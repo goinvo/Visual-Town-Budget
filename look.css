@@ -1,0 +1,135 @@
+.mysvg
+{
+    fill:rgba(239, 237, 248, 0.06));
+}
+
+svg .mycircle {
+    fill: rgba(15, 103, 197, 0.39);
+}
+
+svg .rectangle {
+    fill: rgba(35, 80, 129, 0.59);
+}
+
+.graphline {
+    fill : none;
+    stroke-width : 3 ;
+    stroke-linejoin : round;
+    stroke-linecap: round;
+    -webkit-filter: drop-shadow( -5px -5px 5px #000000 );
+            filter: drop-shadow( -5px -5px 5px #000000 );
+}
+
+.graphline_proj {
+    fill : none;
+    stroke-width : 4;
+    stroke-dasharray : 10, 8;
+    stroke-linejoin : round;
+    stroke-linecap: round;
+    
+}
+
+.home {
+    font-family: "Gill Sans";
+    font-size: 50px;
+    position : absolute;
+    top : 10px;
+    left 10px;
+}
+
+.textbox {
+    fill : rgba(141, 155, 170, 0.06);
+    stroke : rgba(191, 201, 195, 0.1);
+    stroke-width : 3 ;
+}
+    
+.grapharea {
+    stroke-width : 0 ;
+}
+
+.grapharea_proj {
+    stroke-width : 0 ;
+}
+
+.graphcircle {
+    stroke-width : 2;
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: rgba(35, 59, 85, 0.56);
+    stroke-width : 2;
+    shape-rendering: crispEdges;
+
+}
+
+.axis text {
+    font-family: sans-serif;
+    font-size: 11px;
+}
+
+.timeaxis path,
+.timeaxis line {
+    fill: none;
+    stroke: steelblue;
+    stroke-width : 3;
+    shape-rendering: crispEdges;
+    stroke-linejoin : round;
+    stroke-linecap: round;
+
+}
+
+.timeaxis text {
+    font-family: "Gill Sans";
+    font-size: 20px;
+}
+
+.timeselector {
+    stroke-width : 5;
+    fill : rgb(253, 253, 253);
+    stroke : rgba(53, 143, 234, 0.98);
+}
+
+.tooltip {
+    background : rgba(52, 44, 44, 0.54);
+    font-family:"Gill Sans";
+    color : white;
+    padding:5px;
+    border-radius:5px;
+}
+
+.tname {
+    font-family: "Gill Sans";
+    font-size: 40px;
+}
+
+.tdesc{
+    font-family: "Gill Sans";
+    font-size: 16px;
+}
+
+.tright{
+    font-family: "Gill Sans";
+    font-size: 22px;
+    text-align:right;
+}
+
+.tvalue{
+    font-family: "Gill Sans";
+    font-size: 30px;
+    text-align:right;
+    color:rgb(0, 0, 0);
+}
+
+.tperc{
+    font-family: "Gill Sans";
+    font-size: 60px;
+    text-align:right;
+}
+
+.curly_b{
+    stroke: rgba(35, 59, 85, 0.56);
+    stroke-width : 3;
+    fill : none
+}
