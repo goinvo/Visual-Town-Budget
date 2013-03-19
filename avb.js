@@ -1,7 +1,7 @@
             var colors = ["#1f77b4", "#aec7e8", "#ff7f0e", "#ffbb78", "#2ca02c", "#98df8a", "#d62728", "#ff9896", "#9467bd", "#c5b0d5", "#8c564b", "#c49c94", "#e377c2", "#f7b6d2", "#7f7f7f", "#c7c7c7", "#bcbd22", "#dbdb8d", "#17becf", "#9edae5"];
             
             var in_use;
-            
+            //
             // dimensions (no timeline included)
             var graph_w = 1024;
             var graph_h = 768;
@@ -26,7 +26,7 @@
 
             // object references
             var chart;
-            var textbox;
+            var textbox;//
             var titlebox;
             var tooltip;
             var curly;
@@ -39,20 +39,58 @@
             var sel_opacity = 0.8;
             
             d3.json("arlington.js", onjsonload);
-            
-//            drawhome();
-//            
-//            function drawhome() {
-//                //
-//                console.log("hello");
-//                console.log(d3.selectAll("div").text);
-//            }
+
 
                 var filter = mysvg.append("svg:defs")
                                   .append("svg:filter")
                                     .attr("id", "blur")
                                   .append("svg:feGaussianBlur")
                                     .attr("stdDeviation", 10);
+
+
+            function add_label(group, rect, label){
+                var padding = 5;
+                var t = group.append("text")
+                             .attr("class", "label")
+                             .attr("x", rect.attr("x"))
+                             .attr("y", rect.attr("y"));
+                var words = label.split(" ");
+                var tempText = "";
+                var maxWidth = rect.attr("width");
+
+                var get_tspan = function () {
+                                    var new_tspan = t.append("tspan");
+                                    var dy = new_tspan.style("font-size");
+                                    return new_tspan.attr("x",5)//
+                                                    .attr("dy", dy.toString());
+                                };
+                var c_tspan = get_tspan();
+                for (var i=0; i<words.length; i++) {
+                    c_tspan.text(tempText + " " + words[i]);
+                    if ((t.node().getBBox().width  + padding) > maxWidth) {
+                        console.log("hit");
+                        c_tspan.text(tempText);
+                        c_tspan = get_tspan();
+                        tempText = words[i];
+                    } else {
+                        tempText += (" " + words[i]);
+                    }
+                    if (i == (words.length -1) && c_tspan.text() == ""){
+                        c_tspan.remove();
+                    }
+                }
+                if ((t.node().getBBox().height + padding) > rect.attr("height")) {
+                    t.remove();
+                } else {
+                    // centering
+                    var mid_y = (parseFloat(rect.attr("height")) - (t.node().getBBox().height))/2;
+                    t.attr("y",(parseFloat(rect.attr("y")) + mid_y).toString());
+                    var mid_x = (parseFloat(rect.attr("width")) - (t.node().getBBox().width))/2;
+                    t.selectAll("tspan").attr("x",(parseFloat(rect.attr("x")) + mid_x).toString());//
+                    
+                }
+            }
+
 
             function onjsonload(jsondata) {
                 init_tooltip();
@@ -73,6 +111,8 @@
                 .style("visibility", "hidden")
                 .attr("class","tooltip");
             }
+
+
 
             function drawcurly(target_y){
                 if(curly !== undefined ) {
@@ -169,11 +209,6 @@
 
                 textbox.left = textbox.append("div").style("float","left")
                                                      .style("width","60%");
-//                textbox.name = textbox.left.append("div").style("height","10%")
-//                                                    .attr("class","tname");
-//                textbox.descr = textbox.left.append("div")
-//                                                     .attr("class","tdesc");
-
                 textbox.right = textbox.append("div").style("float","right")
                                                      .style("width","40%");
                 textbox.year = textbox.right.append("div").attr("class","tright");
@@ -186,10 +221,8 @@
             
             function drawtext(data, key, parentname) {
                 var percentage = Math.max(0.01,(Math.round(data[key]*100*100/root_total)/100)).toString();
-//                textbox.name.text(data["name"]);
-//                textbox.descr.text(data["descr"]);
                 textbox.percentage.text(percentage + "%");
-                textbox.parent.text("of total " + parentname + " or ");
+                textbox.parent.text("of total " + parentname.toLowerCase() + " or ");
                 var format = d3.format("0,000,000.00"); //returns 2489.8237000 (padding)
                 textbox.value.text("$ " + format(data[key]).toString());
             }
@@ -266,32 +299,26 @@
                 var heightscale = d3.scale.linear().domain([0,maxvalue]).range([0,graph_h*maxvalue/d3.sum(data, function (d) {return d[key]})]);
                 var cur_y = 0;
                 for(var i=0; i<data.length; i++) {
-                    var entities = container.append("rect");
-                    entities.attr("x", 0)//
+                    var group = container.append("g");
+                    var entities = group.append("svg:rect");
+                    entities.attr("x", 0)
                             .attr("y", graph_h - heightscale(data[i][key]) - cur_y )
                             .attr("width", bar_width)
                             .attr("height", heightscale(data[i][key]))
                             .attr("fill", colors[i%20])
                             .attr("opacity", nosel_opacity.toString());
-                    if ( entities.attr("height") >= 50 ) {
-                        d3.select("body").append("div")
-//                                 .text(data[i]["name"])
-//                                 .style("position","absolute")
-//                                 .style("width", bar_width.toString() + "px")
-//                                 .style("height", heightscale(data[i][key]).toString() + "px")
-//                                 .style("left", (xposition + 10).toString() + "px")
-//                                 .style("top", Math.floor(graph_h - heightscale(data[i][key]) - cur_y).toString() + "px");
-
+                    if ( entities.attr("height") >= 20 ) {
+                            add_label(group,entities,data[i]["name"]);
                     }
                     cur_y += heightscale(data[i][key]);
                 }
                 container.selectAll("rect").data(data).enter;
                 container.selectAll("rect").on("click", function(d,i) {
-                        console.log(d);//
                         drawchart(d, d3.select(this).attr("fill"));
-                        drawtext(d, key, d3.select(this.parentNode).attr("name"));
+                        drawtext(d, key, d3.select(this.parentNode.parentNode).attr("name"));
                         filltitle(d);
-                        if( levels[levels.length-1].lev == d3.select(this.parentNode).attr("lev")){
+                        // fix this parentnode mess !
+                        if( levels[levels.length-1].lev == d3.select(this.parentNode.parentNode).attr("lev")){
                             console.log("proceed");   
                         } else {
                             levels.pop().remove();

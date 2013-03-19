@@ -61,7 +61,7 @@ svg .rectangle {
     stroke: rgba(35, 59, 85, 0.56);
     stroke-width : 2;
     shape-rendering: crispEdges;
-
+    
 }
 
 .axis text {
@@ -78,6 +78,15 @@ svg .rectangle {
     stroke-linejoin : round;
     stroke-linecap: round;
 
+}
+
+.label {
+    font-family: "Gill sans";
+    font-size: 12px;
+    shape-rendering: crispEdges;
+    text-rendering: "optimizeLegibility";
+    stroke-width:0px;
+    fill: rgba(0, 0, 0, 0.51);
 }
 
 .timeaxis text {
