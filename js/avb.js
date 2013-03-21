@@ -1,7 +1,9 @@
             var colors = ["#1f77b4", "#aec7e8", "#ff7f0e", "#ffbb78", "#2ca02c", "#98df8a", "#d62728", "#ff9896", "#9467bd", "#c5b0d5", "#8c564b", "#c49c94", "#e377c2", "#f7b6d2", "#7f7f7f", "#c7c7c7", "#bcbd22", "#dbdb8d", "#17becf", "#9edae5"];
             
+            var homecolors = ["#006699", "#33CC66", "#CC0000"]
+            var home;
+
             var in_use;
-            //
             // dimensions (no timeline included)
             var graph_w = get_winsize("w");
             var graph_h = get_winsize("h")*0.9;
@@ -36,25 +38,31 @@
             var tooltip;
             var curly;
             var filter;
+            var timeline;
             var nosel_opacity = 0.3;
             var sel_opacity = 0.8;
 
-            // home elems
+            // HOME ELEMENTS
             var homebars;
             var homescale;
+            var hometexts;
+            var homebars_width;
+            var homebars_height;
+
 
             // init years array
             for(var i = min_year; i <= max_year; i++){
                 years.push((i).toString());
             }
 
+            drawhome();
             activatelinks();
 
 
             Number.prototype.px=function()
             {
                 return this.toString() + "px";
-            }
+            };
             
             var get_max = function (d) {
                 var curmax = 0;
@@ -64,34 +72,40 @@
                     }
                 }
                 return curmax;
-            }
+            };
              
-                        
             function activatelinks() {
-                //drawtimeline(0, graph_h, screen.width, 30);
-//                d3.select("#Revenues").on("click", function() {
-//                    opensection(this.id);
-//                });
+               
+               d3.select("#Revenues").on("click", function() {
+                console.log("click");
+                   opensection(this.id);
+               });
 
-                drawhome();
             }
 
             function drawhome(){
-                mysvg = d3.select("body").append("svg")
-                                         .attr("width", get_winsize("w"))
-                                         .attr("height", 200);
-                drawtimeline(0, 10, get_winsize("w"), 20);
+                home = true;
                 d3.json("js/home.js", onhomedata);
             }
 
 
-
             function onhomedata(jsondata) {
                 var max = 0;
-                drawbars(jsondata["sub"], 10, 50, 150, 50);
+                home_width = 300;
+                mysvg = d3.select("body").append("svg")
+                                         .attr("width", get_winsize("w"))
+                                         .attr("height", home_width);
+                drawbars(jsondata.sub, 10, 0, 150, 60);
+                drawtimeline(0, homebars_height + 25, get_winsize("w"), 30);
+            }
+
+            function formatcurrency(value) {
+               return "$" + Math.round(value/Math.pow(10,6)).toString() + " MLN";
             }
             
-            function drawbars(jsondata, x, y, height, width) {
+            function drawbars(jsondata, x, y, height, width, xpadding) {
+                homebars_width = width;//
+                homebars_height = height;
                 var heightscale = d3.scale.linear()
                                           .domain([0,d3.max(jsondata, get_max)])
                                           .range([0, height]);
@@ -101,37 +115,84 @@
                 homescale = heightscale;
                 var container = mysvg.append("svg:g");
                 translate(container, x, y);
+                var tracecontainer = mysvg.append("svg:g");
+                translate(tracecontainer, x, y);
+                tracecontainer.selectAll("rect")
+                                .data(jsondata)
+                                .enter()
+                                .append("svg:rect")
+                                .attr("width", width)
+                                .attr("y", function(d) {
+                                        return height - heightscale(get_max(d));
+                                })
+                                .attr("height", function(d) {
+                                        return heightscale(get_max(d));
+                                })
+                                .attr("x", function(d, i) {
+                                    return xscale(i);
+                                })
+                                .attr("fill", function(d,i) {
+                                    return homecolors[i];
+                                })
+                                .attr("opacity", 0.3);
                 homebars = container.selectAll("rect")
                                 .data(jsondata)
                                 .enter()
                                 .append("svg:rect")
-                                .attr("width",width)
+                                .attr("width", width)
                                 .attr("height", 0)
                                 .attr("x", function(d, i) {
-                                                    return xscale(i);
+                                    return xscale(i);
                                 })
                                 .attr("fill", function(d,i) {
-                                                    return colors[i];
-                                });
-                
-                changehomeyear();
+                                    return homecolors[i];
+                                })
+                                .attr("opacity", 0.6);
+                hometexts  = container.selectAll("text")
+                                  .data(jsondata)
+                                  .enter()
+                                  .append("svg:text")
+                                  .attr("x", function(d, i){
+                                    return xscale(i) + homebars_width + 10;
+                                  })
+                                  .attr("y", homebars_height)
+                                  .attr("height", homebars_height)
+                                  .attr("width", 100)
+                                  .attr("class", "homeval")
+                                  .text("");
+                refresh();
             }
 
-            function changehomeyear() {
-                homebars.transition()
-                        .attr("height", function (d) {
-                                        return homescale(d[cur_year.toString()]);
-                        });
+            function refresh() {
+                if(home) {
+                    console.log("refreshing home");
+                    homebars.transition()
+                            .attr("height", function (d) {
+                                            return homescale(d[cur_year.toString()]);
+                            })
+                            .attr("y", function(d) {
+                                            return homebars_height - homescale(d[cur_year.toString()]);
+                            
+                            });
+                    hometexts.transition()
+                             .text(function(d) {
+                                return formatcurrency(d[cur_year]);
+                             });
+                } else {
+
+                }
             }
 
             function opensection(name) {
+                d3.selectAll("div").remove();
+                d3.selectAll("svg").remove();
+                home = false;
                 section = name;
-
                 mysvg = d3.select("body").append("svg")
                                          .attr("width", get_winsize("w"))
                                          .attr("height", graph_h + 60);
-                //d3.json("js/arlington.js", onjsonload);
-                
+                d3.json("js/arlington.js", onjsonload);
+                //
             }
 
 
@@ -140,8 +201,8 @@
                 initfilter(10);
                 drawtimeline(0, graph_h, get_winsize("w"), 30);
                 init_tooltip();
-                drawbox(jsondata);
-                init_chart(graph_w/2, graph_h/2, graph_w / 2,  (graph_w/2) * 9/16)
+                init_chart(graph_w/2 - 30, graph_h/2, graph_w / 2,  (graph_w/2) * 9/16);
+                drawbox(graph_w/2, graph_h/2 + 80, graph_w/2 - 30, 0);
                 drawline(jsondata, "steelblue", true);
                 drawtitlebox();
                 filltitle(jsondata);
@@ -175,19 +236,19 @@
             function add_label(group, rect, label){
                 var padding = 5;
                 var t = group.append("text")
-                             .attr("class", "label")
-                             .attr("x", rect.attr("x"))
-                             .attr("y", rect.attr("y"));
+                              .attr("class", "label")
+                              .attr("x", rect.attr("x"))
+                              .attr("y", rect.attr("y"));
                 var words = label.split(" ");
                 var tempText = "";
                 var maxWidth = rect.attr("width");
 
                 var get_tspan = function () {
-                                    var new_tspan = t.append("tspan");
-                                    var dy = new_tspan.style("font-size");
-                                    return new_tspan.attr("x",5)//
-                                                    .attr("dy", dy.toString());
-                                };
+                    var new_tspan = t.append("tspan");
+                    var dy = new_tspan.style("font-size");
+                    return new_tspan.attr("x",5)//
+                                    .attr("dy", dy.toString());
+                };
                 var c_tspan = get_tspan();
                 for (var i=0; i<words.length; i++) {
                     c_tspan.text(tempText + " " + words[i]);
@@ -198,22 +259,21 @@
                     } else {
                         tempText += (" " + words[i]);
                     }
-                    if (i == (words.length -1) && c_tspan.text() == ""){
+                    if (i == (words.length -1) && c_tspan.text() === ""){
                         c_tspan.remove();
                     }
                 }
                 if ((t.node().getBBox().height + padding) > rect.attr("height")) {
                     t.remove();
-                } else {
-                    // centering
+                } else                     
+                // centering//
                     var mid_y = (parseFloat(rect.attr("height")) - (t.node().getBBox().height))/2;
-                    t.attr("y",(parseFloat(rect.attr("y")) + mid_y).toString());
+                    t.attr("y",(parseFloat(rect.attr("y")) + mid_y));
                     var mid_x = (parseFloat(rect.attr("width")) - (t.node().getBBox().width))/2;
                     t.selectAll("tspan").attr("x",(parseFloat(rect.attr("x")) + mid_x).toString());//
                     
                 }
-            }
-
+        
 
             function init_tooltip(){
                 tooltip = d3.select("body")
@@ -301,25 +361,23 @@
 
             
             function filltitle(data){
-                if(section !== data["name"]) {
+                if(section !== data.name) {
                     titlebox.section.text(section.toUpperCase());
                 } else {
                     titlebox.section.text("");
                 }
-                titlebox.top.text(data["name"]);
-                titlebox.bottom.text(data["descr"]);
+                titlebox.top.text(data.name);
+                titlebox.bottom.text(data.descr);
             }
             
-            
-            function drawbox(data) {
-                var box_w = graph_w/2 - 3;
-                var yloc = graph_h/2 + 80;
+            function drawbox(x, y, width, height) {
+
                 textbox = d3.select("body").append("div");
                 textbox.style('position','absolute')
-                       .style('left', (graph_w/2).px())
-                       .style('top', yloc.px())
-                       .style('width', box_w.px())
-                       .style('height', Math.round(box_w * 9/16).px());
+                       .style('left', x.px())
+                       .style('top', y.px())
+                       .style('width', width.px())
+                       .style('height', Math.round(height).px());
 
 
                 textbox.left = textbox.append("div").style("float","left")
@@ -342,50 +400,71 @@
                 textbox.value.text("$ " + format(data[key]).toString());
             }
 
+            function changeyear(year) {
+                if(year == cur_year) return;
+                cur_year = year;
+                timeline.selector.transition()
+                                 .attr("cx", timeline.timescale(year));
+                refresh();
+            }
             
             function drawtimeline(x, y, width, height){
-                var container = mysvg.append("svg:g")
+                timeline = mysvg.append("svg:g");
                 var w_padding = 30;
                 var h_padding = 5;
                 
                 // timescale + axis
-                var timescale = d3.scale.linear()
+                timeline.timescale = d3.scale.linear()
                                         .domain([parseInt(years[0]),parseInt(years[years.length -1])])
                                         .range([w_padding, width - w_padding]);
+
                 var timeAxis = d3.svg.axis()
-                                 .scale(timescale)
+                                 .scale(timeline.timescale)
                                  .orient("bottom")
                                  .ticks(years.length)
                                  .tickSize(1)
                                  .tickPadding(12)
                                  .tickFormat(function(d, i){
-                                    return years[i]; });
+                                    return "'" + years[i].substring(2,4); });
                 
-                container.call(timeAxis)
+                timeline.call(timeAxis)
                          .attr("class", "timeaxis");
-                
+                                
+                timeline.append("rect")
+                        .attr("width", width)
+                        .attr("height", height)
+                        .attr("opacity", 0);
+
                 // selector circle
-                var timeselect =
-                container.append("circle")
+                timeline.selector =
+                timeline.append("circle")
                          .attr("class","timeselector")
-                         .attr("cx", timescale(cur_year).toString())
+                         .attr("cx", timeline.timescale(cur_year))
                          .attr("cy", "0")
                          .attr("r","8")
-                         .call(d3.behavior.drag().on("drag", function() {
-                             this.parentNode.appendChild(this);
-                            var dragTarget = d3.select(this);
-                            
-                            dragTarget
-                                .attr("cx", function(){
-                                    return d3.event.dx + parseInt(dragTarget.attr("cx"));});
-                         }));
+                         .call(d3.behavior.drag()
+                            .on("drag", function() {
+                                this.parentNode.appendChild(this);
+                                var dragTarget = d3.select(this);
+                                dragTarget
+                                    .attr("cx", function(){
+                                        var curx = parseFloat(d3.select(this).attr("cx"));
+                                        if(curx > timeline.timescale.range()[1]) {
+                                            d3.select(this).attr("cx", timeline.timescale.range()[1]);
+                                        } else if (curx < timeline.timescale.range()[0]) {
+                                            d3.select(this).attr("cx", timeline.timescale.range()[0]);
+                                        } else {}
+                                        return d3.event.dx + parseInt(dragTarget.attr("cx"));});
+                            })
+                            .on("dragend", function() {
+                                var curx = parseFloat(d3.select(this).attr("cx"));
+                                changeyear(Math.round(timeline.timescale.invert(curx)));
+                          }));
 
-                timeselect.on("mouseup", function() {
-                    console.log("mouseup");
+                timeline.on("click", function() {
+                    changeyear(Math.round(timeline.timescale.invert(d3.mouse(this)[0])));
                 });
-                
-                                
-                translate(container,x,y + h_padding);
+                translate(timeline,x,y + h_padding);
             }
 
             
@@ -418,6 +497,7 @@
                 for(var i=0; i<data.length; i++) {
                     var group = container.append("g");
                     var entities = group.append("svg:rect");
+                    if(data[i][key] === undefined) continue;
                     entities.attr("x", 0)
                             .attr("y", bar_height - heightscale(data[i][key]) - cur_y )
                             .attr("width", bar_width)
@@ -452,10 +532,10 @@
                             curly.remove();
                         }
                         drawcurly(Math.floor(d3.select(this).attr("y")) + d3.select(this).attr("height")/2);
-                        d3.select(this).attr("opacity",sel_opacity.toString())
+                        d3.select(this).attr("opacity",sel_opacity.toString());
                         drawcurly(Math.floor(d3.select(this).attr("y")) + d3.select(this).attr("height")/2);
                         var newpos = bar_width*2 + d3.select(this).attr("x");
-                        console.log((d3.select(this).data()[0])["name"]);//
+                        console.log((d3.select(this).data()[0]).name);//
                         drawzone(d3.select(this).data()[0], key, xposition + bar_width + bar_intra_padding);
                 });//
                 container.selectAll("rect").call(d3.behavior.drag()
@@ -479,12 +559,12 @@
                     tooltip.style("visibility","visible")
                     .style("left", (d3.event.x + 10).px())
                     .style("top", (d3.event.y + 2).px())
-                    .text(d["name"]);
+                    .text(d.name);
                 });
                 container.selectAll("rect").on("mousemove", function(d) {
                      tooltip.style("left", (d3.event.x + 10).px())
                             .style("top", (d3.event.y + 2).px())
-                            .text(d["name"]);
+                            .text(d.name);
                 });
                 
                 container.attr("transform", "translate(" + xposition.toString() + ", " + (graph_h - bar_height).toString()  +")");
@@ -524,8 +604,8 @@
                 
                 
                
-                for(var i = min_year; i<= max_year; i++) {
-                        values.push(data[i.toString()]);
+                for(var j = min_year; j<= max_year; j++) {
+                        values.push(data[j.toString()]);
                 }
                 
                 var yscale = d3.scale.linear().domain([0,d3.max(values)]).range([padding, chart.height -padding]);
