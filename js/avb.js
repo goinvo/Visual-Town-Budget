@@ -3,19 +3,23 @@
             var in_use;
             //
             // dimensions (no timeline included)
-            var graph_w = 1024;
-            var graph_h = 768;
+            var graph_w = get_winsize("w");
+            var graph_h = get_winsize("h")*0.9;
             
             // bar dimensions
-            var bar_width = 120;                   
+            var bar_width = 120;
+            var bar_height = 655;
             var bar_intra_padding = 70;
             var bar_left_padding = 20;
             
-            // timeline dimensions
-            var timeline_h = 60;
+
+            // titlebox location
+            var tbox_hpadding = 5;
+            var tbox_wpadding = 30;
             
             // constants
-            var years = ["2006", "2007" ,"2008", "2009","2010","2011","2012","2013", "2014", "2015", "2016", "2017", "2018"];
+            var section;
+            var years = [];
             var min_year = 2006;
             var max_year = 2018;
             var cur_year = 2012;
@@ -25,27 +29,147 @@
             var levels = [];
 
             // object references
+            var mysvg;
             var chart;
-            var textbox;//
+            var textbox;
             var titlebox;
             var tooltip;
             var curly;
-            var mysvg = d3.select("body").append("svg")
-                                         .attr("width", graph_w)
-                                         .attr("height", graph_h + timeline_h);
-            
-            
+            var filter;
             var nosel_opacity = 0.3;
             var sel_opacity = 0.8;
+
+            // home elems
+            var homebars;
+            var homescale;
+
+            // init years array
+            for(var i = min_year; i <= max_year; i++){
+                years.push((i).toString());
+            }
+
+            activatelinks();
+
+
+            Number.prototype.px=function()
+            {
+                return this.toString() + "px";
+            }
             
-            d3.json("arlington.js", onjsonload);
+            var get_max = function (d) {
+                var curmax = 0;
+                for( var i=0; i <=years.length; i++) {
+                    if(d[years[i]] !== undefined && d[years[i]] > curmax) {
+                        curmax = d[years[i]];
+                    }
+                }
+                return curmax;
+            }
+             
+                        
+            function activatelinks() {
+                //drawtimeline(0, graph_h, screen.width, 30);
+//                d3.select("#Revenues").on("click", function() {
+//                    opensection(this.id);
+//                });
+
+                drawhome();
+            }
+
+            function drawhome(){
+                mysvg = d3.select("body").append("svg")
+                                         .attr("width", get_winsize("w"))
+                                         .attr("height", 200);
+                drawtimeline(0, 10, get_winsize("w"), 20);
+                d3.json("js/home.js", onhomedata);
+            }
 
 
-                var filter = mysvg.append("svg:defs")
+
+            function onhomedata(jsondata) {
+                var max = 0;
+                drawbars(jsondata["sub"], 10, 50, 150, 50);
+            }
+            
+            function drawbars(jsondata, x, y, height, width) {
+                var heightscale = d3.scale.linear()
+                                          .domain([0,d3.max(jsondata, get_max)])
+                                          .range([0, height]);
+                var xscale = d3.scale.linear()
+                                          .domain([0,3])
+                                          .range([0, get_winsize("w")]);
+                homescale = heightscale;
+                var container = mysvg.append("svg:g");
+                translate(container, x, y);
+                homebars = container.selectAll("rect")
+                                .data(jsondata)
+                                .enter()
+                                .append("svg:rect")
+                                .attr("width",width)
+                                .attr("height", 0)
+                                .attr("x", function(d, i) {
+                                                    return xscale(i);
+                                })
+                                .attr("fill", function(d,i) {
+                                                    return colors[i];
+                                });
+                
+                changehomeyear();
+            }
+
+            function changehomeyear() {
+                homebars.transition()
+                        .attr("height", function (d) {
+                                        return homescale(d[cur_year.toString()]);
+                        });
+            }
+
+            function opensection(name) {
+                section = name;
+
+                mysvg = d3.select("body").append("svg")
+                                         .attr("width", get_winsize("w"))
+                                         .attr("height", graph_h + 60);
+                //d3.json("js/arlington.js", onjsonload);
+                
+            }
+
+
+            function onjsonload(jsondata) {
+                //drawtimeline(0, graph_h, 0, graph_w);
+                initfilter(10);
+                drawtimeline(0, graph_h, get_winsize("w"), 30);
+                init_tooltip();
+                drawbox(jsondata);
+                init_chart(graph_w/2, graph_h/2, graph_w / 2,  (graph_w/2) * 9/16)
+                drawline(jsondata, "steelblue", true);
+                drawtitlebox();
+                filltitle(jsondata);
+                drawzone(jsondata, cur_year.toString(), bar_left_padding);
+                console.log("UI Loaded.");
+            }
+                
+            // helper functions
+            function initfilter(stdev) {
+                    filter = mysvg.append("svg:defs")
                                   .append("svg:filter")
-                                    .attr("id", "blur")
+                                  .attr("id", "blur")
                                   .append("svg:feGaussianBlur")
-                                    .attr("stdDeviation", 10);
+                                  .attr("stdDeviation", stdev);
+            }
+
+
+            function get_winsize(coord){
+                var w = window,
+                d = document,
+                e = d.documentElement,
+                g = d.getElementsByTagName('body')[0],
+                x = w.innerWidth || e.clientWidth || g.clientWidth,
+                y = w.innerHeight|| e.clientHeight|| g.clientHeight;
+                if(coord == "w") return x;
+                if(coord == "h") return y;
+                return undefined;
+            }
 
 
             function add_label(group, rect, label){
@@ -68,7 +192,6 @@
                 for (var i=0; i<words.length; i++) {
                     c_tspan.text(tempText + " " + words[i]);
                     if ((t.node().getBBox().width  + padding) > maxWidth) {
-                        console.log("hit");
                         c_tspan.text(tempText);
                         c_tspan = get_tspan();
                         tempText = words[i];
@@ -92,17 +215,6 @@
             }
 
 
-            function onjsonload(jsondata) {
-                init_tooltip();
-                drawbox(jsondata);
-                drawchart(jsondata, "steelblue");
-                drawtitlebox();
-                filltitle(jsondata);
-                drawzone(jsondata, cur_year.toString(), bar_left_padding);
-                drawtimeline();
-
-            }
- 
             function init_tooltip(){
                 tooltip = d3.select("body")
                 .append("div")
@@ -158,39 +270,42 @@
                 curly.append("svg:line").attr("x1",radius)
                                             .attr("y1",radius + target_y)
                                             .attr("x2",radius)
-                                            .attr("y2",graph_h - radius)
+                                            .attr("y2",bar_height - radius)
                                             .attr("class","curly_b");
                 
                 curly.append("svg:path").datum(d3.range(points))
                                             .attr("d", curvedline)
                                             .attr("class","curly_b")
-                                            .attr("transform", "rotate(180 0 0), translate(" + (-radius*2).toString() +  ", " + (-graph_h + radius).toString() + ") ");
+                                            .attr("transform", "rotate(180 0 0), translate(" + (-radius*2).toString() +  ", " + (-bar_height + radius).toString() + ") ");
 
                 
-                translate(curly, bar_width + bar_left_padding + (bar_intra_padding - radius*2)/2 ,0);
+                translate(curly, bar_width + bar_left_padding + (bar_intra_padding - radius*2)/2 ,graph_h - bar_height);
                 
             }
             
-            function drawtitlebox() {
+            function drawtitlebox(x, y, height, width, xpadding, ypadding) {
                 var box_w = graph_w/2;
-                var box_y = graph_h/3 - chart.c_height;
+                var box_y = graph_h/3 - chart.height;
                 titlebox = d3.select("body").append("div");
                 titlebox.style('position','absolute')
-                       .style('left', (graph_w/2).toString() + "px")
-                       .style('top', (0).toString() + "px")
-                       .style('width', box_w.toString() + "px");
-                var title_y = box_y * 0.6;
+                       .style('left', tbox_wpadding.px())
+                       .style('top', (0).px())
+                       .style('width', box_w.px());
+                titlebox.section = titlebox.append("div")
+                                                    .attr("class","tsection");
                 titlebox.top = titlebox.append("div")
-                                                    .attr("class","tname")
-                                                    .style("font-size", title_y.toString() + "px");
+                                                    .attr("class","tname");
                 titlebox.bottom = titlebox.append("div")
-                                                     .attr("class","tdesc")
-                                                    .style("font-size", (box_y - title_y).toString() + "px");;
+                                                    .attr("class","tdesc");
             }
+
             
             function filltitle(data){
-                console.log("here");
-                console.log(titlebox);
+                if(section !== data["name"]) {
+                    titlebox.section.text(section.toUpperCase());
+                } else {
+                    titlebox.section.text("");
+                }
                 titlebox.top.text(data["name"]);
                 titlebox.bottom.text(data["descr"]);
             }
@@ -201,10 +316,10 @@
                 var yloc = graph_h/2 + 80;
                 textbox = d3.select("body").append("div");
                 textbox.style('position','absolute')
-                       .style('left', (graph_w/2).toString() + "px")
-                       .style('top', (yloc).toString() + "px")
-                       .style('width', box_w.toString() + "px")
-                       .style('height', Math.round(box_w * 9/16).toString() + "px");
+                       .style('left', (graph_w/2).px())
+                       .style('top', yloc.px())
+                       .style('width', box_w.px())
+                       .style('height', Math.round(box_w * 9/16).px());
 
 
                 textbox.left = textbox.append("div").style("float","left")
@@ -228,13 +343,15 @@
             }
 
             
-            function drawtimeline(){
+            function drawtimeline(x, y, width, height){
                 var container = mysvg.append("svg:g")
                 var w_padding = 30;
-                var h_padding = 30;
+                var h_padding = 5;
                 
                 // timescale + axis
-                var timescale = d3.scale.linear().domain([parseInt(years[0]),parseInt(years[years.length -1])]).range([w_padding,graph_w - w_padding]);
+                var timescale = d3.scale.linear()
+                                        .domain([parseInt(years[0]),parseInt(years[years.length -1])])
+                                        .range([w_padding, width - w_padding]);
                 var timeAxis = d3.svg.axis()
                                  .scale(timescale)
                                  .orient("bottom")
@@ -268,7 +385,7 @@
                 });
                 
                                 
-                translate(container,0,graph_h + h_padding);
+                translate(container,x,y + h_padding);
             }
 
             
@@ -296,13 +413,13 @@
                 levels.push(container);
                 var data = obj["sub"];
                 var maxvalue = d3.max(data, function(d) { return d[key]; });
-                var heightscale = d3.scale.linear().domain([0,maxvalue]).range([0,graph_h*maxvalue/d3.sum(data, function (d) {return d[key]})]);
+                var heightscale = d3.scale.linear().domain([0,maxvalue]).range([0,bar_height*maxvalue/d3.sum(data, function (d) {return d[key]})]);
                 var cur_y = 0;
                 for(var i=0; i<data.length; i++) {
                     var group = container.append("g");
                     var entities = group.append("svg:rect");
                     entities.attr("x", 0)
-                            .attr("y", graph_h - heightscale(data[i][key]) - cur_y )
+                            .attr("y", bar_height - heightscale(data[i][key]) - cur_y )
                             .attr("width", bar_width)
                             .attr("height", heightscale(data[i][key]))
                             .attr("fill", colors[i%20])
@@ -314,7 +431,7 @@
                 }
                 container.selectAll("rect").data(data).enter;
                 container.selectAll("rect").on("click", function(d,i) {
-                        drawchart(d, d3.select(this).attr("fill"));
+                        drawline(d, d3.select(this).attr("fill"), true);
                         drawtext(d, key, d3.select(this.parentNode.parentNode).attr("name"));
                         filltitle(d);
                         // fix this parentnode mess !
@@ -350,7 +467,7 @@
                       })
                       .on("dragend", function() {
                         var color = d3.select(this).attr("fill");
-                        addline(d3.select(this).data()[0],color);
+                        drawline(d3.select(this).data()[0],color,false);
                       }));
 
                 container.selectAll("rect").on("mouseout", function(d,i) {
@@ -360,17 +477,17 @@
                 container.selectAll("rect").on("mouseover", function(d) {
                     d3.select(this).attr("opacity","0.7");
                     tooltip.style("visibility","visible")
-                    .style("left", (d3.event.x + 10).toString() + "px")
-                    .style("top", (d3.event.y + 2).toString() + "px")
+                    .style("left", (d3.event.x + 10).px())
+                    .style("top", (d3.event.y + 2).px())
                     .text(d["name"]);
                 });
                 container.selectAll("rect").on("mousemove", function(d) {
-                     tooltip.style("left", (d3.event.x + 10).toString() + "px")
-                            .style("top", (d3.event.y + 2).toString() + "px")
+                     tooltip.style("left", (d3.event.x + 10).px())
+                            .style("top", (d3.event.y + 2).px())
                             .text(d["name"]);
                 });
                 
-                container.attr("transform", "translate(" + xposition.toString() + ", 0)");
+                container.attr("transform", "translate(" + xposition.toString() + ", " + (graph_h - bar_height).toString()  +")");
                 return container;
             }
             
@@ -390,103 +507,36 @@
                 return i;
             }
             
-
-
-            function addline(data, color) {
-                var container = chart.append("svg:g");
-                var padding = 15;
-                container.attr("transform", "translate(" + (graph_w/2).toString() +"," + (graph_h/2).toString() + ")");
-                var min_year = get_minyear(data);
-                var max_year = get_maxyear(data);
-                var projected = cur_year - min_year + 1 ;
-                var values = [];
-                for(var i = min_year; i<= max_year; i++) {
-                        values.push(data[i.toString()]);
-                }//
-                var xscale = chart.xscale;
-                var yscale = chart.yscale;
-                var line = d3.svg.line()
-                                    .x(function(d,i) { return xscale(i); })
-                                    .y(function(d) { return -1 * (yscale(d)); });
-                
-                // area
-                var area = d3.svg.area()
-                            .x(function(d,i) { return xscale(i); })
-                            .y1(function(d) { return -1 * (yscale(d)); });
-                
-               container.append("svg:path").attr("d", line(values.slice(0,years.length)))
-                                            .attr("class","graphline_proj")
-                                            .attr("transform", "translate(0,-10)")
-                                            .style("filter", "url(#blur)")
-                                            .style("stroke", "#000000")
-                                            .style("opacity", 1.0);
-                
-                container.append("svg:path").attr("d", area(values.slice(0,projected)))
-                                            .attr("class","grapharea")
-                                            .style("fill", color)
-                                            .style("opacity", nosel_opacity);
-                
-                // projection area
-                container.append("svg:path").attr("d", area(values.slice(projected-1,years.length)))
-                                            .attr("class","grapharea_proj")
-                                            .attr("transform", "translate(" + (xscale(projected-1) - padding).toString() + ",0)")
-                                            .style("fill", color)
-                                            .style("opacity", 0.15);
-                    
-                
-                
-                // non-projection line
-                container.append("svg:path").attr("d", line(values.slice(0,projected )))
-                                            .attr("class","graphline")
-                                            .style("stroke", color)
-                                            .style("opacity", 0.7);
-                
-                // projection line
-                container.append("svg:path").attr("d", line(values.slice(projected-1,years.length)))
-                                            .attr("class","graphline_proj")
-                                            .attr("transform", "translate(" + (xscale(projected-1) - padding).toString() + ",0)")
-                                            .style("stroke", color)
-                                            .style("opacity", 0.7);
-
-                // hotspots
-                container.selectAll("circle")
-                         .data(values)
-                         .enter()
-                         .append("circle")
-                         .attr("class","graphcircle")
-                         .attr("cx", function(d,i) { return xscale(i); })
-                         .attr("cy", function(d) { return -1 * (yscale(d)); })
-                         .attr("r","5")
-                         .attr("stroke", color)
-                         .attr("stroke-opacity",0.30)
-                         .attr("fill-opacity",0.80)
-                         .attr("fill", color);
-                
-
-            }
-            
-            function drawchart(data ,color){
-                if(chart !== undefined ) {
-                    chart.remove();
+            function drawline(data, color, clear) {
+                if(typeof(clear)==='undefined') clear = false;
+                if(clear) {
+                    for(var i=0; i<chart.linestack.length; i++) {
+                        chart.linestack[i].remove();   
+                    }
                 }
-                chart = mysvg.append("svg:g");
-                container = chart.append("svg:g");
-                container.attr("transform", "translate(" + (graph_w/2).toString() +"," + (graph_h/2).toString() + ")");
-                var c_width = graph_w / 2;
-                var c_height = c_width * 9/16;
-                var padding = 15;
+                
+                var padding = 30;
+                
                 var values = [];
                 var min_year = get_minyear(data);
                 var max_year = get_maxyear(data);
                 var projected = cur_year - min_year + 1 ;
+                
+                
                
                 for(var i = min_year; i<= max_year; i++) {
                         values.push(data[i.toString()]);
                 }
-                var yscale = d3.scale.linear().domain([0,d3.max(values)]).range([padding, c_height -padding]);
-                var xscale = d3.scale.linear().domain([0, max_year-min_year]).range([padding,c_width - padding ]);
+                
+                var yscale = d3.scale.linear().domain([0,d3.max(values)]).range([padding, chart.height -padding]);
+                var xscale = d3.scale.linear().domain([0, max_year-min_year]).range([padding, chart.width - padding ]);
+                
+                
+                var container = chart.append("svg:g");
+                translate(container, chart.x, chart.y);
+                chart.linestack.push(container);
+                
                 var line = d3.svg.line()
-                                    //.interpolate("basis")
                                     .x(function(d,i) { return xscale(i); })
                                     .y(function(d) { return -1 * (yscale(d)); });
                 
@@ -494,16 +544,8 @@
                 var area = d3.svg.area()
                             .x(function(d,i) { return xscale(i); })
                             .y1(function(d) { return -1 * (yscale(d)); });
-                
-                container.append("svg:path").attr("d", line(values.slice(0,years.length)))
-                                            .attr("class","graphline_proj")
-                                            .attr("transform", "translate(0,-10)")
-                                            .style("filter", "url(#blur)")
-                                            .style("stroke", "#000000")
-                                            .style("opacity", 1.0);
-                
-                
-                                // non-projection area
+                         
+                // non-projection area
                 container.append("svg:path").attr("d", area(values.slice(0,projected)))
                                             .attr("class","grapharea")
                                             .style("fill", color)
@@ -516,7 +558,6 @@
                                             .style("fill", color)
                                             .style("opacity", 0.15);
                     
-                
                 // non-projection line
                 container.append("svg:path").attr("d", line(values.slice(0,projected )))
                                             .attr("class","graphline")
@@ -530,8 +571,6 @@
                                             .style("stroke", color)
                                             .style("opacity", 0.7);
                 
-
-
                 // hotspots
                 container.selectAll("circle")
                          .data(values)
@@ -545,23 +584,20 @@
                          .attr("stroke-opacity",0.8)
                          .attr("fill-opacity",0.50)
                          .attr("fill", color);
-
-
-              var xAxis = d3.svg.axis()
-                                 .scale(xscale)
-                                 .orient("bottom")
-                                 .tickFormat(function(d, i){
-                                    return years[i]; });//
+            
+            
                 
-                //axes
-                chart.append("g")
-                    .call(xAxis)
-                    .attr("class", "axis")
-                    .attr("transform", "translate(" + (graph_w/2).toString() +"," + (graph_h/2).toString() + ")");
+                                //axes
+               var xAxis = d3.svg.axis(container)
+                     .scale(xscale)
+                     .orient("bottom")
+                     .tickFormat(function(d, i){
+                        return years[i]; });
                 
+
                 
                var yAxis = d3.svg.axis()
-                                 .scale(yscale.range([c_height -padding, padding]))
+                                 .scale(yscale.range([chart.height -padding, padding]))
                                  .ticks(5)
                                  .orient("left")
                                  .tickFormat(function(d,i){
@@ -572,16 +608,32 @@
                                      }
                                  });
                 
-                chart.append("g")
-                    .call(yAxis)
+                chart.xAxisSocket.call(xAxis);
+                chart.yAxisSocket.call(yAxis);
+                
+            }
+
+
+            function init_chart (x, y, width, height){
+                if(chart !== undefined ) {
+                    chart.remove();
+                }
+                chart = mysvg.append("svg:g");
+                
+                var padding = 30;
+                chart.x = x;
+                chart.y = y;
+                chart.width = width;
+                chart.height = height;
+                chart.linestack = [];
+                
+                chart.xAxisSocket = chart.append("g")
+                  .attr("class", "axis")
+                  .attr("transform", "translate(" + (x).toString() +"," + (y).toString() + ")");
+
+                chart.yAxisSocket = chart.append("g")
                     .attr("class", "axis")
-                    .attr("transform", "translate(" + ((graph_w/2 + padding)).toString() +"," + (graph_h/2 - c_height + padding).toString() + ")");
-                
-                chart.xscale = xscale;
-                chart.yscale = yscale;
-                chart.c_width = c_width;
-                chart.c_height = c_height;
-                
-                
+                    .attr("transform", "translate(" + ((x + padding)).toString() +"," + (y - height + padding).toString() + ")");
+
             }
                     

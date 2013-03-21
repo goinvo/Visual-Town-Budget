@@ -11,6 +11,10 @@ svg .rectangle {
     fill: rgba(35, 80, 129, 0.59);
 }
 
+div {
+ cursor:default;
+}
+
 .graphline {
     fill : none;
     stroke-width : 3 ;
@@ -87,6 +91,7 @@ svg .rectangle {
     text-rendering: "optimizeLegibility";
     stroke-width:0px;
     fill: rgba(0, 0, 0, 0.51);
+    cursor: default;
 }
 
 .timeaxis text {
@@ -118,6 +123,12 @@ svg .rectangle {
     font-size: 16px;
 }
 
+.tsection{
+    font-family: "Gill Sans";
+    font-size: 16px;
+    color:#7a7b7b;
+}
+
 .tright{
     font-family: "Gill Sans";
     font-size: 22px;
@@ -141,4 +152,20 @@ svg .rectangle {
     stroke: rgba(35, 59, 85, 0.56);
     stroke-width : 3;
     fill : none
+}
+
+.homet{
+    font-family: "Gill Sans";
+    font-size: 50px;
+}
+
+.homec{
+    font-family: "Gill Sans";
+    font-size: 18px;
+}
+
+.homediv img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
