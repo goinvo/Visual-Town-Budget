@@ -9,19 +9,15 @@
 
             var in_use;
             // dimensions (no timeline included)
+            var timeline_height = 50;
             var graph_w = get_winsize("w");
-            var graph_h = get_winsize("h")*0.9;
+            var graph_h = get_winsize("h") - timeline_height;
             
             // bar dimensions
             var bar_width = 120;
-            var bar_height = 655;
+            var bar_height;
             var bar_intra_padding = 70;
             var bar_left_padding = 20;
-            
-
-            // titlebox location
-            var tbox_hpadding = 5;
-            var tbox_wpadding = 30;
             
             // constants
             var section;
@@ -102,11 +98,54 @@
                 drawtimeline(0, homebars_height + 25, get_winsize("w"), 30);
             }
 
+
+            function onjsonload(jsondata) {
+                //drawtimeline(0, graph_h, 0, graph_w);
+                initfilter(10);
+                init_tooltip();
+                var bar_offset = bar_width * 2 + bar_left_padding + bar_intra_padding + 80;
+                var leftside_width = graph_w / 2.2;
+                var title_height = 60;
+                bar_height = graph_h - title_height - timeline_height;
+                var chart_width = graph_w - leftside_width - 30;
+                var chart_height = chart_width * 9/16;
+                var card_height = graph_h - title_height - timeline_height - chart_height;
+
+
+                // title
+                drawtitlebox(0, 0, graph_w/2, title_height);
+
+                // chart
+                init_chart(bar_offset, graph_h/2 + title_height, leftside_width,  chart_height);
+
+                // cardbox
+                drawcards(bar_offset, graph_h/2 + title_height + 40, leftside_width , card_height );
+
+                // timeline
+                drawtimeline(0, graph_h, bar_offset + leftside_width, timeline_height);
+
+                // navigation
+                drawzone(jsondata, cur_year.toString(), bar_left_padding, 0);
+
+                // new cards
+                //var stack = ["value", "percentage", "change", "source", "fre"];
+                //draw_stack(jsondata, stack, bar_offset, graph_h/2 + title_height + 40, leftside_width , 70);
+
+                drawline(jsondata, "steelblue", true);
+                drawtext(jsondata, section);
+                filltitle(jsondata);
+                console.log("UI Loaded.");
+            }
+
             function formatcurrency(value) {
-               if(value > 1000000) {
-                return "$" + Math.round(value/Math.pow(10,6)).toString() + " MLN";
+               if(value >= 1000000) {
+                return "$" + Math.round(value/1000000).toString() + " M";
+                } else if (value < 1000000 && value >= 1000){
+                    return "$" + Math.round(value/1000).toString() + " K";
+                } else if (value < 1 && value != 0) {
+                	return "¢" + Math.round(value*100).toString();
                 } else {
-                    return "$" + value.toString();
+                	return "$ " + value.toString();
                 }
             }
             
@@ -213,22 +252,6 @@
             }
 
 
-            function onjsonload(jsondata) {
-                //drawtimeline(0, graph_h, 0, graph_w);
-                initfilter(10);
-                init_tooltip();
-                var bar_offset = bar_width * 2 + bar_left_padding + bar_intra_padding + 80;
-                var leftside_width = graph_w / 2.2;
-                init_chart(bar_offset, graph_h/2, leftside_width,  (graph_w/2.2) * 9/16);
-                drawbox(bar_offset, graph_h/2 + 80, leftside_width , graph_h/2*0.7);
-                drawtimeline(0, graph_h, bar_offset + leftside_width, 30);
-                drawline(jsondata, "steelblue", true);
-                drawtext(jsondata, section);
-                drawtitlebox();
-                filltitle(jsondata);
-                drawzone(jsondata, cur_year.toString(), bar_left_padding);
-                console.log("UI Loaded.");
-            }
                 
             // helper functions
             function initfilter(stdev) {
@@ -304,9 +327,31 @@
                 .attr("class","tooltip");
             }
 
+/*
+            function draw_stack(data, cardnames, x, y, width, height){
+            	var container = mysvg.append("svg:g");
+            	var levels = (cardnames.length + cardnames.length%2) / 2;
+            	var card_height = height / levels;
+            	var card_width = width / levels;
+            	for(var i=0; i < cardnames.length; i++) {
+            		console.log("loop");
+            		var rect = container.append("rect")
+            				 .attr("height", card_height)
+            				 .attr("width", card_width);
+            		draw_card(data, cardnames[i]);
+            		translate(rect, card_width*(i%2), card_height*((i - i%2)/2));
+            	}
+            	translate(container, x, y);
+            }
+
+            function draw_card(data, cardname) {
+            	var iconsize = 30;
 
 
-            function drawcurly(target_y){
+            }
+            */
+
+            function drawcurly(target_y, x, y){
                 if(curly !== undefined ) {
                     curly.remove();
                 }
@@ -359,18 +404,17 @@
                                             .attr("transform", "rotate(180 0 0), translate(" + (-radius*2).toString() +  ", " + (-bar_height + radius).toString() + ") ");
 
                 
-                translate(curly, bar_width + bar_left_padding + (bar_intra_padding - radius*2)/2 ,graph_h - bar_height);
+                translate(curly, bar_width + bar_left_padding + (bar_intra_padding - radius*2)/2, y);
                 
             }
             
-            function drawtitlebox(x, y, height, width, xpadding, ypadding) {
-                var box_w = graph_w/2;
-                var box_y = graph_h/3 - chart.height;
+            function drawtitlebox(x, y, width, height) {
                 titlebox = d3.select("body").append("div");
                 titlebox.style('position','absolute')
-                       .style('left', tbox_wpadding.px())
-                       .style('top', (0).px())
-                       .style('width', box_w.px());
+                	   .style('height', height.px())
+                       .style('left', bar_left_padding.px())
+                       .style('top', y.px())
+                       .style('width', width.px());
                 titlebox.section = titlebox.append("div")
                                                     .attr("class","tsection");
                 titlebox.top = titlebox.append("div")
@@ -404,7 +448,7 @@
                           .attr("class","ttext");
             }
             
-            function drawbox(x, y, width, height) {
+            function drawcards(x, y, width, height) {
 
                 textbox = d3.select("body").append("div")
                                            .style('display','inline')
@@ -551,7 +595,7 @@
                 obj.attr("transform","rotate(" + degrees.toString() + " 100 100)");
             }
             
-            function drawzone(obj, key, xposition) {
+            function drawzone(obj, key, x, y) {
                 
                 var container = mysvg.append("svg:g")
                     .attr("stroke", "white")
@@ -563,7 +607,7 @@
                 //stack push
                 container.lev = levels.length;
                 levels.push(container);
-                var data = obj["sub"];
+                var data = obj.sub;
                 var maxvalue = d3.max(data, function(d) { return d[key]; });
                 var heightscale = d3.scale.linear().domain([0,maxvalue]).range([0,bar_height*maxvalue/d3.sum(data, function (d) {return d[key]})]);
                 var cur_y = 0;
@@ -604,12 +648,11 @@
                         if(curly !== undefined) {
                             curly.remove();
                         }
-                        drawcurly(Math.floor(d3.select(this).attr("y")) + d3.select(this).attr("height")/2);
+                        drawcurly(Math.floor(d3.select(this).attr("y")) + d3.select(this).attr("height")/2, 0, graph_h - bar_height + y);
                         d3.select(this).attr("opacity",sel_opacity.toString());
-                        drawcurly(Math.floor(d3.select(this).attr("y")) + d3.select(this).attr("height")/2);
                         var newpos = bar_width*2 + d3.select(this).attr("x");
                         console.log((d3.select(this).data()[0]).name);//
-                        drawzone(d3.select(this).data()[0], key, xposition + bar_width + bar_intra_padding);
+                        drawzone(d3.select(this).data()[0], key, x + bar_width + bar_intra_padding, y);
                 });//
                 container.selectAll("rect").call(d3.behavior.drag()
                       .on("dragstart", function(d) {
@@ -640,7 +683,7 @@
                             .text(d.name);
                 });
                 
-                container.attr("transform", "translate(" + xposition.toString() + ", " + (graph_h - bar_height).toString()  +")");
+                translate(container, x, graph_h - bar_height + y);
                 return container;
             }
             
@@ -754,11 +797,7 @@
                                  .ticks(5)
                                  .orient("left")
                                  .tickFormat(function(d,i){
-                                     if(d > Math.pow(10,6)) {
-                                        return (d/Math.pow(10,6)).toString() + " MLN";
-                                     } else {
-                                         return d;
-                                     }
+                                     return formatcurrency(d);
                                  });
                 
                 chart.xAxisSocket.call(xAxis);
