@@ -1,6 +1,10 @@
             var colors = ["#1f77b4", "#aec7e8", "#ff7f0e", "#ffbb78", "#2ca02c", "#98df8a", "#d62728", "#ff9896", "#9467bd", "#c5b0d5", "#8c564b", "#c49c94", "#e377c2", "#f7b6d2", "#7f7f7f", "#c7c7c7", "#bcbd22", "#dbdb8d", "#17becf", "#9edae5"];
+            var homecolors = ["#006699", "#33CC66", "#CC0000"];
             
-            var homecolors = ["#006699", "#33CC66", "#CC0000"]
+            var img_path = ["img/dollar.png",
+                             "img/build.png",
+                             "img/updown.png",
+                             "img/info_30.png"];
             var home;
 
             var in_use;
@@ -57,6 +61,7 @@
 
             drawhome();
             activatelinks();
+            //opensection("Revenues");
 
 
             Number.prototype.px=function()
@@ -80,14 +85,12 @@
                 console.log("click");
                    opensection(this.id);
                });
-
             }
 
             function drawhome(){
                 home = true;
                 d3.json("js/home.js", onhomedata);
             }
-
 
             function onhomedata(jsondata) {
                 var max = 0;
@@ -100,7 +103,11 @@
             }
 
             function formatcurrency(value) {
-               return "$" + Math.round(value/Math.pow(10,6)).toString() + " MLN";
+               if(value > 1000000) {
+                return "$" + Math.round(value/Math.pow(10,6)).toString() + " MLN";
+                } else {
+                    return "$" + value.toString();
+                }
             }
             
             function drawbars(jsondata, x, y, height, width, xpadding) {
@@ -163,6 +170,7 @@
                 refresh();
             }
 
+
             function refresh() {
                 if(home) {
                     console.log("refreshing home");
@@ -179,15 +187,24 @@
                                 return formatcurrency(d[cur_year]);
                              });
                 } else {
-
                 }
             }
 
             function opensection(name) {
-                d3.selectAll("div").remove();
+                d3.selectAll("div").style("display","none");
                 d3.selectAll("svg").remove();
+
                 home = false;
-                section = name;
+                section = name.toLowerCase();
+
+                // if(section === "revenues") {
+                //     img_path = iconpaths.revenues;
+                // } else if ( section === "funds") {
+                //     img_path = iconpaths.funds;
+                // } else {
+                //     img_path = iconpaths.expenses; 
+                // }
+
                 mysvg = d3.select("body").append("svg")
                                          .attr("width", get_winsize("w"))
                                          .attr("height", graph_h + 60);
@@ -199,11 +216,14 @@
             function onjsonload(jsondata) {
                 //drawtimeline(0, graph_h, 0, graph_w);
                 initfilter(10);
-                drawtimeline(0, graph_h, get_winsize("w"), 30);
                 init_tooltip();
-                init_chart(graph_w/2 - 30, graph_h/2, graph_w / 2,  (graph_w/2) * 9/16);
-                drawbox(graph_w/2, graph_h/2 + 80, graph_w/2 - 30, 0);
+                var bar_offset = bar_width * 2 + bar_left_padding + bar_intra_padding + 80;
+                var leftside_width = graph_w / 2.2;
+                init_chart(bar_offset, graph_h/2, leftside_width,  (graph_w/2.2) * 9/16);
+                drawbox(bar_offset, graph_h/2 + 80, leftside_width , graph_h/2*0.7);
+                drawtimeline(0, graph_h, bar_offset + leftside_width, 30);
                 drawline(jsondata, "steelblue", true);
+                drawtext(jsondata, section);
                 drawtitlebox();
                 filltitle(jsondata);
                 drawzone(jsondata, cur_year.toString(), bar_left_padding);
@@ -369,35 +389,90 @@
                 titlebox.top.text(data.name);
                 titlebox.bottom.text(data.descr);
             }
+
+            function fillcell(div, slot){
+                var cell = div.append("div")
+                              .attr("class","trow");
+                cell.append("div")
+                   .style("height","100%")
+                   .style("float", "left")
+                   .style("margin-right","3%")
+                   .append("img")
+                   .attr("class", "ticons")
+                   .attr("src", img_path[slot]);
+                return cell.append("div")
+                          .attr("class","ttext");
+            }
             
             function drawbox(x, y, width, height) {
 
-                textbox = d3.select("body").append("div");
-                textbox.style('position','absolute')
-                       .style('left', x.px())
-                       .style('top', y.px())
-                       .style('width', width.px())
-                       .style('height', Math.round(height).px());
+                textbox = d3.select("body").append("div")
+                                           .style('display','inline')
+                                           .style('position', 'absolute')
+                                           .style('left', x.px())
+                                           .style('top', y.px())
+                                           .style('width', width.px())
+                                           .style('height', Math.round(height).px());
 
 
-                textbox.left = textbox.append("div").style("float","left")
-                                                     .style("width","60%");
-                textbox.right = textbox.append("div").style("float","right")
-                                                     .style("width","40%");
-                textbox.year = textbox.right.append("div").attr("class","tright");
-                textbox.percentage = textbox.right.append("div")
+                textbox.trow = textbox.append("div")
+                                     .attr("class","tbrow");
+                textbox.brow = textbox.append("div")
+                                     .attr("class","tbrow");
+
+                textbox.ind = fillcell(textbox.trow, 0);               
+                textbox.col = fillcell(textbox.trow, 1);
+                textbox.change = fillcell(textbox.brow, 2);
+                textbox.source = fillcell(textbox.brow, 3);
+
+                textbox.col.percentage = textbox.col.append("div")
                                                   .attr("class","tperc");
-                textbox.parent = textbox.right.append("div")
+                textbox.col.parent = textbox.col.append("div")
                                                   .attr("class","tright");
-                textbox.value = textbox.right.append("div").attr("class","tvalue");
+                textbox.col.value = textbox.col.append("div").attr("class","tvalue");
+
+                textbox.ind.cost = textbox.ind.append("div")
+                                              .attr("class","tperc");
+                // textbox.ind.descr = textbox.ind.append("div")
+                //                                .attr("class", "ttext")
+                //                                .text("a year");
+                textbox.change.perc = textbox.change.append("div")
+                                              .attr("class","tperc");
+                textbox.change.descr = textbox.change.append("div")
+                                               .attr("class", "ttext")
+                                               .text("compared to previous year.");
+                textbox.source.descr = textbox.source.append("div")
+                                               .attr("class", "ttext")
+                                               .text("Source:");
+                textbox.source.src = textbox.source.append("div")
+                                               .attr("class", "ttext");
+            }
+
+            function get_change(data, key){
+                var res = "";
+                if(key === min_year.toString()) {
+                    // CUR : 100 = NEXT - CUR : X
+                    return "+0.00%";
+                } else {
+                    var perc = Math.round(100 * 100 * (data[key] - data[(parseInt(key) - 1).toString()]) / data[key])/100;
+                    if(perc > 0) {
+                        return "+" + perc.toString() + "%";
+                    } else {
+                        return perc.toString() + "%";
+                    }
+                }
             }
             
-            function drawtext(data, key, parentname) {
-                var percentage = Math.max(0.01,(Math.round(data[key]*100*100/root_total)/100)).toString();
-                textbox.percentage.text(percentage + "%");
-                textbox.parent.text("of total " + parentname.toLowerCase() + " or ");
-                var format = d3.format("0,000,000.00"); //returns 2489.8237000 (padding)
-                textbox.value.text("$ " + format(data[key]).toString());
+            function drawtext(data, parentname) {
+                var percentage = Math.max(0.01,(Math.round(data[cur_year]*100*100/root_total)/100)).toString();
+                textbox.col.percentage.text(percentage + "%");
+                textbox.col.parent.text("of total " + parentname.toLowerCase());
+                //var format = d3.format("0,000,000.00");
+                textbox.source.src.text("Cherry Sheet");
+                textbox.change.perc.text(get_change(data,cur_year));
+
+                // section dependent
+                textbox.ind.cost.text(formatcurrency(data[cur_year.toString()]));
             }
 
             function changeyear(year) {
@@ -476,8 +551,6 @@
                 obj.attr("transform","rotate(" + degrees.toString() + " 100 100)");
             }
             
-
-            
             function drawzone(obj, key, xposition) {
                 
                 var container = mysvg.append("svg:g")
@@ -512,7 +585,7 @@
                 container.selectAll("rect").data(data).enter;
                 container.selectAll("rect").on("click", function(d,i) {
                         drawline(d, d3.select(this).attr("fill"), true);
-                        drawtext(d, key, d3.select(this.parentNode.parentNode).attr("name"));
+                        drawtext(d, d3.select(this.parentNode.parentNode).attr("name"));
                         filltitle(d);
                         // fix this parentnode mess !
                         if( levels[levels.length-1].lev == d3.select(this.parentNode.parentNode).attr("lev")){

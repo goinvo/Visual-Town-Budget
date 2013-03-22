@@ -1,3 +1,8 @@
+
+div {
+    font-family:"Gill Sans";
+}
+
 .mysvg
 {
     fill:rgba(239, 237, 248, 0.06));
@@ -69,7 +74,7 @@ div {
 }
 
 .axis text {
-    font-family: sans-serif;
+    font-family: "Gill Sans";
     font-size: 11px;
     cursor: default;
 }
@@ -86,7 +91,7 @@ div {
 }
 
 .label {
-    font-family: "Gill sans";
+    font-family: "Gill Sans";
     font-size: 12px;
     shape-rendering: crispEdges;
     text-rendering: "optimizeLegibility";
@@ -108,45 +113,17 @@ div {
 
 .tooltip {
     background : rgba(52, 44, 44, 0.54);
-    font-family:"Gill Sans";
     color : white;
     padding:5px;
     border-radius:5px;
 }
 
 .tname {
-    font-family: "Gill Sans";
     font-size: 40px;
 }
 
 .tdesc{
-    font-family: "Gill Sans";
     font-size: 16px;
-}
-
-.tsection{
-    font-family: "Gill Sans";
-    font-size: 16px;
-    color:#7a7b7b;
-}
-
-.tright{
-    font-family: "Gill Sans";
-    font-size: 22px;
-    text-align:right;
-}
-
-.tvalue{
-    font-family: "Gill Sans";
-    font-size: 30px;
-    text-align:right;
-    color:rgb(0, 0, 0);
-}
-
-.tperc{
-    font-family: "Gill Sans";
-    font-size: 60px;
-    text-align:right;
 }
 
 .curly_b{
@@ -156,12 +133,10 @@ div {
 }
 
 .homet{
-    font-family: "Gill Sans";
     font-size: 50px;
 }
 
 .homec{
-    font-family: "Gill Sans";
     font-size: 18px;
 }
 
@@ -172,11 +147,55 @@ div {
 }
 
 .homeval {
-    font-family: "Gill sans";
+    font-family: "Gill Sans";
     font-size: 46px;
     shape-rendering: crispEdges;
     text-rendering: optimizeLegibility;
     stroke-width:0px;
     fill: rgba(0, 0, 0, 0.51);
     cursor: default;
+}
+
+.tbrow{
+    display:block;
+    width:100%;
+    height:50%;
+    margin-bottom:3%;
+}
+
+.ticons{
+    width:35px;
+    float:left;
+    margin-right:5px;
+}
+
+.trow{
+    height:100%; 
+    width:50%;
+    float:left;
+    font-size: 22px;
+}
+
+
+.tsection{
+    font-size: 16px;
+    color:#7a7b7b;
+}
+
+.tright{
+    font-size: 22px;
+}
+
+.tvalue{
+    font-size: 30px;
+    color:rgb(0, 0, 0);
+}
+
+.tperc{
+    font-size: 45px;
+}
+
+.ttext{
+    font-size: 22px;
+    margin-right: 5%;
 }
