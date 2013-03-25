@@ -199,3 +199,30 @@ div {
     font-size: 22px;
     margin-right: 5%;
 }
+
+.card rect {
+    fill : rgb(155, 155, 159);
+    fill-opacity : 0.2;
+    stroke: rgb(51, 51, 51);
+    stroke-opacity: 0.3;
+    stroke-width: 3;
+}
+
+.card line {
+    stroke: rgb(51, 51, 51);
+    stroke-opacity: 0.3;
+    stroke-width: 3;
+}
+
+.card text {
+    font-family: "Gill Sans";
+    shape-rendering: crispEdges;
+    stroke-width:0px;
+    cursor: default;
+
+}
+
+.carddiv {    
+    text-align: center;
+    vertical-align: middle;
+}

@@ -18,6 +18,9 @@
             var bar_height;
             var bar_intra_padding = 70;
             var bar_left_padding = 20;
+
+            // cards update constants
+            var value_height;
             
             // constants
             var section;
@@ -25,10 +28,12 @@
             var min_year = 2006;
             var max_year = 2018;
             var cur_year = 2012;
+
             var root_total = 125000000;
             
             // levelstack
             var levels = [];
+            var cardstack = [];
 
             // object references
             var mysvg;
@@ -39,6 +44,7 @@
             var curly;
             var filter;
             var timeline;
+            var deck;
             var nosel_opacity = 0.3;
             var sel_opacity = 0.8;
 
@@ -55,9 +61,9 @@
                 years.push((i).toString());
             }
 
-            drawhome();
-            activatelinks();
-            //opensection("Revenues");
+            //drawhome();
+            //activatelinks();
+            opensection("Revenues");
 
 
             Number.prototype.px=function()
@@ -99,6 +105,198 @@
             }
 
 
+            function h_growth(data, key){
+                var res = "";
+                if(key === min_year.toString()) {
+                    // CUR : 100 = NEXT - CUR : X
+                    return "+0.00%";
+                } else {
+                    var perc = Math.round(100 * 100 * (data[key] - data[(parseInt(key) - 1).toString()]) / data[key])/100;
+                    if(perc > 0) {
+                        return "+" + perc.toString() + "%";
+                    } else {
+                        return perc.toString() + "%";
+                    }
+                }
+            }
+
+            function h_percentage(data, total) {
+
+            }
+
+            function adjust_width(div, target_h) {
+                var cur_size = parseInt(div.style("font-size"));
+
+                if(div.property("clientHeight") < target_h) return ;
+
+                while(div.property("clientHeight") >= target_h && cur_size >= 1) {
+                    div.style("font-size", (cur_size).px());
+                    cur_size--;
+                }
+
+                div.style("font-size", (cur_size - 2).px());
+            }
+
+            function initdeck(){
+                var deck = [];
+
+                // amount card
+                var newcard = new Object();
+                newcard.title = "AMOUNT";
+                newcard.icon = "img/coin.svg"
+                newcard.back = "this is the back of the card";
+                newcard.value = function(data) { return formatcurrency(data[cur_year.toString()]); };
+                newcard.side = function(data) { return "as of " + cur_year.toString()};
+                deck.push(newcard);
+
+                var newcard = new Object();
+                newcard.title = "IMPACT";
+                newcard.icon = "img/build.png";
+                newcard.back = "this is the back of the card";
+                newcard.value = function(data) { return Math.max(0.01,(Math.round(data[cur_year]*100*100/root_total)/100)).toString(); };
+                newcard.side = "of " + section;
+                deck.push(newcard);
+
+                var newcard = new Object();
+                newcard.title = "GROWTH";
+                newcard.icon = "img/updown.png";
+                newcard.back = "this is the back of the card";
+                newcard.value = function(data) { return h_growth(data, cur_year.toString()); };
+                newcard.side = "compared to last year.";
+                deck.push(newcard);
+
+                var newcard = new Object();
+                newcard.title = "SOURCE";
+                newcard.icon = "img/info_30.png";
+                newcard.back = "this is the back of the card";
+                newcard.value = function(data) { return "Cherry sheet"; };
+                newcard.side = "";
+                deck.push(newcard);
+
+                return deck;
+            }
+
+
+            function getex(){
+                return 0;
+            }
+
+            function draw_stack(x, y, width, height){
+
+                var container = mysvg.append("svg:g");
+                var levels = (deck.length + deck.length%2) / 2;
+                var card_height = height / levels;
+                var padding = 0.02*width;
+                var card_width = (width-padding) / 2;
+
+                for(var i=0; i < deck.length; i++) {
+
+                    var newcard = drawcard(container, deck[i], card_width, card_height);
+                    var inner_x = (card_width + padding)*(i%2),
+                        inner_y = (card_height + padding)*((i - i%2)/2);
+                    placedivs(newcard, x + inner_x, y + inner_y);
+
+                    translate(newcard, inner_x, inner_y);
+                    cardstack.push(newcard);
+                }
+                translate(container, x, y);
+            }
+
+            function placedivs(card, x, y) {
+                card.divs.style("left", (x + 5).px());
+                card.divs.style("top", (y + 10).px());
+            }
+
+            function drawcard(container, card, width, height) {
+                var newcard  = container.append("svg:g")
+                                        .attr("class", "card");
+                var title_h = height / 3.5,
+                    padding = 5,
+                    value_ratio = 0.7;
+                value_height = height - title_h;
+                var rect = newcard.append("svg:rect")
+                                    .attr("width", width.px())
+                                    .attr("height", height.px())
+                                    .attr("rx", (20))
+                                    .attr("ry", (20));
+                newcard.append("svg:line")
+                        .attr("x1", 0)
+                        .attr("x2", width)
+                        .attr("y1", title_h)
+                        .attr("y2", title_h);
+
+                newcard.divs =  d3.select("body").append("div")
+                                                 .attr("class","carddiv")
+                                                 .style("position","absolute")
+                                                 .style("height", height.px())
+                                                 .style("width", width.px());
+                
+                newcard.title = newcard.divs.append("div")
+                       .style("height", title_h.px())
+                       .style("width", width.px())
+                       .style("font-size", (title_h - padding*2).px())
+                       .style("display","block")
+                       .text(card.title);
+                newcard.title.append("img")
+                            .attr("src", card.icon)
+                            .attr("height", title_h)
+                            .attr("width", title_h)
+                            .style("position", "absolute")
+                            .style("left", "10px");
+
+
+                if( card.side === "") {
+                    value_ratio = 1;
+                }
+
+                newcard.bottom = newcard.divs.append("div")
+                                                  .style("height", (height - title_h).px())
+                                                  .style("width", "100%")
+                                                  .style("height", height - title_h)
+                                                  .style("float","bottom");
+                newcard.bottom.left = newcard.bottom.append("div")
+                                                    .style("width", (value_ratio*100).toString() + "%")
+                                                    .style("float","left")
+                                                    .style("height", "100%")
+                                                    .style("display", "table")
+                                                    .append("div")
+                                                    .style("top","50%")
+                                                    .style("display","table-cell")
+                                                    .style("vertical-align", "middle")
+                                                    .style("font-size", (width/5).px());
+
+                newcard.bottom.right = newcard.bottom.append("div")
+                                    .style("width", ((1 - value_ratio)*100).toString() + "%")
+                                    .style("float","left")
+                                    .style("height", "100%")
+                                    .style("display", "table")
+                                    .append("div")
+                                    .style("top","50%")
+                                    .style("display","table-cell")
+                                    .style("vertical-align", "middle")
+                         //           .style("text-align", "left")
+                                    .style("font-size", (width/14).px());
+                
+                return newcard;
+            }
+
+            function updatecards(data) {
+                for(var i=0; i < deck.length; i++) {
+                    cardstack[i].bottom.left.text(deck[i].value(data));
+                    adjust_width(cardstack[i].bottom.left, value_height);
+                    var text;
+                    if ( typeof(deck[i].side) === 'string') {
+                        text = deck[i].side;
+                    } else {
+                        text = deck[i].side(data);
+                    }
+                    cardstack[i].bottom.right.text(text);
+                    adjust_width(cardstack[i].bottom.right, value_height);
+                }
+
+            }
+
+
             function onjsonload(jsondata) {
                 //drawtimeline(0, graph_h, 0, graph_w);
                 initfilter(10);
@@ -110,7 +308,7 @@
                 var chart_width = graph_w - leftside_width - 30;
                 var chart_height = chart_width * 9/16;
                 var card_height = graph_h - title_height - timeline_height - chart_height;
-
+                deck = initdeck();
 
                 // title
                 drawtitlebox(0, 0, graph_w/2, title_height);
@@ -118,8 +316,8 @@
                 // chart
                 init_chart(bar_offset, graph_h/2 + title_height, leftside_width,  chart_height);
 
-                // cardbox
-                drawcards(bar_offset, graph_h/2 + title_height + 40, leftside_width , card_height );
+                // // cardbox
+                // drawcards(bar_offset, graph_h/2 + title_height + 40, leftside_width , card_height );
 
                 // timeline
                 drawtimeline(0, graph_h, bar_offset + leftside_width, timeline_height);
@@ -128,17 +326,24 @@
                 drawzone(jsondata, cur_year.toString(), bar_left_padding, 0);
 
                 // new cards
-                //var stack = ["value", "percentage", "change", "source", "fre"];
-                //draw_stack(jsondata, stack, bar_offset, graph_h/2 + title_height + 40, leftside_width , 70);
+                draw_stack(bar_offset, graph_h/2 + title_height + 40, leftside_width , card_height - 30);
+                updatecards(jsondata);
 
                 drawline(jsondata, "steelblue", true);
-                drawtext(jsondata, section);
+                 // drawtext(jsondata, section);
                 filltitle(jsondata);
+
                 console.log("UI Loaded.");
             }
 
+            function get_change(){
+                return "f0";
+            }
+
             function formatcurrency(value) {
-               if(value >= 1000000) {
+                if(value === undefined) {
+                    return "N/A";
+                } else if(value >= 1000000) {
                 return "$" + Math.round(value/1000000).toString() + " M";
                 } else if (value < 1000000 && value >= 1000){
                     return "$" + Math.round(value/1000).toString() + " K";
@@ -236,19 +441,10 @@
                 home = false;
                 section = name.toLowerCase();
 
-                // if(section === "revenues") {
-                //     img_path = iconpaths.revenues;
-                // } else if ( section === "funds") {
-                //     img_path = iconpaths.funds;
-                // } else {
-                //     img_path = iconpaths.expenses; 
-                // }
-
                 mysvg = d3.select("body").append("svg")
                                          .attr("width", get_winsize("w"))
                                          .attr("height", graph_h + 60);
                 d3.json("js/arlington.js", onjsonload);
-                //
             }
 
 
@@ -327,29 +523,6 @@
                 .attr("class","tooltip");
             }
 
-/*
-            function draw_stack(data, cardnames, x, y, width, height){
-            	var container = mysvg.append("svg:g");
-            	var levels = (cardnames.length + cardnames.length%2) / 2;
-            	var card_height = height / levels;
-            	var card_width = width / levels;
-            	for(var i=0; i < cardnames.length; i++) {
-            		console.log("loop");
-            		var rect = container.append("rect")
-            				 .attr("height", card_height)
-            				 .attr("width", card_width);
-            		draw_card(data, cardnames[i]);
-            		translate(rect, card_width*(i%2), card_height*((i - i%2)/2));
-            	}
-            	translate(container, x, y);
-            }
-
-            function draw_card(data, cardname) {
-            	var iconsize = 30;
-
-
-            }
-            */
 
             function drawcurly(target_y, x, y){
                 if(curly !== undefined ) {
@@ -434,90 +607,6 @@
                 titlebox.bottom.text(data.descr);
             }
 
-            function fillcell(div, slot){
-                var cell = div.append("div")
-                              .attr("class","trow");
-                cell.append("div")
-                   .style("height","100%")
-                   .style("float", "left")
-                   .style("margin-right","3%")
-                   .append("img")
-                   .attr("class", "ticons")
-                   .attr("src", img_path[slot]);
-                return cell.append("div")
-                          .attr("class","ttext");
-            }
-            
-            function drawcards(x, y, width, height) {
-
-                textbox = d3.select("body").append("div")
-                                           .style('display','inline')
-                                           .style('position', 'absolute')
-                                           .style('left', x.px())
-                                           .style('top', y.px())
-                                           .style('width', width.px())
-                                           .style('height', Math.round(height).px());
-
-
-                textbox.trow = textbox.append("div")
-                                     .attr("class","tbrow");
-                textbox.brow = textbox.append("div")
-                                     .attr("class","tbrow");
-
-                textbox.ind = fillcell(textbox.trow, 0);               
-                textbox.col = fillcell(textbox.trow, 1);
-                textbox.change = fillcell(textbox.brow, 2);
-                textbox.source = fillcell(textbox.brow, 3);
-
-                textbox.col.percentage = textbox.col.append("div")
-                                                  .attr("class","tperc");
-                textbox.col.parent = textbox.col.append("div")
-                                                  .attr("class","tright");
-                textbox.col.value = textbox.col.append("div").attr("class","tvalue");
-
-                textbox.ind.cost = textbox.ind.append("div")
-                                              .attr("class","tperc");
-                // textbox.ind.descr = textbox.ind.append("div")
-                //                                .attr("class", "ttext")
-                //                                .text("a year");
-                textbox.change.perc = textbox.change.append("div")
-                                              .attr("class","tperc");
-                textbox.change.descr = textbox.change.append("div")
-                                               .attr("class", "ttext")
-                                               .text("compared to previous year.");
-                textbox.source.descr = textbox.source.append("div")
-                                               .attr("class", "ttext")
-                                               .text("Source:");
-                textbox.source.src = textbox.source.append("div")
-                                               .attr("class", "ttext");
-            }
-
-            function get_change(data, key){
-                var res = "";
-                if(key === min_year.toString()) {
-                    // CUR : 100 = NEXT - CUR : X
-                    return "+0.00%";
-                } else {
-                    var perc = Math.round(100 * 100 * (data[key] - data[(parseInt(key) - 1).toString()]) / data[key])/100;
-                    if(perc > 0) {
-                        return "+" + perc.toString() + "%";
-                    } else {
-                        return perc.toString() + "%";
-                    }
-                }
-            }
-            
-            function drawtext(data, parentname) {
-                var percentage = Math.max(0.01,(Math.round(data[cur_year]*100*100/root_total)/100)).toString();
-                textbox.col.percentage.text(percentage + "%");
-                textbox.col.parent.text("of total " + parentname.toLowerCase());
-                //var format = d3.format("0,000,000.00");
-                textbox.source.src.text("Cherry Sheet");
-                textbox.change.perc.text(get_change(data,cur_year));
-
-                // section dependent
-                textbox.ind.cost.text(formatcurrency(data[cur_year.toString()]));
-            }
 
             function changeyear(year) {
                 if(year == cur_year) return;
@@ -629,7 +718,9 @@
                 container.selectAll("rect").data(data).enter;
                 container.selectAll("rect").on("click", function(d,i) {
                         drawline(d, d3.select(this).attr("fill"), true);
-                        drawtext(d, d3.select(this.parentNode.parentNode).attr("name"));
+                        //drawtext(d, d3.select(this.parentNode.parentNode).attr("name"));
+                        updatecards(d);
+                        console.log(d3.select(this.parentNode.parentNode));
                         filltitle(d);
                         // fix this parentnode mess !
                         if( levels[levels.length-1].lev == d3.select(this.parentNode.parentNode).attr("lev")){
@@ -780,7 +871,6 @@
                          .attr("stroke-opacity",0.8)
                          .attr("fill-opacity",0.50)
                          .attr("fill", color);
-            
             
                 
                                 //axes
