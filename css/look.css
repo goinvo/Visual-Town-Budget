@@ -3,22 +3,15 @@ div {
     font-family:"Gill Sans";
 }
 
-.mysvg
-{
-    fill:rgba(239, 237, 248, 0.06));
-}
-
-svg .mycircle {
-    fill: rgba(15, 103, 197, 0.39);
-}
-
-svg .rectangle {
-    fill: rgba(35, 80, 129, 0.59);
-}
 
 div {
  cursor:default;
 }
+
+.avbsvg{
+    display: block;
+    margin: auto;
+} 
 
 .graphline {
     fill : none;

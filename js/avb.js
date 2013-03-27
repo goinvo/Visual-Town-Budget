@@ -10,7 +10,8 @@
             var in_use;
             // dimensions (no timeline included)
             var timeline_height = 50;
-            var graph_w = get_winsize("w");
+            var title_height = 0;
+            var graph_w = get_winsize("h") * 16/9;
             var graph_h = get_winsize("h") - timeline_height;
             
             // bar dimensions
@@ -203,8 +204,8 @@
             }
 
             function placedivs(card, x, y) {
-                card.divs.style("left", (x + 5).px());
-                card.divs.style("top", (y + 10).px());
+                card.divs.style("left", (x + mysvg.x).px());
+                card.divs.style("top", (y + mysvg.y).px());
             }
 
             function drawcard(container, card, width, height) {
@@ -303,35 +304,33 @@
                 init_tooltip();
                 var bar_offset = bar_width * 2 + bar_left_padding + bar_intra_padding + 80;
                 var leftside_width = graph_w / 2.2;
-                var title_height = 60;
-                bar_height = graph_h - title_height - timeline_height;
-                var chart_width = graph_w - leftside_width - 30;
+                var chart_width = graph_w - leftside_width ;
                 var chart_height = chart_width * 9/16;
                 var card_height = graph_h - title_height - timeline_height - chart_height;
                 deck = initdeck();
 
                 // title
-                drawtitlebox(0, 0, graph_w/2, title_height);
+                drawtitlebox(mysvg.x, 0, graph_w/2, 0);
+                filltitle(jsondata);
+
+                // timeline
+                drawtimeline(0, graph_h * 1.02, bar_offset + leftside_width, timeline_height);
+
+                bar_height = graph_h - title_height;
 
                 // chart
                 init_chart(bar_offset, graph_h/2 + title_height, leftside_width,  chart_height);
-
-                // // cardbox
-                // drawcards(bar_offset, graph_h/2 + title_height + 40, leftside_width , card_height );
-
-                // timeline
-                drawtimeline(0, graph_h, bar_offset + leftside_width, timeline_height);
 
                 // navigation
                 drawzone(jsondata, cur_year.toString(), bar_left_padding, 0);
 
                 // new cards
-                draw_stack(bar_offset, graph_h/2 + title_height + 40, leftside_width , card_height - 30);
+                draw_stack(bar_offset, graph_h/2 + title_height + 40, leftside_width , card_height * 0.8);
                 updatecards(jsondata);
 
                 drawline(jsondata, "steelblue", true);
                  // drawtext(jsondata, section);
-                filltitle(jsondata);
+
 
                 console.log("UI Loaded.");
             }
@@ -442,8 +441,11 @@
                 section = name.toLowerCase();
 
                 mysvg = d3.select("body").append("svg")
-                                         .attr("width", get_winsize("w"))
-                                         .attr("height", graph_h + 60);
+                                         .attr("width", graph_w)
+                                         .attr("height", graph_h + timeline_height)
+                                         .attr("class", "avbsvg");
+                mysvg.x = mysvg.property("offsetLeft");
+                mysvg.y = mysvg.property("offsetTop");
                 d3.json("js/arlington.js", onjsonload);
             }
 
@@ -585,7 +587,7 @@
                 titlebox = d3.select("body").append("div");
                 titlebox.style('position','absolute')
                 	   .style('height', height.px())
-                       .style('left', bar_left_padding.px())
+                       .style('left', (bar_left_padding + mysvg.x).px())
                        .style('top', y.px())
                        .style('width', width.px());
                 titlebox.section = titlebox.append("div")
@@ -605,6 +607,10 @@
                 }
                 titlebox.top.text(data.name);
                 titlebox.bottom.text(data.descr);
+                console.log(titlebox.section.property("clientHeight"));
+                console.log(titlebox.top.property("clientHeight"));
+                console.log(titlebox.bottom.property("clientHeight"));
+                title_height = titlebox.section.property("clientHeight") + titlebox.top.property("clientHeight") + titlebox.bottom.property("clientHeight");
             }
 
 
@@ -673,6 +679,7 @@
                     changeyear(Math.round(timeline.timescale.invert(d3.mouse(this)[0])));
                 });
                 translate(timeline,x,y + h_padding);
+                timeline_height = timeline.property("clientHeight");
             }
 
             
@@ -698,7 +705,8 @@
                 levels.push(container);
                 var data = obj.sub;
                 var maxvalue = d3.max(data, function(d) { return d[key]; });
-                var heightscale = d3.scale.linear().domain([0,maxvalue]).range([0,bar_height*maxvalue/d3.sum(data, function (d) {return d[key]})]);
+                var heightscale = d3.scale.linear().domain([0,maxvalue])
+                                                   .range([0,bar_height*maxvalue/d3.sum(data, function (d) {return d[key]})]);
                 var cur_y = 0;
                 for(var i=0; i<data.length; i++) {
                     var group = container.append("g");
