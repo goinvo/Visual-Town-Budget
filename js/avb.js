@@ -22,6 +22,7 @@
 
             // cards update constants
             var value_height;
+            var chart_height;
             
             // constants
             var section;
@@ -304,31 +305,37 @@
                 init_tooltip();
                 var bar_offset = bar_width * 2 + bar_left_padding + bar_intra_padding + 80;
                 var leftside_width = graph_w / 2.2;
-                var chart_width = graph_w - leftside_width ;
-                var chart_height = chart_width * 9/16;
-                var card_height = graph_h - title_height - timeline_height - chart_height;
+                chart_width = graph_w - leftside_width  ;
+                chart_height = chart_width * 9/20;
+
+                var padding = 20;
+                
+                // timeline
+                drawtimeline(0, graph_h * 1.02, bar_offset + leftside_width, 0);
                 deck = initdeck();
 
                 // title
                 drawtitlebox(mysvg.x, 0, graph_w/2, 0);
                 filltitle(jsondata);
 
-                // timeline
-                drawtimeline(0, graph_h * 1.02, bar_offset + leftside_width, timeline_height);
+                console.log(chart_height);
 
                 bar_height = graph_h - title_height;
 
                 // chart
-                init_chart(bar_offset, graph_h/2 + title_height, leftside_width,  chart_height);
+                init_chart(bar_offset, chart_height + title_height, leftside_width,  chart_height);
+                drawline(jsondata, "steelblue", true);
+                translate(chart, 0, - chart.xAxisSocket.node().getBBox().height);
 
                 // navigation
                 drawzone(jsondata, cur_year.toString(), bar_left_padding, 0);
 
+                console.log(chart_height);
                 // new cards
-                draw_stack(bar_offset, graph_h/2 + title_height + 40, leftside_width , card_height * 0.8);
+                draw_stack(bar_offset, title_height + chart_height + 20, leftside_width , bar_height - chart_height - 40);
                 updatecards(jsondata);
 
-                drawline(jsondata, "steelblue", true);
+
                  // drawtext(jsondata, section);
 
 
@@ -624,8 +631,7 @@
             
             function drawtimeline(x, y, width, height){
                 timeline = mysvg.append("svg:g");
-                var w_padding = 30;
-                var h_padding = 5;
+                var w_padding = width * 0.02;
                 
                 // timescale + axis
                 timeline.timescale = d3.scale.linear()
@@ -678,7 +684,7 @@
                 timeline.on("click", function() {
                     changeyear(Math.round(timeline.timescale.invert(d3.mouse(this)[0])));
                 });
-                translate(timeline,x,y + h_padding);
+                translate(timeline,x,y);
                 timeline_height = timeline.property("clientHeight");
             }
 
@@ -816,20 +822,22 @@
                 var min_year = get_minyear(data);
                 var max_year = get_maxyear(data);
                 var projected = cur_year - min_year + 1 ;
-                
-                
                
                 for(var j = min_year; j<= max_year; j++) {
                         values.push(data[j.toString()]);
                 }
                 
-                var yscale = d3.scale.linear().domain([0,d3.max(values)]).range([padding, chart.height -padding]);
+                var yscale = d3.scale.linear().domain([0,d3.max(values)]).range([padding, chart.height - padding]);
                 var xscale = d3.scale.linear().domain([0, max_year-min_year]).range([padding, chart.width - padding ]);
-                
-                
+
                 var container = chart.append("svg:g");
                 translate(container, chart.x, chart.y);
                 chart.linestack.push(container);
+
+                
+                console.log("ehre");
+                console.log(chart.yAxisSocket.node().getBBox().height);
+
                 
                 var line = d3.svg.line()
                                     .x(function(d,i) { return xscale(i); })
@@ -880,8 +888,7 @@
                          .attr("fill-opacity",0.50)
                          .attr("fill", color);
             
-                
-                                //axes
+                               //axes
                var xAxis = d3.svg.axis(container)
                      .scale(xscale)
                      .orient("bottom")
@@ -900,6 +907,8 @@
                 
                 chart.xAxisSocket.call(xAxis);
                 chart.yAxisSocket.call(yAxis);
+
+                chart_height = chart.node().getBBox().height;
                 
             }
 
@@ -924,6 +933,5 @@
                 chart.yAxisSocket = chart.append("g")
                     .attr("class", "axis")
                     .attr("transform", "translate(" + ((x + padding)).toString() +"," + (y - height + padding).toString() + ")");
-
             }
                     
