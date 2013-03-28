@@ -1,23 +1,22 @@
             var colors = ["#1f77b4", "#aec7e8", "#ff7f0e", "#ffbb78", "#2ca02c", "#98df8a", "#d62728", "#ff9896", "#9467bd", "#c5b0d5", "#8c564b", "#c49c94", "#e377c2", "#f7b6d2", "#7f7f7f", "#c7c7c7", "#bcbd22", "#dbdb8d", "#17becf", "#9edae5"];
             var homecolors = ["#006699", "#33CC66", "#CC0000"];
-            
-            var img_path = ["img/dollar.png",
-                             "img/build.png",
-                             "img/updown.png",
-                             "img/info_30.png"];
+
             var home;
 
             var in_use;
             // dimensions (no timeline included)
             var timeline_height = 50;
             var title_height = 0;
-            var graph_w = get_winsize("h") * 16/9;
-            var graph_h = get_winsize("h") - timeline_height;
-            
+
+
+            console.log(d3.select("#avb").property("clientHeight"));
+
+            var graph_h;
+            var graph_w;
             // bar dimensions
-            var bar_width = 120;
+            var bar_width;
             var bar_height;
-            var bar_intra_padding = 70;
+            var bar_intra_padding ;
             var bar_left_padding = 20;
 
             // cards update constants
@@ -47,6 +46,7 @@
             var filter;
             var timeline;
             var deck;
+            var navigation;
             var nosel_opacity = 0.3;
             var sel_opacity = 0.8;
 
@@ -57,14 +57,19 @@
             var homebars_width;
             var homebars_height;
 
+            // NAV VARIABLES
+            var maxlevel = 2;
+            var offset_w;
+            var offset_h;
+
 
             // init years array
             for(var i = min_year; i <= max_year; i++){
                 years.push((i).toString());
             }
 
-            //drawhome();
-            //activatelinks();
+            // drawhome();
+            // activatelinks();
             opensection("Revenues");
 
 
@@ -85,9 +90,9 @@
              
             function activatelinks() {
                
-               d3.select("#Revenues").on("click", function() {
+               d3.select("#home_0").on("click", function() {
                 console.log("click");
-                   opensection(this.id);
+                   opensection("revenues");
                });
             }
 
@@ -99,10 +104,12 @@
             function onhomedata(jsondata) {
                 var max = 0;
                 home_width = 300;
-                mysvg = d3.select("body").append("svg")
-                                         .attr("width", get_winsize("w"))
-                                         .attr("height", home_width);
-                drawbars(jsondata.sub, 10, 0, 150, 60);
+                var homediv = d3.select("#homeb")
+                mysvg = homediv.append("svg")
+                                         .attr("width", homediv.property("clientWidth"))
+                                         .attr("height", 250)
+                                         .style("margin-top", "1%");
+                drawbars(jsondata.sub, 0, 0, 150, 60);
                 drawtimeline(0, homebars_height + 25, get_winsize("w"), 30);
             }
 
@@ -122,21 +129,16 @@
                 }
             }
 
-            function h_percentage(data, total) {
-
-            }
 
             function adjust_width(div, target_h) {
                 var cur_size = parseInt(div.style("font-size"));
 
-                if(div.property("clientHeight") < target_h) return ;
-
-                while(div.property("clientHeight") >= target_h && cur_size >= 1) {
+                while(div.property("clientHeight") > target_h && cur_size >= 1) {
+                    console.log("Res");
                     div.style("font-size", (cur_size).px());
                     cur_size--;
                 }
 
-                div.style("font-size", (cur_size - 2).px());
             }
 
             function initdeck(){
@@ -155,8 +157,8 @@
                 newcard.title = "IMPACT";
                 newcard.icon = "img/build.png";
                 newcard.back = "this is the back of the card";
-                newcard.value = function(data) { return Math.max(0.01,(Math.round(data[cur_year]*100*100/root_total)/100)).toString(); };
-                newcard.side = "of " + section;
+                newcard.value = function(data) { return Math.max(0.01,(Math.round(data[cur_year]*100*100/root_total)/100)).toString() + "%"; };
+                newcard.side = "of total " + section;
                 deck.push(newcard);
 
                 var newcard = new Object();
@@ -175,6 +177,14 @@
                 newcard.side = "";
                 deck.push(newcard);
 
+                var newcard = new Object();
+                newcard.title = "ADDITIONAL";
+                newcard.icon = "img/info_30.png";
+                newcard.back = "this is the back of the card";
+                newcard.value = function(data) { return "Additional card"; };
+                newcard.side = "";
+                deck.push(newcard);
+
                 return deck;
             }
 
@@ -187,15 +197,16 @@
 
                 var container = mysvg.append("svg:g");
                 var levels = (deck.length + deck.length%2) / 2;
-                var card_height = height / levels;
-                var padding = 0.02*width;
-                var card_width = (width-padding) / 2;
+                var padding_h = 0.02*height;
+                var padding_w = 0.03*width;
+                var card_height = (height / levels) - 2*padding_h;
+                var card_width = (width-2*padding_w) / 2;
 
                 for(var i=0; i < deck.length; i++) {
 
-                    var newcard = drawcard(container, deck[i], card_width, card_height);
-                    var inner_x = (card_width + padding)*(i%2),
-                        inner_y = (card_height + padding)*((i - i%2)/2);
+                    var newcard = drawcard(container, deck[i], card_width, card_height - 2*padding_h);
+                    var inner_x = (card_width + padding_w)*(i%2),
+                        inner_y = (card_height + padding_h)*((i - i%2)/2);
                     placedivs(newcard, x + inner_x, y + inner_y);
 
                     translate(newcard, inner_x, inner_y);
@@ -206,7 +217,7 @@
 
             function placedivs(card, x, y) {
                 card.divs.style("left", (x + mysvg.x).px());
-                card.divs.style("top", (y + mysvg.y).px());
+                card.divs.style("top", (y + mysvg.y + d3.select("#avb").property("offsetTop")).px());
             }
 
             function drawcard(container, card, width, height) {
@@ -218,9 +229,9 @@
                 value_height = height - title_h;
                 var rect = newcard.append("svg:rect")
                                     .attr("width", width.px())
-                                    .attr("height", height.px())
-                                    .attr("rx", (20))
-                                    .attr("ry", (20));
+                                    .attr("height", Math.max(1,height).px())
+                                    .attr("rx", (10))
+                                    .attr("ry", (10));
                 newcard.append("svg:line")
                         .attr("x1", 0)
                         .attr("x2", width)
@@ -235,10 +246,13 @@
                 
                 newcard.title = newcard.divs.append("div")
                        .style("height", title_h.px())
+                       .append("div")
+                       .style("heigth","100%")
                        .style("width", width.px())
-                       .style("font-size", (title_h - padding*2).px())
-                       .style("display","block")
+                       .style("font-size", (30).px())
                        .text(card.title);
+                console.log("call");
+                adjust_width(newcard.title, title_h);
                 newcard.title.append("img")
                             .attr("src", card.icon)
                             .attr("height", title_h)
@@ -301,45 +315,108 @@
 
             function onjsonload(jsondata) {
                 //drawtimeline(0, graph_h, 0, graph_w);
+
+                drawtitlebox(0, d3.select("#navbar").property("clientHeight") , 600, 0);
+                filltitle(jsondata);
+
+                graph_h = get_winsize("h") - title_height - 60 - 60;
+                graph_w = graph_h * 16/9;
+
+                mysvg = d3.select("#avb").style("position","absolute")
+                                         .style("top", title_height.px())
+                                         .append("svg")
+                                         .attr("width", graph_w)
+                                         .attr("height", graph_h)
+                                         .attr("class", "avbsvg");
+                mysvg.x = mysvg.property("offsetLeft");
+                mysvg.y = mysvg.property("offsetTop");
+
                 initfilter(10);
                 init_tooltip();
                 var bar_offset = bar_width * 2 + bar_left_padding + bar_intra_padding + 80;
-                var leftside_width = graph_w / 2.2;
-                chart_width = graph_w - leftside_width  ;
-                chart_height = chart_width * 9/20;
 
                 var padding = 20;
+
+                                // title
+
+                // navigation
+                init_nav(jsondata, 0, 0, graph_w/2, graph_h);
+
                 
                 // timeline
-                drawtimeline(0, graph_h * 1.02, bar_offset + leftside_width, 0);
+                //drawtimeline(0, graph_h * 1.02, bar_offset + leftside_width, 0);
                 deck = initdeck();
 
-                // title
-                drawtitlebox(mysvg.x, 0, graph_w/2, 0);
-                filltitle(jsondata);
-
-                console.log(chart_height);
-
-                bar_height = graph_h - title_height;
-
                 // chart
-                init_chart(bar_offset, chart_height + title_height, leftside_width,  chart_height);
+                chart_width = graph_w/2;
+                chart_height = chart_width * 9/20;
+                init_chart(graph_w/2, graph_h/2, chart_width,  chart_height);
                 drawline(jsondata, "steelblue", true);
                 translate(chart, 0, - chart.xAxisSocket.node().getBBox().height);
 
-                // navigation
-                drawzone(jsondata, cur_year.toString(), bar_left_padding, 0);
-
-                console.log(chart_height);
                 // new cards
-                draw_stack(bar_offset, title_height + chart_height + 20, leftside_width , bar_height - chart_height - 40);
-                updatecards(jsondata);
+                draw_stack(graph_w/2, graph_h/2 + 20, graph_w/2 , graph_h/2 );
+                updatecards(jsondata); 
 
 
                  // drawtext(jsondata, section);
 
 
                 console.log("UI Loaded.");
+            }
+
+
+            var rectclick = function(d,i) {
+                        drawline(d, d3.select(this).attr("fill"), true);
+                        updatecards(d);
+                        filltitle(d);
+                        // fix this parentnode mess !
+                        if( levels[levels.length-1].lev == d3.select(this.parentNode.parentNode).attr("lev")){
+                        } else {
+                            levels.pop().remove();
+                            if(curly !== undefined) {
+                            curly.remove();
+                            }
+                        }
+                        console.log(d.sub);
+                        if ( d["sub"] === undefined ) {
+                            return;
+                        }
+
+                        for(var i=0; i < levels.length; i++) {
+
+                            //container = levels[parseInt(d3.select(this.parentNode.parentNode).attr("lev"))];
+                            container = levels[i];
+                            container.x = container.x - bar_width - bar_intra_padding;
+                            container.transition().duration(500).attr("transform", " translate(" + (container.x).toString() +"," + (container.y).toString() + ")");
+                            if(container.curly !== undefined) {
+                                container.curly.transition().duration(500).attr("transform", " translate(" + (container.x + bar_width + container.curly.padding).toString() + "," + (container.y).toString() + ")");
+                            }
+                        }
+
+                        container.curly = drawcurly(container, Math.floor(d3.select(this).attr("y")) + d3.select(this).attr("height")/2, container.x + bar_width, graph_h - bar_height, 100, d3.select(this).attr("fill"));
+                        d3.select(this).attr("opacity",sel_opacity.toString());
+                        newzone = drawzone(d3.select(this).data()[0], cur_year.toString(), container.x, navigation.height - bar_height, bar_width, bar_height);
+                        newzone.x = graph_w/2 - bar_width - 30;
+                        newzone.transition()
+                               .delay(1000)
+                               .duration(500)
+                               .attr("transform", " translate(" + (newzone.x).toString() +"," + (container.y).toString() + ")")
+                               .attr("display", "inline");
+                };
+
+            function init_nav(jsondata, x, y, width, height) {
+                navigation = mysvg.append("svg:g");
+                navigation.height = height;
+                navigation.width = width;
+                bar_width = width/4;
+                offset_w = bar_width * 0.6;
+                bar_intra_padding = offset_w;
+                offset_h = 0;
+                bar_height = height - offset_h*maxlevel;
+                drawzone(jsondata, cur_year.toString(), graph_w/2 - bar_width - 30, height - bar_height, bar_width, bar_height).attr("display","inline");
+
+
             }
 
             function get_change(){
@@ -366,14 +443,17 @@
                 var heightscale = d3.scale.linear()
                                           .domain([0,d3.max(jsondata, get_max)])
                                           .range([0, height]);
-                var xscale = d3.scale.linear()
-                                          .domain([0,3])
-                                          .range([0, get_winsize("w")]);
                 homescale = heightscale;
                 var container = mysvg.append("svg:g");
                 translate(container, x, y);
                 var tracecontainer = mysvg.append("svg:g");
                 translate(tracecontainer, x, y);
+
+                var getoffset = function (id) {
+                    var divoffset = d3.select("#" + id).property("offsetLeft") - 30;
+                    return d3.select("#" + id).property("offsetLeft") - d3.select("#homeb").property("offsetLeft");
+                }
+
                 tracecontainer.selectAll("rect")
                                 .data(jsondata)
                                 .enter()
@@ -386,7 +466,7 @@
                                         return heightscale(get_max(d));
                                 })
                                 .attr("x", function(d, i) {
-                                    return xscale(i);
+                                    return getoffset("home_" + i.toString());
                                 })
                                 .attr("fill", function(d,i) {
                                     return homecolors[i];
@@ -399,7 +479,7 @@
                                 .attr("width", width)
                                 .attr("height", 0)
                                 .attr("x", function(d, i) {
-                                    return xscale(i);
+                                    return getoffset("home_" + i.toString());
                                 })
                                 .attr("fill", function(d,i) {
                                     return homecolors[i];
@@ -410,7 +490,7 @@
                                   .enter()
                                   .append("svg:text")
                                   .attr("x", function(d, i){
-                                    return xscale(i) + homebars_width + 10;
+                                    return getoffset("home_" + i.toString()) + homebars_width + 5;
                                   })
                                   .attr("y", homebars_height)
                                   .attr("height", homebars_height)
@@ -441,18 +521,12 @@
             }
 
             function opensection(name) {
-                d3.selectAll("div").style("display","none");
+                d3.select("#cont").style("display","none");
                 d3.selectAll("svg").remove();
 
                 home = false;
                 section = name.toLowerCase();
 
-                mysvg = d3.select("body").append("svg")
-                                         .attr("width", graph_w)
-                                         .attr("height", graph_h + timeline_height)
-                                         .attr("class", "avbsvg");
-                mysvg.x = mysvg.property("offsetLeft");
-                mysvg.y = mysvg.property("offsetTop");
                 d3.json("js/arlington.js", onjsonload);
             }
 
@@ -484,7 +558,7 @@
             function add_label(group, rect, label){
                 var padding = 5;
                 var t = group.append("text")
-                              .attr("class", "label")
+                              .attr("class", "lab")
                               .attr("x", rect.attr("x"))
                               .attr("y", rect.attr("y"));
                 var words = label.split(" ");
@@ -529,16 +603,16 @@
                 .style("position", "absolute")
                 .style("z-index", "10")
                 .style("visibility", "hidden")
-                .attr("class","tooltip");
+                .attr("class","toolt");
             }
 
-
-            function drawcurly(target_y, x, y){
-                if(curly !== undefined ) {
-                    curly.remove();
+            function drawcurly(container, target_y, x, y, init_height, color){
+                console.log(color);
+                if(container.curly !== undefined ) {
+                    container.curly.remove();
                 }
                 curly = mysvg.append("svg:g");
-                var radius = Math.floor(bar_intra_padding/3);
+                var radius = Math.floor(bar_intra_padding/5);
                 var points = 6;
 
                 var angle = d3.scale.linear()
@@ -552,6 +626,8 @@
                     .angle(function(d, i) { return angle(i); });
     
                 // 1st curl
+
+
 
                 curly.append("svg:path").datum(d3.range(points))
                                             .attr("d", curvedline)
@@ -568,7 +644,7 @@
                                             .attr("d", curvedline)
                                             .attr("class","curly_b")
                                             .attr("transform", "translate(0, " + (radius + target_y).toString() + ") ");
-                
+
                 curly.append("svg:path").datum(d3.range(points))
                                             .attr("d", curvedline)
                                             .attr("class","curly_b")
@@ -584,17 +660,25 @@
                                             .attr("d", curvedline)
                                             .attr("class","curly_b")
                                             .attr("transform", "rotate(180 0 0), translate(" + (-radius*2).toString() +  ", " + (-bar_height + radius).toString() + ") ");
-
-                
-                translate(curly, bar_width + bar_left_padding + (bar_intra_padding - radius*2)/2, y);
-                
+                //translate(curly, x + (bar_intra_padding-radius*2)/2, y);
+                curly.padding = (bar_intra_padding-radius*2)/2;
+                curly.attr("display","none");
+                curly.attr("transform", "scale(0, " + init_height/bar_height + " ), translate(" + (x + (bar_intra_padding-radius*2)/2).toString() +"," + (y).toString() + ")");
+                curly.transition().delay(500)
+                                  .duration(500)
+                                  .attr("transform", "translate(" + (x + curly.padding).toString() +"," + (y).toString() + ")")
+                                  .attr("display", "inline");
+                return curly;
             }
             
             function drawtitlebox(x, y, width, height) {
-                titlebox = d3.select("body").append("div");
+                titlebox = d3.select("body").append("div")
+                                            .attr("id", "titlebox")
+                                            .style("margin-top", "1%")
+                                            .style("margin-left", "1%");
                 titlebox.style('position','absolute')
                 	   .style('height', height.px())
-                       .style('left', (bar_left_padding + mysvg.x).px())
+                       .style('left', (0).px())
                        .style('top', y.px())
                        .style('width', width.px());
                 titlebox.section = titlebox.append("div")
@@ -614,10 +698,8 @@
                 }
                 titlebox.top.text(data.name);
                 titlebox.bottom.text(data.descr);
-                console.log(titlebox.section.property("clientHeight"));
-                console.log(titlebox.top.property("clientHeight"));
-                console.log(titlebox.bottom.property("clientHeight"));
                 title_height = titlebox.section.property("clientHeight") + titlebox.top.property("clientHeight") + titlebox.bottom.property("clientHeight");
+                console.log(title_height);
             }
 
 
@@ -697,14 +779,20 @@
                 obj.attr("transform","rotate(" + degrees.toString() + " 100 100)");
             }
             
-            function drawzone(obj, key, x, y) {
-                
-                var container = mysvg.append("svg:g")
+            function drawzone(obj, key, x, y, width, height) {
+
+                bar_width = width;
+                bar_height = height;
+                bar_left_padding = x;
+                var container = navigation.append("svg:g")
                     .attr("stroke", "white")
                     .attr("stroke-width", 2)
                     .attr("fill", "orange")
                     .attr("lev", levels.length)
                     .attr("name", obj["name"]);
+
+                container.x = x;
+                container.y = y;
                 
                 //stack push
                 container.lev = levels.length;
@@ -723,6 +811,8 @@
                             .attr("width", bar_width)
                             .attr("height", heightscale(data[i][key]))
                             .attr("fill", colors[i%20])
+                            .attr("rx", 5)
+                            .attr("ry", 5)
                             .attr("opacity", nosel_opacity.toString());
                     if ( entities.attr("height") >= 20 ) {
                             add_label(group,entities,data[i]["name"]);
@@ -730,35 +820,8 @@
                     cur_y += heightscale(data[i][key]);
                 }
                 container.selectAll("rect").data(data).enter;
-                container.selectAll("rect").on("click", function(d,i) {
-                        drawline(d, d3.select(this).attr("fill"), true);
-                        //drawtext(d, d3.select(this.parentNode.parentNode).attr("name"));
-                        updatecards(d);
-                        console.log(d3.select(this.parentNode.parentNode));
-                        filltitle(d);
-                        // fix this parentnode mess !
-                        if( levels[levels.length-1].lev == d3.select(this.parentNode.parentNode).attr("lev")){
-                            console.log("proceed");   
-                        } else {
-                            levels.pop().remove();
-                            if(curly !== undefined) {
-                            curly.remove();
-                            }
-                            console.log("notlast"); 
-                        }
+                container.selectAll("rect").on("click", rectclick);
 
-                        if ( d["sub"] === undefined ) {
-                            return;
-                        }
-                        if(curly !== undefined) {
-                            curly.remove();
-                        }
-                        drawcurly(Math.floor(d3.select(this).attr("y")) + d3.select(this).attr("height")/2, 0, graph_h - bar_height + y);
-                        d3.select(this).attr("opacity",sel_opacity.toString());
-                        var newpos = bar_width*2 + d3.select(this).attr("x");
-                        console.log((d3.select(this).data()[0]).name);//
-                        drawzone(d3.select(this).data()[0], key, x + bar_width + bar_intra_padding, y);
-                });//
                 container.selectAll("rect").call(d3.behavior.drag()
                       .on("dragstart", function(d) {
                         //console.log("dstart");
@@ -776,6 +839,7 @@
                     d3.select(this).attr("opacity","0.3");
                 });        
                 container.selectAll("rect").on("mouseover", function(d) {
+                    console.log("tool");
                     d3.select(this).attr("opacity","0.7");
                     tooltip.style("visibility","visible")
                     .style("left", (d3.event.x + 10).px())
@@ -787,8 +851,8 @@
                             .style("top", (d3.event.y + 2).px())
                             .text(d.name);
                 });
-                
-                translate(container, x, graph_h - bar_height + y);
+                translate(container, x, y);
+                container.attr("display","none");
                 return container;
             }
             
@@ -833,11 +897,6 @@
                 var container = chart.append("svg:g");
                 translate(container, chart.x, chart.y);
                 chart.linestack.push(container);
-
-                
-                console.log("ehre");
-                console.log(chart.yAxisSocket.node().getBBox().height);
-
                 
                 var line = d3.svg.line()
                                     .x(function(d,i) { return xscale(i); })
@@ -892,6 +951,7 @@
                var xAxis = d3.svg.axis(container)
                      .scale(xscale)
                      .orient("bottom")
+                     .tickSize(2, 0, 0)
                      .tickFormat(function(d, i){
                         return years[i]; });
                 
@@ -901,6 +961,7 @@
                                  .scale(yscale.range([chart.height -padding, padding]))
                                  .ticks(5)
                                  .orient("left")
+                                 .tickSize(2, 0, 0)
                                  .tickFormat(function(d,i){
                                      return formatcurrency(d);
                                  });

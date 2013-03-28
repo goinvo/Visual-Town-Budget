@@ -9,17 +9,15 @@ div {
 }
 
 .avbsvg{
-    display: block;
-    margin: auto;
-} 
+    margin-left:auto; 
+    margin-right: auto;
+}
 
 .graphline {
     fill : none;
     stroke-width : 3 ;
     stroke-linejoin : round;
     stroke-linecap: round;
-    -webkit-filter: drop-shadow( -5px -5px 5px #000000 );
-            filter: drop-shadow( -5px -5px 5px #000000 );
 }
 
 .graphline_proj {
@@ -60,8 +58,10 @@ div {
 .axis path,
 .axis line {
     fill: none;
-    stroke: rgba(35, 59, 85, 0.56);
+    stroke: rgba(35, 59, 85, 0.4);
     stroke-width : 2;
+    stroke-linejoin : round;
+    stroke-linecap: round;
     shape-rendering: crispEdges;
     
 }
@@ -83,11 +83,10 @@ div {
 
 }
 
-.label {
+.lab {
     font-family: "Gill Sans";
     font-size: 12px;
     shape-rendering: crispEdges;
-    text-rendering: "optimizeLegibility";
     stroke-width:0px;
     fill: rgba(0, 0, 0, 0.51);
     cursor: default;
@@ -104,7 +103,7 @@ div {
     stroke : rgba(53, 143, 234, 0.98);
 }
 
-.tooltip {
+.toolt {
     background : rgba(52, 44, 44, 0.54);
     color : white;
     padding:5px;
@@ -120,9 +119,11 @@ div {
 }
 
 .curly_b{
-    stroke: rgba(35, 59, 85, 0.56);
+    stroke: rgb(190, 190, 190);
     stroke-width : 3;
-    fill : none
+    fill : none;
+    stroke-linejoin : round;
+    stroke-linecap: round;
 }
 
 .homet{
@@ -149,26 +150,6 @@ div {
     cursor: default;
 }
 
-.tbrow{
-    display:block;
-    width:100%;
-    height:50%;
-    margin-bottom:3%;
-}
-
-.ticons{
-    width:35px;
-    float:left;
-    margin-right:5px;
-}
-
-.trow{
-    height:100%; 
-    width:50%;
-    float:left;
-    font-size: 22px;
-}
-
 
 .tsection{
     font-size: 16px;
@@ -184,14 +165,6 @@ div {
     color:rgb(0, 0, 0);
 }
 
-.tperc{
-    font-size: 45px;
-}
-
-.ttext{
-    font-size: 22px;
-    margin-right: 5%;
-}
 
 .card rect {
     fill : rgb(155, 155, 159);
@@ -199,6 +172,7 @@ div {
     stroke: rgb(51, 51, 51);
     stroke-opacity: 0.3;
     stroke-width: 3;
+
 }
 
 .card line {
@@ -215,7 +189,7 @@ div {
 
 }
 
-.carddiv {    
+.carddiv { 
     text-align: center;
     vertical-align: middle;
 }

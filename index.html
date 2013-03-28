@@ -2,31 +2,74 @@
 <html>
     <head>
         <meta charset="utf-8">
+
+
+        <link href="css/bootstrap.css" rel="stylesheet">
+        <link href="css/bootstrap-responsive.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="css/look.css">
+
+
         <script src ="js/d3.js"></script>
     </head>
     <body>
-        <div class="tname"style="float:top;"> Arlington Visual Budget</div>
-        <div style="text-align:center">
-            <img src="img/town-hall-hi.png" width="25%" style="padding:4%;"> 
-        </div>
-        <div id="hportion">
-        <div id="Revenues" style="width:29%; padding:2%; float:left; ">
-            <div class="tname"style="width:100%; float:top;"> Revenues </div>
-            <div class="tdesc" style="width:100%; float:top;"> How and from where does Arlington get it's budget? </div>
-        </div>
 
-        <div style="width:29%; padding:2%; float:left;">
-            <div class="tname" style="width:100%; float:top;"> Funds </div>
-            <div class="tdesc" style="width:100%; float:top;"> Not simply in and out. The town of Arlington manages a series of independent funds that are fundamental for the local economy. Discover what they are.  </div>
-        </div>
-        <div style="width:29%; padding:2%; float:left;">
-            <div class="tname"  style="width:100%; float:top;"> Expenses </div>
-            <div class="tdesc" style="width:100%; float:top;"> Where does your tax money go each year? Discover what you pay for. </div>
-        </div>  
-        </div>
+    <div id="navbar" class="navbar navbar-inverse navbar-static-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="#">Arlington Visual Budget</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li class="active"><a href="#">Home</a></li>
+              <li><a href="#about">About</a></li>
+              <li><a href="#contact">Contact</a></li>
+              <li><a href="#contact">Code</a></li>
+              <li><a href="#contact">Feedback</a></li>
 
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+    <div id="cont" class="container" style="margin-top:1%;">
+
+      <!-- Main hero unit for a primary marketing message or call to action -->
+      <div class="hero-unit">
+        <img src="img/town-hall-hi.png" style="height:250px; display: block; margin-left: auto; margin-right: auto;">
+      </div>
+
+      <!-- Example row of columns -->
+      <div id="homeb" class="row">
+        <div id="home_0" class="span4">
+          <h2>Revenues</h2>
+          <p>How and from where does Arlington get it's budget?  </p>
+        </div>
+        <div id="home_1" class="span4">
+          <h2>Expenses</h2>
+          <p>here does your tax money go each year? Discover what you pay for.</p>
+       </div>
+        <div id="home_2" class="span4">
+          <h2>Funds</h2>
+          <p>Not simply in and out. The town of Arlington manages a series of independent funds that are fundamental for the local economy. Discover what they are. </p>
+        </div>
+      </div>
+
+      <hr>
+    </div> 
+
+
+
+    <div id="avb" style="margin-top:60px; height:100%">
+    </div>
 
     <script src ="js/avb.js"></script>
     </body>
 </html>
+
+
+
