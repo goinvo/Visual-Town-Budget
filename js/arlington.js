@@ -18,7 +18,20 @@
 	"sub" : [ 
 	{
 		"name" : "Local receipts",
-		"2012" : 8455000
+		
+        "2006" : 8834256,     
+        "2007" : 0,   
+        "2008" : 0,   
+        "2009" : 0,   
+        "2010" : 0,   
+        "2011" : 0,   
+        "2012" : 0,   
+        "2013" : 10291465,  
+        "2014" : 0,  
+        "2015" : 0,   
+        "2016" : 0,   
+        "2017" : 0,   
+        "2018" : 0 
 	},
 	{
 		"name" : "State aid",
@@ -33,19 +46,20 @@
 		"name" : "RE & Personal Property Taxes",
         "descr" : "The property tax levy is the revenue a city or town raises through real and personal property taxes.",
 
-            "2006" : 83133545, 	
-            "2007" : 85887429, 	
-            "2008" : 88741592, 	
-            "2009" : 91700169, 	
-            "2010" : 101257494, 	
-            "2011" : 104843729, 	
-            "2012" : 109773356, 	
-            "2013" : 113652941, 	
-            "2014" : 117689388, 	
-            "2015" : 120689961, 	
-            "2016" : 125062301, 	
-            "2017" : 129614447, 	
-            "2018" : 134340528, 
+            
+            "2006":13133545,
+            "2007":85887429,  
+            "2008":88741592,  
+            "2009":91700169,  
+            "2010":101257494,     
+            "2011":104843729,     
+            "2012":109773356,     
+            "2013":113652941,     
+            "2014":117689388,     
+            "2015":120689961,     
+            "2016":125062301,     
+            "2017":129614447,     
+            "2018":34340528, 
 
 		"sub": [
         {
@@ -517,42 +531,34 @@
     ]
     },
     {
-        "name" : "Bonds - short term",
-        "2012" : 10000000
+        "name" : "Bonds - short term"
     },
 
     {
-        "name" : "Loans",
-        "2012" : 10000000
+        "name" : "Loans"
     },
     {
-        "name" : "Enterprise funds",
-        "2012" : 10000000
+        "name" : "Enterprise funds"
     },
     {
-        "name" : "Reserve & stabilization funds",
-        "2012" : 10000000
+        "name" : "Reserve & stabilization funds"
     }
 
     ]
 
 	},
 	{
-		"name" : "Bonds - short term",
-		"2012" : 10000000
+		"name" : "Bonds - short term"
 	},
 
 	{
-		"name" : "Loans",
-		"2012" : 10000000
+		"name" : "Loans"
 	},
 	{
-		"name" : "Enterprise funds",
-		"2012" : 10000000
+		"name" : "Enterprise funds"
 	},
 	{
-		"name" : "Reserve & stabilization funds",
-		"2012" : 10000000
+		"name" : "Reserve & stabilization funds"
 	}
 
 	]

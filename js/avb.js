@@ -49,6 +49,7 @@
             var navigation;
             var nosel_opacity = 0.3;
             var sel_opacity = 0.8;
+            var multichart;
 
             // HOME ELEMENTS
             var homebars;
@@ -69,7 +70,7 @@
             }
 
             // drawhome();
-            // activatelinks();
+            //activatelinks();
             opensection("Revenues");
 
 
@@ -78,15 +79,7 @@
                 return this.toString() + "px";
             };
             
-            var get_max = function (d) {
-                var curmax = 0;
-                for( var i=0; i <=years.length; i++) {
-                    if(d[years[i]] !== undefined && d[years[i]] > curmax) {
-                        curmax = d[years[i]];
-                    }
-                }
-                return curmax;
-            };
+
              
             function activatelinks() {
                
@@ -107,10 +100,10 @@
                 var homediv = d3.select("#homeb")
                 mysvg = homediv.append("svg")
                                          .attr("width", homediv.property("clientWidth"))
-                                         .attr("height", 250)
+                                         .attr("height", 160)
                                          .style("margin-top", "1%");
                 drawbars(jsondata.sub, 0, 0, 150, 60);
-                drawtimeline(0, homebars_height + 25, get_winsize("w"), 30);
+                //drawtimeline(0, homebars_height + 25, get_winsize("w"), 30);
             }
 
 
@@ -314,12 +307,12 @@
 
 
             function onjsonload(jsondata) {
-                //drawtimeline(0, graph_h, 0, graph_w);
+               //  drawtimeline(0, graph_h, 0, graph_w);
 
                 drawtitlebox(0, d3.select("#navbar").property("clientHeight") , 600, 0);
                 filltitle(jsondata);
 
-                graph_h = get_winsize("h") - title_height - 60 - 60;
+               graph_h = get_winsize("h") - title_height - 60 - 60;
                 graph_w = graph_h * 16/9;
 
                 mysvg = d3.select("#avb").style("position","absolute")
@@ -330,6 +323,168 @@
                                          .attr("class", "avbsvg");
                 mysvg.x = mysvg.property("offsetLeft");
                 mysvg.y = mysvg.property("offsetTop");
+                
+                //initsingle(jsondata);
+                init_tooltip();
+                initmultiple(jsondata);
+
+            }
+
+            function initmultiple(jsondata) {
+                draw_mult_chart(jsondata, 0, 0, graph_w, graph_h);
+
+            }
+
+            function get_maxyear(data) {
+                var i = max_year;
+                while( data[i.toString()] === undefined && i >= min_year ) {
+                    i--;
+                }
+                return i;
+            }
+            
+            var get_max = function (d) {
+                var curmax = 0;
+                for( var i=min_year; i <=max_year; i++) {
+                    if(d[i.toString()] !== undefined && d[i.toString()] > curmax) {
+                        curmax = d[years[i]];
+                    }
+                }
+                return curmax;
+            };
+
+            function gm(d) {
+                var curmax = 0;
+                for( var i=min_year; i <=max_year; i++) {
+                    if(d[i.toString()] !== undefined && d[i.toString()] > curmax) {
+                        curmax = d[i.toString()];
+                    }
+                }
+                return curmax;
+            };
+
+            function stacked_click() {}
+
+            function draw_mult_chart(jsondata, x, y, width, height){
+                multichart = mysvg.append("svg:g");
+                
+                var margin_l = 60;
+                var margin_h = 25;
+                var chart_w = width - margin_l - 20;
+                var chart_h = height - margin_h;
+
+                rev = jsondata;
+                var yscale = d3.scale.linear()
+                                      .domain([0,gm(rev) * 1.3])
+                                      .range([chart_h, 0]);
+                console.log("here");
+
+                var xscale = d3.scale.linear().domain([min_year, max_year]).range([0, chart_w]);
+                var color = d3.scale.category20();
+
+                var area = d3.svg.area()
+                            .interpolate("basis")
+
+                            .x(function(d,i) { return xscale(d.x); })
+                            .y0(function(d) { return yscale(d.y0); })
+                            .y1(function(d) { return yscale(d.y0 + d.y); });
+
+                
+                var stack = d3.layout.stack()
+                              .values(function(d) { return d.val; });
+
+                var layers = rev.sub;
+                var convert = layers.map(function(d) {
+                    var values = [];
+                            for(var i=min_year; i <= max_year ; i++){
+                                if( d[i.toString()] === undefined ) {
+                                    values.push({ "x" : i , "y" : 0});
+                                } else {
+                                    values.push({ "x" : i , "y" : d[i.toString()]});
+                                }
+                            }
+                            return {
+                                name : d.name,
+                                val : values
+                            }
+                });
+
+                var instance = stack(convert);
+
+                var browser = multichart.selectAll(".browser")
+                                   .data(instance)
+                                   .enter().append("g")
+                                   .attr("class", "browser");
+
+                var areas = browser.append("path")
+                       .attr("class", "area")
+                       .attr("d", function(d) { return area(d.val); })
+                       .style("fill", function(d,i) { return colors[i%20]; })
+                       .style("stroke", function(d,i) { return colors[i%20]; });
+
+                areas.on("mouseout", function(d,i) {
+                    tooltip.style("visibility", "hidden");
+                    d3.select(this).attr("opacity","1");
+                });        
+                areas.on("mouseover", function(d) {
+                    d3.select(this).attr("opacity","0.7");
+                    tooltip.style("visibility","visible")
+                    .style("left", (d3.event.x + 10).px())
+                    .style("top", (d3.event.y + 2).px())
+                    .text(d.name);
+                });
+                areas.on("mousemove", function(d) {
+                     tooltip.style("left", (d3.event.x + 10).px())
+                            .style("top", (d3.event.y + 2).px())
+                            .text(d.name);
+                });
+
+              browser.append("text")
+                      .datum(function(d) { return {name: d.name, val: d.val[d.val.length - 1]}; })
+                      .attr("transform", function(d) { return "translate(" + xscale(d.val.x) + "," + yscale(d.val.y0 + d.val.y / 2) + ")"; })
+                      .attr("x", -5)
+                      .attr("dy", ".35em")
+                      .text(function(d) { 
+                                            console.log(yscale.range()[0] - yscale(d.val.y));
+                                            if((yscale.range()[0] - yscale(d.val.y)) > 20) {
+                                                return d.name;
+                                            } else {
+                                                return "";
+                                            }
+                                        });
+
+
+                var xAxis = d3.svg.axis()
+                            .scale(xscale)
+                            .orient("bottom")
+                            .ticks(5)
+                            .tickFormat(function (d) { 
+                                return d.toString();});
+
+                var yAxis = d3.svg.axis()
+                            .scale(yscale)
+                            .orient("left")
+                            .ticks(5)
+                            .tickFormat( function(d) {
+                                return formatcurrency(d);
+                            })
+
+               multichart.append("g")
+                      .attr("class", "axis")
+                      .attr("transform", "translate(0," + chart_h + ")")
+                      .call(xAxis);
+
+               multichart.append("g")
+                      .attr("class", "axis")
+                      .call(yAxis);
+
+
+
+                translate(multichart, x + margin_l, y + 5);
+
+            }
+
+            function initsingle(jsondata){
 
                 initfilter(10);
                 init_tooltip();
@@ -531,6 +686,7 @@
             }
 
 
+
                 
             // helper functions
             function initfilter(stdev) {
@@ -674,6 +830,7 @@
             function drawtitlebox(x, y, width, height) {
                 titlebox = d3.select("body").append("div")
                                             .attr("id", "titlebox")
+                                            .style("width", "100%")
                                             .style("margin-top", "1%")
                                             .style("margin-left", "1%");
                 titlebox.style('position','absolute')
@@ -822,17 +979,17 @@
                 container.selectAll("rect").data(data).enter;
                 container.selectAll("rect").on("click", rectclick);
 
-                container.selectAll("rect").call(d3.behavior.drag()
-                      .on("dragstart", function(d) {
-                        //console.log("dstart");
-                      })
-                      .on("drag", function(d) {
-                        //console.log("dtag");
-                      })
-                      .on("dragend", function() {
-                        var color = d3.select(this).attr("fill");
-                        drawline(d3.select(this).data()[0],color,false);
-                      }));
+                // container.selectAll("rect").call(d3.behavior.drag()
+                //       .on("dragstart", function(d) {
+                //         //console.log("dstart");
+                //       })
+                //       .on("drag", function(d) {
+                //         //console.log("dtag");
+                //       })
+                //       .on("dragend", function() {
+                //         var color = d3.select(this).attr("fill");
+                //         drawline(d3.select(this).data()[0],color,false);
+                //       }));
 
                 container.selectAll("rect").on("mouseout", function(d,i) {
                     tooltip.style("visibility", "hidden");
@@ -864,14 +1021,7 @@
                 return i;
             }
             
-            function get_maxyear(data) {
-                var i = max_year;
-                while( data[i.toString()] === undefined && i >= min_year ) {
-                    i--;
-                }
-                return i;
-            }
-            
+
             function drawline(data, color, clear) {
                 if(typeof(clear)==='undefined') clear = false;
                 if(clear) {

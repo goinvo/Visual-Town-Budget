@@ -54,12 +54,14 @@ div {
 .graphcircle {
     stroke-width : 2;
 }
+/*
+body {background-color:#d1e1f7;}*/
 
 .axis path,
 .axis line {
     fill: none;
-    stroke: rgba(35, 59, 85, 0.4);
-    stroke-width : 2;
+    stroke: rgb(101, 101, 101);
+    stroke-width : 3;
     stroke-linejoin : round;
     stroke-linecap: round;
     shape-rendering: crispEdges;
@@ -68,7 +70,7 @@ div {
 
 .axis text {
     font-family: "Gill Sans";
-    font-size: 11px;
+    font-size: 14px;
     cursor: default;
 }
 
@@ -192,4 +194,22 @@ div {
 .carddiv { 
     text-align: center;
     vertical-align: middle;
+}
+
+.browser text {
+  text-anchor: end;
+}
+
+.area {
+    fill-opacity : 0.65;
+    stroke-opacity: 1.0;
+    stroke-linejoin : round;
+    stroke-linecap: round;
+    stroke-width: 0;
+}
+
+.grid {
+    stroke-width: 1;
+    stroke : lightgrey;
+
 }
