@@ -54,8 +54,7 @@ div {
 .graphcircle {
     stroke-width : 2;
 }
-/*
-body {background-color:#d1e1f7;}*/
+
 
 .axis path,
 .axis line {
@@ -99,11 +98,7 @@ body {background-color:#d1e1f7;}*/
     font-size: 20px;
 }
 
-.timeselector {
-    stroke-width : 5;
-    fill : rgb(253, 253, 253);
-    stroke : rgba(53, 143, 234, 0.98);
-}
+
 
 .toolt {
     background : rgba(52, 44, 44, 0.54);
@@ -200,16 +195,58 @@ body {background-color:#d1e1f7;}*/
   text-anchor: end;
 }
 
-.area {
-    fill-opacity : 0.65;
-    stroke-opacity: 1.0;
+
+.tlaxis path {
+    fill: none;
+    stroke: rgb(101, 101, 101);
+    stroke-width : 1;
     stroke-linejoin : round;
     stroke-linecap: round;
-    stroke-width: 0;
+    shape-rendering: crispEdges;
+    
 }
 
-.grid {
-    stroke-width: 1;
-    stroke : lightgrey;
+.tlb {
+    fill : lightgrey;
+    fill-opacity:0.2
+    stroke: grey;
+    stroke-width: 2px;
+}
 
+.multiarea {
+    fill-opacity : 0.65;
+}
+
+
+.multiline {
+    fill: none;
+    stroke-width:2px;
+    opacity: 1;
+}
+
+.multiaxis path {
+    stroke-width: 0;
+    fill: none;
+}
+
+
+.multigrid .tick {
+    stroke: lightgrey;
+    opacity: 0;
+}
+.multigrid path {
+      stroke-width: 1;
+}
+
+.tselect path{
+    fill : steelblue;
+    fill-opacity: 0.5;
+    stroke-linejoin : round;
+    stroke-linecap: round;
+
+}
+
+.tselect line {
+    stroke-linejoin : round;
+    stroke-linecap: round;
 }
