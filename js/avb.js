@@ -73,7 +73,7 @@
 
             drawhome();
             activatelinks();
-            // opensection("Revenues");
+            //opensection("Revenues");
 
 
             Number.prototype.px=function()
@@ -141,10 +141,10 @@
                 // amount card
                 var newcard = new Object();
                 newcard.title = "AMOUNT";
-                newcard.icon = "img/coin.svg"
+                newcard.icon = "img/dollar.png"
                 newcard.back = "this is the back of the card";
                 newcard.value = function(data) { return formatcurrency(data[cur_year.toString()]); };
-                newcard.side = function(data) { return "as of " + cur_year.toString()};
+                newcard.side = function(data) { return "as of " + cur_year.toString() + "."};
                 deck.push(newcard);
 
                 var newcard = new Object();
@@ -152,7 +152,7 @@
                 newcard.icon = "img/build.png";
                 newcard.back = "this is the back of the card";
                 newcard.value = function(data) { return Math.max(0.01,(Math.round(data[cur_year]*100*100/root_total)/100)).toString() + "%"; };
-                newcard.side = "of total " + section;
+                newcard.side = "of total " + section + ".";
                 deck.push(newcard);
 
                 var newcard = new Object();
@@ -171,14 +171,6 @@
                 newcard.side = "";
                 deck.push(newcard);
 
-                var newcard = new Object();
-                newcard.title = "ADDITIONAL";
-                newcard.icon = "img/info_30.png";
-                newcard.back = "this is the back of the card";
-                newcard.value = function(data) { return "Additional card"; };
-                newcard.side = "";
-                deck.push(newcard);
-
                 return deck;
             }
 
@@ -187,116 +179,50 @@
                 return 0;
             }
 
-            function draw_stack(x, y, width, height){
-
-                var container = layout.cardsvg.append("svg:g");
-                var levels = (deck.length + deck.length%2) / 2;
-                var padding_h = 0.02*height;
-                var padding_w = 0.03*width;
-                var card_height = (height / levels) - 2*padding_h;
-                var card_width = (width-2*padding_w) / 2;
-
+            function stack_draw() {
+                var container;
                 for(var i=0; i < deck.length; i++) {
-
-                    var newcard = drawcard(container, deck[i], card_width, card_height - 2*padding_h);
-                    var inner_x = (card_width + padding_w)*(i%2),
-                        inner_y = (card_height + padding_h)*((i - i%2)/2);
-                    placedivs(newcard, x + inner_x, y + inner_y);
-
-                    translate(newcard, inner_x, inner_y);
+                    if (i%3 === 0) {
+                        container = d3.select("#cards").append("div")
+                        .attr("class","row-fluid");
+                    }
+                    var newcard = card_draw(container, deck[i]);
                     cardstack.push(newcard);
                 }
-                translate(container, x, y);
-            }
-
-            function placedivs(card, x, y) {
-                card.divs.style("left", (x + d3.select("#cards").property("offsetLeft")).px());
-                card.divs.style("top", (y + d3.select("#cards").property("offsetTop")).px());
-            }
-
-
-
-            function drawcard(container, card, width, height) {
-                var newcard  = container.append("svg:g")
-                                        .attr("class", "card");
-                var title_h = height / 3.5,
-                    padding = 5,
-                    value_ratio = 0.7;
-                value_height = height - title_h;
-                var rect = newcard.append("svg:rect")
-                                    .attr("width", width.px())
-                                    .attr("height", Math.max(1,height).px())
-                                    .attr("rx", (10))
-                                    .attr("ry", (10));
-
-                newcard.append("svg:line")
-                        .attr("x1", 0)
-                        .attr("x2", width)
-                        .attr("y1", title_h)
-                        .attr("y2", title_h);
-
-                newcard.divs =  d3.select("#cards").append("div")
-                                                 .attr("class","carddiv")
-                                                 .style("position","absolute")
-                                                 .style("height", height.px())
-                                                 .style("width", width.px());
-                
-                newcard.title = newcard.divs.append("div")
-                       .style("height", title_h.px())
-                       .append("div")
-                       .style("heigth","100%")
-                       .style("width", width.px())
-                       .style("font-size", (30).px())
-                       .text(card.title);
-                console.log("call");
-                adjust_width(newcard.title, title_h);
-                newcard.title.append("img")
-                            .attr("src", card.icon)
-                            .attr("height", title_h)
-                            .attr("width", title_h)
-                            .style("position", "absolute")
-                            .style("left", "10px");
-
-
-                if( card.side === "") {
-                    value_ratio = 1;
+                if(deck.length%3 !== 0) {
+                    container.append("div")
+                    .attr("class", "span6");
                 }
+            }
 
-                newcard.bottom = newcard.divs.append("div")
-                                                  .style("height", (height - title_h).px())
-                                                  .style("width", "100%")
-                                                  .style("height", height - title_h)
-                                                  .style("float","bottom");
+            function card_draw(container, card){
+                var newcard = container.append("div")
+                .attr("class", "span4 card");
+
+                newcard.divs =  newcard.append("div");
+                newcard.title = newcard.divs.append("div")
+                .text(card.title)
+                .attr("class", "cardtitle");
+                var img_size = newcard.title.property("clientHeight");
+                console.log(img_size);
+                newcard.title.append("img")
+                .attr("src", card.icon)
+                .attr("height", img_size)
+                .attr("width", img_size)
+                .style("float","left");
+                newcard.title.append("hr");
+                newcard.bottom = newcard.divs.append("div");
                 newcard.bottom.left = newcard.bottom.append("div")
-                                                    .style("width", (value_ratio*100).toString() + "%")
-                                                    .style("float","left")
-                                                    .style("height", "100%")
-                                                    .style("display", "table")
-                                                    .append("div")
-                                                    .style("top","50%")
-                                                    .style("display","table-cell")
-                                                    .style("vertical-align", "middle")
-                                                    .style("font-size", (width/5).px());
-
+                .attr("class", "cardvalue");;
                 newcard.bottom.right = newcard.bottom.append("div")
-                                    .style("width", ((1 - value_ratio)*100).toString() + "%")
-                                    .style("float","left")
-                                    .style("height", "100%")
-                                    .style("display", "table")
-                                    .append("div")
-                                    .style("top","50%")
-                                    .style("display","table-cell")
-                                    .style("vertical-align", "middle")
-                                    .style("font-size", (width/14).px());
-                
+                .attr("class", "carddescr");;
+
                 return newcard;
             }
-
 
             function cards_update(data) {
                 for(var i=0; i < deck.length; i++) {
                     cardstack[i].bottom.left.text(deck[i].value(data));
-                    adjust_width(cardstack[i].bottom.left, value_height);
                     var text;
                     if ( typeof(deck[i].side) === 'string') {
                         text = deck[i].side;
@@ -304,9 +230,7 @@
                         text = deck[i].side(data);
                     }
                     cardstack[i].bottom.right.text(text);
-                    adjust_width(cardstack[i].bottom.right, value_height);
                 }
-
             }
 
             function layoutsingle_init() {
@@ -324,12 +248,6 @@
                 layout.chartsvg.height = layout.navsvg.height/2;
                 layout.chartsvg.attr("height", layout.navsvg.height/2 )
                              .attr("width", layout.chartsvg.width);
-
-                layout.cardsvg = d3.select("#cards").append("svg");
-                layout.cardsvg.width = d3.select("#cards").property("clientWidth");
-                layout.cardsvg.height = layout.navsvg.height/2;
-                layout.cardsvg.attr("height", layout.navsvg.height/2 )
-                               .attr("width", layout.cardsvg.width);
 
             }
 
@@ -352,13 +270,11 @@
 
             function initmultiple(jsondata) {
                 mode = 2;
-
                 d3.select("#multichart").style("display", "inline");
                 graph_w = d3.select("#multichart").property("clientWidth");
                 layout.multichartsvg = d3.select("#multichart").append("svg")
                            .attr("height", graph_w/2)
                            .attr("width", graph_w);
-                //graph_h = d3.select("#avb").property("clientHeight");
                 graph_h = graph_w * 9/20;
                 multichart_draw(jsondata, 0, 0, graph_w, graph_h);
 
@@ -369,28 +285,23 @@
 
                 layoutsingle_init();
 
-                initfilter(10);
-
-                // // navigation
                 init_nav(jsondata, 0, 0);
 
-                // // chart
                 init_chart(0,layout.chartsvg.height - 30);
                 drawline(jsondata, "steelblue", true);
 
-                // // new cards
-                draw_stack(2, 2, layout.cardsvg.width , layout.cardsvg.height );
+                stack_draw(2, 2);
                 cards_update(jsondata); 
 
                 console.log("UI Loaded.");
             }
 
             function single_remove() {
-                d3.select("#singlelayout").transition().duration(500).style("margin-left", (get_winsize("w")).px());
-                d3.select("#cards").transition().duration(500).selectAll("div").style("left", (get_winsize("w")).px());
+                navigation.transition().duration(500).attr("transform", "translate(" + get_winsize("w") + ", 0)");
+                chart.transition().duration(500).attr("transform", "translate(" + get_winsize("w") + ", 0)");
+                d3.select("#cards").selectAll("div").transition().duration(500).style("margin-left",get_winsize("w").px());
                 d3.select("#singlelayout").transition().delay(500).style("display", "none");
                 d3.select("#cards").selectAll("div").transition().delay(500).remove();
-                d3.select("#cards").selectAll("svg").transition().delay(500).remove();
                 d3.select("#chart").selectAll("svg").transition().delay(500).remove();
                 d3.select("#bars").selectAll("svg").transition().delay(500).remove();
                 cardstack.length = 0;
@@ -408,17 +319,7 @@
                 var arr = toarray(d);
                 return d3.max(arr.values, get_values);
             };
-
-            function gm(d) {
-                var curmax = 0;
-                for( var i=min_year; i <=max_year; i++) {
-                    if(d[i.toString()] !== undefined && d[i.toString()] > curmax) {
-                        curmax = d[i.toString()];
-                    }
-                }
-                return curmax;
-            };
-
+            
             function init_timeline_sel(timeline) {
                 var selector = timeline.append("svg:g")
                   .attr("class", "tselect");
@@ -426,7 +327,7 @@
                 selector.append("svg:path")
                               .attr("d","M0,0H20L10,20L0,0")
                               .attr("class", "tselect")
-                              .attr("transform", "translate(0," + (ntl.padding/3).toString() + ")");
+                              .attr("transform", "scale(0.7,0.7)")
 
                 selector.append("svg:line")
                               .attr("x1", selector.node().getBBox().width/2)
@@ -507,41 +408,31 @@
 
             function timeline_init() {
                 var tl_w = d3.select("#tl").property("clientWidth");
-                var tl_h = tl_w * 0.05;
+                var tl_h = tl_w * 0.04;
                 //var tl_h = d3.select("#tl").property("clientHeight");
                 ntl = d3.select("#tl").append("svg")
-                                          .attr("width", tl_w)
-                                          .attr("height", tl_h);
-
+                .attr("width", tl_w)
+                .attr("height", tl_h);
 
                 ntl.width = tl_w;
                 ntl.height = tl_h;
-                ntl.padding = tl_h*0.4;
+                ntl.padding = tl_h*0;
                 ntl.xscale = d3.scale.linear().domain([min_year, max_year]).range([ntl.padding, tl_w - ntl.padding]);
                 ntl.background = ntl.append("svg:rect").attr("class","tlb")
-                                      .attr("width", ntl.width - ntl.padding*2/3)
-                                      .attr("height", ntl.height - ntl.padding/2)
-                                      .attr("x", ntl.padding/3)
-                                      .attr("y", ntl.padding/3)
-                                      .attr("rx",10)
-                                      .attr("ry",10);
-
-
+                                      .attr("width", ntl.width)
+                                      .attr("height", ntl.height );
 
                 ntl.selector = init_timeline_sel(ntl);
                 ntl.selectend = init_timeline_sel(ntl).attr("display","none");
 
 
                 ntl.selrange = ntl.append("svg:rect")
-                                  .attr("height", ntl.height - ntl.padding/2)
-                                  .attr("y", ntl.padding/3)
+                                  .attr("height", ntl.height - ntl.padding)
                                   .attr("opacity", 0.2)
                                   .attr("fill", "steelblue");
 
                 ntl.selrange.start = 0;
                 ntl.actionstart = 0;
-
-
 
                 ntl.call(d3.behavior.drag()
                     .on("dragstart", timeline_ondragstart)
@@ -551,18 +442,16 @@
 
                 ntl.on("click", timeline_onclick);
 
-
                 var xAxis = d3.svg.axis()
                             .scale(ntl.xscale)
                             .orient("bottom")
                             .tickSize(0)
-                            .tickPadding(5)
                             .tickFormat(function (d) { 
                             return d.toString();});
 
                 ntl.append("g")
-                      .attr("class", "tlaxis")
-                      .attr("transform", "translate(0," + (tl_h - ntl.padding) + ")")
+                      .attr("transform", "translate(0," + (ntl.height - 20) + ")")
+                      .attr("class","tlaxis")
                       .call(xAxis);
 
             }
@@ -592,7 +481,7 @@
             function timeline_update(jsondata){
                 var data = toarray(jsondata);
                 var yscale = d3.scale.linear().domain(d3.extent(data.values, get_values))
-                                              .range([ntl.height - ntl.padding, ntl.padding]);
+                                              .range([ntl.height, 0]);
                 var line = d3.svg.line()
                                  .interpolate("basis")
                                  .x(function(d) { return ntl.xscale(d.year); })
@@ -602,7 +491,7 @@
                                  .interpolate("basis")
                                  .x(function(d) { return ntl.xscale(d.year); })
                                  .y1(function(d) { return (yscale(d.val)); })
-                                 .y0(function(d) { return (ntl.height - ntl.padding); });
+                                 .y0(function(d) { return (ntl.height); });
 
 
                 ntl.append("svg:path").attr("d", line(data.values))
@@ -634,7 +523,7 @@
 
                 rev = jsondata;
                 var yscale = d3.scale.linear()
-                                      .domain([0,gm(rev) * 1.3])
+                                      .domain([0,get_max(rev) * 1.3])
                                       .range([chart_h, 0]);
                 
 
@@ -831,12 +720,6 @@
                 offset_h = 0;
                 bar_height = height - offset_h*maxlevel;
                 drawzone(jsondata, cur_year.toString(), width - bar_width - 30, height - bar_height, bar_width, bar_height).attr("display","inline");
-
-
-            }
-
-            function get_change(){
-                return "f0";
             }
 
             function formatcurrency(value) {

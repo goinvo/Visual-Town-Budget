@@ -162,35 +162,6 @@ div {
     color:rgb(0, 0, 0);
 }
 
-
-.card rect {
-    fill : rgb(155, 155, 159);
-    fill-opacity : 0.2;
-    stroke: rgb(51, 51, 51);
-    stroke-opacity: 0.3;
-    stroke-width: 3;
-
-}
-
-.card line {
-    stroke: rgb(51, 51, 51);
-    stroke-opacity: 0.3;
-    stroke-width: 3;
-}
-
-.card text {
-    font-family: "Gill Sans";
-    shape-rendering: crispEdges;
-    stroke-width:0px;
-    cursor: default;
-
-}
-
-.carddiv { 
-    text-align: center;
-    vertical-align: middle;
-}
-
 .browser text {
   text-anchor: end;
 }
@@ -198,16 +169,23 @@ div {
 
 .tlaxis path {
     fill: none;
-    stroke: rgb(101, 101, 101);
-    stroke-width : 1;
-    stroke-linejoin : round;
-    stroke-linecap: round;
-    shape-rendering: crispEdges;
-    
+    stroke-width : 0;
+}
+
+.tlaxis {
+    font-size: 0.8em;
+}
+
+#tl {
+    background-color: rgba(229, 229, 229, 0.71);
+    margin-top: 1em;
+    box-shadow: 1px 1px 10px rgb(101,101,101);
+     border-radius: 5px;
+     margin-bottom: 0.5em;
 }
 
 .tlb {
-    fill : lightgrey;
+    fill : none;
     fill-opacity:0.2
     stroke: grey;
     stroke-width: 2px;
@@ -249,4 +227,34 @@ div {
 .tselect line {
     stroke-linejoin : round;
     stroke-linecap: round;
+}
+
+.card {
+    background-color: rgba(229, 229, 229, 0.71);
+    margin-top: 1em;
+    box-shadow: 1px 1px 10px rgb(101,101,101);
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+    text-align: center;
+    padding: 0.2em;
+}
+
+.card hr {
+    margin: 0.05em;
+    color: #9E9E9E;
+    background-color: #9E9E9E;
+}
+
+.cardtitle {
+    border : 1px;
+    font-size: 1.2em;
+}
+
+.cardvalue {
+    display: inline;
+    font-size: 3em;
+}
+
+.carddesc {
+    display: inline;
 }
