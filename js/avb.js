@@ -3,23 +3,13 @@
 
             var home;
 
-            var in_use;
-            // dimensions (no timeline included)
-            var timeline_height = 50;
-            var title_height = 0;
-
             var graph_h;
             var graph_w;
             // bar dimensions
             var bar_width;
             var bar_height;
             var bar_intra_padding ;
-            var bar_left_padding = 20;
 
-            // cards update constants
-            var value_height;
-            var chart_height;
-            
             // constants
             var viewmode;
             var section;
@@ -30,25 +20,13 @@
 
             var root_total = 125000000;
             
-            // levelstack
-            var levels = [];
-            var cardstack = [];
-
             // object references
             var mysvg;
-            var chart;
-            var textbox;
-            var titlebox;
             var tooltip;
-            var curly;
             var filter;
-            var timeline;
-            var deck;
-            var navigation;
             var nosel_opacity = 0.3;
             var sel_opacity = 0.8;
-            var multichart;
-            var ntl;
+
 
             // HOME ELEMENTS
             var homebars;
@@ -56,11 +34,6 @@
             var hometexts;
             var homebars_width;
             var homebars_height;
-
-            // NAV VARIABLES
-            var maxlevel = 2;
-            var offset_w;
-            var offset_h;
 
             var layout = new Object();
 
@@ -71,29 +44,23 @@
                 years.push((i).toString());
             }
 
-            drawhome();
-            activatelinks();
-            //opensection("Revenues");
-
-
             Number.prototype.px=function()
             {
                 return this.toString() + "px";
             };
             
-
              
             function activatelinks() {
                
                d3.select("#home_0").on("click", function() {
                 console.log("click");
-                   opensection("revenues");
+                   avb_init("revenues");
                });
             }
 
             function drawhome(){
                 home = true;
-                d3.json("js/home.js", onhomedata);
+                d3.json("data/home.json", onhomedata);
             }
 
             function onhomedata(jsondata) {
@@ -132,105 +99,10 @@
                     div.style("font-size", (cur_size).px());
                     cur_size--;
                 }
-
             }
-
-            function initdeck(){
-                var deck = [];
-
-                // amount card
-                var newcard = new Object();
-                newcard.title = "AMOUNT";
-                newcard.icon = "img/dollar.png"
-                newcard.back = "this is the back of the card";
-                newcard.value = function(data) { return formatcurrency(data[cur_year.toString()]); };
-                newcard.side = function(data) { return "as of " + cur_year.toString() + "."};
-                deck.push(newcard);
-
-                var newcard = new Object();
-                newcard.title = "IMPACT";
-                newcard.icon = "img/build.png";
-                newcard.back = "this is the back of the card";
-                newcard.value = function(data) { return Math.max(0.01,(Math.round(data[cur_year]*100*100/root_total)/100)).toString() + "%"; };
-                newcard.side = "of total " + section + ".";
-                deck.push(newcard);
-
-                var newcard = new Object();
-                newcard.title = "GROWTH";
-                newcard.icon = "img/updown.png";
-                newcard.back = "this is the back of the card";
-                newcard.value = function(data) { return h_growth(data, cur_year.toString()); };
-                newcard.side = "compared to last year.";
-                deck.push(newcard);
-
-                var newcard = new Object();
-                newcard.title = "SOURCE";
-                newcard.icon = "img/info_30.png";
-                newcard.back = "this is the back of the card";
-                newcard.value = function(data) { return "Cherry sheet"; };
-                newcard.side = "";
-                deck.push(newcard);
-
-                return deck;
-            }
-
 
             function getex(){
                 return 0;
-            }
-
-            function stack_draw() {
-                var container;
-                for(var i=0; i < deck.length; i++) {
-                    if (i%3 === 0) {
-                        container = d3.select("#cards").append("div")
-                        .attr("class","row-fluid");
-                    }
-                    var newcard = card_draw(container, deck[i]);
-                    cardstack.push(newcard);
-                }
-                if(deck.length%3 !== 0) {
-                    container.append("div")
-                    .attr("class", "span6");
-                }
-            }
-
-            function card_draw(container, card){
-                var newcard = container.append("div")
-                .attr("class", "span4 card");
-
-                newcard.divs =  newcard.append("div");
-                newcard.title = newcard.divs.append("div")
-                .text(card.title)
-                .attr("class", "cardtitle");
-                var img_size = newcard.title.property("clientHeight");
-                console.log(img_size);
-                newcard.title.append("img")
-                .attr("src", card.icon)
-                .attr("height", img_size)
-                .attr("width", img_size)
-                .style("float","left");
-                newcard.title.append("hr");
-                newcard.bottom = newcard.divs.append("div");
-                newcard.bottom.left = newcard.bottom.append("div")
-                .attr("class", "cardvalue");;
-                newcard.bottom.right = newcard.bottom.append("div")
-                .attr("class", "carddescr");;
-
-                return newcard;
-            }
-
-            function cards_update(data) {
-                for(var i=0; i < deck.length; i++) {
-                    cardstack[i].bottom.left.text(deck[i].value(data));
-                    var text;
-                    if ( typeof(deck[i].side) === 'string') {
-                        text = deck[i].side;
-                    } else {
-                        text = deck[i].side(data);
-                    }
-                    cardstack[i].bottom.right.text(text);
-                }
             }
 
             function layoutsingle_init() {
@@ -253,19 +125,20 @@
 
 
             function onjsonload(jsondata) {
-               //  drawtimeline(0, graph_h, 0, graph_w);
                 cur_json = jsondata;
-                drawtitlebox(0, d3.select("#navbar").property("clientHeight") , 600, 0);
-                filltitle(jsondata);
+                titlebox_init();
+                titlebox_fill(jsondata);
 
-
-                deck = initdeck();
+                avb.cards.initialize();
                 
-               init_tooltip();
+                init_tooltip();
                 //initmultiple(jsondata);
+                avb.breadcrumbs.initialize();
+                avb.breadcrumbs.push(jsondata);
+
                 initsingle(jsondata);
-                timeline_init();
-                timeline_update(jsondata);
+                avb.timeline.initialize();
+                avb.timeline.update(jsondata);
             }
 
             function initmultiple(jsondata) {
@@ -276,7 +149,7 @@
                            .attr("height", graph_w/2)
                            .attr("width", graph_w);
                 graph_h = graph_w * 9/20;
-                multichart_draw(jsondata, 0, 0, graph_w, graph_h);
+                avb.multichart.draw(jsondata, 0, 0, graph_w, graph_h);
 
             }
 
@@ -285,26 +158,25 @@
 
                 layoutsingle_init();
 
-                init_nav(jsondata, 0, 0);
+                avb.navigation.initialize(jsondata, 0, 0);
 
-                init_chart(0,layout.chartsvg.height - 30);
-                drawline(jsondata, "steelblue", true);
+                avb.chart.initialize(0,layout.chartsvg.height - 30);
+                avb.chart.drawline(jsondata, "steelblue", true);
 
-                stack_draw(2, 2);
-                cards_update(jsondata); 
+                avb.cards.draw(2, 2);
+                avb.cards.update(jsondata); 
 
                 console.log("UI Loaded.");
             }
 
             function single_remove() {
-                navigation.transition().duration(500).attr("transform", "translate(" + get_winsize("w") + ", 0)");
-                chart.transition().duration(500).attr("transform", "translate(" + get_winsize("w") + ", 0)");
+                avb.navigation.fadeout();
                 d3.select("#cards").selectAll("div").transition().duration(500).style("margin-left",get_winsize("w").px());
                 d3.select("#singlelayout").transition().delay(500).style("display", "none");
                 d3.select("#cards").selectAll("div").transition().delay(500).remove();
                 d3.select("#chart").selectAll("svg").transition().delay(500).remove();
                 d3.select("#bars").selectAll("svg").transition().delay(500).remove();
-                cardstack.length = 0;
+                avb.cards.clear();
             }
 
             function get_maxyear(data) {
@@ -320,141 +192,6 @@
                 return d3.max(arr.values, get_values);
             };
             
-            function init_timeline_sel(timeline) {
-                var selector = timeline.append("svg:g")
-                  .attr("class", "tselect");
-
-                selector.append("svg:path")
-                              .attr("d","M0,0H20L10,20L0,0")
-                              .attr("class", "tselect")
-                              .attr("transform", "scale(0.7,0.7)")
-
-                selector.append("svg:line")
-                              .attr("x1", selector.node().getBBox().width/2)
-                              .attr("x2", selector.node().getBBox().width/2)
-                              .attr("y1", selector.node().getBBox().height)
-                              .attr("y2", ntl.height - ntl.padding)
-                              .attr("stroke", "black");
-                return selector;
-            }
-
-            function draw_multchart_scale(start, end) {
-                // var scale = ntl.xscale.range()[1] / (end - start);
-                // multichart.areas.attr("transform", "scale(" + scale.toString() + ",1)");
-                // multichart.lines.attr("transform", "scale(" + scale.toString() + ",1)");
-                // console.log(scale);
-                // multichart.xaxis.remove();
-
-                // // multichart.xaxis = multichart.append("g")
-                // //       .attr("class", "multiaxis")
-                // //       .attr("transform", "translate(0," + chart_h + ")")
-                // //       .call(multichart.xAxis.scale());
-            }
-
-            function timeline_switch(start, end) {
-                if(end === undefined) {
-                    if (mode === 2) {
-                        multichart_remove();
-                        setTimeout(function() {initsingle(cur_json);}, 600);
-                    }
-                } else {
-                    if (mode === 1) {
-                        single_remove();
-
-                        setTimeout(function() {initmultiple(cur_json);}, 600);
-                    }
-                }
-            }
-
-            var timeline_onclick  = function () {
-                // ntl.selrange.attr("width",0);
-                // ntl.selector.transition().attr("transform", "translate(" + d3.mouse(this)[0] + ",0)");
-                // console.log("click");
-            };
-
-            var timeline_ondragstart = function() {
-                console.log("start");
-                ntl.selrange.attr("width",0);
-                ntl.actionstart = new Date();
-                ntl.selectend.attr("display", "none");
-                ntl.selrange.start = d3.mouse(this)[0];
-                ntl.selector.attr("transform", "translate(" + ntl.selrange.start + ",0)");
-                ntl.selrange.attr("x", ntl.selrange.start + ntl.selector.node().getBBox().width/2);
-            };
-
-            var timeline_ondrag = function() {
-                if( (new Date() - ntl.actionstart) <= 100) {
-                    return;
-                }
-                if ((d3.mouse(this)[0] - ntl.selrange.start) > 0)  {
-                    ntl.selrange.attr("width", d3.mouse(this)[0] - ntl.selrange.start)
-                }
-            };
-
-            var timeline_ondragend = function() {
-                console.log("dragend");
-                if( (new Date() - ntl.actionstart) <= 100) {
-                    ntl.selrange.attr("width",0);
-                    ntl.selector.transition().attr("transform", "translate(" + d3.mouse(this)[0] + ",0)");
-                    timeline_switch(ntl.xscale.invert(d3.mouse(this)[0]));
-                    return;
-                }
-                translate(ntl.selectend, d3.mouse(this)[0], 0);
-                ntl.selectend.attr("display", "inline");
-                //draw_multchart_scale(ntl.selrange.start ,d3.mouse(this)[0]);
-                timeline_switch(ntl.xscale.invert(ntl.selrange.start), ntl.xscale.invert(d3.mouse(this)[0]));
-            };
-
-
-            function timeline_init() {
-                var tl_w = d3.select("#tl").property("clientWidth");
-                var tl_h = tl_w * 0.04;
-                //var tl_h = d3.select("#tl").property("clientHeight");
-                ntl = d3.select("#tl").append("svg")
-                .attr("width", tl_w)
-                .attr("height", tl_h);
-
-                ntl.width = tl_w;
-                ntl.height = tl_h;
-                ntl.padding = tl_h*0;
-                ntl.xscale = d3.scale.linear().domain([min_year, max_year]).range([ntl.padding, tl_w - ntl.padding]);
-                ntl.background = ntl.append("svg:rect").attr("class","tlb")
-                                      .attr("width", ntl.width)
-                                      .attr("height", ntl.height );
-
-                ntl.selector = init_timeline_sel(ntl);
-                ntl.selectend = init_timeline_sel(ntl).attr("display","none");
-
-
-                ntl.selrange = ntl.append("svg:rect")
-                                  .attr("height", ntl.height - ntl.padding)
-                                  .attr("opacity", 0.2)
-                                  .attr("fill", "steelblue");
-
-                ntl.selrange.start = 0;
-                ntl.actionstart = 0;
-
-                ntl.call(d3.behavior.drag()
-                    .on("dragstart", timeline_ondragstart)
-                    .on("drag", timeline_ondrag)
-                    .on("dragend", timeline_ondragend)
-                );
-
-                ntl.on("click", timeline_onclick);
-
-                var xAxis = d3.svg.axis()
-                            .scale(ntl.xscale)
-                            .orient("bottom")
-                            .tickSize(0)
-                            .tickFormat(function (d) { 
-                            return d.toString();});
-
-                ntl.append("g")
-                      .attr("transform", "translate(0," + (ntl.height - 20) + ")")
-                      .attr("class","tlaxis")
-                      .call(xAxis);
-
-            }
 
 
              function toarray(d){
@@ -478,249 +215,7 @@
                 return d.val;
             }
 
-            function timeline_update(jsondata){
-                var data = toarray(jsondata);
-                var yscale = d3.scale.linear().domain(d3.extent(data.values, get_values))
-                                              .range([ntl.height, 0]);
-                var line = d3.svg.line()
-                                 .interpolate("basis")
-                                 .x(function(d) { return ntl.xscale(d.year); })
-                                 .y(function(d) { return (yscale(d.val)); });
 
-                var area = d3.svg.area()
-                                 .interpolate("basis")
-                                 .x(function(d) { return ntl.xscale(d.year); })
-                                 .y1(function(d) { return (yscale(d.val)); })
-                                 .y0(function(d) { return (ntl.height); });
-
-
-                ntl.append("svg:path").attr("d", line(data.values))
-                                      .attr("class","graphline")
-                                      .style("stroke", "steelblue")
-                                      .style("stroke-width", 1);
-                ntl.append("svg:path").attr("d", area(data.values))
-                                      .attr("fill", "lightblue")
-                                      .attr("opacity",0.3);
-            }
-
-            function multichart_remove() {
-                console.log(get_winsize('w'));
-                multichart.transition().duration(500).attr("transform", "translate(" + get_winsize("w") + ", 0)");
-                d3.select("#multichart").transition().delay(500).style("display", "none");
-                d3.select("#multichart").selectAll("svg").transition().delay(500).remove();
-            }
-
-            function multichart_draw(jsondata, x, y, width, height){
-                multichart = layout.multichartsvg.append("svg:g");
-                
-                var padding = 35;
-                var margin_h = 25;
-                var chart_w = width - padding * 2;
-                var chart_h = height;
-
-                multichart.width = chart_w;
-                multichart.height = chart_h;
-
-                rev = jsondata;
-                var yscale = d3.scale.linear()
-                                      .domain([0,get_max(rev) * 1.3])
-                                      .range([chart_h, 0]);
-                
-
-                var xscale = d3.scale.linear().domain([min_year, max_year]).range([padding, chart_w]);
-                multichart.xscale = xscale;
-                var color = d3.scale.category20();
-
-                var area = d3.svg.area()
-                            .interpolate("basis")
-                            .x(function(d,i) { return xscale(d.x); })
-                            .y0(function(d) { return yscale(d.y0); })
-                            .y1(function(d) { return yscale(d.y0 + d.y); });
-
-                var line = d3.svg.line()
-                            .interpolate("basis")
-                            .x(function(d,i) { return xscale(d.x); })
-                            .y(function(d) { return yscale(d.y0 + d.y); });
-
-                
-                var stack = d3.layout.stack()
-                              .values(function(d) { return d.val; });
-
-                var layers = rev.sub;
-                var convert = layers.map(function(d) {
-                    var values = [];
-                            for(var i=min_year; i <= max_year ; i++){
-                                if( d[i.toString()] === undefined ) {
-                                    values.push({ "x" : i , "y" : 4000000});
-                                } else {
-                                    values.push({ "x" : i , "y" : d[i.toString()]});
-                                }
-                            }
-                            return {
-                                name : d.name,
-                                val : values
-                            }
-                });
-
-                var instance = stack(convert);
-
-                multichart.xgrid_axis = d3.svg.axis()
-                            .scale(xscale)
-                            .orient("bottom")
-                            .tickSize(-multichart.height, 0, 0)
-                            .tickFormat(function (d) { 
-                                return "";});
-
-                multichart.xgrid = multichart.append("g")
-                      .attr("class", "multigrid")
-                      .attr("transform", "translate(0," + chart_h + ")")
-                      .call(multichart.xgrid_axis);
-
-                multichart.ygrid_axis = d3.svg.axis()
-                            .scale(yscale)
-                            .orient("left")
-                            .tickSize(-multichart.width + padding, 0, 0)
-                            .tickFormat(function (d) { 
-                                return "";});
-
-                multichart.grid = multichart.append("g")
-                      .attr("class", "multigrid")
-                      .attr("transform", "translate(" + padding + ",0)")                 
-                      .call(multichart.ygrid_axis);         
-
-
-
-                var browser = multichart.selectAll(".browser")
-                                   .data(instance)
-                                   .enter().append("g")
-                                   .attr("class", "browser");
-
-                multichart.areas = browser.append("path")
-                       .attr("class", "multiarea")
-                       .attr("d", function(d) { return area(d.val); })
-                       .style("fill", function(d,i) { return colors[i%20]; });
-
-                multichart.lines = browser.append("path")
-                            .attr("class", "multiline")
-                            .attr("d", function(d) { return line(d.val); })
-                            .style("stroke", function(d,i) { return colors[i%20]; });
-
-                multichart.areas.on("mouseout", function(d,i) {
-                    tooltip.style("visibility", "hidden");
-                    d3.select(this).attr("opacity","1");
-                });        
-                multichart.areas.on("mouseover", function(d) {
-                    d3.select(this).attr("opacity","0.7");
-                    tooltip.style("visibility","visible")
-                    .style("left", (d3.event.x + 10).px())
-                    .style("top", (d3.event.y + 2).px())
-                    .text(d.name);
-                });
-                multichart.areas.on("mousemove", function(d) {
-                     tooltip.style("left", (d3.event.x + 10).px())
-                            .style("top", (d3.event.y + 2).px())
-                            .text(d.name);
-                });
-
-              browser.append("text")
-                      .datum(function(d) { return {name: d.name, val: d.val[d.val.length - 1]}; })
-                      .attr("transform", function(d) { return "translate(" + xscale(d.val.x) + "," + yscale(d.val.y0 + d.val.y / 2) + ")"; })
-                      .attr("x", -5)
-                      .attr("dy", ".35em")
-                      .text(function(d) { 
-                                            console.log(yscale.range()[0] - yscale(d.val.y));
-                                            if((yscale.range()[0] - yscale(d.val.y)) > 20) {
-                                                return d.name;
-                                            } else {
-                                                return "";
-                                            }
-                                        });
-
-
-                multichart.xAxis = d3.svg.axis()
-                            .scale(xscale)
-                            .orient("bottom")
-                            .ticks(5)
-                            .tickFormat(function (d) { 
-                                return d.toString();});   
-
-                var yAxis = d3.svg.axis()
-                            .scale(yscale)
-                            .orient("left")
-                            .tickFormat( function(d) {
-                                return formatcurrency(d);
-                            })
-
-               multichart.xscale = multichart.append("g")
-                      .attr("class", "multiaxis")
-                      .attr("transform", "translate(0," + chart_h + ")")
-                      .call(multichart.xAxis);
-
-               multichart.append("g")
-                      .attr("class", "multiaxis")
-                      .attr("transform", "translate(" + padding + ",0)")
-                      .call(yAxis);
-
-
-
-                translate(multichart, x + padding, y + 5);
-
-            }
-
-
-
-            var rectclick = function(d,i) {
-                        drawline(d, d3.select(this).attr("fill"), true);
-                        cards_update(d);
-                        filltitle(d);
-                        // fix this parentnode mess !
-                        if( levels[levels.length-1].lev == d3.select(this.parentNode.parentNode).attr("lev")){
-                        } else {
-                            levels.pop().remove();
-                            if(curly !== undefined) {
-                            curly.remove();
-                            }
-                        }
-                        console.log(d.sub);
-                        if ( d["sub"] === undefined ) {
-                            return;
-                        }
-
-                        for(var i=0; i < levels.length; i++) {
-
-                            //container = levels[parseInt(d3.select(this.parentNode.parentNode).attr("lev"))];
-                            container = levels[i];
-                            container.x = container.x - bar_width - bar_intra_padding;
-                            container.transition().duration(500).attr("transform", " translate(" + (container.x).toString() +"," + (container.y).toString() + ")");
-                            if(container.curly !== undefined) {
-                                container.curly.transition().duration(500).attr("transform", " translate(" + (container.x + bar_width + container.curly.padding).toString() + "," + (container.y).toString() + ")");
-                            }
-                        }
-
-                        container.curly = drawcurly(container, Math.floor(d3.select(this).attr("y")) + d3.select(this).attr("height")/2, container.x + bar_width, layout.navsvg.height - bar_height, 100, d3.select(this).attr("fill"));
-                        d3.select(this).attr("opacity",sel_opacity.toString());
-                        newzone = drawzone(d3.select(this).data()[0], cur_year.toString(), container.x, navigation.height - bar_height, bar_width, bar_height);
-                        newzone.x = layout.navsvg.width - bar_width - 30;
-                        newzone.transition()
-                               .delay(1000)
-                               .duration(500)
-                               .attr("transform", " translate(" + (newzone.x).toString() +"," + (container.y).toString() + ")")
-                               .attr("display", "inline");
-                };
-
-            function init_nav(jsondata, x, y) {
-                var width = layout.navsvg.width;
-                var height = layout.navsvg.height;
-                navigation = layout.navsvg.append("svg:g");
-                navigation.height = height;
-                navigation.width = width;
-                bar_width = width/4;
-                offset_w = bar_width * 0.6;
-                bar_intra_padding = offset_w;
-                offset_h = 0;
-                bar_height = height - offset_h*maxlevel;
-                drawzone(jsondata, cur_year.toString(), width - bar_width - 30, height - bar_height, bar_width, bar_height).attr("display","inline");
-            }
 
             function formatcurrency(value) {
                 if(value === undefined) {
@@ -820,14 +315,15 @@
                 }
             }
 
-            function opensection(name) {
-                d3.select("#cont").style("display","none");
+            function avb_init(name) {
+                d3.select("#avb-home").style("display","none");
+                d3.select("#avb-body").style("display","block");
                 d3.selectAll("svg").remove();
 
                 home = false;
                 section = name.toLowerCase();
 
-                d3.json("js/arlington.js", onjsonload);
+                d3.json("data/arlington.json", onjsonload);
             }
 
 
@@ -907,89 +403,16 @@
                 .attr("class","toolt");
             }
 
-            function drawcurly(container, target_y, x, y, init_height, color){
-                console.log(color);
-                if(container.curly !== undefined ) {
-                    container.curly.remove();
-                }
-                curly = layout.navsvg.append("svg:g");
-                var radius = Math.floor(bar_intra_padding/5);
-                var points = 6;
 
-                var angle = d3.scale.linear()
-                    .domain([0, points-1])
-                    .range([0, Math.PI/2]);
-                
-                var curvedline = d3.svg.line.radial()
-                    .interpolate("basis")
-                    .tension(0)
-                    .radius(radius)
-                    .angle(function(d, i) { return angle(i); });
-    
-                // 1st curl
-
-
-
-                curly.append("svg:path").datum(d3.range(points))
-                                            .attr("d", curvedline)
-                                            .attr("class","curly_b")
-                                            .attr("transform", "rotate(270 0 0), translate(" + (-radius).toString() +  ", " + (2*radius).toString() + ") ");
-
-                curly.append("svg:line").attr("x1",radius)
-                                            .attr("y1",radius)
-                                            .attr("x2",radius)
-                                            .attr("y2",target_y - radius)
-                                            .attr("class","curly_b");
-
-                curly.append("svg:path").datum(d3.range(points))
-                                            .attr("d", curvedline)
-                                            .attr("class","curly_b")
-                                            .attr("transform", "translate(0, " + (radius + target_y).toString() + ") ");
-
-                curly.append("svg:path").datum(d3.range(points))
-                                            .attr("d", curvedline)
-                                            .attr("class","curly_b")
-                                            .attr("transform", "rotate(90 0 0), translate(" + (-radius + target_y).toString() +  ", 0)");
-                
-                curly.append("svg:line").attr("x1",radius)
-                                            .attr("y1",radius + target_y)
-                                            .attr("x2",radius)
-                                            .attr("y2",bar_height - radius)
-                                            .attr("class","curly_b");
-                
-                curly.append("svg:path").datum(d3.range(points))
-                                            .attr("d", curvedline)
-                                            .attr("class","curly_b")
-                                            .attr("transform", "rotate(180 0 0), translate(" + (-radius*2).toString() +  ", " + (-bar_height + radius).toString() + ") ");
-                //translate(curly, x + (bar_intra_padding-radius*2)/2, y);
-                curly.padding = (bar_intra_padding-radius*2)/2;
-                curly.attr("display","none");
-                curly.attr("transform", "scale(0, " + init_height/bar_height + " ), translate(" + (x + (bar_intra_padding-radius*2)/2).toString() +"," + (y).toString() + ")");
-                curly.transition().delay(500)
-                                  .duration(500)
-                                  .attr("transform", "translate(" + (x + curly.padding).toString() +"," + (y).toString() + ")")
-                                  .attr("display", "inline");
-                return curly;
-            }
             
-            function drawtitlebox(x, y, width, height) {
-                titlebox = d3.select("#titlebox");
-                titlebox.section = titlebox.append("div")
-                                                    .attr("class","tsection");
-                titlebox.top = titlebox.append("div")
-                                                    .attr("class","tname");
-                titlebox.bottom = titlebox.append("div")
-                                                    .attr("class","tdesc");
+            function titlebox_init(x, y, width, height) {
+                titlebox = d3.select("#title-head");
+                titlebox.bottom = d3.select("#title-descr");
             }
 
             
-            function filltitle(data){
-                if(section !== data.name) {
-                    titlebox.section.text(section.toUpperCase());
-                } else {
-                    titlebox.section.text("");
-                }
-                titlebox.top.text(data.name);
+            function titlebox_fill(data){
+                titlebox.text(data.name);
                 titlebox.bottom.text(data.descr);
             }
 
@@ -1002,82 +425,7 @@
                 obj.attr("transform","rotate(" + degrees.toString() + " 100 100)");
             }
             
-            function drawzone(obj, key, x, y, width, height) {
-
-                bar_width = width;
-                bar_height = height;
-                bar_left_padding = x;
-                var container = navigation.append("svg:g")
-                    .attr("stroke", "white")
-                    .attr("stroke-width", 2)
-                    .attr("fill", "orange")
-                    .attr("lev", levels.length)
-                    .attr("name", obj["name"]);
-
-                container.x = x;
-                container.y = y;
-                
-                //stack push
-                container.lev = levels.length;
-                levels.push(container);
-                var data = obj.sub;
-                var maxvalue = d3.max(data, function(d) { return d[key]; });
-                var heightscale = d3.scale.linear().domain([0,maxvalue])
-                                                   .range([0,bar_height*maxvalue/d3.sum(data, function (d) {return d[key]})]);
-                var cur_y = 0;
-                for(var i=0; i<data.length; i++) {
-                    var group = container.append("g");
-                    var entities = group.append("svg:rect");
-                    if(data[i][key] === undefined) continue;
-                    entities.attr("x", 0)
-                            .attr("y", bar_height - heightscale(data[i][key]) - cur_y )
-                            .attr("width", bar_width)
-                            .attr("height", heightscale(data[i][key]))
-                            .attr("fill", colors[i%20])
-                            .attr("rx", 5)
-                            .attr("ry", 5)
-                            .attr("opacity", nosel_opacity.toString());
-                    if ( entities.attr("height") >= 20 ) {
-                            add_label(group,entities,data[i]["name"]);
-                    }
-                    cur_y += heightscale(data[i][key]);
-                }
-                container.selectAll("rect").data(data).enter;
-                container.selectAll("rect").on("click", rectclick);
-
-                // container.selectAll("rect").call(d3.behavior.drag()
-                //       .on("dragstart", function(d) {
-                //         //console.log("dstart");
-                //       })
-                //       .on("drag", function(d) {
-                //         //console.log("dtag");
-                //       })
-                //       .on("dragend", function() {
-                //         var color = d3.select(this).attr("fill");
-                //         drawline(d3.select(this).data()[0],color,false);
-                //       }));
-
-                container.selectAll("rect").on("mouseout", function(d,i) {
-                    tooltip.style("visibility", "hidden");
-                    d3.select(this).attr("opacity","0.3");
-                });        
-                container.selectAll("rect").on("mouseover", function(d) {
-                    console.log("tool");
-                    d3.select(this).attr("opacity","0.7");
-                    tooltip.style("visibility","visible")
-                    .style("left", (d3.event.x + 10).px())
-                    .style("top", (d3.event.y + 2).px())
-                    .text(d.name);
-                });
-                container.selectAll("rect").on("mousemove", function(d) {
-                     tooltip.style("left", (d3.event.x + 10).px())
-                            .style("top", (d3.event.y + 2).px())
-                            .text(d.name);
-                });
-                translate(container, x, y);
-                container.attr("display","none");
-                return container;
-            }
+            
             
             function get_minyear(data) {
                 var i = min_year;
@@ -1087,152 +435,4 @@
                 return i;
             }
             
-
-            function drawline(data, color, clear) {
-                if(typeof(clear)==='undefined') clear = false;
-                if(clear) {
-                    for(var i=0; i<chart.linestack.length; i++) {
-                        chart.linestack[i].remove();   
-                    }
-                }
-
-                
-                var values = [];
-                var min_year = get_minyear(data);
-                var max_year = get_maxyear(data);
-                var projected = cur_year - min_year + 1 ;
-               
-                for(var j = min_year; j<= max_year; j++) {
-                        values.push(data[j.toString()]);
-                }
-                
-                var yscale = d3.scale.linear().domain([0,d3.max(values)]).range([chart.height - chart.padding, 5]);
-                var xscale = d3.scale.linear().domain([0, max_year-min_year]).range([chart.padding, chart.width]);
-
-                var container = chart.append("svg:g");
-                chart.linestack.push(container);
-
-                container.xgrid_axis = d3.svg.axis()
-                            .scale(xscale)
-                            .orient("bottom")
-                            .tickSize(-chart.height, 0, 0)
-                            .tickFormat(function (d) { 
-                                return "";});
-
-                container.xgrid = container.append("g")
-                      .attr("class", "multigrid")
-                      .attr("transform", "translate(0," + (chart.height - chart.padding) + ")")
-                      .call(container.xgrid_axis);
-
-                container.ygrid_axis = d3.svg.axis()
-                            .scale(yscale)
-                            .orient("left")
-                            .tickSize(-chart.width + chart.padding, 0, 0)
-                            .tickFormat(function (d) { 
-                                return "";});
-
-                container.ygrid = container.append("g")
-                      .attr("class", "multigrid")
-                      .attr("transform", "translate(" + chart.padding + ",0)")                 
-                      .call(container.ygrid_axis);   
-                
-                var line = d3.svg.line()
-                                   .x(function(d,i) { return xscale(i); })
-                                   .y(function(d) { return  yscale(d); });
-                
-                // area
-                var area = d3.svg.area()
-                            .x(function(d,i) { return xscale(i); })
-                            .y0(function(d) { return (chart.height - chart.padding); })
-                            .y1(function(d) { return yscale(d); });
-                         
-                // non-projection area
-                container.append("svg:path").attr("d", area(values.slice(0,projected)))
-                                            .attr("class","grapharea")
-                                            .style("fill", color)
-                                            .style("opacity", nosel_opacity);
-                
-                // projection area
-                container.append("svg:path").attr("d", area(values.slice(projected-1,years.length)))
-                                            .attr("class","grapharea_proj")
-                                            .attr("transform", "translate(" + (xscale(projected-1) - chart.padding).toString() + ",0)")
-                                            .style("fill", color)
-                                            .style("opacity", 0.15);
-                    
-                // non-projection line
-                container.append("svg:path").attr("d", line(values.slice(0,projected )))
-                                            .attr("class","graphline")
-                                            .style("stroke", color)
-                                            .style("opacity", 0.7);
-                
-                // projection line
-                container.append("svg:path").attr("d", line(values.slice(projected-1,years.length)))
-                                            .attr("class","graphline_proj")
-                                            .attr("transform", "translate(" + (xscale(projected-1) - chart.padding).toString() + ",0)")
-                                            .style("stroke", color)
-                                            .style("opacity", 0.7);
-                
-                // hotspots
-                container.selectAll("circle")
-                         .data(values)
-                         .enter()
-                         .append("circle")
-                         .attr("class","graphcircle")
-                         .attr("cx", function(d,i) { return xscale(i); })
-                         .attr("cy", function(d) { return yscale(d); })
-                         .attr("r","5")
-                         .attr("stroke", color)
-                         .attr("stroke-opacity",0.8)
-                         .attr("fill-opacity",0.50)
-                         .attr("fill", color);
-            
-                               //axes
-               var xAxis = d3.svg.axis(container)
-                     .scale(xscale)
-                     .orient("bottom")
-                     .tickSize(2, 0, 0)
-                     .tickFormat(function(d, i){
-                        return years[i]; });
-                
-               var yAxis = d3.svg.axis()
-                                 .scale(yscale)
-                                 .ticks(5)
-                                 .orient("left")
-                                 .tickSize(2, 0, 0)
-                                 .tickFormat(function(d,i){
-                                     return formatcurrency(d);
-                                 });
-                
-                chart.xAxisSocket.call(xAxis);
-                chart.yAxisSocket.call(yAxis);
-
-                chart_height = chart.node().getBBox().height;
-                
-            }
-
-
-            function init_chart (x, y){
-                var width = layout.chartsvg.width;
-                var height = layout.chartsvg.height;
-                if(chart !== undefined ) {
-                    chart.remove();
-                }
-                chart = layout.chartsvg.append("svg:g");
-                
-                chart.padding = 50;
-                chart.x = x;
-                chart.y = y;
-                chart.width = width - chart.padding;
-                chart.height = height;
-                chart.linestack = [];
-                
-                chart.xAxisSocket = chart.append("g")
-                  .attr("class", "axis")
-                  .attr("transform", "translate(0," + (chart.height - chart.padding) + ")");
-
-                chart.yAxisSocket = chart.append("g")
-                    .attr("class", "axis")
-                    .attr("transform", "translate( " + chart.padding + ",0)");
-
-            }
                     

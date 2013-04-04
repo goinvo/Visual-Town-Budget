@@ -58,9 +58,9 @@ div {
 
 .axis path,
 .axis line {
-    fill: none;
-    stroke: rgb(101, 101, 101);
-    stroke-width : 3;
+    fill:grey;
+    stroke: rgb(196,196,196);
+    stroke-width : 1;
     stroke-linejoin : round;
     stroke-linecap: round;
     shape-rendering: crispEdges;
@@ -69,8 +69,9 @@ div {
 
 .axis text {
     font-family: "Gill Sans";
-    font-size: 14px;
+    font-size: 0.8em;
     cursor: default;
+    fill: grey;
 }
 
 .timeaxis path,
@@ -107,13 +108,6 @@ div {
     border-radius:5px;
 }
 
-.tname {
-    font-size: 40px;
-}
-
-.tdesc{
-    font-size: 16px;
-}
 
 .curly_b{
     stroke: rgb(190, 190, 190);
@@ -211,7 +205,8 @@ div {
 .multigrid .tick {
     stroke: lightgrey;
     opacity: 0;
-}
+} 
+
 .multigrid path {
       stroke-width: 1;
 }
@@ -252,9 +247,27 @@ div {
 
 .cardvalue {
     display: inline;
-    font-size: 3em;
+    font-size: 2em;
 }
 
 .carddesc {
     display: inline;
 }
+
+.grey {
+    color : #aaaaaa;
+}
+
+#title-head {
+  margin: 10px 0;
+  font-family: inherit;
+  font-size: 2em;
+  font-weight: bold;
+  line-height: 20px;
+}
+
+#title-descr {
+    font-weight: 200;
+    margin-left: 1%;
+}
+
