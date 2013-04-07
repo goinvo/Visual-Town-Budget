@@ -1,12 +1,26 @@
 
 div {
-    font-family:"Gill Sans";
+    font-family:"Helvetica Neue";
 }
 
+body,html{
+  height:100%;
+  cursor:default;
+}
 
-div {
+body {
+    background-color: rgb(250, 248, 251);
+}
+
+text {
+    stroke-width:0;
+}
+
+div, text {
  cursor:default;
 }
+
+
 
 .avbsvg{
     margin-left:auto; 
@@ -30,7 +44,7 @@ div {
 }
 
 .home {
-    font-family: "Gill Sans";
+    font-family: "Helvetica Neue";
     font-size: 50px;
     position : absolute;
     top : 10px;
@@ -58,35 +72,22 @@ div {
 
 .axis path,
 .axis line {
-    fill:grey;
-    stroke: rgb(196,196,196);
-    stroke-width : 1;
+    stroke: grey;
+    stroke-width : 2;
     stroke-linejoin : round;
     stroke-linecap: round;
     shape-rendering: crispEdges;
-    
 }
 
 .axis text {
-    font-family: "Gill Sans";
+    font-family: "Helvetica Neue";
     font-size: 0.8em;
     cursor: default;
     fill: grey;
 }
 
-.timeaxis path,
-.timeaxis line {
-    fill: none;
-    stroke: steelblue;
-    stroke-width : 3;
-    shape-rendering: crispEdges;
-    stroke-linejoin : round;
-    stroke-linecap: round;
-
-}
-
 .lab {
-    font-family: "Gill Sans";
+    font-family: "Helvetica Neue";
     font-size: 12px;
     shape-rendering: crispEdges;
     stroke-width:0px;
@@ -94,12 +95,31 @@ div {
     cursor: default;
 }
 
-.timeaxis text {
-    font-family: "Gill Sans";
-    font-size: 20px;
+.timeaxis path {
+    stroke: lightgrey;
+    stroke-width:4;
+    opacity: 0;
+} 
+
+.timeaxis .tick{
+    stroke: black;
+    stroke-width:1;
+    font-size: 0.8em;
+
+} 
+
+.timeaxis path {
+      stroke: black;
+      stroke-width: 1;
 }
 
+.tselect path{
+    fill : steelblue;
+    fill-opacity: 0.5;
+    stroke-linejoin : round;
+    stroke-linecap: round;
 
+}
 
 .toolt {
     background : rgba(52, 44, 44, 0.54);
@@ -132,7 +152,7 @@ div {
 }
 
 .homeval {
-    font-family: "Gill Sans";
+    font-family: "Helvetica Neue";
     font-size: 46px;
     shape-rendering: crispEdges;
     text-rendering: optimizeLegibility;
@@ -141,54 +161,13 @@ div {
     cursor: default;
 }
 
-
-.tsection{
-    font-size: 16px;
-    color:#7a7b7b;
-}
-
-.tright{
-    font-size: 22px;
-}
-
-.tvalue{
-    font-size: 30px;
-    color:rgb(0, 0, 0);
-}
-
 .browser text {
   text-anchor: end;
-}
-
-
-.tlaxis path {
-    fill: none;
-    stroke-width : 0;
-}
-
-.tlaxis {
-    font-size: 0.8em;
-}
-
-#tl {
-    background-color: rgba(229, 229, 229, 0.71);
-    margin-top: 1em;
-    box-shadow: 1px 1px 10px rgb(101,101,101);
-     border-radius: 5px;
-     margin-bottom: 0.5em;
-}
-
-.tlb {
-    fill : none;
-    fill-opacity:0.2
-    stroke: grey;
-    stroke-width: 2px;
 }
 
 .multiarea {
     fill-opacity : 0.65;
 }
-
 
 .multiline {
     fill: none;
@@ -200,7 +179,6 @@ div {
     stroke-width: 0;
     fill: none;
 }
-
 
 .multigrid .tick {
     stroke: lightgrey;
@@ -216,7 +194,6 @@ div {
     fill-opacity: 0.5;
     stroke-linejoin : round;
     stroke-linecap: round;
-
 }
 
 .tselect line {
@@ -224,45 +201,56 @@ div {
     stroke-linecap: round;
 }
 
-.card {
-    background-color: rgba(229, 229, 229, 0.71);
-    margin-top: 1em;
-    box-shadow: 1px 1px 10px rgb(101,101,101);
-    -moz-border-radius: 15px;
-    border-radius: 15px;
-    text-align: center;
-    padding: 0.2em;
+.card-row:first-child{
+    padding-left: 0;
 }
 
-.card hr {
-    margin: 0.05em;
-    color: #9E9E9E;
-    background-color: #9E9E9E;
+.card {
+    padding-top: 2%;
+    margin-left: 1%;
+}
+
+.card-img{
+    float: left;
+}
+
+.card-img img{
+    display: block;
+}
+
+.card-text {
+    display: block;
 }
 
 .cardtitle {
+    font-size: 2em;
     border : 1px;
-    font-size: 1.2em;
+    color : #aaaaaa;
 }
 
 .cardvalue {
-    display: inline;
-    font-size: 2em;
-}
-
-.carddesc {
-    display: inline;
+    font-size: 1.2em;
 }
 
 .grey {
     color : #aaaaaa;
 }
 
+.greysvg {
+    fill:grey;
+    stroke-width: 0;
+}
+
+#avb-menubar{
+    -moz-box-shadow:inset 0px -2px 5px gray;
+    -webkit-box-shadow:inset 0px -2px 5px gray;
+    box-shadow:inset 0px -2px 5px gray;
+}
+
 #title-head {
   margin: 10px 0;
   font-family: inherit;
-  font-size: 2em;
-  font-weight: bold;
+  font-size: 2.5em;
   line-height: 20px;
 }
 
@@ -271,3 +259,35 @@ div {
     margin-left: 1%;
 }
 
+#avb-body{
+    margin-top:1%;  
+    display:none; 
+    height:80%; 
+    min-height:800px; 
+    max-height:1600px;
+}
+
+#chart {
+    max-height: 600px;
+    padding-top: 4%;
+    padding-bottom: 4%;
+}
+
+.menubutton{
+    font-size: 1.2em;
+    color : #aaaaaa;
+}
+
+#vdivider{
+    border-left:2px solid #aaaaaa;
+    position:absolute;
+    top:0;
+}
+
+.checkbox{
+    font-size: 1em;
+}
+
+#breadcrumbs-row {
+    display: none;
+}

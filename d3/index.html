@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" type="text/css" href="look.css">
+        <script src ="d3.js"></script>
+    </head>
+    <body>
+        <h1>It works !</h1>
+        <script type="text/javascript">
+            
+            var plot_width = 640,
+                plot_height = 360;
+                
+            var mysvg = d3.select("body") //select body
+                          .append("svg")  //append new svg to body
+                          .attr("width", plot_width) //set svg width
+                          .attr("height", plot_height); // set svg height
+            
+            // data measuring car speed for 15 seconds at rate of 1 measurement/second
+            var speed = [4.0, 10.0, 12.0, 26.0, 32.0, 45.0, 52.0, 70.0,
+                        55.0, 46.0, 37.0, 25.0, 11.0, 8.0, 5.0, 2.0];
+            
+            var padding = 40;
+            var timescale = d3.scale.linear()
+                                    .domain([0,15])
+                                    .range([padding, plot_width - padding]);
+            
+            var speedscale = d3.scale.linear()
+                                     .domain([d3.min(speed),d3.max(speed)])
+                                     .range([plot_height - padding, padding]);
+            
+            var datapoints = mysvg.append("svg:g") // create a new group (optional)
+                                  .selectAll("circle") // select points that will be be created
+                                  .data(speed) // associate data to selection
+                                  .enter() // create a placeholder for each datapoint
+                                  .append("circle") // add svg circle in placeholder
+                                  //.attr("class", "datapoint"); // set class (useful for css)
+            
+            datapoints.attr("cy", function(d) { return speedscale(d); })
+                      .attr("cx", function(d,i) { return timescale(i); })
+                      .attr( "r", "5" );
+            
+//            var speedaxis = d3.svg.axis() // create a new axis
+//                                  .scale(speedscale) // based on speedscale
+//                                  .orient("left"); // is going to be on the left part of plot
+//            
+//            var timeaxis = d3.svg.axis()
+//                                 .scale(timescale)
+//                                 .orient("bottom");
+//            
+//            mysvg.append("svg:g")
+//                 .attr("transform", "translate (" + padding.toString() + ", 0)")
+//                 .attr("class","axis")
+//                 .call(speedaxis);
+//
+//            mysvg.append("svg:g")
+//                 .attr("transform", "translate (0, " + (plot_height - padding).toString() + ")")
+//                 .attr("class","axis")
+//                 .call(timeaxis);
+//            
+//            var line = d3.svg.line() // create a line
+//                             .interpolate("monotone") // interplotate for smooth look (optional)
+//                             .x(function(d,i) { return timescale(i); })
+//                             .y(function(d) { return speedscale(d); });
+//            
+//            mysvg.append("svg:g")
+//                 .attr("class","dataline")
+//                 .append("svg:path")
+//                 .attr("d", line(speed));
+            
+        </script>
+    </body>
+</html>
+        

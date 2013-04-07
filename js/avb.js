@@ -18,7 +18,7 @@
             var max_year = 2018;
             var cur_year = 2012;
 
-            var root_total = 125000000;
+            var root_total = 0;
             
             // object references
             var mysvg;
@@ -51,7 +51,6 @@
             
              
             function activatelinks() {
-               
                d3.select("#home_0").on("click", function() {
                 console.log("click");
                    avb_init("revenues");
@@ -101,98 +100,68 @@
                 }
             }
 
-            function getex(){
-                return 0;
-            }
-
-            function layoutsingle_init() {
-
-                d3.select("#singlelayout").style("display","inline");
-
-                layout.navsvg = d3.select("#bars").append("svg");
-                layout.navsvg.width = d3.select("#bars").property("clientWidth");
-                layout.navsvg.height = layout.navsvg.width;
-                layout.navsvg.attr("height", layout.navsvg.height )
-                             .attr("width", layout.navsvg.width);
-                
-                layout.chartsvg = d3.select("#chart").append("svg");
-                layout.chartsvg.width = d3.select("#bars").property("clientWidth");
-                layout.chartsvg.height = layout.navsvg.height/2;
-                layout.chartsvg.attr("height", layout.navsvg.height/2 )
-                             .attr("width", layout.chartsvg.width);
-
-            }
-
-
             function onjsonload(jsondata) {
                 cur_json = jsondata;
+                root_total = parseInt(jsondata[cur_year.toString()]);
+                
                 titlebox_init();
                 titlebox_fill(jsondata);
 
                 avb.cards.initialize();
                 
                 init_tooltip();
-                //initmultiple(jsondata);
                 avb.breadcrumbs.initialize();
-                avb.breadcrumbs.push(jsondata);
+                avb.breadcrumbs.push(jsondata.name);
 
                 initsingle(jsondata);
                 avb.timeline.initialize();
                 avb.timeline.update(jsondata);
             }
 
-            function initmultiple(jsondata) {
-                mode = 2;
-                d3.select("#multichart").style("display", "inline");
-                graph_w = d3.select("#multichart").property("clientWidth");
-                layout.multichartsvg = d3.select("#multichart").append("svg")
-                           .attr("height", graph_w/2)
-                           .attr("width", graph_w);
-                graph_h = graph_w * 9/20;
-                avb.multichart.draw(jsondata, 0, 0, graph_w, graph_h);
-
-            }
-
             function initsingle(jsondata){
                 mode = 1; // single year mode
 
-                layoutsingle_init();
+                d3.select("#singlelayout").style("display","inline");
+                $("#breadcrumbs-row").slideDown();
+
 
                 avb.navigation.initialize(jsondata, 0, 0);
 
-                avb.chart.initialize(0,layout.chartsvg.height - 30);
-                avb.chart.drawline(jsondata, "steelblue", true);
-
                 avb.cards.draw(2, 2);
                 avb.cards.update(jsondata); 
+
+                avb.chart.initialize();
+                avb.chart.drawline(jsondata, "steelblue", true);
 
                 console.log("UI Loaded.");
             }
 
             function single_remove() {
                 avb.navigation.fadeout();
-                d3.select("#cards").selectAll("div").transition().duration(500).style("margin-left",get_winsize("w").px());
                 d3.select("#singlelayout").transition().delay(500).style("display", "none");
-                d3.select("#cards").selectAll("div").transition().delay(500).remove();
+                d3.select("#cards").selectAll(".removable").transition().delay(500).remove();
                 d3.select("#chart").selectAll("svg").transition().delay(500).remove();
                 d3.select("#bars").selectAll("svg").transition().delay(500).remove();
                 avb.cards.clear();
             }
 
-            function get_maxyear(data) {
-                var i = max_year;
-                while( data[i.toString()] === undefined && i >= min_year ) {
-                    i--;
-                }
-                return i;
+            function resize(){
+                d3.selectAll("svg").remove();
+                avb.navigation.initialize(cur_json, 0, 0);
+                avb.chart.initialize();
+                avb.chart.drawline(cur_json, "steelblue", true);
+                avb.cards.reposition();
             }
+
             
             var get_max = function (d) {
                 var arr = toarray(d);
                 return d3.max(arr.values, get_values);
             };
             
-
+            var log = function(d) {
+                console.log(d);
+            }
 
              function toarray(d){
                 values = [];
@@ -213,6 +182,17 @@
 
             var get_values = function (d) {
                 return d.val;
+            }
+
+            var svgtext_draw = function(container, x, y, text, css) {
+                var newtext = container.append("text")
+                .attr("x", x)
+                .attr("y",y)
+                .text(text);
+                if(css !== undefined) {
+                    newtext.classed(css,true);
+                }
+                return newtext;
             }
 
 
@@ -326,9 +306,6 @@
                 d3.json("data/arlington.json", onjsonload);
             }
 
-
-
-                
             // helper functions
             function initfilter(stdev) {
                     // filter = mysvg.append("svg:defs")
@@ -352,10 +329,10 @@
             }
 
 
-            function add_label(group, rect, label){
+            function add_label(group, rect, label, css){
                 var padding = 5;
                 var t = group.append("text")
-                              .attr("class", "lab")
+                              .attr("class", css)
                               .attr("x", rect.attr("x"))
                               .attr("y", rect.attr("y"));
                 var words = label.split(" ");

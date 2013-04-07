@@ -1,0 +1,26 @@
+.axis path,
+.axis line {
+    fill: none;
+    stroke: black;
+    shape-rendering: crispEdges;
+}
+
+.axis text {
+    font-family: "Gill Sans";
+    font-size: 12px;
+}
+
+.datapoint {
+    stroke : rgba(26, 100, 239, 0.91);
+    fill : rgba(56, 159, 235, 0.9);
+    stroke-width : 1 ;
+}
+
+.dataline {
+    stroke : rgba(45, 93, 144, 0.69);
+    fill : none;
+    stroke-dasharray : 10, 8;
+    stroke-width : 3 ;
+    stroke-linejoin : round;
+    stroke-linecap: round;
+}

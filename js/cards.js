@@ -7,32 +7,40 @@ avb.cards = function(){
     initialize = function(){
         // amount card
         var newcard = new Object();
-        newcard.title = "AMOUNT";
-        newcard.icon = "img/dollar.png"
+        newcard.title = "Amount";
+        newcard.icon = ""
         newcard.back = "this is the back of the card";
         newcard.value = function(data) { return formatcurrency(data[cur_year.toString()]); };
         newcard.side = function(data) { return "as of " + cur_year.toString() + "."};
         deck.push(newcard);
 
         var newcard = new Object();
-        newcard.title = "IMPACT";
-        newcard.icon = "img/build.png";
+        newcard.title = "Impact";
+        newcard.icon = "";
         newcard.back = "this is the back of the card";
         newcard.value = function(data) { return Math.max(0.01,(Math.round(data[cur_year]*100*100/root_total)/100)).toString() + "%"; };
         newcard.side = "of total " + section + ".";
         deck.push(newcard);
 
         var newcard = new Object();
-        newcard.title = "GROWTH";
-        newcard.icon = "img/updown.png";
+        newcard.title = "Growth";
+        newcard.icon = "";
         newcard.back = "this is the back of the card";
         newcard.value = function(data) { return h_growth(data, cur_year.toString()); };
         newcard.side = "compared to last year.";
         deck.push(newcard);
 
         var newcard = new Object();
-        newcard.title = "SOURCE";
-        newcard.icon = "img/info_30.png";
+        newcard.title = "Source";
+        newcard.icon = "";
+        newcard.back = "this is the back of the card";
+        newcard.value = function(data) { return "Cherry sheet"; };
+        newcard.side = "";
+        deck.push(newcard);
+
+        var newcard = new Object();
+        newcard.title = "Fluctuation";
+        newcard.icon = "";
         newcard.back = "this is the back of the card";
         newcard.value = function(data) { return "Cherry sheet"; };
         newcard.side = "";
@@ -42,55 +50,65 @@ avb.cards = function(){
     draw = function () {
         var container;
         for(var i=0; i < deck.length; i++) {
-            if (i%3 === 0) {
+            if (i%4 === 0) {
                 container = d3.select("#cards").append("div")
-                .attr("class","row-fluid");
+                .attr("class","row-fluid card-row");
             }
             var newcard = card_draw(container, deck[i]);
             cardstack.push(newcard);
         }
-        if(deck.length%3 !== 0) {
-            container.append("div")
+        if(deck.length%4 !== 0) {
+            container.append("div") 
             .attr("class", "span6");
         }
     },
 
     card_draw = function (container, card){
         var newcard = container.append("div")
-        .attr("class", "span4 card");
+        .attr("class", "span3 card");
 
-        newcard.divs =  newcard.append("div");
+        newcard.append("div")
+        .classed("card-img",true)
+        .append("img")
+        .attr("src", card.icon)
+        .attr("height", 30)
+        .attr("width", 30)
+        .style("float","left");
+
+        newcard.divs =  newcard.append("div")
+        .style("margin-left", (35).px())
+        .classed("card-text", true)
         newcard.title = newcard.divs.append("div")
         .text(card.title)
         .attr("class", "cardtitle");
-        var img_size = newcard.title.property("clientHeight");
-        console.log(img_size);
-        newcard.title.append("img")
-        .attr("src", card.icon)
-        .attr("height", img_size)
-        .attr("width", img_size)
-        .style("float","left");
-        newcard.title.append("hr");
-        newcard.bottom = newcard.divs.append("div");
-        newcard.bottom.left = newcard.bottom.append("div")
-        .attr("class", "cardvalue");;
-        newcard.bottom.right = newcard.bottom.append("div")
-        .attr("class", "carddescr");;
+
+        newcard.bottom = newcard.divs.append("div")
+        .attr("class", "cardvalue");
 
         return newcard;
     },
 
     update = function (data) {
+        d3.select("#cardtitle").text(data.name + " in " + cur_year.toString());
         for(var i=0; i < deck.length; i++) {
-            cardstack[i].bottom.left.text(deck[i].value(data));
-            var text;
+            var text = deck[i].value(data);
             if ( typeof(deck[i].side) === 'string') {
-                text = deck[i].side;
+                text = text + " " + deck[i].side;
             } else {
-                text = deck[i].side(data);
+                text = text + " " + deck[i].side(data);
             }
-            cardstack[i].bottom.right.text(text);
+            cardstack[i].bottom.text(text);
         }
+        reposition()
+    },
+
+    reposition = function(){
+        var margin = $("#card-container").height();
+        $("#cards .row-fluid").each(function(d) {
+            console.log($(this).height());
+            margin = margin - $(this).height();
+        })
+        $("#cards").css("margin-top", margin/2);
     },
 
     clear = function(){
@@ -101,6 +119,7 @@ avb.cards = function(){
         update : update,
         draw : draw,
         clear : clear,
-        initialize : initialize
+        initialize : initialize,
+        reposition : reposition
     }
 }();

@@ -2,29 +2,29 @@ var avb = avb || {};
 
 avb.navigation = function(){
 	var navigation,
-		levels = [],
+  levels = [],
 
-	fadeout= function(){
-		navigation.transition().duration(500).attr("transform", "translate(" + get_winsize("w") + ", 0)");
-	};
+  fadeout= function(){
+      navigation.transition().duration(500).attr("transform", "translate(" + get_winsize("w") + ", 0)");
+  };
 
-	drawcurly=function(container, target_y, x, y, init_height, color){
-		if(container.curly !== undefined ) {
-			container.curly.remove();
-		}
-		curly = layout.navsvg.append("svg:g");
-		var radius = Math.floor(bar_intra_padding/5);
-		var points = 6;
+  drawcurly=function(container, target_y, x, y, init_height, color){
+      if(container.curly !== undefined ) {
+         container.curly.remove();
+     }
+     curly = layout.navsvg.append("svg:g");
+     var radius = Math.floor(bar_intra_padding/5);
+     var points = 6;
 
-		var angle = d3.scale.linear()
-		.domain([0, points-1])
-		.range([0, Math.PI/2]);
+     var angle = d3.scale.linear()
+     .domain([0, points-1])
+     .range([0, Math.PI/2]);
 
-		var curvedline = d3.svg.line.radial()
-		.interpolate("basis")
-		.tension(0)
-		.radius(radius)
-		.angle(function(d, i) { return angle(i); });
+     var curvedline = d3.svg.line.radial()
+     .interpolate("basis")
+     .tension(0)
+     .radius(radius)
+     .angle(function(d, i) { return angle(i); });
 
                 // 1st curl
                 curly.append("svg:path").datum(d3.range(points))
@@ -71,6 +71,8 @@ avb.navigation = function(){
 
             drawzone = function(obj, key, x, y, width, height) {
 
+                delete navigation.selected;
+
             	bar_width = width;
             	bar_height = height;
             	bar_left_padding = x;
@@ -101,11 +103,11 @@ avb.navigation = function(){
                 	.attr("width", bar_width)
                 	.attr("height", heightscale(data[i][key]))
                 	.attr("fill", colors[i%20])
-                	.attr("rx", 5)
-                	.attr("ry", 5)
+                	// .attr("rx", 5)
+                	// .attr("ry", 5)
                 	.attr("opacity", nosel_opacity.toString());
                 	if ( entities.attr("height") >= 20 ) {
-                		add_label(group,entities,data[i]["name"]);
+                		add_label(group,entities,data[i]["name"], "lab");
                 	}
                 	cur_y += heightscale(data[i][key]);
                 }
@@ -126,7 +128,9 @@ avb.navigation = function(){
 
 container.selectAll("rect").on("mouseout", function(d,i) {
 	tooltip.style("visibility", "hidden");
-	d3.select(this).attr("opacity","0.3");
+    if(d3.select(this) !== navigation.selected){
+	   d3.select(this).attr("opacity","0.3");
+    };
 });        
 container.selectAll("rect").on("mouseover", function(d) {
 	console.log("tool");
@@ -148,54 +152,66 @@ return container;
 
 
 initialize = function(jsondata, x, y) {
+    layout.navsvg = d3.select("#bars").append("svg");
+    layout.navsvg.width = $("#bars").width();
+    layout.navsvg.height = $("#bars").height();
+    layout.navsvg.attr("height", layout.navsvg.height )
+    .attr("width", layout.navsvg.width);
 	navigation = layout.navsvg.append("svg:g");
 	navigation.height = layout.navsvg.height;
 	navigation.width = layout.navsvg.width;
-	bar_width = navigation.width/4;
-	bar_intra_padding = 50;
-	bar_height = navigation.height
-
-	avb.navigation.drawzone(jsondata, cur_year.toString(), navigation.width - bar_width - 30, navigation.height - bar_height, bar_width, bar_height).attr("display","inline");
+	navigation.bar_width = navigation.width;
+	bar_intra_padding = 0;
+	bar_height = navigation.height;
+	avb.navigation.drawzone(jsondata, cur_year.toString(), 0, navigation.height - bar_height, navigation.bar_width, bar_height).attr("display","inline");
 },
 
 rectclick = function(d,i) {
+    cur_json = d;
 	avb.chart.drawline(d, d3.select(this).attr("fill"), true);
 	avb.cards.update(d);
 	titlebox_fill(d);
-	avb.breadcrumbs.push(d);
-                        // fix this parentnode mess !
-                        if( levels[levels.length-1].lev == d3.select(this.parentNode.parentNode).attr("lev")){
-                        } else {
-                        	levels.pop().remove();
-                        	if(curly !== undefined) {
-                        		curly.remove();
-                        	}
-                        }
-                        console.log(d.sub);
-                        if ( d["sub"] === undefined ) {
-                        	return;
-                        }
+    if(navigation.selected === undefined){
+	   avb.breadcrumbs.push(d.name);
+    } else {
+        avb.breadcrumbs.rename(d.name);
+    }
+    d3.select(navigation.selected).style("opacity", 0.3)
+    navigation.selected = this;
+    d3.select(this).style("opacity", 0.7);
+//                         // fix this parentnode mess !
+//                         if( levels[levels.length-1].lev == d3.select(this.parentNode.parentNode).attr("lev")){
+//                         } else {
+//                         	levels.pop().remove();
+//                         	if(curly !== undefined) {
+//                         		curly.remove();
+//                         	}
+//                         }
+//                         console.log(d.sub);
+//                         if ( d["sub"] === undefined ) {
+//                         	return;
+//                         }
 
-                        for(var i=0; i < levels.length; i++) {
+//                         for(var i=0; i < levels.length; i++) {
 
-                            //container = levels[parseInt(d3.select(this.parentNode.parentNode).attr("lev"))];
-                            container = levels[i];
-                            container.x = container.x - bar_width - bar_intra_padding;
-                            container.transition().duration(500).attr("transform", " translate(" + (container.x).toString() +"," + (container.y).toString() + ")");
-                            if(container.curly !== undefined) {
-                            	container.curly.transition().duration(500).attr("transform", " translate(" + (container.x + bar_width + container.curly.padding).toString() + "," + (container.y).toString() + ")");
-                            }
-                        }
+//                             //container = levels[parseInt(d3.select(this.parentNode.parentNode).attr("lev"))];
+//                             container = levels[i];
+//                             container.x = container.x - bar_width - bar_intra_padding;
+//                             container.transition().duration(500).attr("transform", " translate(" + (container.x).toString() +"," + (container.y).toString() + ")");
+//                             if(container.curly !== undefined) {
+//                             	container.curly.transition().duration(500).attr("transform", " translate(" + (container.x + bar_width + container.curly.padding).toString() + "," + (container.y).toString() + ")");
+//                             }
+//                         }
 
-                        container.curly = drawcurly(container, Math.floor(d3.select(this).attr("y")) + d3.select(this).attr("height")/2, container.x + bar_width, layout.navsvg.height - bar_height, 100, d3.select(this).attr("fill"));
-                        d3.select(this).attr("opacity",sel_opacity.toString());
-                        newzone = drawzone(d3.select(this).data()[0], cur_year.toString(), container.x, navigation.height - bar_height, bar_width, bar_height);
-                        newzone.x = layout.navsvg.width - bar_width - 30;
-                        newzone.transition()
-                        .delay(1000)
-                        .duration(500)
-                        .attr("transform", " translate(" + (newzone.x).toString() +"," + (container.y).toString() + ")")
-                        .attr("display", "inline");
+//                         container.curly = drawcurly(container, Math.floor(d3.select(this).attr("y")) + d3.select(this).attr("height")/2, container.x + bar_width, layout.navsvg.height - bar_height, 100, d3.select(this).attr("fill"));
+//                         d3.select(this).attr("opacity",sel_opacity.toString());
+//                         newzone = drawzone(d3.select(this).data()[0], cur_year.toString(), container.x, navigation.height - bar_height, bar_width, bar_height);
+//                         newzone.x = layout.navsvg.width - bar_width - 30;
+//                         newzone.transition()
+//                         .delay(1000)
+//                         .duration(500)
+//                         .attr("transform", " translate(" + (newzone.x).toString() +"," + (container.y).toString() + ")")
+//                         .attr("display", "inline");
                     };
 
                     return{
