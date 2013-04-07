@@ -49,28 +49,28 @@
                 return this.toString() + "px";
             };
             
-             
+
             function activatelinks() {
-               d3.select("#home_0").on("click", function() {
+             d3.select("#home_0").on("click", function() {
                 console.log("click");
-                   avb_init("revenues");
-               });
-            }
+                avb_init("revenues");
+            });
+         }
 
-            function drawhome(){
-                home = true;
-                d3.json("data/home.json", onhomedata);
-            }
+         function drawhome(){
+            home = true;
+            d3.json("data/home.json", onhomedata);
+        }
 
-            function onhomedata(jsondata) {
-                var max = 0;
-                home_width = 300;
-                var homediv = d3.select("#homeb")
-                mysvg = homediv.append("svg")
-                                         .attr("width", homediv.property("clientWidth"))
-                                         .attr("height", 160)
-                                         .style("margin-top", "1%");
-                drawbars(jsondata.sub, 0, 0, 150, 60);
+        function onhomedata(jsondata) {
+            var max = 0;
+            home_width = 300;
+            var homediv = d3.select("#homeb")
+            mysvg = homediv.append("svg")
+            .attr("width", homediv.property("clientWidth"))
+            .attr("height", 160)
+            .style("margin-top", "1%");
+            drawbars(jsondata.sub, 0, 0, 150, 60);
                 //drawtimeline(0, homebars_height + 25, get_winsize("w"), 30);
             }
 
@@ -163,7 +163,7 @@
                 console.log(d);
             }
 
-             function toarray(d){
+            function toarray(d){
                 values = [];
                 for(var i=min_year; i <= max_year ; i++){
                     if( d[i.toString()] !== undefined ) {
@@ -201,7 +201,7 @@
                 if(value === undefined) {
                     return "N/A";
                 } else if(value >= 1000000) {
-                return "$" + Math.round(value/1000000).toString() + " M";
+                    return "$" + Math.round(value/1000000).toString() + " M";
                 } else if (value < 1000000 && value >= 1000){
                     return "$" + Math.round(value/1000).toString() + " K";
                 } else if (value < 1 && value != 0) {
@@ -215,8 +215,8 @@
                 homebars_width = width;//
                 homebars_height = height;
                 var heightscale = d3.scale.linear()
-                                          .domain([0,120000000])
-                                          .range([0, height]);
+                .domain([0,120000000])
+                .range([0, height]);
                 console.log(width);
 
                 homescale = heightscale;
@@ -230,48 +230,48 @@
                 }
 
                 tracecontainer.selectAll("rect")
-                                .data(jsondata)
-                                .enter()
-                                .append("svg:rect")
-                                .attr("width", width)
-                                .attr("y", function(d) {
-                                        return height - heightscale(get_max(d));
-                                })
-                                .attr("height", function(d) {
-                                        return heightscale(get_max(d));
-                                })
-                                .attr("x", function(d, i) {
-                                    return getoffset("home_" + i.toString());
-                                })
-                                .attr("fill", function(d,i) {
-                                    return homecolors[i];
-                                })
-                                .attr("opacity", 0.3);
+                .data(jsondata)
+                .enter()
+                .append("svg:rect")
+                .attr("width", width)
+                .attr("y", function(d) {
+                    return height - heightscale(get_max(d));
+                })
+                .attr("height", function(d) {
+                    return heightscale(get_max(d));
+                })
+                .attr("x", function(d, i) {
+                    return getoffset("home_" + i.toString());
+                })
+                .attr("fill", function(d,i) {
+                    return homecolors[i];
+                })
+                .attr("opacity", 0.3);
                 homebars = container.selectAll("rect")
-                                .data(jsondata)
-                                .enter()
-                                .append("svg:rect")
-                                .attr("width", width)
-                                .attr("height", 0)
-                                .attr("x", function(d, i) {
-                                    return getoffset("home_" + i.toString());
-                                })
-                                .attr("fill", function(d,i) {
-                                    return homecolors[i];
-                                })
-                                .attr("opacity", 0.6);
+                .data(jsondata)
+                .enter()
+                .append("svg:rect")
+                .attr("width", width)
+                .attr("height", 0)
+                .attr("x", function(d, i) {
+                    return getoffset("home_" + i.toString());
+                })
+                .attr("fill", function(d,i) {
+                    return homecolors[i];
+                })
+                .attr("opacity", 0.6);
                 hometexts  = container.selectAll("text")
-                                  .data(jsondata)
-                                  .enter()
-                                  .append("svg:text")
-                                  .attr("x", function(d, i){
-                                    return getoffset("home_" + i.toString()) + homebars_width + 5;
-                                  })
-                                  .attr("y", homebars_height)
-                                  .attr("height", homebars_height)
-                                  .attr("width", 100)
-                                  .attr("class", "homeval")
-                                  .text("");
+                .data(jsondata)
+                .enter()
+                .append("svg:text")
+                .attr("x", function(d, i){
+                    return getoffset("home_" + i.toString()) + homebars_width + 5;
+                })
+                .attr("y", homebars_height)
+                .attr("height", homebars_height)
+                .attr("width", 100)
+                .attr("class", "homeval")
+                .text("");
                 refresh();
             }
 
@@ -280,17 +280,17 @@
                 if(home) {
                     console.log("refreshing home");
                     homebars.transition()
-                            .attr("height", function (d) {
-                                            return homescale(d[cur_year.toString()]);
-                            })
-                            .attr("y", function(d) {
-                                            return homebars_height - homescale(d[cur_year.toString()]);
-                            
-                            });
+                    .attr("height", function (d) {
+                        return homescale(d[cur_year.toString()]);
+                    })
+                    .attr("y", function(d) {
+                        return homebars_height - homescale(d[cur_year.toString()]);
+
+                    });
                     hometexts.transition()
-                             .text(function(d) {
-                                return formatcurrency(d[cur_year]);
-                             });
+                    .text(function(d) {
+                        return formatcurrency(d[cur_year]);
+                    });
                 } else {
                 }
             }
@@ -302,17 +302,40 @@
 
                 home = false;
                 section = name.toLowerCase();
-
                 d3.json("data/arlington.json", onjsonload);
+
             }
 
-            // helper functions
-            function initfilter(stdev) {
-                    // filter = mysvg.append("svg:defs")
-                    //               .append("svg:filter")
-                    //               .attr("id", "blur")
-                    //               .append("svg:feGaussianBlur")
-                    //               .attr("stdDeviation", stdev);
+            function add_filter(container){
+                filter = container.append("svg:defs")
+                .append("svg:filter")
+                .attr("id", "blur");
+
+                filter.append("feOffset")
+                .attr("result","offOut")
+                .attr("in", "SourceGraphic")
+                .attr("dy",-15);
+
+                filter.append("feOffset")
+                .attr("result","offOut2")
+                .attr("in", "SourceGraphic")
+                .attr("dy", 15);
+
+                 filter.append("svg:feGaussianBlur")
+                .attr("in", "offOut")
+                .attr("stdDeviation", 5)
+                .attr("result","blurOut");
+
+                 filter.append("svg:feGaussianBlur")
+                .attr("in", "offOut2")
+                .attr("stdDeviation", 5)
+                .attr("result","blurOut2");
+
+                filter.append("feBlend")
+                .attr("in", "SourceGraphic")
+                .attr("in2", "blurOut")
+                .attr("in3", "blurOut2")
+                .attr("mode","normal");
             }
 
 
@@ -332,9 +355,9 @@
             function add_label(group, rect, label, css){
                 var padding = 5;
                 var t = group.append("text")
-                              .attr("class", css)
-                              .attr("x", rect.attr("x"))
-                              .attr("y", rect.attr("y"));
+                .attr("class", css)
+                .attr("x", rect.attr("x"))
+                .attr("y", rect.attr("y"));
                 var words = label.split(" ");
                 var tempText = "";
                 var maxWidth = rect.attr("width");
@@ -343,7 +366,7 @@
                     var new_tspan = t.append("tspan");
                     var dy = new_tspan.style("font-size");
                     return new_tspan.attr("x",5)//
-                                    .attr("dy", dy.toString());
+                    .attr("dy", dy.toString());
                 };
                 var c_tspan = get_tspan();
                 for (var i=0; i<words.length; i++) {
@@ -363,53 +386,52 @@
                     t.remove();
                 } else                     
                 // centering//
-                    var mid_y = (parseFloat(rect.attr("height")) - (t.node().getBBox().height))/2;
-                    t.attr("y",(parseFloat(rect.attr("y")) + mid_y));
-                    var mid_x = (parseFloat(rect.attr("width")) - (t.node().getBBox().width))/2;
+                var mid_y = (parseFloat(rect.attr("height")) - (t.node().getBBox().height))/2;
+                t.attr("y",(parseFloat(rect.attr("y")) + mid_y));
+                var mid_x = (parseFloat(rect.attr("width")) - (t.node().getBBox().width))/2;
                     t.selectAll("tspan").attr("x",(parseFloat(rect.attr("x")) + mid_x).toString());//
                     
                 }
-        
-
-            function init_tooltip(){
-                tooltip = d3.select("body")
-                .append("div")
-                .style("position", "absolute")
-                .style("z-index", "10")
-                .style("visibility", "hidden")
-                .attr("class","toolt");
-            }
 
 
-            
-            function titlebox_init(x, y, width, height) {
-                titlebox = d3.select("#title-head");
-                titlebox.bottom = d3.select("#title-descr");
-            }
-
-            
-            function titlebox_fill(data){
-                titlebox.text(data.name);
-                titlebox.bottom.text(data.descr);
-            }
-
-            
-            function translate(obj,x,y) {
-                obj.attr("transform", "translate(" + (x).toString() +"," + (y).toString() + ")");
-            }
-            
-            function rotate(obj,degrees) {
-                obj.attr("transform","rotate(" + degrees.toString() + " 100 100)");
-            }
-            
-            
-            
-            function get_minyear(data) {
-                var i = min_year;
-                while( data[i.toString()] === undefined && i <= max_year) {
-                    i++;
+                function init_tooltip(){
+                    tooltip = d3.select("body")
+                    .append("div")
+                    .style("position", "absolute")
+                    .style("z-index", "10")
+                    .style("visibility", "hidden")
+                    .attr("class","toolt");
                 }
-                return i;
-            }
-            
-                    
+
+
+
+                function titlebox_init(x, y, width, height) {
+                    titlebox = d3.select("#title-head");
+                    titlebox.bottom = d3.select("#title-descr");
+                }
+
+
+                function titlebox_fill(data){
+                    titlebox.text(data.name);
+                    titlebox.bottom.text(data.descr);
+                }
+
+
+                function translate(obj,x,y) {
+                    obj.attr("transform", "translate(" + (x).toString() +"," + (y).toString() + ")");
+                }
+
+                function rotate(obj,degrees) {
+                    obj.attr("transform","rotate(" + degrees.toString() + " 100 100)");
+                }
+
+
+
+                function get_minyear(data) {
+                    var i = min_year;
+                    while( data[i.toString()] === undefined && i <= max_year) {
+                        i++;
+                    }
+                    return i;
+                }
+

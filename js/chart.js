@@ -5,8 +5,8 @@ avb.chart = function(){
 		multichart,
 
 	initialize = function(){
-		console.log($("#chart").width());
 		layout.chartsvg = d3.select("#chart").append("svg");
+
 		layout.chartsvg.width = $("#chart").width();
 		layout.chartsvg.height = $("#chart").height();
 		layout.chartsvg.attr("height", layout.chartsvg.height )

@@ -7,7 +7,7 @@
   <link href="css/lib/bootstrap/bootstrap.css" rel="stylesheet">
   <link href="css/lib/bootstrap/bootstrap-responsive.css" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="css/look.css">
-  <link rel="stylesheet" type="text/css" href="css/lib/noUislider/nouislider.fox.css">
+  <link rel="stylesheet" type="text/css" href="css/lib/slider/nouislider.css">
 
   <script src ="js/lib/d3.js"></script>
   <script src ="js/lib/jquery-1.9.1.min.js"></script>
@@ -23,10 +23,11 @@
   <script src ="js/menubuttons.js"></script>
   <script>
   function load() {
-              drawhome();
-              activatelinks();
               menu_scale();
-              //avb_init("Revenues");
+              // drawhome();
+              // activatelinks();
+
+              avb_init("Revenues");
             };
             </script>
 
@@ -36,7 +37,7 @@
               <div class="container-fluid" id="avb-menubar" style="padding-top:1%; background-color:rgb(245, 245, 245)">
               <div class="container">
 
-                <div class="row-fluid menubuttons" style="height:50%;"> 
+                <div class="row-fluid" style="height:50%;"> 
                   <div id="home-button" class="span3" style="position:relative; padding-right:3%;">
                     <div style="display:inline;">
                       <div class="row-fluid"> 
@@ -59,14 +60,13 @@
                       <li><a href="#">Expenses</a></li>
                       <li><a href="#">Funds</a></li>
                       <li><a href="#" onclick="fby.push(['showForm', '4389']);return false;">Give Feedback</a></li>
-                      <li><a href="#">About</a></li>
                     </ul>
                   </div>
                 </div>
               </div>
 
               <div id="breadcrumbs-row" class="row-fluid">
-                <ul id="avb-breadcrumbs" class="breadcrumb" style="padding-left:0;">
+                <ul id="avb-breadcrumbs" class="breadcrumb" style="padding-left:0; margin-bottom:0;">
                   <li href="/"> <a class="brand"  href="/"> Home </a> </li>
                   <li> </li>
                 </ul>

@@ -6,6 +6,7 @@ div {
 body,html{
   height:100%;
   cursor:default;
+  font-family:"Helvetica Neue";
 }
 
 body {
@@ -245,6 +246,7 @@ div, text {
     -moz-box-shadow:inset 0px -2px 5px gray;
     -webkit-box-shadow:inset 0px -2px 5px gray;
     box-shadow:inset 0px -2px 5px gray;
+    padding-bottom: 1%;
 }
 
 #title-head {
