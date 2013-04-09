@@ -128,21 +128,14 @@
                 avb.navigation.initialize(jsondata, 0, 0);
 
                 avb.cards.draw(2, 2);
-                avb.cards.update(jsondata); 
+                avb.cards.update(jsondata);
+                
 
                 avb.chart.initialize();
                 avb.chart.drawline(jsondata, "steelblue", true);
+                $('#chart-container').css("display","none");
 
                 console.log("UI Loaded.");
-            }
-
-            function single_remove() {
-                avb.navigation.fadeout();
-                d3.select("#singlelayout").transition().delay(500).style("display", "none");
-                d3.select("#cards").selectAll(".removable").transition().delay(500).remove();
-                d3.select("#chart").selectAll("svg").transition().delay(500).remove();
-                d3.select("#bars").selectAll("svg").transition().delay(500).remove();
-                avb.cards.clear();
             }
 
             function resize(){

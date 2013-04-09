@@ -2,7 +2,7 @@ var avb = avb || {};
 
 avb.chart = function(){
 	var chart,
-		multichart,
+	multichart,
 
 	initialize = function(){
 		layout.chartsvg = d3.select("#chart").append("svg");
@@ -54,7 +54,7 @@ avb.chart = function(){
 		chart.yscale = yscale;
 		var xscale = chart.xscale;
 
-		var container = chart.append("svg:g");
+		var container = chart.append("svg:g")
 		chart.linestack.push(container);
 
 		container.xgrid_axis = d3.svg.axis()
@@ -105,7 +105,7 @@ avb.chart = function(){
                 container.append("svg:path").attr("d", area(data.values.slice(0,projected +1)))
                 .attr("class","grapharea")
                 .style("fill", color)
-                .style("opacity", 0.7);
+                .style("opacity", 0.5);
                 
                 // projection area
                 container.append("svg:path").attr("d", area(data.values.slice(projected, data.values.length )))
@@ -133,19 +133,7 @@ avb.chart = function(){
                 	}
                 };
 
-	            // hotspots
-	            container.selectAll("circle")
-	            .data(values)
-	            .enter()
-	            .append("circle")
-	            .attr("class","graphcircle")
-	            .attr("cx", function(d) { return xscale(d.year); })
-	            .attr("cy", function(d) { return yscale(d.val); })
-	            .attr("r","5")
-	            .attr("stroke-opacity",0.9)
-	            .attr("fill-opacity",0.50)
-	            .attr("stroke", color)
-	            .attr("fill", color);
+                console.log(data);
 
 	           //axes
 	           var xAxis = d3.svg.axis(container)
@@ -180,42 +168,74 @@ avb.chart = function(){
 	           .attr("class", "axis")
 	           .attr("transform", "translate( " + chart.xmargin + ",0)").call(yAxis);
 
+	           
+	            // hotspots
+	            container
+	            .append("svg:g")
+	            .attr("data-name", data.name)
+	            .selectAll("circle")
+	            .data(values)
+	            .enter()
+	            .append("circle")
+	            .attr("class","chart-circle")
+	            .attr("cx", function(d) { return xscale(d.year); })
+	            .attr("cy", function(d) { return yscale(d.val); })
+	            .attr("r","6")
+	            .attr("stroke", color)
+	            .attr("fill", color);
+
+	            $('.chart-circle').popover({
+	            	container:'body',
+	            	placement: 'bottom',
+	            	trigger: 'hover',
+	            	title: function(){
+	            		return $(this).parent().attr("data-name") +
+	            		" in " + d3.select(this).datum().year;
+	            	},
+	            	content: function() {
+	            		$('#popover-value')
+	            		.text(formatcurrency(d3.select(this).datum().val));
+	            		return $('#popover-html').html();
+	            	},
+	            	html: true
+	            });
+
 	           sub = data.sub;
 
 	           remove_subsections(false);
 	           if ( $('#subdivide').is(':checked') ) {
-					add_subsections(data);
-				}
+	           	add_subsections(data);
+	           }
 	       },
 
-	 add_subsections = function(jsondata, transition){
+	       add_subsections = function(jsondata, transition){
 
-	 	if(jsondata.sub === undefined) {
-	 		console.log("nojson");
-	 		console.log(jsondata);
-	 		return;
-	 	}
+	       	if(jsondata.sub === undefined) {
+	       		console.log("nojson");
+	       		console.log(jsondata);
+	       		return;
+	       	}
 
-		multichart = layout.chartsvg.append("svg:g")
-		.style("opacity",0);
+	       	multichart = layout.chartsvg.append("svg:g")
+	       	.style("opacity",0);
 
-		var chart_w = chart.width;
-		var chart_h = chart.height;
+	       	var chart_w = chart.width;
+	       	var chart_h = chart.height;
 
-		multichart.width = chart_w;
-		multichart.height = chart_h;
+	       	multichart.width = chart_w;
+	       	multichart.height = chart_h;
 
-		rev = jsondata;
+	       	rev = jsondata;
 
-		console.log(jsondata);
+	       	console.log(jsondata);
 
-		var yscale = chart.yscale;
-		var xscale = chart.xscale;
+	       	var yscale = chart.yscale;
+	       	var xscale = chart.xscale;
 
-		multichart.xscale = xscale;
-		var color = d3.scale.category20();
+	       	multichart.xscale = xscale;
+	       	var color = d3.scale.category20();
 
-		var area = d3.svg.area()
+	       	var area = d3.svg.area()
 		// .interpolate("basis")
 		.x(function(d,i) { return xscale(d.x); })
 		.y0(function(d) { return yscale(d.y0); })
@@ -292,32 +312,32 @@ avb.chart = function(){
 		// 		return "";
 		// 	}
 		// });
-		if (transition === undefined){
-			multichart.transition().duration(500).style("opacity",1);
-		} else {
-			multichart.style("opacity",1);
-		}
+if (transition === undefined){
+	multichart.transition().duration(500).style("opacity",1);
+} else {
+	multichart.style("opacity",1);
+}
 
-	},
+},
 
-		remove_subsections = function (transition){
-			if(multichart === undefined) {
-				return;
-			}
-			if(transition === true) {
-				multichart.transition().duration(500).style("opacity",0);
-				multichart.transition().delay(500).remove();	
-			} else {
-				multichart.remove();
-			}
-		};
+remove_subsections = function (transition){
+	if(multichart === undefined) {
+		return;
+	}
+	if(transition === true) {
+		multichart.transition().duration(500).style("opacity",0);
+		multichart.transition().delay(500).remove();	
+	} else {
+		multichart.remove();
+	}
+};
 
 
-	       return{
-	       	chart : chart,
-	       	initialize : initialize,
-	       	drawline : drawline,
-	       	add_subsections : add_subsections,
-	       	remove_subsections : remove_subsections
-	       }
-	   }();
+return{
+	chart : chart,
+	initialize : initialize,
+	drawline : drawline,
+	add_subsections : add_subsections,
+	remove_subsections : remove_subsections
+}
+}();

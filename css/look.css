@@ -66,7 +66,7 @@ div, text {
     stroke-width : 0 ;
 }
 
-.graphcircle {
+.chart-circle {
     stroke-width : 2;
 }
 
@@ -264,9 +264,7 @@ div, text {
 #avb-body{
     margin-top:1%;  
     display:none; 
-    height:80%; 
-    min-height:800px; 
-    max-height:1600px;
+    min-height:768px;
 }
 
 #chart {
