@@ -24,149 +24,312 @@
   <script src ="js/menubuttons.js"></script>
   <script>
   function load() {
-              drawhome();
-              activatelinks();
-              menu_scale();
+    home_init();
               // avb_init("Revenues");
+
             };
             </script>
 
-          </head>
-          <body onload="load()">
+            <style>
 
-            <div class="container-fluid" id="avb-menubar" style="padding-top:1%; background-color:rgb(245, 245, 245)">
-              <div class="container">
+    /* GLOBAL STYLES
+    -------------------------------------------------- */
+    /* Padding below the footer and lighter body text */
 
-                <div class="row-fluid" style="height:50%;"> 
-                  <div id="home-button" class="span3" style="position:relative; padding-right:3%;">
-                    <div style="display:inline;">
-                      <div class="row-fluid"> 
-                        <div class="span12 grey" style="font-size:2.5em;" > 
-                         Arlington
-                         <img src="img/logo@High.png" width="30" height="30" style=""/>
-                       </div>
-                     </div>
-                     <div class="row-fluid"> 
-                      <div class="span12"> 
-                        Town, Budget, Visualized
-                      </div>
+    body {
+      padding-bottom: 40px;
+      color: #5a5a5a;
+    }
+
+
+
+    /* CUSTOMIZE THE CAROUSEL
+    -------------------------------------------------- */
+
+    /* Carousel base class */
+    .carousel {
+      margin-bottom: 60px;
+    }
+
+    .carousel .container {
+      position: relative;
+      z-index: 9;
+    }
+
+    .carousel-control {
+      height: 80px;
+      margin-top: 0;
+      font-size: 120px;
+      text-shadow: 0 1px 1px rgba(0,0,0,.4);
+      background-color: transparent;
+      border: 0;
+      z-index: 10;
+    }
+
+    .carousel .item {
+      height: 500px;
+    }
+    .carousel img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      min-width: 100%;
+      height: 500px;
+    }
+
+    .carousel-caption {
+      background-color: transparent;
+      position: static;
+      max-width: 550px;
+      padding: 0 20px;
+      margin-top: 200px;
+    }
+    .carousel-caption h1,
+    .carousel-caption .lead {
+      margin: 0;
+      line-height: 1.25;
+      color: #fff;
+      text-shadow: 0 1px 1px rgba(0,0,0,.4);
+    }
+    .carousel-caption .btn {
+      margin-top: 10px;
+    }
+
+
+
+    /* MARKETING CONTENT
+    -------------------------------------------------- */
+
+    /* Center align the text within the three columns below the carousel */
+    .marketing .span4 {
+      text-align: center;
+    }
+    .marketing h2 {
+      font-weight: normal;
+    }
+    .marketing .span4 p {
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+
+
+
+    /* RESPONSIVE CSS
+    -------------------------------------------------- */
+
+    @media (max-width: 979px) {
+
+      .container.navbar-wrapper {
+        margin-bottom: 0;
+        width: auto;
+      }
+
+      .carousel .item {
+        height: 500px;
+      }
+      .carousel img {
+        width: auto;
+        height: 500px;
+      }
+
+    }
+
+    @media (max-width: 767px) {
+
+      .carousel {
+        margin-left: -20px;
+        margin-right: -20px;
+      }
+      .carousel .container {
+
+      }
+      .carousel .item {
+        height: 300px;
+      }
+      .carousel img {
+        height: 300px;
+      }
+      .carousel-caption {
+        width: 65%;
+        padding: 0 70px;
+        margin-top: 100px;
+      }
+      .carousel-caption h1 {
+        font-size: 30px;
+      }
+      .carousel-caption .lead,
+      .carousel-caption .btn {
+        font-size: 18px;
+      }
+
+      .marketing .span4 + .span4 {
+        margin-top: 40px;
+      }
+
+    }
+    </style>
+
+
+  </head>
+  <body onload="load()">
+
+    <div class="container-fluid" id="avb-menubar" style="padding-top:1%; background-color:rgb(245, 245, 245)">
+      <div class="container">
+
+        <div class="row-fluid" style="height:50%;"> 
+          <div id="home-button" class="span3" style="position:relative; padding-right:3%;">
+            <div style="display:inline;">
+              <div class="row-fluid"> 
+                <div class="span12 grey" style="font-size:2.5em;" > 
+                 Arlington
+                 <img src="img/logo@High.png" width="30" height="30" style=""/>
+               </div>
+             </div>
+             <div class="row-fluid"> 
+              <div class="span12"> 
+                Town, Budget, Visualized
+              </div>
+            </div>
+          </div>
+          <div id="vdivider"></div>
+        </div>
+        <div id="avb-links" class="span9">
+          <div class="navbar">
+            <ul class="nav menubutton">
+              <li><a href="#" onclick="avb_init('revenues');" >Revenues</a></li>
+              <li><a href="#" >Expenses</a></li>
+              <li><a href="#" >Funds</a></li>
+              <li><a href="#" onclick="fby.push(['showForm', '4389']);return false;">Give Feedback</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div id="breadcrumbs-row" class="row-fluid">
+        <ul id="avb-breadcrumbs" class="breadcrumb" style="padding-left:0; margin-bottom:0;">
+          <li href="/"> <a class="brand"  href="/"> Home </a> </li>
+          <li> </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+
+          <!-- Carousel
+          ================================================== -->
+          <div id="avb-home">
+            <div id="myCarousel" class="carousel slide">
+              <div class="carousel-inner">
+                <div class="item active">
+                  <img src="img/slide03.jpg" alt="">
+                  <div class="container">
+                    <div class="carousel-caption">
+                      <h1>A different way to see our budget.</h1>
+                      <p class="lead">Arlington Visual Budget provides </p>
                     </div>
-                  </div>
-                  <div id="vdivider"></div>
-                </div>
-                <div id="avb-links" class="span9">
-                  <div class="navbar">
-                    <ul class="nav menubutton">
-                      <li><a href="#">Revenues</a></li>
-                      <li><a href="#">Expenses</a></li>
-                      <li><a href="#">Funds</a></li>
-                      <li><a href="#" onclick="fby.push(['showForm', '4389']);return false;">Give Feedback</a></li>
-                    </ul>
                   </div>
                 </div>
               </div>
+            </div><!-- /.carousel -->
 
-              <div id="breadcrumbs-row" class="row-fluid">
-                <ul id="avb-breadcrumbs" class="breadcrumb" style="padding-left:0; margin-bottom:0;">
-                  <li href="/"> <a class="brand"  href="/"> Home </a> </li>
-                  <li> </li>
+        <!-- Marketing messaging and featurettes
+        ================================================== -->
+        <!-- Wrap the rest of the page in another container to center all the content. -->
+
+        <div class="container marketing">
+
+          <!-- Three columns of text below the carousel -->
+          <div class="row">
+            <div class="span4 ">
+              <h2>Revenues</h2>
+              <div id="home-thumb1" field="revenues" style="height:100px; width:70%; margin:auto;"></div>
+              <h4> Now 110 Millions </h4>
+              <p>How and from where does Arlington get it's budget?</p>
+              <p><a class="btn" href="#" onclick="avb_init('revenues');">View details &raquo;</a></p>
+            </div><!-- /.span4 -->
+            <div class="span4">
+
+              <h2>Expenses</h2>
+              <div id="home-thumb2" field="expenses" style="height:100px; width:70%; margin:auto;"></div>
+              <h4> Now 110 Millions </h4>
+              <p>Where does your tax money go each year? Discover what you pay for.</p>
+              <p><a class="btn" href="#">View details &raquo;</a></p>
+            </div><!-- /.span4 -->
+            <div class="span4">
+              <h2>Funds</h2>
+              <div id="home-thumb3" field="funds" style="height:100px; width:70%; margin:auto;"></div>
+              <h4> Now 56 Millions </h4>
+              <p>Not simply in and out. The town of Arlington manages a series of independent funds that are fundamental for the local economy. Discover what they are.</p>
+              <p><a class="btn" href="#" >View details &raquo;</a></p>
+            </div><!-- /.span4 -->
+          </div><!-- /.row -->
+        </div>
+      </div>
+
+
+      <div class="container" id="avb-body" style="height:60%;">
+       <div class="row-fluid" id="singlelayout" style="height:100%;">
+        <div class="span3" id="bars" style="height:100%; padding-right:2%;"> </div>
+        <div class="span9" style="height:100%;">
+
+          <div class="row-fluid" style="height:15%">
+            <div class="row-fluid">
+              <div class="span12" style="margin-top:1%; margin-bottom:2%"> 
+                <span id="title-head">Example page heades</span>
+              </div>
+            </div>
+            <div class="row-fluid">
+              <div class="span12" style="margin-top:1%; margin-bottom:2%"> 
+                <span id="title-descr" class="">Example page heades2</span>
+              </div>
+            </div>
+          </div>
+
+
+          <div id="card-container" class="row-fluid" style="height:25%;"> 
+            <div class="span12" id="cards" > </div>
+          </div>
+          <div id="chart-container" class="row-fluid" style="height:60%"> 
+            <div class="span10" id="chart" style="height:100%;"> </div>
+            <div class="span2" style="padding-top:5%; margin-left:0%;">
+              <ul class="nav nav-pills nav-stacked">
+                <li><label class="checkbox">
+                  <input id="subdivide" type="checkbox"> Subsections </label></li>
+                  <li><a> From funds </a>  </li>
+                  <li><a> State Aid  </a> </li>
                 </ul>
               </div>
             </div>
           </div>
-
-
-
-          <div id="avb-home">
-
-            <div id="cont" class="container" style="margin-top:1%;">
-              <!-- Main hero unit for a primary marketing message or call to action -->
-              <div class="hero-unit">
-                <img src="img/town-hall-hi.png" style="height:250px; display: block; margin-left: auto; margin-right: auto;">
-              </div>
-
-              <!-- Example row of columns -->
-              <div id="homeb" class="row">
-                <div id="home_0" class="span4">
-                  <h2>Revenues</h2>
-                  <p>How and from where does Arlington get it's budget?  </p>
-                </div>
-                <div id="home_1" class="span4">
-                  <h2>Expenses</h2>
-                  <p>here does your tax money go each year? Discover what you pay for.</p>
-                </div>
-                <div id="home_2" class="span4">
-                  <h2>Funds</h2>
-                  <p>Not simply in and out. The town of Arlington manages a series of independent funds that are fundamental for the local economy. Discover what they are. </p>
-                </div>
-              </div>
-              <hr>
-            </div>
+        </div>
+        <div class="row-fluid" style="margin-top:2%; margin-bottom:2%;">
+          <div class="span12" >
+            <div class="noUiSlider" style=" height:10px; width:100%;">  </div>
+            <div id="sliderscale" style="width:100%;"> </div>
           </div>
+        </div>
+      </div>
+      <div id="popover-html" style="display:none;">
+        <!--             <div id="popover-year"> </div> -->
+        <div id="popover-value"> </div>
+      </div>
 
+    </body>
 
-          <div class="container" id="avb-body" style="height:60%;">
-           <div class="row-fluid" id="singlelayout" style="height:100%;">
-            <div class="span3" id="bars" style="height:100%; padding-right:2%;"> </div>
-            <div class="span9" style="height:100%;">
+    <script type="text/html" id="card-template">
+    <div class="span3 card">
+    <div class="card-img">
+    <img src="{{icon}}" height="25" width="25" style="float: left;">
+    </div>
+    <div style="margin-left: 35px;" class="card-text">
+    <div class="cardtitle">{{title}}</div>
+    <div class="cardvalue">{{value}} {{side}}</div>
+    </div>
+    </div>
+    </script>
 
-              <div class="row-fluid" style="height:15%">
-                <div class="row-fluid">
-                  <div class="span12" style="margin-top:1%; margin-bottom:2%"> 
-                    <span id="title-head">Example page heades</span>
-                  </div>
-                </div>
-                <div class="row-fluid">
-                  <div class="span12" style="margin-top:1%; margin-bottom:2%"> 
-                    <span id="title-descr" class="">Example page heades2</span>
-                  </div>
-                </div>
-              </div>
-
-
-              <div id="card-container" class="row-fluid" style="height:25%;"> 
-                <div class="span12" id="cards" > </div>
-              </div>
-              <div id="chart-container" class="row-fluid" style="height:60%"> 
-                <div class="span10" id="chart" style="height:100%;"> </div>
-                <div class="span2" style="padding-top:5%; margin-left:0%;">
-                  <ul class="nav nav-pills nav-stacked">
-                    <li><label class="checkbox">
-                      <input id="subdivide" type="checkbox"> Subsections </label></li>
-                      <li><a> From funds </a>  </li>
-                      <li><a> State Aid  </a> </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="row-fluid" style="margin-top:2%; margin-bottom:2%;">
-              <div class="span12" >
-                <div class="noUiSlider" style=" height:10px; width:100%;">  </div>
-                <div id="sliderscale" style="width:100%;"> </div>
-              </div>
-            </div>
-          </div>
-          <div id="popover-html" style="display:none;">
-            <!--             <div id="popover-year"> </div> -->
-            <div id="popover-value"> </div>
-          </div>
-
-        </body>
-
-        <script type="text/html" id="card-template">
-          <div class="span3 card">
-            <div class="card-img">
-              <img src="{{icon}}" height="25" width="25" style="float: left;">
-            </div>
-            <div style="margin-left: 35px;" class="card-text">
-              <div class="cardtitle">{{title}}</div>
-              <div class="cardvalue">{{value}} {{side}}</div>
-            </div>
-          </div>
-        </script>
-
-        </html>
+    </html>
 
 
 

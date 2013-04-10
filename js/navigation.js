@@ -111,10 +111,10 @@ presentation_layer = function(jsondata) {
 
 initialize = function(jsondata, x, y) {
 
-    
-
+    if(layout.navsvg !== undefined) {
+        layout.navsvg.remove();
+    }
     layout.navsvg = d3.select("#bars").append("svg");
-    add_filter(layout.navsvg);
     layout.navsvg.width = $("#bars").width();
     layout.navsvg.height = $("#bars").height();
     layout.navsvg.attr("height", layout.navsvg.height )

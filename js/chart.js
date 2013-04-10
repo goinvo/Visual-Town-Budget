@@ -5,6 +5,11 @@ avb.chart = function(){
 	multichart,
 
 	initialize = function(){
+
+		if(layout.chartsvg !== undefined) {
+			layout.chartsvg.remove();
+		}
+
 		layout.chartsvg = d3.select("#chart").append("svg");
 
 		layout.chartsvg.width = $("#chart").width();
