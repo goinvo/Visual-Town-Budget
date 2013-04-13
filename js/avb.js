@@ -13,12 +13,12 @@
             // constants
             var viewmode;
             var section;
-            var years = [];
             var min_year = 2006;
             var max_year = 2018;
             var cur_year = 2012;
+            var cur_index = cur_year - min_year;
 
-            var root_total = 0;
+            var root;
             
             // object references
             var mysvg;
@@ -39,44 +39,26 @@
 
             var cur_json;
 
-            // init years array
-            for(var i = min_year; i <= max_year; i++){
-                years.push((i).toString());
-            }
-
             Number.prototype.px=function()
             {
                 return this.toString() + "px";
             };
-            
-            function h_growth(data, key){
-                var res = "";
-                if(key === min_year.toString()) {
-                    // CUR : 100 = NEXT - CUR : X
-                    return "+0.00%";
-                } else {
-                    var perc = Math.round(100 * 100 * (data[key] - data[(parseInt(key) - 1).toString()]) / data[key])/100;
-                    if(perc > 0) {
-                        return "+" + perc.toString() + "%";
-                    } else {
-                        return perc.toString() + "%";
-                    }
-                }
-            }
+
 
 
             function adjust_width(div, target_h) {
                 var cur_size = parseInt(div.style("font-size"));
 
                 while(div.property("clientHeight") > target_h && cur_size >= 1) {
-                    div.style("font-size", (cur_size).px());
+                    div.style("font-size", cur_size.px());
                     cur_size--;
                 }
             }
 
             function onjsonload(jsondata) {
                 cur_json = jsondata;
-                root_total = parseInt(jsondata[cur_year.toString()]);
+
+                root = jsondata;
                 
                 titlebox_init();
                 titlebox_fill(jsondata);
@@ -85,7 +67,6 @@
                 
                 init_tooltip();
                 avb.breadcrumbs.initialize();
-                avb.breadcrumbs.push(jsondata.name);
 
                 initsingle(jsondata);
                 avb.timeline.initialize();
@@ -94,12 +75,11 @@
 
             function initsingle(jsondata){
                 mode = 1; // single year mode
-
+                console.log(jsondata)
                 d3.select("#singlelayout").style("display","inline");
                 $("#breadcrumbs-row").slideDown();
 
-
-                avb.navigation.initialize(jsondata, 0, 0);
+                avb.navigation.initialize(jsondata);
 
                 avb.cards.draw(2, 2);
                 avb.cards.update(jsondata);
@@ -107,7 +87,11 @@
 
                 avb.chart.initialize();
                 avb.chart.drawline(jsondata, "steelblue", true);
+                
                 $('#chart-container').css("display","none");
+                // avb.chartfork.initialize();
+                // avb.chartfork.draw(jsondata);
+
 
                 console.log("UI Loaded.");
             }
@@ -120,28 +104,9 @@
                     avb.cards.reposition();
                 }
             }
-
-            
-            var get_max = function (d) {
-                var arr = toarray(d);
-                return d3.max(arr.values, get_values);
-            };
             
             var log = function(d) {
                 console.log(d);
-            }
-
-            function toarray(d){
-                values = [];
-                for(var i=min_year; i <= max_year ; i++){
-                    if( d[i.toString()] !== undefined ) {
-                        values.push({ year : i , val : d[i.toString()]});
-                    }
-                }
-                return {
-                    name : d.name,
-                    values : values
-                }
             }
 
             var get_year = function (d) {
@@ -162,8 +127,6 @@
                 }
                 return newtext;
             }
-
-
 
             function formatcurrency(value) {
                 if(value === undefined) {
@@ -186,7 +149,7 @@
 
                 home = false;
                 section = name.toLowerCase();
-                d3.json("data/arlington.json", onjsonload);
+                d3.json("data/arlington2.json", onjsonload);
             }
 
             function add_filter(container){
@@ -194,31 +157,19 @@
                 .append("svg:filter")
                 .attr("id", "blur");
 
-                filter.append("feOffset")
-                .attr("result","offOut")
-                .attr("in", "SourceGraphic")
-                .attr("dy",-15);
+            }
 
-                filter.append("feOffset")
-                .attr("result","offOut2")
-                .attr("in", "SourceGraphic")
-                .attr("dy", 15);
-
-                 filter.append("svg:feGaussianBlur")
-                .attr("in", "offOut")
-                .attr("stdDeviation", 5)
-                .attr("result","blurOut");
-
-                 filter.append("svg:feGaussianBlur")
-                .attr("in", "offOut2")
-                .attr("stdDeviation", 5)
-                .attr("result","blurOut2");
-
-                filter.append("feBlend")
-                .attr("in", "SourceGraphic")
-                .attr("in2", "blurOut")
-                .attr("in3", "blurOut2")
-                .attr("mode","normal");
+            function toarray(d){
+                values = [];
+                for(var i=min_year; i <= max_year ; i++){
+                    if( d[i.toString()] !== undefined ) {
+                        values.push({ year : i , val : d[i.toString()]});
+                    }
+                }
+                return {
+                    name : d.name,
+                    values : values
+                }
             }
 
             function getthumbail(div, color){
@@ -259,36 +210,37 @@
                     .style("fill", color)
                     .style("opacity",0.5);
                 });
-            }
+        }
 
-            function get_winsize(coord){
-                var w = window,
-                d = document,
-                e = d.documentElement,
-                g = d.getElementsByTagName('body')[0],
-                x = w.innerWidth || e.clientWidth || g.clientWidth,
-                y = w.innerHeight|| e.clientHeight|| g.clientHeight;
-                if(coord == "w") return x;
-                if(coord == "h") return y;
-                return undefined;
-            }
+        function get_winsize(coord){
+            var w = window,
+            d = document,
+            e = d.documentElement,
+            g = d.getElementsByTagName('body')[0],
+            x = w.innerWidth || e.clientWidth || g.clientWidth,
+            y = w.innerHeight|| e.clientHeight|| g.clientHeight;
+            if(coord == "w") return x;
+            if(coord == "h") return y;
+            return undefined;
+        }
 
 
-            function add_label(group, rect, label, css){
-                var padding = 5;
-                var t = group.append("text")
-                .attr("class", css)
-                .attr("x", rect.attr("x"))
-                .attr("y", rect.attr("y"));
-                var words = label.split(" ");
-                var tempText = "";
-                var maxWidth = rect.attr("width");
+    function add_label(group, rect, label, css){
+        var padding = 5;
+        var t = group.append("text")
+        .attr("class", css)
+        .attr("x", rect.attr("x"))
+        .attr("y", rect.attr("y"));
+        var words = label.split(" ");
+        var tempText = "";
+        var maxWidth = rect.attr("width");
 
-                var get_tspan = function () {
-                    var new_tspan = t.append("tspan");
-                    var dy = new_tspan.style("font-size");
+        var get_tspan = function () {
+            var new_tspan = t.append("tspan");
+            var font_size = 15;
+            var dy = new_tspan.style("font-size",font_size);
                     return new_tspan.attr("x",5)//
-                    .attr("dy", dy.toString());
+                    .attr("dy", font_size);
                 };
                 var c_tspan = get_tspan();
                 for (var i=0; i<words.length; i++) {
@@ -325,8 +277,6 @@
                     .attr("class","toolt");
                 }
 
-
-
                 function titlebox_init(x, y, width, height) {
                     titlebox = d3.select("#title-head");
                     titlebox.bottom = d3.select("#title-descr");
@@ -334,7 +284,7 @@
 
 
                 function titlebox_fill(data){
-                    titlebox.text(data.name);
+                    titlebox.text(data.key);
                     titlebox.bottom.text(data.descr);
                 }
 
@@ -346,14 +296,3 @@
                 function rotate(obj,degrees) {
                     obj.attr("transform","rotate(" + degrees.toString() + " 100 100)");
                 }
-
-
-
-                function get_minyear(data) {
-                    var i = min_year;
-                    while( data[i.toString()] === undefined && i <= max_year) {
-                        i++;
-                    }
-                    return i;
-                }
-

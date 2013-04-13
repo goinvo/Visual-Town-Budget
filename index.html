@@ -14,23 +14,26 @@
   <script src ="js/lib/jquery/jquery-1.9.1.min.js"></script>
   <script src ="js/lib/jquery.nouislider.js"></script>
 
-  <script src ="js/lib/bootstrap.js"></script>
+  <script src ="js/lib/bootstrap.min.js"></script>
 
   <script src ="js/navigation.js"></script>
-  <script src ="js/timeline.js"></script>  <script src ="js/chart.js"></script>
+  <script src ="js/timeline.js"></script>  
+  <script src ="js/chart.js"></script>
   <script src ="js/cards.js"></script>
   <script src ="js/breadcrums.js"></script>
   <script src ="js/avb.js"></script>
   <script src ="js/menubuttons.js"></script>
+   <script src ="js/legend.js"></script>
+
+
   <script>
   function load() {
     home_init();
-              // avb_init("Revenues");
+    avb_init("Revenues");
+  };
+  </script>
 
-            };
-            </script>
-
-            <style>
+  <style>
 
     /* GLOBAL STYLES
     -------------------------------------------------- */
@@ -173,6 +176,10 @@
   </head>
   <body onload="load()">
 
+  <div>
+    <svg id="chart1"></svg>
+  </div>
+
     <div class="container-fluid" id="avb-menubar" style="padding-top:1%; background-color:rgb(245, 245, 245)">
       <div class="container">
 
@@ -226,7 +233,7 @@
                   <div class="container">
                     <div class="carousel-caption">
                       <h1>A different way to see our budget.</h1>
-                      <p class="lead">Arlington Visual Budget provides </p>
+                      <p class="lead"> Arlington Visual Budget provides a new and interactive way of learning about your town. </p>
                     </div>
                   </div>
                 </div>
@@ -267,7 +274,6 @@
         </div>
       </div>
 
-
       <div class="container" id="avb-body" style="height:60%;">
        <div class="row-fluid" id="singlelayout" style="height:100%;">
         <div class="span3" id="bars" style="height:100%; padding-right:2%;"> </div>
@@ -291,15 +297,7 @@
             <div class="span12" id="cards" > </div>
           </div>
           <div id="chart-container" class="row-fluid" style="height:60%"> 
-            <div class="span10" id="chart" style="height:100%;"> </div>
-            <div class="span2" style="padding-top:5%; margin-left:0%;">
-              <ul class="nav nav-pills nav-stacked">
-                <li><label class="checkbox">
-                  <input id="subdivide" type="checkbox"> Subsections </label></li>
-                  <li><a> From funds </a>  </li>
-                  <li><a> State Aid  </a> </li>
-                </ul>
-              </div>
+            <div class="span12" id="chart" style="height:100%;"> </div>
             </div>
           </div>
         </div>

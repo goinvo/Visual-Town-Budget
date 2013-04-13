@@ -9,21 +9,21 @@ avb.cards = function(){
             title : "Amount",
             icon : "img/Amount@High.png",
             back : "this is the back of the card",
-            value : function() { return formatcurrency(cur_json[cur_year.toString()]); },
+            value : function() { return formatcurrency(cur_json.values[cur_index].val); },
             side : function() { return "as of " + cur_year.toString() + "."}
         },
         impact : {
             title : "Impact",
             icon : "img/Impact@High.png",
             back : "this is the back of the card",
-            value : function() { return Math.max(0.01,(Math.round(cur_json[cur_year]*100*100/root_total)/100)).toString() + "%"; },
+            value : function() { return Math.max(0.01,(Math.round(cur_json.values[cur_index].val*100*100/root.values[cur_index].val)/100)).toString() + "%"; },
             side : "of total."
         },
         growth : {
             title : "Growth",
             icon : "img/Growth@High.png",
             back : "this is the back of the card",
-            value : function() { return h_growth(cur_json, cur_year.toString()); },
+            value : function() { return growth(cur_json); },
             side : "compared to last year."
         },
         source : {
@@ -48,6 +48,9 @@ avb.cards = function(){
         deck.push(cards.growth);
         deck.push(cards.source);
         deck.push(cards.fluctuation);
+        deck.push(cards.fluctuation);
+        deck.push(cards.impact);
+
     },
 
     draw = function () {
@@ -91,6 +94,21 @@ avb.cards = function(){
     clear = function(){
         cardstack.length = 0;
     };
+
+
+    function growth(data, key){
+        var res = "";
+        if(key === min_year.toString()) {
+            return "+0.00%";
+        } else {
+            var perc = Math.round(100 * 100 * (data.values[cur_index].val - data.values[cur_index].val.toString()) / data.values[cur_index].val)/100;
+            if(perc > 0) {
+                return "+" + perc.toString() + "%";
+            } else {
+                return perc.toString() + "%";
+            }
+        }
+    }
 
     return{
         update : update,

@@ -7,10 +7,16 @@ body,html{
   height:100%;
   cursor:default;
   font-family:"Helvetica Neue";
+    -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+
 }
 
 body {
-    background-color: rgb(250, 248, 251);
+
+       background-color: #fff;
 }
 
 text {
@@ -20,8 +26,6 @@ text {
 div, text {
  cursor:default;
 }
-
-
 
 .avbsvg{
     margin-left:auto; 
@@ -74,7 +78,7 @@ div, text {
 .axis path,
 .axis line {
     stroke: grey;
-    stroke-width : 2;
+    stroke-width : 0;
     stroke-linejoin : round;
     stroke-linecap: round;
     shape-rendering: crispEdges;
@@ -120,6 +124,10 @@ div, text {
     stroke-linejoin : round;
     stroke-linecap: round;
 
+}
+
+.nv-legend .disabled circle {
+  fill-opacity: 0;
 }
 
 .toolt {
@@ -224,13 +232,15 @@ div, text {
 }
 
 .cardtitle {
-    font-size: 2em;
+    font-size: 1.5em;
     border : 1px;
     color : #aaaaaa;
 }
 
 .cardvalue {
     font-size: 1.2em;
+
+
 }
 
 .grey {
@@ -258,19 +268,19 @@ div, text {
 
 #title-descr {
     font-weight: 200;
-    margin-left: 1%;
+    font-size: 1.2em;
 }
 
 #avb-body{
     margin-top:1%;  
     display:none; 
     min-height:768px;
+    font-weight: 200;
 }
 
 #chart {
     max-height: 600px;
-    padding-top: 4%;
-    padding-bottom: 4%;
+    padding-top:0%;
 }
 
 .menubutton{
