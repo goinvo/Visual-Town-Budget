@@ -13,7 +13,12 @@ avb.chart = function(){
 		layout.chartsvg = d3.select("#chart").append("svg");
 
 		layout.chartsvg.width = $("#chart").width();
-		layout.chartsvg.height = $("#chart").height();
+
+		// compute height to align with bars
+		layout.chartsvg.height = $('#container-right').height() -  $('#title-container').outerHeight() - $('#card-container').outerHeight();
+		log($('#container-right').height() )
+
+
 		layout.chartsvg.attr("height", layout.chartsvg.height )
 		.attr("width", layout.chartsvg.width);
 
@@ -33,14 +38,6 @@ avb.chart = function(){
 
 		var today = svgtext_draw(chart, chart.xscale(cur_year), 15, "Today", "svggrey");
 		translate(today, - today.node().getBBox().width/2,0);
-
-		// $('#subdivide').click(function(){
-		// 	if ( $('#subdivide').is(':checked') ) {
-		// 		add_subsections(cur_json);
-		// 	} else {
-		// 		remove_subsections(true);
-		// 	}
-		// });
 
 		// controles
 		chart.modes = [ { key : "Simple", disabled : false}, {key : "Detailed", disabled : true} ];

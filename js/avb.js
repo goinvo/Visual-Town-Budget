@@ -88,7 +88,7 @@
                 avb.chart.initialize();
                 avb.chart.drawline(jsondata, "steelblue", true);
                 
-                $('#chart-container').css("display","none");
+                // $('#container-right').css("display","none");
                 // avb.chartfork.initialize();
                 // avb.chartfork.draw(jsondata);
 

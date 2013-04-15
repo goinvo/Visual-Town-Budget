@@ -176,9 +176,6 @@
   </head>
   <body onload="load()">
 
-  <div>
-    <svg id="chart1"></svg>
-  </div>
 
     <div class="container-fluid" id="avb-menubar" style="padding-top:1%; background-color:rgb(245, 245, 245)">
       <div class="container">
@@ -277,9 +274,11 @@
       <div class="container" id="avb-body" style="height:60%;">
        <div class="row-fluid" id="singlelayout" style="height:100%;">
         <div class="span3" id="bars" style="height:100%; padding-right:2%;"> </div>
-        <div class="span9" style="height:100%;">
+        
 
-          <div class="row-fluid" style="height:15%">
+        <div id="container-right" class="span9 poptest right" style="height:100%;">
+          <div id="pointer" class="arrow"> </div>
+          <div id="title-container" class="row-fluid">
             <div class="row-fluid">
               <div class="span12" style="margin-top:1%; margin-bottom:2%"> 
                 <span id="title-head">Example page heades</span>
@@ -291,16 +290,16 @@
               </div>
             </div>
           </div>
-
-
-          <div id="card-container" class="row-fluid" style="height:25%;"> 
+          <div id="card-container" class="row-fluid" style="padding:2%;"> 
             <div class="span12" id="cards" > </div>
           </div>
-          <div id="chart-container" class="row-fluid" style="height:60%"> 
-            <div class="span12" id="chart" style="height:100%;"> </div>
+          <div id="chart-container" class="row-fluid"> 
+            <div class="span12" id="chart"> </div>
             </div>
           </div>
-        </div>
+      </div>
+
+
         <div class="row-fluid" style="margin-top:2%; margin-bottom:2%;">
           <div class="span12" >
             <div class="noUiSlider" style=" height:10px; width:100%;">  </div>
@@ -309,7 +308,6 @@
         </div>
       </div>
       <div id="popover-html" style="display:none;">
-        <!--             <div id="popover-year"> </div> -->
         <div id="popover-value"> </div>
       </div>
 
@@ -322,7 +320,7 @@
     </div>
     <div style="margin-left: 35px;" class="card-text">
     <div class="cardtitle">{{title}}</div>
-    <div class="cardvalue">{{value}} {{side}}</div>
+    <div class="cardvalue"></div>
     </div>
     </div>
     </script>

@@ -16,7 +16,7 @@ body,html{
 
 body {
 
-       background-color: #fff;
+/*       background-color: rgb(249,249,249)*/
 }
 
 text {
@@ -227,8 +227,60 @@ div, text {
     display: block;
 }
 
-.card-text {
-    display: block;
+
+.poptest {
+    position: relative;
+  padding: 1%;
+  text-align: left;
+  white-space: normal;
+/*  background-color: #ffffff;*/
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  -webkit-border-radius: 6px;
+     -moz-border-radius: 6px;
+          border-radius: 6px;
+  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+     -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  -webkit-background-clip: padding-box;
+     -moz-background-clip: padding;
+          background-clip: padding-box;
+}
+
+.poptest .arrow,
+.poptest .arrow:after {
+  position: absolute;
+  display: block;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+}
+
+.poptest .arrow {
+  position: absolute;
+  border-width: 11px;
+}
+
+.poptest .arrow:after {
+  border-width: 10px;
+  content: "";
+}
+
+.poptest.right .arrow {
+  top: 50%;
+  left: -11px;
+  margin-top: -11px;
+  border-right-color: #999;
+  border-right-color: rgba(0, 0, 0, 0.25);
+  border-left-width: 0;
+}
+
+.poptest.right .arrow:after {
+  bottom: -10px;
+  left: 1px;
+  border-right-color: #ffffff;
+  border-left-width: 0;
 }
 
 .cardtitle {
@@ -239,8 +291,6 @@ div, text {
 
 .cardvalue {
     font-size: 1.2em;
-
-
 }
 
 .grey {

@@ -130,10 +130,11 @@ rectclick = function(d,i) {
     if(navigation.intro) {
         navigation.intro = false;
         setTimeout(function() {
-            $('#chart-container').fadeIn();
+            $('#container-right').fadeIn();
         },300);
     }
 
+    // breadcums
     if(navigation.selected === undefined){
         avb.breadcrumbs.push(d.key);
     } else {
@@ -143,15 +144,30 @@ rectclick = function(d,i) {
         .attr("transform", "translate(0,0)");
     }
 
+    //hightlight
     d3.select(navigation.selected).style("opacity", 0.3)
     navigation.selected = this;
     d3.select(this).style("opacity", 0.7);
 
+    // slide left
     var offset_x = (navigation.width - bar_width)/1.5;
-
     d3.select(this).transition()
     .duration(300)
     .attr("transform", "translate(" + offset_x.toString() + ",0)");
+
+    // pointer align
+    log("heree")
+    var pointer_height = Math.round(parseFloat(d3.select(this).attr("y")) + parseFloat(d3.select(this).attr("height"))/2);
+    log(pointer_height)
+
+  //   $('#pointer').animate({
+  //   "top" : (pointer_height).px()
+  //   }, 200, function() {
+  //   // Animation complete.
+  // });
+
+    $('#pointer').css("top", (pointer_height).px())
+
 };
 
 return{

@@ -8,36 +8,31 @@ avb.cards = function(){
         amount : {
             title : "Amount",
             icon : "img/Amount@High.png",
-            back : "this is the back of the card",
-            value : function() { return formatcurrency(cur_json.values[cur_index].val); },
+            value : function(d) { return formatcurrency(d.values[cur_index].val); },
             side : function() { return "as of " + cur_year.toString() + "."}
         },
         impact : {
             title : "Impact",
             icon : "img/Impact@High.png",
-            back : "this is the back of the card",
-            value : function() { return Math.max(0.01,(Math.round(cur_json.values[cur_index].val*100*100/root.values[cur_index].val)/100)).toString() + "%"; },
+            value : function(d) { return Math.max(0.01,(Math.round(d.values[cur_index].val*100*100/root.values[cur_index].val)/100)).toString() + "%"; },
             side : "of total."
         },
         growth : {
             title : "Growth",
             icon : "img/Growth@High.png",
-            back : "this is the back of the card",
-            value : function() { return growth(cur_json); },
-            side : "compared to last year."
+            value : function(d) { return growth(d); },
+            side : ""
         },
         source : {
             title : "Source",
             icon : "img/Growth@High.png",
-            back : "this is the back of the card",
             value : function() { return "Cherry sheet"; },
             side : ""
         },
-        fluctuation : {
-            title : "Fluctuation",
+        mean : {
+            title : "Average",
             icon : "img/Growth@High.png",
-            back : "this is the back of the card",
-            value : function() { return "Cherry sheet"; },
+            value : function(d) { return formatcurrency(d3.mean(d.values, get_values)); },
             side : ""
         }
     },
@@ -46,11 +41,8 @@ avb.cards = function(){
         deck.push(cards.amount);
         deck.push(cards.impact);
         deck.push(cards.growth);
+        deck.push(cards.mean);
         deck.push(cards.source);
-        deck.push(cards.fluctuation);
-        deck.push(cards.fluctuation);
-        deck.push(cards.impact);
-
     },
 
     draw = function () {
@@ -78,6 +70,8 @@ avb.cards = function(){
         d3.select("#cardtitle").text(data.name + " in " + cur_year.toString());
         for(var i=0; i < deck.length; i++) {
             cardstack[i].html(Mustache.render($('#card-template').html(),deck[i]));
+            cardstack[i].select(".cardvalue").html(deck[i].value(data) + 
+               ((typeof(deck[i].side) === 'string') ? deck[i].side : deck[i].side(data)));
         }
         reposition();
     },
@@ -93,22 +87,20 @@ avb.cards = function(){
 
     clear = function(){
         cardstack.length = 0;
+    },
+
+
+    growth = function(data){
+        var previous = (data.values[cur_index-1] !== undefined) ? data.values[cur_index-1].val : 0;
+        var perc = Math.round(100 * 100 * (data.values[cur_index].val - previous) / data.values[cur_index].val)/100;
+        if(perc > 0) {
+            return "+ " + perc.toString() + "% compared to last year.";
+        } else {
+            return "- " + Math.abs(perc).toString() + "% compared to last year.";
+        }
     };
 
 
-    function growth(data, key){
-        var res = "";
-        if(key === min_year.toString()) {
-            return "+0.00%";
-        } else {
-            var perc = Math.round(100 * 100 * (data.values[cur_index].val - data.values[cur_index].val.toString()) / data.values[cur_index].val)/100;
-            if(perc > 0) {
-                return "+" + perc.toString() + "%";
-            } else {
-                return perc.toString() + "%";
-            }
-        }
-    }
 
     return{
         update : update,
