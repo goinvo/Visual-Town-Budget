@@ -48,14 +48,14 @@ avb.cards = function(){
     draw = function () {
         var container;
         for(var i=0; i < deck.length; i++) {
-            if (i%4 === 0) {
+            if (i%2 === 0) {
                 container = d3.select("#cards").append("div")
                 .attr("class","row-fluid card-row");
             }
             var newcard = card_draw(container, deck[i]);
             cardstack.push(newcard);
         }
-        if(deck.length%4 !== 0) {
+        if(deck.length%2 !== 0) {
             container.append("div") 
             .attr("class", "span6");
         }
@@ -77,12 +77,9 @@ avb.cards = function(){
     },
 
     reposition = function(){
-        var margin = $("#card-container").height();
-        $("#cards .row-fluid").each(function(d) {
-            console.log($(this).height());
-            margin = margin - $(this).height();
-        })
+        var margin = $("#bottom-container").height() - $("#cards").height();
         $("#cards").css("margin-top", margin/2);
+        return;
     },
 
     clear = function(){

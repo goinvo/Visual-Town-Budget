@@ -2,177 +2,171 @@ var avb = avb || {};
 
 avb.navigation = function(){
 	var navigation,
-  levels = [],
 
-  fadeout= function(){
-      navigation.transition().duration(500).attr("transform", "translate(" + get_winsize("w") + ", 0)");
-  },
 
-  drawzone = function(data, width, height) {
-    delete navigation.selected;
+    initialize = function(data) {
+        var w = $('#navigation').width(),
+        h = $('#navigation').height(),
+        x = d3.scale.linear().range([0, w]),
+        y = d3.scale.linear().range([0, h]),
+        color = d3.scale.category20c();
 
-    bar_width = width;
-    bar_height = height;
-    var container = navigation.append("svg:g")
-    .attr("stroke", "white")
-    .attr("stroke-width", 2)
-    .attr("fill", "orange")
-    .attr("lev", levels.length)
-    .attr("name", data.key);
+        navigation = d3.select("#navigation").append("div")
+        .attr("class", "chart")
+        .style("width", w)
+        .style("height", h)
+        .append("svg:svg")
+        .attr("width", w)
+        .attr("height", h);
 
-    //stack push
-    container.lev = levels.length;
-    levels.push(container);
+        var partition = d3.layout.partition()
+        .value(function(d) { return d.values[cur_index].val; })
+        .children(function(d) { return d.sub;});
 
-    var maxvalue = d3.max(data.values, function(d) { return d.val; });
+        var g = navigation.selectAll("g")
+        .data(partition.nodes(data))
+        .enter().append("svg:g")
+        .attr("transform", function(d) { return "translate(" + (x(d.y)) + "," + y(d.x) + ")"; })
+        .on("click", zoneClick);
 
-    var heightscale = d3.scale.linear().domain([0,maxvalue])
-    .range([0,bar_height*maxvalue/d3.sum(data.sub, function (d) {return d.values[cur_index].val})]);
+        var kx = w / (data.dx),
+        ky = h / 1;
 
-    var subdata = data.sub;
+        navigation.x = x;
+        navigation.y = y;
+        navigation.kx = kx;
+        navigation.ky = ky;
+        navigation.h = h;
+        navigation.w = w;
 
-    var cur_y = 0;
-    for(var i=0; i<subdata.length; i++) {
-    	var group = container.append("g");
-    	var entities = group.append("svg:rect");
-    	if(subdata[i].values[cur_index] === undefined) continue;
-    	entities.attr("x", 0)
-    	.attr("y", bar_height - heightscale(subdata[i].values[cur_index].val) - cur_y )
-    	.attr("width", bar_width)
-    	.attr("height", heightscale(subdata[i].values[cur_index].val))
-    	.attr("fill", colors[i%20])
-    	.attr("rx", 5)
-    	.attr("ry", 5)
-    	.attr("opacity", nosel_opacity.toString());
-    	if ( entities.attr("height") >= 20 ) {
-    		add_label(group,entities,subdata[i].key, "lab");
-    	}
-    	cur_y += heightscale(subdata[i].values[cur_index].val);
+        var color = d3.scale.category20c();
+
+        g.append("svg:rect")
+        .attr("width", data.dy * kx)
+        .attr("height", function(d) { return d.dx * ky; })
+        .attr("class", function(d) { return d.children ? "parent" : "parent"; })
+        .style("fill", function(d) { return color((d.children ? d : d.parent).key); });
+
+        navigation.labelTitleHeight = 12,
+        navigation.labelValueHeight = 18;
+
+        g.append("svg:text")
+        .attr("dy", ".35em");
+
+        g.selectAll("text").each(function(d) {
+            var zoneHeight = d.dx * ky;
+
+                // title
+                var titleLabel = d3.select(this)
+                .append("tspan")
+                .text(d.key)
+                .attr("x", 0)
+                .attr("dy",navigation.labelTitleHeight)
+                .style("opacity", 0);
+
+                // value
+                var valueLabel = d3.select(this)
+                .append("tspan")
+                .text(formatcurrency(d.values[cur_index].val))
+                .attr("x", 0)
+                .attr("dy", function(d) {
+                    return navigation.labelTitleHeight + navigation.labelValueHeight/2;
+                })
+                .attr("font-size", navigation.labelValueHeight)
+
+                .style("opacity", 0);
+
+                d3.select(this).attr("transform", transform)
+                opacity.call(this, d);
+
+            });
+
+        navigation.g = g;
+        navigation.rootnode = navigation.select("g");
+
+        d3.select(window)
+        .on("click", function() { zoneClick(data); })
+    },
+
+    zoneClick = function(d){
+
+        // back to rootnode if clicked on same level
+        if(navigation.lastClicked !== undefined &&
+            navigation.lastClicked.depth !== 0 &&
+            d.depth === navigation.lastClicked.depth){
+            zoneClick.call(navigation.rootnode.node(),navigation.rootnode.datum());
+        return;
     }
-    container.selectAll("rect").data(subdata).enter;
-    container.selectAll("rect").on("click", rectclick);
-    container.selectAll("rect").on("dblclick", rectdclick);
-
-    container.selectAll("rect").on("mouseout", function(d,i) {
-       tooltip.style("visibility", "hidden");
-       if(d3.select(this) !== navigation.selected){
-        d3.select(this).attr("opacity","0.3");
-    };
-});        
-    container.selectAll("rect").on("mouseover", function(d) {
-       d3.select(this).attr("opacity","0.7");
-       tooltip.style("visibility","visible")
-       .style("left", (d3.event.pageX + 15).px())
-       .style("top", (d3.event.pageY + 2).px())
-       .text(d.key);
-   });
-    container.selectAll("rect").on("mousemove", function(d) {
-       tooltip.style("left", (d3.event.pageX + 15).px())
-       .style("top", (d3.event.pageY + 2).px())
-       .text(d.key);
-   });
-    container.attr("display","none");
-    return container;
-},
-
-
-presentation_layer = function(jsondata) {
-    var presentation = new Object();
-    presentation.key = jsondata.key;
-    presentation.values = jsondata.values;
-    presentation.sub = [jsondata];
-    return presentation;
-}
-
-initialize = function(jsondata) {
-
-    if(layout.navsvg !== undefined) {
-        layout.navsvg.remove();
-    }
-
-    layout.navsvg = d3.select("#bars").append("svg");
-    layout.navsvg.width = $("#bars").width();
-    layout.navsvg.height = $("#bars").height();
-    layout.navsvg.attr("height", layout.navsvg.height )
-    .attr("width", layout.navsvg.width);
-    navigation = layout.navsvg.append("svg:g");
-
-    // introduction mode
-    navigation.intro = true;
-
-    navigation.height = layout.navsvg.height;
-    navigation.width = layout.navsvg.width;
-
-    // align with menu bar !
-    navigation.bar_width =  $('#home-button').width();
-    bar_height = navigation.height;
-
-    avb.navigation.drawzone(presentation_layer(jsondata), navigation.bar_width, bar_height).attr("display","inline");
-},
-
-rectdclick = function(d,i) {
-    log("double");
-    if ( d.sub === undefined ) {
-     return;
- }
- console.log(d.sub)
- levels[levels.length-1].style("display","none");
- newzone = drawzone(d, navigation.bar_width, bar_height).attr("display","inline");
-},
-
-rectclick = function(d,i) {
-
-    cur_json = d;
-    avb.chart.drawline(d, d3.select(this).attr("fill"), true);
+    navigation.lastClicked = d;
+    avb.chart.drawline(d, d3.select(this).select("rect").style("fill"), true);
     avb.cards.update(d);
     titlebox_fill(d);
 
-    if(navigation.intro) {
-        navigation.intro = false;
-        setTimeout(function() {
-            $('#container-right').fadeIn();
-        },300);
-    }
+    var x = navigation.x,
+    y = navigation.y,
+    kx = navigation.kx,
+    ky = navigation.ky,
+    h = navigation.h,
+    w = navigation.w,
+    g = navigation.g;
 
-    // breadcums
-    if(navigation.selected === undefined){
-        avb.breadcrumbs.push(d.key);
+    kx = (d.y ? w - 40 : w) / (1 - d.y);
+    ky = h / d.dx;
+    navigation.ky = ky;
+
+    y.domain([d.x, d.x + d.dx]);
+    x.domain([d.y,1]).range([d.y ? 40 : 0, w]);
+    navigation.x = x;
+
+    var t = g.transition()
+    .duration(d3.event.altKey ? 7500 : 750)
+    .attr("transform", function(d) { 
+      return "translate(" + x(d.y)+ "," + y(d.x) + ")"; });
+
+    g.each( function(d) {
+        opacity.call(this, d, 400);
+    })
+
+    t.select("rect")
+    .attr("width", d.dy * kx)
+    .attr("height", function(d) { return d.dx * ky; });
+
+    t.select("text")
+    .attr("transform", transform);
+
+
+    d3.event.stopPropagation();
+},
+
+
+transform = function(d){
+
+    if (d.dx * navigation.ky < (navigation.labelTitleHeight + navigation.labelValueHeight + 5)) {
+        return "translate(8," + (d.dx * navigation.ky / 2 - navigation.labelTitleHeight/2 ) + ")";
     } else {
-        avb.breadcrumbs.rename(d.key);
-        d3.select(navigation.selected).transition()
-        .duration(300)
-        .attr("transform", "translate(0,0)");
+        return "translate(8," + (d.dx * navigation.ky / 2 - this.getBBox().height/2) + ")";
     }
+};
 
-    //hightlight
-    d3.select(navigation.selected).style("opacity", 0.3)
-    navigation.selected = this;
-    d3.select(this).style("opacity", 0.7);
+opacity = function(d, duration) {
+    if(duration === undefined) duration = 0;
 
-    // slide left
-    var offset_x = (navigation.width - bar_width)/1.5;
-    d3.select(this).transition()
-    .duration(300)
-    .attr("transform", "translate(" + offset_x.toString() + ",0)");
+    var zoneHeight = d.dx * navigation.ky,
+        titleOpacity = 0,
+        valueOpacity = 0;
+    if(zoneHeight > (navigation.labelTitleHeight + navigation.labelValueHeight + 8)) {
+        valueOpacity = 1;
+    } 
+    if(zoneHeight > ( navigation.labelValueHeight + 8)) {
+        titleOpacity = 1;
+    } 
 
-    // pointer align
-    log("heree")
-    var pointer_height = Math.round(parseFloat(d3.select(this).attr("y")) + parseFloat(d3.select(this).attr("height"))/2);
-    log(pointer_height)
-
-  //   $('#pointer').animate({
-  //   "top" : (pointer_height).px()
-  //   }, 200, function() {
-  //   // Animation complete.
-  // });
-
-    $('#pointer').css("top", (pointer_height).px())
+    $(this).find("tspan :first").animate({"opacity": titleOpacity}, duration);
+    $(this).find("tspan :last").animate({"opacity": valueOpacity}, duration);
 
 };
 
 return{
- fadeout : fadeout,
- initialize : initialize,
- drawzone : drawzone
+ initialize : initialize
 }
 }();

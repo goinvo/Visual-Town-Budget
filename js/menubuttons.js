@@ -30,7 +30,6 @@ function menu_scale() {
 // On resize
 $(window).resize(function() {
 	menu_scale();
-	resize();
 });
 
 // var fby = fby || [];

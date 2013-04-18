@@ -22,18 +22,6 @@
             
             // object references
             var mysvg;
-            var tooltip;
-            var filter;
-            var nosel_opacity = 0.3;
-            var sel_opacity = 0.8;
-
-
-            // HOME ELEMENTS
-            var homebars;
-            var homescale;
-            var hometexts;
-            var homebars_width;
-            var homebars_height;
 
             var layout = new Object();
 
@@ -66,11 +54,10 @@
                 avb.cards.initialize();
                 
                 init_tooltip();
-                avb.breadcrumbs.initialize();
 
                 initsingle(jsondata);
-                avb.timeline.initialize();
-                avb.timeline.update(jsondata);
+                // avb.timeline.initialize();
+                // avb.timeline.update(jsondata);
             }
 
             function initsingle(jsondata){
@@ -83,12 +70,11 @@
 
                 avb.cards.draw(2, 2);
                 avb.cards.update(jsondata);
-                
 
                 avb.chart.initialize();
                 avb.chart.drawline(jsondata, "steelblue", true);
                 
-                // $('#container-right').css("display","none");
+                // $('#bottom-container').css("display","none");
                 // avb.chartfork.initialize();
                 // avb.chartfork.draw(jsondata);
 
@@ -286,6 +272,9 @@
                 function titlebox_fill(data){
                     titlebox.text(data.key);
                     titlebox.bottom.text(data.descr);
+                    var margin = $("#bottom-container").height() - $("#title-head").height() - $("#title-descr").height();
+                    log(margin)
+                    $("#titledescr-container").css("margin-top", margin/2);
                 }
 
 

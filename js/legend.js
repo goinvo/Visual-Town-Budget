@@ -72,12 +72,10 @@ nv.legend = function() {
       if (align) {
         var seriesWidths = [];
         series.each(function(d,i) {
-            console.log(d3.select(this).select('text'));
               d3.select(this).select('text').node().getComputedTextLength();
               seriesWidths.push(d3.select(this).select('text').node().getComputedTextLength() + 28); // 28 is ~ the width of the circle plus some padding
             });
 
-      console.log(series)
 
         //nv.log('Series Widths: ', JSON.stringify(seriesWidths));
 

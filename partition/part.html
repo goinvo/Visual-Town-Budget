@@ -139,6 +139,7 @@ d3.json("/data/arlington2.json", function(root) {
   }
 
   function transform(d) {
+    console.log(d.dx);
     return "translate(8," + d.dx * ky / 2 + ")";
   }
 });

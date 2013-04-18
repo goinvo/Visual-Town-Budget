@@ -15,8 +15,7 @@ avb.chart = function(){
 		layout.chartsvg.width = $("#chart").width();
 
 		// compute height to align with bars
-		layout.chartsvg.height = $('#container-right').height() -  $('#title-container').outerHeight() - $('#card-container').outerHeight();
-		log($('#container-right').height() )
+		layout.chartsvg.height = $('#chart').height();
 
 
 		layout.chartsvg.attr("height", layout.chartsvg.height )
@@ -114,7 +113,7 @@ avb.chart = function(){
 		}
 
 		var yscale = d3.scale.linear().domain([0,d3.max(data.values, get_values)*1.2])
-		.range([chart.height - chart.ymargin, 40]);
+		.range([chart.height - chart.ymargin, 20]);
 		chart.yscale = yscale;
 		var xscale = chart.xscale;
 
@@ -124,7 +123,7 @@ avb.chart = function(){
 		container.xgrid_axis = d3.svg.axis()
 		.scale(xscale)
 		.orient("bottom")
-		.tickSize(-chart.height + chart.ymargin + 40, 0, 0)
+		.tickSize(-chart.height + chart.ymargin + 20, 0, 0)
 		.ticks(6)
 		.tickFormat(function (d) { 
 			return "";});
@@ -136,7 +135,7 @@ avb.chart = function(){
 
 		container.ygrid_axis = d3.svg.axis()
 		.scale(yscale)
-		.ticks(6)
+		.ticks(4)
 		.orient("left")
 		.tickSize(-chart.width + chart.xmargin , 0, 0)
 		.tickFormat(function (d) { 
@@ -325,7 +324,7 @@ avb.chart = function(){
 
 		multichart.areas = browser.append("path")
 		.attr("class", "multiarea")
-		.attr("d", function(d) { log(d.values); return area(d.values); })
+		.attr("d", function(d) { return area(d.values); })
 		.style("fill", function(d,i) { return colors[i%20]; });
 
 		multichart.lines = browser.append("path")
