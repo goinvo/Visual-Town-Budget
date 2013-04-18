@@ -24,7 +24,7 @@
   <script>
   function load() {
     home_init();
-    avb_init("Revenues");
+    // avb_init("Revenues");
   };
   </script>
 
@@ -174,38 +174,32 @@
 
     <div class="" id="avb-menubar" style="width:auto; padding:0.5%; background-color:rgb(245, 245, 245)">
       <div class="container">
-
         <div class="row-fluid" style="height:50%;"> 
-          <div id="home-button" class="span3" style="position:relative; padding-right:3%;">
-            <div style="display:inline;">
-              <div class="row-fluid"> 
-                <div class="span12 grey" style="font-size:2.5em;" > 
+          <div id="home-button" class="span3" style="position:relative;">
+              
+              <div class="grey" style="font-size:2.5em;" >
+                <div style="display:inline;">
                  Arlington
-                 <img src="img/logo@High.png" width="30" height="30" style=""/>
-               </div>
-             </div>
-             <div class="row-fluid"> 
-              <div class="span12"> 
-                Town, Budget, Visualized
+                </div>
+                <img src="img/logo@High.png" width="30" height="30" />
               </div>
-            </div>
+              <div> Town, Budget, Visualized </div>
+              <div id="vdivider"></div>
           </div>
-          <div id="vdivider"></div>
-        </div>
-        <div id="avb-links" class="span9">
-          <div class="navbar">
-            <ul class="nav menubutton">
-              <li><a href="#" onclick="avb_init('revenues');" >Revenues</a></li>
-              <li><a href="#" >Expenses</a></li>
-              <li><a href="#" >Funds</a></li>
-              <li><a href="#" onclick="fby.push(['showForm', '4389']);return false;">Give Feedback</a></li>
-            </ul>
-          </div>
+      <div id="avb-links" class="span9">
+        <div class="navbar">
+          <ul class="nav menubutton">
+            <li><a href="#" onclick="avb_init('revenues');" >Revenues</a></li>
+            <li><a href="#" >Expenses</a></li>
+            <li><a href="#" >Funds</a></li>
+            <li><a href="#" onclick="fby.push(['showForm', '4389']);return false;">Give Feedback</a></li>
+          </ul>
         </div>
       </div>
-
     </div>
+
   </div>
+</div>
 
           <!-- Carousel
           ================================================== -->
@@ -231,7 +225,7 @@
         <div class="container marketing">
 
           <!-- Three columns of text below the carousel -->
-          <div class="row">
+          <div class="row-fluid">
             <div class="span4 ">
               <h2>Revenues</h2>
               <div id="home-thumb1" field="revenues" style="height:100px; width:70%; margin:auto;"></div>
@@ -260,8 +254,8 @@
 
       <div class="container" id="avb-body">
 
-        <div class="row-fluid" id="navigation-container">
-          <div class="span12" id="navigation" style="height:100%"> </div>
+        <div class="div" id="navigation-container">
+          <div id="navigation" style="height:100%;width:100%;"> </div>
         </div>
 
         <div class="row-fluid bottom" id="bottom-container" style="width:auto; margin-top:1%; margin-bottom:1%; ">

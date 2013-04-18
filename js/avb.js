@@ -56,8 +56,6 @@
                 init_tooltip();
 
                 initsingle(jsondata);
-                // avb.timeline.initialize();
-                // avb.timeline.update(jsondata);
             }
 
             function initsingle(jsondata){

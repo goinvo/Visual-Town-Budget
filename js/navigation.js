@@ -20,7 +20,10 @@ avb.navigation = function(){
         .attr("height", h);
 
         var partition = d3.layout.partition()
-        .value(function(d) { return d.values[cur_index].val; })
+        .value(function(d) { 
+            // return Math.max(20000000,d.values[cur_index].val); 
+            return d.values[cur_index].val;
+        })
         .children(function(d) { return d.sub;});
 
         var g = navigation.selectAll("g")
@@ -50,26 +53,28 @@ avb.navigation = function(){
         navigation.labelTitleHeight = 12,
         navigation.labelValueHeight = 18;
 
-        g.append("svg:text")
-        .attr("dy", ".35em");
+        g.append("svg:g")
+        .classed("labels", true);
 
-        g.selectAll("text").each(function(d) {
-            var zoneHeight = d.dx * ky;
+        g.selectAll("g .labels").each(function(d) {
+                var zoneHeight = d.dx * ky;
 
                 // title
                 var titleLabel = d3.select(this)
-                .append("tspan")
+                .append("text")
                 .text(d.key)
                 .attr("x", 0)
-                .attr("dy",navigation.labelTitleHeight)
+                .attr("y", navigation.labelTitleHeight)
+                .attr("font-size",navigation.labelTitleHeight)
                 .style("opacity", 0);
 
                 // value
                 var valueLabel = d3.select(this)
-                .append("tspan")
-                .text(formatcurrency(d.values[cur_index].val))
+                .append("text")
+                .text(formatcurrency(d.value))
                 .attr("x", 0)
-                .attr("dy", function(d) {
+                .attr("y", navigation.labelTitleHeight +navigation.labelTitleHeight + 5)
+                .attr("font-size", function(d) {
                     return navigation.labelTitleHeight + navigation.labelValueHeight/2;
                 })
                 .attr("font-size", navigation.labelValueHeight)
@@ -131,7 +136,7 @@ avb.navigation = function(){
     .attr("width", d.dy * kx)
     .attr("height", function(d) { return d.dx * ky; });
 
-    t.select("text")
+    t.select("g .labels")
     .attr("transform", transform);
 
 
@@ -140,12 +145,10 @@ avb.navigation = function(){
 
 
 transform = function(d){
-
-    if (d.dx * navigation.ky < (navigation.labelTitleHeight + navigation.labelValueHeight + 5)) {
-        return "translate(8," + (d.dx * navigation.ky / 2 - navigation.labelTitleHeight/2 ) + ")";
-    } else {
-        return "translate(8," + (d.dx * navigation.ky / 2 - this.getBBox().height/2) + ")";
+    if(d.dx * navigation.ky < (navigation.labelTitleHeight + navigation.labelValueHeight + 5)) {
+        return "translate(8," + ((d.dx * navigation.ky / 2) - navigation.labelTitleHeight/2) + ")";
     }
+    return "translate(8," + ((d.dx * navigation.ky / 2) - (navigation.labelTitleHeight + navigation.labelValueHeight + 5)/2) + ")";
 };
 
 opacity = function(d, duration) {
@@ -154,15 +157,15 @@ opacity = function(d, duration) {
     var zoneHeight = d.dx * navigation.ky,
         titleOpacity = 0,
         valueOpacity = 0;
-    if(zoneHeight > (navigation.labelTitleHeight + navigation.labelValueHeight + 8)) {
+    if(zoneHeight > (navigation.labelTitleHeight + navigation.labelValueHeight + 5)) {
         valueOpacity = 1;
     } 
     if(zoneHeight > ( navigation.labelValueHeight + 8)) {
         titleOpacity = 1;
     } 
 
-    $(this).find("tspan :first").animate({"opacity": titleOpacity}, duration);
-    $(this).find("tspan :last").animate({"opacity": valueOpacity}, duration);
+    $(this).find("text :first").animate({"opacity": titleOpacity}, duration);
+    $(this).find("text :last").animate({"opacity": valueOpacity}, duration);
 
 };
 

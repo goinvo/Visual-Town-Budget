@@ -40,8 +40,8 @@ avb.chart = function(){
 
 		// controles
 		chart.modes = [ { key : "Simple", disabled : false}, {key : "Detailed", disabled : true} ];
-		chart.controls = legend(chart.modes, 200, 20, 0, "#666", modechange);
-
+		
+		chart.controls = legend(chart.modes, chart.width/2, "#666", modechange);
 	},
 
 	modechange = function(d, i){
@@ -53,10 +53,12 @@ avb.chart = function(){
 		});
 		d.disabled = false;
 		chart.controls.remove();
-		chart.controls = legend(chart.modes, 200, 20, 0, "#666", modechange);
+
+		var offsetX = (chart.width - chart.xmargin) / 2;
+
+		chart.controls = legend(chart.modes, chart.width/2, "#666", modechange);
 
 		if(d.key === "Detailed") {
-			log("adding sub")
 			add_subsections(cur_json);
 		} else {
 			remove_subsections(true);
@@ -65,7 +67,10 @@ avb.chart = function(){
 	},
 
 
-	legend  = function(data, width, height, x, color, callback) {
+	legend  = function(data, x, color, callback) {
+
+		var width = 200;
+		var height = 50;
 
 		var chart = nv.legend()
 		.width(width)
@@ -82,17 +87,15 @@ avb.chart = function(){
 			chart.dispatch.on('legendClick', callback);
 		}
 
-		var legend = layout.chartsvg.append("g")
-		.attr('width', width)
+		var newlegend = layout.chartsvg.append("g")
+		.attr('width',  width)
 		.attr('height', height)
 		.datum(data)
 		.call(chart);
 
+		translate(newlegend, x - width, 0);
 
-
-		translate(legend, x, 0);
-
-		return legend;
+		return newlegend;
 	},
 
 
@@ -103,7 +106,8 @@ avb.chart = function(){
 			chart.legend.remove();
 		}
 
-		chart.legend = legend( [{ key : data.key }], chart.width, 20, 0, color);
+		var label = data.key.length > 18 ? data.key.substr(0,18) + ".." : data.key;
+		chart.legend = legend( [{ key : label }], chart.width + 15, color);
 
 		if(typeof(clear)==='undefined') clear = false;
 		if(clear) {
@@ -170,13 +174,11 @@ avb.chart = function(){
 
         //non-projection area
         container.append("svg:path").attr("d", area(data.values.slice(0,projected +1)))
-        .attr("class","grapharea")
         .style("fill", color)
         .style("opacity", 0.2);
 
         // projection area
         container.append("svg:path").attr("d", area(data.values.slice(projected, data.values.length )))
-        .attr("class","grapharea_proj")
         .style("fill", color)
         .style("opacity", 0.2);
         

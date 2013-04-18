@@ -1,17 +1,12 @@
 
-div {
-    font-family:"Helvetica Neue";
-}
-
 body,html{
   height:100%;
   cursor:default;
   font-family:"Helvetica Neue";
-    -moz-user-select: none;
+  -moz-user-select: none;
   -khtml-user-select: none;
   -webkit-user-select: none;
   user-select: none;
-
 }
 
 body {
@@ -19,171 +14,32 @@ body {
        background-color: rgb(249,249,249)
 }
 
-text {
-    stroke-width:0;
+div {
+    font-family:"Helvetica Neue";
 }
 
 div, text {
  cursor:default;
 }
 
-.avbsvg{
-    margin-left:auto; 
-    margin-right: auto;
-}
-
-.graphline {
-    fill : none;
-    stroke-width : 3 ;
-    stroke-linejoin : round;
-    stroke-linecap: round;
-}
-
-.graphline_proj {
-    fill : none;
-    stroke-width : 4;
-    stroke-dasharray : 10, 8;
-    stroke-linejoin : round;
-    stroke-linecap: round;
-    
-}
-
-.home {
-    font-family: "Helvetica Neue";
-    font-size: 50px;
-    position : absolute;
-    top : 10px;
-    left 10px;
-}
-
-.textbox {
-    fill : rgba(141, 155, 170, 0.06);
-    stroke : rgba(191, 201, 195, 0.1);
-    stroke-width : 3;
-}
-    
-.grapharea {
-    stroke-width : 0 ;
-}
-
-.grapharea_proj {
-    stroke-width : 0 ;
-}
-
-.chart-circle {
-    stroke-width : 2;
+#avb-menubar{
+    -moz-box-shadow:inset 0px -2px 5px gray;
+    -webkit-box-shadow:inset 0px -2px 5px gray;
+    box-shadow:inset 0px -2px 5px gray;
+    padding-bottom: 1%;
 }
 
 
-.axis path,
-.axis line {
-    stroke: grey;
-    stroke-width : 0;
-    stroke-linejoin : round;
-    stroke-linecap: round;
-    shape-rendering: crispEdges;
+.menubutton{
+    font-size: 1.2em;
+    color : #aaaaaa;
 }
 
-.axis text {
-    font-family: "Helvetica Neue";
-    font-size: 0.8em;
-    cursor: default;
-    fill: grey;
+#avb-body{
+    margin-top:1%;  
+    display:none; 
+    font-weight: 200;
 }
-
-.nv-legend .disabled circle {
-  fill-opacity: 0;
-}
-
-.curly_b{
-    stroke: rgb(190, 190, 190);
-    stroke-width : 3;
-    fill : none;
-    stroke-linejoin : round;
-    stroke-linecap: round;
-}
-
-.homet{
-    font-size: 50px;
-}
-
-.homec{
-    font-size: 18px;
-}
-
-.homediv img {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.homeval {
-    font-family: "Helvetica Neue";
-    font-size: 46px;
-    shape-rendering: crispEdges;
-    text-rendering: optimizeLegibility;
-    stroke-width:0px;
-    fill: rgba(0, 0, 0, 0.51);
-    cursor: default;
-}
-
-.browser text {
-  text-anchor: end;
-}
-
-.multiarea {
-    fill-opacity : 0.65;
-}
-
-.multiline {
-    fill: none;
-    stroke-width:2px;
-    opacity: 1;
-}
-
-.multiaxis path {
-    stroke-width: 0;
-    fill: none;
-}
-
-.multigrid .tick {
-    stroke: lightgrey;
-    opacity: 0;
-} 
-
-.multigrid path {
-      stroke-width: 1;
-}
-
-.tselect path{
-    fill : steelblue;
-    fill-opacity: 0.5;
-    stroke-linejoin : round;
-    stroke-linecap: round;
-}
-
-.tselect line {
-    stroke-linejoin : round;
-    stroke-linecap: round;
-}
-
-.card-row:first-child{
-    padding-left: 0;
-}
-
-.card {
-    padding-top: 3%;
-    margin-left: 2%;
-}
-
-.card-img{
-    float: left;
-}
-
-.card-img img{
-    display: block;
-}
-
 
 #bottom-container {
     position: relative;
@@ -205,25 +61,89 @@ div, text {
   height: 250px;
 }
 
-#bottom-container .arrow {
-  top: 0px;
-  left: 50%;
-  margin-left: -11px;
-  border-bottom-color: #999;
-  border-bottom-color: rgba(0, 0, 0, 0.25);
-  border-top-width: 0;
-    border-width: 11px;
+.grey {
+    color : #aaaaaa;
+}
+
+#chart .nv-legend .disabled circle {
+  fill-opacity: 0;
 }
 
 
-#bottom-container .bottom {
-  margin-top: 10px;
+#chart .graphline {
+    fill : none;
+    stroke-width : 3 ;
+    stroke-linejoin : round;
+    stroke-linecap: round;
 }
 
+#chart .graphline_proj {
+    fill : none;
+    stroke-width : 4;
+    stroke-dasharray : 10, 8;
+    stroke-linejoin : round;
+    stroke-linecap: round;
+}
 
-#bottom-container .arrow:after {
-  border-width: 10px;
-  content: "";
+#chart .browser text {
+  text-anchor: end;
+}
+
+#chart .axis path,
+#chart .axis line {
+    stroke: grey;
+    stroke-width : 0;
+    stroke-linejoin : round;
+    stroke-linecap: round;
+    shape-rendering: crispEdges;
+}
+
+#chart .axis text {
+    font-family: "Helvetica Neue";
+    font-size: 0.8em;
+    cursor: default;
+    fill: grey;
+}
+
+#chart .multiarea {
+    fill-opacity : 0.65;
+}
+
+#chart .multiline {
+    fill: none;
+    stroke-width:2px;
+    opacity: 1;
+}
+
+#chart .multiaxis path {
+    stroke-width: 0;
+    fill: none;
+}
+
+#chart .multigrid .tick {
+    stroke: lightgrey;
+    opacity: 0;
+} 
+
+#chart .multigrid path {
+      stroke-width: 1;
+}
+
+.card-row:first-child{
+    padding-left: 0;
+}
+
+.card {
+    padding-top: 3%;
+    margin-left: 2%;
+}
+
+.card-img{
+    float: left;
+}
+
+.card-img img{
+    display: block;
 }
 
 .cardtitle {
@@ -236,21 +156,6 @@ div, text {
     font-size: 1.2em;
 }
 
-.grey {
-    color : #aaaaaa;
-}
-
-.greysvg {
-    fill:grey;
-    stroke-width: 0;
-}
-
-#avb-menubar{
-    -moz-box-shadow:inset 0px -2px 5px gray;
-    -webkit-box-shadow:inset 0px -2px 5px gray;
-    box-shadow:inset 0px -2px 5px gray;
-    padding-bottom: 1%;
-}
 
 #title-head {
   margin: 10px 0;
@@ -263,30 +168,14 @@ div, text {
     font-size: 1.2em;
 }
 
-#avb-body{
-    margin-top:1%;  
-    display:none; 
-    font-weight: 200;
-}
-
-#chart {
-    max-height: 600px;
-}
-
-.menubutton{
-    font-size: 1.2em;
-    color : #aaaaaa;
-}
 
 #vdivider{
     border-left:2px solid #aaaaaa;
     position:absolute;
     top:0;
+    height: 100%;
 }
 
-#navigation {
-  font-size: 13px; 
-}
 
 #navigation rect {
   stroke: #eee;
@@ -299,39 +188,45 @@ div, text {
   fill: steelblue;
 }
 
-#navigation text {
-  pointer-events: none;
+
+#navigation-container{
+    height: 500px;
 }
 
-  #navigation-container{
-    height: 500px;
-  }
-
-
-/* Large desktop */
-@media (min-width: 1200px) { 
-  .container {
+.container {
     width: 1200px;
   }
 
+#bottom-container{
+    min-width: 1200px;
+  }
 
+#vdivider {
+    left:240px;
+  }
 
- }
  
-/* Portrait tablet to landscape and desktop */
-@media only screen and (device-width: 768px)  { 
+
+@media only screen and (device-width: 768px){ 
+  body,html{
+      font-size: 10px;
+  }
+
   .container {
     width: 980px;
-  }
-  body,html{
-    font-size: 12px;
   }
 
   #bottom-container{
     height: 200px;
+    min-width: 980px;
   }
 
   #navigation-container{
     height: 425px;
   }
+
+  #vdivider {
+    left:196px;
+  }
+
  }
