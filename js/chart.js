@@ -3,6 +3,7 @@ var avb = avb || {};
 avb.chart = function(){
 	var chart,
 	multichart,
+	firstPopover,
 
 	initialize = function(){
 
@@ -33,7 +34,7 @@ avb.chart = function(){
 		chart.width = width - 15;
 		chart.height = height;
 		chart.linestack = [];
-		chart.xscale = d3.scale.linear().domain([min_year, max_year]).range([chart.xmargin, chart.width]);
+		chart.xscale = d3.scale.linear().domain([firstYear, lastYear]).range([chart.xmargin, chart.width]);
 
 		// controles
 		chart.modes = [ { key : "Simple", disabled : false}, {key : "Detailed", disabled : true} ];
@@ -156,16 +157,16 @@ avb.chart = function(){
 
         // area
         var area = d3.svg.area()
-		.interpolate("monotone")
+        .interpolate("monotone")
         .x(function(d,i) { return xscale(d.year); })
         .y0(function(d) { return (chart.height - chart.ymargin); })
         .y1(function(d) { return yscale(d.val); });
 
-        var projected = max_year - cur_year;
+        var projected = lastYear - currentYear;
 
         container.append("line")
-        .attr("x1", chart.xscale(cur_year))
-        .attr("x2", chart.xscale(cur_year))
+        .attr("x1", chart.xscale(thisYear))
+        .attr("x2", chart.xscale(thisYear))
         .attr("y1", 20)
         .attr("y2", chart.height - chart.ymargin)
         .style("stroke","black");
@@ -178,7 +179,7 @@ avb.chart = function(){
         // projection area
         container.append("svg:path").attr("d", area(data.values.slice(projected, data.values.length )))
         .style("fill", color)
-        .style("opacity", 0.2);
+        .style("opacity", 0.1);
         
         // non-projection line
         container.append("svg:path").attr("d", line(data.values.slice(0,projected +1)))
@@ -193,14 +194,6 @@ avb.chart = function(){
         .style("stroke", color)
         .style("opacity", 0.6);
 
-        var getcolor = function (d){
-        	if(d.year === cur_year) {
-        		return "rgb(167, 103, 108)";
-        	} else {
-        		return color;
-        	}
-        };
-
        //axes
        var xAxis = d3.svg.axis(container)
        .scale(xscale)
@@ -209,7 +202,12 @@ avb.chart = function(){
        .tickPadding(10)
        .ticks(5)
        .tickFormat(function(d){
-       	return d; });
+       		if(d !== thisYear) {
+       			return d;
+	     	} else {
+	       		return '';
+       		}
+       });
 
        var yAxis = d3.svg.axis()
        .scale(yscale)
@@ -221,6 +219,19 @@ avb.chart = function(){
        	return formatcurrency(d);
        });
 
+       var thisYearAxis = d3.svg.axis()
+       .scale(xscale)
+       .orient("bottom")
+       .tickSize(0, 0, 0)
+       .tickPadding(10)
+       .tickFormat(function(d){
+       		if(d === thisYear) {
+       			return d;
+	     	} else {
+	       		return '';
+       		}
+       });
+
        if(chart.xAxisSocket !== undefined) {
        	chart.xAxisSocket.remove();
        	chart.yAxisSocket.remove();
@@ -229,6 +240,10 @@ avb.chart = function(){
        chart.xAxisSocket = chart.append("g")
        .attr("class", "axis")
        .attr("transform", "translate(0," + (chart.height - chart.ymargin -1) + ")").call(xAxis);
+
+       chart.thisYearAxisSocket = chart.append("g")
+       .attr("class", "thisYearAxis")
+       .attr("transform", "translate(0," + (chart.height - chart.ymargin -1) + ")").call(thisYearAxis);
 
        chart.yAxisSocket = chart.append("g")
        .attr("class", "axis")
@@ -247,8 +262,8 @@ avb.chart = function(){
         .attr("cx", function(d) { return xscale(d.year); })
         .attr("cy", function(d) { return yscale(d.val); })
         .attr("r", function(d) { 
-        	if(d.val > 0 && d.year > min_year) {
-        		return 6;
+        	if(d.val > 0 && d.year > firstYear) {
+        		return 5;
         	} else {
         		return 0;
         	}
@@ -258,19 +273,21 @@ avb.chart = function(){
 
         $('.chart-circle').popover({
         	container:'body',
-        	placement: 'bottom',
+        	placement: 'top',
         	trigger: 'hover',
-        	title: function(){
-        		return $(this).parent().attr("data-name") +
-        		" in " + d3.select(this).datum().year;
-        	},
         	content: function() {
+        		if(firstPopover !== undefined) {
+        			firstPopover.popover('hide');
+        			firstPopover = undefined;
+        		}
         		$('#popover-value')
         		.text(formatcurrency(d3.select(this).datum().val));
+
         		return $('#popover-html').html();
         	},
         	html: true
         });
+        firstPopover = $($('.chart-circle').get(yearIndex)).popover('show');
 
         sub = data.sub;
 
@@ -301,82 +318,82 @@ avb.chart = function(){
 
     	var area = d3.svg.area()
 
-		.interpolate("monotone")
-		.x(function(d,i) { return xscale(d.year); })
-		.y0(function(d) { return yscale(d.y0); })
-		.y1(function(d) { return yscale(d.y0 + d.val); });
+    	.interpolate("monotone")
+    	.x(function(d,i) { return xscale(d.year); })
+    	.y0(function(d) { return yscale(d.y0); })
+    	.y1(function(d) { return yscale(d.y0 + d.val); });
 
-		var line = d3.svg.line()
-		.interpolate("monotone")
-		.x(function(d,i) { return xscale(d.year); })
-		.y(function(d) { return yscale(d.y0 + d.val); });
+    	var line = d3.svg.line()
+    	.interpolate("monotone")
+    	.x(function(d,i) { return xscale(d.year); })
+    	.y(function(d) { return yscale(d.y0 + d.val); });
 
-		var stack = d3.layout.stack()
-		.values(function(d) { return d.values; })
-		.x(function(d) { return d.year;})
-		.y(function(d) { return d.val;});
+    	var stack = d3.layout.stack()
+    	.values(function(d) { return d.values; })
+    	.x(function(d) { return d.year;})
+    	.y(function(d) { return d.val;});
 
-		var instance = stack(jsondata.sub);
+    	var instance = stack(jsondata.sub);
 
-		var browser = multichart.selectAll(".browser")
-		.data(instance)
-		.enter().append("g")
-		.attr("class", "browser");
+    	var browser = multichart.selectAll(".browser")
+    	.data(instance)
+    	.enter().append("g")
+    	.attr("class", "browser");
 
-		multichart.areas = browser.append("path")
-		.attr("class", "multiarea")
-		.attr("d", function(d) { return area(d.values); })
-		.style("fill", function(d,i) { return colors[i%20]; });
+    	multichart.areas = browser.append("path")
+    	.attr("class", "multiarea")
+    	.attr("d", function(d) { return area(d.values); })
+    	.style("fill", function(d,i) { return colors[i%20]; });
 
-		multichart.lines = browser.append("path")
-		.attr("class", "multiline")
-		.attr("d", function(d) { return line(d.values); })
-		.style("stroke", function(d,i) { return colors[i%20]; });
+    	multichart.lines = browser.append("path")
+    	.attr("class", "multiline")
+    	.attr("d", function(d) { return line(d.values); })
+    	.style("stroke", function(d,i) { return colors[i%20]; });
 
-		multichart.areas.on("mouseout", function(d,i) {
-			tooltip.style("visibility", "hidden");
-			d3.select(this).attr("opacity","1");
-		});        
-		multichart.areas.on("mouseover", function(d) {
-			d3.select(this).attr("opacity","0.7");
-			tooltip.style("visibility","visible")
-			.style("left", (d3.event.pageX + 10).px())
-			.style("top", (d3.event.pageY + 2).px())
-			.text(d.key);
-		});
-		multichart.areas.on("mousemove", function(d) {
-			tooltip.style("left", (d3.event.pageX + 10).px())
-			.style("top", (d3.event.pageY + 2).px())
-			.text(d.key);
-		});
-
-
-		if (transition === undefined){
-			multichart.transition().duration(500).style("opacity",1);
-		} else {
-			multichart.style("opacity",1);
-		}
-
-	},
-
-	remove_subsections = function (transition){
-		if(multichart === undefined) {
-			return;
-		}
-		if(transition === true) {
-			multichart.transition().duration(500).style("opacity",0);
-			multichart.transition().delay(500).remove();	
-		} else {
-			multichart.remove();
-		}
-	};
+    	multichart.areas.on("mouseout", function(d,i) {
+    		tooltip.style("visibility", "hidden");
+    		d3.select(this).attr("opacity","1");
+    	});        
+    	multichart.areas.on("mouseover", function(d) {
+    		d3.select(this).attr("opacity","0.7");
+    		tooltip.style("visibility","visible")
+    		.style("left", (d3.event.pageX + 10).px())
+    		.style("top", (d3.event.pageY + 2).px())
+    		.text(d.key);
+    	});
+    	multichart.areas.on("mousemove", function(d) {
+    		tooltip.style("left", (d3.event.pageX + 10).px())
+    		.style("top", (d3.event.pageY + 2).px())
+    		.text(d.key);
+    	});
 
 
-	return{
-		chart : chart,
-		initialize : initialize,
-		drawline : drawline,
-		add_subsections : add_subsections,
-		remove_subsections : remove_subsections
-	}
+    	if (transition === undefined){
+    		multichart.transition().duration(500).style("opacity",1);
+    	} else {
+    		multichart.style("opacity",1);
+    	}
+
+    },
+
+    remove_subsections = function (transition){
+    	if(multichart === undefined) {
+    		return;
+    	}
+    	if(transition === true) {
+    		multichart.transition().duration(500).style("opacity",0);
+    		multichart.transition().delay(500).remove();	
+    	} else {
+    		multichart.remove();
+    	}
+    };
+
+
+    return{
+    	chart : chart,
+    	initialize : initialize,
+    	drawline : drawline,
+    	add_subsections : add_subsections,
+    	remove_subsections : remove_subsections
+    }
 }();

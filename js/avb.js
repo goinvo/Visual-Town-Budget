@@ -13,10 +13,12 @@
             // constants
             var viewmode;
             var section;
-            var min_year = 2006;
-            var max_year = 2018;
-            var cur_year = 2012;
-            var cur_index = cur_year - min_year;
+
+            var firstYear = 2006,
+                lastYear = 2018,
+                currentYear = 2012, // only used for projections
+                thisYear = 2012,
+                yearIndex = thisYear - firstYear;
 
             var root;
             
@@ -30,16 +32,6 @@
                 return this.toString() + "px";
             };
 
-
-
-            function adjust_width(div, target_h) {
-                var cur_size = parseInt(div.style("font-size"));
-
-                while(div.property("clientHeight") > target_h && cur_size >= 1) {
-                    div.style("font-size", cur_size.px());
-                    cur_size--;
-                }
-            }
 
 
             function onjsonload(jsondata) {
@@ -84,17 +76,6 @@
                 return d.val;
             }
 
-            var svgtext_draw = function(container, x, y, text, css) {
-                var newtext = container.append("text")
-                .attr("x", x)
-                .attr("y",y)
-                .text(text);
-                if(css !== undefined) {
-                    newtext.classed(css,true);
-                }
-                return newtext;
-            }
-
             function formatcurrency(value) {
                 if(value === undefined) {
                     return "N/A";
@@ -132,7 +113,7 @@
 
             function toarray(d){
                 values = [];
-                for(var i=min_year; i <= max_year ; i++){
+                for(var i=firstYear; i <= lastYear ; i++){
                     if( d[i.toString()] !== undefined ) {
                         values.push({ year : i , val : d[i.toString()]});
                     }
@@ -144,9 +125,9 @@
             }
 
             function changeyear(year){
-                if(year === cur_year) return;
-                cur_year = year;
-                cur_index = cur_year - min_year;
+                if(year === thisYear) return;
+                thisYear = year;
+                yearIndex = thisYear - firstYear;
                 avb.navigation.update(root);
                 avb.chart.initialize();
                 avb.chart.drawline(root, "steelblue", true);
@@ -178,7 +159,7 @@
                         }
                     }
                     var xscale = d3.scale.linear()
-                    .domain([min_year, max_year])
+                    .domain([firstYear, lastYear])
                     .range([0, width]);
                     var yscale = d3.scale.linear()
                     .domain([0,d3.max(bardata.values,get_values)])
@@ -194,7 +175,7 @@
                     .attr("y", function(d){
                         return height - yscale(d.val);
                     })                    
-                    .attr("width", Math.floor(width/(max_year - min_year)))
+                    .attr("width", Math.floor(width/(lastYear - firstYear)))
                     .attr("height", function(d) {
                         return yscale(d.val);
                     })
@@ -202,19 +183,6 @@
                     .style("opacity",0.5);
                 });
         }
-
-        function get_winsize(coord){
-            var w = window,
-            d = document,
-            e = d.documentElement,
-            g = d.getElementsByTagName('body')[0],
-            x = w.innerWidth || e.clientWidth || g.clientWidth,
-            y = w.innerHeight|| e.clientHeight|| g.clientHeight;
-            if(coord == "w") return x;
-            if(coord == "h") return y;
-            return undefined;
-        }
-
 
         function init_tooltip(){
             tooltip = d3.select("body")
@@ -233,9 +201,12 @@
 
         function titlebox_fill(data){
             titlebox.text(data.key);
-            titlebox.bottom.text(data.descr);
+            if (data.descr !== ''){
+                titlebox.bottom.text(data.descr);
+            } else {
+                titlebox.bottom.text("No info");
+            }
             var margin = $("#bottom-container").height() - $("#title-head").height() - $("#title-descr").height();
-            log(margin)
             $("#titledescr-container").css("margin-top", margin/2);
         }
 

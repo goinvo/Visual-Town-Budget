@@ -11,7 +11,9 @@ body,html{
 
 body {
 
- background-color: rgb(249,249,249)
+
+  background-image: url(/img/debut_light.png);
+  background-repeat:repeat;
 }
 
 div {
@@ -28,9 +30,14 @@ div, text {
 }
 
 #avb-menubar{
-  -moz-box-shadow:inset 0px -2px 5px gray;
+/*  -moz-box-shadow:inset 0px -2px 5px gray;
   -webkit-box-shadow:inset 0px -2px 5px gray;
-  box-shadow:inset 0px -2px 5px gray;
+  box-shadow:inset 0px -2px 5px gray;*/
+  background-color: rgb(249,249,249);
+
+  border-color:lightgrey;
+  border-width:1px;
+  border-bottom-style:solid;
   padding-bottom: 1%;
 }
 
@@ -48,6 +55,8 @@ div, text {
 
 #bottom-container {
   position: relative;
+  margin-top:15px; 
+  margin-bottom:1%; 
   padding: 1%;
   text-align: left;
   white-space: normal;
@@ -57,13 +66,38 @@ div, text {
   -webkit-border-radius: 6px;
   -moz-border-radius: 6px;
   border-radius: 6px;
-  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-  -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-  -webkit-background-clip: padding-box;
-  -moz-background-clip: padding;
   background-clip: padding-box;
   height: 250px;
+}
+
+
+.arrow_box {
+  position: relative;
+  background: #f9f9f9;
+  border: 1px solid #a3a3a3;
+}
+.arrow_box:after, .arrow_box:before {
+  bottom: 100%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+}
+.arrow_box:after {
+  border-color: rgba(249, 249, 249, 0);
+  border-bottom-color: #f9f9f9;
+  border-width: 10px;
+  left: 10%;
+  margin-left: -10px;
+}
+.arrow_box:before {
+  border-color: rgba(163, 163, 163, 0);
+  border-bottom-color: #a3a3a3;
+  border-width: 11px;
+  left: 10%;
+  margin-left: -11px;
 }
 
 .grey {
@@ -105,9 +139,15 @@ div, text {
 
 #chart .axis text {
   font-family: "Helvetica Neue";
-  font-size: 0.8em;
-  cursor: default;
+  font-size: 0.8em;  
   fill: grey;
+}
+
+#chart .thisYearAxis {
+  fill : black;
+  font-size: 0.8em; 
+  font-width: bold;
+
 }
 
 #chart .multiarea {
@@ -202,19 +242,14 @@ div, text {
   width: 1200px;
 }
 
-#bottom-container{
-  min-width: 1200px;
-}
 
 #vdivider {
   left:240px;
 }
 
-
-
 @media only screen and (device-width: 768px){ 
   body,html{
-    font-size: 10px;
+    font-size: 12px;
   }
 
   .container {
@@ -223,11 +258,10 @@ div, text {
 
   #bottom-container{
     height: 200px;
-    min-width: 980px;
   }
 
   #navigation-container{
-    height: 425px;
+    height: 420px;
   }
 
   #vdivider {

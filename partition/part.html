@@ -54,7 +54,7 @@ var vis = d3.select("#body").append("div")
     .attr("width", w)
     .attr("height", h);
 
-var cur_index = 6,
+var yearIndex = 6,
     width_factor = 1;
 
 // var location = new Object();
@@ -62,7 +62,7 @@ var cur_index = 6,
 
 
 var partition = d3.layout.partition()
-    .value(function(d) { return d.values[cur_index].val; })
+    .value(function(d) { return d.values[yearIndex].val; })
     .children(function(d) { return d.sub;});
 
 // d3.json("/data/arlington2.json", function(json) {

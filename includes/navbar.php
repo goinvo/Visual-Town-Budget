@@ -3,6 +3,7 @@
         <div class="row-fluid" style="height:50%;"> 
           <div id="home-button" class="span3" style="position:relative;">
 
+            <div style="margin-left:20px;">
             <div class="grey" style="font-size:2.5em;" >
               <div style="display:inline;">
                Arlington
@@ -10,6 +11,8 @@
              <img src="/img/logo@High.png" width="30" height="30" />
            </div>
            <div> Town, Budget, Visualized </div>
+         </div>
+
            <div id="vdivider"></div>
          </div>
          <div id="avb-links" class="span9">

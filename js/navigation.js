@@ -31,8 +31,8 @@ avb.navigation = function(){
 
         var partition = d3.layout.partition()
         .value(function(d) { 
-            // return Math.max(20000000,d.values[cur_index].val);
-            return d.values[cur_index].val;
+            // return Math.max(20000000,d.values[yearIndex].val);
+            return d.values[yearIndex].val;
         })
         .children(function(d) { return d.sub;});
 

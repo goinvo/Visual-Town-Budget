@@ -5,22 +5,18 @@
       <div id="navigation" style="height:100%;width:100%;"> </div>
     </div>
 
-    <div class="row-fluid bottom" id="bottom-container" style="width:auto; margin-top:1%; margin-bottom:1%; ">
-      <div class="arrow"> </div>
+    <div class="row-fluid arrow_box" id="bottom-container" style="width:auto;">
       <div>
         <div id="title-container" class="span3">
-          <div class="row-fluid">
-            <div class="span12" style="margin-top:1%; "> 
+
+            <div  style="margin-top:1%; "> 
               <span id="title-head"></span>
             </div>
-          </div>
-          <div class="row-fluid">
-            <div id="titledescr-container" class="span12"> 
+
+            <div id="titledescr-container" > 
               <span id="title-descr"></span>
             </div>
           </div>
-        </div>
-
         <div class="span5" id="chart" style="height:100%;"> </div>
         <div class="span4" id="cards" > </div>
       </div>

@@ -8,14 +8,14 @@ avb.cards = function(){
         amount : {
             title : "Amount",
             icon : "/img/Amount@High.png",
-            value : function(d) { return formatcurrency(d.values[cur_index].val); },
-            side : function() { return " as of " + cur_year.toString() + "."}
+            value : function(d) { return formatcurrency(d.values[yearIndex].val); },
+            side : function() { return " as of " + thisYear.toString() + "."}
         },
         impact : {
             title : "Impact",
             icon : "/img/Impact@High.png",
-            value : function(d) { return Math.max(0.01,(Math.round(d.values[cur_index].val*100*100/root.values[cur_index].val)/100)).toString() + "%"; },
-            side : "of total."
+            value : function(d) { return Math.max(0.01,(Math.round(d.values[yearIndex].val*100*100/root.values[yearIndex].val)/100)).toString() + "%"; },
+            side : " of total."
         },
         growth : {
             title : "Growth",
@@ -67,7 +67,7 @@ avb.cards = function(){
     },
 
     update = function (data) {
-        d3.select("#cardtitle").text(data.name + " in " + cur_year.toString());
+        d3.select("#cardtitle").text(data.name + " in " + thisYear.toString());
         for(var i=0; i < deck.length; i++) {
             cardstack[i].html(Mustache.render($('#card-template').html(),deck[i]));
             cardstack[i].select(".cardvalue").html(deck[i].value(data) + 
@@ -88,8 +88,8 @@ avb.cards = function(){
 
 
     growth = function(data){
-        var previous = (data.values[cur_index-1] !== undefined) ? data.values[cur_index-1].val : 0;
-        var perc = Math.round(100 * 100 * (data.values[cur_index].val - previous) / data.values[cur_index].val)/100;
+        var previous = (data.values[yearIndex-1] !== undefined) ? data.values[yearIndex-1].val : 0;
+        var perc = Math.round(100 * 100 * (data.values[yearIndex].val - previous) / data.values[yearIndex].val)/100;
         if(perc > 0) {
             return "+ " + perc.toString() + "% compared to last year.";
         } else {

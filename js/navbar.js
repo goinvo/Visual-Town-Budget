@@ -21,7 +21,7 @@ avb.navbar = function(){
 		if(!jQuery.browser.mobile) {
 
 			$('#yeardrop-list').html('');
-			for(var i=min_year; i<=max_year; i++) {
+			for(var i=firstYear; i<=lastYear; i++) {
 				var html = '<li role="presentation"><a role="menuitem" tabindex="-1" href="#">' + i +'</a></li>';
 				$('#yeardrop-list').append(html);
 				$('#yeardrop-list li :last').click(function() {
@@ -30,13 +30,13 @@ avb.navbar = function(){
 					changeyear(year);
 				});
 			};
-			$('#yeardrop-label').html(cur_year + ' <b class="caret"></b>');
+			$('#yeardrop-label').html(thisYear + ' <b class="caret"></b>');
 			$('#yeardrop-container').show();
 		} else {
 			$('#yeardrop-container-mobile').html('');
-			for(var i=min_year; i<=max_year; i++) {
+			for(var i=firstYear; i<=lastYear; i++) {
 				var html = '<option'
-				+ ((i === cur_year) ? ' selected="selected"' : ' ')
+				+ ((i === thisYear) ? ' selected="selected"' : ' ')
 				+ 'value="' + i + '">' + i + '</option>';
 				$('#yeardrop-container-mobile').append(html);
 			}
