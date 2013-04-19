@@ -17,40 +17,42 @@
   <script src ="/js/lib/d3/d3.js"></script>
   <script src ="/js/lib/jquery/jquery-1.9.1.min.js"></script>
   <script src ="/js/lib/bootstrap.min.js"></script>
+  <script src ="/js/lib/detectmobilebrowser.js"></script>
   <script src ="/js/navigation.js"></script>
   <script src ="/js/chart.js"></script>
   <script src ="/js/cards.js"></script>
   <script src ="/js/avb.js"></script>
-  <script src ="/js/menubuttons.js"></script>
+  <script src ="/js/navbar.js"></script>
   <script src ="/js/legend.js"></script>
 
 
   <script>
   $(document).ready(function(){
-    // var stateObj = {page : '/'};
-    // history.pushState(stateObj, null, '');
 
-    home_init(); 
-  // direct url load
-  <?php
-  $sections  = array("revenues");
-  if(isset($_GET["page"])) {
-    if(in_array($_GET["page"], $sections)) {
-      echo 'avb_init("'.$_GET["page"].'")';
+    avb.navbar.initialize();
+
+    // direct url load
+    <?php
+    $sections  = array("revenues");
+    if(isset($_GET["page"])) {
+      if(in_array($_GET["page"], $sections)) {
+        echo 'avb_init("'.$_GET["page"].'")';
+      } else {
+        echo 'loadthumbails();';
+      }
     } else {
       echo 'loadthumbails();';
     }
-  } else {
-    echo 'loadthumbails();';
-  }
-  ?>
-});
+    ?>
+  });
 
   </script>
 
 
 
-  <body >
+  <body>
+
+
 
     <?php
     require_once $includePath.'/navbar.php';

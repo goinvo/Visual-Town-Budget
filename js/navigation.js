@@ -1,17 +1,16 @@
 var avb = avb || {};
 
 avb.navigation = function(){
-	var navigation,
+	var nav,
 
 
     initialize = function(data) {
         var w = $('#navigation').width(),
         h = $('#navigation').height(),
-        x = d3.scale.linear().range([0, w]),
-        y = d3.scale.linear().range([0, h]),
         color = d3.scale.category20c();
 
-        navigation = d3.select("#navigation").append("div")
+
+        nav = d3.select("#navigation").append("div")
         .attr("class", "chart")
         .style("width", w)
         .style("height", h)
@@ -19,53 +18,60 @@ avb.navigation = function(){
         .attr("width", w)
         .attr("height", h);
 
+        nav.h = h;
+        nav.w = w;
+
+        update(data);
+    },
+
+    update = function(data){
+
+        nav.x = d3.scale.linear().range([0, nav.w]),
+        nav.y = d3.scale.linear().range([0, nav.h])
+
         var partition = d3.layout.partition()
         .value(function(d) { 
-            // return Math.max(20000000,d.values[cur_index].val); 
+            // return Math.max(20000000,d.values[cur_index].val);
             return d.values[cur_index].val;
         })
         .children(function(d) { return d.sub;});
 
-        var g = navigation.selectAll("g")
+        nav.selectAll("g").remove();
+
+        var g = nav.selectAll("g")
         .data(partition.nodes(data))
         .enter().append("svg:g")
-        .attr("transform", function(d) { return "translate(" + (x(d.y)) + "," + y(d.x) + ")"; })
-        .on("click", zoneClick);
+        .attr("transform", function(d) { return "translate(" + (nav.x(d.y)) + "," + nav.y(d.x) + ")"; })
+        .on("click", zoneClick)
+        .html('');
 
-        var kx = w / (data.dx),
-        ky = h / 1;
-
-        navigation.x = x;
-        navigation.y = y;
-        navigation.kx = kx;
-        navigation.ky = ky;
-        navigation.h = h;
-        navigation.w = w;
+        nav.kx = nav.w / (data.dx),
+        nav.ky = nav.h / 1;
 
         var color = d3.scale.category20c();
 
         g.append("svg:rect")
-        .attr("width", data.dy * kx)
-        .attr("height", function(d) { return d.dx * ky; })
+        .attr("width", data.dy * nav.kx)
+        .attr("height", function(d) { return d.dx * nav.ky; })
         .attr("class", function(d) { return d.children ? "parent" : "parent"; })
         .style("fill", function(d) { return color((d.children ? d : d.parent).key); });
 
-        navigation.labelTitleHeight = 12,
-        navigation.labelValueHeight = 18;
+        nav.labelTitleHeight = 12,
+        nav.labelValueHeight = 18;
 
         g.append("svg:g")
         .classed("labels", true);
 
         g.selectAll("g .labels").each(function(d) {
-                var zoneHeight = d.dx * ky;
+                var zoneHeight = d.dx * nav.ky;
 
                 // title
                 var titleLabel = d3.select(this)
                 .append("text")
                 .text(d.key)
                 .attr("x", 0)
-                .attr("y", navigation.labelTitleHeight)
-                .attr("font-size",navigation.labelTitleHeight)
+                .attr("y", nav.labelTitleHeight)
+                .attr("font-size",nav.labelTitleHeight)
                 .style("opacity", 0);
 
                 // value
@@ -73,11 +79,11 @@ avb.navigation = function(){
                 .append("text")
                 .text(formatcurrency(d.value))
                 .attr("x", 0)
-                .attr("y", navigation.labelTitleHeight +navigation.labelTitleHeight + 5)
+                .attr("y", nav.labelTitleHeight +nav.labelTitleHeight + 5)
                 .attr("font-size", function(d) {
-                    return navigation.labelTitleHeight + navigation.labelValueHeight/2;
+                    return nav.labelTitleHeight + nav.labelValueHeight/2;
                 })
-                .attr("font-size", navigation.labelValueHeight)
+                .attr("font-size", nav.labelValueHeight)
 
                 .style("opacity", 0);
 
@@ -86,42 +92,45 @@ avb.navigation = function(){
 
             });
 
-        navigation.g = g;
-        navigation.rootnode = navigation.select("g");
+        nav.g = g;
+        nav.rootnode = nav.select("g");
 
         d3.select(window)
         .on("click", function() { zoneClick(data); })
+
+        log("updated");
     },
+
 
     zoneClick = function(d){
 
         // back to rootnode if clicked on same level
-        if(navigation.lastClicked !== undefined &&
-            navigation.lastClicked.depth !== 0 &&
-            d.depth === navigation.lastClicked.depth){
-            zoneClick.call(navigation.rootnode.node(),navigation.rootnode.datum());
+        if(nav.lastClicked !== undefined &&
+            nav.lastClicked.depth !== 0 &&
+            d.depth === nav.lastClicked.depth){
+            zoneClick.call(nav.rootnode.node(),nav.rootnode.datum());
         return;
     }
-    navigation.lastClicked = d;
+    nav.lastClicked = d;
     avb.chart.drawline(d, d3.select(this).select("rect").style("fill"), true);
     avb.cards.update(d);
     titlebox_fill(d);
 
-    var x = navigation.x,
-    y = navigation.y,
-    kx = navigation.kx,
-    ky = navigation.ky,
-    h = navigation.h,
-    w = navigation.w,
-    g = navigation.g;
+    var x = nav.x,
+    y = nav.y,
+    kx = nav.kx,
+    ky = nav.ky,
+    h = nav.h,
+    w = nav.w,
+    g = nav.g;
 
     kx = (d.y ? w - 40 : w) / (1 - d.y);
     ky = h / d.dx;
-    navigation.ky = ky;
+    nav.ky = ky;
 
     y.domain([d.x, d.x + d.dx]);
     x.domain([d.y,1]).range([d.y ? 40 : 0, w]);
-    navigation.x = x;
+    nav.x = x;
 
     var t = g.transition()
     .duration(d3.event.altKey ? 7500 : 750)
@@ -145,22 +154,22 @@ avb.navigation = function(){
 
 
 transform = function(d){
-    if(d.dx * navigation.ky < (navigation.labelTitleHeight + navigation.labelValueHeight + 5)) {
-        return "translate(8," + ((d.dx * navigation.ky / 2) - navigation.labelTitleHeight/2) + ")";
+    if(d.dx * nav.ky < (nav.labelTitleHeight + nav.labelValueHeight + 5)) {
+        return "translate(8," + ((d.dx * nav.ky / 2) - nav.labelTitleHeight/2) + ")";
     }
-    return "translate(8," + ((d.dx * navigation.ky / 2) - (navigation.labelTitleHeight + navigation.labelValueHeight + 5)/2) + ")";
+    return "translate(8," + ((d.dx * nav.ky / 2) - (nav.labelTitleHeight + nav.labelValueHeight + 5)/2) + ")";
 };
 
 opacity = function(d, duration) {
     if(duration === undefined) duration = 0;
 
-    var zoneHeight = d.dx * navigation.ky,
+    var zoneHeight = d.dx * nav.ky,
         titleOpacity = 0,
         valueOpacity = 0;
-    if(zoneHeight > (navigation.labelTitleHeight + navigation.labelValueHeight + 5)) {
+    if(zoneHeight > (nav.labelTitleHeight + nav.labelValueHeight + 5)) {
         valueOpacity = 1;
     } 
-    if(zoneHeight > ( navigation.labelValueHeight + 8)) {
+    if(zoneHeight > ( nav.labelValueHeight + 8)) {
         titleOpacity = 1;
     } 
 
@@ -170,6 +179,7 @@ opacity = function(d, duration) {
 };
 
 return{
- initialize : initialize
+ initialize : initialize,
+ update : update
 }
 }();

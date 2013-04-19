@@ -35,9 +35,6 @@ avb.chart = function(){
 		chart.linestack = [];
 		chart.xscale = d3.scale.linear().domain([min_year, max_year]).range([chart.xmargin, chart.width]);
 
-		var today = svgtext_draw(chart, chart.xscale(cur_year), 15, "Today", "svggrey");
-		translate(today, - today.node().getBBox().width/2,0);
-
 		// controles
 		chart.modes = [ { key : "Simple", disabled : false}, {key : "Detailed", disabled : true} ];
 		
@@ -171,7 +168,6 @@ avb.chart = function(){
         .attr("x2", chart.xscale(cur_year))
         .attr("y1", 20)
         .attr("y2", chart.height - chart.ymargin)
-        .style("stroke-width",2)
         .style("stroke","black");
 
         //non-projection area
@@ -186,13 +182,14 @@ avb.chart = function(){
         
         // non-projection line
         container.append("svg:path").attr("d", line(data.values.slice(0,projected +1)))
-        .attr("class","graphline")
+        .classed("chartline", true)
         .style("stroke", color)
         .style("opacity", 0.6);
         
         // projection line
         container.append("svg:path").attr("d", line(data.values.slice(projected, data.values.length )))
-        .attr("class","graphline_proj")
+        .classed("chartline", true)
+        .classed("chartline-projection", true)
         .style("stroke", color)
         .style("opacity", 0.6);
 

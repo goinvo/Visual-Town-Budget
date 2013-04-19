@@ -9,7 +9,7 @@ avb.cards = function(){
             title : "Amount",
             icon : "/img/Amount@High.png",
             value : function(d) { return formatcurrency(d.values[cur_index].val); },
-            side : function() { return "as of " + cur_year.toString() + "."}
+            side : function() { return " as of " + cur_year.toString() + "."}
         },
         impact : {
             title : "Impact",

@@ -58,7 +58,7 @@
 
                 avb.navigation.initialize(jsondata);
 
-                avb.cards.draw(2, 2);
+                avb.cards.draw();
                 avb.cards.update(jsondata);
 
                 avb.chart.initialize();
@@ -111,13 +111,7 @@
 
             function avb_init(name) {
 
-                var stateObj = {page : '/' + name};
-                // history.pushState(stateObj, null, name);
-
-                // window.addEventListener('popstate', function(e) {
-                //   console.log('popstate fired!');
-                //   document.location.href = history.state.page;
-                // });
+                avb.navbar.enableYears();
 
                 d3.select("#avb-home").style("display","none");
                 d3.select("#avb-body").style("display","block");
@@ -148,6 +142,26 @@
                     values : values
                 }
             }
+
+            function changeyear(year){
+                if(year === cur_year) return;
+                cur_year = year;
+                cur_index = cur_year - min_year;
+                avb.navigation.update(root);
+                avb.chart.initialize();
+                avb.chart.drawline(root, "steelblue", true);
+                titlebox_fill(root);
+                avb.cards.update(root);
+            }
+
+
+            function loadthumbails(){
+                getthumbail($("#home-thumb1"),homecolors[0]);
+                getthumbail($("#home-thumb2"),homecolors[2]);
+                getthumbail($("#home-thumb3"),homecolors[1]);
+            }
+
+
 
             function getthumbail(div, color){
 
@@ -233,3 +247,19 @@
         function rotate(obj,degrees) {
             obj.attr("transform","rotate(" + degrees.toString() + " 100 100)");
         }
+
+        // window action code
+
+        // On resize
+        $(window).resize(function() {
+            avb.navbar.reposition();
+        });
+
+        // feedbackify
+
+        // var fby = fby || [];
+        // (function () {
+        //     var f = document.createElement('script'); f.type = 'text/javascript'; f.async = true;
+        //     f.src = '//cdn.feedbackify.com/f.js';
+        //     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(f, s);
+        // })();
