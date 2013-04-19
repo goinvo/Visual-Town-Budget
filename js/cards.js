@@ -7,31 +7,31 @@ avb.cards = function(){
     cards = {
         amount : {
             title : "Amount",
-            icon : "img/Amount@High.png",
+            icon : "/img/Amount@High.png",
             value : function(d) { return formatcurrency(d.values[cur_index].val); },
             side : function() { return "as of " + cur_year.toString() + "."}
         },
         impact : {
             title : "Impact",
-            icon : "img/Impact@High.png",
+            icon : "/img/Impact@High.png",
             value : function(d) { return Math.max(0.01,(Math.round(d.values[cur_index].val*100*100/root.values[cur_index].val)/100)).toString() + "%"; },
             side : "of total."
         },
         growth : {
             title : "Growth",
-            icon : "img/Growth@High.png",
+            icon : "/img/Growth@High.png",
             value : function(d) { return growth(d); },
             side : ""
         },
         source : {
             title : "Source",
-            icon : "img/Growth@High.png",
+            icon : "/img/Growth@High.png",
             value : function() { return "Cherry sheet"; },
             side : ""
         },
         mean : {
             title : "Average",
-            icon : "img/Growth@High.png",
+            icon : "/img/Growth@High.png",
             value : function(d) { return formatcurrency(d3.mean(d.values, get_values)); },
             side : ""
         }

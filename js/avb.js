@@ -25,8 +25,6 @@
 
             var layout = new Object();
 
-            var cur_json;
-
             Number.prototype.px=function()
             {
                 return this.toString() + "px";
@@ -43,22 +41,16 @@
                 }
             }
 
-            function onjsonload(jsondata) {
-                cur_json = jsondata;
 
+            function onjsonload(jsondata) {
                 root = jsondata;
                 
                 titlebox_init();
                 titlebox_fill(jsondata);
 
                 avb.cards.initialize();
-                
                 init_tooltip();
 
-                initsingle(jsondata);
-            }
-
-            function initsingle(jsondata){
                 mode = 1; // single year mode
                 console.log(jsondata)
                 d3.select("#singlelayout").style("display","inline");
@@ -78,15 +70,6 @@
 
 
                 console.log("UI Loaded.");
-            }
-
-            function resize(){
-                if (!home) {
-                    avb.navigation.initialize(cur_json, 0, 0);
-                    avb.chart.initialize();
-                    avb.chart.drawline(cur_json, "steelblue", true);
-                    avb.cards.reposition();
-                }
             }
             
             var log = function(d) {
@@ -127,14 +110,24 @@
             }
 
             function avb_init(name) {
+
+                var stateObj = {page : '/' + name};
+                // history.pushState(stateObj, null, name);
+
+                // window.addEventListener('popstate', function(e) {
+                //   console.log('popstate fired!');
+                //   document.location.href = history.state.page;
+                // });
+
                 d3.select("#avb-home").style("display","none");
                 d3.select("#avb-body").style("display","block");
                 d3.selectAll("svg").remove();
 
                 home = false;
-                section = name.toLowerCase();
-                d3.json("data/arlington2.json", onjsonload);
+                section = name;
+                d3.json("/data/" + section + ".json", onjsonload);
             }
+
 
             function add_filter(container){
                 filter = container.append("svg:defs")
@@ -158,7 +151,7 @@
 
             function getthumbail(div, color){
 
-                d3.json("data/home.json", function(data){
+                d3.json("/data/home.json", function(data){
                     var width = Math.floor(div.width());
                     var height = Math.round(div.height());
                     var barsvg = d3.select(div.get()[0]).append("svg")
@@ -209,77 +202,34 @@
         }
 
 
-    function add_label(group, rect, label, css){
-        var padding = 5;
-        var t = group.append("text")
-        .attr("class", css)
-        .attr("x", rect.attr("x"))
-        .attr("y", rect.attr("y"));
-        var words = label.split(" ");
-        var tempText = "";
-        var maxWidth = rect.attr("width");
+        function init_tooltip(){
+            tooltip = d3.select("body")
+            .append("div")
+            .style("position", "absolute")
+            .style("z-index", "10")
+            .style("visibility", "hidden")
+            .attr("class","toolt");
+        }
 
-        var get_tspan = function () {
-            var new_tspan = t.append("tspan");
-            var font_size = 15;
-            var dy = new_tspan.style("font-size",font_size);
-                    return new_tspan.attr("x",5)//
-                    .attr("dy", font_size);
-                };
-                var c_tspan = get_tspan();
-                for (var i=0; i<words.length; i++) {
-                    c_tspan.text(tempText + " " + words[i]);
-                    if ((t.node().getBBox().width  + padding) > maxWidth) {
-                        c_tspan.text(tempText);
-                        c_tspan = get_tspan();
-                        tempText = words[i];
-                    } else {
-                        tempText += (" " + words[i]);
-                    }
-                    if (i == (words.length -1) && c_tspan.text() === ""){
-                        c_tspan.remove();
-                    }
-                }
-                if ((t.node().getBBox().height + padding) > rect.attr("height")) {
-                    t.remove();
-                } else                     
-                // centering//
-                var mid_y = (parseFloat(rect.attr("height")) - (t.node().getBBox().height))/2;
-                t.attr("y",(parseFloat(rect.attr("y")) + mid_y));
-                var mid_x = (parseFloat(rect.attr("width")) - (t.node().getBBox().width))/2;
-                    t.selectAll("tspan").attr("x",(parseFloat(rect.attr("x")) + mid_x).toString());//
-                    
-                }
+        function titlebox_init(x, y, width, height) {
+            titlebox = d3.select("#title-head");
+            titlebox.bottom = d3.select("#title-descr");
+        }
 
 
-                function init_tooltip(){
-                    tooltip = d3.select("body")
-                    .append("div")
-                    .style("position", "absolute")
-                    .style("z-index", "10")
-                    .style("visibility", "hidden")
-                    .attr("class","toolt");
-                }
-
-                function titlebox_init(x, y, width, height) {
-                    titlebox = d3.select("#title-head");
-                    titlebox.bottom = d3.select("#title-descr");
-                }
+        function titlebox_fill(data){
+            titlebox.text(data.key);
+            titlebox.bottom.text(data.descr);
+            var margin = $("#bottom-container").height() - $("#title-head").height() - $("#title-descr").height();
+            log(margin)
+            $("#titledescr-container").css("margin-top", margin/2);
+        }
 
 
-                function titlebox_fill(data){
-                    titlebox.text(data.key);
-                    titlebox.bottom.text(data.descr);
-                    var margin = $("#bottom-container").height() - $("#title-head").height() - $("#title-descr").height();
-                    log(margin)
-                    $("#titledescr-container").css("margin-top", margin/2);
-                }
+        function translate(obj,x,y) {
+            obj.attr("transform", "translate(" + (x).toString() +"," + (y).toString() + ")");
+        }
 
-
-                function translate(obj,x,y) {
-                    obj.attr("transform", "translate(" + (x).toString() +"," + (y).toString() + ")");
-                }
-
-                function rotate(obj,degrees) {
-                    obj.attr("transform","rotate(" + degrees.toString() + " 100 100)");
-                }
+        function rotate(obj,degrees) {
+            obj.attr("transform","rotate(" + degrees.toString() + " 100 100)");
+        }

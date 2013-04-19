@@ -59,7 +59,7 @@ avb.chart = function(){
 		chart.controls = legend(chart.modes, chart.width/2, "#666", modechange);
 
 		if(d.key === "Detailed") {
-			add_subsections(cur_json);
+			add_subsections(chart.json);
 		} else {
 			remove_subsections(true);
 		}
@@ -101,6 +101,8 @@ avb.chart = function(){
 
 
 	drawline = function(data, color, clear) {
+
+		chart.json = data;
 
 		if(chart.legend !== undefined) {
 			chart.legend.remove();
