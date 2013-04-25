@@ -55,10 +55,6 @@
 
                 avb.chart.initialize();
                 avb.chart.drawline(jsondata, "steelblue", true);
-                
-                // $('#bottom-container').css("display","none");
-                // avb.chartfork.initialize();
-                // avb.chartfork.draw(jsondata);
 
 
                 console.log("UI Loaded.");

@@ -16,6 +16,7 @@ avb.chart = function(){
 		layout.chartsvg.width = $("#chart").width();
 
 		// compute height to align with bars
+    log($('#chart').height())
 		layout.chartsvg.height = $('#chart').height();
 
 
@@ -39,7 +40,6 @@ avb.chart = function(){
 		// controles
 		chart.modes = [ { key : "Simple", disabled : false}, {key : "Detailed", disabled : true} ];
 		
-		chart.controls = legend(chart.modes, chart.width/2, "#666", modechange);
 	},
 
 	modechange = function(d, i){
@@ -102,13 +102,6 @@ avb.chart = function(){
 
 		chart.json = data;
 
-		if(chart.legend !== undefined) {
-			chart.legend.remove();
-		}
-
-		var label = data.key.length > 18 ? data.key.substr(0,18) + ".." : data.key;
-		chart.legend = legend( [{ key : label }], chart.width + 15, color);
-
 		if(typeof(clear)==='undefined') clear = false;
 		if(clear) {
 			for(var i=0; i<chart.linestack.length; i++) {
@@ -117,7 +110,7 @@ avb.chart = function(){
 		}
 
 		var yscale = d3.scale.linear().domain([0,d3.max(data.values, get_values)*1.2])
-		.range([chart.height - chart.ymargin, 20]);
+		.range([chart.height - chart.ymargin, 0]);
 		chart.yscale = yscale;
 		var xscale = chart.xscale;
 
@@ -127,7 +120,7 @@ avb.chart = function(){
 		container.xgrid_axis = d3.svg.axis()
 		.scale(xscale)
 		.orient("bottom")
-		.tickSize(-chart.height + chart.ymargin + 20, 0, 0)
+		.tickSize(-chart.height + chart.ymargin, 0, 0)
 		.ticks(6)
 		.tickFormat(function (d) { 
 			return "";});

@@ -1,0 +1,28 @@
+/*
+	File Overview:	Basic type styles.
+	Author:			Michael Bester
+*/
+
+@include establish-baseline();
+
+body {
+	color: $base-font-color;
+	font-family:"Helvetica Neue";
+}
+
+h1 {
+	@include adjust-font-size-to($base-font-size * 2);
+}
+
+h2 {
+	@include adjust-font-size-to(22px);
+}
+
+h3 {
+	@include adjust-font-size-to(20px);
+
+}
+
+h4 {
+	@include adjust-font-size-to(18px);
+}

@@ -1,0 +1,23 @@
+/*
+	File Overview:	Basic structural styles.
+	Author:			Michael Bester
+*/
+
+html {
+	min-height: 100%;
+	margin-bottom: 1px;
+}
+
+body {
+	@include reset-box-model;
+	background: $page-background-color;
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
+	background-image: url(/img/debut_light.png);
+}
+
+.group {
+	@include pie-clearfix;
+}

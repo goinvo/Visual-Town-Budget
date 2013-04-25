@@ -5,7 +5,7 @@
           <div id="myCarousel" class="carousel slide">
             <div class="carousel-inner">
               <div class="item active">
-                <img src="/img/slide03.jpg" alt="">
+                <img src="img/slide03.jpg" alt="">
                 <div class="container">
                   <div class="carousel-caption">
                     <h1>A different way to see our budget.</h1>

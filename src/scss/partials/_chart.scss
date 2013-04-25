@@ -1,0 +1,60 @@
+
+#chart {
+  .nv-legend .disabled circle {
+    fill-opacity: 0;
+  }
+  .chartline {
+    fill: none;
+    stroke-width: 3;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+  }
+  .chartline-projection {
+    stroke-dasharray: 5, 5;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+  }
+  .browser text {
+    text-anchor: end;
+  }
+  .axis {
+    path, line {
+      stroke: grey;
+      stroke-width: 0;
+      stroke-linejoin: round;
+      stroke-linecap: round;
+      shape-rendering: crispEdges;
+    }
+    text {
+      font-family: "Helvetica Neue";
+      font-size: 0.8em;
+      fill: grey;
+    }
+  }
+  .thisYearAxis {
+    fill: black;
+    font-size: 0.8em;
+    font-width: bold;
+  }
+  .multiarea {
+    fill-opacity: 0.65;
+  }
+  .multiline {
+    fill: none;
+    stroke-width: 2px;
+    opacity: 1;
+  }
+  .multiaxis path {
+    stroke-width: 0;
+    fill: none;
+  }
+  .multigrid {
+    .tick {
+      stroke: lightgrey;
+      opacity: 0;
+    }
+    path {
+      stroke-width: 1;
+    }
+  }
+}

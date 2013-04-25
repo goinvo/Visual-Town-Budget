@@ -1,0 +1,23 @@
+/*
+	File Overview:	Base scss definitions
+	Author:			Michael Bester
+*/
+
+/* Compass global imports */
+@import "compass/css3";
+@import "compass/reset/utilities";
+@import "compass/typography/vertical_rhythm";
+@import "compass/utilities/general/clearfix";
+
+/* Configure for target Browser Set
+   Chrome, IE8+
+============================================*/
+$experimental-support-for-opera:		false;
+$experimental-support-for-mozilla:		false;
+$experimental-support-for-khtml:		false;
+
+/* Global variables */
+$base-font-size: 16px;
+$base-line-height: 24px;
+$base-font-color: rgb(42, 42, 42);
+$page-background-color: rgb(242,242,242);

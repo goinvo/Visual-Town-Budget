@@ -1,0 +1,517 @@
+/*
+	File Overview:	Global SCSS
+	Author:			Michael Bester
+	Description:	Includes all styles for primary styles for the site.
+*/
+/*
+	File Overview:	Base scss definitions
+	Author:			Michael Bester
+*/
+/* Compass global imports */
+/* Configure for target Browser Set
+   Chrome, IE8+
+============================================*/
+/* Global variables */
+/*
+	File Overview:	Basic structural styles.
+	Author:			Michael Bester
+*/
+/* line 6, ../../scss/partials/_structure.scss */
+html {
+  min-height: 100%;
+  margin-bottom: 1px;
+}
+
+/* line 11, ../../scss/partials/_structure.scss */
+body {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: #f2f2f2;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  background-image: url(/img/debut_light.png);
+}
+
+/* line 21, ../../scss/partials/_structure.scss */
+.group {
+  *zoom: 1;
+}
+/* line 38, ../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/utilities/general/_clearfix.scss */
+.group:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/*
+	File Overview:	Basic type styles.
+	Author:			Michael Bester
+*/
+/* line 61, ../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/typography/_vertical_rhythm.scss */
+* html {
+  font-size: 100%;
+}
+
+/* line 64, ../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/typography/_vertical_rhythm.scss */
+html {
+  font-size: 16px;
+  line-height: 1.5em;
+}
+
+/* line 8, ../../scss/partials/_typography.scss */
+body {
+  color: #2a2a2a;
+  font-family: "Helvetica Neue";
+}
+
+/* line 13, ../../scss/partials/_typography.scss */
+h1 {
+  font-size: 2em;
+  line-height: 1.5em;
+}
+
+/* line 17, ../../scss/partials/_typography.scss */
+h2 {
+  font-size: 1.375em;
+  line-height: 2.18182em;
+}
+
+/* line 21, ../../scss/partials/_typography.scss */
+h3 {
+  font-size: 1.25em;
+  line-height: 1.2em;
+}
+
+/* line 26, ../../scss/partials/_typography.scss */
+h4 {
+  font-size: 1.125em;
+  line-height: 1.33333em;
+}
+
+/* line 1, ../../scss/partials/_home.scss */
+body {
+  padding-bottom: 40px;
+  color: #5a5a5a;
+}
+
+/* line 6, ../../scss/partials/_home.scss */
+.carousel {
+  margin-bottom: 60px;
+}
+/* line 8, ../../scss/partials/_home.scss */
+.carousel .container {
+  position: relative;
+  z-index: 9;
+}
+
+/* line 14, ../../scss/partials/_home.scss */
+.carousel-control {
+  height: 80px;
+  margin-top: 0;
+  font-size: 120px;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
+  background-color: transparent;
+  border: 0;
+  z-index: 10;
+}
+
+/* line 25, ../../scss/partials/_home.scss */
+.carousel .item {
+  height: 500px;
+}
+/* line 28, ../../scss/partials/_home.scss */
+.carousel img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  height: 500px;
+}
+
+/* line 37, ../../scss/partials/_home.scss */
+.carousel-caption {
+  background-color: transparent;
+  position: static;
+  max-width: 550px;
+  padding: 0 20px;
+  margin-top: 200px;
+}
+/* line 43, ../../scss/partials/_home.scss */
+.carousel-caption h1, .carousel-caption .lead {
+  margin: 0;
+  line-height: 1.25;
+  color: #fff;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
+}
+/* line 49, ../../scss/partials/_home.scss */
+.carousel-caption .btn {
+  margin-top: 10px;
+}
+
+/* line 55, ../../scss/partials/_home.scss */
+.marketing .span4 {
+  text-align: center;
+}
+/* line 58, ../../scss/partials/_home.scss */
+.marketing h2 {
+  font-weight: normal;
+}
+/* line 61, ../../scss/partials/_home.scss */
+.marketing .span4 p {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+@media (max-width: 979px) {
+  /* line 68, ../../scss/partials/_home.scss */
+  .container.navbar-wrapper {
+    margin-bottom: 0;
+    width: auto;
+  }
+
+  /* line 73, ../../scss/partials/_home.scss */
+  .carousel .item {
+    height: 500px;
+  }
+  /* line 76, ../../scss/partials/_home.scss */
+  .carousel img {
+    width: auto;
+    height: 500px;
+  }
+}
+@media (max-width: 767px) {
+  /* line 84, ../../scss/partials/_home.scss */
+  .carousel {
+    margin-left: -20px;
+    margin-right: -20px;
+  }
+  /* line 88, ../../scss/partials/_home.scss */
+  .carousel .item, .carousel img {
+    height: 300px;
+  }
+
+  /* line 92, ../../scss/partials/_home.scss */
+  .carousel-caption {
+    width: 65%;
+    padding: 0 70px;
+    margin-top: 100px;
+  }
+  /* line 96, ../../scss/partials/_home.scss */
+  .carousel-caption h1 {
+    font-size: 30px;
+  }
+  /* line 99, ../../scss/partials/_home.scss */
+  .carousel-caption .lead, .carousel-caption .btn {
+    font-size: 18px;
+  }
+
+  /* line 103, ../../scss/partials/_home.scss */
+  .marketing .span4 + .span4 {
+    margin-top: 40px;
+  }
+}
+/* line 11, ../../scss/partials/_avb.scss */
+div {
+  cursor: default;
+}
+
+/* line 15, ../../scss/partials/_avb.scss */
+text {
+  cursor: default;
+}
+
+/* line 19, ../../scss/partials/_avb.scss */
+.vhscrollable {
+  height: 150px;
+  overflow: auto;
+}
+
+/* line 24, ../../scss/partials/_avb.scss */
+#avb-menubar {
+  background-color: #dcdfde;
+  border-color: #aaaaaa;
+  border-width: 1px;
+  border-bottom-style: solid;
+  padding-bottom: 1%;
+}
+/* line 31, ../../scss/partials/_avb.scss */
+#avb-menubar .menubutton {
+  font-size: 1.3em;
+  color: #aaaaaa;
+}
+
+/* line 37, ../../scss/partials/_avb.scss */
+#avb-body {
+  margin-top: 1%;
+  display: none;
+  font-weight: 200;
+}
+
+/* line 43, ../../scss/partials/_avb.scss */
+#bottom-container {
+  position: relative;
+  margin-top: 15px;
+  margin-bottom: 1%;
+  padding: 1%;
+  text-align: left;
+  white-space: normal;
+  /*  background-color: #ffffff;*/
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  background-clip: padding-box;
+  height: 250px;
+}
+
+/* line 60, ../../scss/partials/_avb.scss */
+.arrow_box {
+  position: relative;
+  background: #f9f9f9;
+  border: 1px solid #a3a3a3;
+}
+/* line 64, ../../scss/partials/_avb.scss */
+.arrow_box:after, .arrow_box:before {
+  bottom: 100%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+}
+/* line 73, ../../scss/partials/_avb.scss */
+.arrow_box:after {
+  border-color: rgba(249, 249, 249, 0);
+  border-bottom-color: #f9f9f9;
+  border-width: 10px;
+  left: 10%;
+  margin-left: -10px;
+}
+/* line 80, ../../scss/partials/_avb.scss */
+.arrow_box:before {
+  border-color: rgba(163, 163, 163, 0);
+  border-bottom-color: #a3a3a3;
+  border-width: 11px;
+  left: 10%;
+  margin-left: -11px;
+}
+
+/* line 90, ../../scss/partials/_avb.scss */
+.card-row:first-child {
+  padding-left: 0;
+}
+
+/* line 94, ../../scss/partials/_avb.scss */
+.card {
+  padding-top: 3%;
+  margin-left: 2%;
+}
+
+/* line 99, ../../scss/partials/_avb.scss */
+.card-img {
+  float: left;
+}
+/* line 101, ../../scss/partials/_avb.scss */
+.card-img img {
+  display: block;
+}
+
+/* line 106, ../../scss/partials/_avb.scss */
+.cardtitle {
+  font-size: 1.3em;
+  border: 1px;
+  color: #aaaaaa;
+}
+
+/* line 112, ../../scss/partials/_avb.scss */
+.cardvalue {
+  font-size: 1.3em;
+}
+
+/* line 116, ../../scss/partials/_avb.scss */
+#title-head {
+  margin: 10px 0;
+  font-family: inherit;
+  font-size: 2.5em;
+}
+
+/* line 122, ../../scss/partials/_avb.scss */
+#title-descr {
+  font-size: 1.3em;
+}
+
+/* line 126, ../../scss/partials/_avb.scss */
+#vdivider {
+  border-left: 2px solid #aaaaaa;
+  position: absolute;
+  top: 0;
+  height: 100%;
+}
+
+/* line 133, ../../scss/partials/_avb.scss */
+#navigation rect {
+  stroke: #dcdfde;
+  fill: #aaaaaa;
+  fill-opacity: .8;
+}
+/* line 137, ../../scss/partials/_avb.scss */
+#navigation rect.parent {
+  cursor: pointer;
+  fill: steelblue;
+}
+
+/* line 143, ../../scss/partials/_avb.scss */
+#navigation-container {
+  height: 500px;
+}
+
+/* line 147, ../../scss/partials/_avb.scss */
+.container {
+  width: 1200px;
+}
+
+/* line 151, ../../scss/partials/_avb.scss */
+#vdivider {
+  left: 240px;
+}
+
+/* line 155, ../../scss/partials/_avb.scss */
+#basic-modal-content {
+  display: none;
+}
+
+/* Overlay */
+/* line 161, ../../scss/partials/_avb.scss */
+#simplemodal-overlay {
+  background-color: #000;
+}
+
+/* Container */
+/* line 167, ../../scss/partials/_avb.scss */
+#simplemodal-container {
+  height: 90%;
+  width: 90%;
+  position: relative;
+  padding: 5px;
+  background: #000;
+  border: 1px solid black;
+  border-radius: 11px;
+  background-color: white;
+}
+/* line 176, ../../scss/partials/_avb.scss */
+#simplemodal-container .simplemodal-data {
+  padding: 8px;
+}
+/* line 179, ../../scss/partials/_avb.scss */
+#simplemodal-container a.modalCloseImg {
+  background: url(../img/delete_icon.png) no-repeat;
+  width: 25px;
+  height: 29px;
+  display: inline;
+  z-index: 3200;
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  cursor: pointer;
+}
+/* line 190, ../../scss/partials/_avb.scss */
+#simplemodal-container h3 {
+  color: #84b8d9;
+}
+
+@media only screen and (device-width: 768px) {
+  /* line 196, ../../scss/partials/_avb.scss */
+  body, html {
+    font-size: 12px;
+  }
+
+  /* line 199, ../../scss/partials/_avb.scss */
+  .container {
+    width: 980px;
+  }
+
+  /* line 202, ../../scss/partials/_avb.scss */
+  #bottom-container {
+    height: 200px;
+  }
+
+  /* line 205, ../../scss/partials/_avb.scss */
+  #navigation-container {
+    height: 420px;
+  }
+
+  /* line 208, ../../scss/partials/_avb.scss */
+  #vdivider {
+    left: 196px;
+  }
+}
+/* line 3, ../../scss/partials/_chart.scss */
+#chart .nv-legend .disabled circle {
+  fill-opacity: 0;
+}
+/* line 6, ../../scss/partials/_chart.scss */
+#chart .chartline {
+  fill: none;
+  stroke-width: 3;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+/* line 12, ../../scss/partials/_chart.scss */
+#chart .chartline-projection {
+  stroke-dasharray: 5, 5;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+/* line 17, ../../scss/partials/_chart.scss */
+#chart .browser text {
+  text-anchor: end;
+}
+/* line 21, ../../scss/partials/_chart.scss */
+#chart .axis path, #chart .axis line {
+  stroke: grey;
+  stroke-width: 0;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  shape-rendering: crispEdges;
+}
+/* line 28, ../../scss/partials/_chart.scss */
+#chart .axis text {
+  font-family: "Helvetica Neue";
+  font-size: 0.8em;
+  fill: grey;
+}
+/* line 34, ../../scss/partials/_chart.scss */
+#chart .thisYearAxis {
+  fill: black;
+  font-size: 0.8em;
+  font-width: bold;
+}
+/* line 39, ../../scss/partials/_chart.scss */
+#chart .multiarea {
+  fill-opacity: 0.65;
+}
+/* line 42, ../../scss/partials/_chart.scss */
+#chart .multiline {
+  fill: none;
+  stroke-width: 2px;
+  opacity: 1;
+}
+/* line 47, ../../scss/partials/_chart.scss */
+#chart .multiaxis path {
+  stroke-width: 0;
+  fill: none;
+}
+/* line 52, ../../scss/partials/_chart.scss */
+#chart .multigrid .tick {
+  stroke: lightgrey;
+  opacity: 0;
+}
+/* line 56, ../../scss/partials/_chart.scss */
+#chart .multigrid path {
+  stroke-width: 1;
+}

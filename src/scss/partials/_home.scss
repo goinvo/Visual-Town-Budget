@@ -1,0 +1,106 @@
+body {
+  padding-bottom: 40px;
+  color: #5a5a5a;
+}
+
+.carousel {
+  margin-bottom: 60px;
+  .container {
+    position: relative;
+    z-index: 9;
+  }
+}
+
+.carousel-control {
+  height: 80px;
+  margin-top: 0;
+  font-size: 120px;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
+  background-color: transparent;
+  border: 0;
+  z-index: 10;
+}
+
+.carousel {
+  .item {
+    height: 500px;
+  }
+  img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    height: 500px;
+  }
+}
+
+.carousel-caption {
+  background-color: transparent;
+  position: static;
+  max-width: 550px;
+  padding: 0 20px;
+  margin-top: 200px;
+  h1, .lead {
+    margin: 0;
+    line-height: 1.25;
+    color: #fff;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
+  }
+  .btn {
+    margin-top: 10px;
+  }
+}
+
+.marketing {
+  .span4 {
+    text-align: center;
+  }
+  h2 {
+    font-weight: normal;
+  }
+  .span4 p {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}
+
+@media (max-width: 979px) {
+  .container.navbar-wrapper {
+    margin-bottom: 0;
+    width: auto;
+  }
+  .carousel {
+    .item {
+      height: 500px;
+    }
+    img {
+      width: auto;
+      height: 500px;
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .carousel {
+    margin-left: -20px;
+    margin-right: -20px;
+    .container! {}
+    .item, img {
+      height: 300px;
+    }
+  }
+  .carousel-caption {
+    width: 65%;
+    padding: 0 70px;
+    margin-top: 100px;
+    h1 {
+      font-size: 30px;
+    }
+    .lead, .btn {
+      font-size: 18px;
+    }
+  }
+  .marketing .span4 + .span4 {
+    margin-top: 40px;
+  }
+}

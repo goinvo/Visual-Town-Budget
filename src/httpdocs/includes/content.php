@@ -6,7 +6,7 @@
     </div>
 
     <div class="row-fluid arrow_box" id="bottom-container" style="width:auto;">
-      <div>
+      <div class="row-fluid" style="height:100%">
         <div id="title-container" class="span3">
 
             <div  style="margin-top:1%; "> 
@@ -17,15 +17,24 @@
               <span id="title-descr"></span>
             </div>
           </div>
-        <div class="span5" id="chart" style="height:100%;"> </div>
+        <div class="span5" style="height:100%" > 
+          <div class="row-fluid" style="height:10%" > hello </div>
+          <div id='chart' style="height:90%" class="row-fluid"> </div>
+        </div>
+
         <div class="span4" id="cards" > </div>
       </div>
     </div>
+
+      <div id='mod' style='display:none'>
+          MODAL
+      </div>
+
   </div>
+
   <div id="popover-html" style="display:none;">
     <div id="popover-value"> </div>
   </div>
-
 
 
   <script type="text/html" id="card-template">

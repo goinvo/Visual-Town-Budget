@@ -8,7 +8,7 @@
               <div style="display:inline;">
                Arlington
              </div>
-             <img src="/img/logo@High.png" width="30" height="30" />
+             <img src="img/logo@High.png" width="30" height="30" />
            </div>
            <div> Town, Budget, Visualized </div>
          </div>
