@@ -12,3 +12,10 @@
    Chrome, IE8+
 ============================================*/
 /* Global variables */
+/* line 9, ../../scss/print.scss */
+#simplemodal-container {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  background-color: black !important;
+}

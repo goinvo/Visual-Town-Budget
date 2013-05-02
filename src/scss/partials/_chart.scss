@@ -1,6 +1,4 @@
-
-#chart {
-  .nv-legend .disabled circle {
+.nv-legend .disabled circle {
     fill-opacity: 0;
   }
   .chartline {
@@ -57,4 +55,3 @@
       stroke-width: 1;
     }
   }
-}

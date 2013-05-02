@@ -52,6 +52,7 @@ avb.navigation = function(){
 
         g.append("svg:rect")
         .attr("width", data.dy * nav.kx)
+        .attr("rx",3).attr("ry", 3)
         .attr("height", function(d) { return d.dx * nav.ky; })
         .attr("class", function(d) { return d.children ? "parent" : "parent"; })
         .style("fill", function(d) { return color((d.children ? d : d.parent).key); });
@@ -112,9 +113,9 @@ avb.navigation = function(){
         return;
     }
     nav.lastClicked = d;
-    avb.chart.drawline(d, d3.select(this).select("rect").style("fill"), true);
-    avb.cards.update(d);
-    titlebox_fill(d);
+
+    updateSelection(d, d3.select(this).select("rect").style("fill"))
+
 
     var x = nav.x,
     y = nav.y,

@@ -4,11 +4,11 @@
   <meta charset="utf-8">
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="css/lib/bootstrap/bootstrap.css" rel="stylesheet">
     <script src ="js/lib/jquery/jquery-1.9.1.min.js"></script>
-  <script src ="js/lib/bootstrap.min.js"></script>
-  <script src ="js/lib/bootstrap.min.js"></script>
   <script src ="js/lib/simplemodal/jquery.simplemodal.js"></script>
+
+  <script src="iphone-style-checkboxes.js" type="text/javascript" charset="utf-8"></script>
+  <link rel="stylesheet" href="style.css" type="text/css" media="screen" charset="utf-8" />
 </head>
 
 <style type="text/css">
@@ -50,9 +50,11 @@
 
 <script type="text/javascript">
   $(document).ready(function() {
-    $('#mod').modal();
+    // $('#mod').modal();
+        $('#ex01').iphoneStyle();
   });
-  
+
+
 </script>
 
 <body>
@@ -60,6 +62,12 @@
   <div id='mod' style='display:none'>
   MODAL !!!
   </div>
+
+                  <div>
+                    <label class="dblabel" for="ex01"> lol </label>
+                    <input type="checkbox" id="ex01" />
+                  </div>
+
 
   <div class="bs-docs-example">
     <ul class="nav nav-pills">

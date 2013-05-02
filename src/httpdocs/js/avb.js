@@ -3,15 +3,8 @@
 
             var home;
 
-            var graph_h;
-            var graph_w;
-            // bar dimensions
-            var bar_width;
-            var bar_height;
-            var bar_intra_padding ;
 
             // constants
-            var viewmode;
             var section;
 
             var firstYear = 2006,
@@ -21,6 +14,7 @@
                 yearIndex = thisYear - firstYear;
 
             var root;
+            var currentSelection = new Object();
             
             // object references
             var mysvg;
@@ -36,28 +30,68 @@
 
             function onjsonload(jsondata) {
                 root = jsondata;
+                currentSelection.data = root;
                 
                 titlebox_init();
-                titlebox_fill(jsondata);
-
                 avb.cards.initialize();
-                init_tooltip();
-
-                mode = 1; // single year mode
-                console.log(jsondata)
-                d3.select("#singlelayout").style("display","inline");
-                $("#breadcrumbs-row").slideDown();
-
-                avb.navigation.initialize(jsondata);
-
                 avb.cards.draw();
-                avb.cards.update(jsondata);
+                avb.navigation.initialize(jsondata);
+                avb.chart.initialize('#chart');
+                avb.chart.initializeLayers();
 
-                avb.chart.initialize();
-                avb.chart.drawline(jsondata, "steelblue", true);
 
 
                 console.log("UI Loaded.");
+
+                updateSelection(root, "steelblue")
+            }
+
+            function triggerModal() {
+                $('#modal-container').modal({
+                    onOpen : modalOpen,
+                    onClose : modalClose,
+                    opacity : 70
+                });
+            }
+
+            function updateSelection(data, color) {
+                currentSelection.data = data;
+                currentSelection.color = color;
+
+                avb.chart.drawline(data, color, true);
+                avb.cards.update(data);
+                titlebox_fill(data);
+            }
+
+            function modalOpen(dialog) {
+                $('.popover').hide();
+
+                dialog.data.show();
+                dialog.container.show();
+
+                $('#modal-title .title-head').html(currentSelection.data.key);
+                $('#modal-title .title-descr').html(currentSelection.data.descr);
+                $('#bottom-switch').appendTo('#modal-switch');
+                log($('#bottom-right'))
+                $('#bottom-right div :first').appendTo('#modal-right');
+                avb.chart.initialize("#modal-chart");
+                avb.chart.drawline();
+
+
+                dialog.overlay.fadeIn('fast');
+            }
+
+            function modalClose(dialog){
+                $('#bottom-switch').prependTo('#bottom-center-wrap');
+                console.log($('modal-right div :first'))
+                $('#modal-right div :first').appendTo('#bottom-right');
+                avb.chart.initialize("#chart");
+                avb.chart.drawline();
+
+                dialog.data.hide();
+                dialog.container.hide();
+                dialog.overlay.fadeOut('fast');
+                $.modal.close();
             }
             
             var log = function(d) {
@@ -197,12 +231,13 @@
 
         function titlebox_fill(data){
             titlebox.text(data.key);
-            if (data.descr !== ''){
+            console.log("here");
+            if (data.descr !== undefined && data.descr !== ''){
                 titlebox.bottom.text(data.descr);
             } else {
-                titlebox.bottom.text("No info");
+                titlebox.bottom.text("No description available.");
             }
-            var margin = $("#bottom-container").height() - $("#title-head").height() - $("#title-descr").height();
+            var margin = Math.max(0, $("#bottom-container").height() - $("#title-head").height() - $("#title-descr").height());
             $("#titledescr-container").css("margin-top", margin/2);
         }
 

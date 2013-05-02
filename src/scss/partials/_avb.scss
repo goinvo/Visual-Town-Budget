@@ -16,10 +16,6 @@ text {
   cursor: default;
 }
 
-.vhscrollable {
-  height: 150px;
-  overflow: auto;
-}
 
 #avb-menubar {
   background-color: $white;
@@ -32,149 +28,244 @@ text {
     font-size: $text-big;
     color: $gray;
   }
+
+  #vdivider {
+    border-left: 2px solid #aaaaaa;
+    position: absolute;
+    top: 0;
+    height: 100%;
+    left:240px;
+  }
+
+  .vhscrollable {
+    height: 150px;
+    overflow: auto;
+  }
 }
 
+
+/*
+* Body
+*/
 #avb-body {
   margin-top: 1%;
   display: none;
   font-weight: 200;
-}
 
-#bottom-container {
-  position: relative;
-  margin-top: 15px;
-  margin-bottom: 1%;
-  padding: 1%;
-  text-align: left;
-  white-space: normal;
-  /*  background-color: #ffffff;*/
-  border: 1px solid #ccc;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  -webkit-border-radius: 6px;
-  -moz-border-radius: 6px;
-  border-radius: 6px;
-  background-clip: padding-box;
-  height: 250px;
-}
+  /*
+  *  Navigation system
+  */
+  #navigation-container {
 
-.arrow_box {
-  position: relative;
-  background: #f9f9f9;
-  border: 1px solid #a3a3a3;
-  &:after, &:before {
-    bottom: 100%;
-    border: solid transparent;
-    content: " ";
-    height: 0;
-    width: 0;
-    position: absolute;
-    pointer-events: none;
+    #navigation rect {
+      stroke: $black;
+      fill: $black;
+      fill-opacity: .6;
+      &.parent {
+        cursor: pointer;
+        fill: steelblue;
+      }
+    }
   }
-  &:after {
-    border-color: rgba(249, 249, 249, 0);
-    border-bottom-color: #f9f9f9;
-    border-width: 10px;
-    left: 10%;
-    margin-left: -10px;
+
+  /*
+  *  Chart (has a separate CSS)
+  */
+
+  /*
+  *  Bottom container
+  */
+  #bottom-container {
+    position: relative;
+    margin-top: 15px;
+    margin-bottom: 1%;
+    padding: 1%;
+    text-align: left;
+    white-space: normal;
+    /*  background-color: #ffffff;*/
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+    background-clip: padding-box;
+
+    #bottom-left {
+      height: 100%;
+      overflow-y: auto;
+      padding-right: 5px;
+    }
   }
-  &:before {
-    border-color: rgba(163, 163, 163, 0);
-    border-bottom-color: #a3a3a3;
-    border-width: 11px;
-    left: 10%;
-    margin-left: -11px;
+
+
+  .arrow_box {
+    position: relative;
+    background: #f9f9f9;
+    border: 1px solid #a3a3a3;
+    &:after, &:before {
+      bottom: 100%;
+      border: solid transparent;
+      content: " ";
+      height: 0;
+      width: 0;
+      position: absolute;
+      pointer-events: none;
+    }
+    &:after {
+      border-color: rgba(249, 249, 249, 0);
+      border-bottom-color: #f9f9f9;
+      border-width: 10px;
+      left: 10%;
+      margin-left: -10px;
+    }
+    &:before {
+      border-color: rgba(163, 163, 163, 0);
+      border-bottom-color: #a3a3a3;
+      border-width: 11px;
+      left: 10%;
+      margin-left: -11px;
+    }
   }
+
+}
+
+/*
+* Entry title and description
+*/
+.title-head {
+    font-size: $text-title;
+    line-height: normal;
+}
+
+.title-descr {
+    font-size: $text-big;
 }
 
 
-.card-row:first-child {
-  padding-left: 0;
-}
-
+/*
+* Cards and legend
+*/
 .card {
   padding-top: 3%;
   margin-left: 2%;
 }
 
-.card-img {
-  float: left;
-  img {
-    display: block;
+#bottom-right,
+#modal-right {
+  overflow:hidden; 
+  height:100%;
+
+  #legend {
+    position:absolute;
+    height: 100%;
+    width:100%;
+    left:-100%;
+    overflow-y: auto;
+
+
+    .legend-label{
+      width: 16px;
+      height: 16px;
+      border-radius: 8px;
+    }
+
+    tr :first-child {
+      margin-right: 5px;
+    }
+  }
+
+  #cards {
+    position:absolute;
+    height: 100%;
+    width:100%;
+    left:0;
+
+    .card-row:first-child {
+      padding-left: 0;
+    }
+
+    .card-row{
+
+      .card-img {
+        float: left;
+        img {
+          display: block;
+        }
+      }
+
+      .cardtitle {
+        font-size: $text-big;
+        border: 1px;
+        color: $gray;
+      }
+
+      .cardvalue {
+        font-size: $text-big;
+      }
+    }
   }
 }
 
-.cardtitle {
-  font-size: $text-big;
-  border: 1px;
-  color: $gray;
-}
-
-.cardvalue {
-  font-size: $text-big;
-}
-
-#title-head {
-  margin: 10px 0;
-  font-family: inherit;
-  font-size: $text-title;
-}
-
-#title-descr {
-  font-size: $text-big;
-}
-
-#vdivider {
-  border-left: 2px solid #aaaaaa;
-  position: absolute;
-  top: 0;
-  height: 100%;
-}
-
-#navigation rect {
-  stroke: $white;
-  fill: $gray;
-  fill-opacity: .8;
-  &.parent {
-    cursor: pointer;
-    fill: steelblue;
-  }
-}
-
-#navigation-container {
-  height: 500px;
-}
-
-.container {
-  width: 1200px;
-}
-
-#vdivider {
-  left: 240px;
-}
-
-#basic-modal-content {
-  display: none;
-}
-
-/* Overlay */
-
+/* 
+* Modal
+*/
 #simplemodal-overlay {
-  background-color: #000;
+  background-color: black;
+  opacity: 1;
 }
 
-/* Container */
+#modal-container{
+  display: none;
+  font-weight: 200;
+}
 
 #simplemodal-container {
-  height: 90%;
-  width: 90%;
+
+  #basic-modal-content {
+    display: none;
+  }
+
+
   position: relative;
-  padding: 5px;
   background: #000;
   border: 1px solid black;
   border-radius: 11px;
-  background-color: white;
+  background-color: #f9f9f9 !important ;
   .simplemodal-data {
-    padding: 8px;
+    position: relative;
+    height:100%;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 2%;
+    #modal-toprow{
+      height: 20%;
+      overflow: auto;
+      margin-bottom: 20px;
+    }
+    #modal-bottomrow{
+      // 2*2% padding
+      height: 76%;
+
+      .span8{
+        height: 100%;
+        #modal-switch {
+          height: 10%;
+        }
+        #modal-chart{
+          height: 90%;
+        }
+      }
+
+      .span4{
+        height: 76%;
+
+        #modal-right{
+          margin-top: 10%;
+        }
+      }
+
+    }
   }
   a.modalCloseImg {
     background: url(../img/delete_icon.png) no-repeat;
@@ -192,20 +283,65 @@ text {
   }
 }
 
-@media only screen and (device-width: 768px) {
+/*
+* Window sizes
+*/
+
+/*
+* Defaults to > 1200px width (>2013)
+*/
+.container {
+  width: 1200px;
+}
+
+#avb-body {
+  #bottom-container {
+      height: 250px;
+  }
+  #chart {
+        height: 220px;
+  }
+  #navigation-container {
+    height: 500px;
+  }
+}
+
+#simplemodal-container {
+  height:600px;
+  width: 1200px;
+}
+
+/*
+* Ipad Portait + Landscape
+*/ 
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
   body, html {
     font-size: 12px;
+  }
+
+  #vdivider {
+    left: 196px;
   }
   .container {
     width: 980px;
   }
-  #bottom-container {
-    height: 200px;
+  #avb-body {
+    #bottom-container {
+      height: 200px;
+    }
+    #chart {
+      height: 175px;
+    }
+    #navigation-container {
+      height: 420px;
+    }
   }
-  #navigation-container {
-    height: 420px;
+
+  #simplemodal-container {
+    height:500px;
+    width: 900px;
   }
-  #vdivider {
-    left: 196px;
-  }
+
 }
+
+
