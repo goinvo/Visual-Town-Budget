@@ -11,6 +11,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <base href="/" />
+  <title>Arlington Visual Budget</title>
 
   <link href="css/lib/bootstrap/bootstrap.css" rel="stylesheet">
     <link href="css/lib/checkbox/checkbox.css" rel="stylesheet">

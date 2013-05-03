@@ -387,41 +387,41 @@ text {
   box-sizing: border-box;
   padding: 2%;
 }
-/* line 220, ../../scss/partials/_avb.scss */
+/* line 219, ../../scss/partials/_avb.scss */
 #simplemodal-container .simplemodal-data #modal-toprow {
   height: 20%;
   overflow: auto;
   margin-bottom: 20px;
 }
-/* line 225, ../../scss/partials/_avb.scss */
+/* line 224, ../../scss/partials/_avb.scss */
 #simplemodal-container .simplemodal-data #modal-toprow .title-head {
   margin-bottom: 10px;
 }
-/* line 230, ../../scss/partials/_avb.scss */
+/* line 229, ../../scss/partials/_avb.scss */
 #simplemodal-container .simplemodal-data #modal-bottomrow {
   height: 76%;
 }
-/* line 234, ../../scss/partials/_avb.scss */
+/* line 233, ../../scss/partials/_avb.scss */
 #simplemodal-container .simplemodal-data #modal-bottomrow .span8 {
   height: 100%;
 }
-/* line 236, ../../scss/partials/_avb.scss */
+/* line 235, ../../scss/partials/_avb.scss */
 #simplemodal-container .simplemodal-data #modal-bottomrow .span8 #modal-switch {
   height: 10%;
 }
-/* line 239, ../../scss/partials/_avb.scss */
+/* line 238, ../../scss/partials/_avb.scss */
 #simplemodal-container .simplemodal-data #modal-bottomrow .span8 #modal-chart {
   height: 90%;
 }
-/* line 244, ../../scss/partials/_avb.scss */
+/* line 243, ../../scss/partials/_avb.scss */
 #simplemodal-container .simplemodal-data #modal-bottomrow .span4 {
   height: 76%;
 }
-/* line 247, ../../scss/partials/_avb.scss */
+/* line 246, ../../scss/partials/_avb.scss */
 #simplemodal-container .simplemodal-data #modal-bottomrow .span4 #modal-right {
   margin-top: 10%;
 }
-/* line 254, ../../scss/partials/_avb.scss */
+/* line 253, ../../scss/partials/_avb.scss */
 #simplemodal-container a.modalCloseImg {
   background: url(../img/delete_icon.png) no-repeat;
   width: 25px;
@@ -433,7 +433,7 @@ text {
   right: -10px;
   cursor: pointer;
 }
-/* line 265, ../../scss/partials/_avb.scss */
+/* line 264, ../../scss/partials/_avb.scss */
 #simplemodal-container h3 {
   color: #84b8d9;
 }

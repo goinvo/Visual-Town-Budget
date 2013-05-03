@@ -99,6 +99,9 @@
                 $('#bottom-switch').prependTo('#bottom-center-wrap');
                 console.log($('modal-right div :first'))
                 $('#modal-right div :first').appendTo('#bottom-right');
+
+                $("#myonoffswitch").attr('checked', false);
+
                 avb.chart.initialize("#chart");
                 avb.chart.drawline();
 
@@ -106,6 +109,8 @@
                 dialog.container.hide();
                 dialog.overlay.fadeOut('fast');
                 $.modal.close();
+
+
             }
             
             var log = function(d) {
@@ -182,7 +187,7 @@
                 thisYear = year;
                 yearIndex = thisYear - firstYear;
                 avb.navigation.update(root);
-                avb.chart.initialize();
+                avb.chart.initialize('#chart');
                 avb.chart.drawline(root, "steelblue", true);
                 titlebox_fill(root);
                 avb.cards.update(root);
@@ -276,16 +281,15 @@
 
         // On resize
         $(window).resize(function() {
-            avb.navbar.reposition();
         });
 
         window.onpopstate = popUrl;
 
         // feedbackify
 
-        // var fby = fby || [];
-        // (function () {
-        //     var f = document.createElement('script'); f.type = 'text/javascript'; f.async = true;
-        //     f.src = '//cdn.feedbackify.com/f.js';
-        //     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(f, s);
-        // })();
+        var fby = fby || [];
+        (function () {
+            var f = document.createElement('script'); f.type = 'text/javascript'; f.async = true;
+            f.src = '//cdn.feedbackify.com/f.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(f, s);
+        })();

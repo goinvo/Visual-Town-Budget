@@ -21,7 +21,8 @@ avb.navbar = function(){
 			for(var i=firstYear; i<=lastYear; i++) {
 				var html = '<li role="presentation"><a role="menuitem" tabindex="-1" href="#">' + i +'</a></li>';
 				$('#yeardrop-list').append(html);
-				$('#yeardrop-list li :last').click(function() {
+				$('#yeardrop-list li :last').click(function(event) {
+					event.preventDefault();
 					var year = parseInt($(this).text());
 					$('#yeardrop-label').html(year + ' <b class="caret"></b>');
 					changeyear(year);

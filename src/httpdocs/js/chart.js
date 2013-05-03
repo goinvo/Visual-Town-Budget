@@ -13,7 +13,6 @@ avb.chart = function(){
 
 		layout.chartsvg = d3.select(div).append("svg");
 
-
 		layout.chartsvg.width = $(div).width();
 
 		// compute height to align with bars
