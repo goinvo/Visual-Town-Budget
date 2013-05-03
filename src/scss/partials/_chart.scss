@@ -26,14 +26,18 @@
     text {
       font-family: "Helvetica Neue";
       font-size: 0.8em;
-      fill: grey;
+    }
+
+    .odd {
+      fill:none;
+    }
+
+    .thisYear {
+      fill: black;
+      font-weight: bold;
     }
   }
-  .thisYearAxis {
-    fill: black;
-    font-size: 0.8em;
-    font-width: bold;
-  }
+
   .multiarea {
     fill-opacity: 0.65;
   }

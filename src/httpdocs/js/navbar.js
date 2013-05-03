@@ -9,9 +9,6 @@ avb.navbar = function(){
 		$('#home-button').click(function(d) {
 			window.location =  '/';
 		});
-		$("#home-button div").css('cursor','pointer');
-
-		reposition();
 
 	},
 
@@ -45,21 +42,11 @@ avb.navbar = function(){
 			})
 			$('#yeardrop-container-mobile').show();
 		}
-	},
-
-	reposition = function() {
-
-	// link menu div to home
-	var homelink_height = $("#home-button").height();
-	// align navbar
-	$("#avb-links").css("margin-top", (homelink_height - $("#avb-links").height())/2);
-
-};
+	};
 
 return{
 	initialize : initialize,
-	reposition : reposition,
-	enableYears : enableYears,
+	enableYears : enableYears
 
 }
 }();

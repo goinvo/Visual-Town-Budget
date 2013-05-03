@@ -1,0 +1,38 @@
+
+#avb-menubar {
+
+  border-color: $gray;
+  border-width: 1px;
+  border-bottom-style: solid;
+  padding-bottom: 1%;
+
+  #home-button{
+    div{
+      cursor: pointer;
+    }
+    #avb-logo{
+      margin-left: 20px;
+    }
+  }
+
+  #avb-links{
+    margin-top: 10px;
+  }
+
+  .menubutton {
+    font-size: $text-big;
+    color: $gray;
+  }
+
+  #vdivider {
+    border-left: 2px solid #aaaaaa;
+    position: absolute;
+    top: 0;
+    height: 100%;
+}
+
+  .vhscrollable {
+    height: 150px;
+    overflow: auto;
+  }
+}

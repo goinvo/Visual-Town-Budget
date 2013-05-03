@@ -18,6 +18,77 @@ body {
 	background-image: url(/img/debut_light.png);
 }
 
+/*
+* Window sizes
+*/
+
+/*
+* Defaults to > 1200px width (>2013)
+*/
+.container {
+  width: 1200px;
+}
+
+#avb-body {
+  #bottom-container {
+      height: 250px;
+  }
+  #chart {
+        height: 220px;
+  }
+  #navigation-container {
+    height: 500px;
+  }
+}
+
+#simplemodal-container {
+  height:600px;
+  width: 1200px;
+}
+
+#vdivider{
+  left:280px;
+}
+
+
+/*
+* Ipad Portait + Landscape
+*/ 
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
+  body, html {
+    font-size: 12px;
+  }
+
+  #vdivider{
+    left:250px;
+  }
+
+  .container {
+    width: 980px;
+  }
+  #avb-body {
+    #bottom-container {
+      height: 200px;
+    }
+    #chart {
+      height: 175px;
+    }
+    #navigation-container {
+      height: 420px;
+    }
+  }
+
+  #simplemodal-container {
+    height:500px;
+    width: 900px;
+  }
+
+
+}
+
+
+
+
 .group {
 	@include pie-clearfix;
 }

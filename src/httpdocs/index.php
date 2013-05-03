@@ -10,6 +10,8 @@
   ?>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <base href="/" />
+
   <link href="css/lib/bootstrap/bootstrap.css" rel="stylesheet">
     <link href="css/lib/checkbox/checkbox.css" rel="stylesheet">
   <script src="js/lib/mustache/mustache.js"></script>
@@ -26,7 +28,8 @@
   <script src ="js/navbar.js"></script>
   <script src ="js/lib/simplemodal/jquery.simplemodal.js"></script>
 
-
+  <!-- change this -->
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,300' rel='stylesheet' type='text/css'>  
   <script>
   $(document).ready(function(){
 
@@ -34,10 +37,20 @@
 
     // direct url load
     <?php
-    $sections  = array("revenues");
+    $sections = array("revenues");
+    $params = array();
     if(isset($_GET["page"])) {
       if(in_array($_GET["page"], $sections)) {
-        echo 'avb_init("'.$_GET["page"].'")';
+        $params['section'] = $_GET["page"];
+
+        if(isset($_GET["year"])){
+          $params['year'] = $_GET["year"];
+        };
+        if(isset($_GET["node"])){
+          $params['node'] = $_GET["node"];
+        };
+
+        echo 'initialize('.json_encode($params).')';
       } else {
         echo 'loadthumbails();';
       }
@@ -56,21 +69,17 @@
 
 
     <?php
-    //require_once $includePath.'/navbar.php';
     require_once 'includes/navbar.php';
     $sections  = array("revenues");
 
     if(isset($_GET["page"])) {
       if(!in_array($_GET["page"], $sections)) {
-        //require_once $includePath.'/homescreen.php';
         require_once 'includes/homescreen.php';
       }
     } else {
-      //require_once $includePath.'/homescreen.php';
       require_once 'includes/homescreen.php';
     }
     
-    //require_once $includePath.'/content.php';
     require_once 'includes/content.php';
     ?>
 

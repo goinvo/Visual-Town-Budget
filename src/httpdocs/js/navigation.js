@@ -41,6 +41,7 @@ avb.navigation = function(){
         var g = nav.selectAll("g")
         .data(partition.nodes(data))
         .enter().append("svg:g")
+        .attr("nodeid", function(d) { return d.hash; })
         .attr("transform", function(d) { return "translate(" + (nav.x(d.y)) + "," + nav.y(d.x) + ")"; })
         .on("click", zoneClick)
         .html('');
@@ -102,16 +103,30 @@ avb.navigation = function(){
         log("updated");
     },
 
+    open = function(nodeId) {
+        var rect = d3.select('g[nodeid*="' + nodeId +'"]');
+        if(rect.node() === null) {
+            rect = d3.select('g[nodeid*="' + root.hash +'"]');
+        }
+        zoneClick.call(rect.node(), rect.datum());
+    },
+
 
     zoneClick = function(d){
+        console.log('here!')
+        console.log(d);
+        console.log(this);
 
-        // back to rootnode if clicked on same level
-        if(nav.lastClicked !== undefined &&
-            nav.lastClicked.depth !== 0 &&
-            d.depth === nav.lastClicked.depth){
-            zoneClick.call(nav.rootnode.node(),nav.rootnode.datum());
-        return;
+    // back to rootnode if clicked on same level
+    if(nav.lastClicked !== undefined &&
+        nav.lastClicked.depth !== 0 &&
+        d.depth === nav.lastClicked.depth){
+                zoneClick.call(nav.rootnode.node(),nav.rootnode.datum());
+            return;
     }
+
+    pushUrl( section, thisYear, d.hash);
+
     nav.lastClicked = d;
 
     updateSelection(d, d3.select(this).select("rect").style("fill"))
@@ -134,7 +149,7 @@ avb.navigation = function(){
     nav.x = x;
 
     var t = g.transition()
-    .duration(d3.event.altKey ? 7500 : 750)
+    .duration(750)
     .attr("transform", function(d) { 
       return "translate(" + x(d.y)+ "," + y(d.x) + ")"; });
 
@@ -149,8 +164,9 @@ avb.navigation = function(){
     t.select("g .labels")
     .attr("transform", transform);
 
-
-    d3.event.stopPropagation();
+    if(d3.event !== null) {
+        d3.event.stopPropagation();
+    }
 },
 
 
@@ -181,6 +197,7 @@ opacity = function(d, duration) {
 
 return{
  initialize : initialize,
- update : update
+ update : update,
+ open : open
 }
 }();

@@ -1,5 +1,7 @@
 import csv
 import json
+import hashlib
+import zlib
 
 FIRST_YEAR = 2006
 LAST_YEAR = 2017
@@ -16,9 +18,27 @@ class entry:
 		self.level = level
 		self.children = []
 
-def main():
+	#node hash
+	def hashEntry(self):
+		m = hashlib.md5()
+		m.update(self.key)
+		m.update(str(self.values))
+		m.update(self.descr)
+		return m.hexdigest()
+
+	#node to json-ready data structute
+	def reprJSON(self):
+		values = []
+		for value in self.values:
+			values.append(dict(year=value[0], val=value[1]))
+		children = []
+		for child in self.children:
+			children.append(child.reprJSON())
+		return dict(key=self.key, descr=self.descr, values=values, hash=self.hashEntry()[:8], sub=children) 
+
+def convert(inputFile, outputFile):
 	csventries = []
-	with open('revenues.csv', 'rU') as csvfile:
+	with open(inputFile, 'rU') as csvfile:
 		dataline = csv.DictReader(csvfile, delimiter=',', quotechar='"', dialect='excel')
 		for row in dataline:
 			#find name
@@ -30,9 +50,16 @@ def main():
 			#populate yearly values
 			rowValues = []
 			for year in range(FIRST_YEAR, LAST_YEAR+1):
-				rowValues.append((year, row[str(year)]))
+
+				#attempt parsing, value=0 in case of fails
+				value = 0
+				try:
+					value = float(row[str(year)].replace(',', '').replace(' ', ''))
+				except:
+					value = 0
+				rowValues.append((year, value))
 			#create new entry object and add to list	
-			csventries.append(entry(name,'',rowValues, int(row['LEVEL'])))
+			csventries.append(entry(name.replace(' Total',''),'',rowValues, int(row['LEVEL'])))
 
 	#reverse list for tree creation
 	csventries.reverse()
@@ -42,7 +69,12 @@ def main():
 
 	#tree-structure creation
 	stack = []
+	lastNode = None
 	for node in csventries:
+		#checking for total of 1 field
+		if(lastNode != None and node.key == lastNode.key):
+			#print(csventries.pop(csventries.index(node)).key)
+			continue
 		#going one level deeper
 		if(node.level > (len(stack)-1)):
 			if(node.level != 0):
@@ -57,12 +89,16 @@ def main():
 				stack.pop()
 			stack[-1].children.append(node)
 			stack.append(node)
+		lastNode = node
 
 	root = stack[0]
 
 	curnode = root
 	while(curnode.children != []):
-		print(curnode.children[0].key)
 		curnode = curnode.children[0]
 
-main()
+	# tree to json format
+	outputFile = open(outputFile, 'w')
+	outputFile.write(json.dumps(root.reprJSON()))
+
+convert('revenues.csv', 'revenues.json')

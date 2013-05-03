@@ -4,7 +4,7 @@ $gray: #aaaaaa;
 $red: rgb(167, 103, 108);
 $blue: rgb(87,118,162);
 $white: rgb(220, 223, 222);
-$text-title: 2.5em;
+$text-title: 2.0em;
 $text-big: 1.3em;
 $text-small: 0.7em;
 
@@ -15,34 +15,6 @@ div {
 text {
   cursor: default;
 }
-
-
-#avb-menubar {
-  background-color: $white;
-  border-color: $gray;
-  border-width: 1px;
-  border-bottom-style: solid;
-  padding-bottom: 1%;
-
-  .menubutton {
-    font-size: $text-big;
-    color: $gray;
-  }
-
-  #vdivider {
-    border-left: 2px solid #aaaaaa;
-    position: absolute;
-    top: 0;
-    height: 100%;
-    left:240px;
-  }
-
-  .vhscrollable {
-    height: 150px;
-    overflow: auto;
-  }
-}
-
 
 /*
 * Body
@@ -58,7 +30,8 @@ text {
   #navigation-container {
 
     #navigation rect {
-      stroke: $black;
+      stroke: white;
+      stroke-width: 1px;
       fill: $black;
       fill-opacity: .6;
       &.parent {
@@ -90,10 +63,14 @@ text {
     border-radius: 6px;
     background-clip: padding-box;
 
-    #bottom-left {
+    #bottom-left-wrap {
       height: 100%;
-      overflow-y: auto;
-      padding-right: 5px;
+
+      #bottom-left {
+        height: 100%;
+        overflow-y: auto;
+        padding-right: 5px;
+      }
     }
   }
 
@@ -179,6 +156,7 @@ text {
     height: 100%;
     width:100%;
     left:0;
+    overflow: auto;
 
     .card-row:first-child {
       padding-left: 0;
@@ -238,10 +216,16 @@ text {
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
     padding: 2%;
+    
     #modal-toprow{
       height: 20%;
       overflow: auto;
       margin-bottom: 20px;
+
+      .title-head{
+        margin-bottom: 10px;
+      }
+
     }
     #modal-bottomrow{
       // 2*2% padding
@@ -282,66 +266,4 @@ text {
     color: #84b8d9;
   }
 }
-
-/*
-* Window sizes
-*/
-
-/*
-* Defaults to > 1200px width (>2013)
-*/
-.container {
-  width: 1200px;
-}
-
-#avb-body {
-  #bottom-container {
-      height: 250px;
-  }
-  #chart {
-        height: 220px;
-  }
-  #navigation-container {
-    height: 500px;
-  }
-}
-
-#simplemodal-container {
-  height:600px;
-  width: 1200px;
-}
-
-/*
-* Ipad Portait + Landscape
-*/ 
-@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
-  body, html {
-    font-size: 12px;
-  }
-
-  #vdivider {
-    left: 196px;
-  }
-  .container {
-    width: 980px;
-  }
-  #avb-body {
-    #bottom-container {
-      height: 200px;
-    }
-    #chart {
-      height: 175px;
-    }
-    #navigation-container {
-      height: 420px;
-    }
-  }
-
-  #simplemodal-container {
-    height:500px;
-    width: 900px;
-  }
-
-}
-
 

@@ -1,3 +1,5 @@
 # Redirect everything in this directory to "good.html"   
 RewriteEngine on 
-RewriteRule ^revenues? index.php?page=revenues
+RewriteRule ^revenues$ index.php?page=revenues
+RewriteRule ^revenues/([0-9]*)$ index.php?page=revenues&year=$1
+RewriteRule ^revenues/([0-9]*)/(.*)$ index.php?page=revenues&year=$1&node=$2

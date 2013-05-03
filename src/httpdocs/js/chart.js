@@ -105,7 +105,6 @@ avb.chart = function(){
           chart.last.selectAll('.multigrid').remove();
           chart.last.selectAll('.axis').remove();
           chart.last.selectAll('.overflows').remove();
-          chart.last.selectAll('.thisYearAxis').remove();
           chart.last.selectAll('.thisYearLine').remove();
           
         }
@@ -214,14 +213,7 @@ avb.chart = function(){
        */
        var xAxis = d3.svg.axis(container).scale(xscale)
        .orient("bottom").tickSize(0, 0, 0).tickPadding(10)
-       .ticks(5)
-       .tickFormat(function(d){
-         if(d !== thisYear) {
-          return d;
-        } else {
-          return '';
-        }
-      });
+       .tickFormat(function(d){ return d; });
 
        var yAxis = d3.svg.axis().scale(yscale).ticks(5)
        .orient("left").tickSize(0, 0, 0).tickPadding(5)
@@ -229,15 +221,6 @@ avb.chart = function(){
        	return formatcurrency(d);
        });
 
-       var thisYearAxis = d3.svg.axis().scale(xscale)
-       .orient("bottom").tickSize(0, 0, 0).tickPadding(10)
-       .tickFormat(function(d){
-         if(d === thisYear) {
-          return d;
-        } else {
-          return '';
-        }
-      });
 
        if(chart.xAxisSocket !== undefined) {
        	chart.xAxisSocket.remove();
@@ -296,16 +279,23 @@ avb.chart = function(){
 
 
       chart.xAxisSocket = chart.append("g")
-      .attr("class", "axis")
+      .classed("axis",true).classed("xAxis",true)
       .attr("transform", "translate(0," + (chart.height - chart.ymargin -1) + ")").call(xAxis);
 
       chart.yAxisSocket = chart.append("g")
       .attr("class", "axis")
       .attr("transform", "translate( " + chart.xmargin + ",0)").call(yAxis);
 
-       chart.thisYearAxisSocket = chart.append("g")
-       .attr("class", "thisYearAxis")
-       .attr("transform", "translate(0," + (chart.height - chart.ymargin -1) + ")").call(thisYearAxis);
+      // mark odd entries
+
+      // d3 can't do odd selectors
+      $('.xAxis .tick:odd').each(function(){
+        //jquery can't add classes to SVG elements
+        d3.select(this).classed('odd',true);
+      });
+
+      d3.select('.xAxis g:nth-child(' + (yearIndex+1) + ')')
+      .classed('thisYear', true);
 
       chart.last = chart;
 

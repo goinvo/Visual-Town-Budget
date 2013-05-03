@@ -3,12 +3,11 @@
 
             var home;
 
-
             // constants
             var section;
 
             var firstYear = 2006,
-                lastYear = 2018,
+                lastYear = 2017,
                 currentYear = 2012, // only used for projections
                 thisYear = 2012,
                 yearIndex = thisYear - firstYear;
@@ -26,7 +25,22 @@
                 return this.toString() + "px";
             };
 
+            function pushUrl(section, year, node){
+                console.log('here')
+                console.log(section)
+                var url = '/' + section + '/' + thisYear + '/' + node;
+                console.log(url);
+                window.history.pushState({section : section, year : thisYear, nodeId : node},"", url);
+            }
 
+            function popUrl(event){
+                console.log(event.state)
+                if(event.state === null){
+                    //avb.navigation.open(root.hash);
+                } else {
+                    avb.navigation.open(event.state.nodeId);
+                }
+            }
 
             function onjsonload(jsondata) {
                 root = jsondata;
@@ -38,8 +52,6 @@
                 avb.navigation.initialize(jsondata);
                 avb.chart.initialize('#chart');
                 avb.chart.initializeLayers();
-
-
 
                 console.log("UI Loaded.");
 
@@ -70,7 +82,9 @@
                 dialog.container.show();
 
                 $('#modal-title .title-head').html(currentSelection.data.key);
-                $('#modal-title .title-descr').html(currentSelection.data.descr);
+                var description = currentSelection.data.descr;
+                description = (description === '') ? 'No information available.' : description
+                $('#modal-title .title-descr').html(description);
                 $('#bottom-switch').appendTo('#modal-switch');
                 log($('#bottom-right'))
                 $('#bottom-right div :first').appendTo('#modal-right');
@@ -120,7 +134,15 @@
                 }
             }
 
-            function avb_init(name) {
+            function initialize(params) {
+                console.log(params)
+
+                // year checks
+                if(params.year !== undefined && !isNaN(parseInt(params.year)) && 
+                    params.year < lastYear && params.year > firstYear){
+                        thisYear = params.year;
+                        yearIndex = thisYear - firstYear;
+                }
 
                 avb.navbar.enableYears();
 
@@ -129,8 +151,8 @@
                 d3.selectAll("svg").remove();
 
                 home = false;
-                section = name;
-                d3.json("/data/" + section + ".json", onjsonload);
+                section = params.section;
+                d3.json("/data/" + params.section + ".json", onjsonload);
             }
 
 
@@ -156,6 +178,7 @@
 
             function changeyear(year){
                 if(year === thisYear) return;
+                pushUrl(section,year,root.hash)
                 thisYear = year;
                 yearIndex = thisYear - firstYear;
                 avb.navigation.update(root);
@@ -231,7 +254,6 @@
 
         function titlebox_fill(data){
             titlebox.text(data.key);
-            console.log("here");
             if (data.descr !== undefined && data.descr !== ''){
                 titlebox.bottom.text(data.descr);
             } else {
@@ -256,6 +278,8 @@
         $(window).resize(function() {
             avb.navbar.reposition();
         });
+
+        window.onpopstate = popUrl;
 
         // feedbackify
 

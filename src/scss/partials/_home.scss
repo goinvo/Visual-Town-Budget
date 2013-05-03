@@ -1,50 +1,29 @@
+#avb-home{
 
-.carousel {
-  margin-bottom: 60px;
-  .container {
-    position: relative;
-    z-index: 9;
-  }
-}
+  margin-top:10px;
+  margin-bottom: 10px;
 
-.carousel-control {
-  height: 80px;
-  margin-top: 0;
-  font-size: 120px;
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
-  background-color: transparent;
-  border: 0;
-  z-index: 10;
-}
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
 
-.carousel {
-  .item {
-    height: 500px;
-  }
-  img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    min-width: 100%;
-    height: 500px;
-  }
-}
+  -moz-box-shadow: 0px 0px 10px #888;
+  -webkit-box-shadow: 0px 0px 10px #888;
+  box-shadow: 0px 0px 10px #888;
 
-.carousel-caption {
-  background-color: transparent;
-  position: static;
-  max-width: 550px;
-  padding: 0 20px;
-  margin-top: 200px;
-  h1, .lead {
-    margin: 0;
-    line-height: 1.25;
-    color: #fff;
-    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
+  background-color: white;
+
+
+  #home-img{
+    width: 100%;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
   }
-  .btn {
-    margin-top: 10px;
+
+  #home-content{
+    width: 100%;
   }
+
 }
 
 .marketing {
