@@ -172,7 +172,7 @@ avb.chart = function(){
           $(this).prependTo($(this).parent());
         })
 
-        var transitionDuration = 300;
+        var transitionDuration = 0;
 
         if(chart.line1 === undefined) {
           chart.line1 = container.append("svg:path");     

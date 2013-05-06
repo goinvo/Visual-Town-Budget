@@ -193,19 +193,80 @@ text {
   *  Bottom container
   */
 }
-/* line 32, ../../scss/partials/_avb.scss */
+/* line 30, ../../scss/partials/_avb.scss */
+#avb-body .chart {
+  position: relative;
+  overflow: hidden;
+}
+/* line 35, ../../scss/partials/_avb.scss */
+#avb-body #navigation-container {
+  overflow: hidden;
+}
+/* line 44, ../../scss/partials/_avb.scss */
+#avb-body #navigation-container .chart .rectangle {
+  position: absolute;
+  display: inline-block;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  border-radius: 0px;
+  opacity: 1.0;
+}
+/* line 54, ../../scss/partials/_avb.scss */
+#avb-body #navigation-container .chart .rectangle.selected {
+  box-shadow: inset 0px 0px 25px #555;
+}
+/* line 59, ../../scss/partials/_avb.scss */
+#avb-body #navigation-container .chart .outer {
+  display: table-cell;
+  vertical-align: middle;
+  width: 100%;
+  position: static;
+}
+/* line 67, ../../scss/partials/_avb.scss */
+#avb-body #navigation-container .chart .overlay {
+  background-image: url(/img/wavegrid.png);
+  opacity: 0.6;
+  foreground-blend-mode: overlay;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+/* line 76, ../../scss/partials/_avb.scss */
+#avb-body #navigation-container .chart .inner {
+  position: relative;
+  top: -50%;
+}
+/* line 82, ../../scss/partials/_avb.scss */
+#avb-body #navigation-container .chart .titleLabel,
+#avb-body #navigation-container .chart .valueLabel {
+  margin-left: 10px;
+  line-height: 1em;
+}
+/* line 87, ../../scss/partials/_avb.scss */
+#avb-body #navigation-container .chart .titleLabel {
+  font-size: 12px;
+}
+/* line 91, ../../scss/partials/_avb.scss */
+#avb-body #navigation-container .chart .valueLabel {
+  font-size: 18px;
+}
+/* line 96, ../../scss/partials/_avb.scss */
 #avb-body #navigation-container #navigation rect {
+  -webkit-filter: drop-shadow(-5px -5px 5px black);
+  filter: drop-shadow(-5px -5px 5px black);
   stroke: white;
+  stroke-opacity: 0.5;
   stroke-width: 1px;
   fill: #333333;
   fill-opacity: .6;
 }
-/* line 37, ../../scss/partials/_avb.scss */
+/* line 104, ../../scss/partials/_avb.scss */
 #avb-body #navigation-container #navigation rect.parent {
   cursor: pointer;
   fill: steelblue;
 }
-/* line 51, ../../scss/partials/_avb.scss */
+/* line 118, ../../scss/partials/_avb.scss */
 #avb-body #bottom-container {
   position: relative;
   margin-top: 15px;
@@ -216,28 +277,27 @@ text {
   /*  background-color: #ffffff;*/
   border: 1px solid #ccc;
   border: 1px solid rgba(0, 0, 0, 0.2);
-  -webkit-border-radius: 6px;
-  -moz-border-radius: 6px;
-  border-radius: 6px;
-  background-clip: padding-box;
+  border-radius: 8px;
+  -moz-box-shadow: 0px 0px 10px #ccc;
+  -webkit-box-shadow: 0px 0px 10px #ccc;
+  box-shadow: 0px 0px 10px #ccc;
 }
-/* line 66, ../../scss/partials/_avb.scss */
+/* line 141, ../../scss/partials/_avb.scss */
 #avb-body #bottom-container #bottom-left-wrap {
   height: 100%;
 }
-/* line 69, ../../scss/partials/_avb.scss */
+/* line 144, ../../scss/partials/_avb.scss */
 #avb-body #bottom-container #bottom-left-wrap #bottom-left {
   height: 100%;
   overflow-y: auto;
   padding-right: 5px;
 }
-/* line 78, ../../scss/partials/_avb.scss */
+/* line 153, ../../scss/partials/_avb.scss */
 #avb-body .arrow_box {
   position: relative;
   background: #f9f9f9;
-  border: 1px solid #a3a3a3;
 }
-/* line 82, ../../scss/partials/_avb.scss */
+/* line 157, ../../scss/partials/_avb.scss */
 #avb-body .arrow_box:after, #avb-body .arrow_box:before {
   bottom: 100%;
   border: solid transparent;
@@ -247,15 +307,15 @@ text {
   position: absolute;
   pointer-events: none;
 }
-/* line 91, ../../scss/partials/_avb.scss */
+/* line 167, ../../scss/partials/_avb.scss */
 #avb-body .arrow_box:after {
   border-color: rgba(249, 249, 249, 0);
   border-bottom-color: #f9f9f9;
-  border-width: 10px;
+  border-width: 9px;
   left: 10%;
   margin-left: -10px;
 }
-/* line 98, ../../scss/partials/_avb.scss */
+/* line 175, ../../scss/partials/_avb.scss */
 #avb-body .arrow_box:before {
   border-color: rgba(163, 163, 163, 0);
   border-bottom-color: #a3a3a3;
@@ -267,13 +327,13 @@ text {
 /*
 * Entry title and description
 */
-/* line 112, ../../scss/partials/_avb.scss */
+/* line 190, ../../scss/partials/_avb.scss */
 .title-head {
   font-size: 2em;
   line-height: normal;
 }
 
-/* line 117, ../../scss/partials/_avb.scss */
+/* line 195, ../../scss/partials/_avb.scss */
 .title-descr {
   font-size: 1.3em;
 }
@@ -281,19 +341,19 @@ text {
 /*
 * Cards and legend
 */
-/* line 125, ../../scss/partials/_avb.scss */
+/* line 203, ../../scss/partials/_avb.scss */
 .card {
   padding-top: 3%;
   margin-left: 2%;
 }
 
-/* line 131, ../../scss/partials/_avb.scss */
+/* line 209, ../../scss/partials/_avb.scss */
 #bottom-right,
 #modal-right {
   overflow: hidden;
   height: 100%;
 }
-/* line 135, ../../scss/partials/_avb.scss */
+/* line 213, ../../scss/partials/_avb.scss */
 #bottom-right #legend,
 #modal-right #legend {
   position: absolute;
@@ -302,19 +362,19 @@ text {
   left: -100%;
   overflow-y: auto;
 }
-/* line 143, ../../scss/partials/_avb.scss */
+/* line 221, ../../scss/partials/_avb.scss */
 #bottom-right #legend .legend-label,
 #modal-right #legend .legend-label {
   width: 16px;
   height: 16px;
   border-radius: 8px;
 }
-/* line 149, ../../scss/partials/_avb.scss */
+/* line 227, ../../scss/partials/_avb.scss */
 #bottom-right #legend tr :first-child,
 #modal-right #legend tr :first-child {
   margin-right: 5px;
 }
-/* line 154, ../../scss/partials/_avb.scss */
+/* line 232, ../../scss/partials/_avb.scss */
 #bottom-right #cards,
 #modal-right #cards {
   position: absolute;
@@ -323,29 +383,29 @@ text {
   left: 0;
   overflow: auto;
 }
-/* line 161, ../../scss/partials/_avb.scss */
+/* line 239, ../../scss/partials/_avb.scss */
 #bottom-right #cards .card-row:first-child,
 #modal-right #cards .card-row:first-child {
   padding-left: 0;
 }
-/* line 167, ../../scss/partials/_avb.scss */
+/* line 245, ../../scss/partials/_avb.scss */
 #bottom-right #cards .card-row .card-img,
 #modal-right #cards .card-row .card-img {
   float: left;
 }
-/* line 169, ../../scss/partials/_avb.scss */
+/* line 247, ../../scss/partials/_avb.scss */
 #bottom-right #cards .card-row .card-img img,
 #modal-right #cards .card-row .card-img img {
   display: block;
 }
-/* line 174, ../../scss/partials/_avb.scss */
+/* line 252, ../../scss/partials/_avb.scss */
 #bottom-right #cards .card-row .cardtitle,
 #modal-right #cards .card-row .cardtitle {
   font-size: 1.3em;
   border: 1px;
   color: #aaaaaa;
 }
-/* line 180, ../../scss/partials/_avb.scss */
+/* line 258, ../../scss/partials/_avb.scss */
 #bottom-right #cards .card-row .cardvalue,
 #modal-right #cards .card-row .cardvalue {
   font-size: 1.3em;
@@ -354,19 +414,19 @@ text {
 /* 
 * Modal
 */
-/* line 190, ../../scss/partials/_avb.scss */
+/* line 268, ../../scss/partials/_avb.scss */
 #simplemodal-overlay {
   background-color: black;
   opacity: 1;
 }
 
-/* line 195, ../../scss/partials/_avb.scss */
+/* line 273, ../../scss/partials/_avb.scss */
 #modal-container {
   display: none;
   font-weight: 200;
 }
 
-/* line 200, ../../scss/partials/_avb.scss */
+/* line 278, ../../scss/partials/_avb.scss */
 #simplemodal-container {
   position: relative;
   background: #000;
@@ -374,11 +434,11 @@ text {
   border-radius: 11px;
   background-color: #f9f9f9 !important;
 }
-/* line 202, ../../scss/partials/_avb.scss */
+/* line 280, ../../scss/partials/_avb.scss */
 #simplemodal-container #basic-modal-content {
   display: none;
 }
-/* line 212, ../../scss/partials/_avb.scss */
+/* line 290, ../../scss/partials/_avb.scss */
 #simplemodal-container .simplemodal-data {
   position: relative;
   height: 100%;
@@ -387,41 +447,41 @@ text {
   box-sizing: border-box;
   padding: 2%;
 }
-/* line 219, ../../scss/partials/_avb.scss */
+/* line 297, ../../scss/partials/_avb.scss */
 #simplemodal-container .simplemodal-data #modal-toprow {
   height: 20%;
   overflow: auto;
   margin-bottom: 20px;
 }
-/* line 224, ../../scss/partials/_avb.scss */
+/* line 302, ../../scss/partials/_avb.scss */
 #simplemodal-container .simplemodal-data #modal-toprow .title-head {
   margin-bottom: 10px;
 }
-/* line 229, ../../scss/partials/_avb.scss */
+/* line 307, ../../scss/partials/_avb.scss */
 #simplemodal-container .simplemodal-data #modal-bottomrow {
   height: 76%;
 }
-/* line 233, ../../scss/partials/_avb.scss */
+/* line 311, ../../scss/partials/_avb.scss */
 #simplemodal-container .simplemodal-data #modal-bottomrow .span8 {
   height: 100%;
 }
-/* line 235, ../../scss/partials/_avb.scss */
+/* line 313, ../../scss/partials/_avb.scss */
 #simplemodal-container .simplemodal-data #modal-bottomrow .span8 #modal-switch {
   height: 10%;
 }
-/* line 238, ../../scss/partials/_avb.scss */
+/* line 316, ../../scss/partials/_avb.scss */
 #simplemodal-container .simplemodal-data #modal-bottomrow .span8 #modal-chart {
   height: 90%;
 }
-/* line 243, ../../scss/partials/_avb.scss */
+/* line 321, ../../scss/partials/_avb.scss */
 #simplemodal-container .simplemodal-data #modal-bottomrow .span4 {
   height: 76%;
 }
-/* line 246, ../../scss/partials/_avb.scss */
+/* line 324, ../../scss/partials/_avb.scss */
 #simplemodal-container .simplemodal-data #modal-bottomrow .span4 #modal-right {
   margin-top: 10%;
 }
-/* line 253, ../../scss/partials/_avb.scss */
+/* line 331, ../../scss/partials/_avb.scss */
 #simplemodal-container a.modalCloseImg {
   background: url(../img/delete_icon.png) no-repeat;
   width: 25px;
@@ -433,7 +493,7 @@ text {
   right: -10px;
   cursor: pointer;
 }
-/* line 264, ../../scss/partials/_avb.scss */
+/* line 342, ../../scss/partials/_avb.scss */
 #simplemodal-container h3 {
   color: #84b8d9;
 }
@@ -597,6 +657,11 @@ text {
 /* line 58, ../../scss/partials/_chart.scss */
 .multigrid path {
   stroke-width: 1;
+}
+
+/* line 63, ../../scss/partials/_chart.scss */
+#chart {
+  position: relative;
 }
 
 /* line 2, ../../scss/partials/_navbar.scss */

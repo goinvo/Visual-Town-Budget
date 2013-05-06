@@ -12,11 +12,11 @@ avb.navigation = function(){
 
         nav = d3.select("#navigation").append("div")
         .attr("class", "chart")
-        .style("width", w)
-        .style("height", h)
-        .append("svg:svg")
-        .attr("width", w)
-        .attr("height", h);
+        .style("width", w.px())
+        .style("height", h.px());
+        // .append("svg:svg")
+        // .attr("width", w)
+        // .attr("height", h);
 
         nav.h = h;
         nav.w = w;
@@ -30,107 +30,93 @@ avb.navigation = function(){
         nav.y = d3.scale.linear().range([0, nav.h])
 
         var partition = d3.layout.partition()
-        .value(function(d) { 
-            // return Math.max(20000000,d.values[yearIndex].val);
-            return d.values[yearIndex].val;
-        })
+        .value(function(d) { return d.values[yearIndex].val;})
         .children(function(d) { return d.sub;});
 
-        nav.selectAll("g").remove();
 
-        var g = nav.selectAll("g")
-        .data(partition.nodes(data))
-        .enter().append("svg:g")
-        .attr("nodeid", function(d) { return d.hash; })
-        .attr("transform", function(d) { return "translate(" + (nav.x(d.y)) + "," + nav.y(d.x) + ")"; })
-        .on("click", zoneClick)
-        .html('');
+        var color = d3.scale.category20c();
+
+        nav.divs = d3.select('.chart').selectAll('div')
+        .data(partition.nodes(data)).enter().append('div');
 
         nav.kx = nav.w / (data.dx),
         nav.ky = nav.h / 1;
 
-        var color = d3.scale.category20c();
+        // var opacityScale = d3.scale.linear()
+        // .domain([4,0]).range([0.3,0.9]);
 
-        g.append("svg:rect")
-        .attr("width", data.dy * nav.kx)
-        .attr("rx",3).attr("ry", 3)
-        .attr("height", function(d) { return d.dx * nav.ky; })
-        .attr("class", function(d) { return d.children ? "parent" : "parent"; })
-        .style("fill", function(d) { return color((d.children ? d : d.parent).key); });
+        nav.divs.classed('rectangle',true)
+        .attr("nodeid", function(d) { return d.hash})
+        .style('left', function(d) { return (nav.x(d.y)).px() })
+        .style('top', function(d) { return (nav.y(d.x)).px() })
+        .style("height", function(d) { return (Math.floor(d.dx * nav.ky)).px(); })
+        .style("width", (data.dy * nav.kx - 2).px())
+        //.style("opacity", function(d) { return opacityScale(d.depth)})
+        //.style('background-color', function(d) { return color((d.children ? d : d.parent).key); });
+        .style('background', function(d) { return gradient(color((d.children ? d : d.parent).key)); });
+        nav.divs.each(function(){
+            d3.select(this).append('div').classed('overlay',true);
+            $(this).click(function(d) { zoneClick.call(this, d3.select(this).datum()) });
+        });
 
-        nav.labelTitleHeight = 12,
-        nav.labelValueHeight = 18;
 
-        g.append("svg:g")
-        .classed("labels", true);
+        var textContainers = nav.divs.append('div').classed("outer", true)
+        .append('div').classed('inner',true);
 
-        g.selectAll("g .labels").each(function(d) {
-                var zoneHeight = d.dx * nav.ky;
+        textContainers.append('div').classed('titleLabel', true)
+        .text(function(d) { return d.key;} );
+        textContainers.append('div').classed('valueLabel', true)
+        .text(function(d) { return formatcurrency(d.values[yearIndex].val);} );
 
-                // title
-                var titleLabel = d3.select(this)
-                .append("text")
-                .text(d.key)
-                .attr("x", 0)
-                .attr("y", nav.labelTitleHeight)
-                .attr("font-size",nav.labelTitleHeight)
-                .style("opacity", 0);
+        scope();
 
-                // value
-                var valueLabel = d3.select(this)
-                .append("text")
-                .text(formatcurrency(d.value))
-                .attr("x", 0)
-                .attr("y", nav.labelTitleHeight +nav.labelTitleHeight + 5)
-                .attr("font-size", function(d) {
-                    return nav.labelTitleHeight + nav.labelValueHeight/2;
-                })
-                .attr("font-size", nav.labelValueHeight)
+        nav.divs.each(function(d){
+            opacity.call(this, d);
+        });
 
-                .style("opacity", 0);
+        nav.rootnode = d3.select($('.chart div:first').get(0))
+        .classed("selected", true);
+        nav.lastClicked =  nav.rootnode;
 
-                d3.select(this).attr("transform", transform)
-                opacity.call(this, d);
+    },
 
-            });
-
-        nav.g = g;
-        nav.rootnode = nav.select("g");
-
-        d3.select(window)
-        .on("click", function() { zoneClick(data); })
-
-        log("updated");
+    gradient = function(color) {
+        var startRgb = hexToRgb(color);
+        var start = 'rgba(' + startRgb.r + ',' + startRgb.g + ',' + startRgb.b + ',' + 1 + ')';
+        var end = shadeColor(color, 5);
+        var gradient = '-webkit-gradient(linear, 0% 0%, 0% 100%, from(' + start + '), to( ' + start + '))';
+        return gradient;
     },
 
     open = function(nodeId) {
-        var rect = d3.select('g[nodeid*="' + nodeId +'"]');
+        var rect = d3.select('div[nodeid*="' + nodeId +'"]');
         if(rect.node() === null) {
-            rect = d3.select('g[nodeid*="' + root.hash +'"]');
+            rect = d3.select('div[nodeid*="' + root.hash +'"]');
         }
-        zoneClick.call(rect.node(), rect.datum());
+        zoneClick.call(rect.node(), rect.datum(), false);
     },
 
 
-    zoneClick = function(d){
-        console.log('here!')
-        console.log(d);
-        console.log(this);
+    zoneClick = function(d, click){
 
     // back to rootnode if clicked on same level
+    nav.lastClicked.classed("selected", false);
+    d3.select(this).classed("selected", true);
+
     if(nav.lastClicked !== undefined &&
-        nav.lastClicked.depth !== 0 &&
-        d.depth === nav.lastClicked.depth){
+        nav.lastClicked.datum().depth !== 0 &&
+        d.depth === nav.lastClicked.datum().depth){
                 zoneClick.call(nav.rootnode.node(),nav.rootnode.datum());
             return;
     }
 
-    pushUrl( section, thisYear, d.hash);
+    if(click === undefined) {
+        pushUrl( section, thisYear, d.hash);
+    }
 
-    nav.lastClicked = d;
+    nav.lastClicked = d3.select(this);
 
-    updateSelection(d, d3.select(this).select("rect").style("fill"))
-
+    updateSelection(d, d3.select(this).style("background-color"))
 
     var x = nav.x,
     y = nav.y,
@@ -138,7 +124,7 @@ avb.navigation = function(){
     ky = nav.ky,
     h = nav.h,
     w = nav.w,
-    g = nav.g;
+    g = nav.divs;
 
     kx = (d.y ? w - 40 : w) / (1 - d.y);
     ky = h / d.dx;
@@ -148,21 +134,20 @@ avb.navigation = function(){
     x.domain([d.y,1]).range([d.y ? 40 : 0, w]);
     nav.x = x;
 
+    scope();
+
+    var duration = 600;
+
     var t = g.transition()
-    .duration(750)
-    .attr("transform", function(d) { 
-      return "translate(" + x(d.y)+ "," + y(d.x) + ")"; });
+    .duration(duration)
+    .style('left', function(d) { return (x(d.y)).px() })
+    .style('top' , function(d) { return (y(d.x)).px() })
+    .style("width", (d.dy * kx - 1).px())
+    .style("height", function(d) { return (d.dx * ky).px(); });
 
-    g.each( function(d) {
-        opacity.call(this, d, 400);
-    })
-
-    t.select("rect")
-    .attr("width", d.dy * kx)
-    .attr("height", function(d) { return d.dx * ky; });
-
-    t.select("g .labels")
-    .attr("transform", transform);
+    g.each(function(d){
+        opacity.call(this, d, 150);
+    });
 
     if(d3.event !== null) {
         d3.event.stopPropagation();
@@ -177,22 +162,44 @@ transform = function(d){
     return "translate(8," + ((d.dx * nav.ky / 2) - (nav.labelTitleHeight + nav.labelValueHeight + 5)/2) + ")";
 };
 
+scope = function() {
+    nav.divs.style('display', function(d) { 
+        if( d.dx * nav.ky < 2 ) {
+            return 'none';
+        } else {
+            return 'table';
+        }
+    });
+}
+
 opacity = function(d, duration) {
     if(duration === undefined) duration = 0;
+
+    labelTitleHeight = 12,
+    labelValueHeight = 18;
 
     var zoneHeight = d.dx * nav.ky,
         titleOpacity = 0,
         valueOpacity = 0;
-    if(zoneHeight > (nav.labelTitleHeight + nav.labelValueHeight + 5)) {
         valueOpacity = 1;
+         $(this).find(".valueLabel, .valueLabel").css({
+            display : 'none'
+         })
+    if(zoneHeight > (labelTitleHeight + labelValueHeight)) {
+        valueOpacity = 1;
+         $(this).find(".valueLabel").css({
+            display : 'block'
+         })
     } 
-    if(zoneHeight > ( nav.labelValueHeight + 8)) {
+    if(zoneHeight > ( labelValueHeight)) {
         titleOpacity = 1;
-    } 
+         $(this).find(".titleLabel").css({
+            display : 'block'
+         })
+    }
 
-    $(this).find("text :first").animate({"opacity": titleOpacity}, duration);
-    $(this).find("text :last").animate({"opacity": valueOpacity}, duration);
-
+    $(this).find(".titleLabel").css({"opacity": titleOpacity});
+    $(this).find(".valueLabel").css({"opacity": valueOpacity});
 };
 
 return{
