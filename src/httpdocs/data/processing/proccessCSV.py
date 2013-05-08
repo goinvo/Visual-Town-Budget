@@ -99,6 +99,6 @@ def convert(inputFile, outputFile):
 
 	# tree to json format
 	outputFile = open(outputFile, 'w')
-	outputFile.write(json.dumps(root.reprJSON()))
+	outputFile.write(json.dumps(root.reprJSON(), indent=4))
 
 convert('revenues.csv', 'revenues.json')

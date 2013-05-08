@@ -29,9 +29,9 @@
   <script src ="js/navbar.js"></script>
   <script src ="js/lib/simplemodal/jquery.simplemodal.js"></script>
 
-  <!-- change this 
+  <!-- change this -->
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,300' rel='stylesheet' type='text/css'>  
-    -->
+
   <script>
   $(document).ready(function(){
 

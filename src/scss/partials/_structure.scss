@@ -31,14 +31,18 @@ body {
 
 #avb-body {
   #bottom-container {
-      height: 250px;
+
+  #bottom-wrap{
+        margin-top: 10px;
+        height: 250px;
+      }
   }
   #chart {
         height: 220px;
   }
+
   #navigation-container {
-    height: 500px;
-  }
+    height: 450px;  }
 }
 
 #simplemodal-container {
@@ -68,8 +72,12 @@ body {
   }
   #avb-body {
     #bottom-container {
+    }
+
+    #bottom-wrap{
       height: 200px;
     }
+
     #chart {
       height: 175px;
     }

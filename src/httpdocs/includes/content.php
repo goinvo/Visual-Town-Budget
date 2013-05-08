@@ -1,12 +1,14 @@
 
 <div class="container" id="avb-body">
 
-  <div class="div" id="navigation-container">
-    <div id="navigation" style="height:100%;width:100%;"> </div>
-  </div>
+  <div class="row-fluid" id="bottom-container" style="width:auto;">
 
-  <div class="row-fluid arrow_box" id="bottom-container" style="width:auto;">
-    <div id="bottom-wrap" class="row-fluid" style="height:100%">
+    <div id="navigation-container">
+      <div id="arrow"> </div>
+      <div id="navigation" style="height:100%;width:100%;"> </div>
+    </div>
+
+    <div id="bottom-wrap" class="row-fluid">
       <div  id="bottom-left-wrap" class="span3">
         <div id="bottom-left">
 
@@ -95,13 +97,12 @@
 
 
 <script type="text/html" id="card-template">
-<div class="span6 card">
+<div class="span{{span}} card">
 <div class="card-img">
-<img src="{{icon}}" height="25" width="25" style="float: left;">
 </div>
-<div style="margin-left: 35px;" class="card-text">
-<div class="cardtitle">{{title}}</div>
+<div class="card-text">
 <div class="cardvalue"></div>
+<div class="carddesc"></div>
 </div>
 </div>
 </script>

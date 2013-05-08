@@ -23,6 +23,7 @@ text {
   margin-top: 1%;
   display: none;
   font-weight: 200;
+  background-color: #f9f9f9;
 
   /*
   *  Navigation system
@@ -36,24 +37,57 @@ text {
 
     
     overflow: hidden;
+    position: relative;
+
+    #arrow{
+          content:"";
+          display:inline-block;
+          position:absolute;
+          border:15px solid white;
+          border-color:transparent transparent white transparent;
+          bottom:0;
+          margin-left: 25px;
+          z-index: 1010;
+    }
+
 
     .chart  {
       //box-shadow: inset 2px 2px 15px  #ccc;
 
 
+      .titleLabel {
+        font-size: 12px;
+
+      }
+
+      .valueLabel {
+        font-size: 18px;
+      }
+
       .rectangle {
         position: absolute;
-        display: inline-block;
+        display: table;
         box-sizing:border-box;
         -moz-box-sizing:border-box;
         -webkit-box-sizing:border-box;
-        //border: 1px solid #ccc;
-        border-radius:0px;
-        opacity: 1.0;
+        border-radius:3px;
+        background-color: #D7E1EB;
 
         &.selected{
-          box-shadow: inset 0px 0px 25px #555;
+          .overlay{
+            box-shadow: 0px 0px 10px black;
+          }
+
+          .titleLabel {
+              font-size: $text-big;
+          }
+
+          .valueLabel{
+            font-size: $text-title;
+          }
+
         }
+
       }
 
       .outer{
@@ -62,12 +96,12 @@ text {
         width: 100%;
         position: static;
 
+
       }
 
       .overlay{
-        background-image: url(/img/wavegrid.png);
-        opacity: 0.6;
-        foreground-blend-mode: overlay;
+        background-image: url(/img/texture.png);
+        opacity: 0.15;
         position: absolute;
         width: 100%;
         height: 100%;
@@ -82,29 +116,9 @@ text {
       .valueLabel {
         margin-left: 10px;
         line-height: 1em;
+        color: #333333;
       }
 
-      .titleLabel {
-        font-size: 12px;
-      }
-
-      .valueLabel {
-        font-size: 18px;
-      }
-    }
-
-    #navigation rect {
-          -webkit-filter: drop-shadow( -5px -5px 5px #000 );
-            filter: drop-shadow( -5px -5px 5px #000 ); 
-      stroke: white;
-      stroke-opacity: 0.5;
-      stroke-width: 1px;
-      fill: $black;
-      fill-opacity: .6;
-      &.parent {
-        cursor: pointer;
-        fill: steelblue;
-      }
     }
   }
 
@@ -117,26 +131,22 @@ text {
   */
   #bottom-container {
     position: relative;
-    margin-top: 15px;
-    margin-bottom: 1%;
+    margin-bottom: 10px;
     padding: 1%;
     text-align: left;
     white-space: normal;
-    /*  background-color: #ffffff;*/
-    // border: 1px solid #ccc;
-    // border: 1px solid rgba(0, 0, 0, 0.2);
-    // -webkit-border-radius: 6px;
-    // -moz-border-radius: 6px;
-    // border-radius: 6px;
-    // background-clip: padding-box;
 
-      border: 1px solid #ccc;
-      border: 1px solid rgba(0, 0, 0, 0.2);
-      border-radius: 8px;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
 
-      -moz-box-shadow: 0px 0px 10px #ccc;
-      -webkit-box-shadow: 0px 0px 10px #ccc;
-      box-shadow: 0px 0px 10px #ccc;
+    -moz-box-shadow: 0px 0px 10px #ccc;
+    -webkit-box-shadow: 0px 0px 10px #ccc;
+    box-shadow: 0px 0px 10px #ccc;
+
+    #bottom-wrap{
+      position: relative;
+    }
 
     #bottom-left-wrap {
       height: 100%;
@@ -231,7 +241,6 @@ text {
 
   #cards {
     position:absolute;
-    height: 100%;
     width:100%;
     left:0;
     overflow: auto;
@@ -256,7 +265,12 @@ text {
       }
 
       .cardvalue {
-        font-size: $text-big;
+        font-size: 2.2em;
+        line-height: 1em;
+      }
+
+      .carddesc{
+        font-size: $text-small;
       }
     }
   }

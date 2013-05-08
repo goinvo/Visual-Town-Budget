@@ -6,9 +6,8 @@ avb.navigation = function(){
 
     initialize = function(data) {
         var w = $('#navigation').width(),
-        h = $('#navigation').height(),
-        color = d3.scale.category20c();
-
+        h = $('#navigation').height();
+        //color = d3.scale.category20c();
 
         nav = d3.select("#navigation").append("div")
         .attr("class", "chart")
@@ -21,10 +20,18 @@ avb.navigation = function(){
         nav.h = h;
         nav.w = w;
 
+        var color = revenuesColor;
+        data.color = color[0];
+        for(var i=0 ; i<data.sub.length; i++) {
+            data.sub[i].color = color[(i+1)%color.length];
+        }
+
         update(data);
     },
 
     update = function(data){
+
+
 
         nav.x = d3.scale.linear().range([0, nav.w]),
         nav.y = d3.scale.linear().range([0, nav.h])
@@ -33,8 +40,7 @@ avb.navigation = function(){
         .value(function(d) { return d.values[yearIndex].val;})
         .children(function(d) { return d.sub;});
 
-
-        var color = d3.scale.category20c();
+       log(data)
 
         nav.divs = d3.select('.chart').selectAll('div')
         .data(partition.nodes(data)).enter().append('div');
@@ -48,12 +54,17 @@ avb.navigation = function(){
         nav.divs.classed('rectangle',true)
         .attr("nodeid", function(d) { return d.hash})
         .style('left', function(d) { return (nav.x(d.y)).px() })
-        .style('top', function(d) { return (nav.y(d.x)).px() })
+        .style('top', function(d) { return (Math.floor(nav.y(d.x))).px() })
         .style("height", function(d) { return (Math.floor(d.dx * nav.ky)).px(); })
-        .style("width", (data.dy * nav.kx - 2).px())
+        .style("width", (data.dy * nav.kx - 5).px())
         //.style("opacity", function(d) { return opacityScale(d.depth)})
         //.style('background-color', function(d) { return color((d.children ? d : d.parent).key); });
-        .style('background', function(d) { return gradient(color((d.children ? d : d.parent).key)); });
+        .style('background', function(d) {
+            if(d.color === undefined) {
+                d.color = shadeColor(d.parent.color,0);
+            }
+            return background(d.color);
+         });
         nav.divs.each(function(){
             d3.select(this).append('div').classed('overlay',true);
             $(this).click(function(d) { zoneClick.call(this, d3.select(this).datum()) });
@@ -68,25 +79,23 @@ avb.navigation = function(){
         textContainers.append('div').classed('valueLabel', true)
         .text(function(d) { return formatcurrency(d.values[yearIndex].val);} );
 
-        scope();
+        
 
         nav.divs.each(function(d){
             opacity.call(this, d);
+            scope.call(this, d);
         });
 
         nav.rootnode = d3.select($('.chart div:first').get(0))
         .classed("selected", true);
         nav.lastClicked =  nav.rootnode;
 
+        $('#arrow').css({
+            'margin-left' : (nav.rootnode.datum().dy * nav.kx - $('#arrow').outerWidth())/2
+        });
+
     },
 
-    gradient = function(color) {
-        var startRgb = hexToRgb(color);
-        var start = 'rgba(' + startRgb.r + ',' + startRgb.g + ',' + startRgb.b + ',' + 1 + ')';
-        var end = shadeColor(color, 5);
-        var gradient = '-webkit-gradient(linear, 0% 0%, 0% 100%, from(' + start + '), to( ' + start + '))';
-        return gradient;
-    },
 
     open = function(nodeId) {
         var rect = d3.select('div[nodeid*="' + nodeId +'"]');
@@ -99,10 +108,11 @@ avb.navigation = function(){
 
     zoneClick = function(d, click){
 
-    // back to rootnode if clicked on same level
+    // select clicked div
     nav.lastClicked.classed("selected", false);
     d3.select(this).classed("selected", true);
 
+    // go back method
     if(nav.lastClicked !== undefined &&
         nav.lastClicked.datum().depth !== 0 &&
         d.depth === nav.lastClicked.datum().depth){
@@ -110,42 +120,43 @@ avb.navigation = function(){
             return;
     }
 
+    // push url
     if(click === undefined) {
         pushUrl( section, thisYear, d.hash);
     }
 
+    // remember selected div
     nav.lastClicked = d3.select(this);
 
+    // refresh title, chart, cards
     updateSelection(d, d3.select(this).style("background-color"))
 
-    var x = nav.x,
-    y = nav.y,
-    kx = nav.kx,
-    ky = nav.ky,
-    h = nav.h,
-    w = nav.w,
-    g = nav.divs;
+    nav.kx = (d.y ? nav.w - 40 : nav.w) / (1 - d.y);
+    nav.ky = nav.h / d.dx;
+    nav.ky = nav.ky;
 
-    kx = (d.y ? w - 40 : w) / (1 - d.y);
-    ky = h / d.dx;
-    nav.ky = ky;
+    nav.y.domain([d.x, d.x + d.dx]);
+    nav.x.domain([d.y,1]).range([d.y ? 40 : 0, nav.w]);
 
-    y.domain([d.x, d.x + d.dx]);
-    x.domain([d.y,1]).range([d.y ? 40 : 0, w]);
-    nav.x = x;
-
-    scope();
+    // animate pointer
+    $('#arrow').animate({
+        'margin-left' : (d.depth ? 40 : 0) + (d.dy * nav.kx - $('#arrow').outerWidth())/2
+    });
 
     var duration = 600;
 
-    var t = g.transition()
-    .duration(duration)
-    .style('left', function(d) { return (x(d.y)).px() })
-    .style('top' , function(d) { return (y(d.x)).px() })
-    .style("width", (d.dy * kx - 1).px())
-    .style("height", function(d) { return (d.dx * ky).px(); });
+    nav.divs.each(function(d){
+        scope.call(this, d);
+    });
 
-    g.each(function(d){
+    var t = nav.divs.transition()
+    .duration(duration)
+    .style('left', function(d) { return (nav.x(d.y)).px() })
+    .style('top' , function(d) { return (Math.floor(nav.y(d.x))).px() })
+    .style("width", (d.dy * nav.kx - 5).px())
+    .style("height", function(d) { return (Math.floor(d.dx * nav.ky)).px(); });
+
+    nav.divs.each(function(d){
         opacity.call(this, d, 150);
     });
 
@@ -155,19 +166,21 @@ avb.navigation = function(){
 },
 
 
-transform = function(d){
-    if(d.dx * nav.ky < (nav.labelTitleHeight + nav.labelValueHeight + 5)) {
-        return "translate(8," + ((d.dx * nav.ky / 2) - nav.labelTitleHeight/2) + ")";
-    }
-    return "translate(8," + ((d.dx * nav.ky / 2) - (nav.labelTitleHeight + nav.labelValueHeight + 5)/2) + ")";
-};
+background = function(color) {
+    var opacity = 0.5;
+    var startRgb = hexToRgb(color);
+    var start = 'rgba(' + startRgb.r + ',' + startRgb.g + ',' + startRgb.b + ',' + opacity + ')';
+    var gradient = start;
+    return gradient;
+},
 
-scope = function() {
-    nav.divs.style('display', function(d) { 
-        if( d.dx * nav.ky < 2 ) {
-            return 'none';
+scope = function(d) {
+
+    d3.select(this).style('box-shadow', function(d){
+        if(d.dx * nav.ky > 150){
+            return 'inset 0px 0px ' + ((d.dx * nav.ky)) + 'px' + d.color;
         } else {
-            return 'table';
+            return '';
         }
     });
 }
