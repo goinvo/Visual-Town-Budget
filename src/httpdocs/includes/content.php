@@ -28,8 +28,8 @@
 
           <div style="display:inline-block">
             <div class="onoffswitch" >
-              <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" >
-              <label class="onoffswitch-label" for="myonoffswitch">
+              <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="layer-switch" >
+              <label class="onoffswitch-label" for="layer-switch">
                 <div class="onoffswitch-inner"></div>
                 <div class="onoffswitch-switch"></div>
               </label>

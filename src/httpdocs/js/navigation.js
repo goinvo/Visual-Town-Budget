@@ -39,9 +39,7 @@ avb.navigation = function(){
         var partition = d3.layout.partition()
         .value(function(d) { return d.values[yearIndex].val;})
         .children(function(d) { return d.sub;});
-
-       log(data)
-
+        
         nav.divs = d3.select('.chart').selectAll('div')
         .data(partition.nodes(data)).enter().append('div');
 
@@ -176,13 +174,13 @@ background = function(color) {
 
 scope = function(d) {
 
-    d3.select(this).style('box-shadow', function(d){
-        if(d.dx * nav.ky > 150){
-            return 'inset 0px 0px ' + ((d.dx * nav.ky)) + 'px' + d.color;
-        } else {
-            return '';
-        }
-    });
+    // d3.select(this).style('box-shadow', function(d){
+    //     if(d.dx * nav.ky > 150){
+    //         return 'inset 0px 0px ' + ((d.dx * nav.ky)) + 'px' + d.color;
+    //     } else {
+    //         return '';
+    //     }
+    // });
 }
 
 opacity = function(d, duration) {

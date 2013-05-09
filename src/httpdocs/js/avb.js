@@ -52,11 +52,11 @@
                 avb.cards.draw();
                 avb.navigation.initialize(jsondata);
                 avb.chart.initialize('#chart');
-                avb.chart.initializeLayers();
+                avb.chart.initializeSwitch();
+                $(".rectangle:first").trigger('click');
 
                 console.log("UI Loaded.");
-
-                updateSelection(root, "steelblue")
+                
             }
 
             function triggerModal() {
@@ -104,7 +104,7 @@
                 console.log($('modal-right div :first'))
                 $('#modal-right div :first').appendTo('#bottom-right');
 
-                $("#myonoffswitch").attr('checked', false);
+                $("#layer-switch").attr('checked', false);
 
                 avb.chart.initialize("#chart");
                 avb.chart.drawline();

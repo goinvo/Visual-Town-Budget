@@ -7,60 +7,52 @@ avb.chart = function(){
 
 	initialize = function(div){
 
-		if(layout.chartsvg !== undefined) {
-			layout.chartsvg.remove();
-		}
-
-		layout.chartsvg = d3.select(div).append("svg");
-
-		layout.chartsvg.width = $(div).width();
-
-		// compute height to align with bars
-		layout.chartsvg.height = $(div).height();
-
-
-		layout.chartsvg.attr("height", layout.chartsvg.height )
-		.attr("width", layout.chartsvg.width);
-
-		var width = layout.chartsvg.width;
-		var height = layout.chartsvg.height;
-		if(chart !== undefined ) {
+		if(chart !== undefined) {
 			chart.remove();
 		}
-		chart = layout.chartsvg.append("svg:g");
 
-		chart.xmargin = 50;
-		chart.ymargin = 20;
-		chart.width = width - 15;
-		chart.height = height;
-		chart.linestack = [];
-		chart.xscale = d3.scale.linear().domain([firstYear, lastYear]).range([chart.xmargin, chart.width]);
+		chart = d3.select(div).append("svg");
 
+		chart.width = $(div).width() ;
+		chart.height = $(div).height();
+    chart.xmargin = 50;
+    chart.ymargin = 20;
+    chart.linestack = [];
+    chart.xscale = d3.scale.linear()
+    .domain([firstYear, lastYear])
+    .range([chart.xmargin, chart.width]);
+
+
+    chart.attr("height", chart.height )
+    .attr("width", chart.width);
+
+
+    $('#chart-expand').click(function(d){
+      $('#modal-container').modal({
+        onOpen : modalOpen,
+        onClose : modalClose,
+        opacity : 70
+      });
+    });
     // chart expansion
   },
 
-  initializeLayers = function(){
+  initializeSwitch = function(){
         // chart mode switch
-        $("#myonoffswitch").click(function(d) {
-          if ( $('#myonoffswitch').is(':checked') ) {
+        $("#layer-switch").click(function(d) {
+          if ( $('#layer-switch').is(':checked') ) {
+            //switch activated
             enableLayers(currentSelection.data);
+            $('#legend').css({ 'margin-top' :  Math.max(0, ($('#bottom-right').height() - $('#legend').height())/2) })
             $('#legend').animate({left: '0'});
             $('#cards').animate({left: '100%'});
           } else {
+            //switch deactivated
             removeLayers();
             $('#legend').animate({left: '-100%'});
             $('#cards').animate({left: '0'});
           }
         })
-
-        $('#chart-expand').click(function(d){
-          $('#modal-container').modal({
-            onOpen : modalOpen,
-            onClose : modalClose,
-            opacity : 70
-          });
-        });
-
       },
 
       legend  = function(layers) {
@@ -72,11 +64,9 @@ avb.chart = function(){
 
         d3.selectAll("#legend tr").remove();
 
-        var rows = d3.select("#legend tbody")
-        .selectAll("tr")
-        .data(legendLabels)
-        .enter()
-        .append("tr");
+        // add legend rows
+        var rows = d3.select("#legend tbody") .selectAll("tr")
+        .data(legendLabels).enter().append("tr");
 
         rows.append("td").append('div')
         .classed('legend-label', true)
@@ -90,58 +80,56 @@ avb.chart = function(){
       },
 
 
-
       drawline = function(data, color) {
-        var popover = true;
 
+        // redraw case
         if(data === undefined) {
           data = currentSelection.data;
           color = currentSelection.color;
-          popover = false;
         }
 
-        if(chart.last !== undefined) { 
-          chart.last.selectAll('.multigrid').remove();
-          chart.last.selectAll('.axis').remove();
-          chart.last.selectAll('.overflows').remove();
-          chart.last.selectAll('.thisYearLine').remove();
-          
+        // set fixed opacity
+        color = color.replace(color.split(',')[3], ')').replace('a','')
+
+        if(chart.axes === undefined){
+          chart.grids = chart.append('g');
+          chart.visualsgroup = chart.append('g');
+          chart.axes = chart.append('g');
         }
+
+        d3.selectAll(chart.grids.node().childNodes).remove()
+        d3.selectAll(chart.axes.node().childNodes).remove()
 
         /*
-        *  x/y scales computation
+        *  x/y scales
         */
-        var yscale = d3.scale.linear().domain([0,d3.max(data.values, get_values)*1.2])
+        chart.yscale = d3.scale.linear().domain([0,d3.max(data.values, get_values)*1.2])
         .range([chart.height - chart.ymargin, 10]);
-        chart.yscale = yscale;
-        var xscale = chart.xscale;
 
-        var container = (chart.last === undefined) ? chart.append('svg:g') : chart.last.select("g");
-
+       
         /*
         * grids
         */
-        container.xgrid_axis = d3.svg.axis().scale(xscale).orient("bottom")
+
+        // xgrid
+        var xgrid_axis = d3.svg.axis().scale(chart.xscale).orient("bottom")
         .tickSize(-chart.height + chart.ymargin, 0, 0).ticks(6)
         .tickFormat(function (d) { return '';});
 
-        container.xgrid = container.append("g")
+        chart.grids.append("g")
         .attr("class", "multigrid")
         .attr("transform", "translate(0," + (chart.height - chart.ymargin) + ")")
-        .call(container.xgrid_axis);
+        .call(xgrid_axis);
 
-        container.ygrid_axis = d3.svg.axis().scale(yscale).orient("left")
+        // y grid
+        var ygrid_axis = d3.svg.axis().scale(chart.yscale).orient("left")
         .ticks(4).tickSize(-chart.width + chart.xmargin , 0, 0)
         .tickFormat(function (d) { return "";});
 
-        container.ygrid = container.append("g")
+        chart.grids.append("g")
         .attr("class", "multigrid")
         .attr("transform", "translate(" + chart.xmargin + ",0)")                 
-        .call(container.ygrid_axis);
-
-        $('.multigrid').each(function(){
-          $(this).prependTo($(this).parent())
-        })
+        .call(ygrid_axis);
 
         /*
         * line - areas 
@@ -150,140 +138,129 @@ avb.chart = function(){
         // line function
         var line = d3.svg.line()
         .interpolate("monotone")
-        .x(function(d) { return xscale(d.year); })
-        .y(function(d) { return  yscale(d.val); });
+        .x(function(d) { return chart.xscale(d.year); })
+        .y(function(d) { return  chart.yscale(d.val); });
 
         // area
         var area = d3.svg.area()
         .interpolate("monotone")
-        .x(function(d,i) { return xscale(d.year); })
+        .x(function(d,i) { return chart.xscale(d.year); })
         .y0(function(d) { return (chart.height - chart.ymargin); })
-        .y1(function(d) { return yscale(d.val); });
+        .y1(function(d) { return chart.yscale(d.val); });
 
         var projected = lastYear - currentYear;
 
         // current year line
-        container.append("line").classed('thisYearLine',true)
+        chart.grids.append("line").classed('thisYearLine',true)
         .attr("x1", chart.xscale(thisYear)).attr("x2", chart.xscale(thisYear))
         .attr("y1", 0).attr("y2", chart.height - chart.ymargin)
         .style("stroke","black");
 
-        $('.thisYearLine').each(function(){
-          $(this).prependTo($(this).parent());
-        })
-
+        /*
+        * line and areas drawing
+        */
         var transitionDuration = 0;
-
-        if(chart.line1 === undefined) {
-          chart.line1 = container.append("svg:path");     
-          chart.line2 = container.append("svg:path");
-          chart.area1 = container.append("svg:path");
-          chart.area2 = container.append("svg:path");
-          transitionDuration = 0;
+        if (chart.visuals === undefined) {
+          chart.visuals = []
+          for(i=0; i<4; i++) chart.visuals.push(chart.visualsgroup.append("svg:path"));
         }
+        transitionDuration = 0;
 
         //non-projection area
-        chart.area1.attr('id','area1').transition().duration(transitionDuration)
+        chart.visuals[0].classed("area",true)
+        .transition().duration(transitionDuration)
         .attr("d", area(data.values.slice(0,projected +1)))
         .style("fill", color).style("opacity", 0.2);
 
         // projection area
-        chart.area2.attr('id','area2').transition().duration(transitionDuration)
+        chart.visuals[1].classed("area",true).classed("projection",true)
+        .transition().duration(transitionDuration)
         .attr("d", area(data.values.slice(projected, data.values.length )))
         .style("fill", color).style("opacity", 0.1);
         
         // non-projection line
-        chart.line1.attr('id','line1')
-        .classed("chartline", true)
+        chart.visuals[2].classed("line", true)
         .transition().duration(transitionDuration)
         .attr("d", line(data.values.slice(0,projected +1)))
-        .style("stroke", color).style("opacity", 0.6);
-
+        .style("stroke", color);
         
         // projection line
-        chart.line2.attr('id','line2')
-        .classed("chartline", true).classed("chartline-projection", true)
+        chart.visuals[3].classed("line", true).classed("projection", true)
         .transition().duration(transitionDuration)
         .attr("d", line(data.values.slice(projected, data.values.length )))
-        .style("stroke", color).style("opacity", 0.6);
+        .style("stroke", color);
 
        /*
        * x/y axes
        */
-       var xAxis = d3.svg.axis(container).scale(xscale)
+       var xAxis = d3.svg.axis().scale(chart.xscale)
        .orient("bottom").tickSize(0, 0, 0).tickPadding(10)
        .tickFormat(function(d){ return d; });
 
-       var yAxis = d3.svg.axis().scale(yscale).ticks(5)
+       var yAxis = d3.svg.axis().scale(chart.yscale).ticks(5)
        .orient("left").tickSize(0, 0, 0).tickPadding(5)
        .tickFormat(function(d){
        	return formatcurrency(d);
        });
-
 
        if(chart.xAxisSocket !== undefined) {
        	chart.xAxisSocket.remove();
        	chart.yAxisSocket.remove();
        }
        
-        // hotspots
-
+       /*
+       * Hotspots and popovers
+       */
         if(chart.circles === undefined) {
-          chart.circles = container.append("svg:g");
+          chart.circles = chart.visualsgroup.append("svg:g");
           chart.circles.selectAll("circle").data(data.values).enter().append("circle");
         }
 
         chart.circles.attr("data-name", data.key)
         .selectAll("circle").data(data.values)
         .transition().duration(transitionDuration)
-        .attr("class","chart-circle")
-        .attr("cx", function(d) { return xscale(d.year); })
-        .attr("cy", function(d) { return yscale(d.val); })
+        .attr("cx", function(d) { return chart.xscale(d.year); })
+        .attr("cy", function(d) { return chart.yscale(d.val); })
         .attr("r", 5)
         .attr("stroke", color).attr("fill", color);
 
-        console.log(chart.circles.attr("data-name", data.key)
-        .selectAll("circle").data(data.values).enter().append("circle"));
+        chart.circles.attr("data-name", data.key)
+        .selectAll("circle").data(data.values).enter().append("circle");
 
-        $('.chart-circle').popover({
+        $('#chart circle').popover({
         	container:'body',
         	placement: 'top',
         	trigger: 'hover',
         	content: function() {
-        		if(firstPopover !== undefined) {
-        			firstPopover.popover('hide');
-        			firstPopover = undefined;
-        		}
-        		$('#popover-value')
-        		.text(formatcurrency(d3.select(this).datum().val));
-
+        		$('#popover-value').text(formatcurrency(d3.select(this).datum().val));
         		return $('#popover-html').html();
         	},
         	html: true
         });
 
-      var overflowFill = '#f9f9f9';
+        $('#chart circle:first').trigger('hover');
 
-      var overflows = chart.append("g").classed('overflows',true);
-      overflows.append("rect").attr("width",chart.xmargin)
-      .attr("height", chart.height).attr('fill',overflowFill);
+       /*
+       * Overflows
+       */
 
-      overflows.append("rect").attr("width",5)
-      .attr("height", chart.height).attr('x', chart.width)
-      .attr('fill',overflowFill);
+        // covers leftmost circle overflow 
+        var overflows = chart.axes.append("g").classed('overflows',true);
+        overflows.append("rect").attr("width",chart.xmargin)
+        .attr("height", chart.height);
 
-      overflows.append("rect").attr("width", chart.width)
-      .attr("height", chart.ymargin).attr("y", chart.height - chart.ymargin)
-      .attr('fill',overflowFill);
+        // covers line overflow when value is 0
+        overflows.append("rect").attr("width", chart.width)
+        .attr("height", chart.ymargin).attr("y", chart.height - chart.ymargin);
 
 
-      chart.xAxisSocket = chart.append("g")
-      .classed("axis",true).classed("xAxis",true)
-      .attr("transform", "translate(0," + (chart.height - chart.ymargin -1) + ")").call(xAxis);
+        chart.xAxisSocket = chart.axes.append("g")
+        .classed("axis",true).classed("xAxis",true)
+        .attr("transform", "translate(0," + (chart.height - chart.ymargin -1) + ")").call(xAxis);
 
-      chart.yAxisSocket = chart.append("g")
-      .attr("class", "axis")
-      .attr("transform", "translate( " + chart.xmargin + ",0)").call(yAxis);
+        chart.yAxisSocket = chart.axes.append("g")
+        .attr("class", "axis")
+        .attr("transform", "translate( " + chart.xmargin + ",0)").call(yAxis);
 
       // mark odd entries
 
@@ -296,10 +273,9 @@ avb.chart = function(){
       d3.select('.xAxis g:nth-child(' + (yearIndex+1) + ')')
       .classed('thisYear', true);
 
-      chart.last = chart;
-
       removeLayers(false);
-      if ( $('#myonoffswitch').is(':checked') ) {
+
+      if ( $('#layer-switch').is(':checked') ) {
        enableLayers(data);
      }
    },
@@ -311,7 +287,7 @@ avb.chart = function(){
 
     if(jsondata.sub === undefined) return;
 
-    multichart = layout.chartsvg.append("svg:g")
+    multichart = chart.append("svg:g")
     .style("opacity",0);
 
     var chart_w = chart.width;
@@ -393,6 +369,6 @@ avb.chart = function(){
     	drawline : drawline,
     	enableLayers : enableLayers,
     	removeLayers : removeLayers,
-      initializeLayers : initializeLayers
+      initializeSwitch : initializeSwitch
     }
   }();

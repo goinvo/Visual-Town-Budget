@@ -366,24 +366,23 @@ text {
 #bottom-right #legend,
 #modal-right #legend {
   position: absolute;
-  height: 100%;
   width: 100%;
   left: -100%;
   overflow-y: auto;
 }
-/* line 231, ../../scss/partials/_avb.scss */
+/* line 230, ../../scss/partials/_avb.scss */
 #bottom-right #legend .legend-label,
 #modal-right #legend .legend-label {
   width: 16px;
   height: 16px;
   border-radius: 8px;
 }
-/* line 237, ../../scss/partials/_avb.scss */
+/* line 236, ../../scss/partials/_avb.scss */
 #bottom-right #legend tr :first-child,
 #modal-right #legend tr :first-child {
   margin-right: 5px;
 }
-/* line 242, ../../scss/partials/_avb.scss */
+/* line 241, ../../scss/partials/_avb.scss */
 #bottom-right #cards,
 #modal-right #cards {
   position: absolute;
@@ -391,35 +390,35 @@ text {
   left: 0;
   overflow: auto;
 }
-/* line 248, ../../scss/partials/_avb.scss */
+/* line 247, ../../scss/partials/_avb.scss */
 #bottom-right #cards .card-row:first-child,
 #modal-right #cards .card-row:first-child {
   padding-left: 0;
 }
-/* line 254, ../../scss/partials/_avb.scss */
+/* line 253, ../../scss/partials/_avb.scss */
 #bottom-right #cards .card-row .card-img,
 #modal-right #cards .card-row .card-img {
   float: left;
 }
-/* line 256, ../../scss/partials/_avb.scss */
+/* line 255, ../../scss/partials/_avb.scss */
 #bottom-right #cards .card-row .card-img img,
 #modal-right #cards .card-row .card-img img {
   display: block;
 }
-/* line 261, ../../scss/partials/_avb.scss */
+/* line 260, ../../scss/partials/_avb.scss */
 #bottom-right #cards .card-row .cardtitle,
 #modal-right #cards .card-row .cardtitle {
   font-size: 1.3em;
   border: 1px;
   color: #aaaaaa;
 }
-/* line 267, ../../scss/partials/_avb.scss */
+/* line 266, ../../scss/partials/_avb.scss */
 #bottom-right #cards .card-row .cardvalue,
 #modal-right #cards .card-row .cardvalue {
   font-size: 2.2em;
   line-height: 1em;
 }
-/* line 272, ../../scss/partials/_avb.scss */
+/* line 271, ../../scss/partials/_avb.scss */
 #bottom-right #cards .card-row .carddesc,
 #modal-right #cards .card-row .carddesc {
   font-size: 0.7em;
@@ -428,19 +427,19 @@ text {
 /* 
 * Modal
 */
-/* line 282, ../../scss/partials/_avb.scss */
+/* line 281, ../../scss/partials/_avb.scss */
 #simplemodal-overlay {
   background-color: black;
   opacity: 1;
 }
 
-/* line 287, ../../scss/partials/_avb.scss */
+/* line 286, ../../scss/partials/_avb.scss */
 #modal-container {
   display: none;
   font-weight: 200;
 }
 
-/* line 292, ../../scss/partials/_avb.scss */
+/* line 291, ../../scss/partials/_avb.scss */
 #simplemodal-container {
   position: relative;
   background: #000;
@@ -448,11 +447,11 @@ text {
   border-radius: 11px;
   background-color: #f9f9f9 !important;
 }
-/* line 294, ../../scss/partials/_avb.scss */
+/* line 293, ../../scss/partials/_avb.scss */
 #simplemodal-container #basic-modal-content {
   display: none;
 }
-/* line 304, ../../scss/partials/_avb.scss */
+/* line 303, ../../scss/partials/_avb.scss */
 #simplemodal-container .simplemodal-data {
   position: relative;
   height: 100%;
@@ -461,41 +460,41 @@ text {
   box-sizing: border-box;
   padding: 2%;
 }
-/* line 311, ../../scss/partials/_avb.scss */
+/* line 310, ../../scss/partials/_avb.scss */
 #simplemodal-container .simplemodal-data #modal-toprow {
   height: 20%;
   overflow: auto;
   margin-bottom: 20px;
 }
-/* line 316, ../../scss/partials/_avb.scss */
+/* line 315, ../../scss/partials/_avb.scss */
 #simplemodal-container .simplemodal-data #modal-toprow .title-head {
   margin-bottom: 10px;
 }
-/* line 321, ../../scss/partials/_avb.scss */
+/* line 320, ../../scss/partials/_avb.scss */
 #simplemodal-container .simplemodal-data #modal-bottomrow {
   height: 76%;
 }
-/* line 325, ../../scss/partials/_avb.scss */
+/* line 324, ../../scss/partials/_avb.scss */
 #simplemodal-container .simplemodal-data #modal-bottomrow .span8 {
   height: 100%;
 }
-/* line 327, ../../scss/partials/_avb.scss */
+/* line 326, ../../scss/partials/_avb.scss */
 #simplemodal-container .simplemodal-data #modal-bottomrow .span8 #modal-switch {
   height: 10%;
 }
-/* line 330, ../../scss/partials/_avb.scss */
+/* line 329, ../../scss/partials/_avb.scss */
 #simplemodal-container .simplemodal-data #modal-bottomrow .span8 #modal-chart {
   height: 90%;
 }
-/* line 335, ../../scss/partials/_avb.scss */
+/* line 334, ../../scss/partials/_avb.scss */
 #simplemodal-container .simplemodal-data #modal-bottomrow .span4 {
   height: 76%;
 }
-/* line 338, ../../scss/partials/_avb.scss */
+/* line 337, ../../scss/partials/_avb.scss */
 #simplemodal-container .simplemodal-data #modal-bottomrow .span4 #modal-right {
   margin-top: 10%;
 }
-/* line 345, ../../scss/partials/_avb.scss */
+/* line 344, ../../scss/partials/_avb.scss */
 #simplemodal-container a.modalCloseImg {
   background: url(../img/delete_icon.png) no-repeat;
   width: 25px;
@@ -507,7 +506,7 @@ text {
   right: -10px;
   cursor: pointer;
 }
-/* line 356, ../../scss/partials/_avb.scss */
+/* line 355, ../../scss/partials/_avb.scss */
 #simplemodal-container h3 {
   color: #84b8d9;
 }
@@ -603,26 +602,40 @@ text {
 }
 
 /* line 4, ../../scss/partials/_chart.scss */
-.chartline {
+.line {
   fill: none;
   stroke-width: 3;
   stroke-linejoin: round;
   stroke-linecap: round;
+  opacity: 0.6;
 }
-
-/* line 10, ../../scss/partials/_chart.scss */
-.chartline-projection {
+/* line 11, ../../scss/partials/_chart.scss */
+.line.projection {
   stroke-dasharray: 5, 5;
   stroke-linejoin: round;
   stroke-linecap: round;
 }
 
-/* line 15, ../../scss/partials/_chart.scss */
+/* line 18, ../../scss/partials/_chart.scss */
+.area {
+  opacity: 0.2;
+}
+/* line 21, ../../scss/partials/_chart.scss */
+.area.projection {
+  opacity: 0.1;
+}
+
+/* line 26, ../../scss/partials/_chart.scss */
+.overflows {
+  fill: #f9f9f9;
+}
+
+/* line 30, ../../scss/partials/_chart.scss */
 .browser text {
   text-anchor: end;
 }
 
-/* line 19, ../../scss/partials/_chart.scss */
+/* line 34, ../../scss/partials/_chart.scss */
 .axis path, .axis line {
   stroke: grey;
   stroke-width: 0;
@@ -630,50 +643,50 @@ text {
   stroke-linecap: round;
   shape-rendering: crispEdges;
 }
-/* line 26, ../../scss/partials/_chart.scss */
+/* line 41, ../../scss/partials/_chart.scss */
 .axis text {
-  font-family: "Helvetica Neue";
+  font-family: 'Open Sans';
   font-size: 0.8em;
 }
-/* line 31, ../../scss/partials/_chart.scss */
+/* line 46, ../../scss/partials/_chart.scss */
 .axis .odd {
   fill: none;
 }
-/* line 35, ../../scss/partials/_chart.scss */
+/* line 50, ../../scss/partials/_chart.scss */
 .axis .thisYear {
   fill: black;
   font-weight: bold;
 }
 
-/* line 41, ../../scss/partials/_chart.scss */
+/* line 56, ../../scss/partials/_chart.scss */
 .multiarea {
   fill-opacity: 0.65;
 }
 
-/* line 44, ../../scss/partials/_chart.scss */
+/* line 59, ../../scss/partials/_chart.scss */
 .multiline {
   fill: none;
   stroke-width: 2px;
   opacity: 1;
 }
 
-/* line 49, ../../scss/partials/_chart.scss */
+/* line 64, ../../scss/partials/_chart.scss */
 .multiaxis path {
   stroke-width: 0;
   fill: none;
 }
 
-/* line 54, ../../scss/partials/_chart.scss */
+/* line 69, ../../scss/partials/_chart.scss */
 .multigrid .tick {
   stroke: lightgrey;
   opacity: 0;
 }
-/* line 58, ../../scss/partials/_chart.scss */
+/* line 73, ../../scss/partials/_chart.scss */
 .multigrid path {
   stroke-width: 1;
 }
 
-/* line 63, ../../scss/partials/_chart.scss */
+/* line 78, ../../scss/partials/_chart.scss */
 #chart {
   position: relative;
 }

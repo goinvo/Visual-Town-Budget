@@ -1,17 +1,32 @@
 .nv-legend .disabled circle {
     fill-opacity: 0;
   }
-  .chartline {
+  .line {
     fill: none;
     stroke-width: 3;
     stroke-linejoin: round;
     stroke-linecap: round;
+    opacity : 0.6;
+
+    &.projection{
+      stroke-dasharray: 5, 5;
+      stroke-linejoin: round;
+      stroke-linecap: round;
+    }
   }
-  .chartline-projection {
-    stroke-dasharray: 5, 5;
-    stroke-linejoin: round;
-    stroke-linecap: round;
+
+  .area {
+    opacity: 0.2;
+
+    &.projection{
+      opacity: 0.1;
+    }
   }
+
+  .overflows{
+    fill: #f9f9f9;
+  }
+
   .browser text {
     text-anchor: end;
   }
@@ -24,7 +39,7 @@
       shape-rendering: crispEdges;
     }
     text {
-      font-family: "Helvetica Neue";
+      font-family: 'Open Sans';
       font-size: 0.8em;
     }
 
