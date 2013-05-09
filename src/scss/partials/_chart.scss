@@ -15,13 +15,28 @@
     }
   }
 
+  .layers{
+    opacity: 0;
+  }
+
   .area {
-    opacity: 0.2;
+    opacity: 0.15;
 
     &.projection{
       opacity: 0.1;
     }
+
+    // &.layers{
+    //   opacity: 0.1;
+
+    //   &.projection{
+    //     opacity: 0.2;
+    //   }
+    // }
+
   }
+
+
 
   .overflows{
     fill: #f9f9f9;

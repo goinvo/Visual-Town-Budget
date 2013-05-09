@@ -1,9 +1,7 @@
 var avb = avb || {};
 
 avb.chart = function(){
-	var chart,
-	multichart,
-	firstPopover,
+	var chart, layers
 
 	initialize = function(div){
 
@@ -89,11 +87,15 @@ avb.chart = function(){
         }
 
         // set fixed opacity
-        color = color.replace(color.split(',')[3], ')').replace('a','')
+        color = color.replace(color.split(',')[3], ')').replace('a','');
+
+        layersEnabled = $('#layer-switch').is(':checked');
 
         if(chart.axes === undefined){
           chart.grids = chart.append('g');
-          chart.visualsgroup = chart.append('g');
+          chart.areagroup = chart.append('g');
+          chart.layers = chart.append('g');
+          chart.linegroup = chart.append('g');
           chart.axes = chart.append('g');
         }
 
@@ -162,7 +164,8 @@ avb.chart = function(){
         var transitionDuration = 0;
         if (chart.visuals === undefined) {
           chart.visuals = []
-          for(i=0; i<4; i++) chart.visuals.push(chart.visualsgroup.append("svg:path"));
+          for(i=0; i<2; i++) chart.visuals.push(chart.linegroup.append("svg:path")); 
+          for(i=0; i<2; i++) chart.visuals.push(chart.areagroup.append("svg:path")); 
         }
         transitionDuration = 0;
 
@@ -170,13 +173,13 @@ avb.chart = function(){
         chart.visuals[0].classed("area",true)
         .transition().duration(transitionDuration)
         .attr("d", area(data.values.slice(0,projected +1)))
-        .style("fill", color).style("opacity", 0.2);
+        .attr("color", color).style("fill", layersEnabled ? 'rgb(0,0,0)' : color);
 
         // projection area
         chart.visuals[1].classed("area",true).classed("projection",true)
         .transition().duration(transitionDuration)
         .attr("d", area(data.values.slice(projected, data.values.length )))
-        .style("fill", color).style("opacity", 0.1);
+        .attr("color", color).style("fill", layersEnabled ? 'rgb(0,0,0)' : color);
         
         // non-projection line
         chart.visuals[2].classed("line", true)
@@ -212,7 +215,7 @@ avb.chart = function(){
        * Hotspots and popovers
        */
         if(chart.circles === undefined) {
-          chart.circles = chart.visualsgroup.append("svg:g");
+          chart.circles = chart.linegroup.append("svg:g");
           chart.circles.selectAll("circle").data(data.values).enter().append("circle");
         }
 
@@ -275,7 +278,7 @@ avb.chart = function(){
 
       removeLayers(false);
 
-      if ( $('#layer-switch').is(':checked') ) {
+      if ( layersEnabled ) {
        enableLayers(data);
      }
    },
@@ -287,19 +290,19 @@ avb.chart = function(){
 
     if(jsondata.sub === undefined) return;
 
-    multichart = chart.append("svg:g")
-    .style("opacity",0);
+    layers = chart.layers.append('g')
+    .classed('layers',true);
 
     var chart_w = chart.width;
     var chart_h = chart.height;
 
-    multichart.width = chart_w;
-    multichart.height = chart_h;
+    layers.width = chart_w;
+    layers.height = chart_h;
 
-    var yscale = chart.yscale;
+    var yscale = chart.yscale
     var xscale = chart.xscale;
 
-    multichart.xscale = xscale;
+    layers.xscale = xscale;
     var color = d3.scale.category20();
 
       // line declaration
@@ -324,19 +327,21 @@ avb.chart = function(){
       var instance = stack(jsondata.sub);
 
       // calculate areas
-      var browser = multichart.selectAll(".browser")
+      var browser = layers.selectAll(".browser")
       .data(instance)
       .enter().append("g")
       .attr("class", "browser");
 
+
+      console.log("DRAWING AREAS")
       // draw areas
-      multichart.areas = browser.append("path")
+      layers.areas = browser.append("path")
       .attr("class", "multiarea")
       .attr("d", function(d) { return area(d.values); })
       .style("fill", function(d,i) { return colors[i%20]; });
 
       // draw lines
-      multichart.lines = browser.append("path")
+      layers.lines = browser.append("path")
       .attr("class", "multiline")
       .attr("d", function(d) { return line(d.values); })
       .style("stroke", function(d,i) { return colors[i%20]; });
@@ -344,22 +349,30 @@ avb.chart = function(){
       // legend
       legend(browser);
 
+      // areas to gray
+      d3.selectAll(".area").classed("layers",true).style("fill", "rgb(0,0,0)");
+      d3.selectAll(".area").each(function(){
+        log(this)
+      })
+
+      // not fundamental, improves layers looks
+      $('.layers g:last .multiline').remove();
 
       if (transition === undefined){
-        multichart.transition().duration(500).style("opacity",1);
+        layers.transition().duration(500).style("opacity",1);
       } else {
-        multichart.style("opacity",1);
+        layers.style("opacity",1);
       }
 
     },
 
     removeLayers = function (){
-
-    	if(multichart === undefined) {
-    		return;
-    	}
-    	multichart.transition().duration(500).style("opacity",0);
-    	multichart.transition().delay(500).remove();	
+      if(layers !== undefined){
+        // d3.selectAll('.area').classed("layers",false)
+        // .style("fill", function(){ return d3.select(this).attr("color")});
+      	layers.transition().duration(500).style("opacity",0);
+      	layers.transition().delay(500).remove();
+      }	
     };
 
 

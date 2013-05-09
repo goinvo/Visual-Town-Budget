@@ -617,25 +617,30 @@ text {
 }
 
 /* line 18, ../../scss/partials/_chart.scss */
-.area {
-  opacity: 0.2;
+.layers {
+  opacity: 0;
 }
-/* line 21, ../../scss/partials/_chart.scss */
+
+/* line 22, ../../scss/partials/_chart.scss */
+.area {
+  opacity: 0.15;
+}
+/* line 25, ../../scss/partials/_chart.scss */
 .area.projection {
   opacity: 0.1;
 }
 
-/* line 26, ../../scss/partials/_chart.scss */
+/* line 41, ../../scss/partials/_chart.scss */
 .overflows {
   fill: #f9f9f9;
 }
 
-/* line 30, ../../scss/partials/_chart.scss */
+/* line 45, ../../scss/partials/_chart.scss */
 .browser text {
   text-anchor: end;
 }
 
-/* line 34, ../../scss/partials/_chart.scss */
+/* line 49, ../../scss/partials/_chart.scss */
 .axis path, .axis line {
   stroke: grey;
   stroke-width: 0;
@@ -643,50 +648,50 @@ text {
   stroke-linecap: round;
   shape-rendering: crispEdges;
 }
-/* line 41, ../../scss/partials/_chart.scss */
+/* line 56, ../../scss/partials/_chart.scss */
 .axis text {
   font-family: 'Open Sans';
   font-size: 0.8em;
 }
-/* line 46, ../../scss/partials/_chart.scss */
+/* line 61, ../../scss/partials/_chart.scss */
 .axis .odd {
   fill: none;
 }
-/* line 50, ../../scss/partials/_chart.scss */
+/* line 65, ../../scss/partials/_chart.scss */
 .axis .thisYear {
   fill: black;
   font-weight: bold;
 }
 
-/* line 56, ../../scss/partials/_chart.scss */
+/* line 71, ../../scss/partials/_chart.scss */
 .multiarea {
   fill-opacity: 0.65;
 }
 
-/* line 59, ../../scss/partials/_chart.scss */
+/* line 74, ../../scss/partials/_chart.scss */
 .multiline {
   fill: none;
   stroke-width: 2px;
   opacity: 1;
 }
 
-/* line 64, ../../scss/partials/_chart.scss */
+/* line 79, ../../scss/partials/_chart.scss */
 .multiaxis path {
   stroke-width: 0;
   fill: none;
 }
 
-/* line 69, ../../scss/partials/_chart.scss */
+/* line 84, ../../scss/partials/_chart.scss */
 .multigrid .tick {
   stroke: lightgrey;
   opacity: 0;
 }
-/* line 73, ../../scss/partials/_chart.scss */
+/* line 88, ../../scss/partials/_chart.scss */
 .multigrid path {
   stroke-width: 1;
 }
 
-/* line 78, ../../scss/partials/_chart.scss */
+/* line 93, ../../scss/partials/_chart.scss */
 #chart {
   position: relative;
 }
