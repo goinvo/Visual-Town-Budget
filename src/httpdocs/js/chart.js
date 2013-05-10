@@ -18,7 +18,7 @@ avb.chart = function(){
     chart.linestack = [];
     chart.xscale = d3.scale.linear()
     .domain([firstYear, lastYear])
-    .range([chart.xmargin, chart.width]);
+    .range([chart.xmargin, chart.width -15]);
 
 
     chart.attr("height", chart.height )
@@ -33,6 +33,8 @@ avb.chart = function(){
       });
     });
     // chart expansion
+
+    $('#chart').center();
   },
 
   initializeSwitch = function(){
@@ -41,19 +43,18 @@ avb.chart = function(){
           if ( $('#layer-switch').is(':checked') ) {
             //switch activated
             enableLayers(currentSelection.data);
-            $('#legend').css({ 'margin-top' :  Math.max(0, ($('#bottom-right').height() - $('#legend').height())/2) })
-            $('#legend').animate({left: '0'});
+            $('#legend-wrap').animate({left: '0'});
             $('#cards').animate({left: '100%'});
           } else {
             //switch deactivated
             removeLayers();
-            $('#legend').animate({left: '-100%'});
+            $('#legend-wrap').animate({left: '-100%'});
             $('#cards').animate({left: '0'});
           }
         })
       },
 
-      legend  = function(layers) {
+      legend  = function(layers, parent) {
 
         var legendLabels = [];
         layers.each(function(d) {
@@ -61,6 +62,8 @@ avb.chart = function(){
         });
 
         d3.selectAll("#legend tr").remove();
+
+        //d3.select('#legend').append("tr").classed().
 
         // add legend rows
         var rows = d3.select("#legend tbody") .selectAll("tr")
@@ -75,6 +78,9 @@ avb.chart = function(){
         rows.append("td").text(function(d){
           return d.key;
         })
+
+        $('#legend').center();
+
       },
 
 
@@ -87,9 +93,11 @@ avb.chart = function(){
         }
 
         // set fixed opacity
-        color = color.replace(color.split(',')[3], ')').replace('a','');
+        color = color.replace(',' + color.split(',')[3], ')').replace('a','');
+        console.log(color)
 
-        layersEnabled = $('#layer-switch').is(':checked');
+        layersSelected = $('#layer-switch').is(':checked');
+        layersEnabled =  layersSelected && (data.sub.length !== 0);
 
         if(chart.axes === undefined){
           chart.grids = chart.append('g');
@@ -106,7 +114,7 @@ avb.chart = function(){
         *  x/y scales
         */
         chart.yscale = d3.scale.linear().domain([0,d3.max(data.values, get_values)*1.2])
-        .range([chart.height - chart.ymargin, 10]);
+        .range([chart.height - chart.ymargin, 0]);
 
        
         /*
@@ -115,17 +123,17 @@ avb.chart = function(){
 
         // xgrid
         var xgrid_axis = d3.svg.axis().scale(chart.xscale).orient("bottom")
-        .tickSize(-chart.height + chart.ymargin, 0, 0).ticks(6)
+        .tickSize(-chart.yscale.range()[0] , 0, 0).ticks(6)
         .tickFormat(function (d) { return '';});
 
         chart.grids.append("g")
         .attr("class", "multigrid")
-        .attr("transform", "translate(0," + (chart.height - chart.ymargin) + ")")
+        .attr("transform", "translate(0," + (chart.yscale.range()[0]) + ")")
         .call(xgrid_axis);
 
         // y grid
         var ygrid_axis = d3.svg.axis().scale(chart.yscale).orient("left")
-        .ticks(4).tickSize(-chart.width + chart.xmargin , 0, 0)
+        .ticks(4).tickSize(-chart.width +15 + chart.xmargin , 0, 0)
         .tickFormat(function (d) { return "";});
 
         chart.grids.append("g")
@@ -155,7 +163,7 @@ avb.chart = function(){
         // current year line
         chart.grids.append("line").classed('thisYearLine',true)
         .attr("x1", chart.xscale(thisYear)).attr("x2", chart.xscale(thisYear))
-        .attr("y1", 0).attr("y2", chart.height - chart.ymargin)
+        .attr("y1", chart.yscale(data.values[yearIndex].val)).attr("y2", chart.height - chart.ymargin)
         .style("stroke","black");
 
         /*
@@ -164,8 +172,8 @@ avb.chart = function(){
         var transitionDuration = 0;
         if (chart.visuals === undefined) {
           chart.visuals = []
-          for(i=0; i<2; i++) chart.visuals.push(chart.linegroup.append("svg:path")); 
           for(i=0; i<2; i++) chart.visuals.push(chart.areagroup.append("svg:path")); 
+          for(i=0; i<2; i++) chart.visuals.push(chart.linegroup.append("svg:path")); 
         }
         transitionDuration = 0;
 
@@ -173,14 +181,21 @@ avb.chart = function(){
         chart.visuals[0].classed("area",true)
         .transition().duration(transitionDuration)
         .attr("d", area(data.values.slice(0,projected +1)))
-        .attr("color", color).style("fill", layersEnabled ? 'rgb(0,0,0)' : color);
+        .attr("color", color); 
 
-        // projection area
         chart.visuals[1].classed("area",true).classed("projection",true)
         .transition().duration(transitionDuration)
         .attr("d", area(data.values.slice(projected, data.values.length )))
-        .attr("color", color).style("fill", layersEnabled ? 'rgb(0,0,0)' : color);
-        
+        .attr("color", color);
+
+        if(layersEnabled){
+          chart.visuals[0].style("fill", "black");
+          chart.visuals[1].style("fill", "black");
+        } else {
+          chart.visuals[0].style("fill", color);
+          chart.visuals[1].style("fill", color);
+        }
+
         // non-projection line
         chart.visuals[2].classed("line", true)
         .transition().duration(transitionDuration)
@@ -213,7 +228,8 @@ avb.chart = function(){
        
        /*
        * Hotspots and popovers
-       */
+       */ 
+
         if(chart.circles === undefined) {
           chart.circles = chart.linegroup.append("svg:g");
           chart.circles.selectAll("circle").data(data.values).enter().append("circle");
@@ -224,8 +240,7 @@ avb.chart = function(){
         .transition().duration(transitionDuration)
         .attr("cx", function(d) { return chart.xscale(d.year); })
         .attr("cy", function(d) { return chart.yscale(d.val); })
-        .attr("r", 5)
-        .attr("stroke", color).attr("fill", color);
+        .attr("r", 5).attr("stroke", color).attr("fill", color);
 
         chart.circles.attr("data-name", data.key)
         .selectAll("circle").data(data.values).enter().append("circle");
@@ -241,7 +256,6 @@ avb.chart = function(){
         	html: true
         });
 
-        $('#chart circle:first').trigger('hover');
 
        /*
        * Overflows
@@ -259,7 +273,7 @@ avb.chart = function(){
 
         chart.xAxisSocket = chart.axes.append("g")
         .classed("axis",true).classed("xAxis",true)
-        .attr("transform", "translate(0," + (chart.height - chart.ymargin -1) + ")").call(xAxis);
+        .attr("transform", "translate(0," + (chart.height - chart.ymargin) + ")").call(xAxis);
 
         chart.yAxisSocket = chart.axes.append("g")
         .attr("class", "axis")
@@ -276,9 +290,9 @@ avb.chart = function(){
       d3.select('.xAxis g:nth-child(' + (yearIndex+1) + ')')
       .classed('thisYear', true);
 
-      removeLayers(false);
+      if(layers !== undefined) layers.remove();
 
-      if ( layersEnabled ) {
+      if ( layersSelected ) {
        enableLayers(data);
      }
    },
@@ -287,8 +301,13 @@ avb.chart = function(){
 
 
     $('.popover').hide();
-
-    if(jsondata.sub === undefined) return;
+    
+    if(jsondata.sub.length === 0) {
+      d3.selectAll('#chart circle').transition().duration(500).style('opacity', 0);
+     var legendData = chart.areagroup.datum(jsondata);
+     legend(legendData, legendData);
+      return;
+    }
 
     layers = chart.layers.append('g')
     .classed('layers',true);
@@ -332,8 +351,6 @@ avb.chart = function(){
       .enter().append("g")
       .attr("class", "browser");
 
-
-      console.log("DRAWING AREAS")
       // draw areas
       layers.areas = browser.append("path")
       .attr("class", "multiarea")
@@ -347,18 +364,13 @@ avb.chart = function(){
       .style("stroke", function(d,i) { return colors[i%20]; });
 
       // legend
-      legend(browser);
-
-      // areas to gray
-      d3.selectAll(".area").classed("layers",true).style("fill", "rgb(0,0,0)");
-      d3.selectAll(".area").each(function(){
-        log(this)
-      })
+      legend(browser, jsondata);
 
       // not fundamental, improves layers looks
       $('.layers g:last .multiline').remove();
 
       if (transition === undefined){
+        d3.selectAll('#chart circle').transition().duration(500).style('opacity', 0);
         layers.transition().duration(500).style("opacity",1);
       } else {
         layers.style("opacity",1);
@@ -367,12 +379,13 @@ avb.chart = function(){
     },
 
     removeLayers = function (){
-      if(layers !== undefined){
-        // d3.selectAll('.area').classed("layers",false)
-        // .style("fill", function(){ return d3.select(this).attr("color")});
+      d3.selectAll('#chart circle').style('opacity', 1);
+      if(layers !== undefined) {
+        d3.selectAll('.area').classed("layers",false)
+        .style("fill", function(){ return d3.select(this).attr("color")});
       	layers.transition().duration(500).style("opacity",0);
       	layers.transition().delay(500).remove();
-      }	
+      }
     };
 
 

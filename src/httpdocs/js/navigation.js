@@ -29,9 +29,24 @@ avb.navigation = function(){
         update(data);
     },
 
+    updateTitle = function (data) {
+        var title = $(".title-head"),
+            description = $('.title-descr');
+
+        log(title)
+        title.text(data.key);
+
+        if (data.descr !== undefined && data.descr !== ''){
+            description.text(data.descr);
+        } else {
+            var defaultDescr = "Learn more about " + data.key + " using chart and information provided or download Cherry Sheet to learn more.";
+            description.text(defaultDescr);
+        }
+
+        $(title.parent()).center();
+    }
+
     update = function(data){
-
-
 
         nav.x = d3.scale.linear().range([0, nav.w]),
         nav.y = d3.scale.linear().range([0, nav.h])
@@ -105,6 +120,8 @@ avb.navigation = function(){
 
 
     zoneClick = function(d, click){
+
+    updateTitle(d);
 
     // select clicked div
     nav.lastClicked.classed("selected", false);
@@ -216,6 +233,7 @@ opacity = function(d, duration) {
 return{
  initialize : initialize,
  update : update,
- open : open
+ open : open,
+ updateTitle : updateTitle
 }
 }();

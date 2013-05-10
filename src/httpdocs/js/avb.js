@@ -7,8 +7,8 @@
             // constants
             var section;
 
-            var firstYear = 2006,
-                lastYear = 2017,
+            var firstYear = 2008,
+                lastYear = 2018,
                 currentYear = 2012, // only used for projections
                 thisYear = 2012,
                 yearIndex = thisYear - firstYear;
@@ -27,15 +27,11 @@
             };
 
             function pushUrl(section, year, node){
-                console.log('here')
-                console.log(section)
                 var url = '/' + section + '/' + thisYear + '/' + node;
-                console.log(url);
                 window.history.pushState({section : section, year : thisYear, nodeId : node},"", url);
             }
 
             function popUrl(event){
-                console.log(event.state)
                 if(event.state === null){
                     //avb.navigation.open(root.hash);
                 } else {
@@ -47,7 +43,6 @@
                 root = jsondata;
                 currentSelection.data = root;
                 
-                titlebox_init();
                 avb.cards.initialize();
                 avb.cards.draw();
                 avb.navigation.initialize(jsondata);
@@ -68,15 +63,11 @@
             }
 
             function updateSelection(data, color) {
-                log('update')
-                log(color)
-                log(data); 
                 currentSelection.data = data;
                 currentSelection.color = color;
 
                 avb.chart.drawline(data, color, true);
                 avb.cards.update(data);
-                titlebox_fill(data);
             }
 
             function modalOpen(dialog) {
@@ -85,12 +76,8 @@
                 dialog.data.show();
                 dialog.container.show();
 
-                $('#modal-title .title-head').html(currentSelection.data.key);
-                var description = currentSelection.data.descr;
-                description = (description === '') ? 'No information available.' : description
-                $('#modal-title .title-descr').html(description);
+                avb.navigation.updateTitle(currentSelection);
                 $('#bottom-switch').appendTo('#modal-switch');
-                log($('#bottom-right'))
                 $('#bottom-right div :first').appendTo('#modal-right');
                 avb.chart.initialize("#modal-chart");
                 avb.chart.drawline();
@@ -100,11 +87,11 @@
             }
 
             function modalClose(dialog){
-                $('#bottom-switch').prependTo('#bottom-center-wrap');
-                console.log($('modal-right div :first'))
-                $('#modal-right div :first').appendTo('#bottom-right');
+                $('#bottom-switch').appendTo('#bottom-controls');
+                $('#modal-right div :first').prependTo('#bottom-right');
 
                 $("#layer-switch").attr('checked', false);
+
 
                 avb.chart.initialize("#chart");
                 avb.chart.drawline();
@@ -149,7 +136,6 @@
             }
 
             function initialize(params) {
-                console.log(params)
 
                 // year checks
                 if(params.year !== undefined && !isNaN(parseInt(params.year)) && 
@@ -192,13 +178,13 @@
 
             function changeyear(year){
                 if(year === thisYear) return;
+                currentSelection = root;
                 pushUrl(section,year,root.hash)
                 thisYear = year;
                 yearIndex = thisYear - firstYear;
                 avb.navigation.update(root);
                 avb.chart.initialize('#chart');
-                avb.chart.drawline(root, "steelblue", true);
-                titlebox_fill(root);
+                avb.chart.drawline();
                 avb.cards.update(root);
             }
 
@@ -260,10 +246,6 @@
             .attr("class","toolt");
         }
 
-        function titlebox_init(x, y, width, height) {
-            titlebox = d3.select("#title-head");
-            titlebox.bottom = d3.select("#title-descr");
-        }
 
         function hexToRgb(hex) {
             var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
@@ -275,18 +257,6 @@
         }
 
 
-        function titlebox_fill(data){
-            titlebox.text(data.key);
-            if (data.descr !== undefined && data.descr !== ''){
-                titlebox.bottom.text(data.descr);
-            } else {
-                titlebox.bottom.text("No description available.");
-            }
-            var margin = Math.max(0, $("#bottom-wrap").height() - $("#title-head").height() - $("#title-descr").height());
-            $("#titledescr-container").css("margin-top", margin/2);
-        }
-
-
         function translate(obj,x,y) {
             obj.attr("transform", "translate(" + (x).toString() +"," + (y).toString() + ")");
         }
@@ -294,6 +264,39 @@
         function rotate(obj,degrees) {
             obj.attr("transform","rotate(" + degrees.toString() + " 100 100)");
         }
+
+        $.fn.center = function () {
+            this.css("margin-top", Math.max(0, $(this).parent().height() - $(this).height())/2);
+            return this;
+        }
+
+        $.fn.availableHeight = function() {
+            var available = $(this).height();
+            $(this).children().each(function(){
+                available -= $(this).outerHeight();
+            })
+            return Math.max(0, availableHeight);
+        }
+
+        $.fn.textfill = function(maxFontSize) {
+        maxFontSize = parseInt(maxFontSize, 10);
+        return this.each(function(){
+            var ourText = $("span", this),
+                parent = ourText.parent(),
+                maxHeight = parent.height(),
+                maxWidth = parent.width(),
+                fontSize = parseInt(ourText.css("fontSize"), 10),
+                multiplier = maxWidth/ourText.width(),
+                newSize = (fontSize*(multiplier-0.1));
+            ourText.css(
+                "fontSize", 
+                (maxFontSize > 0 && newSize > maxFontSize) ? 
+                    maxFontSize : 
+                    newSize
+            );
+        });
+    };244
+
 
         // window action code
 

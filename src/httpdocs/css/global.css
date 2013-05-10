@@ -166,20 +166,10 @@ h4 {
   line-height: 1.33333em;
 }
 
-/* line 11, ../../scss/partials/_avb.scss */
-div {
-  cursor: default;
-}
-
-/* line 15, ../../scss/partials/_avb.scss */
-text {
-  cursor: default;
-}
-
 /*
 * Body
 */
-/* line 22, ../../scss/partials/_avb.scss */
+/* line 14, ../../scss/partials/_avb.scss */
 #avb-body {
   margin-top: 1%;
   display: none;
@@ -195,17 +185,17 @@ text {
   *  Bottom container
   */
 }
-/* line 31, ../../scss/partials/_avb.scss */
+/* line 23, ../../scss/partials/_avb.scss */
 #avb-body .chart {
   position: relative;
   overflow: hidden;
 }
-/* line 36, ../../scss/partials/_avb.scss */
+/* line 28, ../../scss/partials/_avb.scss */
 #avb-body #navigation-container {
   overflow: hidden;
   position: relative;
 }
-/* line 42, ../../scss/partials/_avb.scss */
+/* line 34, ../../scss/partials/_avb.scss */
 #avb-body #navigation-container #arrow {
   content: "";
   display: inline-block;
@@ -216,15 +206,15 @@ text {
   margin-left: 25px;
   z-index: 1010;
 }
-/* line 58, ../../scss/partials/_avb.scss */
+/* line 50, ../../scss/partials/_avb.scss */
 #avb-body #navigation-container .chart .titleLabel {
   font-size: 12px;
 }
-/* line 63, ../../scss/partials/_avb.scss */
+/* line 55, ../../scss/partials/_avb.scss */
 #avb-body #navigation-container .chart .valueLabel {
   font-size: 18px;
 }
-/* line 67, ../../scss/partials/_avb.scss */
+/* line 59, ../../scss/partials/_avb.scss */
 #avb-body #navigation-container .chart .rectangle {
   position: absolute;
   display: table;
@@ -234,26 +224,26 @@ text {
   border-radius: 3px;
   background-color: #D7E1EB;
 }
-/* line 77, ../../scss/partials/_avb.scss */
+/* line 69, ../../scss/partials/_avb.scss */
 #avb-body #navigation-container .chart .rectangle.selected .overlay {
   box-shadow: 0px 0px 10px black;
 }
-/* line 81, ../../scss/partials/_avb.scss */
+/* line 73, ../../scss/partials/_avb.scss */
 #avb-body #navigation-container .chart .rectangle.selected .titleLabel {
   font-size: 1.3em;
 }
-/* line 85, ../../scss/partials/_avb.scss */
+/* line 77, ../../scss/partials/_avb.scss */
 #avb-body #navigation-container .chart .rectangle.selected .valueLabel {
   font-size: 2em;
 }
-/* line 93, ../../scss/partials/_avb.scss */
+/* line 85, ../../scss/partials/_avb.scss */
 #avb-body #navigation-container .chart .outer {
   display: table-cell;
   vertical-align: middle;
   width: 100%;
   position: static;
 }
-/* line 102, ../../scss/partials/_avb.scss */
+/* line 94, ../../scss/partials/_avb.scss */
 #avb-body #navigation-container .chart .overlay {
   background-image: url(/img/texture.png);
   opacity: 0.15;
@@ -261,19 +251,19 @@ text {
   width: 100%;
   height: 100%;
 }
-/* line 110, ../../scss/partials/_avb.scss */
+/* line 102, ../../scss/partials/_avb.scss */
 #avb-body #navigation-container .chart .inner {
   position: relative;
   top: -50%;
 }
-/* line 116, ../../scss/partials/_avb.scss */
+/* line 108, ../../scss/partials/_avb.scss */
 #avb-body #navigation-container .chart .titleLabel,
 #avb-body #navigation-container .chart .valueLabel {
   margin-left: 10px;
   line-height: 1em;
   color: #333333;
 }
-/* line 132, ../../scss/partials/_avb.scss */
+/* line 124, ../../scss/partials/_avb.scss */
 #avb-body #bottom-container {
   position: relative;
   margin-bottom: 10px;
@@ -287,62 +277,35 @@ text {
   -webkit-box-shadow: 0px 0px 10px #ccc;
   box-shadow: 0px 0px 10px #ccc;
 }
-/* line 147, ../../scss/partials/_avb.scss */
+/* line 139, ../../scss/partials/_avb.scss */
 #avb-body #bottom-container #bottom-wrap {
   position: relative;
 }
-/* line 151, ../../scss/partials/_avb.scss */
+/* line 143, ../../scss/partials/_avb.scss */
 #avb-body #bottom-container #bottom-left-wrap {
   height: 100%;
 }
-/* line 154, ../../scss/partials/_avb.scss */
+/* line 146, ../../scss/partials/_avb.scss */
 #avb-body #bottom-container #bottom-left-wrap #bottom-left {
   height: 100%;
   overflow-y: auto;
   padding-right: 5px;
 }
-/* line 163, ../../scss/partials/_avb.scss */
-#avb-body .arrow_box {
-  position: relative;
-  background: #f9f9f9;
-}
-/* line 167, ../../scss/partials/_avb.scss */
-#avb-body .arrow_box:after, #avb-body .arrow_box:before {
-  bottom: 100%;
-  border: solid transparent;
-  content: " ";
-  height: 0;
-  width: 0;
-  position: absolute;
-  pointer-events: none;
-}
-/* line 177, ../../scss/partials/_avb.scss */
-#avb-body .arrow_box:after {
-  border-color: rgba(249, 249, 249, 0);
-  border-bottom-color: #f9f9f9;
-  border-width: 9px;
-  left: 10%;
-  margin-left: -10px;
-}
-/* line 185, ../../scss/partials/_avb.scss */
-#avb-body .arrow_box:before {
-  border-color: rgba(163, 163, 163, 0);
-  border-bottom-color: #a3a3a3;
-  border-width: 11px;
-  left: 10%;
-  margin-left: -11px;
+/* line 153, ../../scss/partials/_avb.scss */
+#avb-body #bottom-container #bottom-right-content {
+  height: 80%;
 }
 
 /*
 * Entry title and description
 */
-/* line 200, ../../scss/partials/_avb.scss */
+/* line 163, ../../scss/partials/_avb.scss */
 .title-head {
   font-size: 2em;
   line-height: normal;
 }
 
-/* line 205, ../../scss/partials/_avb.scss */
+/* line 168, ../../scss/partials/_avb.scss */
 .title-descr {
   font-size: 1.3em;
 }
@@ -350,96 +313,56 @@ text {
 /*
 * Cards and legend
 */
-/* line 213, ../../scss/partials/_avb.scss */
+/* line 176, ../../scss/partials/_avb.scss */
 .card {
   padding-top: 3%;
   margin-left: 2%;
 }
 
-/* line 219, ../../scss/partials/_avb.scss */
+/* line 182, ../../scss/partials/_avb.scss */
 #bottom-right,
 #modal-right {
   overflow: hidden;
   height: 100%;
 }
-/* line 223, ../../scss/partials/_avb.scss */
-#bottom-right #legend,
-#modal-right #legend {
+/* line 186, ../../scss/partials/_avb.scss */
+#bottom-right #legend-wrap,
+#modal-right #legend-wrap {
   position: absolute;
   width: 100%;
+  height: 100%;
   left: -100%;
   overflow-y: auto;
 }
-/* line 230, ../../scss/partials/_avb.scss */
-#bottom-right #legend .legend-label,
-#modal-right #legend .legend-label {
+/* line 194, ../../scss/partials/_avb.scss */
+#bottom-right #legend-wrap .legend-label,
+#modal-right #legend-wrap .legend-label {
   width: 16px;
   height: 16px;
   border-radius: 8px;
 }
-/* line 236, ../../scss/partials/_avb.scss */
-#bottom-right #legend tr :first-child,
-#modal-right #legend tr :first-child {
+/* line 200, ../../scss/partials/_avb.scss */
+#bottom-right #legend-wrap tr :first-child,
+#modal-right #legend-wrap tr :first-child {
   margin-right: 5px;
-}
-/* line 241, ../../scss/partials/_avb.scss */
-#bottom-right #cards,
-#modal-right #cards {
-  position: absolute;
-  width: 100%;
-  left: 0;
-  overflow: auto;
-}
-/* line 247, ../../scss/partials/_avb.scss */
-#bottom-right #cards .card-row:first-child,
-#modal-right #cards .card-row:first-child {
-  padding-left: 0;
-}
-/* line 253, ../../scss/partials/_avb.scss */
-#bottom-right #cards .card-row .card-img,
-#modal-right #cards .card-row .card-img {
-  float: left;
-}
-/* line 255, ../../scss/partials/_avb.scss */
-#bottom-right #cards .card-row .card-img img,
-#modal-right #cards .card-row .card-img img {
-  display: block;
-}
-/* line 260, ../../scss/partials/_avb.scss */
-#bottom-right #cards .card-row .cardtitle,
-#modal-right #cards .card-row .cardtitle {
-  font-size: 1.3em;
-  border: 1px;
-  color: #aaaaaa;
-}
-/* line 266, ../../scss/partials/_avb.scss */
-#bottom-right #cards .card-row .cardvalue,
-#modal-right #cards .card-row .cardvalue {
-  font-size: 2.2em;
-  line-height: 1em;
-}
-/* line 271, ../../scss/partials/_avb.scss */
-#bottom-right #cards .card-row .carddesc,
-#modal-right #cards .card-row .carddesc {
-  font-size: 0.7em;
 }
 
 /* 
 * Modal
 */
-/* line 281, ../../scss/partials/_avb.scss */
+/* line 209, ../../scss/partials/_avb.scss */
 #simplemodal-overlay {
   background-color: black;
   opacity: 1;
 }
 
-/* line 286, ../../scss/partials/_avb.scss */
+/* line 214, ../../scss/partials/_avb.scss */
 #modal-container {
   display: none;
   font-weight: 200;
 }
 
-/* line 291, ../../scss/partials/_avb.scss */
+/* line 219, ../../scss/partials/_avb.scss */
 #simplemodal-container {
   position: relative;
   background: #000;
@@ -447,11 +370,11 @@ text {
   border-radius: 11px;
   background-color: #f9f9f9 !important;
 }
-/* line 293, ../../scss/partials/_avb.scss */
+/* line 221, ../../scss/partials/_avb.scss */
 #simplemodal-container #basic-modal-content {
   display: none;
 }
-/* line 303, ../../scss/partials/_avb.scss */
+/* line 231, ../../scss/partials/_avb.scss */
 #simplemodal-container .simplemodal-data {
   position: relative;
   height: 100%;
@@ -460,41 +383,41 @@ text {
   box-sizing: border-box;
   padding: 2%;
 }
-/* line 310, ../../scss/partials/_avb.scss */
+/* line 238, ../../scss/partials/_avb.scss */
 #simplemodal-container .simplemodal-data #modal-toprow {
   height: 20%;
   overflow: auto;
   margin-bottom: 20px;
 }
-/* line 315, ../../scss/partials/_avb.scss */
+/* line 243, ../../scss/partials/_avb.scss */
 #simplemodal-container .simplemodal-data #modal-toprow .title-head {
   margin-bottom: 10px;
 }
-/* line 320, ../../scss/partials/_avb.scss */
+/* line 248, ../../scss/partials/_avb.scss */
 #simplemodal-container .simplemodal-data #modal-bottomrow {
   height: 76%;
 }
-/* line 324, ../../scss/partials/_avb.scss */
+/* line 252, ../../scss/partials/_avb.scss */
 #simplemodal-container .simplemodal-data #modal-bottomrow .span8 {
   height: 100%;
 }
-/* line 326, ../../scss/partials/_avb.scss */
+/* line 254, ../../scss/partials/_avb.scss */
 #simplemodal-container .simplemodal-data #modal-bottomrow .span8 #modal-switch {
   height: 10%;
 }
-/* line 329, ../../scss/partials/_avb.scss */
+/* line 257, ../../scss/partials/_avb.scss */
 #simplemodal-container .simplemodal-data #modal-bottomrow .span8 #modal-chart {
   height: 90%;
 }
-/* line 334, ../../scss/partials/_avb.scss */
+/* line 262, ../../scss/partials/_avb.scss */
 #simplemodal-container .simplemodal-data #modal-bottomrow .span4 {
   height: 76%;
 }
-/* line 337, ../../scss/partials/_avb.scss */
+/* line 265, ../../scss/partials/_avb.scss */
 #simplemodal-container .simplemodal-data #modal-bottomrow .span4 #modal-right {
   margin-top: 10%;
 }
-/* line 344, ../../scss/partials/_avb.scss */
+/* line 272, ../../scss/partials/_avb.scss */
 #simplemodal-container a.modalCloseImg {
   background: url(../img/delete_icon.png) no-repeat;
   width: 25px;
@@ -506,7 +429,7 @@ text {
   right: -10px;
   cursor: pointer;
 }
-/* line 355, ../../scss/partials/_avb.scss */
+/* line 283, ../../scss/partials/_avb.scss */
 #simplemodal-container h3 {
   color: #84b8d9;
 }
@@ -623,77 +546,126 @@ text {
 
 /* line 22, ../../scss/partials/_chart.scss */
 .area {
-  opacity: 0.15;
+  opacity: 0.2;
 }
 /* line 25, ../../scss/partials/_chart.scss */
 .area.projection {
   opacity: 0.1;
 }
 
-/* line 41, ../../scss/partials/_chart.scss */
+/* line 33, ../../scss/partials/_chart.scss */
 .overflows {
   fill: #f9f9f9;
 }
 
-/* line 45, ../../scss/partials/_chart.scss */
+/* line 37, ../../scss/partials/_chart.scss */
 .browser text {
   text-anchor: end;
 }
 
-/* line 49, ../../scss/partials/_chart.scss */
+/* line 41, ../../scss/partials/_chart.scss */
 .axis path, .axis line {
   stroke: grey;
-  stroke-width: 0;
+  stroke-width: 1;
   stroke-linejoin: round;
   stroke-linecap: round;
   shape-rendering: crispEdges;
 }
-/* line 56, ../../scss/partials/_chart.scss */
+/* line 48, ../../scss/partials/_chart.scss */
 .axis text {
   font-family: 'Open Sans';
   font-size: 0.8em;
 }
-/* line 61, ../../scss/partials/_chart.scss */
+/* line 53, ../../scss/partials/_chart.scss */
 .axis .odd {
   fill: none;
 }
-/* line 65, ../../scss/partials/_chart.scss */
+/* line 57, ../../scss/partials/_chart.scss */
 .axis .thisYear {
   fill: black;
   font-weight: bold;
 }
+/* line 62, ../../scss/partials/_chart.scss */
+.axis text {
+  cursor: default;
+}
 
-/* line 71, ../../scss/partials/_chart.scss */
+/* line 67, ../../scss/partials/_chart.scss */
 .multiarea {
   fill-opacity: 0.65;
 }
 
-/* line 74, ../../scss/partials/_chart.scss */
+/* line 70, ../../scss/partials/_chart.scss */
 .multiline {
   fill: none;
   stroke-width: 2px;
   opacity: 1;
 }
 
-/* line 79, ../../scss/partials/_chart.scss */
+/* line 75, ../../scss/partials/_chart.scss */
 .multiaxis path {
   stroke-width: 0;
   fill: none;
 }
 
-/* line 84, ../../scss/partials/_chart.scss */
+/* line 80, ../../scss/partials/_chart.scss */
 .multigrid .tick {
   stroke: lightgrey;
   opacity: 0;
 }
-/* line 88, ../../scss/partials/_chart.scss */
+/* line 84, ../../scss/partials/_chart.scss */
 .multigrid path {
   stroke-width: 1;
 }
 
-/* line 93, ../../scss/partials/_chart.scss */
+/* line 89, ../../scss/partials/_chart.scss */
 #chart {
   position: relative;
+  width: 100%;
+}
+
+/* line 1, ../../scss/partials/_cards.scss */
+#cards {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  overflow: auto;
+  cursor: default;
+}
+/* line 8, ../../scss/partials/_cards.scss */
+#cards .card-row:first-child {
+  padding-left: 0;
+}
+/* line 12, ../../scss/partials/_cards.scss */
+#cards .card-row .card-img {
+  float: left;
+}
+/* line 14, ../../scss/partials/_cards.scss */
+#cards .card-row .card-img img {
+  display: block;
+}
+/* line 19, ../../scss/partials/_cards.scss */
+#cards .card-row .card-source {
+  cursor: pointer;
+}
+/* line 21, ../../scss/partials/_cards.scss */
+#cards .card-row .card-source:hover .cardvalue {
+  color: steelblue;
+}
+/* line 28, ../../scss/partials/_cards.scss */
+#cards .card-row .cardtitle {
+  font-size: 1.3em;
+  border: 1px;
+  color: #aaaaaa;
+}
+/* line 33, ../../scss/partials/_cards.scss */
+#cards .card-row .cardvalue {
+  font-size: 2.2em;
+  line-height: 1em;
+}
+/* line 37, ../../scss/partials/_cards.scss */
+#cards .card-row .carddesc {
+  font-size: 0.7em;
 }
 
 /* line 2, ../../scss/partials/_navbar.scss */

@@ -1,0 +1,41 @@
+#cards {
+	position:absolute;
+	width:100%;
+	left:0;
+	overflow:auto;
+	cursor: default;
+
+	.card-row:first-child {
+		padding-left:0;
+	}
+	.card-row {
+		.card-img {
+			float:left;
+			img {
+				display:block;
+			}
+		}
+
+		.card-source{
+			&:hover{
+				.cardvalue {
+					color:  steelblue;
+				}
+			}
+			cursor: pointer;
+		}
+
+		.cardtitle {
+			font-size:$text-big;
+			border:1px;
+			color:$gray;
+		}
+		.cardvalue {
+			font-size:2.2em;
+			line-height:1em;
+		}
+		.carddesc {
+			font-size: $text-small;
+		}
+	}
+}

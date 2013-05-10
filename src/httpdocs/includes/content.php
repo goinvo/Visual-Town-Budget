@@ -12,15 +12,32 @@
       <div  id="bottom-left-wrap" class="span3">
         <div id="bottom-left">
 
+          <div>
           <div class="title-head" id="title-head"></div>
-
           <div class="title-descr" id="titledescr-container" > 
             <div id="title-descr"></div>
           </div>
         </div>
 
+        </div>
+
       </div>
       <div id="bottom-center-wrap" class="span5" style="height:100%" > 
+
+
+          <div id='chart' class="chart"> </div>
+      </div>
+
+      <div class="span4" id="bottom-right-wrap" style="height:100%" >
+
+        <div id="bottom-right">
+
+        <div id="bottom-controls">
+
+        <div style="float:right; z-index:1200;">
+          <img id="chart-expand" src='img/expand.png' width=22 height=22 style="z-index:1200;"> 
+        </div>
+
         <div id="bottom-switch" style="height:25px; margin-bottom:5px;" >
           <div style="float:left; margin-right:10px;">
             Layers
@@ -35,27 +52,20 @@
               </label>
             </div>
           </div>
-
-
         </div>
 
-          <div id='chart' class="chart"> </div>
 
 
       </div>
 
-      <div class="span4" id="bottom-right-wrap" style="height:100%" >
-
-        <div style="float:right; z-index:1200;">
-          <img id="chart-expand" src='img/expand.png' width=22 height=22 style="z-index:1200;"> 
-        </div>
-        <div id="bottom-right">
-        <div style="width:100%; height:100%; position:relative;">
-          <div id="legend">
-            <table>
-              <tbody>
-              </tbody>
-            </table>
+        <div id="bottom-right-content" style="width:100%; position:relative;">
+          <div id="legend-wrap">
+            <div id="legend">
+              <table>
+                <tbody>
+                </tbody>
+              </table>
+            </div>
           </div>
           <div id="cards" > </div>
         </div>
@@ -97,12 +107,11 @@
 
 
 <script type="text/html" id="card-template">
-<div class="span{{span}} card">
-<div class="card-img">
-</div>
-<div class="card-text">
-<div class="cardvalue"></div>
-<div class="carddesc"></div>
-</div>
+<div class="{{class}} card">
+  <div class="card-img"> </div>
+  <div class="card-text">
+    <div class="cardvalue"></div>
+    <div class="carddesc"></div>
+  </div>
 </div>
 </script>

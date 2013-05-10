@@ -3,8 +3,8 @@ import json
 import hashlib
 import zlib
 
-FIRST_YEAR = 2006
-LAST_YEAR = 2017
+FIRST_YEAR = 2008
+LAST_YEAR = 2018
 MAX_LEVEL = 3
 
 class entry:
@@ -101,4 +101,4 @@ def convert(inputFile, outputFile):
 	outputFile = open(outputFile, 'w')
 	outputFile.write(json.dumps(root.reprJSON(), indent=4))
 
-convert('revenues.csv', 'revenues.json')
+convert('revenuesV2.csv', 'revenues.json')

@@ -7,54 +7,56 @@ avb.cards = function(){
     cards = {
         amount : {
             title : "Amount",
-            span : 6,
+            class : "span6",
             icon : "/img/Amount@High.png",
             value : function(d) { return formatcurrency(d.values[yearIndex].val); },
             side : function() { return " as of " + thisYear.toString() + "."}
         },
         impact : {
             title : "Impact",
-            span : 6,
+            class : "span6",
             icon : "/img/Impact@High.png",
             value : function(d) { return Math.max(0.01,(Math.round(d.values[yearIndex].val*100*100/root.values[yearIndex].val)/100)).toString() + "%"; },
             side : function() { return " of total " + section + "."}
         },
         growth : {
             title : "Growth",
-            span : 6,
+            class : "span6",
             icon : "/img/Growth@High.png",
             value : function(d) { return growth(d); },
             side : " compared to last year."
         },
         source : {
             title : "Source",
-            span : 12,
+            class : "span12 card-source",
             icon : "/img/Growth@High.png",
             value : function() { return "Cherry sheet"; },
             side : "is the data source for this entry."
         },
         mean : {
             title : "Average",
-            span : 6,
+            class : "span6",
             icon : "/img/Growth@High.png",
             value : function(d) { return formatcurrency(d3.mean(d.values, get_values)); },
             side : "on average."
         },
         filler : {
             title : "",
-            span : 6,
+            class : "span6",
             icon : "",
             value : function(d) { return ""; },
             side : ""
         }
     },
 
+    decks = {
+        revenues : [cards.amount, cards.growth, cards.impact, cards.mean, cards.source],
+        expenses : [cards.amount, cards.growth, cards.impact, cards.mean, cards.source],
+        funds : [cards.amount, cards.growth, cards.impact, cards.mean, cards.source]
+    },
+
     initialize = function(){
-        deck.push(cards.amount);
-        deck.push(cards.mean);
-        deck.push(cards.growth);
-        deck.push(cards.impact);
-        deck.push(cards.source);
+        deck = decks[section];
     },
 
     draw = function () {
@@ -82,13 +84,6 @@ avb.cards = function(){
             cardstack[i].select(".carddesc").html(
                 (typeof(deck[i].side) === 'string') ? deck[i].side : deck[i].side(data));
         }
-        reposition();
-    },
-
-    reposition = function(){
-        var margin = $("#bottom-wrap").height() - $("#cards").height();
-        $("#cards").css("margin-top", margin/2);
-        return;
     },
 
     clear = function(){
@@ -112,7 +107,6 @@ avb.cards = function(){
         update : update,
         draw : draw,
         clear : clear,
-        initialize : initialize,
-        reposition : reposition
+        initialize : initialize
     }
 }();
