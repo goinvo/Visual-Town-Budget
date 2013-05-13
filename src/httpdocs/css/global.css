@@ -215,55 +215,75 @@ h4 {
   font-size: 18px;
 }
 /* line 59, ../../scss/partials/_avb.scss */
+#avb-body #navigation-container .chart .rectangle :before {
+  position: absolute;
+  content: '';
+  top: 0;
+  left: 0;
+  height: 100%;
+  border-left: 100% solid #999;
+}
+/* line 68, ../../scss/partials/_avb.scss */
+#avb-body #navigation-container .chart .printable {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  border-left: solid;
+}
+/* line 76, ../../scss/partials/_avb.scss */
 #avb-body #navigation-container .chart .rectangle {
   position: absolute;
   display: table;
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
-  border-radius: 3px;
   background-color: #D7E1EB;
 }
-/* line 69, ../../scss/partials/_avb.scss */
-#avb-body #navigation-container .chart .rectangle.selected .overlay {
-  box-shadow: 0px 0px 10px black;
+/* line 85, ../../scss/partials/_avb.scss */
+#avb-body #navigation-container .chart .rectangle.selected {
+  box-shadow: inset 0px 0px 20px #666;
 }
-/* line 73, ../../scss/partials/_avb.scss */
+/* line 88, ../../scss/partials/_avb.scss */
 #avb-body #navigation-container .chart .rectangle.selected .titleLabel {
   font-size: 1.3em;
 }
-/* line 77, ../../scss/partials/_avb.scss */
+/* line 92, ../../scss/partials/_avb.scss */
 #avb-body #navigation-container .chart .rectangle.selected .valueLabel {
   font-size: 2em;
 }
-/* line 85, ../../scss/partials/_avb.scss */
+/* line 98, ../../scss/partials/_avb.scss */
+#avb-body #navigation-container .chart .rectangle.largearea {
+  border-top: 1px solid white;
+}
+/* line 111, ../../scss/partials/_avb.scss */
+#avb-body #navigation-container .chart .rectangle.notext .outer {
+  display: none;
+}
+/* line 117, ../../scss/partials/_avb.scss */
+#avb-body #navigation-container .chart .rectangle.novalue .valueLabel {
+  display: none;
+}
+/* line 124, ../../scss/partials/_avb.scss */
 #avb-body #navigation-container .chart .outer {
   display: table-cell;
   vertical-align: middle;
   width: 100%;
   position: static;
 }
-/* line 94, ../../scss/partials/_avb.scss */
-#avb-body #navigation-container .chart .overlay {
-  background-image: url(/img/texture.png);
-  opacity: 0.15;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-}
-/* line 102, ../../scss/partials/_avb.scss */
+/* line 135, ../../scss/partials/_avb.scss */
 #avb-body #navigation-container .chart .inner {
   position: relative;
   top: -50%;
 }
-/* line 108, ../../scss/partials/_avb.scss */
+/* line 141, ../../scss/partials/_avb.scss */
 #avb-body #navigation-container .chart .titleLabel,
 #avb-body #navigation-container .chart .valueLabel {
   margin-left: 10px;
   line-height: 1em;
   color: #333333;
 }
-/* line 124, ../../scss/partials/_avb.scss */
+/* line 157, ../../scss/partials/_avb.scss */
 #avb-body #bottom-container {
   position: relative;
   margin-bottom: 10px;
@@ -277,21 +297,21 @@ h4 {
   -webkit-box-shadow: 0px 0px 10px #ccc;
   box-shadow: 0px 0px 10px #ccc;
 }
-/* line 139, ../../scss/partials/_avb.scss */
+/* line 172, ../../scss/partials/_avb.scss */
 #avb-body #bottom-container #bottom-wrap {
   position: relative;
 }
-/* line 143, ../../scss/partials/_avb.scss */
+/* line 176, ../../scss/partials/_avb.scss */
 #avb-body #bottom-container #bottom-left-wrap {
   height: 100%;
 }
-/* line 146, ../../scss/partials/_avb.scss */
+/* line 179, ../../scss/partials/_avb.scss */
 #avb-body #bottom-container #bottom-left-wrap #bottom-left {
   height: 100%;
   overflow-y: auto;
   padding-right: 5px;
 }
-/* line 153, ../../scss/partials/_avb.scss */
+/* line 186, ../../scss/partials/_avb.scss */
 #avb-body #bottom-container #bottom-right-content {
   height: 80%;
 }
@@ -299,13 +319,13 @@ h4 {
 /*
 * Entry title and description
 */
-/* line 163, ../../scss/partials/_avb.scss */
+/* line 196, ../../scss/partials/_avb.scss */
 .title-head {
   font-size: 2em;
   line-height: normal;
 }
 
-/* line 168, ../../scss/partials/_avb.scss */
+/* line 201, ../../scss/partials/_avb.scss */
 .title-descr {
   font-size: 1.3em;
 }
@@ -313,19 +333,19 @@ h4 {
 /*
 * Cards and legend
 */
-/* line 176, ../../scss/partials/_avb.scss */
+/* line 209, ../../scss/partials/_avb.scss */
 .card {
   padding-top: 3%;
   margin-left: 2%;
 }
 
-/* line 182, ../../scss/partials/_avb.scss */
+/* line 215, ../../scss/partials/_avb.scss */
 #bottom-right,
 #modal-right {
   overflow: hidden;
   height: 100%;
 }
-/* line 186, ../../scss/partials/_avb.scss */
+/* line 219, ../../scss/partials/_avb.scss */
 #bottom-right #legend-wrap,
 #modal-right #legend-wrap {
   position: absolute;
@@ -334,14 +354,14 @@ h4 {
   left: -100%;
   overflow-y: auto;
 }
-/* line 194, ../../scss/partials/_avb.scss */
+/* line 227, ../../scss/partials/_avb.scss */
 #bottom-right #legend-wrap .legend-label,
 #modal-right #legend-wrap .legend-label {
   width: 16px;
   height: 16px;
   border-radius: 8px;
 }
-/* line 200, ../../scss/partials/_avb.scss */
+/* line 233, ../../scss/partials/_avb.scss */
 #bottom-right #legend-wrap tr :first-child,
 #modal-right #legend-wrap tr :first-child {
   margin-right: 5px;
@@ -350,19 +370,19 @@ h4 {
 /* 
 * Modal
 */
-/* line 209, ../../scss/partials/_avb.scss */
+/* line 242, ../../scss/partials/_avb.scss */
 #simplemodal-overlay {
   background-color: black;
   opacity: 1;
 }
 
-/* line 214, ../../scss/partials/_avb.scss */
+/* line 247, ../../scss/partials/_avb.scss */
 #modal-container {
   display: none;
   font-weight: 200;
 }
 
-/* line 219, ../../scss/partials/_avb.scss */
+/* line 252, ../../scss/partials/_avb.scss */
 #simplemodal-container {
   position: relative;
   background: #000;
@@ -370,11 +390,11 @@ h4 {
   border-radius: 11px;
   background-color: #f9f9f9 !important;
 }
-/* line 221, ../../scss/partials/_avb.scss */
+/* line 254, ../../scss/partials/_avb.scss */
 #simplemodal-container #basic-modal-content {
   display: none;
 }
-/* line 231, ../../scss/partials/_avb.scss */
+/* line 264, ../../scss/partials/_avb.scss */
 #simplemodal-container .simplemodal-data {
   position: relative;
   height: 100%;
@@ -383,41 +403,41 @@ h4 {
   box-sizing: border-box;
   padding: 2%;
 }
-/* line 238, ../../scss/partials/_avb.scss */
+/* line 271, ../../scss/partials/_avb.scss */
 #simplemodal-container .simplemodal-data #modal-toprow {
   height: 20%;
   overflow: auto;
   margin-bottom: 20px;
 }
-/* line 243, ../../scss/partials/_avb.scss */
+/* line 276, ../../scss/partials/_avb.scss */
 #simplemodal-container .simplemodal-data #modal-toprow .title-head {
   margin-bottom: 10px;
 }
-/* line 248, ../../scss/partials/_avb.scss */
+/* line 281, ../../scss/partials/_avb.scss */
 #simplemodal-container .simplemodal-data #modal-bottomrow {
   height: 76%;
 }
-/* line 252, ../../scss/partials/_avb.scss */
+/* line 285, ../../scss/partials/_avb.scss */
 #simplemodal-container .simplemodal-data #modal-bottomrow .span8 {
   height: 100%;
 }
-/* line 254, ../../scss/partials/_avb.scss */
+/* line 287, ../../scss/partials/_avb.scss */
 #simplemodal-container .simplemodal-data #modal-bottomrow .span8 #modal-switch {
   height: 10%;
 }
-/* line 257, ../../scss/partials/_avb.scss */
+/* line 290, ../../scss/partials/_avb.scss */
 #simplemodal-container .simplemodal-data #modal-bottomrow .span8 #modal-chart {
   height: 90%;
 }
-/* line 262, ../../scss/partials/_avb.scss */
+/* line 295, ../../scss/partials/_avb.scss */
 #simplemodal-container .simplemodal-data #modal-bottomrow .span4 {
   height: 76%;
 }
-/* line 265, ../../scss/partials/_avb.scss */
+/* line 298, ../../scss/partials/_avb.scss */
 #simplemodal-container .simplemodal-data #modal-bottomrow .span4 #modal-right {
   margin-top: 10%;
 }
-/* line 272, ../../scss/partials/_avb.scss */
+/* line 305, ../../scss/partials/_avb.scss */
 #simplemodal-container a.modalCloseImg {
   background: url(../img/delete_icon.png) no-repeat;
   width: 25px;
@@ -429,7 +449,7 @@ h4 {
   right: -10px;
   cursor: pointer;
 }
-/* line 283, ../../scss/partials/_avb.scss */
+/* line 316, ../../scss/partials/_avb.scss */
 #simplemodal-container h3 {
   color: #84b8d9;
 }

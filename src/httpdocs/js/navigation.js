@@ -2,6 +2,7 @@ var avb = avb || {};
 
 avb.navigation = function(){
 	var nav,
+        white = { r : 255, b : 255, g : 255 },
 
 
     initialize = function(data) {
@@ -61,25 +62,24 @@ avb.navigation = function(){
         nav.kx = nav.w / (data.dx),
         nav.ky = nav.h / 1;
 
-        // var opacityScale = d3.scale.linear()
-        // .domain([4,0]).range([0.3,0.9]);
 
         nav.divs.classed('rectangle',true)
         .attr("nodeid", function(d) { return d.hash})
         .style('left', function(d) { return (nav.x(d.y)).px() })
         .style('top', function(d) { return (Math.floor(nav.y(d.x))).px() })
         .style("height", function(d) { return (Math.floor(d.dx * nav.ky)).px(); })
+        .style("display", function(d) { return (Math.floor(d.dx * nav.ky)) === 0 ? 'none' : ''; })
         .style("width", (data.dy * nav.kx - 5).px())
-        //.style("opacity", function(d) { return opacityScale(d.depth)})
-        //.style('background-color', function(d) { return color((d.children ? d : d.parent).key); });
         .style('background', function(d) {
             if(d.color === undefined) {
-                d.color = shadeColor(d.parent.color,0);
+                d.color = d.parent.color;
             }
-            return background(d.color);
+            var color = background(d.color, 0.8-(0.15*d.depth));
+            d3.select(this).attr("printcolor", color );
+            return color;
          });
         nav.divs.each(function(){
-            d3.select(this).append('div').classed('overlay',true);
+            //d3.select(this).append('div').classed('overlay',true);
             $(this).click(function(d) { zoneClick.call(this, d3.select(this).datum()) });
         });
 
@@ -96,7 +96,6 @@ avb.navigation = function(){
 
         nav.divs.each(function(d){
             opacity.call(this, d);
-            scope.call(this, d);
         });
 
         nav.rootnode = d3.select($('.chart div:first').get(0))
@@ -120,6 +119,7 @@ avb.navigation = function(){
 
 
     zoneClick = function(d, click){
+
 
     updateTitle(d);
 
@@ -160,16 +160,12 @@ avb.navigation = function(){
 
     var duration = 600;
 
-    nav.divs.each(function(d){
-        scope.call(this, d);
-    });
-
     var t = nav.divs.transition()
     .duration(duration)
     .style('left', function(d) { return (nav.x(d.y)).px() })
-    .style('top' , function(d) { return (Math.floor(nav.y(d.x))).px() })
+    .style('top' , function(d) { return ((nav.y(d.x))).px() })
     .style("width", (d.dy * nav.kx - 5).px())
-    .style("height", function(d) { return (Math.floor(d.dx * nav.ky)).px(); });
+    .style("height", function(d) { return ((d.dx * nav.ky)).px(); });
 
     nav.divs.each(function(d){
         opacity.call(this, d, 150);
@@ -181,54 +177,36 @@ avb.navigation = function(){
 },
 
 
-background = function(color) {
-    var opacity = 0.5;
-    var startRgb = hexToRgb(color);
-    var start = 'rgba(' + startRgb.r + ',' + startRgb.g + ',' + startRgb.b + ',' + opacity + ')';
-    var gradient = start;
-    return gradient;
+background = function(color, opacity) {
+    var startRgb = mixrgb(hexToRgb(color), white, opacity);
+    return 'rgba(' + startRgb.r + ',' + startRgb.g + ',' + startRgb.b + ',' + 1.0 + ')';
 },
 
-scope = function(d) {
 
-    // d3.select(this).style('box-shadow', function(d){
-    //     if(d.dx * nav.ky > 150){
-    //         return 'inset 0px 0px ' + ((d.dx * nav.ky)) + 'px' + d.color;
-    //     } else {
-    //         return '';
-    //     }
-    // });
-}
-
-opacity = function(d, duration) {
-    if(duration === undefined) duration = 0;
+opacity = function(d) {
 
     labelTitleHeight = 12,
     labelValueHeight = 18;
 
-    var zoneHeight = d.dx * nav.ky,
-        titleOpacity = 0,
-        valueOpacity = 0;
-        valueOpacity = 1;
-         $(this).find(".valueLabel, .valueLabel").css({
-            display : 'none'
-         })
-    if(zoneHeight > (labelTitleHeight + labelValueHeight)) {
-        valueOpacity = 1;
-         $(this).find(".valueLabel").css({
-            display : 'block'
-         })
-    } 
-    if(zoneHeight > ( labelValueHeight)) {
-        titleOpacity = 1;
-         $(this).find(".titleLabel").css({
-            display : 'block'
-         })
+    var zoneHeight = d.dx * nav.ky;
+    if(zoneHeight > 30) {
+        $(this).addClass("largearea");
+    } else {
+        $(this).removeClass("largearea");
+    }
+    if(zoneHeight < (labelTitleHeight + labelValueHeight)) {
+        $(this).addClass("novalue");
+    } else {
+        $(this).removeClass("novalue");
+    }
+    if(zoneHeight < labelValueHeight) {
+        $(this).addClass("notext");
+    } else {
+        $(this).removeClass("notext");
     }
 
-    $(this).find(".titleLabel").css({"opacity": titleOpacity});
-    $(this).find(".valueLabel").css({"opacity": valueOpacity});
 };
+
 
 return{
  initialize : initialize,

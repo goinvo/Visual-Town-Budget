@@ -6,8 +6,10 @@
 
 @import "partials/base";
 
-#simplemodal-container {
+.rectangle :before {
 	position: absolute;
-	left: 0px;
-	top: 0px;
+	top : 0;
+	left : 0;
+	height: 100%;
+	border-left: 100% solid #999;
 }

@@ -13,9 +13,10 @@
 ============================================*/
 /* Global variables */
 /* line 9, ../../scss/print.scss */
-#simplemodal-container {
+.rectangle :before {
   position: absolute;
-  left: 0px;
-  top: 0px;
-  background-color: black !important;
+  top: 0;
+  left: 0;
+  height: 100%;
+  border-left: 100% solid #999;
 }

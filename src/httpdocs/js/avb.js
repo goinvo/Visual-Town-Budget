@@ -195,7 +195,23 @@
                 getthumbail($("#home-thumb3"),homecolors[1]);
             }
 
-
+            /*
+            * function gets fired before print rendering
+            * divs backgrounds are not usually printable
+            * this function add borders to have them printable
+            */
+            var mediaQueryList = window.matchMedia('print');
+                mediaQueryList.addListener(function(mql) {
+                if (mql.matches) {
+                  $('.rectangle').each(function(){
+                    $(this).prepend('<div class="printable"></div>');
+                    $(this).find('.printable').css({'border-left-width' : $(this).width(),
+                                 'border-left-color' : $(this).attr("printcolor")})
+                  })
+                } else {
+                    $('.printable').remove();
+                }
+            });
 
             function getthumbail(div, color){
 
@@ -250,12 +266,17 @@
         function hexToRgb(hex) {
             var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
             return result ? {
-                r: parseInt(result[1], 16),
-                g: parseInt(result[2], 16),
-                b: parseInt(result[3], 16)
+                r : parseInt(result[1], 16),
+                g : parseInt(result[2], 16),
+                b : parseInt(result[3], 16)
             } : null;
         }
 
+        function mixrgb(rgb1, rgb2, p) {
+            return { r : Math.round(p*rgb1.r + (1-p)*rgb2.r), 
+                     g : Math.round(p*rgb1.g + (1-p)*rgb2.g), 
+                     b : Math.round(p*rgb1.b + (1-p)*rgb2.b)  };
+        }
 
         function translate(obj,x,y) {
             obj.attr("transform", "translate(" + (x).toString() +"," + (y).toString() + ")");
@@ -264,6 +285,8 @@
         function rotate(obj,degrees) {
             obj.attr("transform","rotate(" + degrees.toString() + " 100 100)");
         }
+
+
 
         $.fn.center = function () {
             this.css("margin-top", Math.max(0, $(this).parent().height() - $(this).height())/2);

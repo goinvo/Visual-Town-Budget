@@ -16,11 +16,11 @@
           <div class="navbar">
             <ul class="nav menubutton">
               <li><a href="revenues" >Revenues</a></li>
-              <!--
+              
               <li><a href="javascript:;" >Expenses</a></li>
               <li><a href="javascript:;" >Funds</a></li>
-              -->
-              <li><a href="javascript:;" onclick="fby.push(['showForm', '4389']);return false;">Give Feedback</a></li>
+            
+             <!-- <li><a href="javascript:;" onclick="fby.push(['showForm', '4389']);return false;"></a></li> -->
             </ul>
 
             <ul class="nav menubutton pull-right">
