@@ -41,32 +41,32 @@ body {
 /*
 * Defaults to > 1200px width (>2013)
 */
-/* line 28, ../../scss/partials/_structure.scss */
+/* line 29, ../../scss/partials/_structure.scss */
 .container {
   width: 1200px;
 }
 
-/* line 35, ../../scss/partials/_structure.scss */
-#avb-body #bottom-container #bottom-wrap {
+/* line 36, ../../scss/partials/_structure.scss */
+#avb-body #avb-wrap #bottom-wrap {
   margin-top: 10px;
   height: 250px;
 }
-/* line 40, ../../scss/partials/_structure.scss */
+/* line 41, ../../scss/partials/_structure.scss */
 #avb-body #chart {
   height: 220px;
 }
-/* line 44, ../../scss/partials/_structure.scss */
+/* line 45, ../../scss/partials/_structure.scss */
 #avb-body #navigation-container {
   height: 450px;
 }
 
-/* line 48, ../../scss/partials/_structure.scss */
+/* line 49, ../../scss/partials/_structure.scss */
 #simplemodal-container {
   height: 600px;
   width: 1200px;
 }
 
-/* line 53, ../../scss/partials/_structure.scss */
+/* line 54, ../../scss/partials/_structure.scss */
 #vdivider {
   left: 280px;
 }
@@ -75,41 +75,51 @@ body {
 * Ipad Portait + Landscape
 */
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
-  /* line 62, ../../scss/partials/_structure.scss */
+  /* line 63, ../../scss/partials/_structure.scss */
   body, html {
     font-size: 12px;
   }
 
-  /* line 66, ../../scss/partials/_structure.scss */
+  /* line 67, ../../scss/partials/_structure.scss */
   #vdivider {
     left: 250px;
   }
 
-  /* line 70, ../../scss/partials/_structure.scss */
+  /* line 71, ../../scss/partials/_structure.scss */
   .container {
     width: 980px;
   }
 
-  /* line 77, ../../scss/partials/_structure.scss */
+  /* line 76, ../../scss/partials/_structure.scss */
+  #avb-body #avb-wrap {
+    padding-bottom: 0px;
+  }
+  /* line 80, ../../scss/partials/_structure.scss */
   #avb-body #bottom-wrap {
     height: 200px;
   }
-  /* line 81, ../../scss/partials/_structure.scss */
-  #avb-body #chart {
-    height: 175px;
-  }
   /* line 84, ../../scss/partials/_structure.scss */
+  #avb-body #chart {
+    height: 200px;
+  }
+  /* line 88, ../../scss/partials/_structure.scss */
   #avb-body #navigation-container {
-    height: 420px;
+    height: 400px;
   }
 
-  /* line 89, ../../scss/partials/_structure.scss */
+  /* line 93, ../../scss/partials/_structure.scss */
   #simplemodal-container {
     height: 500px;
     width: 900px;
   }
 }
 /* line 100, ../../scss/partials/_structure.scss */
+#footer {
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+/* line 108, ../../scss/partials/_structure.scss */
 .group {
   *zoom: 1;
 }
@@ -142,25 +152,25 @@ body {
   font-weight: 300;
 }
 
-/* line 14, ../../scss/partials/_typography.scss */
+/* line 22, ../../scss/partials/_typography.scss */
 h1 {
   font-size: 2em;
   line-height: 1.5em;
 }
 
-/* line 18, ../../scss/partials/_typography.scss */
+/* line 26, ../../scss/partials/_typography.scss */
 h2 {
   font-size: 1.375em;
   line-height: 2.18182em;
 }
 
-/* line 22, ../../scss/partials/_typography.scss */
+/* line 30, ../../scss/partials/_typography.scss */
 h3 {
   font-size: 1.25em;
   line-height: 1.2em;
 }
 
-/* line 27, ../../scss/partials/_typography.scss */
+/* line 35, ../../scss/partials/_typography.scss */
 h4 {
   font-size: 1.125em;
   line-height: 1.33333em;
@@ -169,7 +179,7 @@ h4 {
 /*
 * Body
 */
-/* line 14, ../../scss/partials/_avb.scss */
+/* line 10, ../../scss/partials/_avb.scss */
 #avb-body {
   margin-top: 1%;
   display: none;
@@ -185,17 +195,17 @@ h4 {
   *  Bottom container
   */
 }
-/* line 23, ../../scss/partials/_avb.scss */
+/* line 19, ../../scss/partials/_avb.scss */
 #avb-body .chart {
   position: relative;
   overflow: hidden;
 }
-/* line 28, ../../scss/partials/_avb.scss */
+/* line 24, ../../scss/partials/_avb.scss */
 #avb-body #navigation-container {
   overflow: hidden;
   position: relative;
 }
-/* line 34, ../../scss/partials/_avb.scss */
+/* line 30, ../../scss/partials/_avb.scss */
 #avb-body #navigation-container #arrow {
   content: "";
   display: inline-block;
@@ -204,26 +214,17 @@ h4 {
   border-color: transparent transparent white transparent;
   bottom: 0;
   margin-left: 25px;
-  z-index: 1010;
+  z-index: 200;
 }
-/* line 50, ../../scss/partials/_avb.scss */
+/* line 46, ../../scss/partials/_avb.scss */
 #avb-body #navigation-container .chart .titleLabel {
   font-size: 12px;
 }
-/* line 55, ../../scss/partials/_avb.scss */
+/* line 51, ../../scss/partials/_avb.scss */
 #avb-body #navigation-container .chart .valueLabel {
   font-size: 18px;
 }
-/* line 59, ../../scss/partials/_avb.scss */
-#avb-body #navigation-container .chart .rectangle :before {
-  position: absolute;
-  content: '';
-  top: 0;
-  left: 0;
-  height: 100%;
-  border-left: 100% solid #999;
-}
-/* line 68, ../../scss/partials/_avb.scss */
+/* line 56, ../../scss/partials/_avb.scss */
 #avb-body #navigation-container .chart .printable {
   position: absolute;
   left: 0;
@@ -231,63 +232,69 @@ h4 {
   height: 100%;
   border-left: solid;
 }
-/* line 76, ../../scss/partials/_avb.scss */
+/* line 64, ../../scss/partials/_avb.scss */
 #avb-body #navigation-container .chart .rectangle {
   position: absolute;
   display: table;
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
+  z-index: 100;
   background-color: #D7E1EB;
+  cursor: pointer;
 }
-/* line 85, ../../scss/partials/_avb.scss */
+/* line 74, ../../scss/partials/_avb.scss */
 #avb-body #navigation-container .chart .rectangle.selected {
   box-shadow: inset 0px 0px 20px #666;
+  border-radius: 5px;
 }
-/* line 88, ../../scss/partials/_avb.scss */
+/* line 78, ../../scss/partials/_avb.scss */
 #avb-body #navigation-container .chart .rectangle.selected .titleLabel {
   font-size: 1.3em;
 }
-/* line 92, ../../scss/partials/_avb.scss */
+/* line 82, ../../scss/partials/_avb.scss */
 #avb-body #navigation-container .chart .rectangle.selected .valueLabel {
   font-size: 2em;
 }
-/* line 98, ../../scss/partials/_avb.scss */
+/* line 87, ../../scss/partials/_avb.scss */
 #avb-body #navigation-container .chart .rectangle.largearea {
   border-top: 1px solid white;
 }
-/* line 111, ../../scss/partials/_avb.scss */
+/* line 100, ../../scss/partials/_avb.scss */
 #avb-body #navigation-container .chart .rectangle.notext .outer {
   display: none;
 }
-/* line 117, ../../scss/partials/_avb.scss */
+/* line 106, ../../scss/partials/_avb.scss */
 #avb-body #navigation-container .chart .rectangle.novalue .valueLabel {
   display: none;
 }
-/* line 124, ../../scss/partials/_avb.scss */
+/* line 113, ../../scss/partials/_avb.scss */
 #avb-body #navigation-container .chart .outer {
   display: table-cell;
   vertical-align: middle;
   width: 100%;
   position: static;
 }
-/* line 135, ../../scss/partials/_avb.scss */
+/* line 124, ../../scss/partials/_avb.scss */
 #avb-body #navigation-container .chart .inner {
   position: relative;
   top: -50%;
 }
-/* line 141, ../../scss/partials/_avb.scss */
+/* line 130, ../../scss/partials/_avb.scss */
 #avb-body #navigation-container .chart .titleLabel,
 #avb-body #navigation-container .chart .valueLabel {
   margin-left: 10px;
   line-height: 1em;
   color: #333333;
 }
-/* line 157, ../../scss/partials/_avb.scss */
-#avb-body #bottom-container {
+/* line 146, ../../scss/partials/_avb.scss */
+#avb-body #avb-wrap {
   position: relative;
   margin-bottom: 10px;
-  padding: 1%;
+  padding-top: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 0px;
   text-align: left;
   white-space: normal;
   border: 1px solid #ccc;
@@ -297,35 +304,46 @@ h4 {
   -webkit-box-shadow: 0px 0px 10px #ccc;
   box-shadow: 0px 0px 10px #ccc;
 }
-/* line 172, ../../scss/partials/_avb.scss */
-#avb-body #bottom-container #bottom-wrap {
+/* line 164, ../../scss/partials/_avb.scss */
+#avb-body #avb-wrap #bottom-wrap {
   position: relative;
 }
-/* line 176, ../../scss/partials/_avb.scss */
-#avb-body #bottom-container #bottom-left-wrap {
+/* line 168, ../../scss/partials/_avb.scss */
+#avb-body #avb-wrap #bottom-left-wrap {
   height: 100%;
 }
-/* line 179, ../../scss/partials/_avb.scss */
-#avb-body #bottom-container #bottom-left-wrap #bottom-left {
+/* line 171, ../../scss/partials/_avb.scss */
+#avb-body #avb-wrap #bottom-left-wrap #bottom-left {
   height: 100%;
   overflow-y: auto;
   padding-right: 5px;
 }
-/* line 186, ../../scss/partials/_avb.scss */
-#avb-body #bottom-container #bottom-right-content {
+/* line 178, ../../scss/partials/_avb.scss */
+#avb-body #avb-wrap #bottom-right-content {
   height: 80%;
+}
+
+/* line 185, ../../scss/partials/_avb.scss */
+.link {
+  text-decoration: underline;
+  cursor: auto;
+  color: black;
+}
+/* line 190, ../../scss/partials/_avb.scss */
+.link:hover {
+  color: steelblue;
 }
 
 /*
 * Entry title and description
 */
-/* line 196, ../../scss/partials/_avb.scss */
+/* line 198, ../../scss/partials/_avb.scss */
 .title-head {
   font-size: 2em;
   line-height: normal;
 }
 
-/* line 201, ../../scss/partials/_avb.scss */
+/* line 203, ../../scss/partials/_avb.scss */
 .title-descr {
   font-size: 1.3em;
 }
@@ -333,19 +351,19 @@ h4 {
 /*
 * Cards and legend
 */
-/* line 209, ../../scss/partials/_avb.scss */
+/* line 211, ../../scss/partials/_avb.scss */
 .card {
   padding-top: 3%;
   margin-left: 2%;
 }
 
-/* line 215, ../../scss/partials/_avb.scss */
+/* line 217, ../../scss/partials/_avb.scss */
 #bottom-right,
 #modal-right {
   overflow: hidden;
   height: 100%;
 }
-/* line 219, ../../scss/partials/_avb.scss */
+/* line 221, ../../scss/partials/_avb.scss */
 #bottom-right #legend-wrap,
 #modal-right #legend-wrap {
   position: absolute;
@@ -354,14 +372,14 @@ h4 {
   left: -100%;
   overflow-y: auto;
 }
-/* line 227, ../../scss/partials/_avb.scss */
+/* line 229, ../../scss/partials/_avb.scss */
 #bottom-right #legend-wrap .legend-label,
 #modal-right #legend-wrap .legend-label {
   width: 16px;
   height: 16px;
   border-radius: 8px;
 }
-/* line 233, ../../scss/partials/_avb.scss */
+/* line 235, ../../scss/partials/_avb.scss */
 #bottom-right #legend-wrap tr :first-child,
 #modal-right #legend-wrap tr :first-child {
   margin-right: 5px;
@@ -370,19 +388,19 @@ h4 {
 /* 
 * Modal
 */
-/* line 242, ../../scss/partials/_avb.scss */
+/* line 244, ../../scss/partials/_avb.scss */
 #simplemodal-overlay {
   background-color: black;
   opacity: 1;
 }
 
-/* line 247, ../../scss/partials/_avb.scss */
+/* line 249, ../../scss/partials/_avb.scss */
 #modal-container {
   display: none;
   font-weight: 200;
 }
 
-/* line 252, ../../scss/partials/_avb.scss */
+/* line 254, ../../scss/partials/_avb.scss */
 #simplemodal-container {
   position: relative;
   background: #000;
@@ -390,11 +408,11 @@ h4 {
   border-radius: 11px;
   background-color: #f9f9f9 !important;
 }
-/* line 254, ../../scss/partials/_avb.scss */
+/* line 256, ../../scss/partials/_avb.scss */
 #simplemodal-container #basic-modal-content {
   display: none;
 }
-/* line 264, ../../scss/partials/_avb.scss */
+/* line 266, ../../scss/partials/_avb.scss */
 #simplemodal-container .simplemodal-data {
   position: relative;
   height: 100%;
@@ -403,41 +421,41 @@ h4 {
   box-sizing: border-box;
   padding: 2%;
 }
-/* line 271, ../../scss/partials/_avb.scss */
+/* line 273, ../../scss/partials/_avb.scss */
 #simplemodal-container .simplemodal-data #modal-toprow {
   height: 20%;
   overflow: auto;
   margin-bottom: 20px;
 }
-/* line 276, ../../scss/partials/_avb.scss */
+/* line 278, ../../scss/partials/_avb.scss */
 #simplemodal-container .simplemodal-data #modal-toprow .title-head {
   margin-bottom: 10px;
 }
-/* line 281, ../../scss/partials/_avb.scss */
+/* line 283, ../../scss/partials/_avb.scss */
 #simplemodal-container .simplemodal-data #modal-bottomrow {
   height: 76%;
 }
-/* line 285, ../../scss/partials/_avb.scss */
+/* line 287, ../../scss/partials/_avb.scss */
 #simplemodal-container .simplemodal-data #modal-bottomrow .span8 {
   height: 100%;
 }
-/* line 287, ../../scss/partials/_avb.scss */
+/* line 289, ../../scss/partials/_avb.scss */
 #simplemodal-container .simplemodal-data #modal-bottomrow .span8 #modal-switch {
   height: 10%;
 }
-/* line 290, ../../scss/partials/_avb.scss */
+/* line 292, ../../scss/partials/_avb.scss */
 #simplemodal-container .simplemodal-data #modal-bottomrow .span8 #modal-chart {
   height: 90%;
 }
-/* line 295, ../../scss/partials/_avb.scss */
+/* line 297, ../../scss/partials/_avb.scss */
 #simplemodal-container .simplemodal-data #modal-bottomrow .span4 {
   height: 76%;
 }
-/* line 298, ../../scss/partials/_avb.scss */
+/* line 300, ../../scss/partials/_avb.scss */
 #simplemodal-container .simplemodal-data #modal-bottomrow .span4 #modal-right {
   margin-top: 10%;
 }
-/* line 305, ../../scss/partials/_avb.scss */
+/* line 307, ../../scss/partials/_avb.scss */
 #simplemodal-container a.modalCloseImg {
   background: url(../img/delete_icon.png) no-repeat;
   width: 25px;
@@ -449,7 +467,7 @@ h4 {
   right: -10px;
   cursor: pointer;
 }
-/* line 316, ../../scss/partials/_avb.scss */
+/* line 318, ../../scss/partials/_avb.scss */
 #simplemodal-container h3 {
   color: #84b8d9;
 }
@@ -664,28 +682,30 @@ h4 {
 #cards .card-row .card-img img {
   display: block;
 }
-/* line 19, ../../scss/partials/_cards.scss */
-#cards .card-row .card-source {
+/* line 20, ../../scss/partials/_cards.scss */
+#cards .card-row .card-source .cardvalue {
+  text-decoration: underline;
   cursor: pointer;
+  display: block;
 }
-/* line 21, ../../scss/partials/_cards.scss */
-#cards .card-row .card-source:hover .cardvalue {
+/* line 26, ../../scss/partials/_cards.scss */
+#cards .card-row .card-source .cardvalue:hover {
   color: steelblue;
 }
-/* line 28, ../../scss/partials/_cards.scss */
+/* line 31, ../../scss/partials/_cards.scss */
 #cards .card-row .cardtitle {
   font-size: 1.3em;
   border: 1px;
   color: #aaaaaa;
 }
-/* line 33, ../../scss/partials/_cards.scss */
+/* line 36, ../../scss/partials/_cards.scss */
 #cards .card-row .cardvalue {
   font-size: 2.2em;
   line-height: 1em;
 }
-/* line 37, ../../scss/partials/_cards.scss */
+/* line 40, ../../scss/partials/_cards.scss */
 #cards .card-row .carddesc {
-  font-size: 0.7em;
+  font-size: 1em;
 }
 
 /* line 2, ../../scss/partials/_navbar.scss */

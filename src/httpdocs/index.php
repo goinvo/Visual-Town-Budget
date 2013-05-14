@@ -85,6 +85,12 @@
     require_once 'includes/content.php';
     ?>
 
+    <div id="footer">
+      <a class="link" href="http://www.goinvo.com">by Involution Studios</a> - 
+      <a class="link" href="http://www.town.arlington.ma.us/">for Town of Arlington</a> - 
+      <a class="link" href="javascript:;" onclick="fby.push(['showForm', '4389']);return false;" >Feedback</a> -
+      <a class="link" href="javascript:;"> Open Data </a>
+  </div>
 
   </body>
 

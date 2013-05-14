@@ -8,24 +8,14 @@ avb.navigation = function(){
     initialize = function(data) {
         var w = $('#navigation').width(),
         h = $('#navigation').height();
-        //color = d3.scale.category20c();
 
         nav = d3.select("#navigation").append("div")
         .attr("class", "chart")
         .style("width", w.px())
         .style("height", h.px());
-        // .append("svg:svg")
-        // .attr("width", w)
-        // .attr("height", h);
 
         nav.h = h;
         nav.w = w;
-
-        var color = revenuesColor;
-        data.color = color[0];
-        for(var i=0 ; i<data.sub.length; i++) {
-            data.sub[i].color = color[(i+1)%color.length];
-        }
 
         update(data);
     },
@@ -34,7 +24,6 @@ avb.navigation = function(){
         var title = $(".title-head"),
             description = $('.title-descr');
 
-        log(title)
         title.text(data.key);
 
         if (data.descr !== undefined && data.descr !== ''){
@@ -55,6 +44,8 @@ avb.navigation = function(){
         var partition = d3.layout.partition()
         .value(function(d) { return d.values[yearIndex].val;})
         .children(function(d) { return d.sub;});
+
+        d3.select('.chart').selectAll('div').remove();
         
         nav.divs = d3.select('.chart').selectAll('div')
         .data(partition.nodes(data)).enter().append('div');
@@ -62,6 +53,11 @@ avb.navigation = function(){
         nav.kx = nav.w / (data.dx),
         nav.ky = nav.h / 1;
 
+        var color = revenuesColor;
+        data.color = color[0];
+        for(var i=0 ; i<data.sub.length; i++) {
+            data.sub[i].color = color[(i+1)%color.length];
+        }
 
         nav.divs.classed('rectangle',true)
         .attr("nodeid", function(d) { return d.hash})
@@ -79,7 +75,6 @@ avb.navigation = function(){
             return color;
          });
         nav.divs.each(function(){
-            //d3.select(this).append('div').classed('overlay',true);
             $(this).click(function(d) { zoneClick.call(this, d3.select(this).datum()) });
         });
 
@@ -144,7 +139,7 @@ avb.navigation = function(){
     nav.lastClicked = d3.select(this);
 
     // refresh title, chart, cards
-    updateSelection(d, d3.select(this).style("background-color"))
+    updateSelection(d, d.color)
 
     nav.kx = (d.y ? nav.w - 40 : nav.w) / (1 - d.y);
     nav.ky = nav.h / d.dx;

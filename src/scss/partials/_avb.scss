@@ -1,12 +1,8 @@
-$background: rgb(83, 83, 85);
 $black: #333333;
 $gray: #aaaaaa;
 $red: rgb(167, 103, 108);
 $blue: rgb(87,118,162);
 $white: rgb(220, 223, 222);
-$text-title: 2.0em;
-$text-big: 1.3em;
-$text-small: 0.7em;
 
 /*
 * Body
@@ -39,7 +35,7 @@ $text-small: 0.7em;
           border-color:transparent transparent white transparent;
           bottom:0;
           margin-left: 25px;
-          z-index: 1010;
+          z-index: 200;
     }
 
 
@@ -56,14 +52,6 @@ $text-small: 0.7em;
         font-size: 18px;
       }
 
-      .rectangle :before {
-        position: absolute;
-        content : '';
-        top : 0;
-        left : 0;
-        height: 100%;
-        border-left: 100% solid #999;
-      }
 
       .printable {
         position: absolute;
@@ -79,11 +67,13 @@ $text-small: 0.7em;
         box-sizing:border-box;
         -moz-box-sizing:border-box;
         -webkit-box-sizing:border-box;
-
+        z-index: 100;
         background-color: #D7E1EB;
+        cursor: pointer;
 
         &.selected{
           box-shadow: inset 0px 0px 20px #666;
+          border-radius: 5px;
 
           .titleLabel {
               font-size: $text-big;
@@ -92,7 +82,6 @@ $text-small: 0.7em;
           .valueLabel{
             font-size: $text-title;
           }
-
         }
 
         &.largearea {
@@ -154,10 +143,13 @@ $text-small: 0.7em;
   /*
   *  Bottom container
   */
-  #bottom-container {
+  #avb-wrap {
     position: relative;
     margin-bottom: 10px;
-    padding: 1%;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 0px;
     text-align: left;
     white-space: normal;
 
@@ -187,7 +179,17 @@ $text-small: 0.7em;
       height: 80%;
     }
   }
+}
 
+
+.link {
+  text-decoration: underline;
+  cursor: auto;
+  color: black;
+
+  &:hover{
+    color: steelblue;
+  };
 }
 
 /*

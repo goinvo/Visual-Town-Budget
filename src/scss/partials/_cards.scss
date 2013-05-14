@@ -17,12 +17,15 @@
 		}
 
 		.card-source{
-			&:hover{
-				.cardvalue {
-					color:  steelblue;
-				}
+			.cardvalue{
+				text-decoration: underline;
+	  			cursor: pointer;
+	  			display: block;
+	  		}
+
+			.cardvalue:hover{
+				color:  steelblue;
 			}
-			cursor: pointer;
 		}
 
 		.cardtitle {

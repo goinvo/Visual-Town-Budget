@@ -66,7 +66,7 @@
                 currentSelection.data = data;
                 currentSelection.color = color;
 
-                avb.chart.drawline(data, color, true);
+                avb.chart.drawline(data, color);
                 avb.cards.update(data);
             }
 
@@ -103,11 +103,6 @@
 
 
             }
-
-            function shadeColor(color, percent) {   
-                var num = parseInt(color.slice(1),16), amt = Math.round(2.55 * percent), R = (num >> 16) + amt, B = (num >> 8 & 0x00FF) + amt, G = (num & 0x0000FF) + amt;
-                return "#" + (0x1000000 + (R<255?R<1?0:R:255)*0x10000 + (B<255?B<1?0:B:255)*0x100 + (G<255?G<1?0:G:255)).toString(16).slice(1);
-            }
             
             var log = function(d) {
                 console.log(d);
@@ -136,7 +131,6 @@
             }
 
             function initialize(params) {
-
                 // year checks
                 if(params.year !== undefined && !isNaN(parseInt(params.year)) && 
                     params.year < lastYear && params.year > firstYear){
@@ -179,13 +173,11 @@
             function changeyear(year){
                 if(year === thisYear) return;
                 currentSelection = root;
-                pushUrl(section,year,root.hash)
+                pushUrl(section,year,root.hash);
                 thisYear = year;
                 yearIndex = thisYear - firstYear;
                 avb.navigation.update(root);
-                avb.chart.initialize('#chart');
-                avb.chart.drawline();
-                avb.cards.update(root);
+                $(".rectangle:first").trigger('click');
             }
 
 
@@ -195,23 +187,6 @@
                 getthumbail($("#home-thumb3"),homecolors[1]);
             }
 
-            /*
-            * function gets fired before print rendering
-            * divs backgrounds are not usually printable
-            * this function add borders to have them printable
-            */
-            var mediaQueryList = window.matchMedia('print');
-                mediaQueryList.addListener(function(mql) {
-                if (mql.matches) {
-                  $('.rectangle').each(function(){
-                    $(this).prepend('<div class="printable"></div>');
-                    $(this).find('.printable').css({'border-left-width' : $(this).width(),
-                                 'border-left-color' : $(this).attr("printcolor")})
-                  })
-                } else {
-                    $('.printable').remove();
-                }
-            });
 
             function getthumbail(div, color){
 
@@ -278,6 +253,11 @@
                      b : Math.round(p*rgb1.b + (1-p)*rgb2.b)  };
         }
 
+        function shadeColor(color, percent) {   
+            var num = parseInt(color.slice(1),16), amt = Math.round(2.55 * percent), R = (num >> 16) + amt, B = (num >> 8 & 0x00FF) + amt, G = (num & 0x0000FF) + amt;
+            return "#" + (0x1000000 + (R<255?R<1?0:R:255)*0x10000 + (B<255?B<1?0:B:255)*0x100 + (G<255?G<1?0:G:255)).toString(16).slice(1);
+        }
+
         function translate(obj,x,y) {
             obj.attr("transform", "translate(" + (x).toString() +"," + (y).toString() + ")");
         }
@@ -285,7 +265,6 @@
         function rotate(obj,degrees) {
             obj.attr("transform","rotate(" + degrees.toString() + " 100 100)");
         }
-
 
 
         $.fn.center = function () {
@@ -320,17 +299,27 @@
         });
     };244
 
-
-        // window action code
-
-        // On resize
-        $(window).resize(function() {
+        // Print rendering actions
+        var mediaQueryList = window.matchMedia('print');
+            mediaQueryList.addListener(function(mql) {
+            if (mql.matches) {
+              $('.rectangle').each(function(){
+                $(this).prepend('<div class="printable"></div>');
+                $(this).find('.printable').css({'border-left-width' : $(this).width(),
+                             'border-left-color' : $(this).attr("printcolor")})
+              })
+            } else {
+                $('.printable').remove();
+            }
         });
 
+        // Resize action
+        $(window).resize(function() {});
+
+        // Back button action
         window.onpopstate = popUrl;
 
-        // feedbackify
-
+        // Feedback button
         var fby = fby || [];
         (function () {
             var f = document.createElement('script'); f.type = 'text/javascript'; f.async = true;

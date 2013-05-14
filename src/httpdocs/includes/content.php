@@ -1,7 +1,7 @@
 
 <div class="container" id="avb-body">
 
-  <div class="row-fluid" id="bottom-container" style="width:auto;">
+  <div class="row-fluid" id="avb-wrap" style="width:auto;">
 
     <div id="navigation-container">
       <div id="arrow"> </div>

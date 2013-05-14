@@ -63,8 +63,6 @@ avb.chart = function(){
 
         d3.selectAll("#legend tr").remove();
 
-        //d3.select('#legend').append("tr").classed().
-
         // add legend rows
         var rows = d3.select("#legend tbody") .selectAll("tr")
         .data(legendLabels).enter().append("tr");
@@ -94,7 +92,6 @@ avb.chart = function(){
 
         // set fixed opacity
         color = color.replace(',' + color.split(',')[3], ')').replace('a','');
-        console.log(color)
 
         layersSelected = $('#layer-switch').is(':checked');
         layersEnabled =  layersSelected && (data.sub.length !== 0);
@@ -114,16 +111,19 @@ avb.chart = function(){
         *  x/y scales
         */
         chart.yscale = d3.scale.linear().domain([0,d3.max(data.values, get_values)*1.2])
-        .range([chart.height - chart.ymargin, 0]);
+        .range([chart.height - chart.ymargin, 10]);
 
        
         /*
         * grids
         */
 
+
         // xgrid
+
+        // ticksize = height - 10px for legend space
         var xgrid_axis = d3.svg.axis().scale(chart.xscale).orient("bottom")
-        .tickSize(-chart.yscale.range()[0] , 0, 0).ticks(6)
+        .tickSize(-chart.yscale.range()[0] + 10, 0, 0).ticks(6)
         .tickFormat(function (d) { return '';});
 
         chart.grids.append("g")
@@ -133,7 +133,7 @@ avb.chart = function(){
 
         // y grid
         var ygrid_axis = d3.svg.axis().scale(chart.yscale).orient("left")
-        .ticks(4).tickSize(-chart.width +15 + chart.xmargin , 0, 0)
+        .ticks(4).tickSize(-chart.width + 15 + chart.xmargin , 0, 0)
         .tickFormat(function (d) { return "";});
 
         chart.grids.append("g")
@@ -215,7 +215,7 @@ avb.chart = function(){
        .orient("bottom").tickSize(0, 0, 0).tickPadding(10)
        .tickFormat(function(d){ return d; });
 
-       var yAxis = d3.svg.axis().scale(chart.yscale).ticks(5)
+       var yAxis = d3.svg.axis().scale(chart.yscale).ticks(4)
        .orient("left").tickSize(0, 0, 0).tickPadding(5)
        .tickFormat(function(d){
        	return formatcurrency(d);
@@ -298,7 +298,7 @@ avb.chart = function(){
    },
 
    enableLayers = function(jsondata, transition){
-
+    log(root)
 
     $('.popover').hide();
     
@@ -312,34 +312,32 @@ avb.chart = function(){
     layers = chart.layers.append('g')
     .classed('layers',true);
 
-    var chart_w = chart.width;
-    var chart_h = chart.height;
-
-    layers.width = chart_w;
-    layers.height = chart_h;
+    layers.width = chart.width;
+    layers.height = chart.height;
 
     var yscale = chart.yscale
     var xscale = chart.xscale;
 
     layers.xscale = xscale;
+    
     var color = d3.scale.category20();
 
       // line declaration
       var area = d3.svg.area()
       .interpolate("monotone")
-      .x(function(d,i) { return xscale(d.year); })
+      .x(function(d) { return xscale(d.year); })
       .y0(function(d) { return yscale(d.y0); })
       .y1(function(d) { return yscale(d.y0 + d.val); });
 
       // area declaration
       var line = d3.svg.line()
       .interpolate("monotone")
-      .x(function(d,i) { return xscale(d.year); })
+      .x(function(d) { return xscale(d.year); })
       .y(function(d) { return yscale(d.y0 + d.val); });
 
       // stack declaration
       var stack = d3.layout.stack()
-      .values(function(d) { return d.values; })
+      .values(function(d) {  return d.values; })
       .x(function(d) { return d.year;})
       .y(function(d) { return d.val;});
 
