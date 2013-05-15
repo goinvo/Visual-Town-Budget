@@ -39,25 +39,21 @@
 
     // direct url load
     <?php
-    $sections = array("revenues");
+    $allpages = array("revenues" => "content.php", "funds" => "content.php",
+      "funds" => "content.php", "opendata" => "opendata.php");
+    $sections = array("revenues", "expenses", "funds");
     $params = array();
     if(isset($_GET["page"])) {
       if(in_array($_GET["page"], $sections)) {
         $params['section'] = $_GET["page"];
-
         if(isset($_GET["year"])){
           $params['year'] = $_GET["year"];
         };
         if(isset($_GET["node"])){
           $params['node'] = $_GET["node"];
         };
-
         echo 'initialize('.json_encode($params).')';
-      } else {
-        echo 'loadthumbails();';
-      }
-    } else {
-      echo 'loadthumbails();';
+      } 
     }
     ?>
   });
@@ -72,24 +68,22 @@
 
     <?php
     require_once 'includes/navbar.php';
-    $sections  = array("revenues");
 
     if(isset($_GET["page"])) {
-      if(!in_array($_GET["page"], $sections)) {
-        require_once 'includes/homescreen.php';
+      if(array_key_exists($_GET["page"], $allpages)) {
+         require_once 'includes/'.$allpages[$_GET["page"]];
       }
     } else {
       require_once 'includes/homescreen.php';
     }
     
-    require_once 'includes/content.php';
     ?>
 
     <div id="footer">
-      <a class="link" href="http://www.goinvo.com">by Involution Studios</a> - 
-      <a class="link" href="http://www.town.arlington.ma.us/">for Town of Arlington</a> - 
-      <a class="link" href="javascript:;" onclick="fby.push(['showForm', '4389']);return false;" >Feedback</a> -
-      <a class="link" href="javascript:;"> Open Data </a>
+      <a class="link" href="http://www.town.arlington.ma.us/">Town of Arlington</a> - 
+      <a class="link" href="http://www.goinvo.com">by Involution Studios</a> -
+      <a class="link" href="opendata"> Open Data </a> -
+      <a class="link" href="javascript:;" onclick="fby.push(['showForm', '4389']);return false;" >Feedback</a>
   </div>
 
   </body>

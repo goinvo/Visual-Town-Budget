@@ -1,212 +1,305 @@
 var avb = avb || {};
 
 avb.navigation = function(){
-	var nav,
-        white = { r : 255, b : 255, g : 255 },
+	var nav, currentLevel,
+    white = { r : 255, b : 255, g : 255 },
 
 
     initialize = function(data) {
-        var w = $('#navigation').width(),
-        h = $('#navigation').height();
+        var width = $('#navigation').width(),
+        height = $('#navigation').height();
 
-        nav = d3.select("#navigation").append("div")
-        .attr("class", "chart")
-        .style("width", w.px())
-        .style("height", h.px());
+        var margin = {top: 0, right: 0, bottom: 0, left: 0},
+        height = height - margin.top - margin.bottom,
+        formatNumber = d3.format(",d"),
+        transitioning;
 
-        nav.h = h;
-        nav.w = w;
+        /* create svg */
+        nav = d3.select("#navigation").append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.bottom + margin.top)
+        .style("margin-left", -margin.left + "px")
+        .style("margin.right", -margin.right + "px")
+        .append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+        .style("shape-rendering", "crispEdges");
+
+        /* create x and y scales */
+        nav.x = d3.scale.linear()
+        .domain([0, width])
+        .range([0, width]);
+
+        nav.y = d3.scale.linear()
+        .domain([0, height])
+        .range([0, height]);
+
+        nav.h = height;
+        nav.w = width;
+        nav.m = margin;
+
+        nav.color = d3.scale.category20();
+
+        $('#zoombutton').center();
 
         update(data);
+
     },
 
-    updateTitle = function (data) {
-        var title = $(".title-head"),
-            description = $('.title-descr');
-
-        title.text(data.key);
-
-        if (data.descr !== undefined && data.descr !== ''){
-            description.text(data.descr);
-        } else {
-            var defaultDescr = "Learn more about " + data.key + " using chart and information provided or download Cherry Sheet to learn more.";
-            description.text(defaultDescr);
-        }
-
-        $(title.parent()).center();
-    }
 
     update = function(data){
-
-        nav.x = d3.scale.linear().range([0, nav.w]),
-        nav.y = d3.scale.linear().range([0, nav.h])
-
-        var partition = d3.layout.partition()
-        .value(function(d) { return d.values[yearIndex].val;})
-        .children(function(d) { return d.sub;});
-
-        d3.select('.chart').selectAll('div').remove();
-        
-        nav.divs = d3.select('.chart').selectAll('div')
-        .data(partition.nodes(data)).enter().append('div');
-
-        nav.kx = nav.w / (data.dx),
-        nav.ky = nav.h / 1;
-
-        var color = revenuesColor;
-        data.color = color[0];
-        for(var i=0 ; i<data.sub.length; i++) {
-            data.sub[i].color = color[(i+1)%color.length];
-        }
-
-        nav.divs.classed('rectangle',true)
-        .attr("nodeid", function(d) { return d.hash})
-        .style('left', function(d) { return (nav.x(d.y)).px() })
-        .style('top', function(d) { return (Math.floor(nav.y(d.x))).px() })
-        .style("height", function(d) { return (Math.floor(d.dx * nav.ky)).px(); })
-        .style("display", function(d) { return (Math.floor(d.dx * nav.ky)) === 0 ? 'none' : ''; })
-        .style("width", (data.dy * nav.kx - 5).px())
-        .style('background', function(d) {
-            if(d.color === undefined) {
-                d.color = d.parent.color;
+        var layout = function (d) {
+            if (d.sub) {
+                treemap.nodes({values : d.values, children : d.sub});
+                d.sub.forEach(function(c) {
+                    c.x = d.x + c.x * d.dx;
+                    c.y = d.y + c.y * d.dy;
+                    c.dx *= d.dx;
+                    c.dy *= d.dy;
+                    c.parent = d;
+                    layout(c);
+                });
             }
-            var color = background(d.color, 0.8-(0.15*d.depth));
-            d3.select(this).attr("printcolor", color );
-            return color;
-         });
-        nav.divs.each(function(){
-            $(this).click(function(d) { zoneClick.call(this, d3.select(this).datum()) });
-        });
-
-
-        var textContainers = nav.divs.append('div').classed("outer", true)
-        .append('div').classed('inner',true);
-
-        textContainers.append('div').classed('titleLabel', true)
-        .text(function(d) { return d.key;} );
-        textContainers.append('div').classed('valueLabel', true)
-        .text(function(d) { return formatcurrency(d.values[yearIndex].val);} );
-
-        
-
-        nav.divs.each(function(d){
-            opacity.call(this, d);
-        });
-
-        nav.rootnode = d3.select($('.chart div:first').get(0))
-        .classed("selected", true);
-        nav.lastClicked =  nav.rootnode;
-
-        $('#arrow').css({
-            'margin-left' : (nav.rootnode.datum().dy * nav.kx - $('#arrow').outerWidth())/2
-        });
-
-    },
-
-
-    open = function(nodeId) {
-        var rect = d3.select('div[nodeid*="' + nodeId +'"]');
-        if(rect.node() === null) {
-            rect = d3.select('div[nodeid*="' + root.hash +'"]');
         }
+
+        var init = function(root) {
+            root.x = root.y = 0;
+            root.dx = nav.w;
+            root.dy = nav.h;
+            root.depth = 0;
+        }
+
+        var treemap = d3.layout.treemap()
+        .children(function(d, depth) { return depth ? null : d.children; })
+        .value(function(d) { return d.values[yearIndex].val})
+        .sort(function(a, b) { return a.values[yearIndex].val - b.values[yearIndex].val; })
+        .ratio(nav.h / nav.w * 0.5 * (1 + Math.sqrt(5)))
+        .round(false);
+
+        var root = data;
+
+        nav.grandparent = nav.append("g")
+        .attr("class", "grandparent");
+
+        init(root);
+        layout(root);
+
+        currentLevel = display(root);
+
+
+} 
+
+display = function(d) {
+
+        $('.no-value').tooltip('destroy');
+
+        var formatNumber = d3.format(",d"),transitioning;
+
+        function name(d) {
+            return d.parent ? name(d.parent) + "." + d.key : d.key;
+        }
+
+        var g1 = nav.insert("g", ".grandparent")
+        .datum(d)
+        .attr("class", "depth")
+        .on("click", zoneClick);
+
+        /* add in data */
+        var g = g1.selectAll("g")
+        .data((d.sub.length === 0) ? [d] : d.sub)
+        .enter().append("g");
+
+        /* create grandparent bar at top */
+        nav.grandparent
+        .datum((d.parent === undefined) ? d : d.parent)
+        .attr("nodeid", d.hash)
+        .on("click", zoneClick);
+
+        updateTitle(d);
+
+        /* transition on child click */
+        g.filter(function(d) { return d.sub; })
+        .classed("children", true)
+        .on("click", zoneClick);
+
+        // assign new color only if not last node
+        if(d.sub.length !== 0 && d.color === undefined) {
+            d.color = nav.color(0);
+        }
+        for(var i=0; i<d.sub.length; i++) {
+            d.sub[i].color = nav.color(i);
+        }
+
+        g.append("rect")
+            .attr("class", "parent")
+            .call(rect)
+            .style("fill", function(d) {return background(d.color,0.8);});
+
+
+        /* write children rectangles */
+        function addChilds(d, g){ 
+            g.selectAll(".child")
+            .data(function(d) { return d.sub || [d]; })
+            .enter().append("g")
+            .attr("class", "child")
+            .each( function() {
+                var group = d3.select(this);
+                if(d.sub !== undefined) {
+                    $.each(d.sub, function(){
+                        addChilds(this, group);
+                    })
+                }
+            })
+            .append("rect")
+            .call(rect);
+        }
+
+        addChilds(d, g);
+
+        /* Adding a foreign object instead of a text object, allows for text wrapping */
+        g.each(function(){
+
+            var label = d3.select(this).append("foreignObject")
+            .call(rect)
+            .attr("class","foreignobj")
+            .append("xhtml:div") 
+            .attr("dy", ".75em")
+            .html(function(d) { 
+                var title = '<div class="titleLabel">' + d.key + '</div>',
+                    values = '<div class="valueLabel">' + formatcurrency(d.values[yearIndex].val) + '</div>';
+                return title + values; })
+            .attr("class","textdiv");
+
+           textLabels.call(this);
+
+        });
+
+        return g;
+
+}
+
+
+textLabels = function(d){
+    var d = d3.select(this).datum(),
+        containerHeight = nav.y(d.y + d.dy) - nav.y(d.y) ,
+        containerWidth = nav.x(d.x + d.dx) - nav.x(d.x),
+        title = $(this).find('.titleLabel').first(),
+        div = $(this).find('.textdiv').first();
+
+    $(this).find('div').first().tooltip('destroy');
+    d3.select(this).classed("no-value", false);
+    d3.select(this).classed("no-label", false);
+
+    if (containerHeight < title.outerHeight() || containerWidth < 60) {
+        d3.select(this).classed("no-label", true);
+        d3.select(this).select('div').style("height", "100%");
+        $(this).find('div').first().tooltip({container : 'body', title : d.key});
+    }
+    if(containerHeight < div.outerHeight()) {
+        d3.select(this).classed("no-value", true);
+    }
+}
+
+updateTitle = function (data) {
+    var title = $(".title-head .text");
+
+    var zoom = $('#zoombutton');
+    var parent = d3.select('.grandparent').node();
+
+    zoom.unbind();
+    title.text(data.key);
+    $(title).textfill(48, $('.title-head').width() - 120);
+
+    if (currentSelection === root){
+        zoom.addClass('disabled');
+    } else {
+        zoom.removeClass('disabled');
+    }
+
+    zoom.click(function(){
+        zoneClick.call(parent, d3.select(parent).datum());
+    })
+
+}
+
+open = function(nodeId) {
+        var rect = d3.select('g[nodeid*="' + nodeId +'"]');
         zoneClick.call(rect.node(), rect.datum(), false);
     },
 
+zoneClick= function(d, click) {
 
-    zoneClick = function(d, click){
+    // $('.no-label').tooltip('destroy');
 
+    if (nav.transitioning || !d || currentSelection === d) return;
 
-    updateTitle(d);
-
-    // select clicked div
-    nav.lastClicked.classed("selected", false);
-    d3.select(this).classed("selected", true);
-
-    // go back method
-    if(nav.lastClicked !== undefined &&
-        nav.lastClicked.datum().depth !== 0 &&
-        d.depth === nav.lastClicked.datum().depth){
-                zoneClick.call(nav.rootnode.node(),nav.rootnode.datum());
-            return;
-    }
-
-    // push url
     if(click === undefined) {
         pushUrl( section, thisYear, d.hash);
     }
 
-    // remember selected div
-    nav.lastClicked = d3.select(this);
+      currentSelection = d;
+      updateSelection(d, d.color);
 
-    // refresh title, chart, cards
-    updateSelection(d, d.color)
+      nav.transitioning = true;
 
-    nav.kx = (d.y ? nav.w - 40 : nav.w) / (1 - d.y);
-    nav.ky = nav.h / d.dx;
-    nav.ky = nav.ky;
+      currentLevel.selectAll(".parent").style("opacity", 1);
 
-    nav.y.domain([d.x, d.x + d.dx]);
-    nav.x.domain([d.y,1]).range([d.y ? 40 : 0, nav.w]);
+       var g2 = display(d);
+          t1 = currentLevel.transition().duration(750),
+          t2 = g2.transition().duration(750);
 
-    // animate pointer
-    $('#arrow').animate({
-        'margin-left' : (d.depth ? 40 : 0) + (d.dy * nav.kx - $('#arrow').outerWidth())/2
-    });
+      // Update the domain only after entering new elements.
+      nav.x.domain([d.x, d.x + d.dx]);
+      nav.y.domain([d.y, d.y + d.dy]);
 
-    var duration = 600;
+      // Enable anti-aliasing during the transition.
+      nav.style("shape-rendering", null);
 
-    var t = nav.divs.transition()
-    .duration(duration)
-    .style('left', function(d) { return (nav.x(d.y)).px() })
-    .style('top' , function(d) { return ((nav.y(d.x))).px() })
-    .style("width", (d.dy * nav.kx - 5).px())
-    .style("height", function(d) { return ((d.dx * nav.ky)).px(); });
+      // Draw child nodes on top of parent nodes.
+      nav.selectAll(".depth").sort(function(a, b) { return a.depth - b.depth; });
 
-    nav.divs.each(function(d){
-        opacity.call(this, d, 150);
-    });
+      // Fade-in entering text.
+      g2.selectAll(".foreignobj").style("fill-opacity", 0);
 
-    if(d3.event !== null) {
-        d3.event.stopPropagation();
-    }
-},
+      // Transition to the new view.
+      t1.selectAll(".foreignobj").call(rect);
+      t2.selectAll(".foreignobj").call(rect);
+      t1.selectAll("rect").call(rect);
+      t2.selectAll("rect").call(rect);
+      t2.each(function(){
+        textLabels.call(this);
+      })
+      t2.each("end", function(){
+        textLabels.call(this);
+      })
 
+      // Remove the old node when the transition is finished.
+      t1.remove().each("end", function() {
+        nav.style("shape-rendering", "crispEdges");
+        nav.transitioning = false;
 
-background = function(color, opacity) {
-    var startRgb = mixrgb(hexToRgb(color), white, opacity);
-    return 'rgba(' + startRgb.r + ',' + startRgb.g + ',' + startRgb.b + ',' + 1.0 + ')';
-},
-
-
-opacity = function(d) {
-
-    labelTitleHeight = 12,
-    labelValueHeight = 18;
-
-    var zoneHeight = d.dx * nav.ky;
-    if(zoneHeight > 30) {
-        $(this).addClass("largearea");
-    } else {
-        $(this).removeClass("largearea");
-    }
-    if(zoneHeight < (labelTitleHeight + labelValueHeight)) {
-        $(this).addClass("novalue");
-    } else {
-        $(this).removeClass("novalue");
-    }
-    if(zoneHeight < labelValueHeight) {
-        $(this).addClass("notext");
-    } else {
-        $(this).removeClass("notext");
+      });
+        currentLevel = g2;
     }
 
-};
 
 
-return{
- initialize : initialize,
- update : update,
- open : open,
- updateTitle : updateTitle
-}
+   rect = function(rect) {
+            rect.attr("x", function(d) { return nav.x(d.x); })
+            .attr("y", function(d) { return nav.y(d.y); })
+            .attr("width", function(d) { return nav.x(d.x + d.dx) - nav.x(d.x); })
+            .attr("height", function(d) { return nav.y(d.y + d.dy) - nav.y(d.y); });
+        }
+
+
+    background = function(color, opacity) {
+        var startRgb = mixrgb(hexToRgb(color), white, opacity);
+        return 'rgba(' + startRgb.r + ',' + startRgb.g + ',' + startRgb.b + ',' + 1.0 + ')';
+    };
+
+    return{
+       initialize : initialize,
+       update : update,
+       open : open,
+       updateTitle : updateTitle
+   }
 }();

@@ -34,24 +34,25 @@ avb.chart = function(){
     });
     // chart expansion
 
-    $('#chart').center();
   },
 
   initializeSwitch = function(){
-        // chart mode switch
-        $("#layer-switch").click(function(d) {
-          if ( $('#layer-switch').is(':checked') ) {
-            //switch activated
-            enableLayers(currentSelection.data);
+        $('#layer-switch').center();
+        $('#layer-switch .btn').click(function(){
+          if($(this).attr('action') === 'enable') {
+            enableLayers(currentSelection);
             $('#legend-wrap').animate({left: '0'});
             $('#cards').animate({left: '100%'});
+            $(this).addClass('disabled');
+            $('#layer-switch .btn[action="disable"]').removeClass('disabled');
           } else {
-            //switch deactivated
             removeLayers();
             $('#legend-wrap').animate({left: '-100%'});
             $('#cards').animate({left: '0'});
+            $(this).addClass('disabled');
+            $('#layer-switch .btn[action="enable"]').removeClass('disabled');
           }
-        })
+        });
       },
 
       legend  = function(layers, parent) {
@@ -84,14 +85,13 @@ avb.chart = function(){
 
       drawline = function(data, color) {
 
+        log(color)
+
         // redraw case
         if(data === undefined) {
           data = currentSelection.data;
           color = currentSelection.color;
         }
-
-        // set fixed opacity
-        color = color.replace(',' + color.split(',')[3], ')').replace('a','');
 
         layersSelected = $('#layer-switch').is(':checked');
         layersEnabled =  layersSelected && (data.sub.length !== 0);
@@ -133,7 +133,7 @@ avb.chart = function(){
 
         // y grid
         var ygrid_axis = d3.svg.axis().scale(chart.yscale).orient("left")
-        .ticks(4).tickSize(-chart.width + 15 + chart.xmargin , 0, 0)
+        .ticks(5).tickSize(-chart.width + 15 + chart.xmargin , 0, 0)
         .tickFormat(function (d) { return "";});
 
         chart.grids.append("g")

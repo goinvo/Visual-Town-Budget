@@ -1,0 +1,83 @@
+
+#navigation{
+  text {
+  pointer-events: none;
+  }
+
+  rect {
+    fill: none;
+    stroke: #fff;
+  }
+
+  rect.parent,
+  .grandparent rect {
+    stroke-width: 4px;
+  }
+
+  .grandparent rect {
+    fill: #f9f9f9;
+    stroke:none;
+  }
+
+  .child rect {
+    stroke-opacity: 1.0;
+  }
+
+  rect.parent {
+    opacity: 0.6;
+  }
+
+  .children:hover rect.parent,
+  .grandparent:hover rect {
+    opacity: 1.0;
+  }
+
+  .children {
+    cursor: pointer;
+
+
+      &.no-label {
+      .titleLabel{
+        display: none;
+      }
+
+      .valueLabel{
+        display: none;
+      }
+    }
+
+    &.no-value{
+      .valueLabel{
+        display: none;
+      }
+    }
+  }
+
+
+  .textdiv { /* text in the boxes */
+    font-size: 1em;
+    padding: 8px;
+    font-family: "Open Sans", Helvetica, Arial, sans-serif;;
+
+    .titleLabel,
+    .valueLabel {
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .titleLabel {
+      font-size: 15px;
+    }
+
+    .valueLabel {
+      font-size: 20px;
+
+    }
+
+
+
+
+  }
+
+
+}

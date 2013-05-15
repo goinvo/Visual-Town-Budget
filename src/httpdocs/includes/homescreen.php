@@ -10,7 +10,6 @@
     <div class="row-fluid">
       <div class="span4 offset4">
         <h2>Revenues</h2>
-        <div id="home-thumb1" field="revenues" style="height:100px; width:70%; margin:auto;"></div>
         <h4> Now 110 Million </h4>
         <p>How and from where does Arlington get it's budget?</p>
         <p><a class="btn" href="revenues" >View details &raquo;</a></p>

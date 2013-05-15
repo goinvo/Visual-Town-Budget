@@ -31,19 +31,24 @@ body {
 }
 
 #avb-body {
-  #avb-wrap {
 
-    #bottom-wrap{
-          margin-top: 10px;
-          height: 250px;
+  #information-container{
+
+    height: 540px;
+
+    #chart-wrap {
+      height: 45%;
     }
-  }
-  #chart {
-        height: 220px;
+
+    #info-wrap {
+      height: 50%;
+    }
+
   }
 
   #navigation-container {
-    height: 450px;  }
+    height: 600px;  
+  }
 }
 
 #simplemodal-container {
@@ -71,14 +76,11 @@ body {
   .container {
     width: 980px;
   }
+
   #avb-body {
 
     #avb-wrap {
       padding-bottom: 0px;
-    }
-
-    #bottom-wrap{
-      height: 200px;
     }
 
     #chart {

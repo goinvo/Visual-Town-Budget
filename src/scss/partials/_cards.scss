@@ -1,13 +1,37 @@
+
+.card {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-left: 2%;
+
+  &.top {
+  	padding-top: 5px;
+  }
+}
+
+
+
+/*
+* Cards
+*/
 #cards {
 	position:absolute;
 	width:100%;
 	left:0;
 	overflow:auto;
 	cursor: default;
+	text-align: center;
 
-	.card-row:first-child {
-		padding-left:0;
+	.card-row{
+		div:first-child .card{
+			padding-right:6%;
+		}
+
+		div:last-child .card{
+			padding-left:6%;
+		}
 	}
+
 	.card-row {
 		.card-img {
 			float:left;
@@ -17,8 +41,11 @@
 		}
 
 		.card-source{
+			padding-left:0;
+			padding-right:0;
+
 			.cardvalue{
-				text-decoration: underline;
+				//text-decoration: underline;
 	  			cursor: pointer;
 	  			display: block;
 	  		}
@@ -28,17 +55,47 @@
 			}
 		}
 
-		.cardtitle {
-			font-size:$text-big;
-			border:1px;
-			color:$gray;
+		.card-text{
+			text-align: center;
 		}
+
 		.cardvalue {
-			font-size:2.2em;
+			font-size: $text-title;
 			line-height:1em;
+			font-family: 'Georgia';
 		}
 		.carddesc {
 			font-size: $text-small;
 		}
 	}
 }
+
+#info-wrap{
+  overflow:hidden; 
+  height:100%;
+}
+
+#cards-wrap{
+	height: 100%;
+}
+
+  #legend-wrap {
+    position:absolute;
+    height: 100%;
+    left:-100%;
+    overflow-y: auto;
+    padding-left: 3%;
+    padding-right: 3%;
+
+
+
+    .legend-label{
+      width: 16px;
+      height: 16px;
+      border-radius: 8px;
+    }
+
+    tr :first-child {
+      margin-right: 5px;
+    }
+  }

@@ -7,42 +7,42 @@ avb.cards = function(){
     cards = {
         amount : {
             title : "Amount",
-            class : "span6",
+            class : "span6 separator top",
             icon : "/img/Amount@High.png",
             value : function(d) { return formatcurrency(d.values[yearIndex].val); },
-            side : function() { return " as of " + thisYear.toString() + "."}
+            side : function() { return " in " + thisYear.toString() + "."}
         },
         impact : {
             title : "Impact",
-            class : "span6",
+            class : "span6 separator ",
             icon : "/img/Impact@High.png",
             value : function(d) { return Math.max(0.01,(Math.round(d.values[yearIndex].val*100*100/root.values[yearIndex].val)/100)).toString() + "%"; },
             side : function() { return " of total " + section + "."}
         },
         growth : {
             title : "Growth",
-            class : "span6",
+            class : "span6 separator top",
             icon : "/img/Growth@High.png",
             value : function(d) { return growth(d); },
             side : " compared to last year."
         },
         source : {
             title : "Source",
-            class : "span12 card-source",
+            class : "span12 card-source separator",
             icon : "/img/Growth@High.png",
             value : function() { return "Cherry sheet"; },
             side : "is the data source for this entry."
         },
         mean : {
             title : "Average",
-            class : "span6",
+            class : "span6 separator",
             icon : "/img/Growth@High.png",
             value : function(d) { return formatcurrency(d3.mean(d.values, get_values)); },
             side : "on average."
         },
         filler : {
             title : "",
-            class : "span6",
+            class : "span6 separator",
             icon : "",
             value : function(d) { return ""; },
             side : ""

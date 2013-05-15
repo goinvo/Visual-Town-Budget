@@ -28,8 +28,6 @@
 
   }
 
-
-
   .overflows{
     fill: #f9f9f9;
   }
@@ -89,4 +87,9 @@
   #chart {
     position: relative;
     width: 100%;
+  }
+
+  #bottom-switch {
+    padding-left: 3%;
+    padding-right: 3%;
   }

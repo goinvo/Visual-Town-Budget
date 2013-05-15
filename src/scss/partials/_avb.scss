@@ -9,136 +9,8 @@ $white: rgb(220, 223, 222);
 */
 #avb-body {
   margin-top: 1%;
-  display: none;
   font-weight: 200;
   background-color: #f9f9f9;
-
-  /*
-  *  Navigation system
-  */
-  .chart {
-    position: relative;
-    overflow: hidden;
-  }
-
-  #navigation-container {
-
-    
-    overflow: hidden;
-    position: relative;
-
-    #arrow{
-          content:"";
-          display:inline-block;
-          position:absolute;
-          border:15px solid white;
-          border-color:transparent transparent white transparent;
-          bottom:0;
-          margin-left: 25px;
-          z-index: 200;
-    }
-
-
-    .chart  {
-      //box-shadow: inset 2px 2px 15px  #ccc;
-
-
-      .titleLabel {
-        font-size: 12px;
-
-      }
-
-      .valueLabel {
-        font-size: 18px;
-      }
-
-
-      .printable {
-        position: absolute;
-        left:0;
-        top:0;
-        height: 100%;
-        border-left: solid;
-      }
-
-      .rectangle {
-        position: absolute;
-        display: table;
-        box-sizing:border-box;
-        -moz-box-sizing:border-box;
-        -webkit-box-sizing:border-box;
-        z-index: 100;
-        background-color: #D7E1EB;
-        cursor: pointer;
-
-        &.selected{
-          box-shadow: inset 0px 0px 20px #666;
-          border-radius: 5px;
-
-          .titleLabel {
-              font-size: $text-big;
-          }
-
-          .valueLabel{
-            font-size: $text-title;
-          }
-        }
-
-        &.largearea {
-          border-top: 1px solid white;
-
-          // .overlay{
-          //   background-image: url(/img/texture.png);
-          //   opacity: 0.15;
-          //   position: absolute;
-          //   width: 100%;
-          //   height: 100%;
-          // }
-        }
-
-        &.notext {
-          .outer {
-            display: none;
-          }
-        }
-
-        &.novalue {
-          .valueLabel {
-            display: none;
-          }
-        }
-
-      }
-
-      .outer{
-        display: table-cell;
-        vertical-align: middle;
-        width: 100%;
-        position: static;
-
-
-      }
-
-
-
-      .inner {
-        position: relative;
-        top: -50%;
-      }
-
-      .titleLabel,
-      .valueLabel {
-        margin-left: 10px;
-        line-height: 1em;
-        color: #333333;
-      }
-
-    }
-  }
-
-  /*
-  *  Chart (has a separate CSS)
-  */
 
   /*
   *  Bottom container
@@ -146,10 +18,8 @@ $white: rgb(220, 223, 222);
   #avb-wrap {
     position: relative;
     margin-bottom: 10px;
+    padding: 15px;
     padding-top: 10px;
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-bottom: 0px;
     text-align: left;
     white-space: normal;
 
@@ -161,27 +31,28 @@ $white: rgb(220, 223, 222);
     -webkit-box-shadow: 0px 0px 10px #ccc;
     box-shadow: 0px 0px 10px #ccc;
 
-    #bottom-wrap{
-      position: relative;
-    }
-
-    #bottom-left-wrap {
-      height: 100%;
-
-      #bottom-left {
-        height: 100%;
-        overflow-y: auto;
-        padding-right: 5px;
-      }
-    }
-
-    #bottom-right-content{
-      height: 80%;
-    }
   }
 }
 
+#information-container{
+  position: relative;
+  padding-left: 25px;
+  padding-right: 25px;
+}
 
+
+/*
+* Entry title and description
+*/
+.title-head {
+    font-size: 3em;
+    line-height: normal;
+    white-space: nowrap;
+}
+
+/*
+* Cards and legend
+*/
 .link {
   text-decoration: underline;
   cursor: auto;
@@ -192,131 +63,22 @@ $white: rgb(220, 223, 222);
   };
 }
 
-/*
-* Entry title and description
-*/
-.title-head {
-    font-size: $text-title;
-    line-height: normal;
-}
+.separator:after{
+    content: '';
+    display: block;  
+    line-height: 0px;
+    height: 1px;
+    width: 100%;
+    border-top: 1px dashed $gray;
+    margin-top: 5px;
+};
 
-.title-descr {
-    font-size: $text-big;
-}
-
-
-/*
-* Cards and legend
-*/
-.card {
-  padding-top: 3%;
-  margin-left: 2%;
-}
-
-#bottom-right,
-#modal-right {
-  overflow:hidden; 
-  height:100%;
-
-  #legend-wrap {
-    position:absolute;
-    width:100%;
-    height: 100%;
-    left:-100%;
-    overflow-y: auto;
-
-
-    .legend-label{
-      width: 16px;
-      height: 16px;
-      border-radius: 8px;
-    }
-
-    tr :first-child {
-      margin-right: 5px;
-    }
-  }
-}
-
-/* 
-* Modal
-*/
-#simplemodal-overlay {
-  background-color: black;
-  opacity: 1;
-}
-
-#modal-container{
-  display: none;
-  font-weight: 200;
-}
-
-#simplemodal-container {
-  
-  #basic-modal-content {
-    display: none;
-  }
-
-
-  position: relative;
-  background: #000;
-  border: 1px solid black;
-  border-radius: 11px;
-  background-color: #f9f9f9 !important ;
-  .simplemodal-data {
-    position: relative;
-    height:100%;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    padding: 2%;
-    #modal-toprow{
-      height: 20%;
-      overflow: auto;
-      margin-bottom: 20px;
-
-      .title-head{
-        margin-bottom: 10px;
-      }
-
-    }
-    #modal-bottomrow{
-      // 2*2% padding
-      height: 76%;
-
-      .span8{
-        height: 100%;
-        #modal-switch {
-          height: 10%;
-        }
-        #modal-chart{
-          height: 90%;
-        }
-      }
-
-      .span4{
-        height: 76%;
-
-        #modal-right{
-          margin-top: 10%;
-        }
-      }
-
-    }
-  }
-  a.modalCloseImg {
-    background: url(../img/delete_icon.png) no-repeat;
-    width: 25px;
-    height: 29px;
-    display: inline;
-    z-index: 3200;
-    position: absolute;
-    top: -10px;
-    right: -10px;
-    cursor: pointer;
-  }
-  h3 {
-    color: #84b8d9;
-  }
-}
-
+.separatorb:before{
+    content: '';
+    display: block;  
+    line-height: 0px;
+    height: 1px;
+    width: 100%;
+    border-top: 1px dashed $gray;
+    margin-bottom: 5px;
+};

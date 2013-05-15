@@ -14,7 +14,7 @@
                 yearIndex = thisYear - firstYear;
 
             var root;
-            var currentSelection = new Object();
+            var currentSelection;
             
             // object references
             var mysvg;
@@ -39,17 +39,21 @@
                 }
             }
 
+
+        function name(d) {
+            return d.parent ? name(d.parent) + "." + d.key : d.key;
+        }
+
             function onjsonload(jsondata) {
                 root = jsondata;
-                currentSelection.data = root;
                 
                 avb.cards.initialize();
                 avb.cards.draw();
                 avb.navigation.initialize(jsondata);
                 avb.chart.initialize('#chart');
                 avb.chart.initializeSwitch();
-                $(".rectangle:first").trigger('click');
-
+                avb.navigation.open(root.hash);
+                
                 console.log("UI Loaded.");
                 
             }
@@ -177,7 +181,6 @@
                 thisYear = year;
                 yearIndex = thisYear - firstYear;
                 avb.navigation.update(root);
-                $(".rectangle:first").trigger('click');
             }
 
 
@@ -268,7 +271,7 @@
 
 
         $.fn.center = function () {
-            this.css("margin-top", Math.max(0, $(this).parent().height() - $(this).height())/2);
+            this.css("margin-top", Math.max(0, $(this).parent().height() - $(this).outerHeight())/2);
             return this;
         }
 
@@ -280,38 +283,17 @@
             return Math.max(0, availableHeight);
         }
 
-        $.fn.textfill = function(maxFontSize) {
-        maxFontSize = parseInt(maxFontSize, 10);
-        return this.each(function(){
-            var ourText = $("span", this),
-                parent = ourText.parent(),
-                maxHeight = parent.height(),
-                maxWidth = parent.width(),
-                fontSize = parseInt(ourText.css("fontSize"), 10),
-                multiplier = maxWidth/ourText.width(),
-                newSize = (fontSize*(multiplier-0.1));
-            ourText.css(
-                "fontSize", 
-                (maxFontSize > 0 && newSize > maxFontSize) ? 
-                    maxFontSize : 
-                    newSize
-            );
-        });
-    };244
-
-        // Print rendering actions
-        var mediaQueryList = window.matchMedia('print');
-            mediaQueryList.addListener(function(mql) {
-            if (mql.matches) {
-              $('.rectangle').each(function(){
-                $(this).prepend('<div class="printable"></div>');
-                $(this).find('.printable').css({'border-left-width' : $(this).width(),
-                             'border-left-color' : $(this).attr("printcolor")})
-              })
-            } else {
-                $('.printable').remove();
+        $.fn.textfill = function(maxFontSize, targetWidth) {
+            log($(this).text());
+            var fontSize = 10;
+            $(this).css({ 'font-size' : fontSize });
+            while(($(this).width() < targetWidth) && (fontSize < maxFontSize)){
+                fontSize += 1;
+                $(this).css({ 'font-size' : fontSize });
             }
-        });
+            $(this).css({ 'font-size' : fontSize-1 });
+
+        };
 
         // Resize action
         $(window).resize(function() {});
