@@ -6,30 +6,36 @@
   border-bottom-style: solid;
   padding-bottom: 1%;
 
-  #home-button{
-    div{
-      cursor: pointer;
-    }
-    #avb-logo{
-      margin-left: 20px;
-    }
-  }
-
-  #avb-links{
-    margin-top: 10px;
-  }
 
   .menubutton {
     font-size: $text-big;
     color: $gray;
+    display: inline-block;
+    margin-top: 10px;
+    margin-left: 25px;
+    margin-right: 25px;
+  }
+     .menubutton:first-child {
+    margin-left: 0px;
   }
 
-  #vdivider {
-    border-left: 2px solid #aaaaaa;
-    position: absolute;
-    top: 0;
-    height: 100%;
-}
+   .menubutton:last-child {
+    margin-right: 0px;
+    text-align: right;
+  }
+
+    #home-button {
+    div{
+      cursor: pointer;
+    }
+  }
+
+  .divider {
+    display: none;
+    height: 60px;
+    width: 2px;
+    background-color: $gray;
+  }
 
   .vhscrollable {
     height: 150px;
