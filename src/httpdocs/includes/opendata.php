@@ -14,16 +14,23 @@
       </div>
     </div>
 
-    <div style="margin-bottom:10px;">
+    <div class="separator" style="margin-bottom:10px;">
       <div class="title-head">
         Code
       </div>
 
       <div class="dataDownload">
         <a href="https://github.com/goinvo/Visual-Town-Budget"> GitHub Repo </a href="">
+        </div>
+      </div>
+      <div>
+        <div>
+          Arlington Visual Budget is licensed under <a class="link" href="http://www.apache.org/licenses/LICENSE-2.0.html"> Apache 2</a> and was created using open source code and data.
+        </div>
+        <div>
+          Download, examine, and contribute to Arlington Visual Budget using the links provided.
+        </div>
       </div>
     </div>
-
   </div>
-</div>
 

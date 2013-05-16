@@ -30,7 +30,7 @@
       </div>
 
       <div class="row-fluid" id="info-wrap" >
-        <div id="cards-wrap" style="width:100%; position:relative;">
+        <div id="cards-wrap" style="position:relative;">
           <div id="legend-wrap" >
             <div id="legend" class="separator separatorb" >
               <table>
@@ -45,7 +45,7 @@
       </div>
 
       <div id="chart-wrap" class="row-fluid" > 
-        <div id='chart' class="chart" style="height:100%; margin-top:10px;"> </div>
+        <div id='chart' class="chart"> </div>
       </div>
 
     </div>

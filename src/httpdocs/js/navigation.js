@@ -219,7 +219,7 @@ updateTitle = function (data) {
     title.text(data.key);
     $(title).textfill(48, $('.title-head').width() - 120);
 
-    if (currentSelection === root){
+    if (currentSelection.data === root){
         zoom.addClass('disabled');
     } else {
         zoom.removeClass('disabled');

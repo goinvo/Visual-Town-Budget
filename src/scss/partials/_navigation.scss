@@ -55,7 +55,6 @@
 
 
   .textdiv { /* text in the boxes */
-    font-size: 1em;
     padding: 8px;
     font-family: "Open Sans", Helvetica, Arial, sans-serif;;
 
@@ -66,17 +65,12 @@
     }
 
     .titleLabel {
-      font-size: 15px;
     }
 
     .valueLabel {
-      font-size: 20px;
+      font-size: $text-big;
 
     }
-
-
-
-
   }
 
 

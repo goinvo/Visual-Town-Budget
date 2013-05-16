@@ -1,24 +1,11 @@
-            var colors = ["#1f77b4", "#aec7e8", "#ff7f0e", "#ffbb78", "#2ca02c", "#98df8a", "#d62728", "#ff9896", "#9467bd", "#c5b0d5", "#8c564b", "#c49c94", "#e377c2", "#f7b6d2", "#7f7f7f", "#c7c7c7", "#bcbd22", "#dbdb8d", "#17becf", "#9edae5"];
-            var revenuesColor = ["#006699", "#46ABDE", "#3997D1", "#E76354", "#33CC66", "#46ABDE"];
-            var homecolors = ["#006699", "#33CC66", "#CC0000"];
-
-            var home;
-
-            // constants
-            var section;
-
             var firstYear = 2008,
                 lastYear = 2018,
                 currentYear = 2013, // only used for projections
                 thisYear = 2013,
                 yearIndex = thisYear - firstYear;
 
+            var section;
             var root;
-            var currentSelection;
-            
-            // object references
-            var mysvg;
-
             var currentSelection = new Object();
 
             Number.prototype.px=function()
@@ -57,14 +44,6 @@
                 
                 console.log("UI Loaded.");
                 
-            }
-
-            function triggerModal() {
-                $('#modal-container').modal({
-                    onOpen : modalOpen,
-                    onClose : modalClose,
-                    opacity : 70
-                });
             }
 
             function updateSelection(data, year, color) {
@@ -110,35 +89,11 @@
                 }
 
                 avb.navbar.enableYears();
-
-                d3.select("#avb-home").style("display","none");
-                d3.select("#avb-body").style("display","block");
                 d3.selectAll("svg").remove();
 
                 home = false;
                 section = params.section;
                 d3.json("/data/" + params.section + ".json", onjsonload);
-            }
-
-
-            function add_filter(container){
-                filter = container.append("svg:defs")
-                .append("svg:filter")
-                .attr("id", "blur");
-
-            }
-
-            function toarray(d){
-                values = [];
-                for(var i=firstYear; i <= lastYear ; i++){
-                    if( d[i.toString()] !== undefined ) {
-                        values.push({ year : i , val : d[i.toString()]});
-                    }
-                }
-                return {
-                    name : d.name,
-                    values : values
-                }
             }
 
             function changeyear(year){
@@ -151,64 +106,6 @@
                 avb.navigation.open(root.hash);
 
             }
-
-
-            function loadthumbails(){
-                getthumbail($("#home-thumb1"),homecolors[0]);
-                getthumbail($("#home-thumb2"),homecolors[2]);
-                getthumbail($("#home-thumb3"),homecolors[1]);
-            }
-
-
-            function getthumbail(div, color){
-
-                d3.json("/data/home.json", function(data){
-                    var width = Math.floor(div.width());
-                    var height = Math.round(div.height());
-                    var barsvg = d3.select(div.get()[0]).append("svg")
-                    .attr("width", width)
-                    .attr("height", height);
-                    var bardata;
-                    for(var i=0; i<data.sub.length; i++) {
-                        if(data.sub[i].name === div.attr('field')) {
-                            bardata = toarray(data.sub[i]);
-                        }
-                    }
-                    var xscale = d3.scale.linear()
-                    .domain([firstYear, lastYear])
-                    .range([0, width]);
-                    var yscale = d3.scale.linear()
-                    .domain([0,d3.max(bardata.values,get_values)])
-                    .range([0, height]);
-                    var bars = barsvg.append("svg:g")
-                    .selectAll("rect")
-                    .data(bardata.values)
-                    .enter()
-                    .append("rect")
-                    .attr("x", function(d){
-                        return xscale(d.year);
-                    })
-                    .attr("y", function(d){
-                        return height - yscale(d.val);
-                    })                    
-                    .attr("width", Math.floor(width/(lastYear - firstYear)))
-                    .attr("height", function(d) {
-                        return yscale(d.val);
-                    })
-                    .style("fill", color)
-                    .style("opacity",0.5);
-                });
-        }
-
-        function init_tooltip(){
-            tooltip = d3.select("body")
-            .append("div")
-            .style("position", "absolute")
-            .style("z-index", "10")
-            .style("visibility", "hidden")
-            .attr("class","toolt");
-        }
-
 
         function hexToRgb(hex) {
             var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
