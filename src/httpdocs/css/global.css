@@ -230,6 +230,11 @@ h4 {
   margin-bottom: 5px;
 }
 
+/* line 76, ../../scss/partials/_avb.scss */
+.separatorv {
+  margin-right: 20px;
+}
+
 /* line 1, ../../scss/partials/_home.scss */
 #avb-home {
   margin-top: 10px;
@@ -549,30 +554,35 @@ h4 {
   padding-bottom: 1%;
 }
 /* line 10, ../../scss/partials/_navbar.scss */
-#avb-menubar #home-button div {
-  cursor: pointer;
-}
-/* line 13, ../../scss/partials/_navbar.scss */
-#avb-menubar #home-button #avb-logo {
-  margin-left: 20px;
-}
-/* line 18, ../../scss/partials/_navbar.scss */
-#avb-menubar #avb-links {
-  margin-top: 10px;
-}
-/* line 22, ../../scss/partials/_navbar.scss */
 #avb-menubar .menubutton {
   font-size: 1.3em;
   color: #aaaaaa;
+  display: inline-block;
+  margin-top: 10px;
+  margin-left: 25px;
+  margin-right: 25px;
 }
-/* line 27, ../../scss/partials/_navbar.scss */
-#avb-menubar #vdivider {
-  border-left: 2px solid #aaaaaa;
-  position: absolute;
-  top: 0;
-  height: 100%;
+/* line 18, ../../scss/partials/_navbar.scss */
+#avb-menubar .menubutton:first-child {
+  margin-left: 0px;
 }
-/* line 34, ../../scss/partials/_navbar.scss */
+/* line 22, ../../scss/partials/_navbar.scss */
+#avb-menubar .menubutton:last-child {
+  margin-right: 0px;
+  text-align: right;
+}
+/* line 28, ../../scss/partials/_navbar.scss */
+#avb-menubar #home-button div {
+  cursor: pointer;
+}
+/* line 33, ../../scss/partials/_navbar.scss */
+#avb-menubar .divider {
+  display: none;
+  height: 60px;
+  width: 2px;
+  background-color: #aaaaaa;
+}
+/* line 40, ../../scss/partials/_navbar.scss */
 #avb-menubar .vhscrollable {
   height: 150px;
   overflow: auto;
