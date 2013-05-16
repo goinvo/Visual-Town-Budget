@@ -4,17 +4,14 @@ $red: rgb(167, 103, 108);
 $blue: rgb(87,118,162);
 $white: rgb(220, 223, 222);
 
-/*
-* Body
-*/
+
+// window container
 #avb-body {
   margin-top: 1%;
   font-weight: 200;
   background-color: #f9f9f9;
 
-  /*
-  *  Bottom container
-  */
+  // border window
   #avb-wrap {
     position: relative;
     margin-bottom: 10px;
@@ -33,13 +30,6 @@ $white: rgb(220, 223, 222);
 
   }
 }
-
-#information-container{
-  position: relative;
-  padding-left: 25px;
-  padding-right: 25px;
-}
-
 
 /*
 * Entry title and description
