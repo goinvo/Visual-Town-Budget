@@ -1,3 +1,4 @@
+
 var avb = avb || {};
 
 avb.navigation = function(){
@@ -47,6 +48,8 @@ avb.navigation = function(){
 
 
     update = function(data){
+        nav.selectAll("g").remove();
+
         var layout = function (d) {
             if (d.sub) {
                 treemap.nodes({values : d.values, children : d.sub});
@@ -90,7 +93,7 @@ avb.navigation = function(){
 
 display = function(d) {
 
-        $('.no-value').tooltip('destroy');
+        $('.no-value').popover('destroy');
 
         var formatNumber = d3.format(",d"),transitioning;
 
@@ -101,7 +104,9 @@ display = function(d) {
         var g1 = nav.insert("g", ".grandparent")
         .datum(d)
         .attr("class", "depth")
-        .on("click", zoneClick);
+        .on("click", function(){
+            zoneClick.call(this, d3.select(this).datum(), true);
+        })
 
         /* add in data */
         var g = g1.selectAll("g")
@@ -111,15 +116,20 @@ display = function(d) {
         /* create grandparent bar at top */
         nav.grandparent
         .datum((d.parent === undefined) ? d : d.parent)
-        .attr("nodeid", d.hash)
-        .on("click", zoneClick);
+        .attr("nodeid", (d.parent === undefined) ? d.hash : d.parent.hash)
+        .on("click", function(){
+            zoneClick.call(this, d3.select(this).datum(), true);
+        });
+
 
         updateTitle(d);
 
         /* transition on child click */
         g.filter(function(d) { return d.sub; })
         .classed("children", true)
-        .on("click", zoneClick);
+        .on("click", function(){
+            zoneClick.call(this, d3.select(this).datum(), true);
+        })
 
         // assign new color only if not last node
         if(d.sub.length !== 0 && d.color === undefined) {
@@ -185,14 +195,14 @@ textLabels = function(d){
         title = $(this).find('.titleLabel').first(),
         div = $(this).find('.textdiv').first();
 
-    $(this).find('div').first().tooltip('destroy');
+    $(this).find('div').first().popover('destroy');
     d3.select(this).classed("no-value", false);
     d3.select(this).classed("no-label", false);
 
     if (containerHeight < title.outerHeight() || containerWidth < 60) {
         d3.select(this).classed("no-label", true);
-        d3.select(this).select('div').style("height", "100%");
-        $(this).find('div').first().tooltip({container : 'body', title : d.key});
+        d3.select(this).select('div').style("height", containerHeight.px());
+        $(this).find('div').first().popover({container : 'body', trigger : 'hover', placement: 'top', content : d.key});
     }
     if(containerHeight < div.outerHeight()) {
         d3.select(this).classed("no-value", true);
@@ -216,28 +226,29 @@ updateTitle = function (data) {
     }
 
     zoom.click(function(){
-        zoneClick.call(parent, d3.select(parent).datum());
+        zoneClick.call(parent, d3.select(parent).datum(), true);
     })
 
 }
 
-open = function(nodeId) {
+open = function(nodeId, pushUrl) {
         var rect = d3.select('g[nodeid*="' + nodeId +'"]');
-        zoneClick.call(rect.node(), rect.datum(), false);
+        log(nodeId)
+        log(rect);
+        zoneClick.call(rect.node(), rect.datum(), pushUrl);
     },
 
 zoneClick= function(d, click) {
 
-    // $('.no-label').tooltip('destroy');
+    if (nav.transitioning || !d || !currentSelection || (currentSelection.year  === yearIndex && currentSelection.data === d)) return;
 
-    if (nav.transitioning || !d || currentSelection === d) return;
-
-    if(click === undefined) {
+    if(click === true) {
+        log(d.key); log(d.hash);
         pushUrl( section, thisYear, d.hash);
     }
 
-      currentSelection = d;
-      updateSelection(d, d.color);
+      updateSelection(d, yearIndex, d.color);
+
 
       nav.transitioning = true;
 

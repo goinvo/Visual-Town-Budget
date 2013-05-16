@@ -40,12 +40,14 @@ avb.chart = function(){
         $('#layer-switch').center();
         $('#layer-switch .btn').click(function(){
           if($(this).attr('action') === 'enable') {
-            enableLayers(currentSelection);
+            chart.layersSelected = true;
+            enableLayers(currentSelection.data);
             $('#legend-wrap').animate({left: '0'});
             $('#cards').animate({left: '100%'});
             $(this).addClass('disabled');
             $('#layer-switch .btn[action="disable"]').removeClass('disabled');
           } else {
+            chart.layersSelected = false;
             removeLayers();
             $('#legend-wrap').animate({left: '-100%'});
             $('#cards').animate({left: '0'});
@@ -65,8 +67,8 @@ avb.chart = function(){
         d3.selectAll("#legend tr").remove();
 
         // add legend rows
-        var rows = d3.select("#legend tbody") .selectAll("tr")
-        .data(legendLabels).enter().append("tr");
+        var rows = d3.select("#legend tbody").selectAll("tr")
+        .data(legendLabels.reverse()).enter().append("tr");
 
         rows.append("td").append('div')
         .classed('legend-label', true)
@@ -85,16 +87,13 @@ avb.chart = function(){
 
       drawline = function(data, color) {
 
-        log(color)
-
         // redraw case
         if(data === undefined) {
           data = currentSelection.data;
           color = currentSelection.color;
         }
 
-        layersSelected = $('#layer-switch').is(':checked');
-        layersEnabled =  layersSelected && (data.sub.length !== 0);
+        layersEnabled =  chart.layersSelected && (data.sub.length !== 0);
 
         if(chart.axes === undefined){
           chart.grids = chart.append('g');
@@ -113,11 +112,9 @@ avb.chart = function(){
         chart.yscale = d3.scale.linear().domain([0,d3.max(data.values, get_values)*1.2])
         .range([chart.height - chart.ymargin, 10]);
 
-       
         /*
         * grids
         */
-
 
         // xgrid
 
@@ -158,7 +155,7 @@ avb.chart = function(){
         .y0(function(d) { return (chart.height - chart.ymargin); })
         .y1(function(d) { return chart.yscale(d.val); });
 
-        var projected = lastYear - currentYear;
+        var projected = currentYear - firstYear;
 
         // current year line
         chart.grids.append("line").classed('thisYearLine',true)
@@ -176,6 +173,7 @@ avb.chart = function(){
           for(i=0; i<2; i++) chart.visuals.push(chart.linegroup.append("svg:path")); 
         }
         transitionDuration = 0;
+
 
         //non-projection area
         chart.visuals[0].classed("area",true)
@@ -237,7 +235,6 @@ avb.chart = function(){
 
         chart.circles.attr("data-name", data.key)
         .selectAll("circle").data(data.values)
-        .transition().duration(transitionDuration)
         .attr("cx", function(d) { return chart.xscale(d.year); })
         .attr("cy", function(d) { return chart.yscale(d.val); })
         .attr("r", 5).attr("stroke", color).attr("fill", color);
@@ -245,17 +242,10 @@ avb.chart = function(){
         chart.circles.attr("data-name", data.key)
         .selectAll("circle").data(data.values).enter().append("circle");
 
-        $('#chart circle').popover({
-        	container:'body',
-        	placement: 'top',
-        	trigger: 'hover',
-        	content: function() {
-        		$('#popover-value').text(formatcurrency(d3.select(this).datum().val));
-        		return $('#popover-html').html();
-        	},
-        	html: true
-        });
 
+        if(!chart.layersSelected) {
+          enablePopovers();
+        }
 
        /*
        * Overflows
@@ -290,17 +280,44 @@ avb.chart = function(){
       d3.select('.xAxis g:nth-child(' + (yearIndex+1) + ')')
       .classed('thisYear', true);
 
+
+
       if(layers !== undefined) layers.remove();
 
-      if ( layersSelected ) {
+      if ( chart.layersSelected ) {
        enableLayers(data);
      }
    },
 
-   enableLayers = function(jsondata, transition){
-    log(root)
+   enablePopovers = function(){
+          $('#chart circle').popover({
+          container:'body',
+          placement: 'top',
+          trigger: 'hover',
+          content: function() {
+            if(chart.popover !== undefined && chart.popover !== this) {
+              $(chart.popover).popover('hide');
+            }
+            chart.popover = this;
+            $('#popover-value').text(formatcurrency(d3.select(this).datum().val));
+            return $('#popover-html').html();
+          },
+          html: true
+        });
 
-    $('.popover').hide();
+        $($('#chart circle').get(yearIndex)).popover('show');
+
+   },
+
+   disablePopovers = function(){
+      $('#chart circle').popover('destroy');
+   },
+
+   enableLayers = function(jsondata, transition){
+
+    log('loading layers')
+
+    disablePopovers();
     
     if(jsondata.sub.length === 0) {
       d3.selectAll('#chart circle').transition().duration(500).style('opacity', 0);
@@ -377,6 +394,7 @@ avb.chart = function(){
     },
 
     removeLayers = function (){
+      enablePopovers();
       d3.selectAll('#chart circle').style('opacity', 1);
       if(layers !== undefined) {
         d3.selectAll('.area').classed("layers",false)

@@ -18,7 +18,7 @@
   <script src="js/lib/mustache/mustache.js"></script>
   <link rel="stylesheet" type="text/css" href="css/global.css">
   <link rel="stylesheet" media="print" type="text/css" href="css/print.css">
-  <script src ="js/lib/d3/d3.js"></script>
+  <script src ="js/lib/d3/d3.v3.min.js"></script>
   <script src ="js/lib/jquery/jquery-1.9.1.min.js"></script>
   <script src ="js/lib/bootstrap.min.js"></script>
   <script src ="js/lib/detectmobilebrowser.js"></script>

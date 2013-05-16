@@ -43,7 +43,6 @@ body {
     #info-wrap {
       height: 50%;
     }
-
   }
 
   #navigation-container {
@@ -51,14 +50,11 @@ body {
   }
 }
 
-#simplemodal-container {
-  height:600px;
-  width: 1200px;
-}
 
 #vdivider{
   left:280px;
 }
+
 
 
 /*
@@ -79,24 +75,23 @@ body {
 
   #avb-body {
 
-    #avb-wrap {
-      padding-bottom: 0px;
-    }
+    #information-container{
 
-    #chart {
-      height: 200px;
+      height: 500px;
+
+      #chart-wrap {
+        height: 45%;
+      }
+
+      #info-wrap {
+        height: 50%;
+      }
     }
 
     #navigation-container {
-      height: 400px;
+      height: 550px;  
     }
   }
-
-  #simplemodal-container {
-    height:500px;
-    width: 900px;
-  }
-
 }
 
 #footer {

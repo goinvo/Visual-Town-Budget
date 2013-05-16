@@ -58,18 +58,12 @@ body {
 #avb-body #information-container #info-wrap {
   height: 50%;
 }
-/* line 49, ../../scss/partials/_structure.scss */
+/* line 48, ../../scss/partials/_structure.scss */
 #avb-body #navigation-container {
   height: 600px;
 }
 
 /* line 54, ../../scss/partials/_structure.scss */
-#simplemodal-container {
-  height: 600px;
-  width: 1200px;
-}
-
-/* line 59, ../../scss/partials/_structure.scss */
 #vdivider {
   left: 280px;
 }
@@ -78,47 +72,45 @@ body {
 * Ipad Portait + Landscape
 */
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
-  /* line 68, ../../scss/partials/_structure.scss */
+  /* line 64, ../../scss/partials/_structure.scss */
   body, html {
     font-size: 12px;
   }
 
-  /* line 72, ../../scss/partials/_structure.scss */
+  /* line 68, ../../scss/partials/_structure.scss */
   #vdivider {
     left: 250px;
   }
 
-  /* line 76, ../../scss/partials/_structure.scss */
+  /* line 72, ../../scss/partials/_structure.scss */
   .container {
     width: 980px;
   }
 
+  /* line 78, ../../scss/partials/_structure.scss */
+  #avb-body #information-container {
+    height: 500px;
+  }
   /* line 82, ../../scss/partials/_structure.scss */
-  #avb-body #avb-wrap {
-    padding-bottom: 0px;
+  #avb-body #information-container #chart-wrap {
+    height: 45%;
   }
   /* line 86, ../../scss/partials/_structure.scss */
-  #avb-body #chart {
-    height: 200px;
+  #avb-body #information-container #info-wrap {
+    height: 50%;
   }
-  /* line 90, ../../scss/partials/_structure.scss */
+  /* line 91, ../../scss/partials/_structure.scss */
   #avb-body #navigation-container {
-    height: 400px;
-  }
-
-  /* line 95, ../../scss/partials/_structure.scss */
-  #simplemodal-container {
-    height: 500px;
-    width: 900px;
+    height: 550px;
   }
 }
-/* line 102, ../../scss/partials/_structure.scss */
+/* line 97, ../../scss/partials/_structure.scss */
 #footer {
   text-align: center;
   margin-bottom: 5px;
 }
 
-/* line 110, ../../scss/partials/_structure.scss */
+/* line 105, ../../scss/partials/_structure.scss */
 .group {
   *zoom: 1;
 }

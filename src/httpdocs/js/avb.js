@@ -9,8 +9,8 @@
 
             var firstYear = 2008,
                 lastYear = 2018,
-                currentYear = 2012, // only used for projections
-                thisYear = 2012,
+                currentYear = 2013, // only used for projections
+                thisYear = 2013,
                 yearIndex = thisYear - firstYear;
 
             var root;
@@ -19,7 +19,7 @@
             // object references
             var mysvg;
 
-            var layout = new Object();
+            var currentSelection = new Object();
 
             Number.prototype.px=function()
             {
@@ -27,6 +27,7 @@
             };
 
             function pushUrl(section, year, node){
+                log("push url")
                 var url = '/' + section + '/' + thisYear + '/' + node;
                 window.history.pushState({section : section, year : thisYear, nodeId : node},"", url);
             }
@@ -35,7 +36,7 @@
                 if(event.state === null){
                     //avb.navigation.open(root.hash);
                 } else {
-                    avb.navigation.open(event.state.nodeId);
+                    avb.navigation.open(event.state.nodeId, false);
                 }
             }
 
@@ -52,7 +53,7 @@
                 avb.navigation.initialize(jsondata);
                 avb.chart.initialize('#chart');
                 avb.chart.initializeSwitch();
-                avb.navigation.open(root.hash);
+                avb.navigation.open(root.hash, true);
                 
                 console.log("UI Loaded.");
                 
@@ -66,46 +67,12 @@
                 });
             }
 
-            function updateSelection(data, color) {
+            function updateSelection(data, year, color) {
                 currentSelection.data = data;
-                currentSelection.color = color;
-
+                currentSelection.year = year;
+                log("update")
                 avb.chart.drawline(data, color);
                 avb.cards.update(data);
-            }
-
-            function modalOpen(dialog) {
-                $('.popover').hide();
-
-                dialog.data.show();
-                dialog.container.show();
-
-                avb.navigation.updateTitle(currentSelection);
-                $('#bottom-switch').appendTo('#modal-switch');
-                $('#bottom-right div :first').appendTo('#modal-right');
-                avb.chart.initialize("#modal-chart");
-                avb.chart.drawline();
-
-
-                dialog.overlay.fadeIn('fast');
-            }
-
-            function modalClose(dialog){
-                $('#bottom-switch').appendTo('#bottom-controls');
-                $('#modal-right div :first').prependTo('#bottom-right');
-
-                $("#layer-switch").attr('checked', false);
-
-
-                avb.chart.initialize("#chart");
-                avb.chart.drawline();
-
-                dialog.data.hide();
-                dialog.container.hide();
-                dialog.overlay.fadeOut('fast');
-                $.modal.close();
-
-
             }
             
             var log = function(d) {
@@ -181,6 +148,8 @@
                 thisYear = year;
                 yearIndex = thisYear - firstYear;
                 avb.navigation.update(root);
+                avb.navigation.open(root.hash);
+
             }
 
 
