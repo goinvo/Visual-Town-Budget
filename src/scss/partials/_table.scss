@@ -1,0 +1,92 @@
+
+.group{
+	display: none;
+}
+
+.tablerow{
+	height: 40px;
+	cursor: pointer;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	border-bottom: 1px solid $gray;
+	font-size: 1em;
+	line-height: 40px;
+
+	&:hover{
+		background-color: $gray;
+	}
+
+	&.atomic .expand-icon{
+		display: none;
+	}
+
+	&.expanded .sum{
+
+	}
+}
+
+#table-header:hover{
+	background-color: transparent;
+	cursor: default;
+}
+
+.value, .bullet{
+	display: inline-block;
+}
+
+.bullet, .sparkline{
+	vertical-align: bottom;
+}
+
+
+.value{
+	text-align: center;
+	width: 150px;
+	white-space: nowrap;
+	text-overflow:ellipsis;
+	overflow: hidden;
+
+
+
+	&.long{
+		width: 300px;
+	}
+
+	&.textleft{
+		text-align: left;
+	}
+
+	&.numeric{
+		font-family: 'Georgia'
+	}
+
+	&.head{
+		font-family: 'Open Sans';
+		font-weight: $text-bold;
+	}
+
+
+}
+
+.bullet{
+	width: 20px;
+}
+
+.sparkline{
+	.line{
+		stroke-width: 1px;
+	}
+	line-height: 0px;
+}
+
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
+	.value {
+		width: 100px;
+
+		&.long {
+			width: 250px;
+		}
+	}
+
+}
+

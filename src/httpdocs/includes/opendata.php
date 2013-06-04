@@ -1,6 +1,4 @@
 
-<div class="container" id="avb-body">
-  <div class="row-fluid" id="avb-wrap" style="width:auto;">
     <a href="https://github.com/goinvo/Visual-Town-Budget"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>      
     <div class="separator" style="margin-bottom:0px;">
       <div class="title-head">
@@ -31,6 +29,4 @@
           Download, examine, and contribute to Arlington Visual Budget using the links provided.
         </div>
       </div>
-    </div>
-  </div>
 

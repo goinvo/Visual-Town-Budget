@@ -1,44 +1,40 @@
-
 #avb-menubar {
-
-  border-color: $gray;
-  border-width: 1px;
-  border-bottom-style: solid;
-  padding-bottom: 1%;
-
+  border-bottom: 1px solid $gray;
+  background-color:rgb(245, 245, 245);
+  padding: 5px;
 
   .menubutton {
-    font-size: $text-big;
-    color: $gray;
+
+    margin-top:10px;
     display: inline-block;
-    margin-top: 10px;
-    margin-left: 25px;
-    margin-right: 25px;
-  }
-     .menubutton:first-child {
-    margin-left: 0px;
-  }
 
-   .menubutton:last-child {
-    margin-right: 0px;
-    text-align: right;
-  }
+    .caret{
+      border-top-color: $black;
+      border-bottom-color: $black;
+    }
 
-    #home-button {
+    a{
+      font-size: 1em;
+      color: $black;
+    }
+
+    i{
+      margin-top:4px;
+    }
+
+    &.margin{
+      margin-right: 20px;
+    }
+
+  }
+}
+
+.centered{
+  text-align: center;
+}
+
+#home-button {
     div{
       cursor: pointer;
     }
-  }
-
-  .divider {
-    display: none;
-    height: 60px;
-    width: 2px;
-    background-color: $gray;
-  }
-
-  .vhscrollable {
-    height: 150px;
-    overflow: auto;
-  }
 }

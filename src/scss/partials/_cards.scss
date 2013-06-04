@@ -14,20 +14,19 @@
 * Cards
 */
 #cards {
-	position:absolute;
+	position:relative;
 	width:100%;
-	left:0;
+	margin-top:15px;
 	overflow:auto;
 	cursor: default;
-	text-align: center;
 
 	.card-row{
 		div:first-child .card{
-			padding-right:6%;
+			// padding-right:6%;
 		}
 
 		div:last-child .card{
-			padding-left:6%;
+			// padding-left:6%;
 		}
 
 		.card-img {
@@ -53,7 +52,7 @@
 		}
 
 		.card-text{
-			text-align: center;
+
 		}
 
 		.cardvalue {

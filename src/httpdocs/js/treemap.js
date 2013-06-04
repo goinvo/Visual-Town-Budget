@@ -1,7 +1,7 @@
 
 var avb = avb || {};
 
-avb.navigation = function(){
+avb.treemap = function(){
 	var nav, currentLevel,
     white = { r : 255, b : 255, g : 255 },
 
@@ -41,6 +41,8 @@ avb.navigation = function(){
         nav.color = d3.scale.category20();
 
         $('#zoombutton').center();
+
+        avb.chart.initialize('#chart');  
 
         update(data);
 
