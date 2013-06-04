@@ -23,8 +23,7 @@
     }
   }
 
-  .layers{
-    opacity: 0;
+  .browser{
   }
 
   .area {
@@ -91,3 +90,22 @@
       stroke-width: 1;
     }
   }
+
+.layerSlider{
+  stroke-width:2px;
+  stroke: white;
+  stroke-opacity:0.8;
+  fill: white;
+  fill-opacity: 0.2;
+  filter:url(#ds2);
+  fill-rule: evenodd;
+
+}
+
+.layerLine{
+  stroke:black;
+  stroke-width: 1px;
+  stroke-opacity: 0.0;
+  filter:url(#ds);
+  clip-path: url(#rectClip);
+}
