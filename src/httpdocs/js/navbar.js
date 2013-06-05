@@ -26,6 +26,7 @@ avb.navbar = function(){
 					var year = parseInt($(this).text());
 					$('#yeardrop-label').html(year + ' <b class="caret"></b>');
 					changeyear(year);
+					$('#yeardrop-container').removeClass('open');
 				});
 			};
 			$('#yeardrop-label').html(thisYear + ' <b class="caret"></b>');

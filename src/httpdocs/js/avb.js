@@ -14,7 +14,7 @@
                 stats = {
                     amount : {
                         title : "Amount",
-                        class : "span6 separator top",
+                        class : "span6 top",
                         icon : "/img/Amount@High.png",
                         value : function(d) { return formatcurrency(d.values[yearIndex].val); },
                         side : function() { return " in " + thisYear.toString() + "."},
@@ -23,7 +23,7 @@
                     },
                     impact : {
                         title : "Impact",
-                        class : "span6 separator ",
+                        class : "span6 ",
                         icon : "/img/Impact@High.png",
                         value : function(d) { return Math.max(0.01,(Math.round(d.values[yearIndex].val*100*100/root.values[yearIndex].val)/100)).toString() + "%"; },
                         side : function() { return " of total " + section + "."},
@@ -32,7 +32,7 @@
                     },
                     growth : {
                         title : "Growth",
-                        class : "span6 separator top",
+                        class : "span6 top",
                         icon : "/img/Growth@High.png",
                         value : function(d) { return growth(d); },
                         side : " compared to last year.",
@@ -41,21 +41,21 @@
                     },
                     source : {
                         title : "Source",
-                        class : "span12 card-source separator",
+                        class : "span12 card-source ",
                         icon : "/img/Growth@High.png",
                         value : function() { return "Cherry sheet"; },
                         side : "is the data source for this entry."
                     },
                     mean : {
                         title : "Average",
-                        class : "span6 separator",
+                        class : "span6 ",
                         icon : "/img/Growth@High.png",
                         value : function(d) { return formatcurrency(d3.mean(d.values, get_values)); },
                         side : "on average."
                     },
                     filler : {
                         title : "",
-                        class : "span6 separator",
+                        class : "span6 ",
                         icon : "",
                         value : function(d) { return ""; },
                         side : ""
@@ -89,18 +89,19 @@
                     return this.toString() + "px";
                 };
 
-                function pushUrl(section, year, node){
-                    log("push url")
+                function pushUrl(section, year, mode, node){
                     var url = '/' + section + '/' + thisYear + '/' + mode + '/' + node;
-                    window.history.pushState({section : section, year : thisYear, nodeId : node},"", url);
+                    window.history.pushState({section : section, year : thisYear, mode : mode, nodeId : node},"", url);
                 }
 
                 function popUrl(event){
                     if(event.state === null){
                     //avb.navigation.open(root.hash);
-                } else {
-                    avb.navigation.open(event.state.nodeId, false);
-                }
+                    } else if(event.state.mode !== mode) {
+                        switchMode(event.state.mode, false);
+                    } else {
+                        avb.navigation.open(event.state.nodeId, false);
+                    }
             }
 
             function name(d) {
@@ -109,6 +110,7 @@
 
             function onjsonload(jsondata) {
                 root = jsondata;
+                currentSelection.data = undefined;
                 
                 avb.cards.initialize();
                 avb.cards.draw();
@@ -122,7 +124,6 @@
             function updateSelection(data, year, color) {
                 currentSelection.data = data;
                 currentSelection.year = year;
-                log("update")
                 avb.chart.drawline(data, color);
                 avb.cards.update(data);
             }
@@ -161,8 +162,10 @@
             function formatPercentage(value){
                 if(value > 0) {
                     return "+ " + value.toString() + "%";
-                } else {
+                } else if(value < 0){
                     return "- " + Math.abs(value).toString() + "%";
+                } else {
+                    return Math.abs(value).toString() + "%";
                 }
             }
 
@@ -190,41 +193,44 @@
                 loadData();
             }
 
-            function setMode(mode) {
+            function setMode(modeId) {
                 var container = $('#avb-wrap'),
                 table = $('#table-template'),
                 treemap = $('#treemap-template');
 
                 // initialize code
-                if(mode && mode === 't') {
+                if(modeId && modeId === 'l') {
                     avb.navigation = avb.table;
                     container.html(Mustache.render(table.html()));
-                    mode = 't';
+                    mode = 'l';
                 } else {
                     avb.navigation = avb.treemap;
                     container.html(Mustache.render(treemap.html()));
-                    mode = 'tm';
+                    mode = 't';
                 }
-                console.log(mode);
+
             }
 
-            function switchMode(mode) {
+            function switchMode(mode, pushurl) {
+                if(pushurl === undefined) pushurl = true;
                 setMode(mode);
+                if(pushurl) pushUrl(section,thisYear,mode,root.hash);
                 loadData();
             }
 
             function loadData(){
-                if(root) {
-                    onjsonload(root);
-                } else {
-                    d3.json("/data/" + section + ".json", onjsonload);
-                }
+                d3.json("/data/" + section + ".json", onjsonload);
+                // if(root) {
+                //     onjsonload(root);
+                // } else {
+                //     d3.json("/data/" + section + ".json", onjsonload);
+                // }
             }
 
             function changeyear(year){
                 if(year === thisYear) return;
                 currentSelection = root;
-                pushUrl(section,year,root.hash);
+                pushUrl(section,year,mode,root.hash);
                 thisYear = year;
                 yearIndex = thisYear - firstYear;
                 avb.navigation.update(root);

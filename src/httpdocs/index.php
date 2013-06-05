@@ -35,7 +35,7 @@
     <?php
     $allpages = array("opendata" => "opendata.php");
     $sections = array("revenues", "expenses", "funds");
-    $mode = array("t","tm");
+    $mode = array("t","l");
     $params = array();
     if(isset($_GET["page"])) {
       if(in_array($_GET["page"], $sections)) {
@@ -105,8 +105,7 @@
     <div id="footer">
       <a class="link" href="http://www.town.arlington.ma.us/">Town of Arlington</a> - 
       <a class="link" href="http://www.goinvo.com">by Involution Studios</a> -
-      <a class="link" href="opendata"> Open Data + Code </a> -
-      <a class="link" href="javascript:;" onclick="fby.push(['showForm', '4389']);return false;" >Feedback</a>
+      <a class="link" href="opendata"> Open Data + Code </a>
   </div>
 
   </body>

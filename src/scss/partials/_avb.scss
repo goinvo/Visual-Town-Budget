@@ -53,23 +53,14 @@ $white: rgb(220, 223, 222);
   };
 }
 
-.card-row:after{
+
+.separator:after{
     display:block;
     border:none;
     color:white;
     height:1px;
     background:black;
     background: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 350, from(#ccc), to(#fff));
-};
-
-.separatorb:before{
-    content: '';
-    display: block;  
-    line-height: 0px;
-    height: 1px;
-    width: 100%;
-    border-top: 1px dashed $gray;
-    margin-bottom: 5px;
 };
 
 .separatorv{

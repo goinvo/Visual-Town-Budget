@@ -9,7 +9,7 @@
   <div class="row-fluid" id="info-wrap" >
     <div id="cards-wrap" style="position:relative;">
       <div id="legend-wrap" >
-        <div id="legend" class="separator separatorb" >
+        <div id="legend" class="separator" >
           <table>
             <tbody>
             </tbody>
@@ -30,7 +30,7 @@
       <i class="icon-zoom-out"></i> Zoom out
     </button>
   </div>
-  <div id="navigation" style="height:88%;width:100%"> </div>
+  <div id="navigation" > </div>
 </div>
 
   </script>
@@ -56,7 +56,7 @@
 
   <script type="text/html" id="row-template">
     <div class="tablerow">
-      <div class="bullet"> <img class="expand-icon" src="img/listBullet.png" /> </div>
+      <div class="bullet"> <img class="expand-icon" src="/img/listBullet.png" /> </div>
     </div>
   </script>
 

@@ -5,6 +5,8 @@ avb.cards = function(){
     cardstack = [],
 
     initialize = function(){
+        log('INIT CARDS');
+        cardstack = [];
         deck = decks[section];
     },
 
@@ -13,7 +15,7 @@ avb.cards = function(){
         for(var i=0; i < deck.length; i++) {
             if (i%2 === 0) {
                 container = d3.select("#cards").append("div")
-                .attr("class","row-fluid card-row");
+                .attr("class","row-fluid card-row separator");
             }
             var newcard = card_draw(container, deck[i]);
             cardstack.push(newcard);
@@ -26,6 +28,7 @@ avb.cards = function(){
     },
 
     update = function (data) {
+
         d3.select("#cardtitle").text(data.name + " in " + thisYear.toString());
         for(var i=0; i < deck.length; i++) {
             cardstack[i].html(Mustache.render($('#card-template').html(),deck[i]));

@@ -3,9 +3,13 @@
   background-color:rgb(245, 245, 245);
   padding: 5px;
 
-  .menubutton {
+  .nav{
+    margin-bottom: 0px !important;
+  }
 
-    margin-top:10px;
+  .menubutton {
+    font-size: 1.2em;
+    margin-top:12px;
     display: inline-block;
 
     .caret{
@@ -19,7 +23,7 @@
     }
 
     i{
-      margin-top:4px;
+      margin-top:6px;
     }
 
     &.margin{
