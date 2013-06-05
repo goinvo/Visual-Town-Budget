@@ -29,6 +29,8 @@
 			// padding-left:6%;
 		}
 
+
+
 		.card-img {
 			float:left;
 			img {
@@ -86,11 +88,9 @@
 
 #legend-wrap {
     position:absolute;
-    height: 100%;
+    height: 90%;
     left:-100%;
     overflow-y: auto;
-    padding-left: 3%;
-    padding-right: 3%;
 
     .legend-label{
       width: 16px;

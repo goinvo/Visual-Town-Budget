@@ -44,7 +44,8 @@ avb.chart = function () {
             layers.each(function (d) {
                 legendLabels.push({
                         key: d.key,
-                        color: d3.select(this).select('path').style('fill')
+                        color: d3.select(this).select('path').style('fill'),
+                        percentage: 100 * d.values[yearIndex].val / parent.values[yearIndex].val
                     });
             });
 
@@ -61,7 +62,7 @@ avb.chart = function () {
                 });
 
             rows.append("td").text(function (d) {
-                return d.key;
+                return d.key + ' (' + d.percentage.toFixed(2) + '%)';
             })
 
             $('#legend').center();
@@ -113,6 +114,19 @@ avb.chart = function () {
                 return 'translate(' + x + ', ' + y + ')';
             }
 
+            function showLegend(action){
+                if(action === chart.showLegend) return;
+                chart.showLegend = action;
+                $('#legend-wrap, #cards').stop();
+                if(action) {
+                    $('#legend-wrap').animate({left: '0'});
+                    $('#cards').animate({left: '100%'});
+                } else {
+                    $('#legend-wrap').animate({left: '-100%'});
+                    $('#cards').animate({left: '0'});
+                }
+            }
+
             function slideLayers(x, transition) {
 
                 x = Math.min(x, chart.xscale.range()[1]);
@@ -127,6 +141,7 @@ avb.chart = function () {
                     chart.layers.svg.attr("width", x);
                     chart.layerLine.attr("x1", x).attr("x2", x);
                 }
+                showLegend(x > chart.width/4);
                 setDatapointsOpacity(transition);
             }
 
@@ -406,12 +421,12 @@ avb.chart = function () {
                     .attr("in", "SourceGraphic");
             }
 
-            if (jsondata.sub.length === 0) {
-                var legendData = chart.areagroup.datum(jsondata);
-                legend(legendData, legendData);
-                
-                return;
-            }
+        function appendSeparator(group){
+           chart.layerLine = group.append("line").classed('layerLine', true)
+            .attr("x1", chart.layersWidth).attr("x2", chart.layersWidth)
+            .attr("y1", chart.yscale.range()[1]).attr("y2", chart.height - chart.ymargin);
+        }
+
 
             layers = chart.layers.append('svg')
                 .attr("height", chart.height).attr("width", chart.layersWidth)
@@ -424,6 +439,13 @@ avb.chart = function () {
 
             layers.width = chart.width;
             layers.height = chart.height;
+
+            if (jsondata.sub.length === 0) {
+                appendSeparator(layers);
+                var legendData = chart.areagroup.datum(jsondata);
+                legend(legendData, legendData.datum());
+                return;
+            }
 
             var yscale = chart.yscale
             var xscale = chart.xscale;
@@ -501,17 +523,7 @@ avb.chart = function () {
             // not fundamental, improves layers looks
             $('.layers g:last .multiline').remove();
 
-
-            chart.layerLine = layers.append("line").classed('layerLine', true)
-                .attr("x1", chart.layersWidth).attr("x2", chart.layersWidth)
-                .attr("y1", chart.yscale.range()[1]).attr("y2", chart.height - chart.ymargin);
-
-            if (transition === undefined) {
-                // d3.selectAll('#chart circle').transition().duration(500).style('opacity', 0);
-                layers.transition().duration(500).style("opacity", 1);
-            } else {
-                layers.style("opacity", 1);
-            }
+            appendSeparator(layers);
 
         },
 

@@ -49,6 +49,12 @@ body {
     height: 600px;
     position: relative;  
   }
+
+  #navigation {
+    height:88%;
+    width:100%;
+  }
+
 }
 
 
@@ -64,10 +70,6 @@ body {
 @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
   body, html {
     font-size: 12px;
-  }
-
-  #vdivider{
-    left:250px;
   }
 
   .container {

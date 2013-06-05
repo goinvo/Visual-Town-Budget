@@ -10,7 +10,7 @@
 
    var initialize = function(data){
     var table = $('#table-container'),
-        header = $('#table-header').data('level',0);
+    header = $('#table-header').data('level',0);
     stats = tables[section];
 
     $.each(stats, function(){
@@ -105,6 +105,8 @@
     var width = $(cell).width(),
     height = $(cell).parent().height();
 
+    d3.select(cell).select('svg').remove();
+
     var sparkline = d3.select(cell).append('svg')
     .attr('width', width).attr('height', height);
 
@@ -120,6 +122,7 @@
     sparkline.append('g').append("svg:path").classed("line", true)
     .attr("d", line(node.values)).style("stroke", 'black');
 
+
     sparkline.append('g').append("svg:circle").attr("r", 2)
     .attr("cx", xscale(node.values[yearIndex].year))
     .attr("cy", yscale(node.values[yearIndex].val));
@@ -127,10 +130,20 @@
   },
 
   renderGrowth = function(data, cell){
-     var previous = (data.values[yearIndex-1]) ? data.values[yearIndex-1].val : 0;
-     var perc = Math.round(100 * 100 * (data.values[yearIndex].val - previous) / data.values[yearIndex].val)/100;
-     $(cell).css({"color" : growthScale(perc)});
-     $(cell).text(formatPercentage(perc));
+    var previous = (data.values[yearIndex-1]) ? data.values[yearIndex-1].val : 0;
+     // special delta cases
+    if(data.values[yearIndex].val === 0){
+      if(previous === 0) {
+        perc = 0;
+      } else {
+        perc = 100;
+      }
+    } else {
+      perc = Math.round(100 * 100 * (data.values[yearIndex].val - previous) / data.values[yearIndex].val)/100;
+    }
+
+    $(cell).css({"color" : growthScale(perc)});
+    $(cell).text(formatPercentage(perc));
 
   }
 
@@ -150,12 +163,35 @@
 
   };
 
+  update = function(data){
+    $('.tablerow').each(function(){
+      var node = $(this);
+
+      if(node.is('#table-header')) return;
+
+      // assumption. cell order and stats array do not change
+      log('la');
+      log(stats);
+      for(var i=0; i<stats.length; i++) {
+        var cell = $($(node).find('.value').get(i));
+        if(stats[i].cellFunction) {
+          stats[i].cellFunction(node.data(), cell.get(0));
+        } else {
+          cell.text(stats[i].value(node));
+        }
+      };
+
+    })
+
+  };
+
   return{
     initialize : initialize,
     renderSparkline : renderSparkline,
     renderGrowth : renderGrowth,
     renderAmount : renderAmount,
     renderImpact : renderImpact,
-    open : open
+    open : open,
+    update : update
   }
 }();
