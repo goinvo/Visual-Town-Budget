@@ -200,6 +200,7 @@ textLabels = function(d){
     $(this).find('div').first().popover('destroy');
     d3.select(this).classed("no-value", false);
     d3.select(this).classed("no-label", false);
+    d3.select(this).select('div').style("height", '');
 
     if (containerHeight < title.outerHeight() || containerWidth < 60) {
         d3.select(this).classed("no-label", true);
@@ -234,19 +235,23 @@ updateTitle = function (data) {
 }
 
 open = function(nodeId, pushUrl) {
-        var rect = d3.select('g[nodeid*="' + nodeId +'"]');
-        log(nodeId)
-        log(rect);
-        zoneClick.call(rect.node(), rect.datum(), pushUrl);
+    var rect = d3.select('g[nodeid*="' + nodeId +'"]');
+    zoneClick.call(rect.node(), rect.datum(), pushUrl);
     },
 
 zoneClick= function(d, click) {
 
-    if (nav.transitioning || !d || !currentSelection || (currentSelection.year  === yearIndex && currentSelection.data === d)) return;
+    event.stopPropagation();
+
+    if (nav.transitioning || !d || !currentSelection) return;
+
+    if(d !== root && d === currentSelection.data) {
+       $('#zoombutton').trigger('click');
+       return;
+    }
 
     if(click === true) {
-        log(d.key); log(d.hash);
-        pushUrl( section, thisYear, d.hash);
+        pushUrl( section, thisYear, mode, d.hash);
     }
 
       updateSelection(d, yearIndex, d.color);
