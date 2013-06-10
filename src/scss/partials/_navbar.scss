@@ -1,15 +1,42 @@
 #avb-menubar {
-  border-bottom: 1px solid $gray;
-  background-color:rgb(245, 245, 245);
+  // background-color:rgb(245, 245, 245);
   padding: 5px;
+  padding-top: 10px;
+  z-index: 1020;
+  position: relative;
+  margin-top: 2px;
+
+  &.purple-border{
+    border-top: 2px solid rgb(214,51,102);
+    margin-top: 0px;
+  }
+
 
   .nav{
     margin-bottom: 0px !important;
   }
 
+  .entry{
+    min-height: 0px !important;
+    height: 100%;
+    bottom: 0px;
+    position: relative;
+    height: 100%;
+
+      .center-wrap{
+          position: absolute;
+          bottom: 0;
+
+          &.centered{
+            text-align: center;
+            left:0;
+            right: 0;
+          }
+      }
+  }
+
   .menubutton {
     font-size: 1.2em;
-    margin-top:12px;
     display: inline-block;
 
     .caret{
@@ -17,13 +44,14 @@
       border-bottom-color: $black;
     }
 
+
     a{
       font-size: 1em;
       color: $black;
     }
 
     i{
-      margin-top:6px;
+      vertical-align: baseline;
     }
 
     &.margin{
@@ -33,9 +61,6 @@
   }
 }
 
-.centered{
-  text-align: center;
-}
 
 #home-button {
     div{

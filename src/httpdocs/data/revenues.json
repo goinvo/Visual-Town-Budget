@@ -1,208 +1,129 @@
 {
-"hash": "f998c884", 
-"values": [
-{
-"val": 102918667.0, 
-"year": 2008
-}, 
-{
-"val": 105991091.0, 
-"year": 2009
-}, 
-{
-"val": 100871489.0, 
-"year": 2010
-}, 
-{
-"val": 102697456.0, 
-"year": 2011
-}, 
-{
-"val": 110443078.0, 
-"year": 2012
-}, 
-{
-"val": 113900349.0, 
-"year": 2013
-}, 
-{
-"val": 120443763.0, 
-"year": 2014
-}, 
-{
-"val": 121020030.3, 
-"year": 2015
-}, 
-{
-"val": 124393552.6, 
-"year": 2016
-}, 
-{
-"val": 129729481.1, 
-"year": 2017
-}, 
-{
-"val": 135087975.5, 
-"year": 2018
-}
-], 
+"key": "Revenues", 
+"src": "", 
+"hash": "4ce4e4a8", 
 "sub": [
 {
-"hash": "a6a7f822", 
-"values": [
-{
-"val": 500000.0, 
-"year": 2008
-}, 
-{
-"val": 500000.0, 
-"year": 2009
-}, 
-{
-"val": 500000.0, 
-"year": 2010
-}, 
-{
-"val": 500000.0, 
-"year": 2011
-}, 
-{
-"val": 200000.0, 
-"year": 2012
-}, 
-{
-"val": 200000.0, 
-"year": 2013
-}, 
-{
-"val": 200000.0, 
-"year": 2014
-}, 
-{
-"val": 200000.0, 
-"year": 2015
-}, 
-{
-"val": 200000.0, 
-"year": 2016
-}, 
-{
-"val": 200000.0, 
-"year": 2017
-}, 
-{
-"val": 200000.0, 
-"year": 2018
-}
-], 
-"sub": [
-{
-"hash": "b9082820", 
-"values": [
-{
-"val": 500000.0, 
-"year": 2008
-}, 
-{
-"val": 500000.0, 
-"year": 2009
-}, 
-{
-"val": 500000.0, 
-"year": 2010
-}, 
-{
-"val": 500000.0, 
-"year": 2011
-}, 
-{
-"val": 200000.0, 
-"year": 2012
-}, 
-{
-"val": 200000.0, 
-"year": 2013
-}, 
-{
-"val": 200000.0, 
-"year": 2014
-}, 
-{
-"val": 200000.0, 
-"year": 2015
-}, 
-{
-"val": 200000.0, 
-"year": 2016
-}, 
-{
-"val": 200000.0, 
-"year": 2017
-}, 
-{
-"val": 200000.0, 
-"year": 2018
-}
-], 
-"sub": [], 
-"key": "Overlay reserve surplus", 
-"descr": ""
-}
-], 
 "key": "Other Revenues", 
-"descr": ""
-}, 
+"src": "", 
+"hash": "a6a7f822", 
+"sub": [
 {
-"hash": "8715819a", 
+"key": "Overlay reserve surplus", 
+"src": "", 
+"hash": "b9082820", 
+"sub": [], 
+"descr": "", 
+"url": "", 
 "values": [
 {
-"val": 1655361.0, 
+"val": 500000.0, 
 "year": 2008
 }, 
 {
-"val": 2892247.0, 
+"val": 500000.0, 
 "year": 2009
 }, 
 {
-"val": 4940908.0, 
+"val": 500000.0, 
 "year": 2010
 }, 
 {
-"val": 3154676.0, 
+"val": 500000.0, 
 "year": 2011
 }, 
 {
-"val": 855874.0, 
+"val": 200000.0, 
 "year": 2012
 }, 
 {
-"val": 1990625.0, 
+"val": 200000.0, 
 "year": 2013
 }, 
 {
-"val": 3596153.0, 
+"val": 200000.0, 
 "year": 2014
 }, 
 {
-"val": 1520625.0, 
+"val": 200000.0, 
 "year": 2015
 }, 
 {
-"val": 1983739.0, 
+"val": 200000.0, 
 "year": 2016
 }, 
 {
-"val": 4335893.0, 
+"val": 200000.0, 
 "year": 2017
 }, 
 {
-"val": 7484310.0, 
+"val": 200000.0, 
 "year": 2018
 }
+]
+}
 ], 
+"descr": "", 
+"url": "", 
+"values": [
+{
+"val": 500000.0, 
+"year": 2008
+}, 
+{
+"val": 500000.0, 
+"year": 2009
+}, 
+{
+"val": 500000.0, 
+"year": 2010
+}, 
+{
+"val": 500000.0, 
+"year": 2011
+}, 
+{
+"val": 200000.0, 
+"year": 2012
+}, 
+{
+"val": 200000.0, 
+"year": 2013
+}, 
+{
+"val": 200000.0, 
+"year": 2014
+}, 
+{
+"val": 200000.0, 
+"year": 2015
+}, 
+{
+"val": 200000.0, 
+"year": 2016
+}, 
+{
+"val": 200000.0, 
+"year": 2017
+}, 
+{
+"val": 200000.0, 
+"year": 2018
+}
+]
+}, 
+{
+"key": "From Funds", 
+"src": "", 
+"hash": "8715819a", 
 "sub": [
 {
-"hash": "c886ef3e", 
+"key": "Tip fee stabilization fund", 
+"src": "", 
+"hash": "9c780cb5", 
+"sub": [], 
+"descr": "The Town of Arlington participated in a regional solid waste consortium, and upon leaving the consortium in September 2005, the Town was entitled to revenue derived from the regional agreement.", 
+"url": "", 
 "values": [
 {
 "val": 680000.0, 
@@ -248,13 +169,15 @@
 "val": 0.0, 
 "year": 2018
 }
-], 
-"sub": [], 
-"key": "Tip fee stabilization fund", 
-"descr": ""
+]
 }, 
 {
-"hash": "9214bc04", 
+"key": "Muni Building Trust", 
+"src": "", 
+"hash": "5c38eb7f", 
+"sub": [], 
+"descr": "In accordance with M.G.L. Ch. 40 S. 13, the Town established this fund for the purposes of offsetting the costs associated with significant property loss.", 
+"url": "", 
 "values": [
 {
 "val": 20625.0, 
@@ -300,13 +223,15 @@
 "val": 20625.0, 
 "year": 2018
 }
-], 
-"sub": [], 
-"key": "Muni Building Trust", 
-"descr": ""
+]
 }, 
 {
-"hash": "79cd4c6a", 
+"key": "Free Cash", 
+"src": "", 
+"hash": "0338eed2", 
+"sub": [], 
+"descr": "A revenue source that results from the calculation, as of July 1, of a community's remaining, unrestricted funds from operations of the previous fiscal year, based on the balance sheet as of June 30.", 
+"url": "", 
 "values": [
 {
 "val": 954736.0, 
@@ -352,13 +277,15 @@
 "val": 1500000.0, 
 "year": 2018
 }
-], 
-"sub": [], 
-"key": "Free Cash", 
-"descr": ""
+]
 }, 
 {
-"hash": "6de6edc5", 
+"key": "Override Stabilization Fund", 
+"src": "", 
+"hash": "a88794fa", 
+"sub": [], 
+"descr": "This Fund was created as a result of the 2005 Proposition 2 1/2 override. The Town makes annual appropriations to the fund until the time in which it is necessary to make withdrawals for the purposes of balancing the general fund budget.", 
+"url": "", 
 "values": [
 {
 "val": 0.0, 
@@ -404,118 +331,124 @@
 "val": 5963685.0, 
 "year": 2018
 }
-], 
-"sub": [], 
-"key": "Override Stabilization Fund", 
-"descr": ""
+]
 }, 
 {
-"hash": "56e5da8a", 
-"values": [
-{
-"val": 0.0, 
-"year": 2008
-}, 
-{
-"val": 0.0, 
-"year": 2009
-}, 
-{
-"val": 0.0, 
-"year": 2010
-}, 
-{
-"val": 0.0, 
-"year": 2011
-}, 
-{
-"val": 0.0, 
-"year": 2012
-}, 
-{
-"val": 0.0, 
-"year": 2013
-}, 
-{
-"val": 0.0, 
-"year": 2014
-}, 
-{
-"val": 0.0, 
-"year": 2015
-}, 
-{
-"val": 0.0, 
-"year": 2016
-}, 
-{
-"val": 0.0, 
-"year": 2017
-}, 
-{
-"val": 0.0, 
-"year": 2018
-}
-], 
-"sub": [], 
 "key": "Stabilization Fund", 
-"descr": ""
-}
-], 
-"key": "From Funds", 
-"descr": ""
-}, 
-{
-"hash": "f775d5be", 
+"src": "", 
+"hash": "e8f3fdcf", 
+"sub": [], 
+"descr": "In accordance with M.G.L. Ch. 40 S. 5B, the Town may appropriate in any year an amount not exceeding, in the aggregate, 10% of the amount raised in the preceding fiscal year's tax levy.", 
+"url": "", 
 "values": [
 {
-"val": 9409490.0, 
+"val": 0.0, 
 "year": 2008
 }, 
 {
-"val": 8715295.0, 
+"val": 0.0, 
 "year": 2009
 }, 
 {
-"val": 8653173.0, 
+"val": 0.0, 
 "year": 2010
 }, 
 {
-"val": 9238654.0, 
+"val": 0.0, 
 "year": 2011
 }, 
 {
-"val": 10291465.0, 
+"val": 0.0, 
 "year": 2012
 }, 
 {
-"val": 8455000.0, 
+"val": 0.0, 
 "year": 2013
 }, 
 {
-"val": 8505000.0, 
+"val": 0.0, 
 "year": 2014
 }, 
 {
-"val": 8555000.0, 
+"val": 0.0, 
 "year": 2015
 }, 
 {
-"val": 8605000.0, 
+"val": 0.0, 
 "year": 2016
 }, 
 {
-"val": 8655000.0, 
+"val": 0.0, 
 "year": 2017
 }, 
 {
-"val": 8705000.0, 
+"val": 0.0, 
 "year": 2018
 }
+]
+}
 ], 
+"descr": "", 
+"url": "", 
+"values": [
+{
+"val": 1655361.0, 
+"year": 2008
+}, 
+{
+"val": 2892247.0, 
+"year": 2009
+}, 
+{
+"val": 4940908.0, 
+"year": 2010
+}, 
+{
+"val": 3154676.0, 
+"year": 2011
+}, 
+{
+"val": 855874.0, 
+"year": 2012
+}, 
+{
+"val": 1990625.0, 
+"year": 2013
+}, 
+{
+"val": 3596153.0, 
+"year": 2014
+}, 
+{
+"val": 1520625.0, 
+"year": 2015
+}, 
+{
+"val": 1983739.0, 
+"year": 2016
+}, 
+{
+"val": 4335893.0, 
+"year": 2017
+}, 
+{
+"val": 7484310.0, 
+"year": 2018
+}
+]
+}, 
+{
+"key": "Local Receipts", 
+"src": "", 
+"hash": "f775d5be", 
 "sub": [
 {
+"key": "Medicare Part D", 
+"src": "", 
 "hash": "fe3d5f24", 
+"sub": [], 
+"descr": "", 
+"url": "", 
 "values": [
 {
 "val": 385218.0, 
@@ -561,13 +494,15 @@
 "val": 0.0, 
 "year": 2018
 }
-], 
-"sub": [], 
-"key": "Medicare Part D", 
-"descr": ""
+]
 }, 
 {
+"key": "Investment Income", 
+"src": "", 
 "hash": "d485a4b8", 
+"sub": [], 
+"descr": "", 
+"url": "", 
 "values": [
 {
 "val": 1030217.0, 
@@ -613,13 +548,15 @@
 "val": 50000.0, 
 "year": 2018
 }
-], 
-"sub": [], 
-"key": "Investment Income", 
-"descr": ""
+]
 }, 
 {
+"key": "Fines & Forfeits", 
+"src": "", 
 "hash": "0d65b978", 
+"sub": [], 
+"descr": "", 
+"url": "", 
 "values": [
 {
 "val": 54483.0, 
@@ -665,13 +602,15 @@
 "val": 60000.0, 
 "year": 2018
 }
-], 
-"sub": [], 
-"key": "Fines & Forfeits", 
-"descr": ""
+]
 }, 
 {
+"key": "Special Assessments", 
+"src": "", 
 "hash": "53f70d72", 
+"sub": [], 
+"descr": "", 
+"url": "", 
 "values": [
 {
 "val": 2112.0, 
@@ -717,13 +656,15 @@
 "val": 0.0, 
 "year": 2018
 }
-], 
-"sub": [], 
-"key": "Special Assessments", 
-"descr": ""
+]
 }, 
 {
-"hash": "bf94f804", 
+"key": "Licenses & Permits", 
+"src": "", 
+"hash": "74280396", 
+"sub": [], 
+"descr": "Revenue collected for the issuance of licenses and permits to restaurants, bars, parking, marriage, etc.", 
+"url": "", 
 "values": [
 {
 "val": 1247074.0, 
@@ -769,13 +710,15 @@
 "val": 1384000.0, 
 "year": 2018
 }
-], 
-"sub": [], 
-"key": "Licenses & Permits", 
-"descr": ""
+]
 }, 
 {
+"key": "Departmental Revenue - Other", 
+"src": "", 
 "hash": "821d513e", 
+"sub": [], 
+"descr": "", 
+"url": "", 
 "values": [
 {
 "val": 104031.0, 
@@ -821,13 +764,15 @@
 "val": 225000.0, 
 "year": 2018
 }
-], 
-"sub": [], 
-"key": "Departmental Revenue - Other", 
-"descr": ""
+]
 }, 
 {
+"key": "Departmental Revenue - Recreation", 
+"src": "", 
 "hash": "fc489a8b", 
+"sub": [], 
+"descr": "", 
+"url": "", 
 "values": [
 {
 "val": 0.0, 
@@ -873,13 +818,15 @@
 "val": 0.0, 
 "year": 2018
 }
-], 
-"sub": [], 
-"key": "Departmental Revenue - Recreation", 
-"descr": ""
+]
 }, 
 {
+"key": "Departmental Revenue - Cemetaries", 
+"src": "", 
 "hash": "f7f72cf7", 
+"sub": [], 
+"descr": "", 
+"url": "", 
 "values": [
 {
 "val": 280400.0, 
@@ -925,13 +872,15 @@
 "val": 300000.0, 
 "year": 2018
 }
-], 
-"sub": [], 
-"key": "Departmental Revenue - Cemetaries", 
-"descr": ""
+]
 }, 
 {
+"key": "Departmental Revenue - Libraries", 
+"src": "", 
 "hash": "c56702d0", 
+"sub": [], 
+"descr": "", 
+"url": "", 
 "values": [
 {
 "val": 53057.0, 
@@ -977,13 +926,15 @@
 "val": 55000.0, 
 "year": 2018
 }
-], 
-"sub": [], 
-"key": "Departmental Revenue - Libraries", 
-"descr": ""
+]
 }, 
 {
+"key": "Departmental Revenue - Schools", 
+"src": "", 
 "hash": "c4cb0022", 
+"sub": [], 
+"descr": "", 
+"url": "", 
 "values": [
 {
 "val": 186745.0, 
@@ -1029,13 +980,15 @@
 "val": 150000.0, 
 "year": 2018
 }
-], 
-"sub": [], 
-"key": "Departmental Revenue - Schools", 
-"descr": ""
+]
 }, 
 {
-"hash": "dd878a3a", 
+"key": "Rentals", 
+"src": "", 
+"hash": "54196ef5", 
+"sub": [], 
+"descr": "The Town derives income from the renting of several Town-owned properties including the Gibbs and Parmenter schools, the Mt. Gilboa house, the former Dallin Library, and former Department buildings at Ryder Street.", 
+"url": "", 
 "values": [
 {
 "val": 818604.0, 
@@ -1081,13 +1034,15 @@
 "val": 618000.0, 
 "year": 2018
 }
-], 
-"sub": [], 
-"key": "Rentals", 
-"descr": ""
+]
 }, 
 {
-"hash": "2019929b", 
+"key": "Fees", 
+"src": "", 
+"hash": "de923f66", 
+"sub": [], 
+"descr": "Fees include charges for ambulance fees, parking violations, Town Clerk fees, etc.", 
+"url": "", 
 "values": [
 {
 "val": 962064.0, 
@@ -1133,13 +1088,15 @@
 "val": 1125000.0, 
 "year": 2018
 }
-], 
-"sub": [], 
-"key": "Fees", 
-"descr": ""
+]
 }, 
 {
-"hash": "bebf065e", 
+"key": "PILOT", 
+"src": "", 
+"hash": "14bcaf71", 
+"sub": [], 
+"descr": "Payments In Lieu of Taxes - Certain organizations, such as schools and non-profit institutions, are exempt from paying some taxes such as property taxes. PILOTs are voluntary payments made to the Town by such groups in recognition that they use Town services but are not obligated to pay certain taxes.", 
+"url": "", 
 "values": [
 {
 "val": 23969.0, 
@@ -1185,13 +1142,15 @@
 "val": 38000.0, 
 "year": 2018
 }
-], 
-"sub": [], 
-"key": "PILOT", 
-"descr": ""
+]
 }, 
 {
+"key": "Tax Penalties & Interest", 
+"src": "", 
 "hash": "e6a552b5", 
+"sub": [], 
+"descr": "", 
+"url": "", 
 "values": [
 {
 "val": 186195.0, 
@@ -1237,13 +1196,15 @@
 "val": 200000.0, 
 "year": 2018
 }
-], 
-"sub": [], 
-"key": "Tax Penalties & Interest", 
-"descr": ""
+]
 }, 
 {
-"hash": "207f5031", 
+"key": "Other Excise", 
+"src": "", 
+"hash": "5d0bc96e", 
+"sub": [], 
+"descr": "Revenue derived from the meals tax and hotel tax.", 
+"url": "", 
 "values": [
 {
 "val": 123522.0, 
@@ -1289,13 +1250,15 @@
 "val": 550000.0, 
 "year": 2018
 }
-], 
-"sub": [], 
-"key": "Other Excise", 
-"descr": ""
+]
 }, 
 {
-"hash": "1e52705a", 
+"key": "Motor Vehicle Excise", 
+"src": "", 
+"hash": "40bc7ea2", 
+"sub": [], 
+"descr": "Revenue derived from collection of motor vehicle excise taxes", 
+"url": "", 
 "values": [
 {
 "val": 3951799.0, 
@@ -1341,272 +1304,238 @@
 "val": 3950000.0, 
 "year": 2018
 }
-], 
-"sub": [], 
-"key": "Motor Vehicle Excise", 
-"descr": ""
+]
 }
 ], 
-"key": "Local Receipts", 
-"descr": ""
-}, 
-{
-"hash": "b2e0f0aa", 
+"descr": "", 
+"url": "", 
 "values": [
 {
-"val": 18073196.0, 
+"val": 9409490.0, 
 "year": 2008
 }, 
 {
-"val": 18480774.0, 
+"val": 8715295.0, 
 "year": 2009
 }, 
 {
-"val": 8884297.0, 
+"val": 8653173.0, 
 "year": 2010
 }, 
 {
-"val": 9412298.0, 
+"val": 9238654.0, 
 "year": 2011
 }, 
 {
-"val": 9662226.0, 
+"val": 10291465.0, 
 "year": 2012
 }, 
 {
-"val": 10823582.0, 
+"val": 8455000.0, 
 "year": 2013
 }, 
 {
-"val": 12694650.0, 
+"val": 8505000.0, 
 "year": 2014
 }, 
 {
-"val": 12588774.26, 
+"val": 8555000.0, 
 "year": 2015
 }, 
 {
-"val": 12686882.57, 
+"val": 8605000.0, 
 "year": 2016
 }, 
 {
-"val": 12785973.14, 
+"val": 8655000.0, 
 "year": 2017
 }, 
 {
-"val": 12027195.52, 
+"val": 8705000.0, 
 "year": 2018
 }
-], 
+]
+}, 
+{
+"key": "State Aid", 
+"src": "", 
+"hash": "ec59c539", 
 "sub": [
 {
-"hash": "8e7624a0", 
-"values": [
-{
-"val": 58270.0, 
-"year": 2008
-}, 
-{
-"val": 60716.0, 
-"year": 2009
-}, 
-{
-"val": 40707.0, 
-"year": 2010
-}, 
-{
-"val": 41943.0, 
-"year": 2011
-}, 
-{
-"val": 42540.0, 
-"year": 2012
-}, 
-{
-"val": 42109.0, 
-"year": 2013
-}, 
-{
-"val": 41747.0, 
-"year": 2014
-}, 
-{
-"val": 41315.0, 
-"year": 2015
-}, 
-{
-"val": 41715.0, 
-"year": 2016
-}, 
-{
-"val": 42120.0, 
-"year": 2017
-}, 
-{
-"val": 42529.0, 
-"year": 2018
-}
-], 
-"sub": [
-{
-"hash": "3a212d8f", 
-"values": [
-{
-"val": 0.0, 
-"year": 2008
-}, 
-{
-"val": 0.0, 
-"year": 2009
-}, 
-{
-"val": 0.0, 
-"year": 2010
-}, 
-{
-"val": 0.0, 
-"year": 2011
-}, 
-{
-"val": 0.0, 
-"year": 2012
-}, 
-{
-"val": 0.0, 
-"year": 2013
-}, 
-{
-"val": 0.0, 
-"year": 2014
-}, 
-{
-"val": 0.0, 
-"year": 2015
-}, 
-{
-"val": 0.0, 
-"year": 2016
-}, 
-{
-"val": 0.0, 
-"year": 2017
-}, 
-{
-"val": 0.0, 
-"year": 2018
-}
-], 
-"sub": [], 
-"key": "Other offsets", 
-"descr": ""
-}, 
-{
-"hash": "e5c46fe8", 
-"values": [
-{
-"val": 58270.0, 
-"year": 2008
-}, 
-{
-"val": 60716.0, 
-"year": 2009
-}, 
-{
-"val": 40707.0, 
-"year": 2010
-}, 
-{
-"val": 41943.0, 
-"year": 2011
-}, 
-{
-"val": 42540.0, 
-"year": 2012
-}, 
-{
-"val": 42109.0, 
-"year": 2013
-}, 
-{
-"val": 41747.0, 
-"year": 2014
-}, 
-{
-"val": 41315.0, 
-"year": 2015
-}, 
-{
-"val": 41715.0, 
-"year": 2016
-}, 
-{
-"val": 42120.0, 
-"year": 2017
-}, 
-{
-"val": 42529.0, 
-"year": 2018
-}
-], 
-"sub": [], 
-"key": "Public Libraries", 
-"descr": ""
-}
-], 
 "key": "Offset receipts", 
-"descr": ""
-}, 
+"src": "", 
+"hash": "8e7624a0", 
+"sub": [
 {
-"hash": "40d89f14", 
+"key": "Other offsets", 
+"src": "", 
+"hash": "3a212d8f", 
+"sub": [], 
+"descr": "", 
+"url": "", 
 "values": [
 {
-"val": 9633732.0, 
+"val": 0.0, 
 "year": 2008
 }, 
 {
-"val": 9631069.0, 
+"val": 0.0, 
 "year": 2009
 }, 
 {
-"val": 187014.0, 
+"val": 0.0, 
 "year": 2010
 }, 
 {
-"val": 190609.0, 
+"val": 0.0, 
 "year": 2011
 }, 
 {
-"val": 188476.0, 
+"val": 0.0, 
 "year": 2012
 }, 
 {
-"val": 178152.0, 
+"val": 0.0, 
 "year": 2013
 }, 
 {
-"val": 167052.0, 
+"val": 0.0, 
 "year": 2014
 }, 
 {
-"val": 165321.0, 
+"val": 0.0, 
 "year": 2015
 }, 
 {
-"val": 166925.0, 
+"val": 0.0, 
 "year": 2016
 }, 
 {
-"val": 168545.0, 
+"val": 0.0, 
 "year": 2017
 }, 
 {
-"val": 170181.0, 
+"val": 0.0, 
 "year": 2018
 }
+]
+}, 
+{
+"key": "Public Libraries", 
+"src": "", 
+"hash": "e5c46fe8", 
+"sub": [], 
+"descr": "", 
+"url": "", 
+"values": [
+{
+"val": 58270.0, 
+"year": 2008
+}, 
+{
+"val": 60716.0, 
+"year": 2009
+}, 
+{
+"val": 40707.0, 
+"year": 2010
+}, 
+{
+"val": 41943.0, 
+"year": 2011
+}, 
+{
+"val": 42540.0, 
+"year": 2012
+}, 
+{
+"val": 42109.0, 
+"year": 2013
+}, 
+{
+"val": 41747.0, 
+"year": 2014
+}, 
+{
+"val": 41315.0, 
+"year": 2015
+}, 
+{
+"val": 41715.0, 
+"year": 2016
+}, 
+{
+"val": 42120.0, 
+"year": 2017
+}, 
+{
+"val": 42529.0, 
+"year": 2018
+}
+]
+}
 ], 
+"descr": "", 
+"url": "", 
+"values": [
+{
+"val": 58270.0, 
+"year": 2008
+}, 
+{
+"val": 60716.0, 
+"year": 2009
+}, 
+{
+"val": 40707.0, 
+"year": 2010
+}, 
+{
+"val": 41943.0, 
+"year": 2011
+}, 
+{
+"val": 42540.0, 
+"year": 2012
+}, 
+{
+"val": 42109.0, 
+"year": 2013
+}, 
+{
+"val": 41747.0, 
+"year": 2014
+}, 
+{
+"val": 41315.0, 
+"year": 2015
+}, 
+{
+"val": 41715.0, 
+"year": 2016
+}, 
+{
+"val": 42120.0, 
+"year": 2017
+}, 
+{
+"val": 42529.0, 
+"year": 2018
+}
+]
+}, 
+{
+"key": "General Government", 
+"src": "", 
+"hash": "439c618d", 
 "sub": [
 {
-"hash": "f84f6e30", 
+"key": "Exemptions: Elderly", 
+"src": "Cherry Sheet", 
+"hash": "05bd1b66", 
+"sub": [], 
+"descr": "State reimbursement for elderly services", 
+"url": "http://www.mass.gov/dor/local-officials/municipal-data-and-financial-management/cherry-sheets/", 
 "values": [
 {
 "val": 74296.0, 
@@ -1652,13 +1581,15 @@
 "val": 0.0, 
 "year": 2018
 }
-], 
-"sub": [], 
-"key": "Exemptions: Elderly", 
-"descr": ""
+]
 }, 
 {
-"hash": "9b04b48d", 
+"key": "Exemptions: Vets, Blind Persons & Surviving Spouses", 
+"src": "Cherry Sheet", 
+"hash": "3fd2be01", 
+"sub": [], 
+"descr": "State reimbursement of the costs of providing services for veterans, blind persons and surviving spouses", 
+"url": "http://www.mass.gov/dor/local-officials/municipal-data-and-financial-management/cherry-sheets/", 
 "values": [
 {
 "val": 117263.0, 
@@ -1704,72 +1635,22 @@
 "val": 170181.0, 
 "year": 2018
 }
-], 
-"sub": [], 
-"key": "Exemptions: Vets, Blind Persons & Surviving Spouses", 
-"descr": ""
+]
 }, 
 {
-"hash": "b200c632", 
-"values": [
-{
-"val": 0.0, 
-"year": 2008
-}, 
-{
-"val": 0.0, 
-"year": 2009
-}, 
-{
-"val": 0.0, 
-"year": 2010
-}, 
-{
-"val": 0.0, 
-"year": 2011
-}, 
-{
-"val": 0.0, 
-"year": 2012
-}, 
-{
-"val": 0.0, 
-"year": 2013
-}, 
-{
-"val": 0.0, 
-"year": 2014
-}, 
-{
-"val": 0.0, 
-"year": 2015
-}, 
-{
-"val": 0.0, 
-"year": 2016
-}, 
-{
-"val": 0.0, 
-"year": 2017
-}, 
-{
-"val": 0.0, 
-"year": 2018
-}
-], 
-"sub": [], 
 "key": "Highway fund", 
-"descr": ""
-}, 
-{
-"hash": "39dea166", 
+"src": "Cherry Sheet", 
+"hash": "b200c632", 
+"sub": [], 
+"descr": "", 
+"url": "http://www.mass.gov/dor/local-officials/municipal-data-and-financial-management/cherry-sheets/", 
 "values": [
 {
-"val": 4491775.0, 
+"val": 0.0, 
 "year": 2008
 }, 
 {
-"val": 4491775.0, 
+"val": 0.0, 
 "year": 2009
 }, 
 {
@@ -1808,20 +1689,22 @@
 "val": 0.0, 
 "year": 2018
 }
-], 
-"sub": [], 
+]
+}, 
+{
 "key": "Additional assistance", 
-"descr": ""
-}, 
-{
-"hash": "8939c730", 
+"src": "Cherry Sheet", 
+"hash": "39dea166", 
+"sub": [], 
+"descr": "", 
+"url": "http://www.mass.gov/dor/local-officials/municipal-data-and-financial-management/cherry-sheets/", 
 "values": [
 {
-"val": 4950398.0, 
+"val": 4491775.0, 
 "year": 2008
 }, 
 {
-"val": 4950398.0, 
+"val": 4491775.0, 
 "year": 2009
 }, 
 {
@@ -1860,125 +1743,22 @@
 "val": 0.0, 
 "year": 2018
 }
-], 
-"sub": [], 
+]
+}, 
+{
 "key": "Lottery, beano, charity", 
-"descr": ""
-}
-], 
-"key": "General Government", 
-"descr": ""
-}, 
-{
-"hash": "e202cee7", 
-"values": [
-{
-"val": 20794.0, 
-"year": 2008
-}, 
-{
-"val": 19261.0, 
-"year": 2009
-}, 
-{
-"val": 20783.0, 
-"year": 2010
-}, 
-{
-"val": 16604.0, 
-"year": 2011
-}, 
-{
-"val": 19545.0, 
-"year": 2012
-}, 
-{
-"val": 19029.0, 
-"year": 2013
-}, 
-{
-"val": 18819.0, 
-"year": 2014
-}, 
-{
-"val": 18624.26007, 
-"year": 2015
-}, 
-{
-"val": 18804.57482, 
-"year": 2016
-}, 
-{
-"val": 18987.14351, 
-"year": 2017
-}, 
-{
-"val": 19171.51534, 
-"year": 2018
-}
-], 
-"sub": [
-{
-"hash": "0e538443", 
-"values": [
-{
-"val": 20794.0, 
-"year": 2008
-}, 
-{
-"val": 19261.0, 
-"year": 2009
-}, 
-{
-"val": 20783.0, 
-"year": 2010
-}, 
-{
-"val": 16604.0, 
-"year": 2011
-}, 
-{
-"val": 19545.0, 
-"year": 2012
-}, 
-{
-"val": 19029.0, 
-"year": 2013
-}, 
-{
-"val": 18819.0, 
-"year": 2014
-}, 
-{
-"val": 18624.26007, 
-"year": 2015
-}, 
-{
-"val": 18804.57482, 
-"year": 2016
-}, 
-{
-"val": 18987.14351, 
-"year": 2017
-}, 
-{
-"val": 19171.51534, 
-"year": 2018
-}
-], 
+"src": "Cherry Sheet", 
+"hash": "74ce55cb", 
 "sub": [], 
-"key": "School Lunch", 
-"descr": ""
-}, 
-{
-"hash": "bd102021", 
+"descr": "State aid to municipalities from the State Lotery Fund and other funds - combined with Unrestricted General Government Aid starting FY2010", 
+"url": "http://www.mass.gov/dor/local-officials/municipal-data-and-financial-management/cherry-sheets/", 
 "values": [
 {
-"val": 0.0, 
+"val": 4950398.0, 
 "year": 2008
 }, 
 {
-"val": 0.0, 
+"val": 4950398.0, 
 "year": 2009
 }, 
 {
@@ -2017,66 +1797,287 @@
 "val": 0.0, 
 "year": 2018
 }
-], 
+]
+}, 
+{
+"key": "Unrestricted General Government Aid", 
+"src": "Cherry Sheet", 
+"hash": "d307de9f", 
 "sub": [], 
-"key": "Racial Equality", 
-"descr": ""
+"descr": "Money appropriated from the balance of the State Lottery Fund and additional aid to municipalities", 
+"url": "http://www.mass.gov/dor/local-officials/municipal-data-and-financial-management/cherry-sheets/", 
+"values": [
+{
+"val": 4491775.0, 
+"year": 2008
+}, 
+{
+"val": 4491775.0, 
+"year": 2009
+}, 
+{
+"val": 6684280.0, 
+"year": 2010
+}, 
+{
+"val": 6416909.0, 
+"year": 2011
+}, 
+{
+"val": 5952940.0, 
+"year": 2012
+}, 
+{
+"val": 6416909.0, 
+"year": 2013
+}, 
+{
+"val": 6416909.0, 
+"year": 2014
+}, 
+{
+"val": 6481078.09, 
+"year": 2015
+}, 
+{
+"val": 6545888.87, 
+"year": 2016
+}, 
+{
+"val": 6611347.76, 
+"year": 2017
+}, 
+{
+"val": 6677461.24, 
+"year": 2018
+}
+]
 }
 ], 
+"descr": "", 
+"url": "", 
+"values": [
+{
+"val": 14125507.0, 
+"year": 2008
+}, 
+{
+"val": 14122844.0, 
+"year": 2009
+}, 
+{
+"val": 6871294.0, 
+"year": 2010
+}, 
+{
+"val": 6607518.0, 
+"year": 2011
+}, 
+{
+"val": 6141416.0, 
+"year": 2012
+}, 
+{
+"val": 6595061.0, 
+"year": 2013
+}, 
+{
+"val": 6583961.0, 
+"year": 2014
+}, 
+{
+"val": 6646399.09, 
+"year": 2015
+}, 
+{
+"val": 6712813.87, 
+"year": 2016
+}, 
+{
+"val": 6779892.76, 
+"year": 2017
+}, 
+{
+"val": 6847642.24, 
+"year": 2018
+}
+]
+}, 
+{
 "key": "Education offsets", 
-"descr": ""
-}, 
+"src": "", 
+"hash": "e202cee7", 
+"sub": [
 {
-"hash": "d4019d52", 
+"key": "School Lunch", 
+"src": "", 
+"hash": "0e538443", 
+"sub": [], 
+"descr": "", 
+"url": "", 
 "values": [
 {
-"val": 8360400.0, 
+"val": 20794.0, 
 "year": 2008
 }, 
 {
-"val": 8769728.0, 
+"val": 19261.0, 
 "year": 2009
 }, 
 {
-"val": 8635793.0, 
+"val": 20783.0, 
 "year": 2010
 }, 
 {
-"val": 9163142.0, 
+"val": 16604.0, 
 "year": 2011
 }, 
 {
-"val": 9411665.0, 
+"val": 19545.0, 
 "year": 2012
 }, 
 {
-"val": 10584292.0, 
+"val": 19029.0, 
 "year": 2013
 }, 
 {
-"val": 12467032.0, 
+"val": 18819.0, 
 "year": 2014
 }, 
 {
-"val": 12363514.0, 
+"val": 18624.26007, 
 "year": 2015
 }, 
 {
-"val": 12459438.0, 
+"val": 18804.57482, 
 "year": 2016
 }, 
 {
-"val": 12556321.0, 
+"val": 18987.14351, 
 "year": 2017
 }, 
 {
-"val": 11795314.0, 
+"val": 19171.51534, 
 "year": 2018
 }
+]
+}, 
+{
+"key": "Racial Equality", 
+"src": "", 
+"hash": "bd102021", 
+"sub": [], 
+"descr": "", 
+"url": "", 
+"values": [
+{
+"val": 0.0, 
+"year": 2008
+}, 
+{
+"val": 0.0, 
+"year": 2009
+}, 
+{
+"val": 0.0, 
+"year": 2010
+}, 
+{
+"val": 0.0, 
+"year": 2011
+}, 
+{
+"val": 0.0, 
+"year": 2012
+}, 
+{
+"val": 0.0, 
+"year": 2013
+}, 
+{
+"val": 0.0, 
+"year": 2014
+}, 
+{
+"val": 0.0, 
+"year": 2015
+}, 
+{
+"val": 0.0, 
+"year": 2016
+}, 
+{
+"val": 0.0, 
+"year": 2017
+}, 
+{
+"val": 0.0, 
+"year": 2018
+}
+]
+}
 ], 
+"descr": "", 
+"url": "", 
+"values": [
+{
+"val": 20794.0, 
+"year": 2008
+}, 
+{
+"val": 19261.0, 
+"year": 2009
+}, 
+{
+"val": 20783.0, 
+"year": 2010
+}, 
+{
+"val": 16604.0, 
+"year": 2011
+}, 
+{
+"val": 19545.0, 
+"year": 2012
+}, 
+{
+"val": 19029.0, 
+"year": 2013
+}, 
+{
+"val": 18819.0, 
+"year": 2014
+}, 
+{
+"val": 18624.26007, 
+"year": 2015
+}, 
+{
+"val": 18804.57482, 
+"year": 2016
+}, 
+{
+"val": 18987.14351, 
+"year": 2017
+}, 
+{
+"val": 19171.51534, 
+"year": 2018
+}
+]
+}, 
+{
+"key": "Education", 
+"src": "", 
+"hash": "d4019d52", 
 "sub": [
 {
+"key": "School construction", 
+"src": "Cherry Sheet", 
 "hash": "27481363", 
+"sub": [], 
+"descr": "", 
+"url": "http://www.mass.gov/dor/local-officials/municipal-data-and-financial-management/cherry-sheets/", 
 "values": [
 {
 "val": 2546280.0, 
@@ -2122,13 +2123,15 @@
 "val": 1615914.0, 
 "year": 2018
 }
-], 
-"sub": [], 
-"key": "School construction", 
-"descr": ""
+]
 }, 
 {
+"key": "School transportation", 
+"src": "Cherry Sheet", 
 "hash": "90951b92", 
+"sub": [], 
+"descr": "", 
+"url": "http://www.mass.gov/dor/local-officials/municipal-data-and-financial-management/cherry-sheets/", 
 "values": [
 {
 "val": 0, 
@@ -2174,13 +2177,15 @@
 "val": 0, 
 "year": 2018
 }
-], 
-"sub": [], 
-"key": "School transportation", 
-"descr": ""
+]
 }, 
 {
-"hash": "23635900", 
+"key": "Chapter 70", 
+"src": "Cherry Sheet", 
+"hash": "8dcaace1", 
+"sub": [], 
+"descr": "Chapter 70 refers to the school fuding formula created under the Education Reform Act of 1993 by which State Aid is distributed through the Cherry Sheet to help establish educational equity among municipal and regional school districts", 
+"url": "http://www.mass.gov/dor/local-officials/municipal-data-and-financial-management/cherry-sheets/", 
 "values": [
 {
 "val": 5814120.0, 
@@ -2226,119 +2231,125 @@
 "val": 10179400.0, 
 "year": 2018
 }
-], 
-"sub": [], 
-"key": "Chapter 70", 
-"descr": ""
+]
 }
 ], 
-"key": "Education", 
-"descr": ""
-}
-], 
-"key": "State Aid", 
-"descr": ""
+"descr": "", 
+"url": "", 
+"values": [
+{
+"val": 8360400.0, 
+"year": 2008
 }, 
 {
+"val": 8769728.0, 
+"year": 2009
+}, 
+{
+"val": 8635793.0, 
+"year": 2010
+}, 
+{
+"val": 9163142.0, 
+"year": 2011
+}, 
+{
+"val": 9411665.0, 
+"year": 2012
+}, 
+{
+"val": 10584292.0, 
+"year": 2013
+}, 
+{
+"val": 12467032.0, 
+"year": 2014
+}, 
+{
+"val": 12363514.0, 
+"year": 2015
+}, 
+{
+"val": 12459438.0, 
+"year": 2016
+}, 
+{
+"val": 12556321.0, 
+"year": 2017
+}, 
+{
+"val": 11795314.0, 
+"year": 2018
+}
+]
+}
+], 
+"descr": "", 
+"url": "", 
+"values": [
+{
+"val": 22564971.0, 
+"year": 2008
+}, 
+{
+"val": 22972549.0, 
+"year": 2009
+}, 
+{
+"val": 15568577.0, 
+"year": 2010
+}, 
+{
+"val": 15829207.0, 
+"year": 2011
+}, 
+{
+"val": 15615166.0, 
+"year": 2012
+}, 
+{
+"val": 17240491.0, 
+"year": 2013
+}, 
+{
+"val": 19111559.0, 
+"year": 2014
+}, 
+{
+"val": 19069852.35, 
+"year": 2015
+}, 
+{
+"val": 19232771.44, 
+"year": 2016
+}, 
+{
+"val": 19397320.9, 
+"year": 2017
+}, 
+{
+"val": 18704656.76, 
+"year": 2018
+}
+]
+}, 
+{
+"key": "Property Taxes", 
+"src": "", 
 "hash": "ce382dac", 
-"values": [
-{
-"val": 73280620.0, 
-"year": 2008
-}, 
-{
-"val": 75402775.0, 
-"year": 2009
-}, 
-{
-"val": 77893111.0, 
-"year": 2010
-}, 
-{
-"val": 80391828.0, 
-"year": 2011
-}, 
-{
-"val": 89433513.0, 
-"year": 2012
-}, 
-{
-"val": 92431142.0, 
-"year": 2013
-}, 
-{
-"val": 95447960.0, 
-"year": 2014
-}, 
-{
-"val": 98155631.0, 
-"year": 2015
-}, 
-{
-"val": 100917931.0, 
-"year": 2016
-}, 
-{
-"val": 103752615.0, 
-"year": 2017
-}, 
-{
-"val": 106671470.0, 
-"year": 2018
-}
-], 
 "sub": [
 {
+"key": "Debt Exclusions", 
+"src": "", 
 "hash": "06afaef9", 
-"values": [
-{
-"val": 1436024.0, 
-"year": 2008
-}, 
-{
-"val": 1119201.0, 
-"year": 2009
-}, 
-{
-"val": 1025542.0, 
-"year": 2010
-}, 
-{
-"val": 945868.0, 
-"year": 2011
-}, 
-{
-"val": 989286.0, 
-"year": 2012
-}, 
-{
-"val": 1118656.0, 
-"year": 2013
-}, 
-{
-"val": 1402711.0, 
-"year": 2014
-}, 
-{
-"val": 1309299.0, 
-"year": 2015
-}, 
-{
-"val": 1200491.0, 
-"year": 2016
-}, 
-{
-"val": 1092289.0, 
-"year": 2017
-}, 
-{
-"val": 994685.0, 
-"year": 2018
-}
-], 
 "sub": [
 {
-"hash": "75f1e204", 
+"key": "Debt Exclusion - Symmes", 
+"src": "", 
+"hash": "d89fe0a2", 
+"sub": [], 
+"descr": "An action taken by a community through a referendum vote to raise the funds necessary to pay debt service costs for a particular project from the property tax levy, but outside the limits under Proposition 2 1/2. The amount is added to the levy limit for the life of the debt only and may increase the levy above the levy ceiling.", 
+"url": "", 
 "values": [
 {
 "val": 0.0, 
@@ -2384,13 +2395,15 @@
 "val": 307130.0, 
 "year": 2018
 }
-], 
-"sub": [], 
-"key": "Debt Exclusion - Symmes", 
-"descr": ""
+]
 }, 
 {
-"hash": "b69d01bd", 
+"key": "Debt Exclusion - Schools (10 year)", 
+"src": "", 
+"hash": "cc5903f3", 
+"sub": [], 
+"descr": "An action taken by a community through a referendum vote to raise the funds necessary to pay debt service costs for a particular project from the property tax levy, but outside the limits under Proposition 2 1/2. The amount is added to the levy limit for the life of the debt only and may increase the levy above the levy ceiling.", 
+"url": "", 
 "values": [
 {
 "val": 1436024.0, 
@@ -2436,66 +2449,70 @@
 "val": 687555.0, 
 "year": 2018
 }
-], 
-"sub": [], 
-"key": "Debt Exclusion - Schools (10 year)", 
-"descr": ""
+]
 }
 ], 
-"key": "Debt Exclusions", 
-"descr": ""
-}, 
-{
-"hash": "a42106e2", 
+"descr": "", 
+"url": "", 
 "values": [
 {
-"val": 6303750.0, 
+"val": 1436024.0, 
 "year": 2008
 }, 
 {
-"val": 6461344.0, 
+"val": 1119201.0, 
 "year": 2009
 }, 
 {
-"val": 6622877.0, 
+"val": 1025542.0, 
 "year": 2010
 }, 
 {
-"val": 6788449.0, 
+"val": 945868.0, 
 "year": 2011
 }, 
 {
-"val": 13448161.0, 
+"val": 989286.0, 
 "year": 2012
 }, 
 {
-"val": 13784365.0, 
+"val": 1118656.0, 
 "year": 2013
 }, 
 {
-"val": 14128973.0, 
+"val": 1402711.0, 
 "year": 2014
 }, 
 {
-"val": 14482198.0, 
+"val": 1309299.0, 
 "year": 2015
 }, 
 {
-"val": 14844253.0, 
+"val": 1200491.0, 
 "year": 2016
 }, 
 {
-"val": 15215359.0, 
+"val": 1092289.0, 
 "year": 2017
 }, 
 {
-"val": 15595743.0, 
+"val": 994685.0, 
 "year": 2018
 }
-], 
+]
+}, 
+{
+"key": "Overrides", 
+"src": "", 
+"hash": "a42106e2", 
 "sub": [
 {
-"hash": "95497de7", 
+"key": "2012 override", 
+"src": "", 
+"hash": "37223181", 
+"sub": [], 
+"descr": "An override is a vote by a community at an election to permanently increase the levy limt. June 7, 2011 voters passed a $6.5 million override", 
+"url": "", 
 "values": [
 {
 "val": 0.0, 
@@ -2541,13 +2558,15 @@
 "val": 7526410.0, 
 "year": 2018
 }
-], 
-"sub": [], 
-"key": "2012 override", 
-"descr": ""
+]
 }, 
 {
-"hash": "22f033f7", 
+"key": "2006 override", 
+"src": "", 
+"hash": "36b66df8", 
+"sub": [], 
+"descr": "An override is a vote by a community at an election to permanently increase the levy limt.", 
+"url": "", 
 "values": [
 {
 "val": 6303750.0, 
@@ -2593,66 +2612,70 @@
 "val": 8069333.0, 
 "year": 2018
 }
-], 
-"sub": [], 
-"key": "2006 override", 
-"descr": ""
+]
 }
 ], 
-"key": "Overrides", 
-"descr": ""
-}, 
-{
-"hash": "b29427c6", 
+"descr": "", 
+"url": "", 
 "values": [
 {
-"val": 65540846.0, 
+"val": 6303750.0, 
 "year": 2008
 }, 
 {
-"val": 67822230.0, 
+"val": 6461344.0, 
 "year": 2009
 }, 
 {
-"val": 70244692.0, 
+"val": 6622877.0, 
 "year": 2010
 }, 
 {
-"val": 72657511.0, 
+"val": 6788449.0, 
 "year": 2011
 }, 
 {
-"val": 74996066.0, 
+"val": 13448161.0, 
 "year": 2012
 }, 
 {
-"val": 77528121.0, 
+"val": 13784365.0, 
 "year": 2013
 }, 
 {
-"val": 79916276.0, 
+"val": 14128973.0, 
 "year": 2014
 }, 
 {
-"val": 82364134.0, 
+"val": 14482198.0, 
 "year": 2015
 }, 
 {
-"val": 84873187.0, 
+"val": 14844253.0, 
 "year": 2016
 }, 
 {
-"val": 87444967.0, 
+"val": 15215359.0, 
 "year": 2017
 }, 
 {
-"val": 90081042.0, 
+"val": 15595743.0, 
 "year": 2018
 }
-], 
+]
+}, 
+{
+"key": "General Property Taxes", 
+"src": "", 
+"hash": "b29427c6", 
 "sub": [
 {
-"hash": "dee26d1b", 
+"key": "Plus New Growth", 
+"src": "", 
+"hash": "49f6e703", 
+"sub": [], 
+"descr": "Additional tax revenue generated by new construction, renovations and other increases in the property tax base during a calendar year.", 
+"url": "", 
 "values": [
 {
 "val": 640013.0, 
@@ -2698,13 +2721,15 @@
 "val": 450000.0, 
 "year": 2018
 }
-], 
-"sub": [], 
-"key": "Plus New Growth", 
-"descr": ""
+]
 }, 
 {
-"hash": "67094939", 
+"key": "Plus 2.5%", 
+"src": "", 
+"hash": "4eda1032", 
+"sub": [], 
+"descr": "Massachusetts limits the growth of the general property levy to 2 1/2 percent each year (exclusive of New Growth, overrides or exclusions)", 
+"url": "", 
 "values": [
 {
 "val": 1582898.0, 
@@ -2750,13 +2775,15 @@
 "val": 2186074.0, 
 "year": 2018
 }
-], 
-"sub": [], 
-"key": "Plus 2.5%", 
-"descr": ""
+]
 }, 
 {
-"hash": "7c68f7d8", 
+"key": "Previous Year Limit", 
+"src": "", 
+"hash": "4750098f", 
+"sub": [], 
+"descr": "The levy limit restricts the real and personal property taxes imposed by a city or town the previous fiscal year", 
+"url": "", 
 "values": [
 {
 "val": 63315927.0, 
@@ -2802,20 +2829,155 @@
 "val": 87442950.0, 
 "year": 2018
 }
-], 
-"sub": [], 
-"key": "Previous Year Limit", 
-"descr": ""
+]
 }
 ], 
-"key": "General Property Taxes", 
-"descr": ""
+"descr": "", 
+"url": "", 
+"values": [
+{
+"val": 65540846.0, 
+"year": 2008
+}, 
+{
+"val": 67822230.0, 
+"year": 2009
+}, 
+{
+"val": 70244692.0, 
+"year": 2010
+}, 
+{
+"val": 72657511.0, 
+"year": 2011
+}, 
+{
+"val": 74996066.0, 
+"year": 2012
+}, 
+{
+"val": 77528121.0, 
+"year": 2013
+}, 
+{
+"val": 79916276.0, 
+"year": 2014
+}, 
+{
+"val": 82364134.0, 
+"year": 2015
+}, 
+{
+"val": 84873187.0, 
+"year": 2016
+}, 
+{
+"val": 87444967.0, 
+"year": 2017
+}, 
+{
+"val": 90081042.0, 
+"year": 2018
+}
+]
 }
 ], 
-"key": "Property Taxes", 
-"descr": ""
+"descr": "", 
+"url": "", 
+"values": [
+{
+"val": 73280620.0, 
+"year": 2008
+}, 
+{
+"val": 75402775.0, 
+"year": 2009
+}, 
+{
+"val": 77893111.0, 
+"year": 2010
+}, 
+{
+"val": 80391828.0, 
+"year": 2011
+}, 
+{
+"val": 89433513.0, 
+"year": 2012
+}, 
+{
+"val": 92431142.0, 
+"year": 2013
+}, 
+{
+"val": 95447960.0, 
+"year": 2014
+}, 
+{
+"val": 98155631.0, 
+"year": 2015
+}, 
+{
+"val": 100917931.0, 
+"year": 2016
+}, 
+{
+"val": 103752615.0, 
+"year": 2017
+}, 
+{
+"val": 106671470.0, 
+"year": 2018
+}
+]
 }
 ], 
-"key": "Revenues", 
-"descr": ""
+"descr": "", 
+"url": "", 
+"values": [
+{
+"val": 107410442.0, 
+"year": 2008
+}, 
+{
+"val": 110482866.0, 
+"year": 2009
+}, 
+{
+"val": 107555769.0, 
+"year": 2010
+}, 
+{
+"val": 109114365.0, 
+"year": 2011
+}, 
+{
+"val": 116396018.0, 
+"year": 2012
+}, 
+{
+"val": 120317258.0, 
+"year": 2013
+}, 
+{
+"val": 126860672.0, 
+"year": 2014
+}, 
+{
+"val": 127501108.4, 
+"year": 2015
+}, 
+{
+"val": 130939441.4, 
+"year": 2016
+}, 
+{
+"val": 136340828.9, 
+"year": 2017
+}, 
+{
+"val": 141765436.8, 
+"year": 2018
+}
+]
 }

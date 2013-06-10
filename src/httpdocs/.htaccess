@@ -4,4 +4,15 @@ RewriteRule ^revenues$ index.php?page=revenues
 RewriteRule ^revenues/([0-9]*)$ index.php?page=revenues&year=$1
 RewriteRule ^revenues/([0-9]*)/(.*)$ index.php?page=revenues&year=$1&mode=$2
 RewriteRule ^revenues/([0-9]*)/(.*)/(.*)$ index.php?page=revenues&year=$1&mode=$2&node=$3
+
+RewriteRule ^expenses$ index.php?page=expenses
+RewriteRule ^expenses/([0-9]*)$ index.php?page=expenses&year=$1
+RewriteRule ^expenses/([0-9]*)/(.*)$ index.php?page=expenses&year=$1&mode=$2
+RewriteRule ^expenses/([0-9]*)/(.*)/(.*)$ index.php?page=expenses&year=$1&mode=$2&node=$3
+
+RewriteRule ^funds$ index.php?page=funds
+RewriteRule ^funds/([0-9]*)$ index.php?page=funds&year=$1
+RewriteRule ^funds/([0-9]*)/(.*)$ index.php?page=funds&year=$1&mode=$2
+RewriteRule ^funds/([0-9]*)/(.*)/(.*)$ index.php?page=funds&year=$1&mode=$2&node=$3
+
 RewriteRule ^opendata$ index.php?page=opendata

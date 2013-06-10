@@ -170,8 +170,6 @@
       if(node.is('#table-header')) return;
 
       // assumption. cell order and stats array do not change
-      log('la');
-      log(stats);
       for(var i=0; i<stats.length; i++) {
         var cell = $($(node).find('.value').get(i));
         if(stats[i].cellFunction) {

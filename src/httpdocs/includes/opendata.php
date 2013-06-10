@@ -6,9 +6,22 @@
       </div>
 
       <div class="dataDownload">
+        <span> <i class="icon-download"></i> </span>
         <span class="name"> Revenues </span>  <span> - </span> 
         <a href="data/processing/revenuesV2.csv"> CSV </a> <span> - </span> 
         <a href="data/revenues.json"> Json </a>
+      </div>
+      <div class="dataDownload">
+        <span> <i class="icon-download"></i> </span>
+        <span class="name"> Funds </span>  <span> - </span> 
+        <a href="data/processing/expenses.csv"> CSV </a> <span> - </span> 
+        <a href="data/expenses.json"> Json </a>
+      </div>
+      <div class="dataDownload">
+        <span> <i class="icon-download"></i> </span>
+        <span class="name"> Expenses </span>  <span> - </span> 
+        <a href="data/processing/funds.csv"> CSV </a> <span> - </span> 
+        <a href="data/funds.json"> Json </a>
       </div>
     </div>
 

@@ -15,7 +15,6 @@
                     amount : {
                         title : "Amount",
                         class : "span6 top",
-                        icon : "/img/Amount@High.png",
                         value : function(d) { return formatcurrency(d.values[yearIndex].val); },
                         side : function() { return " in " + thisYear.toString() + "."},
                         cellClass : "value sum numeric textleft",
@@ -24,7 +23,6 @@
                     impact : {
                         title : "Impact",
                         class : "span6 ",
-                        icon : "/img/Impact@High.png",
                         value : function(d) { return Math.max(0.01,(Math.round(d.values[yearIndex].val*100*100/root.values[yearIndex].val)/100)).toString() + "%"; },
                         side : function() { return " of total " + section + "."},
                         cellClass : "value sum",
@@ -33,7 +31,6 @@
                     growth : {
                         title : "Growth",
                         class : "span6 top",
-                        icon : "/img/Growth@High.png",
                         value : function(d) { return growth(d); },
                         side : " compared to last year.",
                         cellFunction : function(d, cell) { avb.table.renderGrowth(d,cell)},
@@ -42,21 +39,18 @@
                     source : {
                         title : "Source",
                         class : "span12 card-source ",
-                        icon : "/img/Growth@High.png",
                         value : function() { return "Cherry sheet"; },
                         side : "is the data source for this entry."
                     },
                     mean : {
                         title : "Average",
                         class : "span6 ",
-                        icon : "/img/Growth@High.png",
                         value : function(d) { return formatcurrency(d3.mean(d.values, get_values)); },
                         side : "on average."
                     },
                     filler : {
                         title : "",
                         class : "span6 ",
-                        icon : "",
                         value : function(d) { return ""; },
                         side : ""
                     },
@@ -80,8 +74,8 @@
 
                 tables = {
                     revenues : [stats.name,  stats.growth, stats.sparkline, stats.impact, stats.amount],
-                    expenses : [stats.amount, stats.growth, stats.impact, stats.mean, stats.source],
-                    funds : [stats.amount, stats.growth, stats.impact, stats.mean, stats.source]
+                    expenses : [stats.name,  stats.growth, stats.sparkline, stats.impact, stats.amount],
+                    funds : [stats.name,  stats.growth, stats.sparkline, stats.impact, stats.amount]
                 }
 
                 Number.prototype.px=function()
@@ -179,13 +173,19 @@
             function initialize(params) {
                 // year checks
 
+                // fire up revenues
+               // $('#avb-wrap').css({opacity : 0});
+                setTimeout(function(){
+                   // $('#avb-wrap').animate({opacity : 1});
+                }, 30);
+
                 if(params.year !== undefined && !isNaN(parseInt(params.year)) && 
                     params.year < lastYear && params.year > firstYear){
                     thisYear = params.year;
-                yearIndex = thisYear - firstYear;
-            }
+                    yearIndex = thisYear - firstYear;
+                }
 
-                avb.navbar.enableYears();
+                avb.navbar.initialize(thisYear);
                 section = params.section;
 
                 setMode(params.mode);
@@ -208,7 +208,6 @@
                     container.html(Mustache.render(treemap.html()));
                     mode = 't';
                 }
-
             }
 
             function switchMode(mode, pushurl) {

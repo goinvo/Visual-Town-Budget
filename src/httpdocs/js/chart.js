@@ -15,13 +15,12 @@ avb.chart = function () {
             chart.height = $(div).height();
             chart.xmargin = 50;
             chart.ymargin = 20;
-            chart.layersWidth = 100;
             chart.linestack = [];
             chart.xscale = d3.scale.linear()
                 .domain([firstYear, lastYear])
                 .range([chart.xmargin, chart.width - 15]);
 
-
+            chart.layersWidth = chart.xscale(thisYear);
             chart.attr("height", chart.height)
                 .attr("width", chart.width);
 
@@ -33,6 +32,7 @@ avb.chart = function () {
                     });
             });
             // chart expansion
+            addActions(chart);
 
         },
 
@@ -71,100 +71,29 @@ avb.chart = function () {
 
         initializeLayers = function () {
 
-            function setDatapointsOpacity(transition) {
-                transition = 50;
-                chart.circles.selectAll('circle').attr('opacity', function () {
-                    var circle = d3.select(this);
-                    if (parseFloat(circle.attr('cx')) < chart.layersWidth) {
-                        circle.style('opacity', 0);
-                    } else {
-                        circle.style('opacity', 1);
-                    }
-                });
-            };
+            if (chart.sideShadow) return;
 
-            function appendDropshadow(group) {
-                // filters go in defs element
-                var defs = group.append("defs");
+            chart.sideShadow =  chart.layerWindow.append("foreignObject")
+            .attr('width', 10 ).attr('x',chart.xscale.range()[1] - 10 )
+            .attr('height', chart.yscale.range()[0] - 10).attr('y',10).attr("class","foreignobj");
 
-                var filter = defs.append("filter")
-                    .attr("id", "ds2")
-                    .attr("height", "300%").attr("width", "300%")
-                    .attr("y", "-100%").attr("x", "-100%");
-
-                filter.append("feGaussianBlur")
-                    .attr("in", "SourceAlpha")
-                    .attr("stdDeviation", 2)
-                    .attr("result", "blur");
-
-                filter.append("feOffset")
-                    .attr("in", "blur")
-                    .attr("dx", -2)
-                    .attr("result", "offsetBlur");
-
-                var feMerge = filter.append("feMerge");
-
-                feMerge.append("feMergeNode")
-                    .attr("in", "offsetBlur")
-                feMerge.append("feMergeNode")
-                    .attr("in", "SourceGraphic");
-            };
-
-            function translate(x, y) {
-                return 'translate(' + x + ', ' + y + ')';
-            }
-
-            function showLegend(action){
-                if(action === chart.showLegend) return;
-                chart.showLegend = action;
-                $('#legend-wrap, #cards').stop();
-                if(action) {
-                    $('#legend-wrap').animate({left: '0'});
-                    $('#cards').animate({left: '100%'});
-                } else {
-                    $('#legend-wrap').animate({left: '-100%'});
-                    $('#cards').animate({left: '0'});
-                }
-            }
-
-            function slideLayers(x, transition) {
-
-                x = Math.min(x, chart.xscale.range()[1]);
-                x = Math.max(x, chart.xscale.range()[0]);
-                chart.layersWidth = x;
-                if (transition) {
-                    chart.layerSlider.transition().duration(transition).ease('cubic-in-out').attr("cx", x);
-                    chart.layers.svg.transition().duration(transition).ease('cubic-in-out').attr("width", x);
-                    chart.layerLine.transition().duration(transition).ease('cubic-in-out').attr("x1", x).attr("x2", x);
-                } else {
-                    chart.layerSlider.attr("cx", x);
-                    chart.layers.svg.attr("width", x);
-                    chart.layerLine.attr("x1", x).attr("x2", x);
-                }
-                showLegend(x > chart.width/4);
-                setDatapointsOpacity(transition);
-            }
-
-            if (chart.layerSlider) return;
-
-            appendDropshadow(chart.layerWindow);
-
-            chart.layerSlider = chart.layerWindow.append('circle').attr('cx',chart.layersWidth).attr('cy',chart.height/2)
-            .attr('r', 8).classed('layerSlider', true);
+            chart.sideShadow.append("xhtml:div")
+            .style('width', (2).px()).style('height', (chart.yscale.range()[0] - 10).px())
+            .classed('sideShadow',true);
 
 
-            // button controls
-            var drag = d3.behavior.drag()
-                .on("drag", function (e) {
-                    var x = d3.mouse(this)[0];
-                    slideLayers(x);
-                });
-            chart.layerSlider.call(drag);
 
-            chart.on('click', function () {
-                var x = d3.mouse(this)[0];
-                slideLayers(x, 250);
-            });
+            chart.t =  chart.layerWindow.append("foreignObject")
+            .attr( 'width', chart.xscale.range()[1]  - chart.xscale.range()[0] )
+            .attr('x', chart.xscale.range()[0])
+            .attr('height', 10).attr('y',10).attr("class","foreignobj");
+
+            chart.t.append("xhtml:div")
+            .style('width', (chart.xscale.range()[1]  - chart.xscale.range()[0]).px())
+            .style('height', (2).px())
+            .classed('ls',true);
+
+            setDatapointsOpacity();
 
         },
 
@@ -255,12 +184,6 @@ avb.chart = function () {
 
             var projected = currentYear - firstYear;
 
-            // current year line
-            // chart.grids.append("line").classed('thisYearLine',true)
-            // .attr("x1", chart.xscale(thisYear)).attr("x2", chart.xscale(thisYear))
-            // .attr("y1", chart.yscale(data.values[yearIndex].val)).attr("y2", chart.height - chart.ymargin)
-            // .style("stroke","black");
-
             /*
              * line and areas drawing
              */
@@ -272,12 +195,17 @@ avb.chart = function () {
             }
             transitionDuration = 0;
 
+            d3.selectAll('#areaclip').remove();
+            chart.append('g').append('clipPath').attr('id','areaclip')
+            .append('svg:path').attr('fill','none')
+            .attr("d", area(data.values.slice(0, data.values.length)));
+
 
             //non-projection area
             chart.visuals[0].classed("area", true)
                 .transition().duration(transitionDuration)
-                .attr("d", area(data.values.slice(0, projected + 1)))
-                .attr("color", color);
+                .attr("d", area(data.values.slice(0, data.values.length)))
+                .attr("fill", 'black');
 
             chart.visuals[1].classed("area", true).classed("projection", true)
                 .transition().duration(transitionDuration)
@@ -341,7 +269,7 @@ avb.chart = function () {
                 .attr("cy", function (d) {
                     return chart.yscale(d.val);
                 })
-                .attr("r", 5).attr("stroke", color).attr("fill", color);
+                .attr("r", 3).attr("stroke", color).attr("fill", color);
 
             chart.circles.attr("data-name", data.key)
                 .selectAll("circle").data(data.values).enter().append("circle");
@@ -386,55 +314,128 @@ avb.chart = function () {
             enableLayers(data);
         },
 
+
+        setDatapointsOpacity = function() {
+            chart.circles.selectAll('circle').attr('opacity', function () {
+                var circle = d3.select(this);
+                if (parseFloat(circle.attr('cx')) < chart.layersWidth) {
+                    circle.style('opacity', 0);
+                } else {
+                    circle.style('opacity', 1);
+                }
+            });
+        },
+
+        showLegend = function(action){
+            if(action === chart.showLegend) return;
+            chart.showLegend = action;
+            $('#legend-wrap, #cards').stop();
+            if(action) {
+                $('#legend-wrap').animate({left: '0'});
+                $('#cards').animate({left: '100%'});
+            } else {
+                $('#legend-wrap').animate({left: '-100%'});
+                $('#cards').animate({left: '0'});
+            }
+        },
+
+        slideLayers  = function(x) {
+
+            x = Math.min(x, chart.xscale.range()[1]);
+            x = Math.max(x, chart.xscale.range()[0]);
+            chart.layersWidth = x;
+            chart.layers.svg.attr("width", x);
+            chart.layerLine.attr('x', x-10);
+            showLegend(x > chart.xscale(thisYear));
+            setDatapointsOpacity();
+        },
+
+
+        addActions = function(chart){
+            var touchStart = new Object()
+                delta = new Object(),
+                mousedown = false;
+
+            function dragStart(e){
+
+                e = d3.event;
+
+                e.preventDefault();
+                var x,y;
+                mousedown = true;
+
+                 if(e.type === 'touchstart'){
+                    x = e.originalEvent.touches[0].pageX;
+                } else {
+                    x = e.offsetX || d3.mouse(this)[0];
+                }
+
+                slideLayers(x);
+                touchStart.x = chart.layersWidth;
+                touchStart.y = 0;
+            };
+
+            function dragMove(e){
+
+                e = d3.event;
+
+                e.preventDefault();
+                if(!mousedown) return;
+                var x,y;
+                dragging = true;
+
+                if(e.type === 'touchmove'){
+                    x = e.originalEvent.touches[0].pageX;
+                } else {
+                    x = e.offsetX || d3.mouse(this)[0];
+                }
+
+                delta = {
+                    x : x - touchStart.x,
+                };
+
+                slideLayers(touchStart.x + delta.x);
+
+            };
+
+            function dragEnd(e){
+                e = d3.event;
+
+                e.preventDefault();
+                mousedown = false;
+            };
+
+            chart.on('mousedown', dragStart);
+            chart.on('mousemove', dragMove);
+            chart.on('mouseup', dragEnd);
+            chart.on('touchstart', dragStart);
+            chart.on('touchmove', dragMove);
+            chart.on('touchend', dragEnd);
+
+        },
+
         enableLayers = function (jsondata, transition) {
 
 
-            function appendDropshadow(group) {
-                // filters go in defs element
-                var defs = group.append("defs");
-
-                // create filter with id #drop-shadow
-                // height=130% so that the shadow is not clipped
-                var filter = defs.append("filter")
-                    .attr("id", "ds")
-                    .attr("height", "130%");
-
-                filter.append('feComponentTransfer').attr('result', "matrixOut")
-                    .attr('in', 'SourceAlpha').append('feFuncA')
-                    .attr('type', 'table').attr('tableValues', '1.0');
-
-                filter.append("feGaussianBlur")
-                    .attr("in", "matrixOut")
-                    .attr("stdDeviation", 2)
-                    .attr("result", "blur");
-
-                filter.append("feOffset")
-                    .attr("in", "blur")
-                    .attr("dx", -2)
-                    .attr("result", "offsetBlur");
-
-                var feMerge = filter.append("feMerge");
-
-                feMerge.append("feMergeNode")
-                    .attr("in", "offsetBlur")
-                feMerge.append("feMergeNode")
-                    .attr("in", "SourceGraphic");
-            }
-
         function appendSeparator(group){
-           chart.layerLine = group.append("line").classed('layerLine', true)
-            .attr("x1", chart.layersWidth).attr("x2", chart.layersWidth)
-            .attr("y1", chart.yscale.range()[1]).attr("y2", chart.height - chart.ymargin);
+            chart.sideShadow.attr("clip-path","url(#areaclip)");
+
+            chart.layerLine =  group.append("foreignObject")
+            .attr('x', chart.layersWidth - 10).attr('width', 10).attr('y', 10).attr('height', chart.yscale.range()[0] - 10)
+            .attr("class","foreignobj")
+            
+            chart.layerLine.append("xhtml:div").style('width', (3).px())
+            .style('height', (chart.yscale.range()[0] - 10).px())
+            .classed('layerLine',true);
         }
 
 
-            layers = chart.layers.append('svg')
+            layers = chart.layers.append('svg').attr("clip-path","url(#areaclip)")
                 .attr("height", chart.height).attr("width", chart.layersWidth)
                 .classed('layers', true);
 
             chart.layers.svg = layers;
 
-            appendDropshadow(layers);
             chart.layers.classed('layers', true);
 
             layers.width = chart.width;
@@ -528,7 +529,6 @@ avb.chart = function () {
         },
 
         removeLayers = function () {
-            // enablePopovers();
             d3.selectAll('#chart circle').style('opacity', 1);
             if (layers !== undefined) {
                 d3.selectAll('.area').classed("layers", false)

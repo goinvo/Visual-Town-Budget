@@ -1,4 +1,5 @@
   #chart-wrap {
+    cursor: pointer;
     width: 100%;
     position: absolute;
     bottom: 0px;
@@ -6,6 +7,7 @@
     #chart {
       width: 100%;
       height: 100%;
+      cursor: pointer;
     }
   }
 
@@ -91,22 +93,8 @@
     }
   }
 
-.layerSlider{
-  stroke-width:2px;
-  stroke: white;
-  stroke-opacity:0.8;
-  fill: white;
-  fill-opacity: 1;
-  filter:url(#ds2);
-
-
+.layerLine, .sideShadow {
+  box-shadow: -3px 0px 8px black;
+  margin-left: 10px;
 }
 
-.layerLine{
-  stroke:black;
-  stroke-width: 1px;
-  stroke-opacity: 0.0;
-  filter:url(#ds);
-  //clip-path: url(#rectClip);
-    -webkit-filter: drop-shadow(-12px 12px 7px red);
-}

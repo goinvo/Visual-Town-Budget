@@ -5,7 +5,6 @@ avb.cards = function(){
     cardstack = [],
 
     initialize = function(){
-        log('INIT CARDS');
         cardstack = [];
         deck = decks[section];
     },
