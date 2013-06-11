@@ -10,10 +10,6 @@ avb.navbar = function(){
 
 		// year selector (mobile browsers)
 		$selector = $('#yeardrop-container-mobile');
-
-		console.log('***********');
-		console.log(thisYear);
-
 		if(!jQuery.browser.mobile) {
 
 			$dropdownList.html('');
@@ -33,8 +29,6 @@ avb.navbar = function(){
 		} else {
 			$selector.html('');
 			for(var i=firstYear; i<=lastYear; i++) {
-				console.log(i);
-				console.log(thisYear);
 				var html = '<option'
 				+ ((i == thisYear) ? ' selected="selected"' : ' ')
 				+ 'value="' + i + '">' + i + '</option>';

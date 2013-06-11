@@ -73,6 +73,10 @@ avb.chart = function () {
 
             if (chart.sideShadow) return;
 
+            setDatapointsOpacity();
+
+            if(ie()) return;
+
             chart.sideShadow =  chart.layerWindow.append("foreignObject")
             .attr('width', 10 ).attr('x',chart.xscale.range()[1] - 10 )
             .attr('height', chart.yscale.range()[0] - 10).attr('y',10).attr("class","foreignobj");
@@ -80,7 +84,6 @@ avb.chart = function () {
             chart.sideShadow.append("xhtml:div")
             .style('width', (2).px()).style('height', (chart.yscale.range()[0] - 10).px())
             .classed('sideShadow',true);
-
 
 
             chart.t =  chart.layerWindow.append("foreignObject")
@@ -93,7 +96,7 @@ avb.chart = function () {
             .style('height', (2).px())
             .classed('ls',true);
 
-            setDatapointsOpacity();
+
 
         },
 
@@ -345,7 +348,8 @@ avb.chart = function () {
             x = Math.max(x, chart.xscale.range()[0]);
             chart.layersWidth = x;
             chart.layers.svg.attr("width", x);
-            chart.layerLine.attr('x', x-10);
+
+            if(!ie()) chart.layerLine.attr('x', x-10);
             showLegend(x > chart.xscale(thisYear));
             setDatapointsOpacity();
         },
@@ -418,6 +422,9 @@ avb.chart = function () {
 
 
         function appendSeparator(group){
+
+            if(ie()) return;
+
             chart.sideShadow.attr("clip-path","url(#areaclip)");
 
             chart.layerLine =  group.append("foreignObject")

@@ -196,7 +196,6 @@ textLabels = function(d){
                 trigger : 'hover', 
                 placement: function (context, source) {
                     var position = $(source).position();
-                    log(position.top)
                     if (position.top < 110){
                         return "left";
                     } else {
@@ -228,10 +227,10 @@ textLabels = function(d){
         d3.select(this).classed("no-label", true);
         popover = true;
     }
-    if(containerHeight < div.height() || containerHeight < 80) {
+    if(containerHeight < div.height() || containerHeight < 80 || containerWidth < 90) {
         d3.select(this).classed("no-value", true);
     }
-    if(popover || d.descr !== ''){
+    if(popover || d.descr !== '' || containerWidth < 80){
         attachPopover(this, d.key, d.descr);
     }
 
@@ -265,10 +264,10 @@ open = function(nodeId, pushUrl) {
     },
 
 zoneClick= function(d, click) {
-    console.log('CALL')
     var event = window.event || event;
     if(event) {
-        event.stopPropagation();
+        event.cancelBubble = true;
+        if(event.stopPropagation) event.stopPropagation();
     }
 
     if (nav.transitioning || !d || !currentSelection) return;
