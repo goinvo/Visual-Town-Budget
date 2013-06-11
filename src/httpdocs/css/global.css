@@ -315,20 +315,21 @@ h4 {
 
 /* line 1, ../../scss/partials/_chart.scss */
 #chart-wrap {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   cursor: pointer;
   width: 100%;
   position: absolute;
   bottom: 0px;
   left: 0px;
 }
-/* line 7, ../../scss/partials/_chart.scss */
+/* line 8, ../../scss/partials/_chart.scss */
 #chart-wrap #chart {
   width: 100%;
   height: 100%;
   cursor: pointer;
 }
 
-/* line 14, ../../scss/partials/_chart.scss */
+/* line 15, ../../scss/partials/_chart.scss */
 .line {
   fill: none;
   stroke-width: 3;
@@ -336,33 +337,33 @@ h4 {
   stroke-linecap: round;
   opacity: 0.6;
 }
-/* line 21, ../../scss/partials/_chart.scss */
+/* line 22, ../../scss/partials/_chart.scss */
 .line.projection {
   stroke-dasharray: 5, 5;
   stroke-linejoin: round;
   stroke-linecap: round;
 }
 
-/* line 31, ../../scss/partials/_chart.scss */
+/* line 32, ../../scss/partials/_chart.scss */
 .area {
   opacity: 0.2;
 }
-/* line 34, ../../scss/partials/_chart.scss */
+/* line 35, ../../scss/partials/_chart.scss */
 .area.projection {
   opacity: 0.1;
 }
 
-/* line 40, ../../scss/partials/_chart.scss */
+/* line 41, ../../scss/partials/_chart.scss */
 .overflows {
   fill: #f9f9f9;
 }
 
-/* line 44, ../../scss/partials/_chart.scss */
+/* line 45, ../../scss/partials/_chart.scss */
 .browser text {
   text-anchor: end;
 }
 
-/* line 48, ../../scss/partials/_chart.scss */
+/* line 49, ../../scss/partials/_chart.scss */
 .axis path, .axis line {
   stroke: grey;
   stroke-width: 1;
@@ -370,54 +371,54 @@ h4 {
   stroke-linecap: round;
   shape-rendering: crispEdges;
 }
-/* line 55, ../../scss/partials/_chart.scss */
+/* line 56, ../../scss/partials/_chart.scss */
 .axis text {
   font-family: 'Open Sans';
   font-size: 0.8em;
 }
-/* line 60, ../../scss/partials/_chart.scss */
+/* line 61, ../../scss/partials/_chart.scss */
 .axis .odd {
   fill: none;
 }
-/* line 64, ../../scss/partials/_chart.scss */
+/* line 65, ../../scss/partials/_chart.scss */
 .axis .thisYear {
   fill: black;
   font-weight: bold;
 }
-/* line 69, ../../scss/partials/_chart.scss */
+/* line 70, ../../scss/partials/_chart.scss */
 .axis text {
   cursor: default;
 }
 
-/* line 74, ../../scss/partials/_chart.scss */
+/* line 75, ../../scss/partials/_chart.scss */
 .multiarea {
   fill-opacity: 0.65;
 }
 
-/* line 77, ../../scss/partials/_chart.scss */
+/* line 78, ../../scss/partials/_chart.scss */
 .multiline {
   fill: none;
   stroke-width: 2px;
   opacity: 1;
 }
 
-/* line 82, ../../scss/partials/_chart.scss */
+/* line 83, ../../scss/partials/_chart.scss */
 .multiaxis path {
   stroke-width: 0;
   fill: none;
 }
 
-/* line 87, ../../scss/partials/_chart.scss */
+/* line 88, ../../scss/partials/_chart.scss */
 .multigrid .tick {
   stroke: lightgrey;
   opacity: 0;
 }
-/* line 91, ../../scss/partials/_chart.scss */
+/* line 92, ../../scss/partials/_chart.scss */
 .multigrid path {
   stroke-width: 1;
 }
 
-/* line 96, ../../scss/partials/_chart.scss */
+/* line 97, ../../scss/partials/_chart.scss */
 .layerLine, .sideShadow {
   box-shadow: -3px 0px 8px black;
   margin-left: 10px;
@@ -669,79 +670,83 @@ h4 {
     width: 250px;
   }
 }
-/* line 3, ../../scss/partials/_navigation.scss */
+/* line 2, ../../scss/partials/_navigation.scss */
+#navigation {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+/* line 5, ../../scss/partials/_navigation.scss */
 #navigation text {
   pointer-events: none;
   height: 88%;
   width: 100%;
 }
-/* line 9, ../../scss/partials/_navigation.scss */
+/* line 11, ../../scss/partials/_navigation.scss */
 #navigation rect {
   fill: none;
   stroke: #fff;
 }
-/* line 15, ../../scss/partials/_navigation.scss */
+/* line 17, ../../scss/partials/_navigation.scss */
 #navigation rect.parent,
 #navigation .grandparent rect {
   stroke-width: 4px;
 }
-/* line 19, ../../scss/partials/_navigation.scss */
+/* line 21, ../../scss/partials/_navigation.scss */
 #navigation .grandparent rect {
   fill: #f9f9f9;
   stroke: none;
 }
-/* line 24, ../../scss/partials/_navigation.scss */
+/* line 26, ../../scss/partials/_navigation.scss */
 #navigation .child rect {
   stroke-opacity: 1.0;
 }
-/* line 28, ../../scss/partials/_navigation.scss */
+/* line 30, ../../scss/partials/_navigation.scss */
 #navigation rect.parent {
   opacity: 0.6;
 }
-/* line 33, ../../scss/partials/_navigation.scss */
+/* line 35, ../../scss/partials/_navigation.scss */
 #navigation .children:hover rect.parent,
 #navigation .grandparent:hover rect {
   opacity: 1.0;
 }
-/* line 37, ../../scss/partials/_navigation.scss */
+/* line 39, ../../scss/partials/_navigation.scss */
 #navigation .children {
   cursor: pointer;
 }
-/* line 42, ../../scss/partials/_navigation.scss */
+/* line 44, ../../scss/partials/_navigation.scss */
 #navigation .children.no-label .titleLabel {
   display: none;
 }
-/* line 46, ../../scss/partials/_navigation.scss */
+/* line 48, ../../scss/partials/_navigation.scss */
 #navigation .children.no-label .valueLabel {
   display: none;
 }
-/* line 52, ../../scss/partials/_navigation.scss */
+/* line 54, ../../scss/partials/_navigation.scss */
 #navigation .children.no-value .valueLabel {
   display: none;
 }
-/* line 59, ../../scss/partials/_navigation.scss */
+/* line 61, ../../scss/partials/_navigation.scss */
 #navigation .textdiv {
   /* text in the boxes */
   padding: 8px;
   font-family: "Open Sans", Helvetica, Arial, sans-serif;
 }
-/* line 64, ../../scss/partials/_navigation.scss */
+/* line 66, ../../scss/partials/_navigation.scss */
 #navigation .textdiv .titleLabel,
 #navigation .textdiv .valueLabel {
   overflow: hidden;
   text-overflow: ellipsis;
 }
-/* line 72, ../../scss/partials/_navigation.scss */
+/* line 74, ../../scss/partials/_navigation.scss */
 #navigation .textdiv .valueLabel {
   font-size: 1.3em;
 }
 
-/* line 79, ../../scss/partials/_navigation.scss */
+/* line 81, ../../scss/partials/_navigation.scss */
 #zoombutton {
   float: right;
 }
 
-/* line 83, ../../scss/partials/_navigation.scss */
+/* line 85, ../../scss/partials/_navigation.scss */
 .popover {
   z-index: 1050;
 }

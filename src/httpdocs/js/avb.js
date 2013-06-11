@@ -299,8 +299,6 @@
 
             return v> 4 ? v : undef;
         };
-
-
         // Back button action
         window.onpopstate = popUrl;
 

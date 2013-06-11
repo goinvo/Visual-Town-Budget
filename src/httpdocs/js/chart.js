@@ -369,7 +369,7 @@ avb.chart = function () {
                 mousedown = true;
 
                  if(e.type === 'touchstart'){
-                    x = e.originalEvent.touches[0].pageX;
+                    x = e.touches[0].pageX;
                 } else {
                     x = e.offsetX || d3.mouse(this)[0];
                 }
@@ -389,7 +389,7 @@ avb.chart = function () {
                 dragging = true;
 
                 if(e.type === 'touchmove'){
-                    x = e.originalEvent.touches[0].pageX;
+                    x = e.touches[0].pageX;
                 } else {
                     x = e.offsetX || d3.mouse(this)[0];
                 }
@@ -403,6 +403,7 @@ avb.chart = function () {
             };
 
             function dragEnd(e){
+                
                 e = d3.event;
 
                 e.preventDefault();
