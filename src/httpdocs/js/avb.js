@@ -84,11 +84,14 @@
                 };
 
                 function pushUrl(section, year, mode, node){
+                    if(ie()) return;
                     var url = '/' + section + '/' + thisYear + '/' + mode + '/' + node;
                     window.history.pushState({section : section, year : thisYear, mode : mode, nodeId : node},"", url);
                 }
 
                 function popUrl(event){
+                    if(ie()) return;
+                    
                     if(event.state === null){
                     //avb.navigation.open(root.hash);
                     } else if(event.state.mode !== mode) {
@@ -169,15 +172,9 @@
                 return formatPercentage(perc);
             };
 
-
             function initialize(params) {
                 // year checks
 
-                // fire up revenues
-               // $('#avb-wrap').css({opacity : 0});
-                setTimeout(function(){
-                   // $('#avb-wrap').animate({opacity : 1});
-                }, 30);
 
                 if(params.year !== undefined && !isNaN(parseInt(params.year)) && 
                     params.year < lastYear && params.year > firstYear){

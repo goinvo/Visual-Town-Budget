@@ -34,7 +34,13 @@
       <i class="icon-zoom-out"></i> Zoom out
     </button>
   </div>
-  <div id="navigation" data-step="3" data-intro="The xray of the financials... Zoom into the data details by touching a block. How cool was that? " data-position="left"> </div>
+  <div id="navigation" data-step="3" data-intro="The xray of the financials... Zoom into the data details by touching a block. How cool was that? " data-position="left">  
+  <div id="ie-popover">
+    <div class="text"></div>
+    <div class="arrow"> </div> 
+  </div>
+  </div>
+  
 </div>
 
   </script>

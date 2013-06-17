@@ -168,6 +168,12 @@ display = function(d) {
         addChilds(d, g);
 
         /* Adding a foreign object instead of a text object, allows for text wrapping */
+
+        if(ie()){
+            nav.on('mouseout', function(){ d3.select('#ie-popover').style('display', 'none')});
+            return g;
+        }
+
         g.each(function(){
 
             var label = d3.select(this).append("foreignObject")
@@ -188,6 +194,39 @@ display = function(d) {
 
 }
 
+ieLabels = function(d){
+
+    function attachPopoverIe(obj, title, descr){
+        d3.select(obj).on('mouseover',function(){
+            var rect = d3.select(this).select('.parent');
+            var coords = [parseFloat(rect.attr('x')), 
+                          parseFloat(rect.attr('y'))];
+            var x = coords[0] + parseFloat(rect.attr('width'))/2 - 75;
+            d3.select('#ie-popover').select('.text').text(title);
+            d3.select('#ie-popover').style('display', 'block')
+            .style('left', (x).px()).style('top', (coords[1]).px());
+        })
+    }
+
+    var label = d3.select(this).append("text")
+    .call(rect).attr('dy','1.5em').attr('dx','0.5em')
+    .text(function(d) {return d.key})
+    textLabels.call(this);
+
+
+    var d = d3.select(this).datum(),
+    containerHeight = nav.y(d.y + d.dy) - nav.y(d.y) ,
+    containerWidth = nav.x(d.x + d.dx) - nav.x(d.x);
+
+    if (containerHeight < 40 || containerWidth < 150) {
+        d3.select(this).classed("no-label", true);
+        popover = true;
+    }
+
+    attachPopoverIe(this, d.key, d.descr);
+
+}
+
 textLabels = function(d){
 
     function attachPopover(obj, title, descr){
@@ -205,7 +244,6 @@ textLabels = function(d){
                 title : (d.descr !== '' && d.title !== '') ? d.key : '',
                 content : (d.descr !== '') ? d.descr : d.key
             });
-
     }
 
     var d = d3.select(this).datum(),
@@ -213,8 +251,6 @@ textLabels = function(d){
         containerWidth = nav.x(d.x + d.dx) - nav.x(d.x),
         title = $(this).find('.titleLabel').first(),
         div = $(this).find('.textdiv').first();
-
-
 
     $(this).find('div').first().popover('destroy');
     d3.select(this).classed("no-value", false);
@@ -281,6 +317,8 @@ zoneClick= function(d, click) {
         pushUrl( section, thisYear, mode, d.hash);
     }
 
+    nav.selectAll('text').remove();
+
       updateSelection(d, yearIndex, d.color);
 
 
@@ -311,10 +349,15 @@ zoneClick= function(d, click) {
       t1.selectAll("rect").call(rect);
       t2.selectAll("rect").call(rect);
       t2.each(function(){
+        if(ie()) return;
         textLabels.call(this);
       })
       t2.each("end", function(){
-        textLabels.call(this);
+        if(ie()) {
+            ieLabels.call(this);
+        } else {
+            textLabels.call(this);
+        }
       })
 
       // Remove the old node when the transition is finished.

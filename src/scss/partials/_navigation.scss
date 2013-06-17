@@ -1,6 +1,7 @@
 
 #navigation{
     -webkit-tap-highlight-color: rgba(0,0,0,0); 
+    position: relative;
   
     text {
     pointer-events: none;
@@ -12,6 +13,15 @@
     fill: none;
     stroke: #fff;
   }
+
+  text{
+    font-size:1.2em;
+  }
+
+  svg{
+    overflow: hidden;
+  }
+
 
   rect.parent,
   .grandparent rect {
@@ -46,6 +56,10 @@
       }
 
       .valueLabel{
+        display: none;
+      }
+
+      text{
         display: none;
       }
     }
@@ -84,4 +98,33 @@
 
 .popover {
   z-index: 1050;
+}
+
+#ie-popover{
+  z-index: 1050;
+  background-color: rgba(0,0,0,0.5);
+  display: none;
+  position: absolute;
+  width: 150px;
+  height: 50px;
+  margin-top: -58px;
+  border-radius: 5px;
+
+  .arrow{
+    z-index: 1050;
+    position: absolute;
+    width: 0; 
+    height: 0; 
+    left: 65px;
+    top: 50px;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid rgba(0,0,0,0.5);
+  }
+
+  .text{
+    color: white;
+    padding: 5px;
+  }
+
 }
