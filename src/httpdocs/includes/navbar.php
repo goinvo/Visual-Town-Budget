@@ -14,9 +14,9 @@
 
      <div class="span5 entry">
       <div class="center-wrap centered">
-        <span class="menubutton margin"><a href="/revenues">Revenues</a></span>
-        <span class="menubutton margin"><a href="/expenses">Expenses</a></span>
-        <span class="menubutton margin"><a href="/funds">Funds</a></span>
+        <span class="menubutton section margin"><a href="/revenues">Revenues</a></span>
+        <span class="menubutton section margin"><a href="/expenses">Expenses</a></span>
+        <span class="menubutton section margin"><a href="/funds">Funds</a></span>
       </div>
 
     </div>

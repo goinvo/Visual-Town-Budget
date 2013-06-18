@@ -16,3 +16,4 @@ RewriteRule ^funds/([0-9]*)/(.*)$ index.php?page=funds&year=$1&mode=$2
 RewriteRule ^funds/([0-9]*)/(.*)/(.*)$ index.php?page=funds&year=$1&mode=$2&node=$3
 
 RewriteRule ^opendata$ index.php?page=opendata
+RewriteRule ^update.php$ data/processing/update.php

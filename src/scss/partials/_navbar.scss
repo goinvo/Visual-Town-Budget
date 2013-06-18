@@ -39,6 +39,12 @@
     font-size: 1.2em;
     display: inline-block;
 
+    &.selected {
+      a{
+        color: rgb(219, 78, 134);
+      }
+    }
+
     .caret{
       border-top-color: $black;
       border-bottom-color: $black;
@@ -58,6 +64,28 @@
       margin-right: 20px;
     }
 
+  }
+}
+
+#yeardrop-container{
+
+  &.open{
+
+  }
+
+  min-width: 100px;
+  a {
+    padding-left: 20px;
+
+    b{
+      float: right;
+      margin-right: 5px;
+      vertical-align: baseline;
+    }
+  }
+  .dropdown-menu{
+    min-width: 100px;
+    border-radius: 0px;
   }
 }
 

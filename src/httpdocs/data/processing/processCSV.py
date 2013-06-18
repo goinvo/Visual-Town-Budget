@@ -1,7 +1,4 @@
-import csv
-import json
-import hashlib
-import zlib
+import csv, json, hashlib, zlib, sys
 
 FIRST_YEAR = 2008
 LAST_YEAR = 2018
@@ -38,11 +35,25 @@ class entry:
 			children.append(child.reprJSON())
 		return dict(key=self.key, descr=self.descr, src= self.source, url= self.url, values=values, hash=self.hashEntry()[:8], sub=children) 
 
-def convert(inputFile, outputFile):
+def convert(inputFile):
 	csventries = []
-	with open(inputFile, 'rU') as csvfile:
-		dataline = csv.DictReader(csvfile, delimiter=',', quotechar='"', dialect='excel')
-		for row in dataline:
+
+	filename = inputFile.split('/')[-1].split('.')[0]
+	
+	# attempt opening file
+	try:
+		csvfile = open(inputFile, 'rU')
+	except Exception, e:
+		print('Error opening ' + inputFile)
+		exit(1)
+	dataline = csv.DictReader(csvfile, delimiter=',', quotechar='"', dialect='excel')
+
+	#keep current row count for printing errors
+	currentRow = 0
+
+	for row in dataline:
+
+		try:
 			#find name
 			name = ''
 			for level in reversed(range(1,MAX_LEVEL+1)):
@@ -63,45 +74,56 @@ def convert(inputFile, outputFile):
 			#create new entry object and add to list	
 			csventries.append(entry(name.replace(' Total',''),row['TOOLTIP'], row['SOURCE'], row['SOURCE URL'], rowValues, int(row['LEVEL'])))
 
+		except Exception, e:
+			print('Error parsing line ' + str(currentRow) + ': ' + str(row))
+			exit(1)
+
+		#update row number (useful for printing errors)
+		currentRow += 1
+
 	#reverse list for tree creation
 	csventries.reverse()
 
 	#assign name to root
-	csventries[0].key = 'Revenues'
+	csventries[0].key = filename.capitalize()
 
 	#tree-structure creation
 	stack = []
 	duplicates = []
 	lastNode = None
 	for node in csventries:
-		#print('@' + node.key)
-		#checking for total of 1 field
-		if(lastNode != None and node.key == lastNode.key):
-			#print('skipping ' + node.key)
-			if(lastNode.descr == ''):
-				lastNode.descr = node.descr
-			duplicates += [node]
-			continue
-		#going one level deeper
-		if(node.level > (len(stack)-1)):
-			if(node.level != 0):
-				#print('+ ' + stack[-1].key + ' -> ' + node.key)
+		try:
+			#print('@' + node.key)
+			#checking for total of 1 field
+			if(lastNode != None and node.key == lastNode.key):
+				#print('skipping ' + node.key)
+				if(lastNode.descr == ''):
+					lastNode.descr = node.descr
+				duplicates += [node]
+				continue
+			#going one level deeper
+			if(node.level > (len(stack)-1)):
+				if(node.level != 0):
+					#print('+ ' + stack[-1].key + ' -> ' + node.key)
+					stack[-1].children.append(node)
+				stack.append(node)
+			#staying on same level
+			elif (node.level == (len(stack)-1)):
+				stack.pop().key;
+				stack.append(node)
+				stack[-2].children.append(node)
+				#print("= " + stack[-2].key + ' -> ' + node.key)
+			#pop deeper levels
+			else:
+				while (node.level < (len(stack))):
+					stack.pop()
 				stack[-1].children.append(node)
-			stack.append(node)
-		#staying on same level
-		elif (node.level == (len(stack)-1)):
-			stack.pop().key;
-			stack.append(node)
-			stack[-2].children.append(node)
-			#print("= " + stack[-2].key + ' -> ' + node.key)
-		#pop deeper levels
-		else:
-			while (node.level < (len(stack))):
-				stack.pop()
-			stack[-1].children.append(node)
-			#print("- " + stack[-1].key + ' -> ' + node.key)
-			stack.append(node)
-		lastNode = node
+				#print("- " + stack[-1].key + ' -> ' + node.key)
+				stack.append(node)
+			lastNode = node
+		except Exception, e:
+			print('Error reconstructing tree at node: ' + str(node))
+			exit(1)
 
 	# delete duplicates
 	for dup in duplicates:
@@ -114,7 +136,25 @@ def convert(inputFile, outputFile):
 		curnode = curnode.children[0]
 
 	# tree to json format
-	outputFile = open(outputFile, 'w')
+	try:
+		outputFile = open(filename + '.json', 'w')
+	except  Exception, e:
+		print('Error opening output file.')
+		exit(1)
+
+	# dump in json structure
 	outputFile.write(json.dumps(root.reprJSON(), indent=0))
 
-convert('funds.csv', 'funds.json')
+	#success ! print output file
+	print(filename + '.json')
+
+def main():
+	if len(sys.argv) < 2:
+		print('Usage: processCSV.py filename')
+	else:
+		convert(sys.argv[1])
+
+if __name__ == '__main__':
+	main()
+
+

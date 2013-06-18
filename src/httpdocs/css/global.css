@@ -114,7 +114,7 @@ body {
 .group {
   *zoom: 1;
 }
-/* line 38, ../../../../../../../var/lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/utilities/general/_clearfix.scss */
+/* line 38, ../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/utilities/general/_clearfix.scss */
 .group:after {
   content: "";
   display: table;
@@ -125,12 +125,12 @@ body {
 	File Overview:	Basic type styles.
 	Author:			Michael Bester
 */
-/* line 61, ../../../../../../../var/lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/typography/_vertical_rhythm.scss */
+/* line 61, ../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/typography/_vertical_rhythm.scss */
 * html {
   font-size: 100%;
 }
 
-/* line 64, ../../../../../../../var/lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/typography/_vertical_rhythm.scss */
+/* line 64, ../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/typography/_vertical_rhythm.scss */
 html {
   font-size: 16px;
   line-height: 1.5em;
@@ -304,9 +304,11 @@ h4 {
 }
 /* line 77, ../../scss/partials/_home.scss */
 #welcome h1 {
+  font-size: 42px;
+  color: #666;
   margin-bottom: 10px;
 }
-/* line 81, ../../scss/partials/_home.scss */
+/* line 83, ../../scss/partials/_home.scss */
 #welcome #tour-link {
   text-decoration: underline;
   cursor: pointer;
@@ -556,26 +558,50 @@ h4 {
   font-size: 1.2em;
   display: inline-block;
 }
-/* line 42, ../../scss/partials/_navbar.scss */
+/* line 43, ../../scss/partials/_navbar.scss */
+#avb-menubar .menubutton.selected a {
+  color: #db4e86;
+}
+/* line 48, ../../scss/partials/_navbar.scss */
 #avb-menubar .menubutton .caret {
   border-top-color: #333333;
   border-bottom-color: #333333;
 }
-/* line 48, ../../scss/partials/_navbar.scss */
+/* line 54, ../../scss/partials/_navbar.scss */
 #avb-menubar .menubutton a {
   font-size: 1em;
   color: #333333;
 }
-/* line 53, ../../scss/partials/_navbar.scss */
+/* line 59, ../../scss/partials/_navbar.scss */
 #avb-menubar .menubutton i {
   vertical-align: baseline;
 }
-/* line 57, ../../scss/partials/_navbar.scss */
+/* line 63, ../../scss/partials/_navbar.scss */
 #avb-menubar .menubutton.margin {
   margin-right: 20px;
 }
 
-/* line 66, ../../scss/partials/_navbar.scss */
+/* line 70, ../../scss/partials/_navbar.scss */
+#yeardrop-container {
+  min-width: 100px;
+}
+/* line 77, ../../scss/partials/_navbar.scss */
+#yeardrop-container a {
+  padding-left: 20px;
+}
+/* line 80, ../../scss/partials/_navbar.scss */
+#yeardrop-container a b {
+  float: right;
+  margin-right: 5px;
+  vertical-align: baseline;
+}
+/* line 86, ../../scss/partials/_navbar.scss */
+#yeardrop-container .dropdown-menu {
+  min-width: 100px;
+  border-radius: 0px;
+}
+
+/* line 94, ../../scss/partials/_navbar.scss */
 #home-button div {
   cursor: pointer;
 }
@@ -649,23 +675,24 @@ h4 {
 /* line 71, ../../scss/partials/_table.scss */
 .bullet {
   width: 20px;
+  vertical-align: top;
 }
 
-/* line 75, ../../scss/partials/_table.scss */
+/* line 76, ../../scss/partials/_table.scss */
 .sparkline {
   line-height: 0px;
 }
-/* line 76, ../../scss/partials/_table.scss */
+/* line 77, ../../scss/partials/_table.scss */
 .sparkline .line {
   stroke-width: 1px;
 }
 
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
-  /* line 83, ../../scss/partials/_table.scss */
+  /* line 84, ../../scss/partials/_table.scss */
   .value {
     width: 100px;
   }
-  /* line 86, ../../scss/partials/_table.scss */
+  /* line 87, ../../scss/partials/_table.scss */
   .value.long {
     width: 250px;
   }

@@ -173,9 +173,7 @@
             };
 
             function initialize(params) {
-                // year checks
-
-
+               
                 if(params.year !== undefined && !isNaN(parseInt(params.year)) && 
                     params.year < lastYear && params.year > firstYear){
                     thisYear = params.year;
@@ -184,6 +182,13 @@
 
                 avb.navbar.initialize(thisYear);
                 section = params.section;
+
+                // highlight current selection
+                $('.section').each(function(){
+                    if($(this).text().toLowerCase() === section){
+                        $(this).addClass('selected');
+                    }
+                });
 
                 setMode(params.mode);
 
