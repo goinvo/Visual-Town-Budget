@@ -37,12 +37,8 @@
     // border: solid 3px $gray;
     box-sizing:border-box;
     -moz-box-sizing:border-box; /* Firefox */
-    padding: 10px;
-    border-radius: 5px;
-    line-height: 12px;
-    overflow: hidden;
+
     position: absolute;
-    text-indent: 2px;
     cursor: pointer;
 
     &:hover{
@@ -75,7 +71,7 @@
   }
 
   h1{
-    font-size: 42px;
+    font-size: 50px;
     color: #666;
     margin-bottom: 10px;
   }

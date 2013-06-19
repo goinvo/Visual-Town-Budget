@@ -1,7 +1,7 @@
 import csv, json, hashlib, zlib, sys
 
-FIRST_YEAR = 2008
-LAST_YEAR = 2018
+FIRST_YEAR = None
+LAST_YEAR = None
 MAX_LEVEL = 3
 
 class entry:
@@ -36,6 +36,8 @@ class entry:
 		return dict(key=self.key, descr=self.descr, src= self.source, url= self.url, values=values, hash=self.hashEntry()[:8], sub=children) 
 
 def convert(inputFile):
+	global FIRST_YEAR
+	global LAST_YEAR
 	csventries = []
 
 	filename = inputFile.split('/')[-1].split('.')[0]
@@ -50,8 +52,17 @@ def convert(inputFile):
 
 	#keep current row count for printing errors
 	currentRow = 0
+	yearSet = False
 
 	for row in dataline:
+
+		#initialize year-range
+		if not yearSet:
+			for key, value  in row.iteritems() :
+				if(key.isdigit()):
+					FIRST_YEAR = int(key) if FIRST_YEAR == None else min(FIRST_YEAR, int(key))
+					LAST_YEAR = int(key) if LAST_YEAR == None else max(LAST_YEAR, int(key))
+			yearSet = True
 
 		try:
 			#find name

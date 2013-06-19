@@ -114,7 +114,7 @@ body {
 .group {
   *zoom: 1;
 }
-/* line 38, ../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/utilities/general/_clearfix.scss */
+/* line 38, ../../../../../../../var/lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/utilities/general/_clearfix.scss */
 .group:after {
   content: "";
   display: table;
@@ -125,12 +125,12 @@ body {
 	File Overview:	Basic type styles.
 	Author:			Michael Bester
 */
-/* line 61, ../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/typography/_vertical_rhythm.scss */
+/* line 61, ../../../../../../../var/lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/typography/_vertical_rhythm.scss */
 * html {
   font-size: 100%;
 }
 
-/* line 64, ../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/typography/_vertical_rhythm.scss */
+/* line 64, ../../../../../../../var/lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/typography/_vertical_rhythm.scss */
 html {
   font-size: 16px;
   line-height: 1.5em;
@@ -277,38 +277,33 @@ h4 {
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   /* Firefox */
-  padding: 10px;
-  border-radius: 5px;
-  line-height: 12px;
-  overflow: hidden;
   position: absolute;
-  text-indent: 2px;
   cursor: pointer;
 }
-/* line 48, ../../scss/partials/_home.scss */
+/* line 44, ../../scss/partials/_home.scss */
 #home-map .node:hover {
   opacity: 0.8;
 }
 
-/* line 65, ../../scss/partials/_home.scss */
+/* line 61, ../../scss/partials/_home.scss */
 #welcome {
   padding: 0px;
   margin-top: 70px;
   padding-top: 30px;
   display: inline-block;
 }
-/* line 71, ../../scss/partials/_home.scss */
+/* line 67, ../../scss/partials/_home.scss */
 #welcome #welcome-hero {
   width: 60%;
   display: inline-block;
 }
-/* line 77, ../../scss/partials/_home.scss */
+/* line 73, ../../scss/partials/_home.scss */
 #welcome h1 {
-  font-size: 42px;
+  font-size: 50px;
   color: #666;
   margin-bottom: 10px;
 }
-/* line 83, ../../scss/partials/_home.scss */
+/* line 79, ../../scss/partials/_home.scss */
 #welcome #tour-link {
   text-decoration: underline;
   cursor: pointer;

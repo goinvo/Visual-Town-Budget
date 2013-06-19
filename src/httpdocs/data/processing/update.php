@@ -73,7 +73,9 @@
         exec($cmd, $output, $exitCode);
         if($exitCode === 0){
           $jsonfile = $output[0];
+          // bring files to data directory
           copy($jsonfile, '../'.$jsonfile);
+          copy($filename, '../'.$filename);
           printSuccess($filename." updated.");
         } else {
           printError($output[0]);
@@ -81,7 +83,7 @@
       }
 
       function printError($msg){
-        echo '<div class="alert alert-error">'.$msg.'</div>';
+        echo '<div class="alert alert-error" style="max-width:600px;">'.$msg.'</div>';
         exit();
       }
 
@@ -90,6 +92,7 @@
         exit();
       }
 
+      // example credential, will be changed on production server
       $user = 'admin';
       $pass = 'pass';
 
@@ -121,7 +124,7 @@
         if(move_uploaded_file($file['tmp_name'], getcwd().'/'.$filename)){
           process($filename);
         }  else {
-         printError('Error replacing old data file.');
+         printError('Unable to replace previous data file, check permissions.');
         }
       } else {
        printError('Valid files are "revenues.csv", "expenses.csv" and "funds.csv"');

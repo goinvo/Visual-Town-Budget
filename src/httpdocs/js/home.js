@@ -29,6 +29,13 @@
  		home.menubar.removeClass('purple-border');
  		home.content.show();
  		home.overlay.show();
+
+    setTimeout(function(){
+      $('#revenues-node').animate({height : 180},1000);
+      $('#expenses-node').animate({height : 180},1000);
+      $('#funds-node').animate({height : 50},1000);
+    },1000);
+
 		initialize({"section":"revenues"});
 		$('.section').removeClass('selected');
  	},
@@ -40,9 +47,6 @@
  		home.overlay.fadeOut(function(){
  			if( showTutorial || isFirstVisit() ) startTutorial();
  		});
-
-
-    
  	},
 
     isFirstVisit = function(){
