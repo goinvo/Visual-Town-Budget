@@ -24,6 +24,7 @@
   <script type="text/javascript" src ="/js/avb.js"></script>
   <script type="text/javascript" src ="/js/navbar.js"></script>
   <script type="text/javascript" src ="/js/table.js"></script>
+  <script type="text/javascript" src ="/js/statistics.js"></script>
   <script type="text/javascript" src ="/js/home.js"></script>
 
 

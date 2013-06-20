@@ -1,4 +1,4 @@
-import csv, json, hashlib, zlib, sys
+import csv, json, hashlib, zlib, sys, os
 
 FIRST_YEAR = None
 LAST_YEAR = None
@@ -35,19 +35,26 @@ class entry:
 			children.append(child.reprJSON())
 		return dict(key=self.key, descr=self.descr, src= self.source, url= self.url, values=values, hash=self.hashEntry()[:8], sub=children) 
 
-def convert(inputFile):
+
+# given a csv file generates a list of entry object,
+# each representing one row of the csv file.
+def generateList(inputFile):
 	global FIRST_YEAR
 	global LAST_YEAR
 	csventries = []
-
-	filename = inputFile.split('/')[-1].split('.')[0]
 	
-	# attempt opening file
-	try:
-		csvfile = open(inputFile, 'rU')
-	except Exception, e:
-		print('Error opening ' + inputFile)
-		exit(1)
+	# attempt opening file if inputFile is not 
+	# a file descriptor
+	if isinstance(inputFile, str):
+		filename = inputFile.split('/')[-1].split('.')[0]
+		try:
+			csvfile = open(inputFile, 'rU')
+		except Exception, e:
+			print('Error opening ' + inputFile)
+			exit(1)
+	else:
+		csvfile = inputFile
+
 	dataline = csv.DictReader(csvfile, delimiter=',', quotechar='"', dialect='excel')
 
 	#keep current row count for printing errors
@@ -92,6 +99,14 @@ def convert(inputFile):
 		#update row number (useful for printing errors)
 		currentRow += 1
 
+	csvfile.close()
+
+	return csventries
+
+# takes a flat list of entries and transforms them
+# into a tree structure
+def generateTree(csventries, filename):
+
 	#reverse list for tree creation
 	csventries.reverse()
 
@@ -133,6 +148,7 @@ def convert(inputFile):
 				stack.append(node)
 			lastNode = node
 		except Exception, e:
+			print(e)
 			print('Error reconstructing tree at node: ' + str(node))
 			exit(1)
 
@@ -159,11 +175,56 @@ def convert(inputFile):
 	#success ! print output file
 	print(filename + '.json')
 
+
+def updateHome():
+	global FIRST_YEAR, LAST_YEAR
+
+	# the files used to generate home data
+	files = ['../revenues.csv', '../expenses.csv', '../funds.csv']
+	sections = []
+
+	# add root entries from all 3 files to sections []
+	for file in files:
+		FIRST_YEAR = None
+		LAST_YEAR = None
+		try:
+			fd = open(os.path.dirname(__file__) + file, 'rU')
+			csventries = generateList(fd)
+			sections += [csventries[-1]]
+		except Exception, e:
+			print('Error in proceesing files for homepage update.')
+			exit(1)
+
+	# create root and add the 3 sections as children
+	root = entry('root','', '', '', [], 0)
+	root.children += sections
+
+	# dump data to json file
+	try:
+		outputFile = open('home.json', 'w')
+	except  Exception, e:
+		print('Error opening home.json for write.')
+		exit(1)
+
+	outputFile.write(json.dumps(root.reprJSON(), indent=4))
+	outputFile.close()
+
+	# print output file name
+	print('home.json')
+		
+def updateData(inputFile):
+	outputFile = inputFile.split('/')[-1].split('.')[0]
+	csventries = generateList(inputFile)
+	generateTree(csventries, outputFile)
+
+
 def main():
 	if len(sys.argv) < 2:
-		print('Usage: processCSV.py filename')
+		print('Usage: processCSV.py {updatehome|filename}')
+	elif (sys.argv[1] == 'updatehome'):
+		updateHome()
 	else:
-		convert(sys.argv[1])
+		updateData(sys.argv[1])
 
 if __name__ == '__main__':
 	main()

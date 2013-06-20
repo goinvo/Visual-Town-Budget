@@ -18,7 +18,6 @@
       setTimeout(function(){
         hide()
       }, 100);
-
 		}
 
  		home.content = $('#avb-home');
@@ -33,15 +32,15 @@
  	},
 
   showGraph = function(duration){
-    var data = home.data;
+    var data = home.data['sub'];
     var scale = d3.scale.linear().clamp(true).range([30,160])
-    .domain([0, d3.max(data['home'], function(d) { return d.values[yearIndex].val})]);
-    $('#revenues-node').animate({height : scale(data['home'][0].values[yearIndex].val)},duration)
-    .find('.node-value').text(formatcurrency(data['home'][0].values[yearIndex].val));
-    $('#expenses-node').animate({height : scale(data['home'][1].values[yearIndex].val)},duration)
-    .find('.node-value').text(formatcurrency(data['home'][1].values[yearIndex].val));
-    $('#funds-node').animate({height : scale(data['home'][2].values[yearIndex].val)},duration)
-    .find('.node-value').text(formatcurrency(data['home'][2].values[yearIndex].val));
+    .domain([0, d3.max(data, function(d) { return d.values[yearIndex].val})]);
+    $('#revenues-node').animate({height : scale(data[0].values[yearIndex].val)},duration)
+    .find('.node-value').text(formatcurrency(data[0].values[yearIndex].val));
+    $('#expenses-node').animate({height : scale(data[1].values[yearIndex].val)},duration)
+    .find('.node-value').text(formatcurrency(data[1].values[yearIndex].val));
+    $('#funds-node').animate({height : scale(data[2].values[yearIndex].val)},duration)
+    .find('.node-value').text(formatcurrency(data[2].values[yearIndex].val));
     $('.node-value').fadeIn(duration);
   }
 

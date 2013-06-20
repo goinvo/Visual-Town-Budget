@@ -80,6 +80,20 @@
         } else {
           printError($output[0]);
         }
+
+        // update home
+        $cmd = 'python processCSV.py updatehome';
+        $exitCode = -1;
+        exec($cmd, $output, $exitCode);
+        if($exitCode === 0){
+          $jsonfile = $output[0];
+          // bring files to data directory
+          copy('home.json', '../home.json');
+          printSuccess("Homepage data updated.");
+        } else {
+          printError($output[0]);
+        }
+
       }
 
       function printError($msg){
@@ -89,7 +103,6 @@
 
       function printSuccess($msg){
         echo '<div class="alert alert-success">'.$msg.'</div>';
-        exit();
       }
 
       // example credential, will be changed on production server
