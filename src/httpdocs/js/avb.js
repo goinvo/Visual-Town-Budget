@@ -39,7 +39,8 @@
                     source : {
                         title : "Source",
                         class : "span12 card-source ",
-                        value : function() { return "Cherry sheet"; },
+                        value : function() { return "Town of Arlington"; },
+                        link : function() { return "http://www.town.arlington.ma.us/"; },
                         side : "is the data source for this entry."
                     },
                     mean : {
