@@ -1,13 +1,8 @@
-$black: #333333;
-$gray: #aaaaaa;
-$red: rgb(167, 103, 108);
-$blue: rgb(87,118,162);
-$white: rgb(220, 223, 222);
+
 
 
 // window container
 #avb-body {
-  margin-top: 1%;
   font-weight: 200;
   
 
@@ -19,12 +14,7 @@ $white: rgb(220, 223, 222);
     padding-top: 10px;
     text-align: left;
     white-space: normal;
-
-    // border: 1px solid #ccc;
-    // border: 1px solid rgba(0, 0, 0, 0.2);
-
     background-color: #f9f9f9;
-
 
     -moz-box-shadow: 0px 0px 10px #ccc;
     -webkit-box-shadow: 0px 0px 10px #ccc;
@@ -61,12 +51,7 @@ $white: rgb(220, 223, 222);
     border:none;
     color:white;
     height:1px;
-    //background: -moz-linear-gradient(radial, 50% 50%, 0, 50% 50%, 350, from(#ccc), to(#fff));
     background: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 350, from(#ccc), to(#fff));
-};
-
-.separatorv{
-  margin-right: 20px;
 };
 
 .dataDownload{

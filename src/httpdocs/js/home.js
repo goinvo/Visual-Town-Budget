@@ -10,8 +10,13 @@
     	}
 
 		function divClick(){
-			initialize({ section : $(this).text().toLowerCase() }); 
-			hide();
+			initialize({ section : $(this).attr('data-section').toLowerCase() });
+      // timeout needed to avoid sloppy animation
+      // while calculating treemap values
+      setTimeout(function(){
+        hide()
+      }, 100);
+
 		}
 
  		home.content = $('#avb-home');
@@ -30,11 +35,19 @@
  		home.content.show();
  		home.overlay.show();
 
-    setTimeout(function(){
-      $('#revenues-node').animate({height : 180},1000);
-      $('#expenses-node').animate({height : 180},1000);
-      $('#funds-node').animate({height : 50},1000);
-    },1000);
+    $.getJSON('data/home.json', function(data) {
+      setTimeout(function(){
+        var scale = d3.scale.linear().clamp(true).range([30,160])
+        .domain([0, d3.max(data['home'], function(d) { return d.values[yearIndex].val})]);
+        $('#revenues-node').animate({height : scale(data['home'][0].values[yearIndex].val)},1000)
+        .find('.node-value').text(formatcurrency(data['home'][0].values[yearIndex].val));
+        $('#expenses-node').animate({height : scale(data['home'][1].values[yearIndex].val)},1000)
+        .find('.node-value').text(formatcurrency(data['home'][1].values[yearIndex].val));
+        $('#funds-node').animate({height : scale(data['home'][2].values[yearIndex].val)},1000)
+        .find('.node-value').text(formatcurrency(data['home'][2].values[yearIndex].val));
+        $('.node-value').fadeIn(1000);
+      },1000);
+    });
 
 		initialize({"section":"revenues"});
 		$('.section').removeClass('selected');

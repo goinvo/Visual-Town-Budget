@@ -1,9 +1,9 @@
 #avb-menubar {
   // background-color:rgb(245, 245, 245);
-  padding: 5px;
-  padding-top: 10px;
-  z-index: 1020;
-  position: relative;
+
+  font-size: $text-big;
+  padding: 15px 5px 15px 5px;
+  z-index: 1050;
   margin-top: 2px;
 
   &.purple-border{
@@ -11,32 +11,23 @@
     margin-top: 0px;
   }
 
-
   .nav{
     margin-bottom: 0px !important;
   }
 
   .entry{
-    min-height: 0px !important;
-    height: 100%;
-    bottom: 0px;
+    display: inline-block;
     position: relative;
-    height: 100%;
+  }
 
-      .center-wrap{
-          position: absolute;
-          bottom: 0;
-
-          &.centered{
-            text-align: center;
-            left:0;
-            right: 0;
-          }
-      }
+  .homebutton,
+  .menubutton {
+    cursor: pointer;
+    position: relative;
+    z-index: 1050;
   }
 
   .menubutton {
-    font-size: 1.2em;
     display: inline-block;
 
     &.selected {
@@ -50,9 +41,7 @@
       border-bottom-color: $black;
     }
 
-
     a{
-      font-size: 1em;
       color: $black;
     }
 
@@ -89,9 +78,3 @@
   }
 }
 
-
-#home-button {
-    div{
-      cursor: pointer;
-    }
-}

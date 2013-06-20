@@ -143,36 +143,35 @@ body {
   font-weight: 300;
 }
 
-/* line 24, ../../scss/partials/_typography.scss */
+/* line 26, ../../scss/partials/_typography.scss */
 h1 {
   font-size: 2em;
   line-height: 1.5em;
 }
 
-/* line 28, ../../scss/partials/_typography.scss */
+/* line 30, ../../scss/partials/_typography.scss */
 h2 {
   font-size: 1.375em;
   line-height: 2.18182em;
 }
 
-/* line 32, ../../scss/partials/_typography.scss */
+/* line 34, ../../scss/partials/_typography.scss */
 h3 {
   font-size: 1.25em;
   line-height: 1.2em;
 }
 
-/* line 37, ../../scss/partials/_typography.scss */
+/* line 39, ../../scss/partials/_typography.scss */
 h4 {
   font-size: 1.125em;
   line-height: 1.33333em;
 }
 
-/* line 9, ../../scss/partials/_avb.scss */
+/* line 5, ../../scss/partials/_avb.scss */
 #avb-body {
-  margin-top: 1%;
   font-weight: 200;
 }
-/* line 15, ../../scss/partials/_avb.scss */
+/* line 10, ../../scss/partials/_avb.scss */
 #avb-body #avb-wrap {
   position: relative;
   margin-bottom: 10px;
@@ -189,7 +188,7 @@ h4 {
 /*
 * Entry title and description
 */
-/* line 39, ../../scss/partials/_avb.scss */
+/* line 29, ../../scss/partials/_avb.scss */
 .title-head {
   font-size: 3em;
   line-height: normal;
@@ -199,18 +198,18 @@ h4 {
 /*
 * Cards and legend
 */
-/* line 48, ../../scss/partials/_avb.scss */
+/* line 38, ../../scss/partials/_avb.scss */
 .link {
   text-decoration: underline;
   cursor: pointer;
   color: black;
 }
-/* line 53, ../../scss/partials/_avb.scss */
+/* line 43, ../../scss/partials/_avb.scss */
 .link:hover {
   color: steelblue;
 }
 
-/* line 59, ../../scss/partials/_avb.scss */
+/* line 49, ../../scss/partials/_avb.scss */
 .separator:after {
   display: block;
   border: none;
@@ -219,17 +218,12 @@ h4 {
   background: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 350, from(#cccccc), to(white));
 }
 
-/* line 68, ../../scss/partials/_avb.scss */
-.separatorv {
-  margin-right: 20px;
-}
-
-/* line 72, ../../scss/partials/_avb.scss */
+/* line 57, ../../scss/partials/_avb.scss */
 .dataDownload {
-  font-size: 1.3em;
+  font-size: 1.2em;
   line-height: 2em;
 }
-/* line 76, ../../scss/partials/_avb.scss */
+/* line 61, ../../scss/partials/_avb.scss */
 .dataDownload .icon-download {
   vertical-align: baseline;
 }
@@ -264,46 +258,65 @@ h4 {
   display: inline-block;
   vertical-align: top;
   width: 38%;
-  height: 220px;
+  height: 200px;
 }
-/* line 30, ../../scss/partials/_home.scss */
+/* line 29, ../../scss/partials/_home.scss */
 #home-map #home-map-svg {
   margin: 0 auto;
   width: 300px;
   height: 100%;
 }
-/* line 36, ../../scss/partials/_home.scss */
+/* line 35, ../../scss/partials/_home.scss */
 #home-map .node {
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   /* Firefox */
+  text-align: center;
   position: absolute;
   cursor: pointer;
+  bottom: 0px;
 }
 /* line 44, ../../scss/partials/_home.scss */
+#home-map .node .node-bar {
+  display: inline-block;
+  width: 85px;
+  overflow: hidden;
+  border-radius: 5px;
+}
+/* line 50, ../../scss/partials/_home.scss */
+#home-map .node .node-bar .node-value {
+  display: none;
+  position: absolute;
+  bottom: 10px;
+  color: white;
+  font-size: 1.1em;
+  right: 0;
+  left: 0;
+}
+/* line 61, ../../scss/partials/_home.scss */
 #home-map .node:hover {
   opacity: 0.8;
 }
 
-/* line 61, ../../scss/partials/_home.scss */
+/* line 78, ../../scss/partials/_home.scss */
 #welcome {
   padding: 0px;
   margin-top: 70px;
   padding-top: 30px;
   display: inline-block;
 }
-/* line 67, ../../scss/partials/_home.scss */
+/* line 84, ../../scss/partials/_home.scss */
 #welcome #welcome-hero {
   width: 60%;
   display: inline-block;
 }
-/* line 73, ../../scss/partials/_home.scss */
+/* line 90, ../../scss/partials/_home.scss */
 #welcome h1 {
   font-size: 50px;
   color: #666;
   margin-bottom: 10px;
 }
-/* line 79, ../../scss/partials/_home.scss */
+/* line 96, ../../scss/partials/_home.scss */
 #welcome #tour-link {
   text-decoration: underline;
   cursor: pointer;
@@ -465,59 +478,60 @@ h4 {
 #cards .card-row .card-source .cardvalue:hover {
   color: steelblue;
 }
-/* line 60, ../../scss/partials/_cards.scss */
+/* line 56, ../../scss/partials/_cards.scss */
+#cards .card-row .carddesc {
+  font-size: 1.2em;
+  line-height: 1.5em;
+}
+/* line 61, ../../scss/partials/_cards.scss */
 #cards .card-row .cardvalue {
-  font-size: 2.2em;
+  font-size: 2.4em;
   line-height: 1em;
   font-family: 'Georgia';
 }
-/* line 66, ../../scss/partials/_cards.scss */
-#cards .card-row .carddesc {
-  font-size: 1em;
-}
 
-/* line 72, ../../scss/partials/_cards.scss */
+/* line 70, ../../scss/partials/_cards.scss */
 #information-container {
   position: relative;
-  padding-left: 25px;
-  padding-right: 25px;
+  padding-left: 5px;
 }
-/* line 77, ../../scss/partials/_cards.scss */
+/* line 74, ../../scss/partials/_cards.scss */
 #information-container #info-wrap {
   overflow: hidden;
   height: 100%;
 }
-/* line 82, ../../scss/partials/_cards.scss */
+/* line 79, ../../scss/partials/_cards.scss */
 #information-container #cards-wrap {
   height: 100%;
   width: 100%;
   position: relative;
 }
 
-/* line 89, ../../scss/partials/_cards.scss */
+/* line 86, ../../scss/partials/_cards.scss */
 #legend-wrap {
   position: absolute;
   height: 90%;
   left: -100%;
   overflow-y: auto;
+  font-size: 1.2em;
+  line-height: 1.5em;
 }
-/* line 95, ../../scss/partials/_cards.scss */
+/* line 94, ../../scss/partials/_cards.scss */
 #legend-wrap .legend-label {
   width: 16px;
   height: 16px;
   border-radius: 8px;
 }
-/* line 101, ../../scss/partials/_cards.scss */
+/* line 100, ../../scss/partials/_cards.scss */
 #legend-wrap tr :first-child {
   margin-right: 5px;
 }
 
 /* line 1, ../../scss/partials/_navbar.scss */
 #avb-menubar {
-  padding: 5px;
-  padding-top: 10px;
-  z-index: 1020;
-  position: relative;
+  font-size: 1.2em;
+  padding: 15px 5px 15px 5px;
+  z-index: 1050;
   margin-top: 2px;
 }
 /* line 9, ../../scss/partials/_navbar.scss */
@@ -525,80 +539,66 @@ h4 {
   border-top: 2px solid #d63366;
   margin-top: 0px;
 }
-/* line 15, ../../scss/partials/_navbar.scss */
+/* line 14, ../../scss/partials/_navbar.scss */
 #avb-menubar .nav {
   margin-bottom: 0px !important;
 }
-/* line 19, ../../scss/partials/_navbar.scss */
+/* line 18, ../../scss/partials/_navbar.scss */
 #avb-menubar .entry {
-  min-height: 0px !important;
-  height: 100%;
-  bottom: 0px;
+  display: inline-block;
   position: relative;
-  height: 100%;
 }
-/* line 26, ../../scss/partials/_navbar.scss */
-#avb-menubar .entry .center-wrap {
-  position: absolute;
-  bottom: 0;
+/* line 24, ../../scss/partials/_navbar.scss */
+#avb-menubar .homebutton,
+#avb-menubar .menubutton {
+  cursor: pointer;
+  position: relative;
+  z-index: 1050;
 }
 /* line 30, ../../scss/partials/_navbar.scss */
-#avb-menubar .entry .center-wrap.centered {
-  text-align: center;
-  left: 0;
-  right: 0;
-}
-/* line 38, ../../scss/partials/_navbar.scss */
 #avb-menubar .menubutton {
-  font-size: 1.2em;
   display: inline-block;
 }
-/* line 43, ../../scss/partials/_navbar.scss */
+/* line 34, ../../scss/partials/_navbar.scss */
 #avb-menubar .menubutton.selected a {
   color: #db4e86;
 }
-/* line 48, ../../scss/partials/_navbar.scss */
+/* line 39, ../../scss/partials/_navbar.scss */
 #avb-menubar .menubutton .caret {
   border-top-color: #333333;
   border-bottom-color: #333333;
 }
-/* line 54, ../../scss/partials/_navbar.scss */
+/* line 44, ../../scss/partials/_navbar.scss */
 #avb-menubar .menubutton a {
-  font-size: 1em;
   color: #333333;
 }
-/* line 59, ../../scss/partials/_navbar.scss */
+/* line 48, ../../scss/partials/_navbar.scss */
 #avb-menubar .menubutton i {
   vertical-align: baseline;
 }
-/* line 63, ../../scss/partials/_navbar.scss */
+/* line 52, ../../scss/partials/_navbar.scss */
 #avb-menubar .menubutton.margin {
   margin-right: 20px;
 }
 
-/* line 70, ../../scss/partials/_navbar.scss */
+/* line 59, ../../scss/partials/_navbar.scss */
 #yeardrop-container {
   min-width: 100px;
 }
-/* line 77, ../../scss/partials/_navbar.scss */
+/* line 66, ../../scss/partials/_navbar.scss */
 #yeardrop-container a {
   padding-left: 20px;
 }
-/* line 80, ../../scss/partials/_navbar.scss */
+/* line 69, ../../scss/partials/_navbar.scss */
 #yeardrop-container a b {
   float: right;
   margin-right: 5px;
   vertical-align: baseline;
 }
-/* line 86, ../../scss/partials/_navbar.scss */
+/* line 75, ../../scss/partials/_navbar.scss */
 #yeardrop-container .dropdown-menu {
   min-width: 100px;
   border-radius: 0px;
-}
-
-/* line 94, ../../scss/partials/_navbar.scss */
-#home-button div {
-  cursor: pointer;
 }
 
 /* line 2, ../../scss/partials/_table.scss */
@@ -763,7 +763,7 @@ h4 {
 #navigation .textdiv {
   /* text in the boxes */
   padding: 8px;
-  font-family: "Open Sans", Helvetica, Arial, sans-serif;
+  font-family: "Open Sans", sans-serif;
 }
 /* line 80, ../../scss/partials/_navigation.scss */
 #navigation .textdiv .titleLabel,
@@ -773,7 +773,7 @@ h4 {
 }
 /* line 88, ../../scss/partials/_navigation.scss */
 #navigation .textdiv .valueLabel {
-  font-size: 1.3em;
+  font-size: 1.2em;
 }
 
 /* line 95, ../../scss/partials/_navigation.scss */

@@ -21,11 +21,10 @@
 }
 
 #home-map{
-  // display: none;
-  display: inline-block; //---> default
+  display: inline-block;
   vertical-align: top;
   width: 38%;
-  height: 220px;
+  height: 200px;
 
   #home-map-svg{
     margin: 0 auto;
@@ -37,9 +36,27 @@
     // border: solid 3px $gray;
     box-sizing:border-box;
     -moz-box-sizing:border-box; /* Firefox */
-
+    text-align: center;
     position: absolute;
     cursor: pointer;
+    bottom: 0px;
+
+    .node-bar {
+      display:inline-block; 
+      width:85px;
+      overflow: hidden;
+      border-radius: 5px;
+
+      .node-value{
+        display: none;
+        position:absolute; 
+        bottom:10px;
+        color: white;
+        font-size: 1.1em;
+        right:0; 
+        left:0;
+      }
+    }
 
     &:hover{
       opacity: 0.8;
