@@ -236,6 +236,12 @@
                 yearIndex = thisYear - firstYear;
                 avb.navigation.update(root);
                 avb.navigation.open(root.hash);
+
+                // update homepage graph if needed
+                if ($('#avb-home').is(":visible")) {
+                    avb.home.showGraph(100);
+                }
+
             }
 
             function hexToRgb(hex) {

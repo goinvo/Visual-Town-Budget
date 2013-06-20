@@ -6,6 +6,8 @@
     init = function(data) {
     	function overlayClick(event){
     		event.stopPropagation();
+        // clicking on overlay is the same as clicking on revenues
+        $('.section').first().addClass('selected');
     		hide();
     	}
 
@@ -30,6 +32,19 @@
 
  	},
 
+  showGraph = function(duration){
+    var data = home.data;
+    var scale = d3.scale.linear().clamp(true).range([30,160])
+    .domain([0, d3.max(data['home'], function(d) { return d.values[yearIndex].val})]);
+    $('#revenues-node').animate({height : scale(data['home'][0].values[yearIndex].val)},duration)
+    .find('.node-value').text(formatcurrency(data['home'][0].values[yearIndex].val));
+    $('#expenses-node').animate({height : scale(data['home'][1].values[yearIndex].val)},duration)
+    .find('.node-value').text(formatcurrency(data['home'][1].values[yearIndex].val));
+    $('#funds-node').animate({height : scale(data['home'][2].values[yearIndex].val)},duration)
+    .find('.node-value').text(formatcurrency(data['home'][2].values[yearIndex].val));
+    $('.node-value').fadeIn(duration);
+  }
+
  	show = function(){
  		home.menubar.removeClass('purple-border');
  		home.content.show();
@@ -37,15 +52,8 @@
 
     $.getJSON('data/home.json', function(data) {
       setTimeout(function(){
-        var scale = d3.scale.linear().clamp(true).range([30,160])
-        .domain([0, d3.max(data['home'], function(d) { return d.values[yearIndex].val})]);
-        $('#revenues-node').animate({height : scale(data['home'][0].values[yearIndex].val)},1000)
-        .find('.node-value').text(formatcurrency(data['home'][0].values[yearIndex].val));
-        $('#expenses-node').animate({height : scale(data['home'][1].values[yearIndex].val)},1000)
-        .find('.node-value').text(formatcurrency(data['home'][1].values[yearIndex].val));
-        $('#funds-node').animate({height : scale(data['home'][2].values[yearIndex].val)},1000)
-        .find('.node-value').text(formatcurrency(data['home'][2].values[yearIndex].val));
-        $('.node-value').fadeIn(1000);
+        home.data = data;
+        showGraph(1000);
       },1000);
     });
 
@@ -78,6 +86,7 @@
   return{
   	initialize : init,
   	show : show,
+    showGraph : showGraph,
   	hide : hide
   }
 }();
