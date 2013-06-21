@@ -1,30 +1,32 @@
 <!DOCTYPE HTML>
-<meta charset="utf-8">
-
 <html>
 <head>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
   <title>Arlington Visual Budget</title>
 
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:700,300' rel='stylesheet' type='text/css'>  
   <link href="/css/lib/bootstrap/bootstrap.css" rel="stylesheet">
-  <link href="/css/lib/checkbox/checkbox.css" rel="stylesheet">
-  <script src="/js/lib/mustache/mustache.js"></script>
+  <link rel="stylesheet" type="text/css" href="/css/lib/intro/introjs.min.css">
   <link rel="stylesheet" type="text/css" href="/css/global.css">
   <link rel="stylesheet" media="print" type="text/css" href="/css/print.css">
+  <script type="text/javascript" src="/js/lib/mustache/mustache.js"></script>
   <script type="text/javascript" src ="/js/lib/d3/d3.v3.min.js"></script>
   <script type="text/javascript" src ="/js/lib/jquery/jquery-1.9.1.min.js"></script>
   <script type="text/javascript" src ="/js/lib/bootstrap.min.js"></script>
   <script type="text/javascript" src ="/js/lib/detectmobilebrowser.js"></script>
+  <script type="text/javascript" src ="/js/lib/intro/intro.min.js"></script>
+  <script type="text/javascript" src ="/js/lib/cookie/jquery.cookie.js"></script>
   <script type="text/javascript" src ="/js/treemap.js"></script>
   <script type="text/javascript" src ="/js/chart.js"></script>
   <script type="text/javascript" src ="/js/cards.js"></script>
   <script type="text/javascript" src ="/js/avb.js"></script>
   <script type="text/javascript" src ="/js/navbar.js"></script>
   <script type="text/javascript" src ="/js/table.js"></script>
+  <script type="text/javascript" src ="/js/statistics.js"></script>
+  <script type="text/javascript" src ="/js/home.js"></script>
 
-  <!-- change this -->
-<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,300' rel='stylesheet' type='text/css'>  
 
   <script>
   $(document).ready(function(){
@@ -49,65 +51,58 @@
         if(isset($_GET["mode"])){
           $params['mode'] = $_GET["mode"];
         };
-        echo 'initialize('.json_encode($params).')';
+        echo 'initialize('.json_encode($params).');';
       } 
     } else {
-      echo('initialize({section : "revenues"})');
+      echo('avb.home.initialize();');
+      echo('avb.home.show();');
     }
     ?>
   });
 
   </script>
 
-
+</head>
 
   <body>
-  <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-10273473-12', 'arlingtonvisualbudget.org');
-  ga('send', 'pageview');
+    ga('create', 'UA-10273473-12', 'arlingtonvisualbudget.org');
+    ga('send', 'pageview');
 
-  </script>
-
-  <?php
-    require_once 'includes/navbar.php';
-  ?>
-
-  <div class="container" id="avb-body">
-    <div class="row-fluid" id="avb-wrap" style="width:auto;">
+    </script>
 
     <?php
-    
-    if(isset($_GET["page"])) {
-      if(array_key_exists($_GET["page"], $allpages)) {
-         require_once 'includes/'.$allpages[$_GET["page"]];
-      }
-    } else {
-      // homepage
-      require_once 'includes/homescreen.php';
-    }
-    
+      require_once 'includes/home.php';
+      require_once 'includes/navbar.php';
+      require_once 'includes/templates.php';
     ?>
 
+    <div class="container" id="avb-body">
+      <div class="row-fluid" id="avb-wrap" style="width:auto;">
+        <?php
+        if(isset($_GET["page"])) {
+          if(array_key_exists($_GET["page"], $allpages)) {
+           require_once 'includes/'.$allpages[$_GET["page"]];
+         }
+       } else {
+      }
 
+      ?>
     </div>
   </div>
 
-  <?php
-    require_once 'includes/templates.php';
-  ?>
-
-
-    <div id="footer">
-      <a class="link" href="http://www.town.arlington.ma.us/">Town of Arlington</a> - 
-      <a class="link" href="http://www.goinvo.com">by Involution Studios</a> -
-      <a class="link" href="/opendata"> Open Data + Code </a>
+  <div id="footer">
+    <a class="link" href="http://www.town.arlington.ma.us/">Town of Arlington</a> - 
+    <a class="link" href="http://www.goinvo.com">by Involution Studios</a> -
+    <a class="link" href="/opendata"> Open Data + Code</a> -
+    <a class="link" href="javascript:;" onclick="fby.push(['showForm', '4389']);return false;" data-step="4" data-intro="Something not quite right? What needs more clarity? Send us your feedback and we'll get back to you within 1 business day." data-position="top" >Feedback</a>
   </div>
 
-  </body>
+</body>
 
-  </html>
+</html>

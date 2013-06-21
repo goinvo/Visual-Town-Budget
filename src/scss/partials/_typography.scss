@@ -9,17 +9,19 @@ body {
 	color: $base-font-color;
 	font-family: 'Open Sans', sans-serif;
 	font-weight: 300;
+
 }
 
-$text-title: 2.2em;
-$text-big: 1.3em;
-$text-small: 0.7em;
+$text-title: 2.4em;
+$text-big: 1.2em;
+$text-small: 0.8em;
 $text-bold: 500;
 
-
-@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
-	$text-small: 1em;
-}
+$black: #333333;
+$gray: #aaaaaa;
+$red: rgb(167, 103, 108);
+$blue: rgb(87,118,162);
+$white: rgb(220, 223, 222);
 
 h1 {
 	@include adjust-font-size-to($base-font-size * 2);

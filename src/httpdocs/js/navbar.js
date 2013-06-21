@@ -1,54 +1,48 @@
 var avb = avb || {};
 
 avb.navbar = function(){
-	var dummy,
+	var initialize = function(){
+		
+		// year dropdown (desktop browsers)
+		$dropdown = $('#yeardrop-container');
+		$dropdownLabel = $('#yeardrop-label');
+		$dropdownList = $('#yeardrop-list');
 
-	initialize = function(){
-		home = true;
-		$('#home-button').unbind();
-		$('#home-button').click(function(d) {
-			window.location =  '/';
-		});
-
-	},
-
-	enableYears = function(){
-		// year processing
-
+		// year selector (mobile browsers)
+		$selector = $('#yeardrop-container-mobile');
 		if(!jQuery.browser.mobile) {
 
-			$('#yeardrop-list').html('');
+			$dropdownList.html('');
 			for(var i=firstYear; i<=lastYear; i++) {
 				var html = '<li role="presentation"><a role="menuitem" tabindex="-1" href="#">' + i +'</a></li>';
-				$('#yeardrop-list').append(html);
-				$('#yeardrop-list li :last').click(function(event) {
+				$dropdownList.append(html);
+				$dropdownList.find('li :last').click(function(event) {
 					event.preventDefault();
 					var year = parseInt($(this).text());
-					$('#yeardrop-label').html(year + ' <b class="caret"></b>');
+					$dropdownLabel.html(year + ' <b class="caret"></b>');
 					changeyear(year);
-					$('#yeardrop-container').removeClass('open');
+					$dropdown.removeClass('open');
 				});
 			};
-			$('#yeardrop-label').html(thisYear + ' <b class="caret"></b>');
-			$('#yeardrop-container').show();
+			$dropdownLabel.html(thisYear + ' <b class="caret"></b>');
+			$dropdown.show();
 		} else {
-			$('#yeardrop-container-mobile').html('');
+			$selector.html('');
 			for(var i=firstYear; i<=lastYear; i++) {
 				var html = '<option'
-				+ ((i === thisYear) ? ' selected="selected"' : ' ')
+				+ ((i == thisYear) ? ' selected="selected"' : ' ')
 				+ 'value="' + i + '">' + i + '</option>';
-				$('#yeardrop-container-mobile').append(html);
+				$selector.append(html);
 			}
-			$('#yeardrop-container-mobile').change(function(){
-				changeyear(parseInt($('#yeardrop-container-mobile').val()));
+			$selector.change(function(){
+				changeyear(parseInt($selector.val()));
 			})
-			$('#yeardrop-container-mobile').show();
+			$selector.show();
 		}
 	};
 
 return{
-	initialize : initialize,
-	enableYears : enableYears
+	initialize : initialize
 
 }
 }();

@@ -1,96 +1,101 @@
+#avb-home, #overlay {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+
 #avb-home{
-
-  margin-top:10px;
-  margin-bottom: 10px;
-
-  border: 1px solid #ccc;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  border-radius: 8px;
-
-  -moz-box-shadow: 0px 0px 10px #888;
-  -webkit-box-shadow: 0px 0px 10px #888;
-  box-shadow: 0px 0px 10px #888;
-
-  background-color: white;
-
-
-  #home-img{
-    width: 100%;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
-  }
-
-  #home-content{
-    width: 100%;
-  }
-
+  background-image: url(/img/bg_avb.png);
+  z-index: 1010;
+  border-bottom: 2px solid rgb(214,51,102);
+  display: none;
 }
 
-.marketing {
-  .span4 {
+#overlay{
+  height: 100%;
+  z-index: 1000;
+  background-color: #000;
+  opacity: 0.5;
+  display: none;
+}
+
+#home-map{
+  display: inline-block;
+  vertical-align: top;
+  width: 38%;
+  height: 200px;
+
+  #home-map-svg{
+    margin: 0 auto;
+    width: 300px;
+    height: 100%;
+  }
+
+  .node {
+    // border: solid 3px $gray;
+    box-sizing:border-box;
+    -moz-box-sizing:border-box; /* Firefox */
     text-align: center;
-  }
-  h2 {
-    font-weight: normal;
-  }
-  .span4 p {
-    margin-left: 10px;
-    margin-right: 10px;
-  }
-}
-
-@media (max-width: 979px) {
-  .container.navbar-wrapper {
-    margin-bottom: 0;
-    width: auto;
-  }
-  .carousel {
-    .item {
-      height: 500px;
-    }
-    img {
-      width: auto;
-      height: 500px;
-    }
-  }
-}
-
-@media (max-width: 767px) {
-  .carousel {
-    margin-left: -20px;
-    margin-right: -20px;
-    .container! {}
-    .item, img {
-      height: 300px;
-    }
-  }
-  .carousel-caption {
-    width: 65%;
-    padding: 0 70px;
-    margin-top: 100px;
-    h1 {
-      font-size: 30px;
-    }
-    .lead, .btn {
-      font-size: 18px;
-    }
-  }
-  .marketing .span4 + .span4 {
-    margin-top: 40px;
-  }
-}
-
-
-/*
-* Opendata section
-*/
-
-.dataDownload {
-  padding: 15px;
-  font-size: $text-big;
-  a {
+    position: absolute;
     cursor: pointer;
+    bottom: 0px;
+
+    .node-bar {
+      display:inline-block; 
+      width:85px;
+      overflow: hidden;
+      border-radius: 5px;
+
+      .node-value{
+        display: none;
+        position:absolute; 
+        bottom:10px;
+        color: white;
+        font-size: 1.1em;
+        right:0; 
+        left:0;
+      }
+    }
+
+    &:hover{
+      opacity: 0.8;
+    }
   }
 
 }
 
+// twitter bootstrap changes
+// .hero-unit h1 {
+//   margin-bottom: 0;
+//   font-size: 60px;
+//   line-height: 1;
+//   letter-spacing: -1px;
+//   color: inherit;
+// }
+
+
+#welcome{
+  padding: 0px;
+  margin-top: 70px;
+  padding-top: 30px;
+  display: inline-block;
+
+  #welcome-hero{
+    width: 60%; //----> DEFAULT
+    // width: 75%;
+    display: inline-block;
+  }
+
+  h1{
+    font-size: 50px;
+    color: #666;
+    margin-bottom: 10px;
+  }
+
+  #tour-link{
+    text-decoration: underline;
+    cursor: pointer;
+    color: black;
+  }
+}

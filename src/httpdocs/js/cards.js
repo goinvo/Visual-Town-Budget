@@ -5,7 +5,6 @@ avb.cards = function(){
     cardstack = [],
 
     initialize = function(){
-        log('INIT CARDS');
         cardstack = [];
         deck = decks[section];
     },
@@ -33,6 +32,8 @@ avb.cards = function(){
         for(var i=0; i < deck.length; i++) {
             cardstack[i].html(Mustache.render($('#card-template').html(),deck[i]));
             cardstack[i].select(".cardvalue").html(deck[i].value(data));
+            var link = typeof(deck[i].link) === 'function' ? deck[i].link() : '';
+            cardstack[i].attr('onclick', "window.location='" + link + "'");
             cardstack[i].select(".carddesc").html(
                 (typeof(deck[i].side) === 'string') ? deck[i].side : deck[i].side(data));
         }

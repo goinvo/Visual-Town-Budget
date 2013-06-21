@@ -1,8 +1,9 @@
 <script type="text/html" id="treemap-template">
 
-
-
 <div id="information-container" class="span6">
+
+  <div data-intro='See the basic financial summary and high level data story.' data-step='1' data-position="right">
+
   <div class="title-head" style="height:70px;">
     <span class="text" > </span>
   </div>
@@ -19,18 +20,27 @@
       <div id="cards" > </div>
     </div>
   </div>
-  <div id="chart-wrap" class="row-fluid" > 
+
+  </div>
+
+  <div id="chart-wrap" class="row-fluid" data-intro="Explore how the town revenues changed over time. It's interactive: try pulling the graph line!" data-step='2' data-position="right"> 
     <div id='chart' class="chart"> </div>
   </div>
 </div>
 
-<div id="navigation-container" class="span6">
+<div id="navigation-container" class="span6" >
   <div class="title-head" style="height:70px;">
     <button id="zoombutton" class="btn pull-right">
       <i class="icon-zoom-out"></i> Zoom out
     </button>
   </div>
-  <div id="navigation" > </div>
+  <div id="navigation" data-step="3" data-intro="The xray of the financials... Zoom into the data details by touching a block. How cool was that? " data-position="left">  
+  <div id="ie-popover">
+    <div class="text"></div>
+    <div class="arrow"> </div> 
+  </div>
+  </div>
+  
 </div>
 
   </script>

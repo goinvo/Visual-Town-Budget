@@ -1,16 +1,40 @@
 #avb-menubar {
-  border-bottom: 1px solid $gray;
-  background-color:rgb(245, 245, 245);
-  padding: 5px;
+  // background-color:rgb(245, 245, 245);
+
+  font-size: $text-big;
+  padding: 15px 5px 15px 5px;
+  z-index: 1050;
+  margin-top: 2px;
+
+  &.purple-border{
+    border-top: 2px solid rgb(214,51,102);
+    margin-top: 0px;
+  }
 
   .nav{
     margin-bottom: 0px !important;
   }
 
-  .menubutton {
-    font-size: 1.2em;
-    margin-top:12px;
+  .entry{
     display: inline-block;
+    position: relative;
+  }
+
+  .homebutton,
+  .menubutton {
+    cursor: pointer;
+    position: relative;
+    z-index: 1050;
+  }
+
+  .menubutton {
+    display: inline-block;
+
+    &.selected {
+      a{
+        color: rgb(219, 78, 134);
+      }
+    }
 
     .caret{
       border-top-color: $black;
@@ -18,12 +42,11 @@
     }
 
     a{
-      font-size: 1em;
       color: $black;
     }
 
     i{
-      margin-top:6px;
+      vertical-align: baseline;
     }
 
     &.margin{
@@ -33,12 +56,25 @@
   }
 }
 
-.centered{
-  text-align: center;
+#yeardrop-container{
+
+  &.open{
+
+  }
+
+  min-width: 100px;
+  a {
+    padding-left: 20px;
+
+    b{
+      float: right;
+      margin-right: 5px;
+      vertical-align: baseline;
+    }
+  }
+  .dropdown-menu{
+    min-width: 100px;
+    border-radius: 0px;
+  }
 }
 
-#home-button {
-    div{
-      cursor: pointer;
-    }
-}

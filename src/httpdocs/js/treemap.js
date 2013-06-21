@@ -106,7 +106,7 @@ display = function(d) {
         var g1 = nav.insert("g", ".grandparent")
         .datum(d)
         .attr("class", "depth")
-        .on("click", function(){
+        .on("click", function(event){
             zoneClick.call(this, d3.select(this).datum(), true);
         })
 
@@ -119,7 +119,7 @@ display = function(d) {
         nav.grandparent
         .datum((d.parent === undefined) ? d : d.parent)
         .attr("nodeid", (d.parent === undefined) ? d.hash : d.parent.hash)
-        .on("click", function(){
+        .on("click", function(event){
             zoneClick.call(this, d3.select(this).datum(), true);
         });
 
@@ -129,7 +129,7 @@ display = function(d) {
         /* transition on child click */
         g.filter(function(d) { return d.sub; })
         .classed("children", true)
-        .on("click", function(){
+        .on("click", function(event){
             zoneClick.call(this, d3.select(this).datum(), true);
         })
 
@@ -168,13 +168,18 @@ display = function(d) {
         addChilds(d, g);
 
         /* Adding a foreign object instead of a text object, allows for text wrapping */
+
+        if(ie()){
+            nav.on('mouseout', function(){ d3.select('#ie-popover').style('display', 'none')});
+            return g;
+        }
+
         g.each(function(){
 
             var label = d3.select(this).append("foreignObject")
             .call(rect)
             .attr("class","foreignobj")
             .append("xhtml:div") 
-            .attr("dy", ".75em")
             .html(function(d) { 
                 var title = '<div class="titleLabel">' + d.key + '</div>',
                     values = '<div class="valueLabel">' + formatcurrency(d.values[yearIndex].val) + '</div>';
@@ -189,8 +194,58 @@ display = function(d) {
 
 }
 
+ieLabels = function(d){
+
+    function attachPopoverIe(obj, title, descr){
+        d3.select(obj).on('mouseover',function(){
+            var rect = d3.select(this).select('.parent');
+            var coords = [parseFloat(rect.attr('x')), 
+                          parseFloat(rect.attr('y'))];
+            var x = coords[0] + parseFloat(rect.attr('width'))/2 - 75;
+            d3.select('#ie-popover').select('.text').text(title);
+            d3.select('#ie-popover').style('display', 'block')
+            .style('left', (x).px()).style('top', (coords[1]).px());
+        })
+    }
+
+    var label = d3.select(this).append("text")
+    .call(rect).attr('dy','1.5em').attr('dx','0.5em')
+    .text(function(d) {return d.key})
+    textLabels.call(this);
+
+
+    var d = d3.select(this).datum(),
+    containerHeight = nav.y(d.y + d.dy) - nav.y(d.y) ,
+    containerWidth = nav.x(d.x + d.dx) - nav.x(d.x);
+
+    if (containerHeight < 40 || containerWidth < 150) {
+        d3.select(this).classed("no-label", true);
+        popover = true;
+    }
+
+    attachPopoverIe(this, d.key, d.descr);
+
+}
 
 textLabels = function(d){
+
+    function attachPopover(obj, title, descr){
+        $(obj).find('div').first().popover(
+            {container : 'body', 
+                trigger : 'hover', 
+                placement: function (context, source) {
+                    var position = $(source).position();
+                    if (position.top < 110){
+                        return "left";
+                    } else {
+                        return "top";
+                    }
+                },
+                title : (d.descr !== '' && d.title !== '') ? d.key : '',
+                content : (d.descr !== '') ? d.descr : d.key
+            });
+    }
+
     var d = d3.select(this).datum(),
         containerHeight = nav.y(d.y + d.dy) - nav.y(d.y) ,
         containerWidth = nav.x(d.x + d.dx) - nav.x(d.x),
@@ -200,16 +255,21 @@ textLabels = function(d){
     $(this).find('div').first().popover('destroy');
     d3.select(this).classed("no-value", false);
     d3.select(this).classed("no-label", false);
-    d3.select(this).select('div').style("height", '');
+    div.height(Math.max(0,containerHeight-16));
 
-    if (containerHeight < title.outerHeight() || containerWidth < 60) {
+    var popover = false;
+
+    if (containerHeight < title.outerHeight() || containerHeight < 40 || containerWidth < 60) {
         d3.select(this).classed("no-label", true);
-        d3.select(this).select('div').style("height", containerHeight.px());
-        $(this).find('div').first().popover({container : 'body', trigger : 'hover', placement: 'top', content : d.key});
+        popover = true;
     }
-    if(containerHeight < div.outerHeight()) {
+    if(containerHeight < div.height() || containerHeight < 80 || containerWidth < 90) {
         d3.select(this).classed("no-value", true);
     }
+    if(popover || d.descr !== '' || containerWidth < 80){
+        attachPopover(this, d.key, d.descr);
+    }
+
 }
 
 updateTitle = function (data) {
@@ -240,8 +300,11 @@ open = function(nodeId, pushUrl) {
     },
 
 zoneClick= function(d, click) {
-
-    event.stopPropagation();
+    var event = window.event || event;
+    if(event) {
+        event.cancelBubble = true;
+        if(event.stopPropagation) event.stopPropagation();
+    }
 
     if (nav.transitioning || !d || !currentSelection) return;
 
@@ -253,6 +316,8 @@ zoneClick= function(d, click) {
     if(click === true) {
         pushUrl( section, thisYear, mode, d.hash);
     }
+
+    nav.selectAll('text').remove();
 
       updateSelection(d, yearIndex, d.color);
 
@@ -284,10 +349,15 @@ zoneClick= function(d, click) {
       t1.selectAll("rect").call(rect);
       t2.selectAll("rect").call(rect);
       t2.each(function(){
+        if(ie()) return;
         textLabels.call(this);
       })
       t2.each("end", function(){
-        textLabels.call(this);
+        if(ie()) {
+            ieLabels.call(this);
+        } else {
+            textLabels.call(this);
+        }
       })
 
       // Remove the old node when the transition is finished.

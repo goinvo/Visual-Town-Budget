@@ -32,7 +32,7 @@ body {
   -khtml-user-select: none;
   -webkit-user-select: none;
   user-select: none;
-  background-image: url(/img/debut_light.png);
+  background-image: url(/img/bg_avb.png);
 }
 
 /*
@@ -81,31 +81,36 @@ body {
   }
 
   /* line 75, ../../scss/partials/_structure.scss */
+  h1 {
+    font-size: 2.5em !important;
+  }
+
+  /* line 79, ../../scss/partials/_structure.scss */
   .container {
     width: 980px;
   }
 
-  /* line 83, ../../scss/partials/_structure.scss */
+  /* line 87, ../../scss/partials/_structure.scss */
   #avb-body #information-container #chart-wrap {
     height: 220px;
   }
-  /* line 87, ../../scss/partials/_structure.scss */
+  /* line 91, ../../scss/partials/_structure.scss */
   #avb-body #information-container #info-wrap {
     height: 250px;
   }
-  /* line 93, ../../scss/partials/_structure.scss */
+  /* line 97, ../../scss/partials/_structure.scss */
   #avb-body #navigation-container,
   #avb-body #information-container {
     height: 550px;
   }
 }
-/* line 99, ../../scss/partials/_structure.scss */
+/* line 103, ../../scss/partials/_structure.scss */
 #footer {
   text-align: center;
   margin-bottom: 5px;
 }
 
-/* line 107, ../../scss/partials/_structure.scss */
+/* line 111, ../../scss/partials/_structure.scss */
 .group {
   *zoom: 1;
 }
@@ -138,37 +143,35 @@ body {
   font-weight: 300;
 }
 
-/* line 24, ../../scss/partials/_typography.scss */
+/* line 26, ../../scss/partials/_typography.scss */
 h1 {
   font-size: 2em;
   line-height: 1.5em;
 }
 
-/* line 28, ../../scss/partials/_typography.scss */
+/* line 30, ../../scss/partials/_typography.scss */
 h2 {
   font-size: 1.375em;
   line-height: 2.18182em;
 }
 
-/* line 32, ../../scss/partials/_typography.scss */
+/* line 34, ../../scss/partials/_typography.scss */
 h3 {
   font-size: 1.25em;
   line-height: 1.2em;
 }
 
-/* line 37, ../../scss/partials/_typography.scss */
+/* line 39, ../../scss/partials/_typography.scss */
 h4 {
   font-size: 1.125em;
   line-height: 1.33333em;
 }
 
-/* line 9, ../../scss/partials/_avb.scss */
+/* line 5, ../../scss/partials/_avb.scss */
 #avb-body {
-  margin-top: 1%;
   font-weight: 200;
-  background-color: #f9f9f9;
 }
-/* line 15, ../../scss/partials/_avb.scss */
+/* line 10, ../../scss/partials/_avb.scss */
 #avb-body #avb-wrap {
   position: relative;
   margin-bottom: 10px;
@@ -176,9 +179,7 @@ h4 {
   padding-top: 10px;
   text-align: left;
   white-space: normal;
-  border: 1px solid #ccc;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  border-radius: 8px;
+  background-color: #f9f9f9;
   -moz-box-shadow: 0px 0px 10px #ccc;
   -webkit-box-shadow: 0px 0px 10px #ccc;
   box-shadow: 0px 0px 10px #ccc;
@@ -187,7 +188,7 @@ h4 {
 /*
 * Entry title and description
 */
-/* line 37, ../../scss/partials/_avb.scss */
+/* line 29, ../../scss/partials/_avb.scss */
 .title-head {
   font-size: 3em;
   line-height: normal;
@@ -197,144 +198,148 @@ h4 {
 /*
 * Cards and legend
 */
-/* line 46, ../../scss/partials/_avb.scss */
+/* line 38, ../../scss/partials/_avb.scss */
 .link {
   text-decoration: underline;
-  cursor: auto;
+  cursor: pointer;
   color: black;
 }
-/* line 51, ../../scss/partials/_avb.scss */
+/* line 43, ../../scss/partials/_avb.scss */
 .link:hover {
   color: steelblue;
 }
 
-/* line 57, ../../scss/partials/_avb.scss */
+/* line 49, ../../scss/partials/_avb.scss */
 .separator:after {
   display: block;
   border: none;
   color: white;
   height: 1px;
-  background: black;
   background: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 350, from(#cccccc), to(white));
 }
 
-/* line 66, ../../scss/partials/_avb.scss */
-.separatorv {
-  margin-right: 20px;
+/* line 57, ../../scss/partials/_avb.scss */
+.dataDownload {
+  font-size: 1.2em;
+  line-height: 2em;
+}
+/* line 61, ../../scss/partials/_avb.scss */
+.dataDownload .icon-download {
+  vertical-align: baseline;
 }
 
 /* line 1, ../../scss/partials/_home.scss */
+#avb-home, #overlay {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+
+/* line 8, ../../scss/partials/_home.scss */
 #avb-home {
-  margin-top: 10px;
-  margin-bottom: 10px;
-  border: 1px solid #ccc;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  border-radius: 8px;
-  -moz-box-shadow: 0px 0px 10px #888;
-  -webkit-box-shadow: 0px 0px 10px #888;
-  box-shadow: 0px 0px 10px #888;
-  background-color: white;
+  background-image: url(/img/bg_avb.png);
+  z-index: 1010;
+  border-bottom: 2px solid #d63366;
+  display: none;
 }
-/* line 17, ../../scss/partials/_home.scss */
-#avb-home #home-img {
-  width: 100%;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
+
+/* line 15, ../../scss/partials/_home.scss */
+#overlay {
+  height: 100%;
+  z-index: 1000;
+  background-color: #000;
+  opacity: 0.5;
+  display: none;
 }
+
 /* line 23, ../../scss/partials/_home.scss */
-#avb-home #home-content {
-  width: 100%;
+#home-map {
+  display: inline-block;
+  vertical-align: top;
+  width: 38%;
+  height: 200px;
 }
-
-/* line 30, ../../scss/partials/_home.scss */
-.marketing .span4 {
+/* line 29, ../../scss/partials/_home.scss */
+#home-map #home-map-svg {
+  margin: 0 auto;
+  width: 300px;
+  height: 100%;
+}
+/* line 35, ../../scss/partials/_home.scss */
+#home-map .node {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  /* Firefox */
   text-align: center;
-}
-/* line 33, ../../scss/partials/_home.scss */
-.marketing h2 {
-  font-weight: normal;
-}
-/* line 36, ../../scss/partials/_home.scss */
-.marketing .span4 p {
-  margin-left: 10px;
-  margin-right: 10px;
-}
-
-@media (max-width: 979px) {
-  /* line 43, ../../scss/partials/_home.scss */
-  .container.navbar-wrapper {
-    margin-bottom: 0;
-    width: auto;
-  }
-
-  /* line 48, ../../scss/partials/_home.scss */
-  .carousel .item {
-    height: 500px;
-  }
-  /* line 51, ../../scss/partials/_home.scss */
-  .carousel img {
-    width: auto;
-    height: 500px;
-  }
-}
-@media (max-width: 767px) {
-  /* line 59, ../../scss/partials/_home.scss */
-  .carousel {
-    margin-left: -20px;
-    margin-right: -20px;
-  }
-  /* line 63, ../../scss/partials/_home.scss */
-  .carousel .item, .carousel img {
-    height: 300px;
-  }
-
-  /* line 67, ../../scss/partials/_home.scss */
-  .carousel-caption {
-    width: 65%;
-    padding: 0 70px;
-    margin-top: 100px;
-  }
-  /* line 71, ../../scss/partials/_home.scss */
-  .carousel-caption h1 {
-    font-size: 30px;
-  }
-  /* line 74, ../../scss/partials/_home.scss */
-  .carousel-caption .lead, .carousel-caption .btn {
-    font-size: 18px;
-  }
-
-  /* line 78, ../../scss/partials/_home.scss */
-  .marketing .span4 + .span4 {
-    margin-top: 40px;
-  }
-}
-/*
-* Opendata section
-*/
-/* line 88, ../../scss/partials/_home.scss */
-.dataDownload {
-  padding: 15px;
-  font-size: 1.3em;
-}
-/* line 91, ../../scss/partials/_home.scss */
-.dataDownload a {
+  position: absolute;
   cursor: pointer;
+  bottom: 0px;
+}
+/* line 44, ../../scss/partials/_home.scss */
+#home-map .node .node-bar {
+  display: inline-block;
+  width: 85px;
+  overflow: hidden;
+  border-radius: 5px;
+}
+/* line 50, ../../scss/partials/_home.scss */
+#home-map .node .node-bar .node-value {
+  display: none;
+  position: absolute;
+  bottom: 10px;
+  color: white;
+  font-size: 1.1em;
+  right: 0;
+  left: 0;
+}
+/* line 61, ../../scss/partials/_home.scss */
+#home-map .node:hover {
+  opacity: 0.8;
+}
+
+/* line 78, ../../scss/partials/_home.scss */
+#welcome {
+  padding: 0px;
+  margin-top: 70px;
+  padding-top: 30px;
+  display: inline-block;
+}
+/* line 84, ../../scss/partials/_home.scss */
+#welcome #welcome-hero {
+  width: 60%;
+  display: inline-block;
+}
+/* line 90, ../../scss/partials/_home.scss */
+#welcome h1 {
+  font-size: 50px;
+  color: #666;
+  margin-bottom: 10px;
+}
+/* line 96, ../../scss/partials/_home.scss */
+#welcome #tour-link {
+  text-decoration: underline;
+  cursor: pointer;
+  color: black;
 }
 
 /* line 1, ../../scss/partials/_chart.scss */
 #chart-wrap {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  cursor: pointer;
   width: 100%;
   position: absolute;
   bottom: 0px;
   left: 0px;
 }
-/* line 6, ../../scss/partials/_chart.scss */
+/* line 8, ../../scss/partials/_chart.scss */
 #chart-wrap #chart {
   width: 100%;
   height: 100%;
+  cursor: pointer;
 }
 
-/* line 12, ../../scss/partials/_chart.scss */
+/* line 15, ../../scss/partials/_chart.scss */
 .line {
   fill: none;
   stroke-width: 3;
@@ -342,33 +347,33 @@ h4 {
   stroke-linecap: round;
   opacity: 0.6;
 }
-/* line 19, ../../scss/partials/_chart.scss */
+/* line 22, ../../scss/partials/_chart.scss */
 .line.projection {
   stroke-dasharray: 5, 5;
   stroke-linejoin: round;
   stroke-linecap: round;
 }
 
-/* line 29, ../../scss/partials/_chart.scss */
+/* line 32, ../../scss/partials/_chart.scss */
 .area {
   opacity: 0.2;
 }
-/* line 32, ../../scss/partials/_chart.scss */
+/* line 35, ../../scss/partials/_chart.scss */
 .area.projection {
   opacity: 0.1;
 }
 
-/* line 38, ../../scss/partials/_chart.scss */
+/* line 41, ../../scss/partials/_chart.scss */
 .overflows {
   fill: #f9f9f9;
 }
 
-/* line 42, ../../scss/partials/_chart.scss */
+/* line 45, ../../scss/partials/_chart.scss */
 .browser text {
   text-anchor: end;
 }
 
-/* line 46, ../../scss/partials/_chart.scss */
+/* line 49, ../../scss/partials/_chart.scss */
 .axis path, .axis line {
   stroke: grey;
   stroke-width: 1;
@@ -376,70 +381,57 @@ h4 {
   stroke-linecap: round;
   shape-rendering: crispEdges;
 }
-/* line 53, ../../scss/partials/_chart.scss */
+/* line 56, ../../scss/partials/_chart.scss */
 .axis text {
   font-family: 'Open Sans';
   font-size: 0.8em;
 }
-/* line 58, ../../scss/partials/_chart.scss */
+/* line 61, ../../scss/partials/_chart.scss */
 .axis .odd {
   fill: none;
 }
-/* line 62, ../../scss/partials/_chart.scss */
+/* line 65, ../../scss/partials/_chart.scss */
 .axis .thisYear {
   fill: black;
   font-weight: bold;
 }
-/* line 67, ../../scss/partials/_chart.scss */
+/* line 70, ../../scss/partials/_chart.scss */
 .axis text {
   cursor: default;
 }
 
-/* line 72, ../../scss/partials/_chart.scss */
+/* line 75, ../../scss/partials/_chart.scss */
 .multiarea {
   fill-opacity: 0.65;
 }
 
-/* line 75, ../../scss/partials/_chart.scss */
+/* line 78, ../../scss/partials/_chart.scss */
 .multiline {
   fill: none;
   stroke-width: 2px;
   opacity: 1;
 }
 
-/* line 80, ../../scss/partials/_chart.scss */
+/* line 83, ../../scss/partials/_chart.scss */
 .multiaxis path {
   stroke-width: 0;
   fill: none;
 }
 
-/* line 85, ../../scss/partials/_chart.scss */
+/* line 88, ../../scss/partials/_chart.scss */
 .multigrid .tick {
   stroke: lightgrey;
   opacity: 0;
 }
-/* line 89, ../../scss/partials/_chart.scss */
+/* line 92, ../../scss/partials/_chart.scss */
 .multigrid path {
   stroke-width: 1;
 }
 
-/* line 94, ../../scss/partials/_chart.scss */
-.layerSlider {
-  stroke-width: 2px;
-  stroke: white;
-  stroke-opacity: 0.8;
-  fill: white;
-  fill-opacity: 1;
-  filter: url(#ds2);
-}
-
-/* line 105, ../../scss/partials/_chart.scss */
-.layerLine {
-  stroke: black;
-  stroke-width: 1px;
-  stroke-opacity: 0.0;
-  filter: url(#ds);
-  -webkit-filter: drop-shadow(-12px 12px 7px red);
+/* line 97, ../../scss/partials/_chart.scss */
+.layerLine, .sideShadow {
+  box-shadow: -3px 0px 8px black;
+  margin-left: 10px;
 }
 
 /* line 2, ../../scss/partials/_cards.scss */
@@ -486,96 +478,127 @@ h4 {
 #cards .card-row .card-source .cardvalue:hover {
   color: steelblue;
 }
-/* line 60, ../../scss/partials/_cards.scss */
+/* line 56, ../../scss/partials/_cards.scss */
+#cards .card-row .carddesc {
+  font-size: 1.2em;
+  line-height: 1.5em;
+}
+/* line 61, ../../scss/partials/_cards.scss */
 #cards .card-row .cardvalue {
-  font-size: 2.2em;
+  font-size: 2.4em;
   line-height: 1em;
   font-family: 'Georgia';
 }
-/* line 66, ../../scss/partials/_cards.scss */
-#cards .card-row .carddesc {
-  font-size: 1em;
-}
 
-/* line 72, ../../scss/partials/_cards.scss */
+/* line 70, ../../scss/partials/_cards.scss */
 #information-container {
   position: relative;
-  padding-left: 25px;
-  padding-right: 25px;
+  padding-left: 5px;
 }
-/* line 77, ../../scss/partials/_cards.scss */
+/* line 74, ../../scss/partials/_cards.scss */
 #information-container #info-wrap {
   overflow: hidden;
   height: 100%;
 }
-/* line 82, ../../scss/partials/_cards.scss */
+/* line 79, ../../scss/partials/_cards.scss */
 #information-container #cards-wrap {
   height: 100%;
   width: 100%;
   position: relative;
 }
 
-/* line 89, ../../scss/partials/_cards.scss */
+/* line 86, ../../scss/partials/_cards.scss */
 #legend-wrap {
   position: absolute;
   height: 90%;
   left: -100%;
   overflow-y: auto;
+  font-size: 1.2em;
+  line-height: 1.5em;
 }
-/* line 95, ../../scss/partials/_cards.scss */
+/* line 94, ../../scss/partials/_cards.scss */
 #legend-wrap .legend-label {
   width: 16px;
   height: 16px;
   border-radius: 8px;
 }
-/* line 101, ../../scss/partials/_cards.scss */
+/* line 100, ../../scss/partials/_cards.scss */
 #legend-wrap tr :first-child {
   margin-right: 5px;
 }
 
 /* line 1, ../../scss/partials/_navbar.scss */
 #avb-menubar {
-  border-bottom: 1px solid #aaaaaa;
-  background-color: whitesmoke;
-  padding: 5px;
+  font-size: 1.2em;
+  padding: 15px 5px 15px 5px;
+  z-index: 1050;
+  margin-top: 2px;
 }
-/* line 6, ../../scss/partials/_navbar.scss */
+/* line 9, ../../scss/partials/_navbar.scss */
+#avb-menubar.purple-border {
+  border-top: 2px solid #d63366;
+  margin-top: 0px;
+}
+/* line 14, ../../scss/partials/_navbar.scss */
 #avb-menubar .nav {
   margin-bottom: 0px !important;
 }
-/* line 10, ../../scss/partials/_navbar.scss */
+/* line 18, ../../scss/partials/_navbar.scss */
+#avb-menubar .entry {
+  display: inline-block;
+  position: relative;
+}
+/* line 24, ../../scss/partials/_navbar.scss */
+#avb-menubar .homebutton,
 #avb-menubar .menubutton {
-  font-size: 1.2em;
-  margin-top: 12px;
+  cursor: pointer;
+  position: relative;
+  z-index: 1050;
+}
+/* line 30, ../../scss/partials/_navbar.scss */
+#avb-menubar .menubutton {
   display: inline-block;
 }
-/* line 15, ../../scss/partials/_navbar.scss */
+/* line 34, ../../scss/partials/_navbar.scss */
+#avb-menubar .menubutton.selected a {
+  color: #db4e86;
+}
+/* line 39, ../../scss/partials/_navbar.scss */
 #avb-menubar .menubutton .caret {
   border-top-color: #333333;
   border-bottom-color: #333333;
 }
-/* line 20, ../../scss/partials/_navbar.scss */
+/* line 44, ../../scss/partials/_navbar.scss */
 #avb-menubar .menubutton a {
-  font-size: 1em;
   color: #333333;
 }
-/* line 25, ../../scss/partials/_navbar.scss */
+/* line 48, ../../scss/partials/_navbar.scss */
 #avb-menubar .menubutton i {
-  margin-top: 6px;
+  vertical-align: baseline;
 }
-/* line 29, ../../scss/partials/_navbar.scss */
+/* line 52, ../../scss/partials/_navbar.scss */
 #avb-menubar .menubutton.margin {
   margin-right: 20px;
 }
 
-/* line 36, ../../scss/partials/_navbar.scss */
-.centered {
-  text-align: center;
+/* line 59, ../../scss/partials/_navbar.scss */
+#yeardrop-container {
+  min-width: 100px;
 }
-
-/* line 41, ../../scss/partials/_navbar.scss */
-#home-button div {
-  cursor: pointer;
+/* line 66, ../../scss/partials/_navbar.scss */
+#yeardrop-container a {
+  padding-left: 20px;
+}
+/* line 69, ../../scss/partials/_navbar.scss */
+#yeardrop-container a b {
+  float: right;
+  margin-right: 5px;
+  vertical-align: baseline;
+}
+/* line 75, ../../scss/partials/_navbar.scss */
+#yeardrop-container .dropdown-menu {
+  min-width: 100px;
+  border-radius: 0px;
 }
 
 /* line 2, ../../scss/partials/_table.scss */
@@ -647,90 +670,147 @@ h4 {
 /* line 71, ../../scss/partials/_table.scss */
 .bullet {
   width: 20px;
+  vertical-align: top;
 }
 
-/* line 75, ../../scss/partials/_table.scss */
+/* line 76, ../../scss/partials/_table.scss */
 .sparkline {
   line-height: 0px;
 }
-/* line 76, ../../scss/partials/_table.scss */
+/* line 77, ../../scss/partials/_table.scss */
 .sparkline .line {
   stroke-width: 1px;
 }
 
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
-  /* line 83, ../../scss/partials/_table.scss */
+  /* line 84, ../../scss/partials/_table.scss */
   .value {
     width: 100px;
   }
-  /* line 86, ../../scss/partials/_table.scss */
+  /* line 87, ../../scss/partials/_table.scss */
   .value.long {
     width: 250px;
   }
 }
-/* line 3, ../../scss/partials/_navigation.scss */
+/* line 2, ../../scss/partials/_navigation.scss */
+#navigation {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  position: relative;
+}
+/* line 6, ../../scss/partials/_navigation.scss */
 #navigation text {
   pointer-events: none;
   height: 88%;
   width: 100%;
 }
-/* line 9, ../../scss/partials/_navigation.scss */
+/* line 12, ../../scss/partials/_navigation.scss */
 #navigation rect {
   fill: none;
   stroke: #fff;
 }
-/* line 15, ../../scss/partials/_navigation.scss */
+/* line 17, ../../scss/partials/_navigation.scss */
+#navigation text {
+  font-size: 1.2em;
+}
+/* line 21, ../../scss/partials/_navigation.scss */
+#navigation svg {
+  overflow: hidden;
+}
+/* line 27, ../../scss/partials/_navigation.scss */
 #navigation rect.parent,
 #navigation .grandparent rect {
   stroke-width: 4px;
 }
-/* line 19, ../../scss/partials/_navigation.scss */
+/* line 31, ../../scss/partials/_navigation.scss */
 #navigation .grandparent rect {
   fill: #f9f9f9;
   stroke: none;
 }
-/* line 24, ../../scss/partials/_navigation.scss */
+/* line 36, ../../scss/partials/_navigation.scss */
 #navigation .child rect {
   stroke-opacity: 1.0;
 }
-/* line 28, ../../scss/partials/_navigation.scss */
+/* line 40, ../../scss/partials/_navigation.scss */
 #navigation rect.parent {
   opacity: 0.6;
 }
-/* line 33, ../../scss/partials/_navigation.scss */
+/* line 45, ../../scss/partials/_navigation.scss */
 #navigation .children:hover rect.parent,
 #navigation .grandparent:hover rect {
   opacity: 1.0;
 }
-/* line 37, ../../scss/partials/_navigation.scss */
+/* line 49, ../../scss/partials/_navigation.scss */
 #navigation .children {
   cursor: pointer;
 }
-/* line 42, ../../scss/partials/_navigation.scss */
+/* line 54, ../../scss/partials/_navigation.scss */
 #navigation .children.no-label .titleLabel {
   display: none;
 }
-/* line 46, ../../scss/partials/_navigation.scss */
+/* line 58, ../../scss/partials/_navigation.scss */
 #navigation .children.no-label .valueLabel {
   display: none;
 }
-/* line 52, ../../scss/partials/_navigation.scss */
+/* line 62, ../../scss/partials/_navigation.scss */
+#navigation .children.no-label text {
+  display: none;
+}
+/* line 68, ../../scss/partials/_navigation.scss */
 #navigation .children.no-value .valueLabel {
   display: none;
 }
-/* line 59, ../../scss/partials/_navigation.scss */
+/* line 75, ../../scss/partials/_navigation.scss */
 #navigation .textdiv {
   /* text in the boxes */
   padding: 8px;
-  font-family: "Open Sans", Helvetica, Arial, sans-serif;
+  font-family: "Open Sans", sans-serif;
 }
-/* line 64, ../../scss/partials/_navigation.scss */
+/* line 80, ../../scss/partials/_navigation.scss */
 #navigation .textdiv .titleLabel,
 #navigation .textdiv .valueLabel {
   overflow: hidden;
   text-overflow: ellipsis;
 }
-/* line 72, ../../scss/partials/_navigation.scss */
+/* line 88, ../../scss/partials/_navigation.scss */
 #navigation .textdiv .valueLabel {
-  font-size: 1.3em;
+  font-size: 1.2em;
+}
+
+/* line 95, ../../scss/partials/_navigation.scss */
+#zoombutton {
+  float: right;
+}
+
+/* line 99, ../../scss/partials/_navigation.scss */
+.popover {
+  z-index: 1050;
+}
+
+/* line 103, ../../scss/partials/_navigation.scss */
+#ie-popover {
+  z-index: 1050;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  position: absolute;
+  width: 150px;
+  height: 50px;
+  margin-top: -58px;
+  border-radius: 5px;
+}
+/* line 113, ../../scss/partials/_navigation.scss */
+#ie-popover .arrow {
+  z-index: 1050;
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: 65px;
+  top: 50px;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid rgba(0, 0, 0, 0.5);
+}
+/* line 125, ../../scss/partials/_navigation.scss */
+#ie-popover .text {
+  color: white;
+  padding: 5px;
 }

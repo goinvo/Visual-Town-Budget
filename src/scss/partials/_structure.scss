@@ -15,7 +15,7 @@ body {
 	-khtml-user-select: none;
 	-webkit-user-select: none;
 	user-select: none;
-	background-image: url(/img/debut_light.png);
+	background-image: url(/img/bg_avb.png);
 }
 
 
@@ -70,6 +70,10 @@ body {
 @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
   body, html {
     font-size: 12px;
+  }
+
+  h1{
+    font-size: 2.5em !important;
   }
 
   .container {

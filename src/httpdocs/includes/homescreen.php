@@ -1,5 +1,5 @@
 
-  <img id="home-img" src="/img/avbhome.jpg"/>
+<!--   <img id="home-img" src="/img/avbhome.jpg"/> -->
 
   <div id="home-content" class="container marketing">
 

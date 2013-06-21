@@ -53,8 +53,9 @@
 			}
 		}
 
-		.card-text{
-
+		.carddesc{
+			font-size: $text-big;
+			line-height: 1.5em;
 		}
 
 		.cardvalue {
@@ -63,16 +64,12 @@
 			font-family: 'Georgia';
 		}
 		
-		.carddesc {
-			font-size: $text-small;
-		}
 	}
 }
 
 #information-container{
   position: relative;
-  padding-left: 25px;
-  padding-right: 25px;
+  padding-left: 5px;
 
 	#info-wrap{
 	  overflow:hidden; 
@@ -91,6 +88,8 @@
     height: 90%;
     left:-100%;
     overflow-y: auto;
+    font-size: $text-big;
+    line-height: 1.5em;
 
     .legend-label{
       width: 16px;
