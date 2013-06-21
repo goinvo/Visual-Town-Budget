@@ -18,6 +18,7 @@
     </div>
 
     <div class="entry" style="float:right;">
+        <input type="text" class="margin menubutton margin search" placeholder="Search">
     
         <div class="menubutton margin">
           <span> <i class="icon-th-large"></i> </span>

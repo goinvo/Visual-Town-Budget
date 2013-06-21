@@ -25,6 +25,12 @@
     cursor: pointer;
     position: relative;
     z-index: 1050;
+    vertical-align: bottom;
+  }
+
+  .search {
+    border-radius: 5px;
+    border: 1px solid rgb(194,194,194);
   }
 
   .menubutton {
