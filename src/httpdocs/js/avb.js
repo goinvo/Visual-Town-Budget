@@ -4,7 +4,7 @@ var firstYear, lastYear,
     currentYear = new Date().getFullYear(), // only used for projections
     thisYear = currentYear;
 
-var section, mode, root;
+var section, mode, data, root;
 var currentSelection = new Object();
 
 
@@ -72,6 +72,9 @@ var get_values = function (d) {
     return d.val;
 }
 
+function downloadData(){
+}
+
 function initialize(params) {
     if (params.year !== undefined && !isNaN(parseInt(params.year)) &&
         params.year < lastYear && params.year > firstYear) {
@@ -92,6 +95,20 @@ function initialize(params) {
     setMode(params.mode);
 
     d3.json("/data/" + section + ".json", onjsonload);
+    // dataUrls = ['revenues', 'expenses', 'funds'];
+
+    // var jxhr = [];
+    // var result = 0;
+    // $.each(urls, function (i, url) {
+    //     jxhr.push(
+    //         $.getJSON(url, function (json) {
+    //             result += json.field1;
+    //         })
+    //     );
+    // });
+
+    
+
 }
 
 function setMode(modeId) {

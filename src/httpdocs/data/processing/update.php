@@ -22,6 +22,8 @@
     });
   </script>
 
+  <title> Data Update </title>
+
 </head>
 <body>
 
