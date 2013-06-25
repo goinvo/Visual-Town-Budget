@@ -228,6 +228,11 @@ h4 {
   vertical-align: baseline;
 }
 
+/* line 66, ../../scss/partials/_avb.scss */
+.introjs-tooltip {
+  font-size: 1.2em;
+}
+
 /* line 1, ../../scss/partials/_home.scss */
 #avb-home, #overlay {
   position: absolute;

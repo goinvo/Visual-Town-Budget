@@ -34,7 +34,7 @@
 
   addHeader = function(table){
     var headerHtml = '<div class="tablerow" id="table-header" > <div class="bullet"> </div>'; 
-    var header = $(headerHtml).appendTo(table);
+    var header = $(headerHtml).appendTo(table).data('level',0);
     $.each(stats, function(){
       var newcell = $('<div class="' + this.cellClass + ' head"> </div>').appendTo(header);
       newcell.text(this.title);
