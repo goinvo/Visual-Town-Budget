@@ -7,7 +7,7 @@
       <img src="/img/logo.png" alt="avb-logo" style="position:relative" />
     </div>
 
-    <div> 
+    <div style="line-height:25px;"> 
 
      <div onclick='window.location = "/"' class="entry homebutton"> Town Budget, Visualized </div>
 
@@ -18,7 +18,7 @@
     </div>
 
     <div class="entry" style="float:right;">
-        <input type="text" class="margin menubutton margin search" placeholder="Search">
+        <input id="searchbox" type="text" class="margin menubutton margin search" placeholder="Search">
     
         <div class="menubutton margin">
           <span> <i class="icon-th-large"></i> </span>

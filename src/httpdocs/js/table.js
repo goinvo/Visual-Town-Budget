@@ -2,26 +2,43 @@
 
  avb.table = function(){
 
-   var indent = 25;
-   var stats = [];
-   var growthScale = d3.scale.linear().clamp(true).domain([-10,10]).range(["rgb(29,118,162)",'rgb(167, 103, 108)']);
-   var amountScale = d3.scale.linear().clamp(true).range(["#aaa", "#333"]);
-   var impactScale = d3.scale.linear().clamp(true).domain([0,100]).range(["#aaa", "#333"]);
+    var indent = 25;
+    var stats = [];
+    var growthScale = d3.scale.linear().clamp(true).domain([-10,10]).range(["rgb(29,118,162)",'rgb(167, 103, 108)']);
+    var amountScale = d3.scale.linear().clamp(true).range(["#aaa", "#333"]);
+    var impactScale = d3.scale.linear().clamp(true).domain([0,100]).range(["#aaa", "#333"]);
 
-   var initialize = function(data){
-    var table = $('#table-container'),
-    header = $('#table-header').data('level',0);
-    stats = tables[section];
+  var initialize = function(data){
 
+    var table = $('#table-container');
+    // clean old rows
+    $('.tablerow').remove();
+
+    if (data instanceof Array) {
+      stats = tables.search;
+      if(data.length === 0) {
+        textRow('No results found.', table);
+        return;
+      }
+      addHeader( table);
+      $.each(data, function(){
+        renderNode(this, 0, table);
+      });
+    } else {
+      stats = tables[section];
+      addHeader(table);
+      amountScale.domain([0,data.values[yearIndex].val*0.5]);
+      renderNode(data, 0, table).trigger('click');
+    }
+  },
+
+  addHeader = function(table){
+    var headerHtml = '<div class="tablerow" id="table-header" > <div class="bullet"> </div>'; 
+    var header = $(headerHtml).appendTo(table);
     $.each(stats, function(){
       var newcell = $('<div class="' + this.cellClass + ' head"> </div>').appendTo(header);
       newcell.text(this.title);
     })
-
-    amountScale.domain([0,data.values[yearIndex].val*0.5]);
-
-    renderNode(data, 0, table).trigger('click');
-
   },
 
   alignRows = function(){
@@ -33,6 +50,12 @@
     $('.tablerow').each(function(){
       $(this).find('.name').animate({'margin-right' : (maxLevel - $(this).data('level'))*indent}, 250);
     });
+  },
+
+  textRow = function(msg, table){
+    var template = $('#row-template');
+    var rendered = table.append(Mustache.render(template.html())).children().last();
+    rendered.css({'text-align' : 'center'}).text(msg);
   },
 
   rowClick = function (){
@@ -53,9 +76,10 @@
       // expand
 
       // sort by amount
-      node.sub.sort(function(a,b) {
-        return a.values[yearIndex].val < b.values[0].val;
-      })
+      // node.sub.sort(function(a,b) {
+      //   return a.values[yearIndex].val < b.values[0].val;
+      // })
+
 
       // container
       var childDiv = $('<div class="group"></div>').insertAfter(row);
@@ -73,8 +97,6 @@
       childDiv.slideDown(250);
     }
   },
-
-
 
   renderNode = function (node, level, container){
     var template = $('#row-template');
@@ -95,7 +117,33 @@
       }
     })
 
+    // append popover
+    if(node.descr.length !== 0){
+      rendered.find('.long').popover(
+        {trigger : 'manual', 
+            placement: function (context, source) {
+                var position = $(source).position();
+                if (position.top < 150){
+                    return "bottom";
+                } else {
+                    return "top";
+                }
+            },
+            content : node.descr
+        });
+    }
+
+    rendered.mouseenter(function(){
+      rendered.find('.long').popover('show');
+    });
+
+    rendered.mouseleave(function(){
+      rendered.find('.long').popover('hide');
+    });
+
+
     rendered.click(rowClick);
+
 
     return rendered;
   },
@@ -178,9 +226,7 @@
           cell.text(stats[i].value(node));
         }
       };
-
     })
-
   };
 
   return{

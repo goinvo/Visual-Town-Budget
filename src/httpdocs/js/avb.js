@@ -1,9 +1,11 @@
 var colors = ["#1f77b4", "#aec7e8", "#ff7f0e", "#ffbb78", "#2ca02c", "#98df8a", "#d62728", "#ff9896", "#9467bd", "#c5b0d5", "#8c564b", "#c49c94", "#e377c2", "#f7b6d2", "#7f7f7f", "#c7c7c7", "#bcbd22", "#dbdb8d", "#17becf", "#9edae5"];
+var sections = ['revenues', 'expenses', 'funds'];
 
 var firstYear, lastYear,
     currentYear = new Date().getFullYear(), // only used for projections
     thisYear = currentYear;
 
+var timer = 0;
 var section, mode, data, root;
 var currentSelection = new Object();
 
@@ -52,6 +54,12 @@ function onjsonload(jsondata) {
     avb.navigation.initialize(jsondata);
     avb.navigation.open(root.hash, true);
 
+    // initializes search
+    $('#searchbox').keyup(searchChange);
+    $('#searchbox').click(function(){
+        if ($('#avb-home').is(":visible"))  avb.home.hide();
+    });
+
     console.log("UI Loaded.");
 
 }
@@ -72,7 +80,23 @@ var get_values = function (d) {
     return d.val;
 }
 
-function downloadData(){
+function downloadData(openSection){
+    data = new Object;
+
+    // loads all jsons in data
+    var jxhr = [];
+    $.each(sections, function (i, url) {
+        jxhr.push(
+            $.getJSON('/data/' + url + '.json', function (json) {
+                data[url] = json;
+            })
+        );
+    });
+
+    // open section if needed
+    $.when.apply($, jxhr).done(function() {
+        if(openSection !== undefined) onjsonload(data[openSection]);
+    });
 }
 
 function initialize(params) {
@@ -94,20 +118,7 @@ function initialize(params) {
     // set viewing mode
     setMode(params.mode);
 
-    d3.json("/data/" + section + ".json", onjsonload);
-    // dataUrls = ['revenues', 'expenses', 'funds'];
-
-    // var jxhr = [];
-    // var result = 0;
-    // $.each(urls, function (i, url) {
-    //     jxhr.push(
-    //         $.getJSON(url, function (json) {
-    //             result += json.field1;
-    //         })
-    //     );
-    // });
-
-    
+    downloadData(section);
 
 }
 
@@ -132,7 +143,7 @@ function switchMode(mode, pushurl) {
     if (pushurl === undefined) pushurl = true;
     setMode(mode);
     if (pushurl) pushUrl(section, thisYear, mode, root.hash);
-    d3.json("/data/" + section + ".json", onjsonload);
+    onjsonload(data[section]);
 }
 
 function changeyear(year) {
@@ -148,7 +159,44 @@ function changeyear(year) {
     if ($('#avb-home').is(":visible")) {
         avb.home.showGraph(100);
     }
+}
 
+function searchChange(){
+    var  keyword = $(this).val();
+
+    function showResults(){
+        if(avb.navigation !== avb.table){
+            setMode('l');
+        };
+        pushUrl(section, thisYear, 'l', root.hash);
+        avb.navigation.initialize(search(keyword));
+    }
+
+    clearTimeout(timer);
+    timer = setTimeout( showResults, 300);
+}
+
+function search(keyword){
+    var result = [];
+    // aggregate search results from all sections
+    $.each(sections, function(){
+        var searchSection = this;
+        var newResult = searchObject(keyword, data[this]);
+        // remember where searched element was found
+        $.each(newResult, function() {this.section = capitalise(searchSection)});
+        result = result.concat(newResult);
+    });
+    return result;
+}
+
+function searchObject(keyword, object){
+    var result = (object.key.toLowerCase().indexOf(keyword.toLowerCase()) !== -1) ? [object] : []; 
+    if(object.sub !== undefined) {
+        for(var i=0; i<object.sub.length; i++) {
+            result = result.concat(searchObject(keyword, object.sub[i]));
+        }
+    }
+    return result;
 }
 
 function hexToRgb(hex) {
@@ -218,6 +266,11 @@ function ie() {
 
     return v > 4 ? v : undef;
 };
+
+function capitalise(string)
+{
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
  // Back button action
 window.onpopstate = popUrl;
 

@@ -80,6 +80,13 @@ stats = {
         cellFunction: function (d, cell) {
             avb.table.renderSparkline(d, cell)
         }
+    },
+    section : {
+        title: "Type",
+        cellClass: "value",
+        value: function (d){
+            return d.section;
+        }
     }
 },
 
@@ -92,7 +99,8 @@ decks = {
 tables = {
     revenues: [stats.name, stats.growth, stats.sparkline, stats.impact, stats.amount],
     expenses: [stats.name, stats.growth, stats.sparkline, stats.impact, stats.amount],
-    funds: [stats.name, stats.growth, stats.sparkline, stats.impact, stats.amount]
+    funds: [stats.name, stats.growth, stats.sparkline, stats.impact, stats.amount],
+    search: [stats.name, stats.growth, stats.sparkline, stats.impact, stats.amount, stats.section]
 }
 
 function formatcurrency(value) {

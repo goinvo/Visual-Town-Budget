@@ -9,7 +9,7 @@
 	padding-top: 5px;
 	padding-bottom: 5px;
 	border-bottom: 1px solid $gray;
-	font-size: 1em;
+	font-size: $text-big;
 	line-height: 40px;
 
 	&:hover{
@@ -23,6 +23,15 @@
 	&.expanded .sum{
 
 	}
+}
+
+.tablerow:last-child{
+	border-bottom: 0px;
+}
+
+.popover{
+	max-width: 350px;
+	line-height: 1.5em;
 }
 
 #table-header:hover{
@@ -48,6 +57,7 @@
 
 
 
+
 	&.long{
 		width: 300px;
 	}
@@ -64,9 +74,8 @@
 		font-family: 'Open Sans';
 		font-weight: $text-bold;
 	}
-
-
 }
+
 
 .bullet{
 	width: 20px;
@@ -90,4 +99,6 @@
 	}
 
 }
+
+
 
