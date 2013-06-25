@@ -77,6 +77,12 @@
 
     startTutorial = function(){
         tutorial = introJs();
+        // do not show next button at last tour step
+        tutorial.onchange(function(targetElement) {
+          lastStep = $(targetElement).attr('data-step') == 4 ? true : false;
+          $navbuttons = $('.introjs-nextbutton, .introjs-prevbutton');
+          $navbuttons.css({display : lastStep ? 'none' : 'inline-block'})
+        });
         tutorial.setOption("showStepNumbers", false);
         tutorial.setOption("skipLabel", "Exit");
         tutorial.start();

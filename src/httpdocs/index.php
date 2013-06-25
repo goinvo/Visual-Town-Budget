@@ -100,7 +100,7 @@
     <a class="link" href="http://www.town.arlington.ma.us/">Town of Arlington</a> - 
     <a class="link" href="http://www.goinvo.com">by Involution Studios</a> -
     <a class="link" href="/opendata"> Open Data + Code</a> -
-    <a class="link" href="javascript:;" onclick="fby.push(['showForm', '4389']);return false;" data-step="4" data-intro="Something not quite right? What needs more clarity? Send us your feedback and we'll get back to you within 1 business day." data-position="top" >Feedback</a>
+    <a class="link" href="javascript:;" onclick="fby.push(['showForm', '4389']);return false;">Feedback</a>
   </div>
 
 </body>

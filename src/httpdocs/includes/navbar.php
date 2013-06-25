@@ -29,7 +29,7 @@
           <a href="javascript:switchMode('l');"> List </a>
         </div>
 
-        <ul class="nav menubutton ">
+        <ul class="nav menubutton " data-step="4" data-intro="Interested in seeing a different year? Use this menu." data-position="left">
           <li  id="yeardrop-container" class="dropdown" style="display:none;">
             <a id="yeardrop-label" class="dropdown-toggle" role="button" data-toggle="dropdown" href="#">Dropdown <b class="caret"></b></a>
             <ul id="yeardrop-list" class="dropdown-menu vhscrollable" role="menu">

@@ -23,7 +23,7 @@
 
   </div>
 
-  <div id="chart-wrap" class="row-fluid" data-intro="Explore how the town revenues changed over time. It's interactive: try pulling the graph line!" data-step='2' data-position="right"> 
+  <div id="chart-wrap" class="row-fluid" data-intro="Explore how the town revenues changed over time." data-step='2' data-position="right"> 
     <div id='chart' class="chart"> </div>
   </div>
 </div>
