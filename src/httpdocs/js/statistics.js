@@ -39,9 +39,9 @@ stats = {
             return formatcurrency(d.values[yearIndex].val);
         },
         side: function () {
-            return " in " + thisYear.toString() + "."
+            return " in " + avb.thisYear.toString() + "."
         },
-        cellClass: "value sum numeric textleft",
+        cellClass: "value sum numeric ",
         cellFunction: function (d, cell) {
             avb.table.renderAmount(d, cell)
         }
@@ -50,10 +50,10 @@ stats = {
         title: "Impact",
         class: "span6 ",
         value: function (d) {
-            return Math.max(0.01, (Math.round(d.values[yearIndex].val * 100 * 100 / root.values[yearIndex].val) / 100)).toString() + "%";
+            return Math.max(0.01, (Math.round(d.values[yearIndex].val * 100 * 100 / avb.root.values[yearIndex].val) / 100)).toString() + "%";
         },
         side: function () {
-            return " of total " + section + "."
+            return " of total " + avb.section + "."
         },
         cellClass: "value sum",
         cellFunction: function (d, cell) {
@@ -64,7 +64,7 @@ stats = {
         title: "Individual",
         class: "span6 ",
         value: function (d) {
-            var percentage = d.values[yearIndex].val / root.values[yearIndex].val;
+            var percentage = d.values[yearIndex].val / avb.root.values[yearIndex].val;
             return '$' + d3.round(averageContribution * percentage,2).toFixed(2);
         },
         side: 'a year to a single resident.',
@@ -145,7 +145,7 @@ tables = {
     revenues: [stats.name, stats.growth, stats.sparkline, stats.impact, stats.amount],
     expenses: [stats.name, stats.growth, stats.sparkline, stats.impact, stats.amount],
     funds: [stats.name, stats.growth, stats.sparkline, stats.impact, stats.amount],
-    search: [stats.name, stats.growth, stats.sparkline, stats.impact, stats.amount, stats.section]
+    search: [stats.name, stats.growth, stats.sparkline, stats.amount, stats.section]
 }
 
 function formatcurrency(value) {

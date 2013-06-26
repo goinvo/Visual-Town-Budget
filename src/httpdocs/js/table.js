@@ -30,7 +30,7 @@ License:
  avb.table = function(){
 
     var indent = 25;
-    var stats = [];
+    var tableStats = [];
     var growthScale = d3.scale.linear().clamp(true).domain([-10,10]).range(["rgb(29,118,162)",'rgb(167, 103, 108)']);
     var amountScale = d3.scale.linear().clamp(true).range(["#aaa", "#333"]);
     var impactScale = d3.scale.linear().clamp(true).domain([0,100]).range(["#aaa", "#333"]);
@@ -42,7 +42,7 @@ License:
     $('.tablerow').remove();
 
     if (data instanceof Array) {
-      stats = tables.search;
+      tableStats = tables.search;
       if(data.length === 0) {
         textRow('No results found.', table);
         return;
@@ -52,7 +52,7 @@ License:
         renderNode(this, 0, table);
       });
     } else {
-      stats = tables[section];
+      tableStats = tables[avb.section];
       addHeader(table);
       amountScale.domain([0,data.values[yearIndex].val*0.5]);
       renderNode(data, 0, table).trigger('click');
@@ -62,7 +62,7 @@ License:
   addHeader = function(table){
     var headerHtml = '<div class="tablerow" id="table-header" > <div class="bullet"> </div>'; 
     var header = $(headerHtml).appendTo(table).data('level',0);
-    $.each(stats, function(){
+    $.each(tableStats, function(){
       var newcell = $('<div class="' + this.cellClass + ' head"> </div>').appendTo(header);
       newcell.text(this.title);
     })
@@ -135,7 +135,7 @@ License:
 
     rendered.css({'padding-left' : level*indent});
 
-    $.each(stats, function(){
+    $.each(tableStats, function(){
       var newcell = $('<div class="' + this.cellClass + '"> </div>').appendTo(rendered);
       if(this.cellFunction) {
         this.cellFunction(node, newcell.get(0));
@@ -186,7 +186,7 @@ License:
     .attr('width', width).attr('height', height);
 
     var xscale = d3.scale.linear().range([0, width])
-    .domain([firstYear, lastYear]);
+    .domain([avb.firstYear, avb.lastYear]);
     var yscale = d3.scale.linear().range([height-2, 2])
     .domain([0,d3.max(node.values, function(d) {return d.val})]);
 
@@ -224,12 +224,12 @@ License:
 
   renderAmount = function(data, cell){
     var amount = (data.values[yearIndex].val);
-    $(cell).css({"color" : amountScale(amount)});
+    if(tableStats !== tables.search) $(cell).css({"color" : amountScale(amount)});
     $(cell).text(formatCurrencyExact(amount));
   },
 
   renderImpact = function(data, cell){
-    var impact = Math.max(0.01,(Math.round(data.values[yearIndex].val*100*100/root.values[yearIndex].val)/100));
+    var impact = stats.impact.value(data);
     $(cell).css({"color" : impactScale(impact)});
     $(cell).text(impact + ' %');
   },
@@ -244,13 +244,13 @@ License:
 
       if(node.is('#table-header')) return;
 
-      // assumption. cell order and stats array do not change
-      for(var i=0; i<stats.length; i++) {
+      // assumption. cell order and tableStats array do not change
+      for(var i=0; i<tableStats.length; i++) {
         var cell = $($(node).find('.value').get(i));
-        if(stats[i].cellFunction) {
-          stats[i].cellFunction(node.data(), cell.get(0));
+        if(tableStats[i].cellFunction) {
+          tableStats[i].cellFunction(node.data(), cell.get(0));
         } else {
-          cell.text(stats[i].value(node));
+          cell.text(tableStats[i].value(node));
         }
       };
     })

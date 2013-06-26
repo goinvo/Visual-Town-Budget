@@ -309,7 +309,7 @@ updateTitle = function (data) {
     title.text(data.key);
     $(title).textfill(48, $('.title-head').width() - 120);
 
-    if (currentSelection.data === root){
+    if (avb.currentNode.data === avb.root){
         zoom.addClass('disabled');
     } else {
         zoom.removeClass('disabled');
@@ -333,18 +333,18 @@ zoneClick= function(d, click) {
         if(event.stopPropagation) event.stopPropagation();
     }
 
-    if (nav.transitioning || !d || !currentSelection) return;
+    if (nav.transitioning || !d || !avb.currentNode) return;
 
-    if(d !== root && d === currentSelection.data) {
+    if(d !== avb.root && d === avb.currentNode.data) {
        $('#zoombutton').trigger('click');
        return;
     }
 
     if(click === true) {
-        pushUrl( section, thisYear, mode, d.hash);
+        pushUrl( avb.section, avb.thisYear, avb.mode, d.hash);
     }
 
-    yearIndex =  thisYear - firstYear;
+    yearIndex =  avb.thisYear - avb.firstYear;
 
     nav.selectAll('text').remove();
 

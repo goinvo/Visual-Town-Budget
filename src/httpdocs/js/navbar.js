@@ -36,7 +36,7 @@ avb.navbar = function(){
 	        if(avb.navigation !== avb.table){
 	            setMode('l');
 	        };
-	        pushUrl(section, thisYear, 'l', root.hash);
+	        pushUrl(avb.section, avb.thisYear, 'l', avb.root.hash);
 	        avb.navigation.initialize(search(keyword));
 	    }
 
@@ -47,9 +47,9 @@ avb.navbar = function(){
 	search = function(keyword){
 	    var result = [];
 	    // aggregate search results from all sections
-	    $.each(sections, function(){
+	    $.each(avb.sections, function(){
 	        var searchSection = this;
-	        var newResult = searchObject(keyword, data[this]);
+	        var newResult = searchObject(keyword, avb.data[this]);
 	        // remember where searched element was found
 	        $.each(newResult, function() {this.section = capitalise(searchSection)});
 	        result = result.concat(newResult);
@@ -80,7 +80,7 @@ avb.navbar = function(){
 		if(!jQuery.browser.mobile) {
 
 			$dropdownList.html('');
-			for(var i=firstYear; i<=lastYear; i++) {
+			for(var i=avb.firstYear; i<=avb.lastYear; i++) {
 				var html = '<li role="presentation"><a role="menuitem" tabindex="-1" href="#">' + i +'</a></li>';
 				$dropdownList.append(html);
 				$dropdownList.find('li :last').click(function(event) {
@@ -91,13 +91,13 @@ avb.navbar = function(){
 					$dropdown.removeClass('open');
 				});
 			};
-			$dropdownLabel.html(thisYear + ' <b class="caret"></b>');
+			$dropdownLabel.html(avb.thisYear + ' <b class="caret"></b>');
 			$dropdown.show();
 		} else {
 			$selector.html('');
-			for(var i=firstYear; i<=lastYear; i++) {
+			for(var i=avb.firstYear; i<=avb.lastYear; i++) {
 				var html = '<option'
-				+ ((i == thisYear) ? ' selected="selected"' : ' ')
+				+ ((i == avb.thisYear) ? ' selected="selected"' : ' ')
 				+ 'value="' + i + '">' + i + '</option>';
 				$selector.append(html);
 			}

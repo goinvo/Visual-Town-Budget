@@ -108,7 +108,8 @@ License:
         tutorial.onchange(function(targetElement) {
           lastStep = $(targetElement).attr('data-step') == 4 ? true : false;
           $navbuttons = $('.introjs-nextbutton, .introjs-prevbutton');
-          $navbuttons.css({display : lastStep ? 'none' : 'inline-block'})
+          $navbuttons.css({display : lastStep ? 'none' : 'inline-block'});
+          if (lastStep) setTimeout(function(){$('#yeardrop-container').addClass('open')},800)
         });
         tutorial.setOption("showStepNumbers", false);
         tutorial.setOption("skipLabel", "Exit");

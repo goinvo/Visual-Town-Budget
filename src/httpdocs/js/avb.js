@@ -26,23 +26,26 @@ License:
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-
 var avb = avb || {};
 
-var colors = ["#1f77b4", "#aec7e8", "#ff7f0e", "#ffbb78", "#2ca02c", "#98df8a", 
-              "#d62728", "#ff9896", "#9467bd", "#c5b0d5", "#8c564b", "#c49c94", 
-              "#e377c2", "#f7b6d2", "#7f7f7f", "#c7c7c7", "#bcbd22", "#dbdb8d", 
-              "#17becf", "#9edae5"];
-var sections = ['revenues', 'expenses', 'funds'];
+// navigation variables
 
-var firstYear, lastYear,
-    currentYear = new Date().getFullYear(), // only used for projections
-    thisYear = currentYear;
+avb.root = null; // reference to root node of current section
+avb.section = null; // current selected section
+avb.mode = null; // current mode (map, table etc.)
+avb.data = {}; // json data
+avb.currentNode = {}; // currently selected node
+
+// time variables
+
+avb.firstYear = null;
+avb.lastYear = null;
+avb.currentYear = new Date().getFullYear();
+avb.thisYear = avb.currentYear;
+
+avb.sections = ['revenues', 'expenses', 'funds'];
 
 var timer = 0;
-var section, mode, data, root;
-var currentSelection = new Object();
-
 
 Number.prototype.px = function () {
     return this.toString() + "px";
@@ -53,10 +56,10 @@ Number.prototype.px = function () {
 function pushUrl(section, year, mode, node) {
     if (ie()) return;
 
-    var url = '/' + section + '/' + thisYear + '/' + mode + '/' + node;
+    var url = '/' + section + '/' + avb.thisYear + '/' + mode + '/' + node;
     window.history.pushState({
         section: section,
-        year: thisYear,
+        year: avb.thisYear,
         mode: mode,
         nodeId: node
     }, "", url);
@@ -67,7 +70,7 @@ function popUrl(event) {
 
     if (event.state === null) {
         //avb.navigation.open(root.hash);
-    } else if (event.state.mode !== mode) {
+    } else if (event.state.mode !== avb.mode) {
         switchMode(event.state.mode, false);
     } else {
         avb.navigation.open(event.state.nodeId, false);
@@ -79,16 +82,16 @@ function popUrl(event) {
 
 function initialize(params) {
     if (params.year !== undefined && !isNaN(parseInt(params.year)) &&
-        params.year < lastYear && params.year > firstYear) {
-        thisYear = params.year;
+        params.year < avb.lastYear && params.year > avb.firstYear) {
+        avb.thisYear = params.year;
     }
 
-    
-    section = params.section;
+
+    avb.section = params.section;
 
     // highlight current selection in menubar
     $('.section').each(function () {
-        if ($(this).text().toLowerCase() === section) {
+        if ($(this).text().toLowerCase() === avb.section) {
             $(this).addClass('selected');
         }
     });
@@ -96,59 +99,64 @@ function initialize(params) {
     // set viewing mode
     setMode(params.mode);
 
-    downloadData(section);
+    downloadData(avb.section);
 
 }
 
-function downloadData(openSection){
-    data = new Object;
+function downloadData(opensection) {
 
     // loads all jsons in data
     var jxhr = [];
-    $.each(sections, function (i, url) {
+    $.each(avb.sections, function (i, url) {
         jxhr.push(
             $.getJSON('/data/' + url + '.json', function (json) {
-                data[url] = json;
+                avb.data[url] = json;
             })
         );
     });
 
     // open section if needed
-    $.when.apply($, jxhr).done(function() {
-        if(openSection !== undefined) onDataload(data[openSection]);
+    $.when.apply($, jxhr).done(function () {
+        if (opensection !== undefined) onDataload(avb.data[opensection]);
     });
 }
 
 function onDataload(jsondata) {
-    root = jsondata;
+    avb.root = jsondata;
 
     //year bounds initialization
-    firstYear = d3.min(root.values, function(d) { return d.year});
-    lastYear = d3.max(root.values, function(d) { return d.year});
-    yearIndex = thisYear - firstYear;
-    avb.navbar.initialize(thisYear);
+    log(avb.root)
 
-    currentSelection.data = undefined;
+    avb.firstYear = d3.min(avb.root.values, function (d) {
+        return d.year
+    });
+    avb.lastYear = d3.max(avb.root.values, function (d) {
+        return d.year
+    });
+    yearIndex = avb.thisYear - avb.firstYear;
+    avb.navbar.initialize(avb.thisYear);
+
+    avb.currentNode.data = undefined;
 
     avb.cards.initialize();
     avb.navigation.initialize(jsondata);
-    avb.navigation.open(root.hash, true);
+    avb.navigation.open(avb.root.hash, true);
 
     // initializes search
     $('#searchbox').keyup(avb.navbar.searchChange);
-    $('#searchbox').click(function(){
-        if ($('#avb-home').is(":visible"))  avb.home.hide();
+    $('#searchbox').click(function () {
+        if ($('#avb-home').is(":visible")) avb.home.hide();
     });
 
     console.log("UI Loaded.");
 
 }
 
-/* Navigation subroutines */ 
+/* Navigation subroutines */
 
 function updateSelection(data, year, color) {
-    currentSelection.data = data;
-    currentSelection.year = year;
+    avb.currentNode.data = data;
+    avb.currentNode.year = year;
     avb.chart.drawline(data, color);
     avb.cards.update(data);
 }
@@ -163,29 +171,29 @@ function setMode(modeId) {
     if (modeId && modeId === 'l') {
         avb.navigation = avb.table;
         container.html(Mustache.render(table.html()));
-        mode = 'l';
+        avb.mode = 'l';
     } else {
         avb.navigation = avb.treemap;
         container.html(Mustache.render(treemap.html()));
-        mode = 't';
+        avb.mode = 't';
     }
 }
 
 function switchMode(mode, pushurl) {
     if (pushurl === undefined) pushurl = true;
     setMode(mode);
-    if (pushurl) pushUrl(section, thisYear, mode, root.hash);
-    onDataload(data[section]);
+    if (pushurl) pushUrl(avb.section, avb.thisYear, mode, avb.root.hash);
+    onDataload(avb.data[avb.section]);
 }
 
 function changeYear(year) {
-    if (year === thisYear) return;
-    currentSelection = root;
-    pushUrl(section, year, mode, root.hash);
-    thisYear = year;
-    yearIndex = thisYear - firstYear;
-    avb.navigation.update(root);
-    avb.navigation.open(root.hash);
+    if (year === avb.thisYear) return;
+    avb.currentNode = avb.root;
+    pushUrl(avb.section, year, avb.mode, avb.root.hash);
+    avb.thisYear = year;
+    yearIndex = avb.thisYear - avb.firstYear;
+    avb.navigation.update(avb.root);
+    avb.navigation.open(avb.root.hash);
 
     // update homepage graph if needed
     if ($('#avb-home').is(":visible")) {
@@ -199,30 +207,30 @@ var log = function (d) {
     console.log(d);
 }
 
-function hexToRgb(hex) {
-    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-    return result ? {
-        r: parseInt(result[1], 16),
-        g: parseInt(result[2], 16),
-        b: parseInt(result[3], 16)
-    } : null;
-}
+    function hexToRgb(hex) {
+        var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+        return result ? {
+            r: parseInt(result[1], 16),
+            g: parseInt(result[2], 16),
+            b: parseInt(result[3], 16)
+        } : null;
+    }
 
-function mixrgb(rgb1, rgb2, p) {
-    return {
-        r: Math.round(p * rgb1.r + (1 - p) * rgb2.r),
-        g: Math.round(p * rgb1.g + (1 - p) * rgb2.g),
-        b: Math.round(p * rgb1.b + (1 - p) * rgb2.b)
-    };
-}
+    function mixrgb(rgb1, rgb2, p) {
+        return {
+            r: Math.round(p * rgb1.r + (1 - p) * rgb2.r),
+            g: Math.round(p * rgb1.g + (1 - p) * rgb2.g),
+            b: Math.round(p * rgb1.b + (1 - p) * rgb2.b)
+        };
+    }
 
-function translate(obj, x, y) {
-    obj.attr("transform", "translate(" + (x).toString() + "," + (y).toString() + ")");
-}
+    function translate(obj, x, y) {
+        obj.attr("transform", "translate(" + (x).toString() + "," + (y).toString() + ")");
+    }
 
-function rotate(obj, degrees) {
-    obj.attr("transform", "rotate(" + degrees.toString() + " 100 100)");
-}
+    function rotate(obj, degrees) {
+        obj.attr("transform", "rotate(" + degrees.toString() + " 100 100)");
+    }
 
 
 $.fn.center = function () {
@@ -267,14 +275,13 @@ function ie() {
     return v > 4 ? v : undef;
 };
 
-function capitalise(string)
-{
+function capitalise(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
- // Back button action
+// Back button action
 window.onpopstate = popUrl;
 
- // Feedback button
+// Feedback button
 var fby = fby || [];
 (function () {
     var f = document.createElement('script');

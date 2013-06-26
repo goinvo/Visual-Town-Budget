@@ -36,7 +36,7 @@ avb.cards = function(){
 
     initialize = function(){
         cardstack = [];
-        deck = decks[section];
+        deck = decks[avb.section];
         draw();
     },
 
@@ -59,7 +59,7 @@ avb.cards = function(){
 
     update = function (data) {
 
-        d3.select("#cardtitle").text(data.name + " in " + thisYear.toString());
+        d3.select("#cardtitle").text(data.name + " in " + avb.thisYear.toString());
         for(var i=0; i < deck.length; i++) {
             cardstack[i].html(Mustache.render($('#card-template').html(),deck[i]));
             cardstack[i].select(".cardvalue").html(deck[i].value(data));
