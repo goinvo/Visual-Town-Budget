@@ -1,3 +1,30 @@
+/*
+File: chart.js
+
+Description:
+    Chart component for visual budget application.
+
+Authors:
+    Ivan DiLernia <ivan@goinvo.com>
+    Roger Zhu <roger@goinvo.com>
+
+License:
+    Copyright 2013, Involution Studios <http://goinvo.com>
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+*/
+
+
 var avb = avb || {};
 
 avb.chart = function () {
@@ -40,12 +67,15 @@ avb.chart = function () {
 
         legend = function (layers, parent) {
 
+            chart.legendLayers = layers || chart.legendLayers;
+            chart.legendParent = parent || chart.legendParent;
+
             var legendLabels = [];
-            layers.each(function (d) {
+            chart.legendLayers.each(function (d) {
                 legendLabels.push({
                         key: d.key,
                         color: d3.select(this).select('path').style('fill'),
-                        percentage: 100 * d.values[yearIndex].val / parent.values[yearIndex].val
+                        percentage: 100 * d.values[yearIndex].val / chart.legendParent.values[yearIndex].val
                     });
             });
 
@@ -125,7 +155,7 @@ avb.chart = function () {
             /*
              *  x/y scales
              */
-            chart.yscale = d3.scale.linear().domain([0, d3.max(data.values, get_values) * 1.2])
+            chart.yscale = d3.scale.linear().domain([0, d3.max(data.values, function(d) { return d.val} ) * 1.2])
                 .range([chart.height - chart.ymargin, 10]);
 
             /*
@@ -334,16 +364,26 @@ avb.chart = function () {
             chart.showLegend = action;
             $('#legend-wrap, #cards').stop();
             if(action) {
-                $('#legend-wrap').animate({left: '0'});
-                $('#cards').animate({left: '100%'});
+                $('#legend-wrap').animate({left: '0'}, 350);
+                $('#cards').animate({left: '100%'}, 350);
             } else {
-                $('#legend-wrap').animate({left: '-100%'});
-                $('#cards').animate({left: '0'});
+                $('#legend-wrap').animate({left: '-100%'}, 350);
+                $('#cards').animate({left: '0'}, 350);
             }
         },
 
         slideLayers  = function(x) {
+            function updateInfo(year){
+                var newIndex = year - firstYear;
+                if(yearIndex === newIndex) return;
+                yearIndex = newIndex;
+                avb.cards.update(currentSelection.data);
+                legend();
+            }
 
+            updateInfo(Math.round(chart.xscale.invert(x)));
+
+            // resize svg width
             x = Math.min(x, chart.xscale.range()[1]);
             x = Math.max(x, chart.xscale.range()[0]);
             chart.layersWidth = x;

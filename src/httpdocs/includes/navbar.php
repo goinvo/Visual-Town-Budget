@@ -22,11 +22,11 @@
     
         <div class="menubutton margin">
           <span> <i class="icon-th-large"></i> </span>
-          <a href="javascript:switchMode('t'); "> Map </a>
+          <a href="javascript:switchMode('t'); "> Map view </a>
         </div>
         <div class="menubutton">
           <span> <i class="icon-th-list"></i> </span>
-          <a href="javascript:switchMode('l');"> List </a>
+          <a href="javascript:switchMode('l');"> Tabular view </a>
         </div>
 
         <ul class="nav menubutton " data-step="4" data-intro="Interested in seeing a different year? Use this menu." data-position="left">

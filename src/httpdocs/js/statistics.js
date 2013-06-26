@@ -1,3 +1,35 @@
+/*
+File: statistics.js
+
+Description:
+    Statistics and helper functions for visual budget application
+
+Requires:
+    d3.js
+
+Authors:
+    Ivan DiLernia <ivan@goinvo.com>
+    Roger Zhu <roger@goinvo.com>
+
+License:
+    Copyright 2013, Involution Studios <http://goinvo.com>
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+*/
+
+
+
+var averageContribution = 500;
 
 stats = {
     amount: {
@@ -28,6 +60,19 @@ stats = {
             avb.table.renderImpact(d, cell)
         }
     },
+    individual: {
+        title: "Individual",
+        class: "span6 ",
+        value: function (d) {
+            var percentage = d.values[yearIndex].val / root.values[yearIndex].val;
+            return '$' + d3.round(averageContribution * percentage,2).toFixed(2);
+        },
+        side: 'a year to a single resident.',
+        cellClass: "value sum",
+        cellFunction: function (d, cell) {
+            avb.table.renderImpact(d, cell)
+        }
+    },
     growth: {
         title: "Growth",
         class: "span6 top",
@@ -42,7 +87,7 @@ stats = {
     },
     source: {
         title: "Source",
-        class: "span12 card-source ",
+        class: "span6 card-source ",
         value: function () {
             return "Town of Arlington";
         },
@@ -55,7 +100,7 @@ stats = {
         title: "Average",
         class: "span6 ",
         value: function (d) {
-            return formatcurrency(d3.mean(d.values, get_values));
+            return formatcurrency(d3.mean(d.values, function(d) {return d.val}));
         },
         side: "on average."
     },
@@ -92,7 +137,7 @@ stats = {
 
 decks = {
     revenues: [stats.amount, stats.growth, stats.impact, stats.mean, stats.source],
-    expenses: [stats.amount, stats.growth, stats.impact, stats.mean, stats.source],
+    expenses: [stats.amount, stats.growth, stats.impact, stats.mean, stats.individual, stats.source],
     funds: [stats.amount, stats.growth, stats.impact, stats.mean, stats.source]
 },
 
