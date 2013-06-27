@@ -57,7 +57,10 @@ License:
       amountScale.domain([0,data.values[yearIndex].val*0.5]);
       renderNode(data, 0, table).trigger('click');
     }
+
   },
+
+
 
   addHeader = function(table){
     var headerHtml = '<div class="tablerow" id="table-header" > <div class="bullet"> </div>'; 
@@ -231,7 +234,7 @@ License:
   renderImpact = function(data, cell){
     var impact = stats.impact.value(data);
     $(cell).css({"color" : impactScale(impact)});
-    $(cell).text(impact + ' %');
+    $(cell).text(impact);
   },
 
   open = function() {

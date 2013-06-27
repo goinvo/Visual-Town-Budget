@@ -13,7 +13,7 @@
 	line-height: 40px;
 
 	&:hover{
-		background-color: $gray;
+		background-color: rgb(235,235,235);
 	}
 
 	&.atomic .expand-icon{
@@ -71,7 +71,7 @@
 	}
 
 	&.head{
-		font-family: 'Open Sans';
+		font-family: 'Helvetica Neue LT Std';
 		font-weight: $text-bold;
 	}
 }

@@ -43,6 +43,8 @@ avb.lastYear = null;
 avb.currentYear = new Date().getFullYear();
 avb.thisYear = avb.currentYear;
 
+avb.userContribution = null;
+
 avb.sections = ['revenues', 'expenses', 'funds'];
 
 var timer = 0;
@@ -91,10 +93,13 @@ function initialize(params) {
 
     // highlight current selection in menubar
     $('.section').each(function () {
-        if ($(this).text().toLowerCase() === avb.section) {
+        if ($(this).text().toLowerCase() === avb.section.toLowerCase()) {
             $(this).addClass('selected');
         }
     });
+
+    avb.userContribution = avb.home.getContribution();
+    
 
     // set viewing mode
     setMode(params.mode);

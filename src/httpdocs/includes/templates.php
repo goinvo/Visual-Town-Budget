@@ -2,10 +2,10 @@
 
 <div id="information-container" class="span6">
 
-  <div data-intro='See the basic financial summary and high level data story.' data-step='1' data-position="right">
+  <div id="information-cards" >
 
   <div class="title-head" style="height:70px;">
-    <span class="text" > </span>
+    <div style="display:inline-block;" class="text" > </div>
   </div>
   <div class="row-fluid" id="info-wrap" >
     <div id="cards-wrap" style="position:relative;">
@@ -23,7 +23,7 @@
 
   </div>
 
-  <div id="chart-wrap" class="row-fluid" data-intro="Explore how the town revenues changed over time." data-step='2' data-position="right"> 
+  <div id="chart-wrap" class="row-fluid" > 
     <div id='chart' class="chart"> </div>
   </div>
 </div>
@@ -34,7 +34,7 @@
       <i class="icon-zoom-out"></i> Zoom out
     </button>
   </div>
-  <div id="navigation" data-step="3" data-intro="The xray of the financials... Zoom into the data details by touching a block. How cool was that? " data-position="left">  
+  <div id="navigation" >  
   <div id="ie-popover">
     <div class="text"></div>
     <div class="arrow"> </div> 

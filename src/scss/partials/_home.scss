@@ -20,15 +20,24 @@
   display: none;
 }
 
+p{
+  vertical-align: top;
+}
+
+#tax-input{
+  width:120px;
+  //font-family: 'Helvetica Neue LT Std', sans-serif;
+}
+
+
 #home-map{
   display: inline-block;
-  vertical-align: top;
-  width: 38%;
+  vertical-align: bottom;
   height: 200px;
 
   #home-map-svg{
     margin: 0 auto;
-    width: 300px;
+    width: 29%;
     height: 100%;
   }
 
@@ -74,6 +83,9 @@
 //   color: inherit;
 // }
 
+.home-column{
+  vertical-align: top;
+}
 
 #welcome{
   padding: 0px;
@@ -82,14 +94,14 @@
   display: inline-block;
 
   #welcome-hero{
-    width: 60%; //----> DEFAULT
+    width: 70%; //----> DEFAULT
     // width: 75%;
     display: inline-block;
+    vertical-align: top;
   }
 
   h1{
-    font-size: 50px;
-    color: #666;
+    font-size: 1.8em;
     margin-bottom: 10px;
   }
 

@@ -27,10 +27,6 @@ License:
     limitations under the License.
 */
 
-
-
-var averageContribution = 500;
-
 stats = {
     amount: {
         title: "Amount",
@@ -41,7 +37,7 @@ stats = {
         side: function () {
             return " in " + avb.thisYear.toString() + "."
         },
-        cellClass: "value sum numeric ",
+        cellClass: "value sum ",
         cellFunction: function (d, cell) {
             avb.table.renderAmount(d, cell)
         }
@@ -62,12 +58,12 @@ stats = {
     },
     individual: {
         title: "Individual",
-        class: "span6 ",
+        class: "span6 individual",
         value: function (d) {
             var percentage = d.values[yearIndex].val / avb.root.values[yearIndex].val;
-            return '$' + d3.round(averageContribution * percentage,2).toFixed(2);
+            return '$' + d3.round(avb.userContribution * percentage,2);
         },
-        side: 'a year to a single resident.',
+        side: 'your yearly contribution.',
         cellClass: "value sum",
         cellFunction: function (d, cell) {
             avb.table.renderImpact(d, cell)
@@ -137,7 +133,7 @@ stats = {
 
 decks = {
     revenues: [stats.amount, stats.growth, stats.impact, stats.mean, stats.source],
-    expenses: [stats.amount, stats.growth, stats.impact, stats.mean, stats.individual, stats.source],
+    expenses: [stats.amount,  stats.growth, stats.impact, stats.mean, stats.source],
     funds: [stats.amount, stats.growth, stats.impact, stats.mean, stats.source]
 },
 

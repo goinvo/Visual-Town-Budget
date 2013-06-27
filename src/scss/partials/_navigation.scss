@@ -74,7 +74,7 @@
 
   .textdiv { /* text in the boxes */
     padding: 8px;
-    font-family: "Open Sans", sans-serif;;
+    font-family: "Helvetica Neue LT Std", sans-serif;
 
     .titleLabel,
     .valueLabel {
@@ -93,7 +93,15 @@
 }
 
 #zoombutton{
+    width:120px;
+    font-family: "Helvetica Neue LT Std", sans-serif;
     float: right;
+    font-size: 18px;
+
+    i{
+      vertical-align: top;
+      margin-right: 5px;
+    }
   }
 
 .popover {

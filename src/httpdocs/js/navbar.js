@@ -58,7 +58,10 @@ avb.navbar = function(){
 	},
 
 	searchObject = function(keyword, object){
-	    var result = (object.key.toLowerCase().indexOf(keyword.toLowerCase()) !== -1) ? [object] : []; 
+		var index = object.key.toLowerCase().indexOf(keyword.toLowerCase());
+		// ignore matches in mid word
+		if (index !== 0 && object.key[index-1] !== ' ') index = -1;
+	    var result = index !== -1 ? [object] : []; 
 	    if(object.sub !== undefined) {
 	        for(var i=0; i<object.sub.length; i++) {
 	            result = result.concat(searchObject(keyword, object.sub[i]));

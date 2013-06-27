@@ -29,7 +29,7 @@ avb.chart = function () {
     var chart, layers
 
     /*
-     * Ini
+     *
      */
     initialize = function (div) {
 

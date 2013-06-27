@@ -11,7 +11,7 @@
 
      <div onclick='window.location = "/"' class="entry homebutton"> Town Budget, Visualized </div>
 
-     <div class="entry" style="margin-left: 40px">
+     <div class="entry" style="margin-left: 90px">
         <span class="menubutton section margin"><a href="/revenues">Revenues</a></span>
         <span class="menubutton section margin"><a href="/expenses">Expenses</a></span>
         <span class="menubutton section margin"><a href="/funds">Funds</a></span>
@@ -29,7 +29,7 @@
           <a href="javascript:switchMode('l');"> Tabular view </a>
         </div>
 
-        <ul class="nav menubutton " data-step="4" data-intro="Interested in seeing budget history or projections? Use this menu." data-position="left">
+        <ul id="yeardrop" class="nav menubutton ">
           <li  id="yeardrop-container" class="dropdown" style="display:none;">
             <a id="yeardrop-label" class="dropdown-toggle" role="button" data-toggle="dropdown" href="#">Dropdown <b class="caret"></b></a>
             <ul id="yeardrop-list" class="dropdown-menu vhscrollable" role="menu">
