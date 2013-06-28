@@ -378,81 +378,75 @@ p {
   stroke-linecap: round;
 }
 
-/* line 32, ../../scss/partials/_chart.scss */
+/* line 29, ../../scss/partials/_chart.scss */
 .area {
   opacity: 0.2;
 }
-/* line 35, ../../scss/partials/_chart.scss */
+/* line 32, ../../scss/partials/_chart.scss */
 .area.projection {
   opacity: 0.1;
 }
 
-/* line 41, ../../scss/partials/_chart.scss */
+/* line 38, ../../scss/partials/_chart.scss */
 .overflows {
   fill: #f9f9f9;
 }
 
-/* line 45, ../../scss/partials/_chart.scss */
-.browser text {
-  text-anchor: end;
-}
-
-/* line 49, ../../scss/partials/_chart.scss */
+/* line 44, ../../scss/partials/_chart.scss */
 .axis path, .axis line {
-  stroke: grey;
+  stroke: #7a7a7a;
   stroke-width: 1;
   stroke-linejoin: round;
   stroke-linecap: round;
-  shape-rendering: crispEdges;
 }
-/* line 56, ../../scss/partials/_chart.scss */
+/* line 50, ../../scss/partials/_chart.scss */
 .axis text {
   font-family: 'Open Sans';
   font-size: 0.8em;
 }
-/* line 61, ../../scss/partials/_chart.scss */
+/* line 55, ../../scss/partials/_chart.scss */
 .axis .odd {
   fill: none;
 }
-/* line 65, ../../scss/partials/_chart.scss */
+/* line 59, ../../scss/partials/_chart.scss */
 .axis .thisYear {
   fill: black;
   font-weight: bold;
 }
-/* line 70, ../../scss/partials/_chart.scss */
+/* line 64, ../../scss/partials/_chart.scss */
 .axis text {
   cursor: default;
 }
 
-/* line 75, ../../scss/partials/_chart.scss */
+/* line 69, ../../scss/partials/_chart.scss */
 .multiarea {
   fill-opacity: 0.65;
 }
 
-/* line 78, ../../scss/partials/_chart.scss */
+/* line 72, ../../scss/partials/_chart.scss */
 .multiline {
   fill: none;
   stroke-width: 2px;
   opacity: 1;
 }
 
-/* line 83, ../../scss/partials/_chart.scss */
+/* line 77, ../../scss/partials/_chart.scss */
 .multiaxis path {
   stroke-width: 0;
   fill: none;
 }
 
-/* line 88, ../../scss/partials/_chart.scss */
+/* line 82, ../../scss/partials/_chart.scss */
 .multigrid .tick {
-  stroke: lightgrey;
+  stroke: lightgray;
   opacity: 0;
 }
-/* line 92, ../../scss/partials/_chart.scss */
+/* line 86, ../../scss/partials/_chart.scss */
 .multigrid path {
   stroke-width: 1;
 }
 
-/* line 97, ../../scss/partials/_chart.scss */
+/* line 91, ../../scss/partials/_chart.scss */
 .layerLine, .sideShadow {
   box-shadow: -3px 0px 8px black;
   margin-left: 10px;
@@ -516,15 +510,18 @@ p {
   overflow: hidden;
   height: 100%;
 }
-/* line 71, ../../scss/partials/_cards.scss */
+/* line 69, ../../scss/partials/_cards.scss */
+#information-container #info-wrap div {
+  cursor: pointer;
+}
+/* line 75, ../../scss/partials/_cards.scss */
 #information-container #cards-wrap {
   height: 100%;
   width: 100%;
   position: relative;
 }
-
-/* line 78, ../../scss/partials/_cards.scss */
-#legend-wrap {
+/* line 81, ../../scss/partials/_cards.scss */
+#information-container #legend-wrap {
   position: absolute;
   height: 90%;
   left: -100%;
@@ -532,14 +529,14 @@ p {
   font-size: 1.3em;
   line-height: 1.5em;
 }
-/* line 86, ../../scss/partials/_cards.scss */
-#legend-wrap .legend-label {
+/* line 89, ../../scss/partials/_cards.scss */
+#information-container #legend-wrap .legend-label {
   width: 16px;
   height: 16px;
   border-radius: 8px;
 }
-/* line 92, ../../scss/partials/_cards.scss */
-#legend-wrap tr :first-child {
+/* line 95, ../../scss/partials/_cards.scss */
+#information-container #legend-wrap tr :first-child {
   margin-right: 5px;
 }
 

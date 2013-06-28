@@ -6,8 +6,7 @@
   <meta charset="utf-8">
   <title>Arlington Visual Budget</title>
 
-  <link href='http://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
-  <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,700' rel='stylesheet' type='text/css'>
 
   <link href="/css/lib/bootstrap/bootstrap.css" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="/css/lib/intro/introjs.min.css">

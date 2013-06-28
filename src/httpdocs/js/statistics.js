@@ -35,7 +35,7 @@ stats = {
             return formatcurrency(d.values[yearIndex].val);
         },
         side: function () {
-            return " in " + avb.thisYear.toString() + "."
+            return " in " + (avb.firstYear + yearIndex).toString() + "."
         },
         cellClass: "value sum ",
         cellFunction: function (d, cell) {
@@ -60,7 +60,9 @@ stats = {
         title: "Individual",
         class: "span6 individual",
         value: function (d) {
+            log(yearIndex);
             var percentage = d.values[yearIndex].val / avb.root.values[yearIndex].val;
+
             return '$' + d3.round(avb.userContribution * percentage,2);
         },
         side: 'your yearly contribution.',
@@ -75,7 +77,7 @@ stats = {
         value: function (d) {
             return growth(d);
         },
-        side: " compared to last year.",
+        side: " compared to previous year.",
         cellFunction: function (d, cell) {
             avb.table.renderGrowth(d, cell)
         },

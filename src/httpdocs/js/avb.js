@@ -162,7 +162,8 @@ function onDataload(jsondata) {
 function updateSelection(data, year, color) {
     avb.currentNode.data = data;
     avb.currentNode.year = year;
-    avb.chart.drawline(data, color);
+    avb.chart.update
+(data, color);
     avb.cards.update(data);
 }
 

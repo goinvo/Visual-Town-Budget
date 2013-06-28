@@ -66,6 +66,10 @@
 	#info-wrap{
 	  overflow:hidden; 
 	  height:100%;
+	  div{
+	  	cursor: pointer;
+	  }
+
 	}
 
 	#cards-wrap{
@@ -73,23 +77,25 @@
 		width:100%; 
 		position:relative;
 	}
+
+	#legend-wrap {
+	    position:absolute;
+	    height: 90%;
+	    left:-100%;
+	    overflow-y: auto;
+	    font-size: $text-big;
+	    line-height: 1.5em;
+
+	    .legend-label{
+	      width: 16px;
+	      height: 16px;
+	      border-radius: 8px;
+	    }
+
+	    tr :first-child {
+	      margin-right: 5px;
+	    }
+	  }
 }
 
-#legend-wrap {
-    position:absolute;
-    height: 90%;
-    left:-100%;
-    overflow-y: auto;
-    font-size: $text-big;
-    line-height: 1.5em;
 
-    .legend-label{
-      width: 16px;
-      height: 16px;
-      border-radius: 8px;
-    }
-
-    tr :first-child {
-      margin-right: 5px;
-    }
-  }

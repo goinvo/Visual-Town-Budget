@@ -29,49 +29,59 @@ avb.chart = function () {
     var chart, layers
 
     /*
-     *
+     * Initialization routines
      */
     initialize = function (div) {
 
+        // remove preexisting charts
         if (chart !== undefined) {
             chart.remove();
         }
 
         chart = d3.select(div).append("svg");
 
+        // chart param initialization
         chart.width = $(div).width();
         chart.height = $(div).height();
         chart.xmargin = 50;
         chart.ymargin = 20;
         chart.linestack = [];
+        chart.showLegend = false;
+
+        $('#info-wrap').click(toggleLegend);
+
+        chart.attr("height", chart.height)
+            .attr("width", chart.width);
+
+        // xscale initialization(time)
         chart.xscale = d3.scale.linear()
             .domain([avb.firstYear, avb.lastYear])
             .range([chart.xmargin, chart.width - 15]);
 
+        // limits layers from taking the whole chart width
         chart.layersWidth = chart.xscale(avb.thisYear);
-        chart.attr("height", chart.height)
-            .attr("width", chart.width);
 
-        $('#chart-expand').click(function (d) {
-            $('#modal-container').modal({
-                onOpen: modalOpen,
-                onClose: modalClose,
-                opacity: 70
-            });
-        });
-        // chart expansion
+        // hooks up chart interactions functions
         addActions(chart);
 
     },
 
 
-
+    /*
+    * Populates legend for all chart layers
+    *
+    * Arguments:
+    * layers - *(array of svg groups)* an array containing all layers
+    * parent - *(object)* data for upper level node (needed to calculate percentages)
+    */
     legend = function (layers, parent) {
 
         chart.legendLayers = layers || chart.legendLayers;
         chart.legendParent = parent || chart.legendParent;
 
         var legendLabels = [];
+        // populate the array above with the names of various layers
+        // along with percentages relative to their parent
         chart.legendLayers.each(function (d) {
             legendLabels.push({
                 key: d.key,
@@ -80,34 +90,42 @@ avb.chart = function () {
             });
         });
 
+        // clean up old legend if needed
         d3.selectAll("#legend tr").remove();
 
         // add legend rows
         var rows = d3.select("#legend tbody").selectAll("tr")
             .data(legendLabels.reverse()).enter().append("tr");
 
+        // insert divs to make bullet points
         rows.append("td").append('div')
             .classed('legend-label', true)
             .style('background-color', function (d) {
                 return d.color;
             });
 
+        // insert names and percentages
         rows.append("td").text(function (d) {
             return d.key + ' (' + d.percentage.toFixed(2) + '%)';
         })
 
+        // center legend vertically
         $('#legend').center();
-
     },
 
+    /*
+    *   Initializes layers
+    */
     initializeLayers = function () {
 
-        if (chart.sideShadow) return;
+        // hides datapoint circles to the left of the
+        // line that divides the layered part from the non-layered one
+        setDatapointsVisibility();
 
-        setDatapointsOpacity();
-
+        // IE9 does not support foreignobjects...
         if (ie()) return;
 
+        // drop shadow at chart right-edge
         chart.sideShadow = chart.layerWindow.append("foreignObject")
             .attr('width', 10).attr('x', chart.xscale.range()[1] - 10)
             .attr('height', chart.yscale.range()[0] - 10).attr('y', 10).attr("class", "foreignobj");
@@ -116,31 +134,18 @@ avb.chart = function () {
             .style('width', (2).px()).style('height', (chart.yscale.range()[0] - 10).px())
             .classed('sideShadow', true);
 
-
-        chart.t = chart.layerWindow.append("foreignObject")
-            .attr('width', chart.xscale.range()[1] - chart.xscale.range()[0])
-            .attr('x', chart.xscale.range()[0])
-            .attr('height', 10).attr('y', 10).attr("class", "foreignobj");
-
-        chart.t.append("xhtml:div")
-            .style('width', (chart.xscale.range()[1] - chart.xscale.range()[0]).px())
-            .style('height', (2).px())
-            .classed('ls', true);
-
-
-
     },
 
-    drawline = function (data, color) {
+    /*
+    * Updates chart with current data
+    */
+    update = function (data, color) {
 
-        // redraw case
-        if (data === undefined) {
-            data = avb.currentNode.data;
-            color = avb.currentNode.color;
-        }
+        // do a redraw in case function is called with no arguments
+        var data = data || avb.currentNode.data;
+        var color = color || avb.currentNode.color;
 
-        layersEnabled = chart.layersSelected && (data.sub.length !== 0);
-
+        // svg groups initalization
         if (chart.axes === undefined) {
             chart.grids = chart.append('g');
             chart.areagroup = chart.append('g');
@@ -153,21 +158,17 @@ avb.chart = function () {
         d3.selectAll(chart.grids.node().childNodes).remove()
         d3.selectAll(chart.axes.node().childNodes).remove()
 
-        /*
-         *  x/y scales
-         */
-        chart.yscale = d3.scale.linear().domain([0, d3.max(data.values, function (d) {
-            return d.val
-        }) * 1.2])
-            .range([chart.height - chart.ymargin, 10]);
+        // scales initialization
+        // yscale multiplied by 1.2 to avoid chart line to touch
+        // the svg top
+        chart.yscale = d3.scale.linear().domain(
+            [0, d3.max(data.values, function (d) { return d.val }) * 1.2])
+        .range([chart.height - chart.ymargin, 10]);
 
-        /*
-         * grids
-         */
 
-        // xgrid
+        // grid initialization
 
-        // ticksize = height - 10px for legend space
+        // ticksize = height - 10px for label space
         var xgrid_axis = d3.svg.axis().scale(chart.xscale).orient("bottom")
             .tickSize(-chart.yscale.range()[0] + 10, 0, 0).ticks(6)
             .tickFormat(function (d) {
@@ -191,11 +192,10 @@ avb.chart = function () {
             .attr("transform", "translate(" + chart.xmargin + ",0)")
             .call(ygrid_axis);
 
-        /*
-         * line - areas
-         */
 
-        // line function
+        // line drawing
+
+        // line definition
         var line = d3.svg.line()
             .interpolate("monotone")
             .x(function (d) {
@@ -205,7 +205,7 @@ avb.chart = function () {
                 return chart.yscale(d.val);
             });
 
-        // area
+        // curve area
         var area = d3.svg.area()
             .interpolate("monotone")
             .x(function (d, i) {
@@ -218,6 +218,7 @@ avb.chart = function () {
                 return chart.yscale(d.val);
             });
 
+        // which index projection data begins
         var projected = avb.currentYear - avb.firstYear;
 
         /*
@@ -248,13 +249,9 @@ avb.chart = function () {
             .attr("d", area(data.values.slice(projected, data.values.length)))
             .attr("color", color);
 
-        if (layersEnabled) {
-            chart.visuals[0].style("fill", "black");
-            chart.visuals[1].style("fill", "black");
-        } else {
-            chart.visuals[0].style("fill", color);
-            chart.visuals[1].style("fill", color);
-        }
+
+        chart.visuals[0].style("fill", color);
+        chart.visuals[1].style("fill", color);
 
         // non-projection line
         chart.visuals[2].classed("line", true)
@@ -323,6 +320,10 @@ avb.chart = function () {
         overflows.append("rect").attr("width", chart.width)
             .attr("height", chart.ymargin).attr("y", chart.height - chart.ymargin);
 
+        // covers rightmost circle overflow
+        overflows.append("rect").attr("width", 10)
+            .attr("height", chart.height).attr('x', chart.xscale(avb.lastYear));
+
 
         chart.xAxisSocket = chart.axes.append("g")
             .classed("axis", true).classed("xAxis", true)
@@ -340,18 +341,25 @@ avb.chart = function () {
             d3.select(this).classed('odd', true);
         });
 
+        // highlights label that represents current year on axis
         d3.select('.xAxis g:nth-child(' + (yearIndex + 1) + ')')
             .classed('thisYear', true);
 
+        // initialize layers
         initializeLayers();
 
+        // remove any existing layers
         if (layers !== undefined) layers.remove();
 
-        enableLayers(data);
+        // draw layers
+        drawLayers(data);
     },
 
-
-    setDatapointsOpacity = function () {
+    /*
+    * Shows/hides datapoint markers when necessary
+    * Eg. markers shouldn't be shown in the layered region
+    */
+    setDatapointsVisibility = function () {
         chart.circles.selectAll('circle').attr('opacity', function () {
             var circle = d3.select(this);
             if (parseFloat(circle.attr('cx')) < chart.layersWidth) {
@@ -362,17 +370,23 @@ avb.chart = function () {
         });
     },
 
-    showLegend = function (action) {
-        if (action === chart.showLegend) return;
-        chart.showLegend = action;
+    /*
+    * Toggles layer legend
+    */
+    toggleLegend = function () {
+        // return if action is being repeated
+        chart.showLegend = !chart.showLegend;
+        // stop any other ongoing transitions
         $('#legend-wrap, #cards').stop();
-        if (action) {
+        // show legend
+        if (chart.showLegend) {
             $('#legend-wrap').animate({
                 left: '0'
             }, 350);
             $('#cards').animate({
                 left: '100%'
             }, 350);
+        // hide legend
         } else {
             $('#legend-wrap').animate({
                 left: '-100%'
@@ -383,9 +397,15 @@ avb.chart = function () {
         }
     },
 
+    /*
+    * Handles drag and drops in chart
+    */
     slideLayers = function (x) {
+        // updates information data based on the 
         function updateInfo(year) {
-            var newIndex = year - avb.firstYear;
+            // fixes edge case bug which gives a out of 
+            // boundary year
+            var newIndex = Math.max(year - avb.firstYear, 0);
             if (yearIndex === newIndex) return;
             yearIndex = newIndex;
             avb.cards.update(avb.currentNode.data);
@@ -400,17 +420,21 @@ avb.chart = function () {
         chart.layersWidth = x;
         chart.layers.svg.attr("width", x);
 
+        // drop shadow not drawn in IE
         if (!ie()) chart.layerLine.attr('x', x - 10);
-        showLegend(x > chart.xscale(avb.thisYear));
-        setDatapointsOpacity();
+        // show/hide point based on new layer position
+        setDatapointsVisibility();
     },
 
-
+    /*
+    * Binds all events for chart interactivity
+    */
     addActions = function (chart) {
-        var touchStart = new Object()
-        delta = new Object(),
+        var touchStart = {},
+            delta = {},
             mousedown = false;
 
+        // called at beginning of drag
         function dragStart(e) {
 
             e = d3.event;
@@ -419,17 +443,21 @@ avb.chart = function () {
             var x, y;
             mousedown = true;
 
+            // makes event valid for both touch and mouse devices 
             if (e.type === 'touchstart') {
                 x = e.touches[0].pageX;
             } else {
+                //solves some IE compatibility issues
                 x = e.offsetX || d3.mouse(this)[0];
             }
 
+            // immediately bring layers boundary where user clicked
             slideLayers(x);
             touchStart.x = chart.layersWidth;
             touchStart.y = 0;
         };
 
+        // called during drag
         function dragMove(e) {
 
             e = d3.event;
@@ -439,20 +467,25 @@ avb.chart = function () {
             var x, y;
             dragging = true;
 
+            // makes event valid for both touch and mouse devices 
             if (e.type === 'touchmove') {
                 x = e.touches[0].pageX;
             } else {
+                //solves some IE compatibility issues
                 x = e.offsetX || d3.mouse(this)[0];
             }
 
+            // distance from where the drag started
             delta = {
                 x: x - touchStart.x,
             };
 
+            // bring layers where the cursor is at
             slideLayers(touchStart.x + delta.x);
 
         };
 
+        // called at end of drag event
         function dragEnd(e) {
 
             e = d3.event;
@@ -461,6 +494,7 @@ avb.chart = function () {
             mousedown = false;
         };
 
+        // hook up all actons
         chart.on('mousedown', dragStart);
         chart.on('mousemove', dragMove);
         chart.on('mouseup', dragEnd);
@@ -470,15 +504,22 @@ avb.chart = function () {
 
     },
 
-    enableLayers = function (jsondata, transition) {
+    /*
+    * Draws layers
+    */
+    drawLayers = function (jsondata, transition) {
 
-
-        function appendSeparator(group) {
+        // puts a shadow at boundary between layered
+        // and non-layered part of the chart
+        function appendShadow(group) {
 
             if (ie()) return;
 
+            // clips the shadow so that it doesn't take the full height of the chart
             chart.sideShadow.attr("clip-path", "url(#areaclip)");
 
+            // the shadow is a foreignobject (div) to which
+            // the css property 'box-shadow' is applied to.
             chart.layerLine = group.append("foreignObject")
                 .attr('x', chart.layersWidth - 10).attr('width', 10).attr('y', 10).attr('height', chart.yscale.range()[0] - 10)
                 .attr("class", "foreignobj")
@@ -488,20 +529,27 @@ avb.chart = function () {
                 .classed('layerLine', true);
         }
 
-
-        layers = chart.layers.append('svg').attr("clip-path", "url(#areaclip)")
+        // layers are a whole new svg image, this is done so that
+        // the width of this svg can be easily adjusted to whatever desired
+        // value, giving the illusion of 'clipping' the layers
+        layers = chart.layers.append('svg')
             .attr("height", chart.height).attr("width", chart.layersWidth)
             .classed('layers', true);
 
+        // clip area used by boundary shadow
+        layers.attr("clip-path", "url(#areaclip)");
+
         chart.layers.svg = layers;
-
         chart.layers.classed('layers', true);
-
         layers.width = chart.width;
         layers.height = chart.height;
 
+        // when there visualized part has no subsections there
+        // is not much to be done
         if (jsondata.sub.length === 0) {
-            appendSeparator(layers);
+            // append the shadow
+            appendShadow(layers);
+            // update legend
             var legendData = chart.areagroup.datum(jsondata);
             legend(legendData, legendData.datum());
             return;
@@ -552,13 +600,13 @@ avb.chart = function () {
         var instance = stack(jsondata.sub);
 
         // calculate areas
-        var browser = layers.selectAll(".browser")
+        var regions = layers.selectAll(".browser")
             .data(instance)
             .enter().append("g")
             .attr("class", "browser");
 
         // draw areas
-        layers.areas = browser.append("path")
+        layers.areas = regions.append("path")
             .attr("class", "multiarea")
             .attr("d", function (d) {
                 return area(d.values);
@@ -568,7 +616,7 @@ avb.chart = function () {
             });
 
         // draw lines
-        layers.lines = browser.append("path")
+        layers.lines = regions.append("path")
             .attr("class", "multiline")
             .attr("d", function (d) {
                 return line(d.values);
@@ -578,31 +626,19 @@ avb.chart = function () {
             });
 
         // legend
-        legend(browser, jsondata);
+        legend(regions, jsondata);
 
         // not fundamental, improves layers looks
         $('.layers g:last .multiline').remove();
 
-        appendSeparator(layers);
+        // append boundary shadow
+        appendShadow(layers);
 
-    },
-
-    removeLayers = function () {
-        d3.selectAll('#chart circle').style('opacity', 1);
-        if (layers !== undefined) {
-            d3.selectAll('.area').classed("layers", false)
-                .style("fill", function () {
-                    return d3.select(this).attr("color")
-                });
-            layers.transition().duration(500).style("opacity", 0);
-            layers.transition().delay(500).remove();
-        }
     };
-
 
     return {
         chart: chart,
         initialize: initialize,
-        drawline: drawline
+        update : update
     }
 }();
