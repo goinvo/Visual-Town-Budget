@@ -124,6 +124,7 @@ avb.chart = function () {
 
         // IE9 does not support foreignobjects...
         if (ie()) return;
+        if(chart.layersInitialized) return;
 
         // drop shadow at chart right-edge
         chart.sideShadow = chart.layerWindow.append("foreignObject")
@@ -133,6 +134,8 @@ avb.chart = function () {
         chart.sideShadow.append("xhtml:div")
             .style('width', (2).px()).style('height', (chart.yscale.range()[0] - 10).px())
             .classed('sideShadow', true);
+
+        chart.layersInitialized = true;
 
     },
 

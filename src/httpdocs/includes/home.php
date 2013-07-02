@@ -26,9 +26,9 @@
         </div>
         <div class="home-column" style="display:inline-block; margin-left:5%; width:46%;"> 
           <div> Start learning about Arlington:
-            <div> <a class='link' style='color:#db4e86'> How much the town of Arlington is spending on education? </a> </div>
-            <div> <a class='link' style='color:#db4e86'> How much it will cost to clear the snow last winter? </a> </div>
-            <div> <a class='link' style='color:#db4e86'> Where the town’s money come from? </a> </div>
+            <div> <a class='link' style='color:#db4e86' id='q1' data-section="expenses"> What is the fire department annual cost? </a> </div>
+            <div> <a class='link' style='color:#db4e86' id='q2' data-section="expenses"> How much money does the town spend on schools? </a> </div>
+            <div> <a class='link' style='color:#db4e86' id='q3' data-section="expenses"> How expensive is to take care of snow over the winter? </a> </div>
           </div>
 
           <p style="margin-top:20px;">

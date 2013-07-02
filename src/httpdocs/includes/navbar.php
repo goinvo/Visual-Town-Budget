@@ -3,9 +3,11 @@
 <div class="purple-border" id="avb-menubar" >
   <div class="container">
 
-    <div class="homebutton" style="width:200px" onclick='window.location = "/"'> 
-      <img src="/img/logo.png" alt="avb-logo" style="position:relative" />
-    </div>
+    <div class="homebutton" onclick='window.location = "/"'> 
+      
+      <div style="font-size:32px;line-height:28px; display:inline-block"> Arlington, MA  </div>
+      <img src="/img/logo@High.png" alt="avb-logo" widht=24 height=24 />
+   </div>
 
     <div style="line-height:25px;"> 
 

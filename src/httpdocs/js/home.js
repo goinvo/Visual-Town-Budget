@@ -28,17 +28,110 @@ var avb = avb || {};
 avb.home = function () {
     var home = new Object;
 
-    var mainTour = [
-      {selector : '#information-cards', text : 'See the basic financial summary and high level data story.', position : 'right'},
-      {selector : '#chart-wrap', text : 'Explore how the town revenues changed over time.', position : 'right'},
-      {selector : '#navigation', text: 'he xray of the financials... Zoom into the data details by touching a block. How cool was that?', position : 'left'},
-      {selector : '#yeardrop', text : 'Interested in seeing budget history or projections? Use this menu.', position : 'left'}
-    ];
+    /*
+     * Tutorial node IDs.
+     */
+    var townDepartments = '2956e900',
+        fireDepartment = 'a97750fe',
+        snowRemoval = 'ced0e3a8',
+        townSchools = '40d55302';
 
-    var individualTour = [
-          {selector : '.individual', text : 'Here is your yearly contribution.', position : 'right'},
-          {selector : '#navigation', text : 'See how much you pay for these services.', position : 'left'}
-    ];
+
+    var mainTour = [{
+        selector: '#information-cards',
+        text: 'See the basic financial summary and high level data story.',
+        position: 'right'
+    }, {
+        selector: '#chart-wrap',
+        text: 'Explore how the town revenues changed over time.',
+        position: 'right'
+    }, {
+        selector: '#navigation',
+        text: 'The xray of the financials... Zoom into the data details by touching a block. How cool was that?',
+        position: 'left'
+    }, {
+        selector: '#yeardrop',
+        text: 'Interested in seeing budget history or projections? Use this menu.',
+        position: 'left',
+        before: function () {
+            setTimeout(function () {
+                $('#yeardrop-container').addClass('open')
+            }, 800);
+        }
+    }];
+
+    var individualTour = [{
+        selector: '.individual',
+        text: 'Here is your yearly contribution.',
+        position: 'right'
+    }, {
+        selector: '#navigation',
+        text: 'See how much you pay for these services.',
+        position: 'left'
+    }];
+
+    var fireTour = [{
+        selector: '#fire',
+        text: 'The fire department accounts for one of the greatest town department expenses.',
+        position: 'left',
+        before: function () {
+            $('g[nodeid="' + fireDepartment + '"]').find('div').first().attr('id', 'fire');
+        }
+    }, {
+        selector: '#cards',
+        text: 'Here is the basic information you need to know about the department.',
+        position: 'down',
+        before: function () {
+            avb.navigation.open(fireDepartment);
+        }
+    }, {
+        selector: '#zoombutton',
+        text: 'Go back and explore more.',
+        position: 'left'
+    }];
+
+    var snowTour = [{
+        selector: '#snow',
+        text: 'Snow removal has a relatively small cost compared to other departments',
+        position: 'top',
+        before: function () {
+            $('g[nodeid="' + snowRemoval + '"]').find('div').first().attr('id', 'snow');
+        }
+    }, {
+        selector: '#chart',
+        text: 'Check how the snow removal costs oscillate over the years.',
+        position: 'right',
+        before: function () {
+            avb.navigation.open(snowRemoval);
+        }
+    }, {
+        selector: '#cards',
+        text: 'Here is the basic information about snow removal over the current year.',
+        position: 'right'
+    }, {
+        selector: '#zoombutton',
+        text: 'Go back and explore more.',
+        position: 'left'
+    }];
+
+
+    var schoolTour = [{
+        selector: '#school',
+        text: 'School play an important role in the town expenses.',
+        position: 'bottom',
+        before: function () {
+            $('g[nodeid="' + townSchools + '"]').find('div').first().attr('id', 'school');
+        }
+    }, {
+        selector: '#cards',
+        text: 'They constitute about 40% of the yearly expenses.',
+        position: 'right',
+        before :  function() { avb.navigation.open(townSchools) }
+    }, {
+        selector: '#zoombutton',
+        text: 'Go back and explore more.',
+        position: 'left'
+    }];
 
     init = function (data) {
         function overlayClick(event) {
@@ -48,15 +141,24 @@ avb.home = function () {
             hide();
         }
 
-        function individualClick (){
+        function tourClick(tour, before) {
             setContribution();
             sectionClick.call(this);
-            setTimeout(function(){
-                starttour(individualTour);
+            setTimeout(function () {
+                if (before !== undefined) {
+                    setTimeout(function () {
+                        before();
+                    }, 800);
+                    setTimeout(function () {
+                        starttour(tour)
+                    }, 2500);
+                } else {
+                    starttour(tour);
+                }
             }, 500);
         }
 
-        function sectionClick () {
+        function sectionClick() {
             initialize({
                 section: $(this).attr('data-section').toLowerCase()
             });
@@ -75,15 +177,44 @@ avb.home = function () {
 
         $('.section').removeAttr('onclick');
 
+        // taxes input textbox
         $('#tax-input').val(getContribution());
-        $('#tax-input-start').click(individualClick);
+        $('#tax-input-start').click(function () {
+            tourClick.call(this, individualTour)
+        });
 
-        home.map.find('.node').click(sectionClick);
+        // tutorials 
+
+
+
+        $('#q1').click(function () {
+            tourClick.call(this, fireTour, function () {
+                avb.navigation.open(townDepartments);
+                fireTour[0].before();
+            })
+        });
+
+
+        $('#q2').click(function () {
+            sectionClick.call(this);
+            setTimeout(function() {
+                schoolTour[0].before();
+                starttour(schoolTour);
+            },1200)
+        });
+
+
+        $('#q3').click(function () {
+            tourClick.call(this, snowTour, function () {
+                avb.navigation.open(townDepartments);
+                snowTour[0].before();
+            })
+        });
 
         $('#tax-input').keypress(function (e) {
-          if (e.which == 13) {
-            individualClick.call(this);
-          }
+            if (e.which == 13) {
+                tourClick.call(this, individualTour);
+            }
         });
 
     },
@@ -91,7 +222,7 @@ avb.home = function () {
     getContribution = function () {
 
         var value = jQuery.cookie('contribution') || null;
-        if(value !== null && decks.expenses[0].title !== stats.individual.title) {
+        if (value !== null && decks.expenses[0].title !== stats.individual.title) {
             decks.expenses.unshift(stats.individual);
         }
         return value;
@@ -99,7 +230,7 @@ avb.home = function () {
 
     setContribution = function () {
         var input = parseFloat($('#tax-input').val());
-        if(isNaN(input)) return;
+        if (isNaN(input)) return;
         avb.userContribution = input;
         jQuery.cookie('contribution', avb.userContribution, {
             expires: 14
@@ -157,7 +288,9 @@ avb.home = function () {
         });
 
         // start budget app
-        initialize({"section": "funds" });
+        initialize({
+            "section": "funds"
+        });
         $('.section').removeClass('selected');
 
     },
@@ -181,29 +314,22 @@ avb.home = function () {
 
     starttour = function (steps) {
 
-        function addTour(tour){
-            for(var i=0; i<tour.length; i++) {
-                log($(tour[i].selector).get(0))
-              $(tour[i].selector).attr('data-intro', tour[i].text)
-              .attr('data-step',i+1).attr('data-position', tour[i].position);
+        function addTour(tour) {
+            for (var i = 0; i < tour.length; i++) {
+                $(tour[i].selector).attr('data-intro', tour[i].text)
+                    .attr('data-step', i + 1).attr('data-position', tour[i].position);
             }
             home.selectedTour = tour;
         }
 
         var steps = steps || mainTour;
         addTour(steps);
-
         tour = introJs();
         // do not show next button at last tour step
         tour.onchange(function (targetElement) {
-            lastStep = $(targetElement).attr('data-step') == steps.length ? true : false;
-            $navbuttons = $('.introjs-nextbutton, .introjs-prevbutton');
-            $navbuttons.css({
-                display: lastStep ? 'none' : 'inline-block'
-            });
-            if (steps === mainTour && lastStep) setTimeout(function () {
-                $('#yeardrop-container').addClass('open')
-            }, 800)
+            var curStep = parseInt($(targetElement).attr('data-step')) - 1;
+            if (curStep === steps.length - 1) $('.introjs-nextbutton, .introjs-prevbutton').hide();
+            if (typeof (steps[curStep].before) === 'function') steps[curStep].before();
         });
         tour.setOption("showStepNumbers", false);
         tour.setOption("skipLabel", "Exit");

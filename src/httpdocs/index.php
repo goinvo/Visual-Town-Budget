@@ -6,8 +6,7 @@
   <meta charset="utf-8">
   <title>Arlington Visual Budget</title>
 
-  <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,700' rel='stylesheet' type='text/css'>
-
+  <link href='http://fonts.googleapis.com/css?family=Strait' rel='stylesheet' type='text/css'>
   <link href="/css/lib/bootstrap/bootstrap.css" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="/css/lib/intro/introjs.min.css">
   <link rel="stylesheet" type="text/css" href="/css/global.css">
@@ -97,7 +96,7 @@
     </div>
   </div>
 
-  <div id="footer">
+  <div id="footer" style="font-size:1.2em">
     <a class="link" href="http://www.town.arlington.ma.us/">Town of Arlington</a> - 
     <a class="link" href="http://www.goinvo.com">by Involution Studios</a> -
     <a class="link" href="/opendata"> Open Data + Code</a> -

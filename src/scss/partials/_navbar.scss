@@ -26,12 +26,13 @@
     position: relative;
     z-index: 1050;
     vertical-align: bottom;
+    color: $black;
   }
 
   .search {
     border-radius: 5px;
     border: 1px solid rgb(194,194,194);
-    font-family: "Helvetica Neue LT Std", sans-serif;
+    font-family: 'Strait', sans-serif;
   }
 
   .menubutton {

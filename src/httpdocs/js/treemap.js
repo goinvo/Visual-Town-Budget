@@ -159,6 +159,10 @@ display = function(d) {
         .on("click", function(event){
             zoneClick.call(this, d3.select(this).datum(), true);
         })
+        .each(function() {
+            var node = d3.select(this);
+            node.attr('nodeid', function() {  return node.datum().hash; });
+        });
 
         // assign new color only if not last node
         if(d.sub.length !== 0 && d.color === undefined) {
@@ -180,6 +184,7 @@ display = function(d) {
             .data(function(d) { return d.sub || [d]; })
             .enter().append("g")
             .attr("class", "child")
+
             .each( function() {
                 var group = d3.select(this);
                 if(d.sub !== undefined) {

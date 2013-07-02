@@ -18,7 +18,6 @@
 	width:100%;
 	margin-top:15px;
 	overflow:auto;
-	cursor: default;
 
 	.card-row{
 		div:first-child .card{
@@ -33,9 +32,12 @@
 		.card-source{
 			padding-left:0;
 			padding-right:0;
+			
+
 
 			.cardvalue{
 				//text-decoration: underline;
+				font-size:$text-big;
 	  			cursor: pointer;
 	  			display: block;
 	  		}
@@ -47,12 +49,13 @@
 
 		.carddesc{
 			font-size: $text-big;
-			line-height: 1.5em;
+			line-height: $text-lineheight-big;
+			color: gray;
 		}
 
 		.cardvalue {
 			font-size: $text-title;
-			line-height:1em;
+			line-height:$text-lineheight-big;
 			font-family: 'Georgia';
 		}
 		
@@ -84,7 +87,7 @@
 	    left:-100%;
 	    overflow-y: auto;
 	    font-size: $text-big;
-	    line-height: 1.5em;
+	    line-height: $text-lineheight-big;
 
 	    .legend-label{
 	      width: 16px;

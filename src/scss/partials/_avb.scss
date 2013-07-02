@@ -27,15 +27,15 @@
 * Entry title and description
 */
 .title-head {
-    font-size: 3em;
+    font-size: $text-big;
     line-height: normal;
     white-space: nowrap;
-    height:70px;
-
+    font-size: $text-title;
     div{
       line-height: 70px;
     }
 }
+
 
 /*
 * Cards and legend
@@ -61,7 +61,7 @@
 
 .dataDownload{
     font-size: $text-big;
-    line-height: 2em;
+    line-height: $text-lineheight-big;
 
     .icon-download{
       vertical-align: baseline;
