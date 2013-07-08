@@ -123,7 +123,7 @@ avb.chart = function () {
         setDatapointsVisibility();
 
         // IE9 does not support foreignobjects...
-        if (ie()) return;
+        if (ie() || jQuery.browser.mobile) return;
         if(chart.layersInitialized) return;
 
         // drop shadow at chart right-edge
@@ -423,10 +423,12 @@ avb.chart = function () {
         chart.layersWidth = x;
         chart.layers.svg.attr("width", x);
 
-        // drop shadow not drawn in IE
-        if (!ie()) chart.layerLine.attr('x', x - 10);
         // show/hide point based on new layer position
         setDatapointsVisibility();
+
+        // drop shadow not drawn in IE or mobile browsers
+        if (!ie() && !jQuery.browser.mobile) chart.layerLine.attr('x', x - 10);
+
     },
 
     /*
@@ -516,7 +518,7 @@ avb.chart = function () {
         // and non-layered part of the chart
         function appendShadow(group) {
 
-            if (ie()) return;
+            if (ie() || jQuery.browser.mobile) return;
 
             // clips the shadow so that it doesn't take the full height of the chart
             chart.sideShadow.attr("clip-path", "url(#areaclip)");

@@ -30,13 +30,16 @@ avb.home = function () {
 
     /*
      * Tutorial node IDs.
+     * They are used to identify which zone to highlight on the treemap
      */
     var townDepartments = '2956e900',
         fireDepartment = 'a97750fe',
         snowRemoval = 'ced0e3a8',
         townSchools = '40d55302';
 
-
+    /*
+    * Main tour, for new users.
+    */
     var mainTour = [{
         selector: '#information-cards',
         text: 'See the basic financial summary and high level data story.',
@@ -60,6 +63,9 @@ avb.home = function () {
         }
     }];
 
+    /*
+    *   Individual contribution tour, begins when user types in a contribution amount
+    */
     var individualTour = [{
         selector: '.individual',
         text: 'Here is your yearly contribution.',
@@ -70,6 +76,9 @@ avb.home = function () {
         position: 'left'
     }];
 
+    /*
+    *   Topic tour, begins when user clicks on FAQ
+    */
     var fireTour = [{
         selector: '#fire',
         text: 'The fire department accounts for one of the greatest town department expenses.',
@@ -90,6 +99,9 @@ avb.home = function () {
         position: 'left'
     }];
 
+    /*
+    *   Topic tour, begins when user clicks on FAQ
+    */
     var snowTour = [{
         selector: '#snow',
         text: 'Snow removal has a relatively small cost compared to other departments',
@@ -114,7 +126,9 @@ avb.home = function () {
         position: 'left'
     }];
 
-
+    /*
+    *   Topic tour, begins when user clicks on FAQ
+    */
     var schoolTour = [{
         selector: '#school',
         text: 'School play an important role in the town expenses.',
@@ -133,16 +147,23 @@ avb.home = function () {
         position: 'left'
     }];
 
+    /*
+    *   Initiialize function
+    */
     init = function (data) {
+
+        // hides overlay when clicked
+        // it defaults to funds section
         function overlayClick(event) {
             event.stopPropagation();
-            // highlights selected link
+            // highlight 'funds' link
             $($('.section').get(2)).addClass('selected');
             hide();
         }
 
+        // begins a tour with a slight delay to wait for 
+        // homepage to minimize
         function tourClick(tour, before) {
-            setContribution();
             sectionClick.call(this);
             setTimeout(function () {
                 if (before !== undefined) {
@@ -158,16 +179,8 @@ avb.home = function () {
             }, 500);
         }
 
-        function sectionClick() {
-            initialize({
-                section: $(this).attr('data-section').toLowerCase()
-            });
-            // timeout needed to avoid sloppy animation
-            // while calculating treemap values
-            setTimeout(function () {
-                hide()
-            }, 100);
-        }
+        // 
+
 
         home.content = $('#avb-home');
         home.overlay = $('#overlay');
@@ -177,23 +190,28 @@ avb.home = function () {
 
         $('.section').removeAttr('onclick');
 
-        // taxes input textbox
+        // taxes input initialization
         $('#tax-input').val(getContribution());
+        // start link 
         $('#tax-input-start').click(function () {
+            setContribution();
             tourClick.call(this, individualTour)
         });
+        // enter key event
+        $('#tax-input').keypress(function (e) {
+            if (e.which == 13) {
+                setContribution();
+                tourClick.call(this, individualTour);
+            }
+        });
 
-        // tutorials 
-
-
-
+        // tutorials links
         $('#q1').click(function () {
             tourClick.call(this, fireTour, function () {
                 avb.navigation.open(townDepartments);
                 fireTour[0].before();
             })
         });
-
 
         $('#q2').click(function () {
             sectionClick.call(this);
@@ -203,50 +221,65 @@ avb.home = function () {
             },1200)
         });
 
-
         $('#q3').click(function () {
             tourClick.call(this, snowTour, function () {
                 avb.navigation.open(townDepartments);
                 snowTour[0].before();
             })
         });
-
-        $('#tax-input').keypress(function (e) {
-            if (e.which == 13) {
-                tourClick.call(this, individualTour);
-            }
-        });
-
     },
 
-    getContribution = function () {
+    sectionClick = function() {
+        initialize({
+            section: $(this).attr('data-section').toLowerCase()
+        });
+        // home page minimizes right after treemap values are calculated
+        // avoids sloppy animations
+        setTimeout(function () {
+            hide()
+        }, 100);
+    }
 
+    /*
+    * retrieves resident annual contribution
+    */
+    getContribution = function () {
+        // reads contribution cookie
         var value = jQuery.cookie('contribution') || null;
+        // adds yearly contribution as a new card
         if (value !== null && decks.expenses[0].title !== stats.individual.title) {
             decks.expenses.unshift(stats.individual);
         }
         return value;
     },
 
+    /*
+    * reads yearly contribution from input box and stores it
+    */
     setContribution = function () {
+        // value validation
         var input = parseFloat($('#tax-input').val());
         if (isNaN(input)) return;
+        // yearly contribution is set
         avb.userContribution = input;
+        // and stored
         jQuery.cookie('contribution', avb.userContribution, {
             expires: 14
         });
     },
 
-    // useful snippet on stackoverflow
-    // http://stackoverflow.com/questions/469357/html-text-input-allow-only-numeric-input
+    /*
+    * useful snippet on stackoverflow
+    * keeps non-numeric characters from being typed in the input box
+    * http://stackoverflow.com/questions/469357/html-text-input-allow-only-numeric-input
+    */
     validate = function (evt) {
 
         // enter key
-
-
         var theEvent = evt || window.event;
         var key = theEvent.keyCode || theEvent.which;
         key = String.fromCharCode(key);
+        // regex all values are compared against
         var regex = /[0-9]|\./;
         if (!regex.test(key)) {
             theEvent.returnValue = false;
@@ -254,6 +287,9 @@ avb.home = function () {
         }
     },
 
+    /*
+    * Executes home bars transition
+    */
     showGraph = function (duration) {
         var data = home.data['sub'];
         var scale = d3.scale.linear().clamp(true).range([30, 160])
@@ -273,8 +309,10 @@ avb.home = function () {
         }, duration)
             .find('.node-value').text(formatcurrency(data[2].values[yearIndex].val));
         $('.node-value').fadeIn(duration);
+        $('.node').click(sectionClick);
     },
 
+    //
     show = function () {
         home.menubar.removeClass('purple-border');
         home.content.show();
@@ -295,15 +333,27 @@ avb.home = function () {
 
     },
 
+    /*
+    * minimizes home page
+    */
     hide = function (showtour) {
+        // slides up home page area
         home.content.slideUp(function () {
+            //adds purple border to menu bar when transition is over
             home.menubar.addClass('purple-border');
         });
+        // overlay fades out
         home.overlay.fadeOut(function () {
+            // starts tour
             if (showtour || isFirstVisit()) starttour();
         });
     },
 
+    /*
+    * Checks for new or returning user
+    * Stores cookie that will mark current user as returning visitor
+    * for 2 weeks
+    */
     isFirstVisit = function () {
         var visited = jQuery.cookie('visited');
         jQuery.cookie('visited', 'y', {

@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta charset="utf-8">
   <title>Arlington Visual Budget</title>
+  <meta name="description" content="An interactive tool to learn more about the town of Arlington, Massachusetts." />
 
   <link href='http://fonts.googleapis.com/css?family=Strait' rel='stylesheet' type='text/css'>
   <link href="/css/lib/bootstrap/bootstrap.css" rel="stylesheet">
@@ -35,7 +36,7 @@
 
     // direct url load
     <?php
-    $allpages = array("opendata" => "opendata.php");
+    $allpages = array("opendata" => "opendata.php", "glossary" => "glossary.php");
     $sections = array("revenues", "expenses", "funds");
     $mode = array("t","l");
     $params = array();

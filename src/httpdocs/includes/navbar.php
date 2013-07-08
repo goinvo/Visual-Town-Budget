@@ -9,11 +9,11 @@
       <img src="/img/logo@High.png" alt="avb-logo" widht=24 height=24 />
    </div>
 
-    <div style="line-height:25px;"> 
+    <div style="line-height:30px;"> 
 
      <div onclick='window.location = "/"' class="entry homebutton"> Town Budget, Visualized </div>
 
-     <div class="entry" style="margin-left: 90px">
+     <div class="entry navbar-margin">
         <span class="menubutton section margin"><a href="/revenues">Revenues</a></span>
         <span class="menubutton section margin"><a href="/expenses">Expenses</a></span>
         <span class="menubutton section margin"><a href="/funds">Funds</a></span>
@@ -24,27 +24,26 @@
     
         <div class="menubutton margin">
           <span> <i class="icon-th-large"></i> </span>
-          <a href="javascript:switchMode('t'); "> Map view </a>
+          <a id="navbar-map" href="javascript:switchMode('t'); "> Map view </a>
         </div>
-        <div class="menubutton">
+        <div class="menubutton margin">
           <span> <i class="icon-th-list"></i> </span>
-          <a href="javascript:switchMode('l');"> Tabular view </a>
+          <a id="navbar-table" href="javascript:switchMode('l'); "> Tabular view </a>
         </div>
 
-        <ul id="yeardrop" class="nav menubutton ">
+        <ul id="yeardrop" class="nav menubutton">
           <li  id="yeardrop-container" class="dropdown" style="display:none;">
             <a id="yeardrop-label" class="dropdown-toggle" role="button" data-toggle="dropdown" href="#">Dropdown <b class="caret"></b></a>
             <ul id="yeardrop-list" class="dropdown-menu vhscrollable" role="menu">
             </ul>
           </li>
           <li>
-          <select id="yeardrop-container-mobile" style="display:none; width:100px;">
+          <select id="yeardrop-container-mobile" style="display:none; width:100px; height:28px">
           </select>
         </li>
         </ul>
 
       </div>
-
     </div>
 
 

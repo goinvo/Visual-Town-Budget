@@ -11,6 +11,10 @@
     margin-top: 0px;
   }
 
+  .navbar-margin{
+      margin-left: 90px;
+  }
+
   .nav{
     margin-bottom: 0px !important;
   }
@@ -25,7 +29,6 @@
     cursor: pointer;
     position: relative;
     z-index: 1050;
-    vertical-align: bottom;
     color: $black;
   }
 
@@ -33,6 +36,7 @@
     border-radius: 5px;
     border: 1px solid rgb(194,194,194);
     font-family: 'Strait', sans-serif;
+    vertical-align: top;
   }
 
   .menubutton {
@@ -65,6 +69,7 @@
 }
 
 #yeardrop-container{
+  vertical-align: top;
 
   &.open{
 

@@ -108,7 +108,18 @@ avb.navbar = function(){
 				changeYear(parseInt($selector.val()));
 			})
 			$selector.show();
+			$('#yeardrop').css({'vertical-align' : 'top'});
 		}
+
+		if(jQuery.browser.mobile) {
+			$('#navbar-map').text('Map');
+			$('#navbar-table').text('Table');
+		}
+		$('#searchbox').bind('click touchstart',function () {
+	        if ($('#avb-home').is(":visible")) avb.home.hide();
+	    });
+
+
 	};
 
 return{

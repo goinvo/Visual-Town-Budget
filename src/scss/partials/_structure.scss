@@ -81,6 +81,19 @@ body {
     width: 980px;
   }
 
+  #avb-menubar{
+
+    padding: 15px 5px 15px 5px;
+
+    .navbar-margin{
+      margin-left: 30px;
+    }
+
+    .modename{
+      display: none;
+    }
+  }
+
   #avb-body {
 
     #information-container{
@@ -92,6 +105,10 @@ body {
       #info-wrap {
         height: 250px;
       }
+    }
+
+    #cards{
+      margin-top: 0px;
     }
 
     #navigation-container,

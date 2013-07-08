@@ -129,9 +129,6 @@ function downloadData(opensection) {
 function onDataload(jsondata) {
     avb.root = jsondata;
 
-    //year bounds initialization
-    log(avb.root)
-
     avb.firstYear = d3.min(avb.root.values, function (d) {
         return d.year
     });
@@ -149,9 +146,6 @@ function onDataload(jsondata) {
 
     // initializes search
     $('#searchbox').keyup(avb.navbar.searchChange);
-    $('#searchbox').click(function () {
-        if ($('#avb-home').is(":visible")) avb.home.hide();
-    });
 
     console.log("UI Loaded.");
 
@@ -162,8 +156,7 @@ function onDataload(jsondata) {
 function updateSelection(data, year, color) {
     avb.currentNode.data = data;
     avb.currentNode.year = year;
-    avb.chart.update
-(data, color);
+    avb.chart.update(data, color);
     avb.cards.update(data);
 }
 
