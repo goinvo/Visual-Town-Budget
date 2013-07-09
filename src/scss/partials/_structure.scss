@@ -10,10 +10,10 @@ html {
 body {
 	@include reset-box-model;
 	background: $page-background-color;
-	-moz-user-select: none;
-	-khtml-user-select: none;
-	-webkit-user-select: none;
-	user-select: none;
+	// -moz-user-select: none;
+	// -khtml-user-select: none;
+	// -webkit-user-select: none;
+	// user-select: none;
 	background-image: url(/img/bg_avb.png);
   height: 100%;
   min-height: 100%;

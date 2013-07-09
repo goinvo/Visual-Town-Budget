@@ -36,7 +36,7 @@
     <div >
       <h1> AVB Data Upload </h1>
     </div>
-    <form action="update.php" enctype="multipart/form-data" method="post" class="form-horizontal">
+    <form action="update" enctype="multipart/form-data" method="post" class="form-horizontal">
       <div class="control-group">
         <label class="control-label" for="inputEmail">Username</label>
         <div class="controls">
@@ -67,19 +67,26 @@
     <div id="error">
       <?php
 
+      // calls python script to convert file to json
       function process($filename){
         $curpath = getcwd().'/';
 
+        // commands to be launched
         $cmd = 'python processCSV.py '.$curpath.$filename;
         $exitCode = -1;
+        // command launched
         exec($cmd, $output, $exitCode);
+        // script executed correctly
         if($exitCode === 0){
           $jsonfile = $output[0];
           // bring files to data directory
+          // (old files are wiped out)
           copy($jsonfile, '../'.$jsonfile);
           copy($filename, '../'.$filename);
+          // success
           printSuccess($filename." updated.");
         } else {
+          // script failed, print error message
           printError($output[0]);
         }
 
@@ -98,11 +105,13 @@
 
       }
 
+      // prints error message to screen
       function printError($msg){
         echo '<div class="alert alert-error" style="max-width:600px;">'.$msg.'</div>';
         exit();
       }
 
+      // prints success message to screen
       function printSuccess($msg){
         echo '<div class="alert alert-success">'.$msg.'</div>';
       }
@@ -129,20 +138,33 @@
         printError("No file specified.");
       }
 
-      // filename check + file move
-      $validFiles = array('revenues.csv', 'expenses.csv', 'funds.csv');
+      // array of valid files that can be uploaded
+      $validFiles = array('revenues.csv', 'expenses.csv', 'funds.csv', 'glossary.csv');
+
+      // array of files that needs to be converted to json format
+      $tojsonFiles = array('revenues.csv', 'expenses.csv', 'funds.csv');
+
+      // return error if uploaded filename is not in valid files list
       if (in_array($filename, $validFiles)) {
         $destFile = getcwd().'/'.$filename;
+        // delete old files
         if (file_exists($destFile)){
            unlink($destFile);
         }
+        // save uploaded file
         if(move_uploaded_file($file['tmp_name'], getcwd().'/'.$filename)){
-          process($filename);
+          // convert csv to json if needed
+          if(in_array($filename, $tojsonFiles)){
+            process($filename);
+          } else {
+            copy($filename, '../'.$filename);
+            printSuccess($filename." updated.");
+          }
         }  else {
          printError('Unable to replace previous data file, check permissions.');
         }
       } else {
-       printError('Valid files are "revenues.csv", "expenses.csv" and "funds.csv"');
+       printError('Valid files are "revenues.csv", "expenses.csv", "funds.csv" and "glossary.csv".');
       }
 
       ?>

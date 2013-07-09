@@ -16,12 +16,12 @@
 	File Overview:	Basic type styles.
 	Author:			Michael Bester
 */
-/* line 61, ../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/typography/_vertical_rhythm.scss */
+/* line 61, ../../../../../../../var/lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/typography/_vertical_rhythm.scss */
 * html {
   font-size: 100%;
 }
 
-/* line 64, ../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/typography/_vertical_rhythm.scss */
+/* line 64, ../../../../../../../var/lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/typography/_vertical_rhythm.scss */
 html {
   font-size: 16px;
   line-height: 1.5em;
@@ -126,6 +126,33 @@ h4 {
 /* line 71, ../../scss/partials/_avb.scss */
 .introjs-tooltip {
   font-size: 18px;
+}
+
+/* line 75, ../../scss/partials/_avb.scss */
+#avb-opendata {
+  padding: 10px;
+}
+
+/* line 80, ../../scss/partials/_avb.scss */
+#avb-glossary {
+  padding: 10px;
+}
+/* line 84, ../../scss/partials/_avb.scss */
+#avb-glossary .definition {
+  margin-bottom: 20px;
+}
+/* line 88, ../../scss/partials/_avb.scss */
+#avb-glossary .definition .title,
+#avb-glossary .definition .description {
+  font-size: 18px;
+}
+/* line 92, ../../scss/partials/_avb.scss */
+#avb-glossary .definition .title {
+  font-weight: bold;
+}
+/* line 96, ../../scss/partials/_avb.scss */
+#avb-glossary .definition .description {
+  margin-left: 10px;
 }
 
 /* line 1, ../../scss/partials/_home.scss */
@@ -762,10 +789,6 @@ body {
   padding: 0;
   border: 0;
   background: #f2f2f2;
-  -moz-user-select: none;
-  -khtml-user-select: none;
-  -webkit-user-select: none;
-  user-select: none;
   background-image: url(/img/bg_avb.png);
   height: 100%;
   min-height: 100%;
@@ -867,7 +890,7 @@ body {
 .group {
   *zoom: 1;
 }
-/* line 38, ../../../../../../../Library/Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/utilities/general/_clearfix.scss */
+/* line 38, ../../../../../../../var/lib/gems/1.9.1/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/utilities/general/_clearfix.scss */
 .group:after {
   content: "";
   display: table;

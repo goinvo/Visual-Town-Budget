@@ -71,3 +71,31 @@
 .introjs-tooltip{
   font-size: $text-big;
 }
+
+#avb-opendata{
+  padding: 10px;
+}
+
+
+#avb-glossary{
+
+  padding: 10px;
+
+  .definition{
+    margin-bottom: 20px;
+
+    .title,
+    .description{
+      font-size: $text-big;
+    }
+
+    .title{
+      font-weight: bold;
+    }
+
+    .description{
+      margin-left: 10px;
+    }
+
+  }
+}
