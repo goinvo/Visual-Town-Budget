@@ -70,6 +70,11 @@ avb.navbar = function(){
 	    return result;
 	},
 
+	minimize = function(){
+		// removes right-handside portion of navbar
+		log($('#navbar-links .entry').last().remove());
+	},
+
 
 	initialize = function(){
 		
@@ -124,6 +129,7 @@ avb.navbar = function(){
 
 return{
 	initialize : initialize,
-	searchChange : searchChange
+	searchChange : searchChange,
+	minimize : minimize
 }
 }();

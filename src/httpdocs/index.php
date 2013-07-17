@@ -53,6 +53,8 @@
           $params['mode'] = $_GET["mode"];
         };
         echo 'initialize('.json_encode($params).');';
+      } else {
+        echo 'avb.navbar.minimize();';
       } 
     } else {
       echo('avb.home.initialize();');

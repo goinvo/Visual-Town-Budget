@@ -9,7 +9,7 @@
       <img src="/img/logo@High.png" alt="avb-logo" widht=24 height=24 />
    </div>
 
-    <div style="line-height:30px;"> 
+    <div id="navbar-links" style="line-height:30px;"> 
 
      <div onclick='window.location = "/"' class="entry homebutton"> Town Budget, Visualized </div>
 
