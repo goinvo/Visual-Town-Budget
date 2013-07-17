@@ -135,7 +135,7 @@ stats = {
         title : "From",
         cellClass: "value",
         value: function (d){
-            return d.parent;
+            return (typeof(d.parent) === 'string') ? d.parent : '';
         }
     }
 },

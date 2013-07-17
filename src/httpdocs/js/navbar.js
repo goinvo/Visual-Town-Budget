@@ -60,7 +60,7 @@ avb.navbar = function(){
 		var index = object.key.toLowerCase().indexOf(keyword.toLowerCase());
 		// ignore matches in mid word
 		if (index !== 0 && object.key[index-1] !== ' ') index = -1;
-		if(index != -1) {object.parent = parent.key};
+		if(index != -1) { object.parent = parent.key};
 	    var result = index !== -1 ? [object] : []; 
 	    if(object.sub !== undefined) {
 	        for(var i=0; i<object.sub.length; i++) {

@@ -1,12 +1,12 @@
 {
 "key": "Expenses", 
 "src": "", 
-"hash": "97876729", 
+"hash": "13495828", 
 "sub": [
 {
 "key": "Override Stabilization Fund", 
 "src": "", 
-"hash": "d648bf6b", 
+"hash": "fd16beb2", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -60,7 +60,7 @@
 {
 "key": "Warrant Articles", 
 "src": "", 
-"hash": "e47d8a83", 
+"hash": "66dc631a", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -114,12 +114,12 @@
 {
 "key": "Other", 
 "src": "", 
-"hash": "65f80300", 
+"hash": "6311ae17", 
 "sub": [
 {
 "key": "Other Deficit", 
 "src": "", 
-"hash": "e1f32ed1", 
+"hash": "436f7f14", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -173,7 +173,7 @@
 {
 "key": "Symmes", 
 "src": "", 
-"hash": "9558ffb9", 
+"hash": "2d4457dd", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -227,7 +227,7 @@
 {
 "key": "Snow & Ice Deficit", 
 "src": "", 
-"hash": "f548c3ba", 
+"hash": "da93aa43", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -281,7 +281,7 @@
 {
 "key": "Court Judgments", 
 "src": "", 
-"hash": "bb8e1786", 
+"hash": "5ef2ae18", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -385,7 +385,7 @@
 {
 "key": "Overlay Reserve", 
 "src": "", 
-"hash": "9bb2aea5", 
+"hash": "8552970c", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -439,7 +439,7 @@
 {
 "key": "Offset Aid - Library & School", 
 "src": "", 
-"hash": "af07542c", 
+"hash": "a57777a0", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -493,17 +493,17 @@
 {
 "key": "State assessments", 
 "src": "", 
-"hash": "bbe0c732", 
+"hash": "bbe92acf", 
 "sub": [
 {
 "key": "Tuition Assessments", 
 "src": "", 
-"hash": "d48006f7", 
+"hash": "cec357e7", 
 "sub": [
 {
 "key": "Charter School Sending Tuition", 
 "src": "", 
-"hash": "58aefc6e", 
+"hash": "acd35426", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -557,7 +557,7 @@
 {
 "key": "School Choice Sending Tuition", 
 "src": "", 
-"hash": "f0618af4", 
+"hash": "90291ae7", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -661,12 +661,12 @@
 {
 "key": "Annual Charges Against Receipts", 
 "src": "", 
-"hash": "e8bf23d8", 
+"hash": "2ea87d6a", 
 "sub": [
 {
 "key": "STRAP Repayments", 
 "src": "", 
-"hash": "518aef68", 
+"hash": "3c2b4bc0", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -720,7 +720,7 @@
 {
 "key": "Special Education", 
 "src": "", 
-"hash": "f356d517", 
+"hash": "7c81afa3", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -824,12 +824,12 @@
 {
 "key": "Transportation", 
 "src": "", 
-"hash": "7049971e", 
+"hash": "a600971f", 
 "sub": [
 {
 "key": "Boston Metro. Transit District", 
 "src": "", 
-"hash": "b652442e", 
+"hash": "00be6abd", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -883,7 +883,7 @@
 {
 "key": "MBTA", 
 "src": "", 
-"hash": "93d13252", 
+"hash": "fd02adbc", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -937,7 +937,7 @@
 {
 "key": "Transportation Authorities", 
 "src": "", 
-"hash": "61e5f061", 
+"hash": "2df280fa", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -1041,7 +1041,7 @@
 {
 "key": "RMV Non-Renewal Surcharge", 
 "src": "", 
-"hash": "54c02b87", 
+"hash": "1a657a56", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -1095,7 +1095,7 @@
 {
 "key": "Metropolitan Area Planning Council", 
 "src": "", 
-"hash": "2aa33a70", 
+"hash": "6e46e346", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -1149,7 +1149,7 @@
 {
 "key": "Air Pollution Districts", 
 "src": "", 
-"hash": "fdfe2aa1", 
+"hash": "e1d8bf37", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -1203,7 +1203,7 @@
 {
 "key": "Retired Employees Health Insurance", 
 "src": "", 
-"hash": "53ed4550", 
+"hash": "d8e99fc0", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -1307,7 +1307,7 @@
 {
 "key": "MWRA Debt Shift", 
 "src": "", 
-"hash": "db44e5df", 
+"hash": "6842ca9f", 
 "sub": [], 
 "descr": "The Town has accepted provisions of M.G.L. Ch. 110 whereby water and sewer costs are transferred to the tax levy.", 
 "url": "", 
@@ -1361,12 +1361,12 @@
 {
 "key": "Insurance", 
 "src": "", 
-"hash": "0fc3d49a", 
+"hash": "eaff1bdf", 
 "sub": [
 {
 "key": "Liability", 
 "src": "", 
-"hash": "742654f6", 
+"hash": "b87b86a8", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -1420,7 +1420,7 @@
 {
 "key": "Health Insurance", 
 "src": "", 
-"hash": "0a2ac6e7", 
+"hash": "d99703a7", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -1524,7 +1524,7 @@
 {
 "key": "Pensions", 
 "src": "", 
-"hash": "b19e6d47", 
+"hash": "737d52fc", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -1578,12 +1578,12 @@
 {
 "key": "Capital Budget", 
 "src": "", 
-"hash": "fa421a5d", 
+"hash": "91eace3e", 
 "sub": [
 {
 "key": "Minus Capital Carry Forward", 
 "src": "", 
-"hash": "9677b399", 
+"hash": "4bf3fb82", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -1637,7 +1637,7 @@
 {
 "key": "Cash", 
 "src": "", 
-"hash": "59756489", 
+"hash": "069b30db", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -1691,7 +1691,7 @@
 {
 "key": "Non-Exempt Service", 
 "src": "", 
-"hash": "3c8872ee", 
+"hash": "35fea039", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -1745,7 +1745,7 @@
 {
 "key": "Exempt Debt Service", 
 "src": "", 
-"hash": "0d9ba70c", 
+"hash": "a884d0d8", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -1849,17 +1849,17 @@
 {
 "key": "Town Departments", 
 "src": "", 
-"hash": "2956e900", 
+"hash": "dc313bc5", 
 "sub": [
 {
 "key": "Library", 
 "src": "", 
-"hash": "df826825", 
+"hash": "4d70254b", 
 "sub": [
 {
 "key": "Expenses", 
 "src": "", 
-"hash": "3ca06396", 
+"hash": "13495828", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -1913,7 +1913,7 @@
 {
 "key": "Salaries", 
 "src": "", 
-"hash": "fe5acf2d", 
+"hash": "70c3addf", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -2017,12 +2017,12 @@
 {
 "key": "Veterans Services", 
 "src": "", 
-"hash": "5c658c27", 
+"hash": "096a39b8", 
 "sub": [
 {
 "key": "Expenses", 
 "src": "", 
-"hash": "6f0e7cc9", 
+"hash": "13495828", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -2076,7 +2076,7 @@
 {
 "key": "Salaries", 
 "src": "", 
-"hash": "951df7ba", 
+"hash": "70c3addf", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -2180,12 +2180,12 @@
 {
 "key": "Council on Aging", 
 "src": "", 
-"hash": "2c5ec65f", 
+"hash": "820f5be5", 
 "sub": [
 {
 "key": "Expenses", 
 "src": "", 
-"hash": "4dc8c5a6", 
+"hash": "13495828", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -2239,7 +2239,7 @@
 {
 "key": "Salaries", 
 "src": "", 
-"hash": "deca9254", 
+"hash": "70c3addf", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -2343,12 +2343,12 @@
 {
 "key": "Health & Human Services Admin", 
 "src": "", 
-"hash": "713bbaad", 
+"hash": "1b46fa8d", 
 "sub": [
 {
 "key": "Expenses", 
 "src": "", 
-"hash": "31f98d9d", 
+"hash": "13495828", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -2402,7 +2402,7 @@
 {
 "key": "Salaries", 
 "src": "", 
-"hash": "aa0bfa1c", 
+"hash": "70c3addf", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -2506,12 +2506,12 @@
 {
 "key": "Cemetery", 
 "src": "", 
-"hash": "ed188604", 
+"hash": "967183cc", 
 "sub": [
 {
 "key": "Expenses", 
 "src": "", 
-"hash": "4cd48d47", 
+"hash": "13495828", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -2565,7 +2565,7 @@
 {
 "key": "Salaries", 
 "src": "", 
-"hash": "906d6fda", 
+"hash": "70c3addf", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -2669,12 +2669,12 @@
 {
 "key": "Properties", 
 "src": "", 
-"hash": "c8dac5cc", 
+"hash": "9fc2d28c", 
 "sub": [
 {
 "key": "Expenses", 
 "src": "", 
-"hash": "2b786c81", 
+"hash": "13495828", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -2778,12 +2778,12 @@
 {
 "key": "Solid Waste", 
 "src": "", 
-"hash": "99e94ff9", 
+"hash": "e00ddc08", 
 "sub": [
 {
 "key": "Expenses", 
 "src": "", 
-"hash": "c46d5ae9", 
+"hash": "13495828", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -2887,12 +2887,12 @@
 {
 "key": "Hgwy Motor Equip Repair", 
 "src": "", 
-"hash": "28138659", 
+"hash": "705f612d", 
 "sub": [
 {
 "key": "Expenses", 
 "src": "", 
-"hash": "d985bdf4", 
+"hash": "13495828", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -2946,7 +2946,7 @@
 {
 "key": "Salaries", 
 "src": "", 
-"hash": "37fa50d6", 
+"hash": "70c3addf", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -3050,12 +3050,12 @@
 {
 "key": "Removal Snow & Ice", 
 "src": "", 
-"hash": "ced0e3a8", 
+"hash": "c61196eb", 
 "sub": [
 {
 "key": "Expenses", 
 "src": "", 
-"hash": "e6d0516c", 
+"hash": "13495828", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -3159,12 +3159,12 @@
 {
 "key": "Highway", 
 "src": "", 
-"hash": "3c900f4c", 
+"hash": "b72a19a4", 
 "sub": [
 {
 "key": "Expenses", 
 "src": "", 
-"hash": "bc18e0d9", 
+"hash": "13495828", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -3218,7 +3218,7 @@
 {
 "key": "Salaries", 
 "src": "", 
-"hash": "486eecaf", 
+"hash": "70c3addf", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -3322,12 +3322,12 @@
 {
 "key": "Public Works Admin", 
 "src": "", 
-"hash": "aacb3ae3", 
+"hash": "8cff1116", 
 "sub": [
 {
 "key": "Expenses", 
 "src": "", 
-"hash": "b7b306d4", 
+"hash": "13495828", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -3381,7 +3381,7 @@
 {
 "key": "Salaries", 
 "src": "", 
-"hash": "88cea977", 
+"hash": "70c3addf", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -3485,12 +3485,12 @@
 {
 "key": "Fire Alarm Systems", 
 "src": "", 
-"hash": "e0abbaab", 
+"hash": "298f3778", 
 "sub": [
 {
 "key": "Expenses", 
 "src": "", 
-"hash": "b2cbc4d6", 
+"hash": "13495828", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -3594,12 +3594,12 @@
 {
 "key": "Traffic Signals", 
 "src": "", 
-"hash": "098e1cb1", 
+"hash": "8d677047", 
 "sub": [
 {
 "key": "Expenses", 
 "src": "", 
-"hash": "0a47d8fa", 
+"hash": "13495828", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -3703,12 +3703,12 @@
 {
 "key": "Street Lighting", 
 "src": "", 
-"hash": "50fdb01c", 
+"hash": "1f413e9e", 
 "sub": [
 {
 "key": "Expenses", 
 "src": "", 
-"hash": "1f453833", 
+"hash": "13495828", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -3812,12 +3812,12 @@
 {
 "key": "Town Engineer", 
 "src": "", 
-"hash": "eab499f4", 
+"hash": "1ede75ba", 
 "sub": [
 {
 "key": "Expenses", 
 "src": "", 
-"hash": "36c3ee16", 
+"hash": "13495828", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -3871,7 +3871,7 @@
 {
 "key": "Salaries", 
 "src": "", 
-"hash": "3fad57cf", 
+"hash": "70c3addf", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -3975,7 +3975,7 @@
 {
 "key": "Maintenance Town Fields", 
 "src": "", 
-"hash": "b4303392", 
+"hash": "348d2ef4", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -4029,7 +4029,7 @@
 {
 "key": "Expenses", 
 "src": "", 
-"hash": "395905a2", 
+"hash": "13495828", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -4083,12 +4083,12 @@
 {
 "key": "Natural Resources", 
 "src": "", 
-"hash": "fc902393", 
+"hash": "5c222cdc", 
 "sub": [
 {
 "key": "Expenses", 
 "src": "", 
-"hash": "983a7018", 
+"hash": "13495828", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -4142,7 +4142,7 @@
 {
 "key": "Salaries", 
 "src": "", 
-"hash": "16783063", 
+"hash": "70c3addf", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -4246,12 +4246,12 @@
 {
 "key": "Inspections", 
 "src": "", 
-"hash": "5beebd31", 
+"hash": "0e153021", 
 "sub": [
 {
 "key": "Expenses", 
 "src": "", 
-"hash": "e6264fe1", 
+"hash": "13495828", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -4305,7 +4305,7 @@
 {
 "key": "Salaries", 
 "src": "", 
-"hash": "498368f7", 
+"hash": "70c3addf", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -4409,12 +4409,12 @@
 {
 "key": "Fire", 
 "src": "", 
-"hash": "a97750fe", 
+"hash": "bd2b7e5f", 
 "sub": [
 {
 "key": "Expenses", 
 "src": "", 
-"hash": "22c513d5", 
+"hash": "13495828", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -4468,7 +4468,7 @@
 {
 "key": "Salaries", 
 "src": "", 
-"hash": "93d451bc", 
+"hash": "70c3addf", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -4572,12 +4572,12 @@
 {
 "key": "Comm Safety Support", 
 "src": "", 
-"hash": "a7c8c1db", 
+"hash": "8aded2d6", 
 "sub": [
 {
 "key": "Expenses", 
 "src": "", 
-"hash": "948fd751", 
+"hash": "13495828", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -4631,7 +4631,7 @@
 {
 "key": "Salaries", 
 "src": "", 
-"hash": "ec1f951b", 
+"hash": "70c3addf", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -4735,12 +4735,12 @@
 {
 "key": "Community Safety Admin", 
 "src": "", 
-"hash": "5397d9a6", 
+"hash": "6115d328", 
 "sub": [
 {
 "key": "Salaries", 
 "src": "", 
-"hash": "442284e3", 
+"hash": "70c3addf", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -4844,12 +4844,12 @@
 {
 "key": "Police", 
 "src": "", 
-"hash": "2f84aefb", 
+"hash": "5dac73aa", 
 "sub": [
 {
 "key": "Expenses", 
 "src": "", 
-"hash": "c5dbbe78", 
+"hash": "13495828", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -4903,7 +4903,7 @@
 {
 "key": "Salaries", 
 "src": "", 
-"hash": "56d61fb6", 
+"hash": "70c3addf", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -5007,12 +5007,12 @@
 {
 "key": "Parking Ticket", 
 "src": "", 
-"hash": "4e8b6455", 
+"hash": "c9a89252", 
 "sub": [
 {
 "key": "Expenses", 
 "src": "", 
-"hash": "cdd4223d", 
+"hash": "13495828", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -5066,7 +5066,7 @@
 {
 "key": "Salaries", 
 "src": "", 
-"hash": "6340757f", 
+"hash": "70c3addf", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -5170,12 +5170,12 @@
 {
 "key": "Printing Town Reports", 
 "src": "", 
-"hash": "1cebfec2", 
+"hash": "dc29187c", 
 "sub": [
 {
 "key": "Expenses", 
 "src": "", 
-"hash": "5730cc2b", 
+"hash": "13495828", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -5279,12 +5279,12 @@
 {
 "key": "Dallin Library", 
 "src": "", 
-"hash": "f1233c98", 
+"hash": "82d3c564", 
 "sub": [
 {
 "key": "Expenses", 
 "src": "", 
-"hash": "03fcb9c5", 
+"hash": "13495828", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -5388,12 +5388,12 @@
 {
 "key": "Crosby", 
 "src": "", 
-"hash": "d95a9e00", 
+"hash": "cefcb0de", 
 "sub": [
 {
 "key": "Expenses", 
 "src": "", 
-"hash": "1e5c88de", 
+"hash": "13495828", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -5497,12 +5497,12 @@
 {
 "key": "Parmenter", 
 "src": "", 
-"hash": "4e2f504e", 
+"hash": "9bbd9e3b", 
 "sub": [
 {
 "key": "Expenses", 
 "src": "", 
-"hash": "8388b678", 
+"hash": "13495828", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -5556,7 +5556,7 @@
 {
 "key": "Salaries", 
 "src": "", 
-"hash": "00c8b995", 
+"hash": "70c3addf", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -5660,12 +5660,12 @@
 {
 "key": "Gibbs", 
 "src": "", 
-"hash": "e0842cf7", 
+"hash": "10e1d06b", 
 "sub": [
 {
 "key": "Expenses", 
 "src": "", 
-"hash": "352514ee", 
+"hash": "13495828", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -5719,7 +5719,7 @@
 {
 "key": "Salaries", 
 "src": "", 
-"hash": "cf0ab571", 
+"hash": "70c3addf", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -5823,12 +5823,12 @@
 {
 "key": "Redevelopment Board", 
 "src": "", 
-"hash": "053862a2", 
+"hash": "d237d03b", 
 "sub": [
 {
 "key": "Expenses", 
 "src": "", 
-"hash": "de395cfd", 
+"hash": "13495828", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -5932,12 +5932,12 @@
 {
 "key": "Zoning Board", 
 "src": "", 
-"hash": "1a4bd301", 
+"hash": "64ec5850", 
 "sub": [
 {
 "key": "Expenses", 
 "src": "", 
-"hash": "f6f7cfef", 
+"hash": "13495828", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -5991,7 +5991,7 @@
 {
 "key": "Salaries", 
 "src": "", 
-"hash": "8d9cb27b", 
+"hash": "70c3addf", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -6095,12 +6095,12 @@
 {
 "key": "Planning", 
 "src": "", 
-"hash": "b72978cf", 
+"hash": "21d28aa0", 
 "sub": [
 {
 "key": "Expenses", 
 "src": "", 
-"hash": "7836d6d1", 
+"hash": "13495828", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -6154,7 +6154,7 @@
 {
 "key": "Salaries", 
 "src": "", 
-"hash": "a7589390", 
+"hash": "70c3addf", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -6258,12 +6258,12 @@
 {
 "key": "Conservation", 
 "src": "", 
-"hash": "7321c50d", 
+"hash": "b9855217", 
 "sub": [
 {
 "key": "Expenses", 
 "src": "", 
-"hash": "26eb10b9", 
+"hash": "13495828", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -6367,12 +6367,12 @@
 {
 "key": "Registrars", 
 "src": "", 
-"hash": "0c2df478", 
+"hash": "aafccbc5", 
 "sub": [
 {
 "key": "Expenses", 
 "src": "", 
-"hash": "fc9f286c", 
+"hash": "13495828", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -6426,7 +6426,7 @@
 {
 "key": "Salaries", 
 "src": "", 
-"hash": "70516da0", 
+"hash": "70c3addf", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -6530,12 +6530,12 @@
 {
 "key": "Election", 
 "src": "", 
-"hash": "962bac1b", 
+"hash": "28c1ebc9", 
 "sub": [
 {
 "key": "Expenses", 
 "src": "", 
-"hash": "619f731e", 
+"hash": "13495828", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -6589,7 +6589,7 @@
 {
 "key": "Salaries", 
 "src": "", 
-"hash": "48b451c9", 
+"hash": "70c3addf", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -6693,12 +6693,12 @@
 {
 "key": "Town Clerk", 
 "src": "", 
-"hash": "995520fa", 
+"hash": "92222a9a", 
 "sub": [
 {
 "key": "Expenses", 
 "src": "", 
-"hash": "2fa63cac", 
+"hash": "13495828", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -6752,7 +6752,7 @@
 {
 "key": "Salaries", 
 "src": "", 
-"hash": "89b7bca4", 
+"hash": "70c3addf", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -6856,12 +6856,12 @@
 {
 "key": "Information Technology", 
 "src": "", 
-"hash": "996fbd55", 
+"hash": "73595e15", 
 "sub": [
 {
 "key": "Expenses", 
 "src": "", 
-"hash": "32abb95c", 
+"hash": "13495828", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -6915,7 +6915,7 @@
 {
 "key": "Salaries", 
 "src": "", 
-"hash": "3f981b22", 
+"hash": "70c3addf", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -7019,12 +7019,12 @@
 {
 "key": "Human Resources", 
 "src": "", 
-"hash": "3a038dd7", 
+"hash": "d19092ef", 
 "sub": [
 {
 "key": "Expenses", 
 "src": "", 
-"hash": "7df2141c", 
+"hash": "13495828", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -7078,7 +7078,7 @@
 {
 "key": "Salaries", 
 "src": "", 
-"hash": "8dd6fad9", 
+"hash": "70c3addf", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -7182,12 +7182,12 @@
 {
 "key": "Legal", 
 "src": "", 
-"hash": "bacb02ae", 
+"hash": "a10a9bcd", 
 "sub": [
 {
 "key": "Expenses", 
 "src": "", 
-"hash": "8caf5d0e", 
+"hash": "13495828", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -7241,7 +7241,7 @@
 {
 "key": "Salaries", 
 "src": "", 
-"hash": "847b9224", 
+"hash": "70c3addf", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -7345,12 +7345,12 @@
 {
 "key": "Postage", 
 "src": "", 
-"hash": "ccb2e8f9", 
+"hash": "a49b4f3b", 
 "sub": [
 {
 "key": "Expenses", 
 "src": "", 
-"hash": "64d93e52", 
+"hash": "13495828", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -7404,7 +7404,7 @@
 {
 "key": "Salaries", 
 "src": "", 
-"hash": "213b9388", 
+"hash": "70c3addf", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -7508,12 +7508,12 @@
 {
 "key": "Treasurer/Collector", 
 "src": "", 
-"hash": "46e68c43", 
+"hash": "2d4ed078", 
 "sub": [
 {
 "key": "Expenses", 
 "src": "", 
-"hash": "5a2858ac", 
+"hash": "13495828", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -7567,7 +7567,7 @@
 {
 "key": "Salaries", 
 "src": "", 
-"hash": "82c80101", 
+"hash": "70c3addf", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -7671,12 +7671,12 @@
 {
 "key": "Assessors", 
 "src": "", 
-"hash": "2873b68a", 
+"hash": "fcdfff42", 
 "sub": [
 {
 "key": "Expenses", 
 "src": "", 
-"hash": "0d03267a", 
+"hash": "13495828", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -7730,7 +7730,7 @@
 {
 "key": "Salaries", 
 "src": "", 
-"hash": "9b1e3343", 
+"hash": "70c3addf", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -7834,12 +7834,12 @@
 {
 "key": "Comptroller", 
 "src": "", 
-"hash": "f2e83d71", 
+"hash": "2fe2f917", 
 "sub": [
 {
 "key": "Expenses", 
 "src": "", 
-"hash": "15492ad6", 
+"hash": "13495828", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -7893,7 +7893,7 @@
 {
 "key": "Salaries", 
 "src": "", 
-"hash": "6cfe9d85", 
+"hash": "70c3addf", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -7997,12 +7997,12 @@
 {
 "key": "Finance Committee", 
 "src": "", 
-"hash": "482963c0", 
+"hash": "22847912", 
 "sub": [
 {
 "key": "Expenses", 
 "src": "", 
-"hash": "b604eb58", 
+"hash": "13495828", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -8056,7 +8056,7 @@
 {
 "key": "Salaries", 
 "src": "", 
-"hash": "26e66638", 
+"hash": "70c3addf", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -8160,12 +8160,12 @@
 {
 "key": "Town Manager", 
 "src": "", 
-"hash": "e096365b", 
+"hash": "647cbb95", 
 "sub": [
 {
 "key": "Expenses", 
 "src": "", 
-"hash": "ec021bbe", 
+"hash": "13495828", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -8219,7 +8219,7 @@
 {
 "key": "Salaries", 
 "src": "", 
-"hash": "3110c8e3", 
+"hash": "70c3addf", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -8323,7 +8323,7 @@
 {
 "key": "Accounting and Auditing", 
 "src": "", 
-"hash": "b070a4c0", 
+"hash": "8a717d2d", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -8377,12 +8377,12 @@
 {
 "key": "Board of Selectmen", 
 "src": "", 
-"hash": "6c8a5985", 
+"hash": "e7bf7cc6", 
 "sub": [
 {
 "key": "Expenses", 
 "src": "", 
-"hash": "daab3235", 
+"hash": "13495828", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -8436,7 +8436,7 @@
 {
 "key": "Salaries", 
 "src": "", 
-"hash": "11bfb6dd", 
+"hash": "70c3addf", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -8590,12 +8590,12 @@
 {
 "key": "Schools", 
 "src": "", 
-"hash": "40d55302", 
+"hash": "b5fe5259", 
 "sub": [
 {
 "key": "Minuteman Regional High School", 
 "src": "", 
-"hash": "81960d6f", 
+"hash": "35297b63", 
 "sub": [], 
 "descr": "", 
 "url": "", 
@@ -8649,7 +8649,7 @@
 {
 "key": "Special Education", 
 "src": "", 
-"hash": "c9acbe76", 
+"hash": "b1c00d39", 
 "sub": [], 
 "descr": "Funds appropriated to the school department to cover the expenses of educating students with disabilities.", 
 "url": "", 
@@ -8703,7 +8703,7 @@
 {
 "key": "General Education", 
 "src": "", 
-"hash": "aa747086", 
+"hash": "7657583b", 
 "sub": [], 
 "descr": "Funds appropriated to the school department to cover the costs of personnel, operating school department facilities, transportation, and other expenses necessary for providing public education in the district.", 
 "url": "", 

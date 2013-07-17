@@ -32,10 +32,10 @@ avb.home = function () {
      * Tutorial node IDs.
      * They are used to identify which zone to highlight on the treemap
      */
-    var townDepartments = 'ad864a7e',
-        fireDepartment = '8c25ea50',
-        snowRemoval = 'f2e64f63',
-        townSchools = '52b91b83';
+    var townDepartments = 'dc313bc5',
+        fireDepartment = 'bd2b7e5f',
+        snowRemoval = 'c61196eb',
+        townSchools = 'b5fe5259';
 
     /*
     * Main tour, for new users.
