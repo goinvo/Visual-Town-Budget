@@ -76,13 +76,16 @@
   padding: 10px;
 }
 
-
+/*
+* Glossary section css
+*/
 #avb-glossary{
 
   padding: 10px;
 
   .definition{
     margin-bottom: 20px;
+
 
     .title,
     .description{
@@ -91,6 +94,7 @@
 
     .title{
       font-weight: bold;
+      color: #d63366;
     }
 
     .description{

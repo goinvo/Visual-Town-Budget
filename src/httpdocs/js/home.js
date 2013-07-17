@@ -32,10 +32,10 @@ avb.home = function () {
      * Tutorial node IDs.
      * They are used to identify which zone to highlight on the treemap
      */
-    var townDepartments = '2956e900',
-        fireDepartment = 'a97750fe',
-        snowRemoval = 'ced0e3a8',
-        townSchools = '40d55302';
+    var townDepartments = 'ad864a7e',
+        fireDepartment = '8c25ea50',
+        snowRemoval = 'f2e64f63',
+        townSchools = '52b91b83';
 
     /*
     * Main tour, for new users.
@@ -169,7 +169,7 @@ avb.home = function () {
                 if (before !== undefined) {
                     setTimeout(function () {
                         before();
-                    }, 800);
+                    }, 1000);
                     setTimeout(function () {
                         starttour(tour)
                     }, 2500);

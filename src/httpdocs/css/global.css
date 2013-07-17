@@ -133,24 +133,28 @@ h4 {
   padding: 10px;
 }
 
-/* line 80, ../../scss/partials/_avb.scss */
+/*
+* Glossary section css
+*/
+/* line 82, ../../scss/partials/_avb.scss */
 #avb-glossary {
   padding: 10px;
 }
-/* line 84, ../../scss/partials/_avb.scss */
+/* line 86, ../../scss/partials/_avb.scss */
 #avb-glossary .definition {
   margin-bottom: 20px;
 }
-/* line 88, ../../scss/partials/_avb.scss */
+/* line 91, ../../scss/partials/_avb.scss */
 #avb-glossary .definition .title,
 #avb-glossary .definition .description {
   font-size: 18px;
 }
-/* line 92, ../../scss/partials/_avb.scss */
+/* line 95, ../../scss/partials/_avb.scss */
 #avb-glossary .definition .title {
   font-weight: bold;
+  color: #d63366;
 }
-/* line 96, ../../scss/partials/_avb.scss */
+/* line 100, ../../scss/partials/_avb.scss */
 #avb-glossary .definition .description {
   margin-left: 10px;
 }
@@ -617,31 +621,30 @@ p {
 }
 /* line 73, ../../scss/partials/_table.scss */
 .value.head {
-  font-family: 'Helvetica Neue LT Std';
   font-weight: 500;
 }
 
-/* line 80, ../../scss/partials/_table.scss */
+/* line 79, ../../scss/partials/_table.scss */
 .bullet {
   width: 20px;
   vertical-align: top;
 }
 
-/* line 85, ../../scss/partials/_table.scss */
+/* line 84, ../../scss/partials/_table.scss */
 .sparkline {
   line-height: 0px;
 }
-/* line 86, ../../scss/partials/_table.scss */
+/* line 85, ../../scss/partials/_table.scss */
 .sparkline .line {
   stroke-width: 1px;
 }
 
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
-  /* line 93, ../../scss/partials/_table.scss */
+  /* line 92, ../../scss/partials/_table.scss */
   .value {
     width: 100px;
   }
-  /* line 96, ../../scss/partials/_table.scss */
+  /* line 95, ../../scss/partials/_table.scss */
   .value.long {
     width: 250px;
   }

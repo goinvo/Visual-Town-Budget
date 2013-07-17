@@ -63,8 +63,18 @@ avb.cards = function(){
         for(var i=0; i < deck.length; i++) {
             cardstack[i].html(Mustache.render($('#card-template').html(),deck[i]));
             cardstack[i].select(".cardvalue").html(deck[i].value(data));
-            if(typeof(deck[i].link) === 'function')
-                cardstack[i].attr('onclick', "window.location='" + deck[i].link()  + "'");
+            if(typeof(deck[i].link) === 'function') {
+                // attach link
+                cardstack[i].attr('onclick', "window.location='" + deck[i].link(data)  + "'");
+                // prevent sliding animation
+                $(cardstack[i].node()).click(function(){
+                    var event = window.event || event;
+                    if(event) {
+                        event.cancelBubble = true;
+                        if(event.stopPropagation) event.stopPropagation();
+                    }
+                })
+            }
             cardstack[i].select(".carddesc").html(
                 (typeof(deck[i].side) === 'string') ? deck[i].side : deck[i].side(data));
         }

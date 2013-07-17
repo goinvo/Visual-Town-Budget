@@ -86,11 +86,11 @@ stats = {
     source: {
         title: "Source",
         class: "span6 card-source ",
-        value: function () {
-            return "Town of Arlington";
+        value: function (d) {
+            return (d.src === '') ? 'Town of Arlington' : d.src;
         },
-        link: function () {
-            return "http://www.town.arlington.ma.us/";
+        link: function (d) {
+            return (d.url === '') ? "http://www.town.arlington.ma.us/" : d.url;
         },
         side: "is the data source for this entry."
     },
@@ -130,6 +130,13 @@ stats = {
         value: function (d){
             return d.section;
         }
+    },
+    parent : {
+        title : "From",
+        cellClass: "value",
+        value: function (d){
+            return d.parent;
+        }
     }
 },
 
@@ -143,7 +150,7 @@ tables = {
     revenues: [stats.name, stats.growth, stats.sparkline, stats.impact, stats.amount],
     expenses: [stats.name, stats.growth, stats.sparkline, stats.impact, stats.amount],
     funds: [stats.name, stats.growth, stats.sparkline, stats.impact, stats.amount],
-    search: [stats.name, stats.growth, stats.sparkline, stats.amount, stats.section]
+    search: [stats.name, stats.growth, stats.sparkline, stats.amount, stats.parent,  stats.section]
 }
 
 function formatcurrency(value) {

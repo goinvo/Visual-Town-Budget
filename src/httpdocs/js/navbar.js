@@ -24,7 +24,6 @@ License:
     limitations under the License.
 */
 
-
 var avb = avb || {};
 
 avb.navbar = function(){
@@ -49,7 +48,7 @@ avb.navbar = function(){
 	    // aggregate search results from all sections
 	    $.each(avb.sections, function(){
 	        var searchSection = this;
-	        var newResult = searchObject(keyword, avb.data[this]);
+	        var newResult = searchObject(keyword, avb.data[this], avb.data);
 	        // remember where searched element was found
 	        $.each(newResult, function() {this.section = capitalise(searchSection)});
 	        result = result.concat(newResult);
@@ -57,14 +56,15 @@ avb.navbar = function(){
 	    return result;
 	},
 
-	searchObject = function(keyword, object){
+	searchObject = function(keyword, object, parent){
 		var index = object.key.toLowerCase().indexOf(keyword.toLowerCase());
 		// ignore matches in mid word
 		if (index !== 0 && object.key[index-1] !== ' ') index = -1;
+		if(index != -1) {object.parent = parent.key};
 	    var result = index !== -1 ? [object] : []; 
 	    if(object.sub !== undefined) {
 	        for(var i=0; i<object.sub.length; i++) {
-	            result = result.concat(searchObject(keyword, object.sub[i]));
+	            result = result.concat(searchObject(keyword, object.sub[i], object));
 	        }
 	    }
 	    return result;
