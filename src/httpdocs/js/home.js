@@ -27,6 +27,7 @@ var avb = avb || {};
 
 avb.home = function () {
     var home = new Object;
+    var tour;
 
     /*
      * Tutorial node IDs.
@@ -58,7 +59,7 @@ avb.home = function () {
         position: 'left',
         before: function () {
             setTimeout(function () {
-                $('#yeardrop-container').addClass('open')
+                $('#yeardrop-container').addClass('open');
             }, 800);
         }
     }];

@@ -31,7 +31,7 @@
 <div id="navigation-container" class="span6" >
   <div class="title-head" style="height:70px;">
     <button id="zoombutton" class="btn pull-right">
-      <i class="icon-zoom-out"></i> Zoom out
+      <i class="icon-zoom-out"></i> Go back
     </button>
   </div>
   <div id="navigation" >  

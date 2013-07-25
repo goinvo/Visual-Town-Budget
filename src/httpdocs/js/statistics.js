@@ -60,7 +60,6 @@ stats = {
         title: "Individual",
         class: "span6 individual",
         value: function (d) {
-            log(yearIndex);
             var percentage = d.values[yearIndex].val / avb.root.values[yearIndex].val;
 
             return '$' + d3.round(avb.userContribution * percentage,2);

@@ -262,6 +262,7 @@ ieLabels = function(d){
 textLabels = function(d){
 
     function attachPopover(obj, title, descr){
+
         $(obj).find('div').first().popover(
             {container : 'body', 
                 trigger : 'hover', 
@@ -273,8 +274,9 @@ textLabels = function(d){
                         return "top";
                     }
                 },
-                title : (d.descr !== '' && d.title !== '') ? d.key : '',
-                content : (d.descr !== '') ? d.descr : d.key
+                title : (descr !== '' && d.title !== '') ? d.key : '',
+                content : (descr !== '') ? descr : d.key,
+                html : true
             });
     }
 
@@ -291,36 +293,49 @@ textLabels = function(d){
 
     var popover = false;
 
+    // add contribution if user filled out form
+    var description;
+    if(avb.userContribution != null && avb.section == 'expenses') {
+        description = '<div >' + d.descr + '</div> <div class="contribution"> Your contribution is ' + stats.individual.value(d) + '</div>';
+    } else {
+        description = d.descr;
+    }
+
     if (containerHeight < title.outerHeight() || containerHeight < 40 || containerWidth < 60) {
-        d3.select(this).classed("no-label", true);
+    d3.select(this).classed("no-label", true);
         popover = true;
     }
     if(containerHeight < div.height() || containerHeight < 80 || containerWidth < 90) {
         d3.select(this).classed("no-value", true);
     }
-    if(popover || d.descr !== '' || containerWidth < 80){
-        attachPopover(this, d.key, d.descr);
+    if(popover || description !== '' || containerWidth < 80){
+        attachPopover(this, d.key, description);
     }
 
 }
 
 updateTitle = function (data) {
-    var title = $(".title-head .text");
+    var $title = $(".title-head .text");
 
-    var zoom = $('#zoombutton');
+    var $zoom = $('#zoombutton');
     var parent = d3.select('.grandparent').node();
 
-    zoom.unbind();
-    title.text(data.key);
-    $(title).textfill(48, $('.title-head').width() - 120);
+    $zoom.unbind();
+    $title.text(data.key);
+    $title.textfill(48, $('.title-head').width() - 120);
 
-    if (avb.currentNode.data === avb.root){
-        zoom.addClass('disabled');
-    } else {
-        zoom.removeClass('disabled');
+    // add description to main sections
+    if(inArray(avb.sections, data.key.toLowerCase())){
+        $('<div class="description">  </div>').appendTo($title).text(data.descr);
     }
 
-    zoom.click(function(){
+    if (avb.currentNode.data === avb.root){
+        $zoom.addClass('disabled');
+    } else {
+        $zoom.removeClass('disabled');
+    }
+
+    $zoom.click(function(){
         zoneClick.call(parent, d3.select(parent).datum(), true);
     })
 

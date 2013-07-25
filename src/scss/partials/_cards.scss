@@ -1,12 +1,12 @@
 
 .card {
-  padding-top: 10px;
-  padding-bottom: 10px;
-  margin-left: 2%;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	margin-left: 2%;
 
-  &.top {
-  	padding-top: 5px;
-  }
+	&.top {
+		padding-top: 5px;
+	}
 }
 
 
@@ -38,9 +38,9 @@
 			.cardvalue{
 				//text-decoration: underline;
 				font-size:$text-big;
-	  			cursor: pointer;
-	  			display: block;
-	  		}
+				cursor: pointer;
+				display: block;
+			}
 
 			.cardvalue:hover{
 				color:  steelblue;
@@ -63,42 +63,59 @@
 }
 
 #information-container{
-  position: relative;
-  padding-left: 5px;
+
+
+	position: relative;
+	padding-left: 5px;
+
+	#title-
 
 	#info-wrap{
-	  overflow:hidden; 
-	  height:100%;
-	  div{
-	  	cursor: pointer;
-	  }
+		overflow:hidden; 
+		height:100%;
+		div{
+			cursor: pointer;
+		}
+	}
 
+	.title-head{
+		.description{
+			display: inline-block;
+			font-size: $text-big;
+			width: 400px;
+			margin-left: 20px;
+			line-height: normal;
+			white-space: normal;
+		}
 	}
 
 	#cards-wrap{
 		height: 100%;
 		width:100%; 
+		overflow-x: hidden;
 		position:relative;
+		cursor: pointer;
 	}
 
 	#legend-wrap {
-	    position:absolute;
-	    height: 90%;
-	    left:-100%;
-	    overflow-y: auto;
-	    font-size: $text-big;
-	    line-height: $text-lineheight-big;
+		position:absolute;
+		height: 100%;
+		width: 100%;
+		left:-100%;
+		overflow-y: auto;
+		font-size: $text-big;
+		line-height: $text-lineheight-big;
 
-	    .legend-label{
-	      width: 16px;
-	      height: 16px;
-	      border-radius: 8px;
-	    }
+		.legend-label{
+			width: 16px;
+			height: 16px;
+			border-radius: 8px;
+		}
 
-	    tr :first-child {
-	      margin-right: 5px;
-	    }
-	  }
+		tr :first-child {
+			margin-right: 5px;
+		}
+	}
 }
 
 

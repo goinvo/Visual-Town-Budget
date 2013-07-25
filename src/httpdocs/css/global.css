@@ -426,37 +426,51 @@ p {
   position: relative;
   padding-left: 5px;
 }
-/* line 69, ../../scss/partials/_cards.scss */
-#information-container #info-wrap {
+/* line 73, ../../scss/partials/_cards.scss */
+#information-container #title-
+#info-wrap {
   overflow: hidden;
   height: 100%;
 }
-/* line 72, ../../scss/partials/_cards.scss */
-#information-container #info-wrap div {
+/* line 76, ../../scss/partials/_cards.scss */
+#information-container #title-
+#info-wrap div {
   cursor: pointer;
 }
-/* line 78, ../../scss/partials/_cards.scss */
+/* line 82, ../../scss/partials/_cards.scss */
+#information-container .title-head .description {
+  display: inline-block;
+  font-size: 18px;
+  width: 400px;
+  margin-left: 20px;
+  line-height: normal;
+  white-space: normal;
+}
+/* line 92, ../../scss/partials/_cards.scss */
 #information-container #cards-wrap {
   height: 100%;
   width: 100%;
+  overflow-x: hidden;
   position: relative;
+  cursor: pointer;
 }
-/* line 84, ../../scss/partials/_cards.scss */
+/* line 100, ../../scss/partials/_cards.scss */
 #information-container #legend-wrap {
   position: absolute;
-  height: 90%;
+  height: 100%;
+  width: 100%;
   left: -100%;
   overflow-y: auto;
   font-size: 18px;
   line-height: 28px;
 }
-/* line 92, ../../scss/partials/_cards.scss */
+/* line 109, ../../scss/partials/_cards.scss */
 #information-container #legend-wrap .legend-label {
   width: 16px;
   height: 16px;
   border-radius: 8px;
 }
-/* line 98, ../../scss/partials/_cards.scss */
+/* line 115, ../../scss/partials/_cards.scss */
 #information-container #legend-wrap tr :first-child {
   margin-right: 5px;
 }
@@ -729,26 +743,26 @@ p {
   text-overflow: ellipsis;
 }
 
-/* line 95, ../../scss/partials/_navigation.scss */
+/* line 88, ../../scss/partials/_navigation.scss */
 #zoombutton {
   width: 120px;
   font-family: 'Strait', sans-serif;
   float: right;
   font-size: 18px;
 }
-/* line 101, ../../scss/partials/_navigation.scss */
+/* line 94, ../../scss/partials/_navigation.scss */
 #zoombutton i {
   vertical-align: top;
   margin-right: 5px;
 }
 
-/* line 107, ../../scss/partials/_navigation.scss */
+/* line 100, ../../scss/partials/_navigation.scss */
 .popover {
   z-index: 1050;
   font-size: 18px;
 }
 
-/* line 112, ../../scss/partials/_navigation.scss */
+/* line 106, ../../scss/partials/_navigation.scss */
 #ie-popover {
   z-index: 1050;
   background-color: rgba(0, 0, 0, 0.5);
@@ -759,7 +773,7 @@ p {
   margin-top: -58px;
   border-radius: 5px;
 }
-/* line 122, ../../scss/partials/_navigation.scss */
+/* line 116, ../../scss/partials/_navigation.scss */
 #ie-popover .arrow {
   z-index: 1050;
   position: absolute;
@@ -771,7 +785,7 @@ p {
   border-right: 10px solid transparent;
   border-top: 10px solid rgba(0, 0, 0, 0.5);
 }
-/* line 134, ../../scss/partials/_navigation.scss */
+/* line 128, ../../scss/partials/_navigation.scss */
 #ie-popover .text {
   color: white;
   padding: 5px;

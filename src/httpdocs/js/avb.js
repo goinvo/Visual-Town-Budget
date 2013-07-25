@@ -37,7 +37,6 @@ avb.data = {}; // json data
 avb.currentNode = {}; // currently selected node
 
 // time variables
-
 avb.firstYear = null;
 avb.lastYear = null;
 avb.currentYear = new Date().getFullYear();
@@ -54,7 +53,6 @@ Number.prototype.px = function () {
 };
 
 /* URL history routines */
-
 function pushUrl(section, year, mode, node) {
     if (ie()) return;
 
@@ -83,12 +81,14 @@ function popUrl(event) {
 /* Initialization routines */
 
 function initialize(params) {
-    if (params.year !== undefined && !isNaN(parseInt(params.year)) &&
-        params.year < avb.lastYear && params.year > avb.firstYear) {
+    var yearCookie = parseInt(jQuery.cookie('year'));
+    if (params.year !== undefined && !isNaN(parseInt(params.year))) {
         avb.thisYear = params.year;
+    } else if (!isNaN(yearCookie)) {
+        avb.thisYear = yearCookie;
+    } else {
+        log('NOPE');
     }
-
-
     avb.section = params.section;
 
     // highlight current selection in menubar
@@ -100,7 +100,6 @@ function initialize(params) {
 
     avb.userContribution = avb.home.getContribution();
     
-
     // set viewing mode
     setMode(params.mode);
 
@@ -194,6 +193,10 @@ function changeYear(year) {
     avb.navigation.update(avb.root);
     avb.navigation.open(avb.root.hash);
 
+    jQuery.cookie('year', year, {
+            expires: 14
+    });
+
     // update homepage graph if needed
     if ($('#avb-home').is(":visible")) {
         avb.home.showGraph(100);
@@ -274,7 +277,7 @@ function ie() {
     return v > 4 ? v : undef;
 };
 
-function capitalise(string) {
+function capitalize(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 // Back button action
@@ -290,3 +293,26 @@ var fby = fby || [];
     var s = document.getElementsByTagName('script')[0];
     s.parentNode.insertBefore(f, s);
 })();
+
+var indexOf = function(needle) {
+    if(typeof Array.prototype.indexOf === 'function') {
+        indexOf = Array.prototype.indexOf;
+    } else {
+        indexOf = function(needle) {
+            var i = -1, index;
+
+            for(i = 0; i < this.length; i++) {
+                if(this[i] === needle) {
+                    index = i;
+                    break;
+                }
+            }
+            return index;
+        };
+    }
+    return indexOf.call(this, needle);
+};
+
+var inArray = function(myarray, needle){
+    return indexOf.call(myarray, needle) > -1;
+};

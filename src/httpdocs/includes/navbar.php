@@ -16,7 +16,7 @@
      <div class="entry navbar-margin">
         <span class="menubutton section margin"><a href="/revenues">Revenues</a></span>
         <span class="menubutton section margin"><a href="/expenses">Expenses</a></span>
-        <span class="menubutton section margin"><a href="/funds">Funds</a></span>
+        <span class="menubutton section margin"><a id="navbar-funds" href="/funds">Funds &#38; Reserves</a></span>
     </div>
 
     <div class="entry" style="float:right;">

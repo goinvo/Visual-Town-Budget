@@ -50,7 +50,7 @@ avb.navbar = function(){
 	        var searchSection = this;
 	        var newResult = searchObject(keyword, avb.data[this], avb.data);
 	        // remember where searched element was found
-	        $.each(newResult, function() {this.section = capitalise(searchSection)});
+	        $.each(newResult, function() {this.section = capitalize(searchSection)});
 	        result = result.concat(newResult);
 	    });
 	    return result;
@@ -119,6 +119,7 @@ avb.navbar = function(){
 		if(jQuery.browser.mobile) {
 			$('#navbar-map').text('Map');
 			$('#navbar-table').text('Table');
+			$('#navbar-funds').text('Funds');
 		}
 		$('#searchbox').bind('click touchstart',function () {
 	        if ($('#avb-home').is(":visible")) avb.home.hide();

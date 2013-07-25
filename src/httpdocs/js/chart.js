@@ -106,7 +106,7 @@ avb.chart = function () {
 
         // insert names and percentages
         rows.append("td").text(function (d) {
-            return d.key + ' (' + d.percentage.toFixed(2) + '%)';
+            return d.key + ' (' + d.percentage.toFixed(2) + '% of ' + chart.legendParent.key +')';
         })
 
         // center legend vertically
@@ -482,7 +482,7 @@ avb.chart = function () {
 
             // distance from where the drag started
             delta = {
-                x: x - touchStart.x,
+                x : x - touchStart.x
             };
 
             // bring layers where the cursor is at
