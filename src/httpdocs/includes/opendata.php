@@ -16,13 +16,13 @@
   </div>
   <div class="dataDownload">
     <span> <i class="icon-download"></i> </span>
-    <span class="name"> Funds </span>  <span> - </span> 
+    <span class="name"> Expenses </span>  <span> - </span> 
     <a href="data/expenses.csv"> CSV </a> <span> - </span> 
     <a href="data/expenses.json"> Json </a>
   </div>
   <div class="dataDownload">
     <span> <i class="icon-download"></i> </span>
-    <span class="name"> Expenses </span>  <span> - </span> 
+    <span class="name"> Funds </span>  <span> - </span> 
     <a href="data/funds.csv"> CSV </a> <span> - </span> 
     <a href="data/funds.json"> Json </a>
   </div>
