@@ -1,6 +1,6 @@
 /*
 	File Overview:	Print Styles SCSS
-	Author:			Michael Bester
+	Author:			Ivan DiLernia
 	Description:	Includes all styles for primary styles for the site.
 */
 /*
@@ -12,11 +12,31 @@
    Chrome, IE8+
 ============================================*/
 /* Global variables */
-/* line 9, ../../scss/print.scss */
-.rectangle :before {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  border-left: 100% solid #999;
+@page {
+  size: landscape;
+}
+
+/* line 15, ../../scss/print.scss */
+.popover {
+  background: white !important;
+}
+
+/* line 20, ../../scss/print.scss */
+#zoombutton {
+  display: none;
+}
+
+/* line 24, ../../scss/print.scss */
+.overflows {
+  display: none;
+}
+
+/* line 29, ../../scss/print.scss */
+a:link:after, a:visited:after {
+  content: "";
+}
+
+/* line 33, ../../scss/print.scss */
+#avb-body {
+  margin-bottom: 20px;
 }

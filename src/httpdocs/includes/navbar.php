@@ -1,12 +1,11 @@
 
-
 <div class="purple-border" id="avb-menubar" >
   <div class="container">
 
     <div class="homebutton" onclick='window.location = "/"'> 
       
       <div style="font-size:32px;line-height:28px; display:inline-block"> Arlington, MA  </div>
-      <img src="/img/logo@High.png" alt="avb-logo" widht=24 height=24 />
+      <img src="/img/logo@High.png" alt="avb-logo" width=24 height=24 />
    </div>
 
     <div id="navbar-links" style="line-height:30px;"> 

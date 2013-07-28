@@ -4,11 +4,15 @@
   font-size: $text-big;
   padding: 15px 5px 15px 5px;
   z-index: 1050;
-  margin-top: 2px;
+  padding-top: 2px;
+  border-top: 2px solid rgb(214,51,102);
+
+  .container{
+    margin-top: 5px;
+  }
 
   &.purple-border{
     border-top: 2px solid rgb(214,51,102);
-    margin-top: 0px;
   }
 
   .navbar-margin{

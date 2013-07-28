@@ -480,27 +480,31 @@ p {
   font-size: 18px;
   padding: 15px 5px 15px 5px;
   z-index: 1050;
-  margin-top: 2px;
-}
-/* line 9, ../../scss/partials/_navbar.scss */
-#avb-menubar.purple-border {
+  padding-top: 2px;
   border-top: 2px solid #d63366;
-  margin-top: 0px;
+}
+/* line 10, ../../scss/partials/_navbar.scss */
+#avb-menubar .container {
+  margin-top: 5px;
 }
 /* line 14, ../../scss/partials/_navbar.scss */
+#avb-menubar.purple-border {
+  border-top: 2px solid #d63366;
+}
+/* line 18, ../../scss/partials/_navbar.scss */
 #avb-menubar .navbar-margin {
   margin-left: 90px;
 }
-/* line 18, ../../scss/partials/_navbar.scss */
+/* line 22, ../../scss/partials/_navbar.scss */
 #avb-menubar .nav {
   margin-bottom: 0px !important;
 }
-/* line 22, ../../scss/partials/_navbar.scss */
+/* line 26, ../../scss/partials/_navbar.scss */
 #avb-menubar .entry {
   display: inline-block;
   position: relative;
 }
-/* line 28, ../../scss/partials/_navbar.scss */
+/* line 32, ../../scss/partials/_navbar.scss */
 #avb-menubar .homebutton,
 #avb-menubar .menubutton {
   cursor: pointer;
@@ -508,55 +512,55 @@ p {
   z-index: 1050;
   color: #333333;
 }
-/* line 35, ../../scss/partials/_navbar.scss */
+/* line 39, ../../scss/partials/_navbar.scss */
 #avb-menubar .search {
   border-radius: 5px;
   border: 1px solid #c2c2c2;
   font-family: 'Strait', sans-serif;
   vertical-align: top;
 }
-/* line 42, ../../scss/partials/_navbar.scss */
+/* line 46, ../../scss/partials/_navbar.scss */
 #avb-menubar .menubutton {
   display: inline-block;
 }
-/* line 46, ../../scss/partials/_navbar.scss */
+/* line 50, ../../scss/partials/_navbar.scss */
 #avb-menubar .menubutton.selected a {
   color: #db4e86;
 }
-/* line 51, ../../scss/partials/_navbar.scss */
+/* line 55, ../../scss/partials/_navbar.scss */
 #avb-menubar .menubutton .caret {
   border-top-color: #333333;
   border-bottom-color: #333333;
 }
-/* line 56, ../../scss/partials/_navbar.scss */
+/* line 60, ../../scss/partials/_navbar.scss */
 #avb-menubar .menubutton a {
   color: #333333;
 }
-/* line 60, ../../scss/partials/_navbar.scss */
+/* line 64, ../../scss/partials/_navbar.scss */
 #avb-menubar .menubutton i {
   vertical-align: baseline;
 }
-/* line 64, ../../scss/partials/_navbar.scss */
+/* line 68, ../../scss/partials/_navbar.scss */
 #avb-menubar .menubutton.margin {
   margin-right: 20px;
 }
 
-/* line 71, ../../scss/partials/_navbar.scss */
+/* line 75, ../../scss/partials/_navbar.scss */
 #yeardrop-container {
   vertical-align: top;
   min-width: 100px;
 }
-/* line 79, ../../scss/partials/_navbar.scss */
+/* line 83, ../../scss/partials/_navbar.scss */
 #yeardrop-container a {
   padding-left: 20px;
 }
-/* line 82, ../../scss/partials/_navbar.scss */
+/* line 86, ../../scss/partials/_navbar.scss */
 #yeardrop-container a b {
   float: right;
   margin-right: 5px;
   vertical-align: baseline;
 }
-/* line 88, ../../scss/partials/_navbar.scss */
+/* line 92, ../../scss/partials/_navbar.scss */
 #yeardrop-container .dropdown-menu {
   min-width: 100px;
   border-radius: 0px;
@@ -762,7 +766,7 @@ p {
   font-size: 18px;
 }
 
-/* line 106, ../../scss/partials/_navigation.scss */
+/* line 105, ../../scss/partials/_navigation.scss */
 #ie-popover {
   z-index: 1050;
   background-color: rgba(0, 0, 0, 0.5);
@@ -773,7 +777,7 @@ p {
   margin-top: -58px;
   border-radius: 5px;
 }
-/* line 116, ../../scss/partials/_navigation.scss */
+/* line 115, ../../scss/partials/_navigation.scss */
 #ie-popover .arrow {
   z-index: 1050;
   position: absolute;
@@ -785,7 +789,7 @@ p {
   border-right: 10px solid transparent;
   border-top: 10px solid rgba(0, 0, 0, 0.5);
 }
-/* line 128, ../../scss/partials/_navigation.scss */
+/* line 127, ../../scss/partials/_navigation.scss */
 #ie-popover .text {
   color: white;
   padding: 5px;
@@ -793,14 +797,15 @@ p {
 
 /*
 	File Overview:	Basic structural styles.
-	Author:			Michael Bester
+	Author:			Ivan David DiLernia
 */
 /* line 6, ../../scss/partials/_structure.scss */
 html {
-  margin-bottom: 1px;
+  min-height: 100%;
+  position: relative;
 }
 
-/* line 10, ../../scss/partials/_structure.scss */
+/* line 11, ../../scss/partials/_structure.scss */
 body {
   margin: 0;
   padding: 0;
@@ -808,7 +813,6 @@ body {
   background: #f2f2f2;
   background-image: url(/img/bg_avb.png);
   height: 100%;
-  min-height: 100%;
 }
 
 /*
@@ -817,32 +821,32 @@ body {
 /*
 * Defaults to > 1200px width (>2013)
 */
-/* line 30, ../../scss/partials/_structure.scss */
+/* line 24, ../../scss/partials/_structure.scss */
 .container {
   width: 1200px;
 }
 
-/* line 39, ../../scss/partials/_structure.scss */
+/* line 33, ../../scss/partials/_structure.scss */
 #avb-body #information-container #chart-wrap {
   height: 250px;
 }
-/* line 43, ../../scss/partials/_structure.scss */
+/* line 37, ../../scss/partials/_structure.scss */
 #avb-body #information-container #info-wrap {
   height: 250px;
 }
-/* line 49, ../../scss/partials/_structure.scss */
+/* line 43, ../../scss/partials/_structure.scss */
 #avb-body #navigation-container,
 #avb-body #information-container {
   height: 600px;
   position: relative;
 }
-/* line 54, ../../scss/partials/_structure.scss */
+/* line 48, ../../scss/partials/_structure.scss */
 #avb-body #navigation {
   height: 88%;
   width: 100%;
 }
 
-/* line 62, ../../scss/partials/_structure.scss */
+/* line 56, ../../scss/partials/_structure.scss */
 #vdivider {
   left: 280px;
 }
@@ -851,59 +855,59 @@ body {
 * Ipad Portait + Landscape
 */
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
-  /* line 72, ../../scss/partials/_structure.scss */
+  /* line 66, ../../scss/partials/_structure.scss */
   body, html {
     font-size: 12px;
   }
 
-  /* line 76, ../../scss/partials/_structure.scss */
+  /* line 70, ../../scss/partials/_structure.scss */
   h1 {
     font-size: 2.5em !important;
   }
 
-  /* line 80, ../../scss/partials/_structure.scss */
+  /* line 74, ../../scss/partials/_structure.scss */
   .container {
     width: 980px;
   }
 
-  /* line 84, ../../scss/partials/_structure.scss */
+  /* line 78, ../../scss/partials/_structure.scss */
   #avb-menubar {
     padding: 15px 5px 15px 5px;
   }
-  /* line 88, ../../scss/partials/_structure.scss */
+  /* line 82, ../../scss/partials/_structure.scss */
   #avb-menubar .navbar-margin {
     margin-left: 30px;
   }
-  /* line 92, ../../scss/partials/_structure.scss */
+  /* line 86, ../../scss/partials/_structure.scss */
   #avb-menubar .modename {
     display: none;
   }
 
-  /* line 101, ../../scss/partials/_structure.scss */
+  /* line 95, ../../scss/partials/_structure.scss */
   #avb-body #information-container #chart-wrap {
     height: 220px;
   }
-  /* line 105, ../../scss/partials/_structure.scss */
+  /* line 99, ../../scss/partials/_structure.scss */
   #avb-body #information-container #info-wrap {
     height: 250px;
   }
-  /* line 110, ../../scss/partials/_structure.scss */
+  /* line 104, ../../scss/partials/_structure.scss */
   #avb-body #cards {
     margin-top: 0px;
   }
-  /* line 115, ../../scss/partials/_structure.scss */
+  /* line 109, ../../scss/partials/_structure.scss */
   #avb-body #navigation-container,
   #avb-body #information-container {
     height: 550px;
   }
 }
-/* line 121, ../../scss/partials/_structure.scss */
+/* line 115, ../../scss/partials/_structure.scss */
 #footer {
   text-align: center;
   margin-bottom: 5px;
 }
 
-/* line 129, ../../scss/partials/_structure.scss */
+/* line 123, ../../scss/partials/_structure.scss */
 .group {
   *zoom: 1;
 }

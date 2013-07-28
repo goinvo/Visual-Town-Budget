@@ -1,6 +1,6 @@
 <div id="overlay"> </div>
 
-<div style="height:100%;">
+
   <div id="avb-home"> 
     <div class="container">
       <div id="welcome" class="hero-unit">
@@ -76,6 +76,4 @@
       </div>
     </div>
   </div>
-</div>
-
 </div>
