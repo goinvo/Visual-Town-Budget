@@ -36,7 +36,6 @@
   <script type="text/javascript" src ="/js/avb.js"></script>
 -->
 
-
   <script>
   $(document).ready(function(){
 
@@ -116,6 +115,27 @@
     <a class="link" href="/opendata"> Open Data + Code</a> -
     <a class="link" href="javascript:;" onclick="fby.push(['showForm', '4389']);return false;">Feedback</a>
   </div>
+
+  <script id="data-revenues" type="application/json"> 
+  <?php
+    require_once "data/revenues.json";
+  ?>
+  </script>
+  <script id="data-expenses" type="application/json"> 
+  <?php
+    require_once "data/expenses.json";  
+  ?>
+  </script>
+  <script id="data-funds" type="application/json"> 
+  <?php
+    require_once "data/funds.json";      
+  ?>
+  </script>
+  <script id="data-home" type="application/json"> 
+  <?php
+    require_once "data/home.json";      
+  ?>
+  </script>
 
 </body>
 

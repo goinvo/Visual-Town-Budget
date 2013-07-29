@@ -319,12 +319,11 @@ avb.home = function () {
         home.content.show();
         home.overlay.show();
 
-        $.getJSON('data/home.json', function (data) {
-            setTimeout(function () {
-                home.data = data;
-                showGraph(1000);
-            }, 1000);
-        });
+        var data = JSON.parse($('#data-home').html());
+        setTimeout(function () {
+            home.data = data;
+            showGraph(1000);
+        }, 1000);
 
         // start budget app
         initialize({

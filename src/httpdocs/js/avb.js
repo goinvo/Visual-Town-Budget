@@ -135,32 +135,12 @@ function initialize(params) {
     setMode(params.mode);
 
     // get datasets
-    downloadData(avb.section);
-
-}
-
-/*
-*   Download datasets
-*/
-function downloadData(section) {
-
-    // loads all jsons in data
-    var jxhr = [];
+        // loads all jsons in data
     $.each(avb.sections, function (i, url) {
-        jxhr.push
-(            $.getJSON('/data/' + url + '.json', function (json) {
-                avb.data[url] = json;
-            })
-        );
+        avb.data[url] = JSON.parse($('#data-' + url).html());
     });
 
-    // open section if needed
-    $.when.apply($, jxhr).done(function () {
-        if (section !== undefined) onDataload(avb.data[section]);
-    });
-}
-
-function onDataload(jsondata) {
+    jsondata = avb.data[avb.section];
     avb.root = jsondata;
 
     avb.firstYear = d3.min(avb.root.values, function (d) {
@@ -185,7 +165,14 @@ function onDataload(jsondata) {
 
 }
 
-/* Navigation subroutines */
+/*
+*   Download datasets
+*/
+function downloadData(section) {
+
+
+}
+
 
 function updateSelection(data, year, color) {
     avb.currentNode.data = data;
