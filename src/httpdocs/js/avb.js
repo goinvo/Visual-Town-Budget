@@ -117,6 +117,7 @@ function initialize(params) {
     } else if (!isNaN(yearCookie)) {
         avb.thisYear = yearCookie;
     } else {
+
     }
     avb.section = params.section;
 

@@ -1,7 +1,7 @@
 {
 "key": "Funds", 
 "src": "", 
-"hash": "d42b2bb7", 
+"hash": "eb060738", 
 "sub": [
 {
 "key": "Municipal Building Ins. Trust Fund", 
@@ -274,7 +274,7 @@
 ]
 }
 ], 
-"descr": "", 
+"descr": "Test description", 
 "url": "", 
 "values": [
 {
