@@ -399,23 +399,23 @@ p {
   padding-right: 0;
 }
 /* line 38, ../../scss/partials/_cards.scss */
-#cards .card-row .card-source .cardvalue {
+#cards .card-row .card-source .card-value {
   font-size: 18px;
   cursor: pointer;
   display: block;
 }
 /* line 45, ../../scss/partials/_cards.scss */
-#cards .card-row .card-source .cardvalue:hover {
+#cards .card-row .card-source .card-value:hover {
   color: steelblue;
 }
 /* line 50, ../../scss/partials/_cards.scss */
-#cards .card-row .carddesc {
+#cards .card-row .card-desc {
   font-size: 18px;
   line-height: 28px;
   color: gray;
 }
 /* line 56, ../../scss/partials/_cards.scss */
-#cards .card-row .cardvalue {
+#cards .card-row .card-value {
   font-size: 28px;
   line-height: 28px;
   font-family: 'Georgia';

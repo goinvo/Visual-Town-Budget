@@ -538,7 +538,7 @@ avb.chart = function () {
         // the width of this svg can be easily adjusted to whatever desired
         // value, giving the illusion of 'clipping' the layers
         layers = chart.layers.append('svg')
-            .attr("height", chart.height).attr("width", chart.layersWidth)
+            .attr("height", chart.height).attr("width", chart.width)
             .classed('layers', true);
 
         // clip area used by boundary shadow
@@ -638,6 +638,13 @@ avb.chart = function () {
 
         // append boundary shadow
         appendShadow(layers);
+
+        // trick that solves IE10 bug which keeps chart
+        // for expanding past its initial width
+        setTimeout(function(){
+            slideLayers(chart.layersWidth);
+        }, 10);
+        
 
     };
 

@@ -50,8 +50,8 @@
     <div class="card {{class}} ">
       <div class="card-img"> </div>
       <div class="card-text">
-        <div class="cardvalue"></div>
-        <div class="carddesc"></div>
+        <div class="card-value"></div>
+        <div class="card-desc"></div>
       </div>
     </div>
   </script>

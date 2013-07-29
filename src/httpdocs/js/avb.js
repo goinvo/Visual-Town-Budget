@@ -37,25 +37,43 @@ avb.data = {}; // json data
 avb.currentNode = {}; // currently selected node
 
 // time variables
+
+// first datapoint
 avb.firstYear = null;
+// last datapoint
 avb.lastYear = null;
 avb.currentYear = new Date().getFullYear();
 avb.thisYear = avb.currentYear;
 
+// amount of yearly taxes spent by user
 avb.userContribution = null;
-
+// available data sections
 avb.sections = ['revenues', 'expenses', 'funds'];
 
 var timer = 0;
 
+// Protoypes
+
+/*
+* Converts number to css compatible value
+*/
 Number.prototype.px = function () {
     return this.toString() + "px";
 };
 
-/* URL history routines */
+// Browser history routines
+
+/*
+*   Pushes current status to browser history
+*
+*   @param {string} section - current section
+*   @param {int} year - current year
+*   @param {string} mode - treemap or table view
+*   @param {string} node - hash of current node
+*
+*/
 function pushUrl(section, year, mode, node) {
     if (ie()) return;
-
     var url = '/' + section + '/' + avb.thisYear + '/' + mode + '/' + node;
     window.history.pushState({
         section: section,
@@ -65,11 +83,16 @@ function pushUrl(section, year, mode, node) {
     }, "", url);
 }
 
+/*
+*   Restores previous history state
+*   
+*   @param {state obj} event - object containing previous state
+*/
 function popUrl(event) {
     if (ie()) return;
 
     if (event.state === null) {
-        //avb.navigation.open(root.hash);
+
     } else if (event.state.mode !== avb.mode) {
         switchMode(event.state.mode, false);
     } else {
@@ -77,43 +100,54 @@ function popUrl(event) {
     }
 }
 
-
 /* Initialization routines */
 
+
+/*
+*   Bootstraps visual budget application
+*   @param {obj} params - object listing year, mode, section and node
+*/
 function initialize(params) {
+    // get previosly set year
     var yearCookie = parseInt(jQuery.cookie('year'));
+    // use year listed in the params object
     if (params.year !== undefined && !isNaN(parseInt(params.year))) {
         avb.thisYear = params.year;
+    // use year previosly set (if any)
     } else if (!isNaN(yearCookie)) {
         avb.thisYear = yearCookie;
     } else {
-        log('NOPE');
     }
     avb.section = params.section;
 
-    // highlight current selection in menubar
+    // highlight current selection in navigation bar
     $('.section').each(function () {
         if ($(this).text().toLowerCase() === avb.section.toLowerCase()) {
             $(this).addClass('selected');
         }
     });
 
+    // get user contribution if set
     avb.userContribution = avb.home.getContribution();
     
     // set viewing mode
     setMode(params.mode);
 
+    // get datasets
     downloadData(avb.section);
 
 }
 
-function downloadData(opensection) {
+/*
+*   Download datasets
+*/
+function downloadData(section) {
 
     // loads all jsons in data
     var jxhr = [];
     $.each(avb.sections, function (i, url) {
-        jxhr.push(
-            $.getJSON('/data/' + url + '.json', function (json) {
+        jxhr.push
+(            $.getJSON('/data/' + url + '.json', function (json) {
                 avb.data[url] = json;
             })
         );
@@ -121,7 +155,7 @@ function downloadData(opensection) {
 
     // open section if needed
     $.when.apply($, jxhr).done(function () {
-        if (opensection !== undefined) onDataload(avb.data[opensection]);
+        if (section !== undefined) onDataload(avb.data[section]);
     });
 }
 
@@ -193,7 +227,7 @@ function changeYear(year) {
     avb.navigation.update(avb.root);
     avb.navigation.open(avb.root.hash);
 
-    jQuery.cookie('year', year, {
+    $.cookie('year', year, {
             expires: 14
     });
 
@@ -209,30 +243,30 @@ var log = function (d) {
     console.log(d);
 }
 
-    function hexToRgb(hex) {
-        var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-        return result ? {
-            r: parseInt(result[1], 16),
-            g: parseInt(result[2], 16),
-            b: parseInt(result[3], 16)
-        } : null;
-    }
+function hexToRgb(hex) {
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16)
+    } : null;
+}
 
-    function mixrgb(rgb1, rgb2, p) {
-        return {
-            r: Math.round(p * rgb1.r + (1 - p) * rgb2.r),
-            g: Math.round(p * rgb1.g + (1 - p) * rgb2.g),
-            b: Math.round(p * rgb1.b + (1 - p) * rgb2.b)
-        };
-    }
+function mixrgb(rgb1, rgb2, p) {
+    return {
+        r: Math.round(p * rgb1.r + (1 - p) * rgb2.r),
+        g: Math.round(p * rgb1.g + (1 - p) * rgb2.g),
+        b: Math.round(p * rgb1.b + (1 - p) * rgb2.b)
+    };
+}
 
-    function translate(obj, x, y) {
-        obj.attr("transform", "translate(" + (x).toString() + "," + (y).toString() + ")");
-    }
+function translate(obj, x, y) {
+    obj.attr("transform", "translate(" + (x).toString() + "," + (y).toString() + ")");
+}
 
-    function rotate(obj, degrees) {
-        obj.attr("transform", "rotate(" + degrees.toString() + " 100 100)");
-    }
+function rotate(obj, degrees) {
+    obj.attr("transform", "rotate(" + degrees.toString() + " 100 100)");
+}
 
 
 $.fn.center = function () {
@@ -265,17 +299,22 @@ $.fn.textfill = function (maxFontSize, targetWidth) {
 
 };
 
-function ie() {
-    var undef, v = 3,
-        div = document.createElement('div');
+function ie(){
+    var agent = navigator.userAgent;
+    var reg = /MSIE\s?(\d+)(?:\.(\d+))?/i;
+    var matches = agent.match(reg);
+    if (matches != null) {
+        return true
+    }
+    return false;
+}
 
-    while (
-        div.innerHTML = '<!--[if gt IE ' + (++v) + ']><i></i><![endif]-->',
-        div.getElementsByTagName('i')[0]
-    );
-
-    return v > 4 ? v : undef;
-};
+function stopPropagation(event){
+    if(event) {
+        event.cancelBubble = true;
+        if(event.stopPropagation) event.stopPropagation();
+    }
+}
 
 function capitalize(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);

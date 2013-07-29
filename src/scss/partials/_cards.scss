@@ -35,25 +35,25 @@
 			
 
 
-			.cardvalue{
+			.card-value{
 				//text-decoration: underline;
 				font-size:$text-big;
 				cursor: pointer;
 				display: block;
 			}
 
-			.cardvalue:hover{
+			.card-value:hover{
 				color:  steelblue;
 			}
 		}
 
-		.carddesc{
+		.card-desc{
 			font-size: $text-big;
 			line-height: $text-lineheight-big;
 			color: gray;
 		}
 
-		.cardvalue {
+		.card-value {
 			font-size: $text-title;
 			line-height:$text-lineheight-big;
 			font-family: 'Georgia';
