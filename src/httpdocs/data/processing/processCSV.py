@@ -169,7 +169,8 @@ def generateTree(csventries, filename):
 		exit(1)
 
 	# dump in json structure
-	outputFile.write(json.dumps(root.reprJSON(), indent=0))
+	jsontext = json.dumps(root.reprJSON(), indent=0).replace('\n', '').replace('\r', '')
+	outputFile.write(jsontext)
 
 	#success ! print output file
 	print(filename + '.json')
