@@ -206,7 +206,8 @@ def updateHome():
 		print('Error opening home.json for write.')
 		exit(1)
 
-	outputFile.write(json.dumps(root.reprJSON(), indent=4))
+	jsontext = json.dumps(root.reprJSON(), indent=0).replace('\n', '').replace('\r', '')
+	outputFile.write(jsontext)
 	outputFile.close()
 
 	# print output file name
