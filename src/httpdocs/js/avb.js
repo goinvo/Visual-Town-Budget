@@ -61,50 +61,11 @@ Number.prototype.px = function () {
     return this.toString() + "px";
 };
 
-// Browser history routines
-
-/*
-*   Pushes current status to browser history
-*
-*   @param {string} section - current section
-*   @param {int} year - current year
-*   @param {string} mode - treemap or table view
-*   @param {string} node - hash of current node
-*
-*/
-function pushUrl(section, year, mode, node) {
-    if (ie()) return;
-    var url = '/' + section + '/' + avb.thisYear + '/' + mode + '/' + node;
-    window.history.pushState({
-        section: section,
-        year: avb.thisYear,
-        mode: mode,
-        nodeId: node
-    }, "", url);
-}
-
-/*
-*   Restores previous history state
-*   
-*   @param {state obj} event - object containing previous state
-*/
-function popUrl(event) {
-    if (ie()) return;
-
-    if (event.state === null) {
-
-    } else if (event.state.mode !== avb.mode) {
-        switchMode(event.state.mode, false);
-    } else {
-        avb.navigation.open(event.state.nodeId, false);
-    }
-}
-
-/* Initialization routines */
 
 
 /*
 *   Bootstraps visual budget application
+*
 *   @param {obj} params - object listing year, mode, section and node
 */
 function initialize(params) {
@@ -134,18 +95,26 @@ function initialize(params) {
     // set viewing mode
     setMode(params.mode);
 
-    // get datasets
-        // loads all jsons in data
+    loadData();
+}
+
+function loadData() {
+        // get datasets
+    // loads all jsons in data
     $.each(avb.sections, function (i, url) {
         avb.data[url] = JSON.parse($('#data-' + url).html());
     });
 
-    jsondata = avb.data[avb.section];
-    avb.root = jsondata;
+    // initialize root level
+    avb.root = avb.data[avb.section];
 
+    // inialize year variables based on data
+
+    // determine oldest year
     avb.firstYear = d3.min(avb.root.values, function (d) {
         return d.year
     });
+    // determine newest year
     avb.lastYear = d3.max(avb.root.values, function (d) {
         return d.year
     });
@@ -154,44 +123,78 @@ function initialize(params) {
 
     avb.currentNode.data = undefined;
 
+    // initialize cards
     avb.cards.initialize();
-    avb.navigation.initialize(jsondata);
+    // navigation (treemap or table)
+    avb.navigation.initialize(avb.root);
     avb.navigation.open(avb.root.hash, true);
 
-    // initializes search
+    // connect search actions
     $('#searchbox').keyup(avb.navbar.searchChange);
 
     console.log("UI Loaded.");
+}
 
+// Browser history routines
+
+/*
+*   Pushes current status to browser history
+*
+*   @param {string} section - current section
+*   @param {int} year - current year
+*   @param {string} mode - treemap or table view
+*   @param {string} node - hash of current node
+*
+*/
+function pushUrl(section, year, mode, node) {
+    if (ie()) return;
+    // format URL
+    var url = '/' + section + '/' + avb.thisYear + '/' + mode + '/' + node;
+    // create history object
+    window.history.pushState({
+        section: section,
+        year: avb.thisYear,
+        mode: mode,
+        nodeId: node
+    }, "", url);
 }
 
 /*
-*   Download datasets
+*   Restores previous history state
+*   
+*   @param {state obj} event - object containing previous state
 */
-function downloadData(section) {
+function popUrl(event) {
+    if (ie()) return;
 
-
+    if (event.state === null) {
+    } else if (event.state.mode !== avb.mode) {
+        switchMode(event.state.mode, false);
+    } else {
+        avb.navigation.open(event.state.nodeId, false);
+    }
 }
 
-
-function updateSelection(data, year, color) {
-    avb.currentNode.data = data;
-    avb.currentNode.year = year;
-    avb.chart.update(data, color);
-    avb.cards.update(data);
-}
+/* Initialization routines */
 
 
-function setMode(modeId) {
+/*
+*   Sets visualization mode
+*
+*   @param {string} mode - 'l' for list, 't' for treemap
+*/
+function setMode(mode) {
     var container = $('#avb-wrap'),
         table = $('#table-template'),
         treemap = $('#treemap-template');
 
-    // initialize code
-    if (modeId && modeId === 'l') {
+    //  table/list mode
+    if (mode && mode === 'l') {
+        // initialize table
         avb.navigation = avb.table;
         container.html(Mustache.render(table.html()));
         avb.mode = 'l';
+    // treemap mode
     } else {
         avb.navigation = avb.treemap;
         container.html(Mustache.render(treemap.html()));
@@ -199,38 +202,61 @@ function setMode(modeId) {
     }
 }
 
+/*
+* Switches between visualization models
+*
+* @param {string} mode - visualization mode ('l' for list, 't' for treemap)
+* @param {bool} pushurl - whether to push change in browser history
+*/
 function switchMode(mode, pushurl) {
     if (pushurl === undefined) pushurl = true;
     setMode(mode);
     if (pushurl) pushUrl(avb.section, avb.thisYear, mode, avb.root.hash);
-    onDataload(avb.data[avb.section]);
+    loadData();
 }
 
+/*
+* Switches visualizations to selected year
+*
+* @param {int} year - selected year
+*
+*/
 function changeYear(year) {
+    // don't switch if year is already selected
     if (year === avb.thisYear) return;
+    // go back to root
     avb.currentNode = avb.root;
+    // push change to browser history
     pushUrl(avb.section, year, avb.mode, avb.root.hash);
+    // set new year values
     avb.thisYear = year;
     yearIndex = avb.thisYear - avb.firstYear;
+    // update navigation (treemap or table)
     avb.navigation.update(avb.root);
     avb.navigation.open(avb.root.hash);
-
+    // remember year over page changes
     $.cookie('year', year, {
             expires: 14
     });
-
     // update homepage graph if needed
     if ($('#avb-home').is(":visible")) {
         avb.home.showGraph(100);
     }
 }
 
-/* Helper functions */
+/* Utilities */
 
+/* As simple as that */
 var log = function (d) {
     console.log(d);
 }
 
+/*
+* Converts hex encoded color value to rgb
+*
+* @param {string} hex - hex color value
+* @return {object} - rgb color object
+*/
 function hexToRgb(hex) {
     var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
     return result ? {
@@ -240,6 +266,14 @@ function hexToRgb(hex) {
     } : null;
 }
 
+/*
+*   Mixes two rgb colors
+*
+*   @param {object} rgb1 - rgb color object
+*   @param {object} rgb2 - rgb color object
+*   @param {float} p - weight (0 to 1)
+*
+*/
 function mixrgb(rgb1, rgb2, p) {
     return {
         r: Math.round(p * rgb1.r + (1 - p) * rgb2.r),
@@ -248,28 +282,27 @@ function mixrgb(rgb1, rgb2, p) {
     };
 }
 
+/*
+*   Applies translate to svg object
+*/
 function translate(obj, x, y) {
     obj.attr("transform", "translate(" + (x).toString() + "," + (y).toString() + ")");
 }
 
-function rotate(obj, degrees) {
-    obj.attr("transform", "rotate(" + degrees.toString() + " 100 100)");
-}
-
-
+/*
+*  Centers object vertically
+*/ 
 $.fn.center = function () {
     this.css("margin-top", Math.max(0, $(this).parent().height() - $(this).outerHeight()) / 2);
     return this;
 }
 
-$.fn.availableHeight = function () {
-    var available = $(this).height();
-    $(this).children().each(function () {
-        available -= $(this).outerHeight();
-    })
-    return Math.max(0, availableHeight);
-}
-
+/*
+*   Resizes text to match target width
+*
+*   @param {int} maxFontSize - maxium font size
+*   @param {int} targetWidth - desired width
+*/
 $.fn.textfill = function (maxFontSize, targetWidth) {
     var fontSize = 10;
     $(this).css({
@@ -287,6 +320,11 @@ $.fn.textfill = function (maxFontSize, targetWidth) {
 
 };
 
+/*
+*   Detects IE browsers
+*
+*   @return - true when browser is IE
+*/
 function ie(){
     var agent = navigator.userAgent;
     var reg = /MSIE\s?(\d+)(?:\.(\d+))?/i;
@@ -297,30 +335,26 @@ function ie(){
     return false;
 }
 
+/*
+*   Stops event propagation (on all browsers)
+*/
 function stopPropagation(event){
-    log(event)
     if(event) {
         event.cancelBubble = true;
         if(event.stopPropagation) event.stopPropagation();
     }
 }
 
+/*
+*   Capitalizes a string
+*/
 function capitalize(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
+
 // Back button action
 window.onpopstate = popUrl;
 
-// Feedback button
-var fby = fby || [];
-(function () {
-    var f = document.createElement('script');
-    f.type = 'text/javascript';
-    f.async = true;
-    f.src = '//cdn.feedbackify.com/f.js';
-    var s = document.getElementsByTagName('script')[0];
-    s.parentNode.insertBefore(f, s);
-})();
 
 var indexOf = function(needle) {
     if(typeof Array.prototype.indexOf === 'function') {
@@ -344,3 +378,16 @@ var indexOf = function(needle) {
 var inArray = function(myarray, needle){
     return indexOf.call(myarray, needle) > -1;
 };
+
+/*
+* Feedbackify function
+*/
+var fby = fby || [];
+(function () {
+    var f = document.createElement('script');
+    f.type = 'text/javascript';
+    f.async = true;
+    f.src = '//cdn.feedbackify.com/f.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(f, s);
+})();

@@ -471,8 +471,13 @@ avb.treemap = function () {
         // remove old labels
         nav.selectAll('text').remove();
 
-        // calculate new treemap
-        updateSelection(d, yearIndex, d.color);
+        // remember currently selected section and year
+        avb.currentNode.data = d;
+        avb.currentNode.year = yearIndex;
+        
+        // update chart and cards
+        avb.chart.update(d, d.color);
+        avb.cards.update(d);
 
         // prevent further events from happening while transitioning
         nav.transitioning = true;

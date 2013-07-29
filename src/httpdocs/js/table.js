@@ -29,18 +29,25 @@ License:
 
  avb.table = function(){
 
-    var indent = 25;
-    var tableStats = [];
+    var indent = 25;  // indentation width
+    var tableStats = []; // columns to be shown
+    // color scales
     var growthScale = d3.scale.linear().clamp(true).domain([-10,10]).range(["rgb(29,118,162)",'rgb(167, 103, 108)']);
     var amountScale = d3.scale.linear().clamp(true).range(["#aaa", "#333"]);
     var impactScale = d3.scale.linear().clamp(true).domain([0,100]).range(["#aaa", "#333"]);
 
+  /*
+  * Initializes table
+  *
+  * @parma {obj} data - dataset
+  */
   var initialize = function(data){
-
     var table = $('#table-container');
-    // clean old rows
+
+    // remove old rows
     $('.tablerow').remove();
 
+    // data comes from search result
     if (data instanceof Array) {
       tableStats = tables.search;
       if(data.length === 0) {
@@ -51,6 +58,7 @@ License:
       $.each(data, function(){
         renderNode(this, 0, table);
       });
+    // data comes from section dataset
     } else {
       tableStats = tables[avb.section];
       addHeader(table);
