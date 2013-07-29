@@ -1,3 +1,31 @@
+/*
+File: statistics.js
+
+Description:
+    Statistics and helper functions for visual budget application
+
+Requires:
+    d3.js
+
+Authors:
+    Ivan DiLernia <ivan@goinvo.com>
+    Roger Zhu <roger@goinvo.com>
+
+License:
+    Copyright 2013, Involution Studios <http://goinvo.com>
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+*/
 
 stats = {
     amount: {
@@ -7,9 +35,9 @@ stats = {
             return formatcurrency(d.values[yearIndex].val);
         },
         side: function () {
-            return " in " + thisYear.toString() + "."
+            return " in " + (avb.firstYear + yearIndex).toString() + "."
         },
-        cellClass: "value sum numeric textleft",
+        cellClass: "value sum ",
         cellFunction: function (d, cell) {
             avb.table.renderAmount(d, cell)
         }
@@ -18,11 +46,25 @@ stats = {
         title: "Impact",
         class: "span6 ",
         value: function (d) {
-            return Math.max(0.01, (Math.round(d.values[yearIndex].val * 100 * 100 / root.values[yearIndex].val) / 100)).toString() + "%";
+            return Math.max(0.01, (Math.round(d.values[yearIndex].val * 100 * 100 / avb.root.values[yearIndex].val) / 100)).toString() + "%";
         },
         side: function () {
-            return " of total " + section + "."
+            return " of total " + avb.section + "."
         },
+        cellClass: "value sum",
+        cellFunction: function (d, cell) {
+            avb.table.renderImpact(d, cell)
+        }
+    },
+    individual: {
+        title: "Individual",
+        class: "span6 individual",
+        value: function (d) {
+            var percentage = d.values[yearIndex].val / avb.root.values[yearIndex].val;
+
+            return '$' + d3.round(avb.userContribution * percentage,2);
+        },
+        side: 'your yearly contribution.',
         cellClass: "value sum",
         cellFunction: function (d, cell) {
             avb.table.renderImpact(d, cell)
@@ -34,7 +76,7 @@ stats = {
         value: function (d) {
             return growth(d);
         },
-        side: " compared to last year.",
+        side: " compared to previous year.",
         cellFunction: function (d, cell) {
             avb.table.renderGrowth(d, cell)
         },
@@ -42,12 +84,12 @@ stats = {
     },
     source: {
         title: "Source",
-        class: "span12 card-source ",
-        value: function () {
-            return "Town of Arlington";
+        class: "span6 card-source ",
+        value: function (d) {
+            return (d.src === '') ? 'Town of Arlington' : d.src;
         },
-        link: function () {
-            return "http://www.town.arlington.ma.us/";
+        link: function (d) {
+            return (d.url === '') ? "http://www.town.arlington.ma.us/" : d.url;
         },
         side: "is the data source for this entry."
     },
@@ -55,7 +97,7 @@ stats = {
         title: "Average",
         class: "span6 ",
         value: function (d) {
-            return formatcurrency(d3.mean(d.values, get_values));
+            return formatcurrency(d3.mean(d.values, function(d) {return d.val}));
         },
         side: "on average."
     },
@@ -80,19 +122,34 @@ stats = {
         cellFunction: function (d, cell) {
             avb.table.renderSparkline(d, cell)
         }
+    },
+    section : {
+        title: "Type",
+        cellClass: "value",
+        value: function (d){
+            return d.section;
+        }
+    },
+    parent : {
+        title : "From",
+        cellClass: "value",
+        value: function (d){
+            return (typeof(d.parent) === 'string') ? d.parent : '';
+        }
     }
 },
 
 decks = {
     revenues: [stats.amount, stats.growth, stats.impact, stats.mean, stats.source],
-    expenses: [stats.amount, stats.growth, stats.impact, stats.mean, stats.source],
+    expenses: [stats.amount,  stats.growth, stats.impact, stats.mean, stats.source],
     funds: [stats.amount, stats.growth, stats.impact, stats.mean, stats.source]
 },
 
 tables = {
     revenues: [stats.name, stats.growth, stats.sparkline, stats.impact, stats.amount],
     expenses: [stats.name, stats.growth, stats.sparkline, stats.impact, stats.amount],
-    funds: [stats.name, stats.growth, stats.sparkline, stats.impact, stats.amount]
+    funds: [stats.name, stats.growth, stats.sparkline, stats.impact, stats.amount],
+    search: [stats.name, stats.growth, stats.sparkline, stats.amount, stats.parent,  stats.section]
 }
 
 function formatcurrency(value) {

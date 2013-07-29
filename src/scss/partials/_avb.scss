@@ -27,10 +27,15 @@
 * Entry title and description
 */
 .title-head {
-    font-size: 3em;
+    font-size: $text-big;
     line-height: normal;
     white-space: nowrap;
+    font-size: $text-title;
+    div{
+      line-height: 70px;
+    }
 }
+
 
 /*
 * Cards and legend
@@ -56,9 +61,45 @@
 
 .dataDownload{
     font-size: $text-big;
-    line-height: 2em;
+    line-height: $text-lineheight-big;
 
     .icon-download{
       vertical-align: baseline;
     }
+}
+
+.introjs-tooltip{
+  font-size: $text-big;
+}
+
+#avb-opendata{
+  padding: 10px;
+}
+
+/*
+* Glossary section css
+*/
+#avb-glossary{
+
+  padding: 10px;
+
+  .definition{
+    margin-bottom: 20px;
+
+
+    .title,
+    .description{
+      font-size: $text-big;
+    }
+
+    .title{
+      font-weight: bold;
+      color: #d63366;
+    }
+
+    .description{
+      margin-left: 10px;
+    }
+
+  }
 }

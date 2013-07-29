@@ -20,15 +20,24 @@
   display: none;
 }
 
+p{
+  vertical-align: top;
+}
+
+#tax-input{
+  width:100px;
+  //font-family: 'Helvetica Neue LT Std', sans-serif;
+}
+
+
 #home-map{
   display: inline-block;
-  vertical-align: top;
-  width: 38%;
+  vertical-align: bottom;
   height: 200px;
 
   #home-map-svg{
     margin: 0 auto;
-    width: 300px;
+    width: 29%;
     height: 100%;
   }
 
@@ -52,7 +61,6 @@
         position:absolute; 
         bottom:10px;
         color: white;
-        font-size: 1.1em;
         right:0; 
         left:0;
       }
@@ -65,31 +73,25 @@
 
 }
 
-// twitter bootstrap changes
-// .hero-unit h1 {
-//   margin-bottom: 0;
-//   font-size: 60px;
-//   line-height: 1;
-//   letter-spacing: -1px;
-//   color: inherit;
-// }
-
+.home-column{
+  vertical-align: top;
+}
 
 #welcome{
   padding: 0px;
-  margin-top: 70px;
-  padding-top: 30px;
+  margin-top: 90px;
+  line-height: $text-lineheight-big;
   display: inline-block;
 
   #welcome-hero{
-    width: 60%; //----> DEFAULT
+    width: 70%; //----> DEFAULT
     // width: 75%;
     display: inline-block;
+    vertical-align: top;
   }
 
   h1{
-    font-size: 50px;
-    color: #666;
+    font-size: $text-title;
     margin-bottom: 10px;
   }
 

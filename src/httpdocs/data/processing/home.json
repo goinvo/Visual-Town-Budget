@@ -1,12 +1,12 @@
 {
     "key": "root", 
     "src": "", 
-    "hash": "b75aba2d", 
+    "hash": "63a9f0ea", 
     "sub": [
         {
             "key": "REVENUES TOTAL", 
             "src": "", 
-            "hash": "0dcabad4", 
+            "hash": "07d40778", 
             "sub": [], 
             "descr": "", 
             "url": "", 
@@ -60,7 +60,7 @@
         {
             "key": "APPROPRIATIONS TOTAL", 
             "src": "", 
-            "hash": "6c7dc270", 
+            "hash": "026f893f", 
             "sub": [], 
             "descr": "", 
             "url": "", 
@@ -114,7 +114,7 @@
         {
             "key": "FUNDS TOTAL", 
             "src": "", 
-            "hash": "ba7bc6a4", 
+            "hash": "032862cb", 
             "sub": [], 
             "descr": "", 
             "url": "", 

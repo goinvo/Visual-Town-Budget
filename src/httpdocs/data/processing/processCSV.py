@@ -21,7 +21,6 @@ class entry:
 	def hashEntry(self):
 		m = hashlib.md5()
 		m.update(self.key)
-		m.update(str(self.values))
 		m.update(self.descr)
 		return m.hexdigest()
 

@@ -1,12 +1,12 @@
 {
 "key": "Funds", 
 "src": "", 
-"hash": "1788107a", 
+"hash": "eb060738", 
 "sub": [
 {
 "key": "Municipal Building Ins. Trust Fund", 
 "src": "", 
-"hash": "22644c85", 
+"hash": "7bc6d64b", 
 "sub": [], 
 "descr": "In accordance with M.G.L. Ch. 40 S. 13, the Town established this fund for the purposes of offsetting the costs associated with significant property loss.", 
 "url": "", 
@@ -60,7 +60,7 @@
 {
 "key": "Tip Fee Stabilization Fund", 
 "src": "", 
-"hash": "54e6b09e", 
+"hash": "68a317f0", 
 "sub": [], 
 "descr": "The Town of Arlington participated in a regional solid waste consortium, and upon leaving the consortium in September 2005, the Town was entitled to revenue derived from the regional agreement.", 
 "url": "", 
@@ -114,7 +114,7 @@
 {
 "key": "Override Stabilization Fund", 
 "src": "", 
-"hash": "26cb4694", 
+"hash": "cc5b3ad1", 
 "sub": [], 
 "descr": "This Fund was created as a result of the 2005 Proposition 2 1/2 override. The Town makes annual appropriations to the fund until the time in which it is necessary to make withdrawals for the purposes of balancing the general fund budget.", 
 "url": "", 
@@ -168,7 +168,7 @@
 {
 "key": "Stabilization Fund", 
 "src": "", 
-"hash": "364fc5b5", 
+"hash": "22772b4f", 
 "sub": [], 
 "descr": "In accordance with M.G.L. Ch. 40 S. 5B, the Town may appropriate in any year an amount not exceeding, in the aggregate, 10% of the amount raised in the preceding fiscal year's tax levy.", 
 "url": "", 
@@ -222,7 +222,7 @@
 {
 "key": "Free Cash", 
 "src": "", 
-"hash": "e621133a", 
+"hash": "2f4932b7", 
 "sub": [], 
 "descr": "A revenue source that results from the calculation, as of July 1, of a community's remaining, unrestricted funds from operations of the previous fiscal year, based on the balance sheet as of June 30.", 
 "url": "", 
@@ -274,7 +274,7 @@
 ]
 }
 ], 
-"descr": "", 
+"descr": "Test description", 
 "url": "", 
 "values": [
 {

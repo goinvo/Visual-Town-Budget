@@ -1,156 +1,262 @@
-var colors = ["#1f77b4", "#aec7e8", "#ff7f0e", "#ffbb78", "#2ca02c", "#98df8a", "#d62728", "#ff9896", "#9467bd", "#c5b0d5", "#8c564b", "#c49c94", "#e377c2", "#f7b6d2", "#7f7f7f", "#c7c7c7", "#bcbd22", "#dbdb8d", "#17becf", "#9edae5"];
+/*
+File: avb.js
 
-var firstYear, lastYear,
-    currentYear = new Date().getFullYear(), // only used for projections
-    thisYear = currentYear;
+Description:
+    Visual budget application main routines
 
-var section, mode, data, root;
-var currentSelection = new Object();
+Requires:
+    d3.js
 
+Authors:
+    Ivan DiLernia <ivan@goinvo.com>
+    Roger Zhu <roger@goinvo.com>
 
+License:
+    Copyright 2013, Involution Studios <http://goinvo.com>
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+*/
+var avb = avb || {};
+
+// navigation variables
+
+avb.root = null; // reference to root node of current section
+avb.section = null; // current selected section
+avb.mode = null; // current mode (map, table etc.)
+avb.data = {}; // json data
+avb.currentNode = {}; // currently selected node
+
+// time variables
+
+// first datapoint
+avb.firstYear = null;
+// last datapoint
+avb.lastYear = null;
+avb.currentYear = new Date().getFullYear();
+avb.thisYear = avb.currentYear;
+
+// amount of yearly taxes spent by user
+avb.userContribution = null;
+// available data sections
+avb.sections = ['revenues', 'expenses', 'funds'];
+
+var timer = 0;
+
+// Protoypes
+
+/*
+* Converts number to css compatible value
+*/
 Number.prototype.px = function () {
     return this.toString() + "px";
 };
 
+
+
+/*
+*   Bootstraps visual budget application
+*
+*   @param {obj} params - object listing year, mode, section and node
+*/
+function initialize(params) {
+    // get previosly set year
+    var yearCookie = parseInt(jQuery.cookie('year'));
+    // use year listed in the params object
+    if (params.year !== undefined && !isNaN(parseInt(params.year))) {
+        avb.thisYear = params.year;
+    // use year previosly set (if any)
+    } else if (!isNaN(yearCookie)) {
+        avb.thisYear = yearCookie;
+    } else {
+
+    }
+    avb.section = params.section;
+
+    // highlight current selection in navigation bar
+    $('.section').each(function () {
+        if ($(this).text().toLowerCase() === avb.section.toLowerCase()) {
+            $(this).addClass('selected');
+        }
+    });
+
+    // get user contribution if set
+    avb.userContribution = avb.home.getContribution();
+    
+    // set viewing mode
+    setMode(params.mode);
+
+    loadData();
+}
+
+function loadData() {
+        // get datasets
+    // loads all jsons in data
+    $.each(avb.sections, function (i, url) {
+        avb.data[url] = JSON.parse($('#data-' + url).html());
+    });
+
+    // initialize root level
+    avb.root = avb.data[avb.section];
+
+    // inialize year variables based on data
+
+    // determine oldest year
+    avb.firstYear = d3.min(avb.root.values, function (d) {
+        return d.year
+    });
+    // determine newest year
+    avb.lastYear = d3.max(avb.root.values, function (d) {
+        return d.year
+    });
+    yearIndex = avb.thisYear - avb.firstYear;
+    avb.navbar.initialize(avb.thisYear);
+
+    avb.currentNode.data = undefined;
+
+    // initialize cards
+    avb.cards.initialize();
+    // navigation (treemap or table)
+    avb.navigation.initialize(avb.root);
+    avb.navigation.open(avb.root.hash, true);
+
+    // connect search actions
+    $('#searchbox').keyup(avb.navbar.searchChange);
+
+    console.log("UI Loaded.");
+}
+
+// Browser history routines
+
+/*
+*   Pushes current status to browser history
+*
+*   @param {string} section - current section
+*   @param {int} year - current year
+*   @param {string} mode - treemap or table view
+*   @param {string} node - hash of current node
+*
+*/
 function pushUrl(section, year, mode, node) {
     if (ie()) return;
-
-    var url = '/' + section + '/' + thisYear + '/' + mode + '/' + node;
+    // format URL
+    var url = '/' + section + '/' + avb.thisYear + '/' + mode + '/' + node;
+    // create history object
     window.history.pushState({
         section: section,
-        year: thisYear,
+        year: avb.thisYear,
         mode: mode,
         nodeId: node
     }, "", url);
 }
 
+/*
+*   Restores previous history state
+*   
+*   @param {state obj} event - object containing previous state
+*/
 function popUrl(event) {
     if (ie()) return;
 
     if (event.state === null) {
-        //avb.navigation.open(root.hash);
-    } else if (event.state.mode !== mode) {
+    } else if (event.state.mode !== avb.mode) {
         switchMode(event.state.mode, false);
     } else {
         avb.navigation.open(event.state.nodeId, false);
     }
 }
 
-function onjsonload(jsondata) {
-    root = jsondata;
-
-    //year bounds initialization
-    firstYear = d3.min(root.values, function(d) { return d.year});
-    lastYear = d3.max(root.values, function(d) { return d.year});
-    yearIndex = thisYear - firstYear;
-    avb.navbar.initialize(thisYear);
-
-    currentSelection.data = undefined;
-
-    avb.cards.initialize();
-    avb.cards.draw();
-    avb.navigation.initialize(jsondata);
-    avb.navigation.open(root.hash, true);
-
-    console.log("UI Loaded.");
-
-}
-
-function updateSelection(data, year, color) {
-    currentSelection.data = data;
-    currentSelection.year = year;
-    avb.chart.drawline(data, color);
-    avb.cards.update(data);
-}
-
-var log = function (d) {
-    console.log(d);
-}
+/* Initialization routines */
 
 
-var get_values = function (d) {
-    return d.val;
-}
-
-function downloadData(){
-}
-
-function initialize(params) {
-    if (params.year !== undefined && !isNaN(parseInt(params.year)) &&
-        params.year < lastYear && params.year > firstYear) {
-        thisYear = params.year;
-    }
-
-    
-    section = params.section;
-
-    // highlight current selection in menubar
-    $('.section').each(function () {
-        if ($(this).text().toLowerCase() === section) {
-            $(this).addClass('selected');
-        }
-    });
-
-    // set viewing mode
-    setMode(params.mode);
-
-    d3.json("/data/" + section + ".json", onjsonload);
-    // dataUrls = ['revenues', 'expenses', 'funds'];
-
-    // var jxhr = [];
-    // var result = 0;
-    // $.each(urls, function (i, url) {
-    //     jxhr.push(
-    //         $.getJSON(url, function (json) {
-    //             result += json.field1;
-    //         })
-    //     );
-    // });
-
-    
-
-}
-
-function setMode(modeId) {
+/*
+*   Sets visualization mode
+*
+*   @param {string} mode - 'l' for list, 't' for treemap
+*/
+function setMode(mode) {
     var container = $('#avb-wrap'),
         table = $('#table-template'),
         treemap = $('#treemap-template');
 
-    // initialize code
-    if (modeId && modeId === 'l') {
+    //  table/list mode
+    if (mode && mode === 'l') {
+        // initialize table
         avb.navigation = avb.table;
         container.html(Mustache.render(table.html()));
-        mode = 'l';
+        avb.mode = 'l';
+    // treemap mode
     } else {
         avb.navigation = avb.treemap;
         container.html(Mustache.render(treemap.html()));
-        mode = 't';
+        avb.mode = 't';
     }
 }
 
+/*
+* Switches between visualization models
+*
+* @param {string} mode - visualization mode ('l' for list, 't' for treemap)
+* @param {bool} pushurl - whether to push change in browser history
+*/
 function switchMode(mode, pushurl) {
     if (pushurl === undefined) pushurl = true;
     setMode(mode);
-    if (pushurl) pushUrl(section, thisYear, mode, root.hash);
-    d3.json("/data/" + section + ".json", onjsonload);
+    if (pushurl) pushUrl(avb.section, avb.thisYear, mode, avb.root.hash);
+    loadData();
 }
 
-function changeyear(year) {
-    if (year === thisYear) return;
-    currentSelection = root;
-    pushUrl(section, year, mode, root.hash);
-    thisYear = year;
-    yearIndex = thisYear - firstYear;
-    avb.navigation.update(root);
-    avb.navigation.open(root.hash);
-
+/*
+* Switches visualizations to selected year
+*
+* @param {int} year - selected year
+*
+*/
+function changeYear(year) {
+    // don't switch if year is already selected
+    if (year === avb.thisYear) return;
+    // go back to root
+    avb.currentNode = avb.root;
+    // push change to browser history
+    pushUrl(avb.section, year, avb.mode, avb.root.hash);
+    // set new year values
+    avb.thisYear = year;
+    yearIndex = avb.thisYear - avb.firstYear;
+    // update navigation (treemap or table)
+    avb.navigation.update(avb.root);
+    avb.navigation.open(avb.root.hash);
+    // remember year over page changes
+    $.cookie('year', year, {
+            expires: 14
+    });
     // update homepage graph if needed
     if ($('#avb-home').is(":visible")) {
         avb.home.showGraph(100);
     }
-
 }
 
+/* Utilities */
+
+/* As simple as that */
+var log = function (d) {
+    console.log(d);
+}
+
+/*
+* Converts hex encoded color value to rgb
+*
+* @param {string} hex - hex color value
+* @return {object} - rgb color object
+*/
 function hexToRgb(hex) {
     var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
     return result ? {
@@ -160,6 +266,14 @@ function hexToRgb(hex) {
     } : null;
 }
 
+/*
+*   Mixes two rgb colors
+*
+*   @param {object} rgb1 - rgb color object
+*   @param {object} rgb2 - rgb color object
+*   @param {float} p - weight (0 to 1)
+*
+*/
 function mixrgb(rgb1, rgb2, p) {
     return {
         r: Math.round(p * rgb1.r + (1 - p) * rgb2.r),
@@ -168,28 +282,27 @@ function mixrgb(rgb1, rgb2, p) {
     };
 }
 
+/*
+*   Applies translate to svg object
+*/
 function translate(obj, x, y) {
     obj.attr("transform", "translate(" + (x).toString() + "," + (y).toString() + ")");
 }
 
-function rotate(obj, degrees) {
-    obj.attr("transform", "rotate(" + degrees.toString() + " 100 100)");
-}
-
-
+/*
+*  Centers object vertically
+*/ 
 $.fn.center = function () {
     this.css("margin-top", Math.max(0, $(this).parent().height() - $(this).outerHeight()) / 2);
     return this;
 }
 
-$.fn.availableHeight = function () {
-    var available = $(this).height();
-    $(this).children().each(function () {
-        available -= $(this).outerHeight();
-    })
-    return Math.max(0, availableHeight);
-}
-
+/*
+*   Resizes text to match target width
+*
+*   @param {int} maxFontSize - maxium font size
+*   @param {int} targetWidth - desired width
+*/
 $.fn.textfill = function (maxFontSize, targetWidth) {
     var fontSize = 10;
     $(this).css({
@@ -207,21 +320,68 @@ $.fn.textfill = function (maxFontSize, targetWidth) {
 
 };
 
-function ie() {
-    var undef, v = 3,
-        div = document.createElement('div');
+/*
+*   Detects IE browsers
+*
+*   @return - true when browser is IE
+*/
+function ie(){
+    var agent = navigator.userAgent;
+    var reg = /MSIE\s?(\d+)(?:\.(\d+))?/i;
+    var matches = agent.match(reg);
+    if (matches != null) {
+        return true
+    }
+    return false;
+}
 
-    while (
-        div.innerHTML = '<!--[if gt IE ' + (++v) + ']><i></i><![endif]-->',
-        div.getElementsByTagName('i')[0]
-    );
+/*
+*   Stops event propagation (on all browsers)
+*/
+function stopPropagation(event){
+    if(event) {
+        event.cancelBubble = true;
+        if(event.stopPropagation) event.stopPropagation();
+    }
+}
 
-    return v > 4 ? v : undef;
-};
- // Back button action
+/*
+*   Capitalizes a string
+*/
+function capitalize(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+// Back button action
 window.onpopstate = popUrl;
 
- // Feedback button
+
+var indexOf = function(needle) {
+    if(typeof Array.prototype.indexOf === 'function') {
+        indexOf = Array.prototype.indexOf;
+    } else {
+        indexOf = function(needle) {
+            var i = -1, index;
+
+            for(i = 0; i < this.length; i++) {
+                if(this[i] === needle) {
+                    index = i;
+                    break;
+                }
+            }
+            return index;
+        };
+    }
+    return indexOf.call(this, needle);
+};
+
+var inArray = function(myarray, needle){
+    return indexOf.call(myarray, needle) > -1;
+};
+
+/*
+* Feedbackify function
+*/
 var fby = fby || [];
 (function () {
     var f = document.createElement('script');

@@ -26,9 +26,6 @@
     }
   }
 
-  .browser{
-  }
-
   .area {
     opacity: 0.2;
 
@@ -42,20 +39,17 @@
     fill: #f9f9f9;
   }
 
-  .browser text {
-    text-anchor: end;
-  }
+
   .axis {
     path, line {
-      stroke: grey;
+      stroke: rgb(122,122,122);
       stroke-width: 1;
       stroke-linejoin: round;
       stroke-linecap: round;
-      shape-rendering: crispEdges;
     }
     text {
-      font-family: 'Open Sans';
-      font-size: $text-small;
+      font-family: 'Strait', sans-serif;
+      font-size: 12px;
     }
 
     .odd {
@@ -86,7 +80,7 @@
   }
   .multigrid {
     .tick {
-      stroke: lightgrey;
+      stroke: lightgray;
       opacity: 0;
     }
     path {

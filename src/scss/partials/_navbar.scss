@@ -4,11 +4,19 @@
   font-size: $text-big;
   padding: 15px 5px 15px 5px;
   z-index: 1050;
-  margin-top: 2px;
+  padding-top: 2px;
+  border-top: 2px solid rgb(214,51,102);
+
+  .container{
+    margin-top: 5px;
+  }
 
   &.purple-border{
     border-top: 2px solid rgb(214,51,102);
-    margin-top: 0px;
+  }
+
+  .navbar-margin{
+      margin-left: 90px;
   }
 
   .nav{
@@ -25,6 +33,14 @@
     cursor: pointer;
     position: relative;
     z-index: 1050;
+    color: $black;
+  }
+
+  .search {
+    border-radius: 5px;
+    border: 1px solid rgb(194,194,194);
+    font-family: 'Strait', sans-serif;
+    vertical-align: top;
   }
 
   .menubutton {
@@ -57,6 +73,7 @@
 }
 
 #yeardrop-container{
+  vertical-align: top;
 
   &.open{
 

@@ -5,12 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta charset="utf-8">
   <title>Arlington Visual Budget</title>
+  <meta name="description" content="An interactive tool to learn more about the town of Arlington, Massachusetts." />
 
-  <link href='http://fonts.googleapis.com/css?family=Open+Sans:700,300' rel='stylesheet' type='text/css'>  
+  <link href='http://fonts.googleapis.com/css?family=Strait' rel='stylesheet' type='text/css'>
   <link href="/css/lib/bootstrap/bootstrap.css" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="/css/lib/intro/introjs.min.css">
   <link rel="stylesheet" type="text/css" href="/css/global.css">
   <link rel="stylesheet" media="print" type="text/css" href="/css/print.css">
+
+
   <script type="text/javascript" src="/js/lib/mustache/mustache.js"></script>
   <script type="text/javascript" src ="/js/lib/d3/d3.v3.min.js"></script>
   <script type="text/javascript" src ="/js/lib/jquery/jquery-1.9.1.min.js"></script>
@@ -27,6 +30,12 @@
   <script type="text/javascript" src ="/js/statistics.js"></script>
   <script type="text/javascript" src ="/js/home.js"></script>
 
+  
+<!--
+  <script type="text/javascript" src ="/js/lib/dependencies.js"></script>
+  <script type="text/javascript" src ="/js/components.js"></script>
+  <script type="text/javascript" src ="/js/avb.js"></script>
+-->
 
   <script>
   $(document).ready(function(){
@@ -35,7 +44,7 @@
 
     // direct url load
     <?php
-    $allpages = array("opendata" => "opendata.php");
+    $allpages = array("opendata" => "opendata.php", "glossary" => "glossary.php");
     $sections = array("revenues", "expenses", "funds");
     $mode = array("t","l");
     $params = array();
@@ -52,6 +61,8 @@
           $params['mode'] = $_GET["mode"];
         };
         echo 'initialize('.json_encode($params).');';
+      } else {
+        echo 'avb.navbar.minimize();';
       } 
     } else {
       echo('avb.home.initialize();');
@@ -65,6 +76,8 @@
 </head>
 
   <body>
+    
+  
     <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -96,12 +109,34 @@
     </div>
   </div>
 
-  <div id="footer">
+  <div id="footer" style="font-size:1.2em">
+    <a class="link" href="/glossary">Glossary</a> - 
     <a class="link" href="http://www.town.arlington.ma.us/">Town of Arlington</a> - 
     <a class="link" href="http://www.goinvo.com">by Involution Studios</a> -
     <a class="link" href="/opendata"> Open Data + Code</a> -
-    <a class="link" href="javascript:;" onclick="fby.push(['showForm', '4389']);return false;" data-step="4" data-intro="Something not quite right? What needs more clarity? Send us your feedback and we'll get back to you within 1 business day." data-position="top" >Feedback</a>
+    <a class="link" href="javascript:;" onclick="fby.push(['showForm', '4389']);return false;">Feedback</a>
   </div>
+
+  <script id="data-revenues" type="application/json"> 
+  <?php
+    require_once "data/revenues.json";
+  ?>
+  </script>
+  <script id="data-expenses" type="application/json"> 
+  <?php
+    require_once "data/expenses.json";  
+  ?>
+  </script>
+  <script id="data-funds" type="application/json"> 
+  <?php
+    require_once "data/funds.json";      
+  ?>
+  </script>
+  <script id="data-home" type="application/json"> 
+  <?php
+    require_once "data/home.json";      
+  ?>
+  </script>
 
 </body>
 

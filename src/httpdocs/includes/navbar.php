@@ -1,41 +1,43 @@
 
-
 <div class="purple-border" id="avb-menubar" >
   <div class="container">
 
-    <div class="homebutton" style="width:200px" onclick='window.location = "/"'> 
-      <img src="/img/logo.png" alt="avb-logo" style="position:relative" />
-    </div>
+    <div class="homebutton" onclick='window.location = "/"'> 
+      
+      <div style="font-size:32px;line-height:28px; display:inline-block"> Arlington, MA  </div>
+      <img src="/img/logo@High.png" alt="avb-logo" width=24 height=24 />
+   </div>
 
-    <div> 
+    <div id="navbar-links" style="line-height:30px;"> 
 
      <div onclick='window.location = "/"' class="entry homebutton"> Town Budget, Visualized </div>
 
-     <div class="entry" style="margin-left: 40px">
+     <div class="entry navbar-margin">
         <span class="menubutton section margin"><a href="/revenues">Revenues</a></span>
         <span class="menubutton section margin"><a href="/expenses">Expenses</a></span>
-        <span class="menubutton section margin"><a href="/funds">Funds</a></span>
+        <span class="menubutton section margin"><a id="navbar-funds" href="/funds">Funds &#38; Reserves</a></span>
     </div>
 
     <div class="entry" style="float:right;">
+        <input id="searchbox" type="text" class="margin menubutton margin search" placeholder="Search">
     
         <div class="menubutton margin">
           <span> <i class="icon-th-large"></i> </span>
-          <a href="javascript:switchMode('t'); "> Map </a>
+          <a id="navbar-map" href="javascript:switchMode('t'); "> Map view </a>
         </div>
-        <div class="menubutton">
+        <div class="menubutton margin">
           <span> <i class="icon-th-list"></i> </span>
-          <a href="javascript:switchMode('l');"> List </a>
+          <a id="navbar-table" href="javascript:switchMode('l'); "> Tabular view </a>
         </div>
 
-        <ul class="nav menubutton ">
+        <ul id="yeardrop" class="nav menubutton">
           <li  id="yeardrop-container" class="dropdown" style="display:none;">
             <a id="yeardrop-label" class="dropdown-toggle" role="button" data-toggle="dropdown" href="#">Dropdown <b class="caret"></b></a>
             <ul id="yeardrop-list" class="dropdown-menu vhscrollable" role="menu">
             </ul>
           </li>
           <li>
-          <select id="yeardrop-container-mobile" style="display:none; width:100px;">
+          <select id="yeardrop-container-mobile" style="display:none; width:100px; height:28px">
           </select>
         </li>
         </ul>

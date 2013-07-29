@@ -9,11 +9,11 @@
 	padding-top: 5px;
 	padding-bottom: 5px;
 	border-bottom: 1px solid $gray;
-	font-size: 1em;
+	font-size: $text-big;
 	line-height: 40px;
 
 	&:hover{
-		background-color: $gray;
+		background-color: rgb(235,235,235);
 	}
 
 	&.atomic .expand-icon{
@@ -23,6 +23,15 @@
 	&.expanded .sum{
 
 	}
+}
+
+.tablerow:last-child{
+	border-bottom: 0px;
+}
+
+.popover{
+	max-width: 350px;
+	line-height: 1.2em;
 }
 
 #table-header:hover{
@@ -48,6 +57,7 @@
 
 
 
+
 	&.long{
 		width: 300px;
 	}
@@ -61,12 +71,10 @@
 	}
 
 	&.head{
-		font-family: 'Open Sans';
 		font-weight: $text-bold;
 	}
-
-
 }
+
 
 .bullet{
 	width: 20px;
@@ -90,4 +98,6 @@
 	}
 
 }
+
+
 

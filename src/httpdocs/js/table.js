@@ -1,27 +1,82 @@
+/*
+File: table.js
+
+Description:
+    Table compoent for visual budget application
+
+Authors:
+    Ivan DiLernia <ivan@goinvo.com>
+    Roger Zhu <roger@goinvo.com>
+
+License:
+    Copyright 2013, Involution Studios <http://goinvo.com>
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+*/
+
+
  var avb = avb || {};
 
  avb.table = function(){
 
-   var indent = 25;
-   var stats = [];
-   var growthScale = d3.scale.linear().clamp(true).domain([-10,10]).range(["rgb(29,118,162)",'rgb(167, 103, 108)']);
-   var amountScale = d3.scale.linear().clamp(true).range(["#aaa", "#333"]);
-   var impactScale = d3.scale.linear().clamp(true).domain([0,100]).range(["#aaa", "#333"]);
+    var indent = 25;  // indentation width
+    var tableStats = []; // columns to be shown
+    // color scales
+    var growthScale = d3.scale.linear().clamp(true).domain([-10,10]).range(["rgb(29,118,162)",'rgb(167, 103, 108)']);
+    var amountScale = d3.scale.linear().clamp(true).range(["#aaa", "#333"]);
+    var impactScale = d3.scale.linear().clamp(true).domain([0,100]).range(["#aaa", "#333"]);
 
-   var initialize = function(data){
-    var table = $('#table-container'),
-    header = $('#table-header').data('level',0);
-    stats = tables[section];
+  /*
+  * Initializes table
+  *
+  * @parma {obj} data - dataset
+  */
+  var initialize = function(data){
+    var table = $('#table-container');
 
-    $.each(stats, function(){
+    // remove old rows
+    $('.tablerow').remove();
+
+    // data comes from search result
+    if (data instanceof Array) {
+      tableStats = tables.search;
+      if(data.length === 0) {
+        textRow('No results found.', table);
+        return;
+      }
+      addHeader( table);
+      $.each(data, function(){
+        renderNode(this, 0, table);
+      });
+    // data comes from section dataset
+    } else {
+      tableStats = tables[avb.section];
+      addHeader(table);
+      amountScale.domain([0,data.values[yearIndex].val*0.5]);
+      renderNode(data, 0, table).trigger('click');
+    }
+
+  },
+
+
+
+  addHeader = function(table){
+    var headerHtml = '<div class="tablerow" id="table-header" > <div class="bullet"> </div>'; 
+    var header = $(headerHtml).appendTo(table).data('level',0);
+    $.each(tableStats, function(){
       var newcell = $('<div class="' + this.cellClass + ' head"> </div>').appendTo(header);
       newcell.text(this.title);
     })
-
-    amountScale.domain([0,data.values[yearIndex].val*0.5]);
-
-    renderNode(data, 0, table).trigger('click');
-
   },
 
   alignRows = function(){
@@ -33,6 +88,12 @@
     $('.tablerow').each(function(){
       $(this).find('.name').animate({'margin-right' : (maxLevel - $(this).data('level'))*indent}, 250);
     });
+  },
+
+  textRow = function(msg, table){
+    var template = $('#row-template');
+    var rendered = table.append(Mustache.render(template.html())).children().last();
+    rendered.css({'text-align' : 'center'}).text(msg);
   },
 
   rowClick = function (){
@@ -53,9 +114,10 @@
       // expand
 
       // sort by amount
-      node.sub.sort(function(a,b) {
-        return a.values[yearIndex].val < b.values[0].val;
-      })
+      // node.sub.sort(function(a,b) {
+      //   return a.values[yearIndex].val < b.values[0].val;
+      // })
+
 
       // container
       var childDiv = $('<div class="group"></div>').insertAfter(row);
@@ -74,8 +136,6 @@
     }
   },
 
-
-
   renderNode = function (node, level, container){
     var template = $('#row-template');
     var rendered = container.append(Mustache.render(template.html(), node)).children().last();
@@ -86,7 +146,7 @@
 
     rendered.css({'padding-left' : level*indent});
 
-    $.each(stats, function(){
+    $.each(tableStats, function(){
       var newcell = $('<div class="' + this.cellClass + '"> </div>').appendTo(rendered);
       if(this.cellFunction) {
         this.cellFunction(node, newcell.get(0));
@@ -95,7 +155,33 @@
       }
     })
 
+    // append popover
+    if(node.descr.length !== 0){
+      rendered.find('.long').popover(
+        {trigger : 'manual', 
+            placement: function (context, source) {
+                var position = $(source).position();
+                if (position.top < 150){
+                    return "bottom";
+                } else {
+                    return "top";
+                }
+            },
+            content : node.descr
+        });
+    }
+
+    rendered.mouseenter(function(){
+      rendered.find('.long').popover('show');
+    });
+
+    rendered.mouseleave(function(){
+      rendered.find('.long').popover('hide');
+    });
+
+
     rendered.click(rowClick);
+
 
     return rendered;
   },
@@ -111,7 +197,7 @@
     .attr('width', width).attr('height', height);
 
     var xscale = d3.scale.linear().range([0, width])
-    .domain([firstYear, lastYear]);
+    .domain([avb.firstYear, avb.lastYear]);
     var yscale = d3.scale.linear().range([height-2, 2])
     .domain([0,d3.max(node.values, function(d) {return d.val})]);
 
@@ -149,14 +235,14 @@
 
   renderAmount = function(data, cell){
     var amount = (data.values[yearIndex].val);
-    $(cell).css({"color" : amountScale(amount)});
+    if(tableStats !== tables.search) $(cell).css({"color" : amountScale(amount)});
     $(cell).text(formatCurrencyExact(amount));
   },
 
   renderImpact = function(data, cell){
-    var impact = Math.max(0.01,(Math.round(data.values[yearIndex].val*100*100/root.values[yearIndex].val)/100));
+    var impact = stats.impact.value(data);
     $(cell).css({"color" : impactScale(impact)});
-    $(cell).text(impact + ' %');
+    $(cell).text(impact);
   },
 
   open = function() {
@@ -169,18 +255,16 @@
 
       if(node.is('#table-header')) return;
 
-      // assumption. cell order and stats array do not change
-      for(var i=0; i<stats.length; i++) {
+      // assumption. cell order and tableStats array do not change
+      for(var i=0; i<tableStats.length; i++) {
         var cell = $($(node).find('.value').get(i));
-        if(stats[i].cellFunction) {
-          stats[i].cellFunction(node.data(), cell.get(0));
+        if(tableStats[i].cellFunction) {
+          tableStats[i].cellFunction(node.data(), cell.get(0));
         } else {
-          cell.text(stats[i].value(node));
+          cell.text(tableStats[i].value(node));
         }
       };
-
     })
-
   };
 
   return{

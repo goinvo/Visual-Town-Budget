@@ -5,23 +5,27 @@
 
 @include establish-baseline();
 
-body {
-	color: $base-font-color;
-	font-family: 'Open Sans', sans-serif;
-	font-weight: 300;
 
-}
 
-$text-title: 2.4em;
-$text-big: 1.2em;
-$text-small: 0.8em;
+
+$text-title: 28px;
+$text-big: 18px;
+$text-small: 14px;
 $text-bold: 500;
+
+$text-lineheight-big: 28px;
 
 $black: #333333;
 $gray: #aaaaaa;
 $red: rgb(167, 103, 108);
 $blue: rgb(87,118,162);
 $white: rgb(220, 223, 222);
+
+body {
+	color: $black;
+	font-family: 'Strait', sans-serif;
+
+}
 
 h1 {
 	@include adjust-font-size-to($base-font-size * 2);

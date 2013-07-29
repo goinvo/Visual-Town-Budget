@@ -1,24 +1,19 @@
 /*
 	File Overview:	Basic structural styles.
-	Author:			Michael Bester
+	Author:			Ivan David DiLernia
 */
 
-html {
-	min-height: 100%;
-	margin-bottom: 1px;
+html{
+    min-height: 100%;
+    position: relative;
 }
 
 body {
 	@include reset-box-model;
 	background: $page-background-color;
-	-moz-user-select: none;
-	-khtml-user-select: none;
-	-webkit-user-select: none;
-	user-select: none;
 	background-image: url(/img/bg_avb.png);
+  height: 100%;
 }
-
-
 /*
 * Window sizes
 */
@@ -80,6 +75,19 @@ body {
     width: 980px;
   }
 
+  #avb-menubar{
+
+    padding: 15px 5px 15px 5px;
+
+    .navbar-margin{
+      margin-left: 30px;
+    }
+
+    .modename{
+      display: none;
+    }
+  }
+
   #avb-body {
 
     #information-container{
@@ -91,6 +99,10 @@ body {
       #info-wrap {
         height: 250px;
       }
+    }
+
+    #cards{
+      margin-top: 0px;
     }
 
     #navigation-container,
