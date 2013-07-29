@@ -298,6 +298,7 @@ function ie(){
 }
 
 function stopPropagation(event){
+    log(event)
     if(event) {
         event.cancelBubble = true;
         if(event.stopPropagation) event.stopPropagation();

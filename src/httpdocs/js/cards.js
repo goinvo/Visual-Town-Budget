@@ -98,9 +98,9 @@ avb.cards = function(){
                 // attach link
                 cardstack[i].attr('onclick', "window.location='" + deck[i].link(data)  + "'");
                 // prevent sliding animation
-                cardstack[i].click(function(){
+                cardstack[i].click(function(event){
                     // stop propagation
-                   stopPropagation(window.event || event);
+                    stopPropagation(window.event || event);
                 });
             }
             // set card description if available

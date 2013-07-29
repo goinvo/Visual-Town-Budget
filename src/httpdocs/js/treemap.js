@@ -447,7 +447,8 @@ avb.treemap = function () {
 
     zoneClick = function (d, click) {
         // stop event propagation
-        stopPropagation(window.event || event);
+        var event = window.event || event
+        stopPropagation( event );
 
         // do not expand if another transition is happening
         // or data not defined
