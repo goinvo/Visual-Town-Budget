@@ -18,7 +18,7 @@ License:
       http://www.apache.org/licenses/LICENSE-2.0
 
     Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
+distributed under the License is distributed on an "AS IS" BASIS,
     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
     See the License for the specific language governing permissions and
     limitations under the License.
@@ -52,7 +52,7 @@ avb.home = function () {
     }, {
         selector: '#navigation',
         text: 'The xray of the financials... Zoom into the data details by touching a block. How cool was that?',
-        position: 'left'
+        position: 'top'
     }, {
         selector: '#yeardrop',
         text: 'Interested in seeing budget history or projections? Use this menu.',
@@ -74,7 +74,7 @@ avb.home = function () {
     }, {
         selector: '#navigation',
         text: 'See how much you pay for these services.',
-        position: 'left'
+        position: 'top'
     }];
 
     /*
