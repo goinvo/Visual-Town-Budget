@@ -77,7 +77,6 @@ avb.navbar = function(){
 
 
 	initialize = function(){
-		
 		// year dropdown (desktop browsers)
 		$dropdown = $('#yeardrop-container');
 		$dropdownLabel = $('#yeardrop-label');

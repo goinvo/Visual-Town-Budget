@@ -18,7 +18,7 @@
         <span class="menubutton section margin"><a id="navbar-funds" href="/funds">Funds &#38; Reserves</a></span>
     </div>
 
-    <div class="entry" style="float:right;">
+    <div class="entry" id="navbar-right" style="float:right;">
         <input id="searchbox" type="text" class="margin menubutton margin search" placeholder="Search">
     
         <div class="menubutton margin">

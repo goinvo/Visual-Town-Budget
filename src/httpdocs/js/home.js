@@ -316,19 +316,24 @@ avb.home = function () {
     //
     show = function () {
         home.menubar.removeClass('purple-border');
-        home.content.show();
+
+        $('#avb-body').css({opacity : 0});
         home.overlay.show();
+        home.content.delay(300).fadeIn();
 
         var data = JSON.parse($('#data-home').html());
         setTimeout(function () {
             home.data = data;
             showGraph(1000);
-        }, 1000);
+        }, 1500);
 
+        
+        
         // start budget app
         initialize({
             "section": "funds"
         });
+        $('#avb-body').delay(100).animate({opacity : 1});
         $('.section').removeClass('selected');
 
     },
