@@ -1,4 +1,4 @@
-Visual Town Budget Application
+Budget Visualization Framework
 ========
 
 Open-source budget data visualization framework.
