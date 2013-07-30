@@ -18,7 +18,7 @@ License:
       http://www.apache.org/licenses/LICENSE-2.0
 
     Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
+distributed under the License is distributed on an "AS IS" BASIS,
     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
     See the License for the specific language governing permissions and
     limitations under the License.
@@ -26,8 +26,8 @@ License:
 var avb = avb || {};
 
 avb.home = function () {
-    var home = new Object;
-    var tour;
+    var home = {},
+        tour;
 
     /*
      * Tutorial node IDs.
@@ -52,7 +52,7 @@ avb.home = function () {
     }, {
         selector: '#navigation',
         text: 'The xray of the financials... Zoom into the data details by touching a block. How cool was that?',
-        position: 'left'
+        position: 'top'
     }, {
         selector: '#yeardrop',
         text: 'Interested in seeing budget history or projections? Use this menu.',
@@ -74,7 +74,7 @@ avb.home = function () {
     }, {
         selector: '#navigation',
         text: 'See how much you pay for these services.',
-        position: 'left'
+        position: 'top'
     }];
 
     /*
@@ -151,10 +151,12 @@ avb.home = function () {
     /*
     *   Initiialize function
     */
-    init = function (data) {
+    init = function () {
 
-        // hides overlay when clicked
-        // it defaults to funds section
+        /*
+        *   hides overlay when clicked
+        *   defaults to funds section
+        */
         function overlayClick(event) {
             event.stopPropagation();
             // highlight 'funds' link
@@ -162,43 +164,52 @@ avb.home = function () {
             hide();
         }
 
-        // begins a tour with a slight delay to wait for 
-        // homepage to minimize
+        /* 
+        *   starts a tour with a slight delay
+        *   this gives the homepage enough time to minimize
+        *
+        *   @param {tour obj} tour - tour to be rendered
+        *   @param {function} before - function to be execute before starting tour
+        */
         function tourClick(tour, before) {
+            // open tour section (section in data-section field of tour link)
             sectionClick.call(this);
+
+            // wait for homepage to minize
             setTimeout(function () {
+                // execute before function if any
+                // the timeout give enuogh time for transitions
+                // to happen and tour zones to be rendered
                 if (before !== undefined) {
-                    setTimeout(function () {
-                        before();
-                    }, 1000);
-                    setTimeout(function () {
-                        starttour(tour)
-                    }, 2500);
+                    // execute before function
+                    setTimeout(function () { before();}, 1000);
+                    // start tour
+                    setTimeout(function () {starttour(tour) }, 2500);
                 } else {
                     starttour(tour);
                 }
             }, 500);
         }
 
-        // 
-
-
+        // homepage div
         home.content = $('#avb-home');
+        //overlay init
         home.overlay = $('#overlay');
+        home.overlay.click(overlayClick);
+        // visualization init
         home.map = $('#home-map-svg');
         home.menubar = $('#avb-menubar');
-        home.overlay.click(overlayClick);
-
+        
         $('.section').removeAttr('onclick');
 
-        // taxes input initialization
+        // taxes input box initialization
         $('#tax-input').val(getContribution());
-        // start link 
+        // start our when user clicks on start
         $('#tax-input-start').click(function () {
             setContribution();
-            tourClick.call(this, individualTour)
+            tourClick.call(this, individualTour);
         });
-        // enter key event
+        // start our when user clicks on enter
         $('#tax-input').keypress(function (e) {
             if (e.which == 13) {
                 setContribution();
@@ -206,7 +217,11 @@ avb.home = function () {
             }
         });
 
-        // tutorials links
+        /*
+        *   Tutorial links initialization
+        */
+
+        // Link 1
         $('#q1').click(function () {
             tourClick.call(this, fireTour, function () {
                 avb.navigation.open(townDepartments);
@@ -214,6 +229,7 @@ avb.home = function () {
             })
         });
 
+        // Link 2
         $('#q2').click(function () {
             sectionClick.call(this);
             setTimeout(function() {
@@ -222,6 +238,7 @@ avb.home = function () {
             },1200)
         });
 
+        // Link 3
         $('#q3').click(function () {
             tourClick.call(this, snowTour, function () {
                 avb.navigation.open(townDepartments);
@@ -236,9 +253,7 @@ avb.home = function () {
         });
         // home page minimizes right after treemap values are calculated
         // avoids sloppy animations
-        setTimeout(function () {
-            hide()
-        }, 100);
+        setTimeout(function () { hide() }, 100);
     }
 
     /*
@@ -289,54 +304,85 @@ avb.home = function () {
     },
 
     /*
-    * Executes home bars transition
+    *   Executes home bars transition
+    *  
+    *   @param {int} duration - transition duration   
     */
     showGraph = function (duration) {
+        // get data
         var data = home.data['sub'];
+        // calculate block height scales
         var scale = d3.scale.linear().clamp(true).range([30, 160])
             .domain([0, d3.max(data, function (d) {
                 return d.values[yearIndex].val
             })]);
+
+        // renuves animation
         $('#revenues-node').animate({
             height: scale(data[0].values[yearIndex].val)
         }, duration)
             .find('.node-value').text(formatcurrency(data[0].values[yearIndex].val));
+        // expenses animation
         $('#expenses-node').animate({
             height: scale(data[1].values[yearIndex].val)
         }, duration)
             .find('.node-value').text(formatcurrency(data[1].values[yearIndex].val));
+        // funds animation
         $('#funds-node').animate({
             height: scale(data[2].values[yearIndex].val)
         }, duration)
             .find('.node-value').text(formatcurrency(data[2].values[yearIndex].val));
         $('.node-value').fadeIn(duration);
+
+        // hook up click actions
         $('.node').click(sectionClick);
     },
 
-    //
+    /*
+    *   Shows home page
+    */
     show = function () {
+        // remove purple border on top of navbar
         home.menubar.removeClass('purple-border');
-        home.content.show();
+
+        // delays where inserted to mitigate jumps
+        // on page load due to web-fonts loading and changing
+        // the page aspect
+
+        // fade in body
+        $('#avb-body').css({opacity : 0});
+        $('#avb-body').delay(200).animate({opacity : 1});
+
         home.overlay.show();
 
+        // fade in homepage content
+        home.content.delay(300).fadeIn();
+
+        // show section bar animation
         var data = JSON.parse($('#data-home').html());
         setTimeout(function () {
             home.data = data;
             showGraph(1000);
-        }, 1000);
+        }, 1500);
 
-        // start budget app
+        // start application
         initialize({
             "section": "funds"
         });
+        
+        // do not highlight any sections while homepage is open
         $('.section').removeClass('selected');
 
     },
 
     /*
-    * minimizes home page
+    *   Minimizes home page
+    *
+    *   @parma {boolean} showtour - whether to show tour after homepage
     */
     hide = function (showtour) {
+        // return if home is not initialized
+        if(home.content === undefined) return;
         // slides up home page area
         home.content.slideUp(function () {
             //adds purple border to menu bar when transition is over
@@ -350,9 +396,11 @@ avb.home = function () {
     },
 
     /*
-    * Checks for new or returning user
-    * Stores cookie that will mark current user as returning visitor
-    * for 2 weeks
+    *   Checks whether user is new or returning visitor
+    *   Stores cookie that will mark current user as returning visitor
+    *   for 2 weeks
+    *
+    *   @return {bool} - True when new user, false otherwise
     */
     isFirstVisit = function () {
         var visited = jQuery.cookie('visited');
@@ -362,10 +410,18 @@ avb.home = function () {
         return (visited !== 'y');
     },
 
+    /*
+    *   Loads a tour from tour object
+    *
+    *   @param {tour object} steps - Object containing tour directives
+    *                                Check examples at beginning of this js file
+    */
     starttour = function (steps) {
 
         function addTour(tour) {
+            // for each step
             for (var i = 0; i < tour.length; i++) {
+                // find its dom object and set tour data attributes
                 $(tour[i].selector).attr('data-intro', tour[i].text)
                     .attr('data-step', i + 1).attr('data-position', tour[i].position);
             }
@@ -373,14 +429,20 @@ avb.home = function () {
         }
 
         var steps = steps || mainTour;
+        // find the dom objects that will be part of the tour
+        // and attach tour data attributes
         addTour(steps);
+        // initialize tour
         tour = introJs();
-        // do not show next button at last tour step
+        // before each new tour slide call any functions if needed
         tour.onchange(function (targetElement) {
             var curStep = parseInt($(targetElement).attr('data-step')) - 1;
+            // don't show 'next' or 'back' options while at last step
             if (curStep === steps.length - 1) $('.introjs-nextbutton, .introjs-prevbutton').hide();
+            // execute specified function if needed
             if (typeof (steps[curStep].before) === 'function') steps[curStep].before();
         });
+        // don't show labels or step numbers
         tour.setOption("showStepNumbers", false);
         tour.setOption("skipLabel", "Exit");
         tour.start();

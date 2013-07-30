@@ -6,6 +6,9 @@
   z-index: 1050;
   padding-top: 2px;
   border-top: 2px solid rgb(214,51,102);
+  // removes loading jump
+  max-height: 60px;
+
 
   .container{
     margin-top: 5px;

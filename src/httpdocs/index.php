@@ -30,12 +30,11 @@
   <script type="text/javascript" src ="/js/statistics.js"></script>
   <script type="text/javascript" src ="/js/home.js"></script>
 
-  
-<!--
+  <!--
   <script type="text/javascript" src ="/js/lib/dependencies.js"></script>
   <script type="text/javascript" src ="/js/components.js"></script>
   <script type="text/javascript" src ="/js/avb.js"></script>
--->
+  -->
 
   <script>
   $(document).ready(function(){

@@ -18,16 +18,16 @@
         <span class="menubutton section margin"><a id="navbar-funds" href="/funds">Funds &#38; Reserves</a></span>
     </div>
 
-    <div class="entry" style="float:right;">
+    <div class="entry" id="navbar-right" style="float:right;">
         <input id="searchbox" type="text" class="margin menubutton margin search" placeholder="Search">
     
         <div class="menubutton margin">
           <span> <i class="icon-th-large"></i> </span>
-          <a id="navbar-map" href="javascript:switchMode('t'); "> Map view </a>
+          <a id="navbar-map" href="javascript:avb.home.hide();switchMode('t'); "> Map view </a>
         </div>
         <div class="menubutton margin">
           <span> <i class="icon-th-list"></i> </span>
-          <a id="navbar-table" href="javascript:switchMode('l'); "> Tabular view </a>
+          <a id="navbar-table" href="javascript:avb.home.hide();switchMode('l'); "> Tabular view </a>
         </div>
 
         <ul id="yeardrop" class="nav menubutton">

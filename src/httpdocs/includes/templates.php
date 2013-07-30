@@ -63,6 +63,15 @@
     </div>
   </script>
 
+  <script type="text/html" id="table-header-template">
+    <div class="tablerow" id="table-header" data-level=0> 
+      <div class="bullet"> </div> 
+      {{#.}}
+        <div class="{{cellClass}} head"> {{title}} </div>
+      {{/.}}
+    </div>
+  </script>
+
 
   <script type="text/html" id="row-template">
     <div class="tablerow">
@@ -71,3 +80,9 @@
   </script>
 
 
+
+  <script type="text/html" id="dropdown-template">
+    <li role="presentation">
+      <a role="menuitem" tabindex="-1" href="#">{{.}}</a>
+    </li>
+  </script>

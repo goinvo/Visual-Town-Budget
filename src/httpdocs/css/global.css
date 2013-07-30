@@ -482,29 +482,30 @@ p {
   z-index: 1050;
   padding-top: 2px;
   border-top: 2px solid #d63366;
+  max-height: 60px;
 }
-/* line 10, ../../scss/partials/_navbar.scss */
+/* line 13, ../../scss/partials/_navbar.scss */
 #avb-menubar .container {
   margin-top: 5px;
 }
-/* line 14, ../../scss/partials/_navbar.scss */
+/* line 17, ../../scss/partials/_navbar.scss */
 #avb-menubar.purple-border {
   border-top: 2px solid #d63366;
 }
-/* line 18, ../../scss/partials/_navbar.scss */
+/* line 21, ../../scss/partials/_navbar.scss */
 #avb-menubar .navbar-margin {
   margin-left: 90px;
 }
-/* line 22, ../../scss/partials/_navbar.scss */
+/* line 25, ../../scss/partials/_navbar.scss */
 #avb-menubar .nav {
   margin-bottom: 0px !important;
 }
-/* line 26, ../../scss/partials/_navbar.scss */
+/* line 29, ../../scss/partials/_navbar.scss */
 #avb-menubar .entry {
   display: inline-block;
   position: relative;
 }
-/* line 32, ../../scss/partials/_navbar.scss */
+/* line 35, ../../scss/partials/_navbar.scss */
 #avb-menubar .homebutton,
 #avb-menubar .menubutton {
   cursor: pointer;
@@ -512,55 +513,55 @@ p {
   z-index: 1050;
   color: #333333;
 }
-/* line 39, ../../scss/partials/_navbar.scss */
+/* line 42, ../../scss/partials/_navbar.scss */
 #avb-menubar .search {
   border-radius: 5px;
   border: 1px solid #c2c2c2;
   font-family: 'Strait', sans-serif;
   vertical-align: top;
 }
-/* line 46, ../../scss/partials/_navbar.scss */
+/* line 49, ../../scss/partials/_navbar.scss */
 #avb-menubar .menubutton {
   display: inline-block;
 }
-/* line 50, ../../scss/partials/_navbar.scss */
+/* line 53, ../../scss/partials/_navbar.scss */
 #avb-menubar .menubutton.selected a {
   color: #db4e86;
 }
-/* line 55, ../../scss/partials/_navbar.scss */
+/* line 58, ../../scss/partials/_navbar.scss */
 #avb-menubar .menubutton .caret {
   border-top-color: #333333;
   border-bottom-color: #333333;
 }
-/* line 60, ../../scss/partials/_navbar.scss */
+/* line 63, ../../scss/partials/_navbar.scss */
 #avb-menubar .menubutton a {
   color: #333333;
 }
-/* line 64, ../../scss/partials/_navbar.scss */
+/* line 67, ../../scss/partials/_navbar.scss */
 #avb-menubar .menubutton i {
   vertical-align: baseline;
 }
-/* line 68, ../../scss/partials/_navbar.scss */
+/* line 71, ../../scss/partials/_navbar.scss */
 #avb-menubar .menubutton.margin {
   margin-right: 20px;
 }
 
-/* line 75, ../../scss/partials/_navbar.scss */
+/* line 78, ../../scss/partials/_navbar.scss */
 #yeardrop-container {
   vertical-align: top;
   min-width: 100px;
 }
-/* line 83, ../../scss/partials/_navbar.scss */
+/* line 86, ../../scss/partials/_navbar.scss */
 #yeardrop-container a {
   padding-left: 20px;
 }
-/* line 86, ../../scss/partials/_navbar.scss */
+/* line 89, ../../scss/partials/_navbar.scss */
 #yeardrop-container a b {
   float: right;
   margin-right: 5px;
   vertical-align: baseline;
 }
-/* line 92, ../../scss/partials/_navbar.scss */
+/* line 95, ../../scss/partials/_navbar.scss */
 #yeardrop-container .dropdown-menu {
   min-width: 100px;
   border-radius: 0px;
@@ -762,13 +763,13 @@ p {
 
 /* line 100, ../../scss/partials/_navigation.scss */
 .popover {
-  z-index: 1050;
+  z-index: 2030;
   font-size: 18px;
 }
 
 /* line 105, ../../scss/partials/_navigation.scss */
 #ie-popover {
-  z-index: 1050;
+  z-index: 2030;
   background-color: rgba(0, 0, 0, 0.5);
   display: none;
   position: absolute;
@@ -821,32 +822,32 @@ body {
 /*
 * Defaults to > 1200px width (>2013)
 */
-/* line 24, ../../scss/partials/_structure.scss */
+/* line 25, ../../scss/partials/_structure.scss */
 .container {
   width: 1200px;
 }
 
-/* line 33, ../../scss/partials/_structure.scss */
+/* line 34, ../../scss/partials/_structure.scss */
 #avb-body #information-container #chart-wrap {
   height: 250px;
 }
-/* line 37, ../../scss/partials/_structure.scss */
+/* line 38, ../../scss/partials/_structure.scss */
 #avb-body #information-container #info-wrap {
   height: 250px;
 }
-/* line 43, ../../scss/partials/_structure.scss */
+/* line 44, ../../scss/partials/_structure.scss */
 #avb-body #navigation-container,
 #avb-body #information-container {
   height: 600px;
   position: relative;
 }
-/* line 48, ../../scss/partials/_structure.scss */
+/* line 49, ../../scss/partials/_structure.scss */
 #avb-body #navigation {
   height: 88%;
   width: 100%;
 }
 
-/* line 56, ../../scss/partials/_structure.scss */
+/* line 57, ../../scss/partials/_structure.scss */
 #vdivider {
   left: 280px;
 }
@@ -855,59 +856,59 @@ body {
 * Ipad Portait + Landscape
 */
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
-  /* line 66, ../../scss/partials/_structure.scss */
+  /* line 67, ../../scss/partials/_structure.scss */
   body, html {
     font-size: 12px;
   }
 
-  /* line 70, ../../scss/partials/_structure.scss */
+  /* line 71, ../../scss/partials/_structure.scss */
   h1 {
     font-size: 2.5em !important;
   }
 
-  /* line 74, ../../scss/partials/_structure.scss */
+  /* line 75, ../../scss/partials/_structure.scss */
   .container {
     width: 980px;
   }
 
-  /* line 78, ../../scss/partials/_structure.scss */
+  /* line 79, ../../scss/partials/_structure.scss */
   #avb-menubar {
     padding: 15px 5px 15px 5px;
   }
-  /* line 82, ../../scss/partials/_structure.scss */
+  /* line 83, ../../scss/partials/_structure.scss */
   #avb-menubar .navbar-margin {
     margin-left: 30px;
   }
-  /* line 86, ../../scss/partials/_structure.scss */
+  /* line 87, ../../scss/partials/_structure.scss */
   #avb-menubar .modename {
     display: none;
   }
 
-  /* line 95, ../../scss/partials/_structure.scss */
+  /* line 96, ../../scss/partials/_structure.scss */
   #avb-body #information-container #chart-wrap {
     height: 220px;
   }
-  /* line 99, ../../scss/partials/_structure.scss */
+  /* line 100, ../../scss/partials/_structure.scss */
   #avb-body #information-container #info-wrap {
     height: 250px;
   }
-  /* line 104, ../../scss/partials/_structure.scss */
+  /* line 105, ../../scss/partials/_structure.scss */
   #avb-body #cards {
     margin-top: 0px;
   }
-  /* line 109, ../../scss/partials/_structure.scss */
+  /* line 110, ../../scss/partials/_structure.scss */
   #avb-body #navigation-container,
   #avb-body #information-container {
     height: 550px;
   }
 }
-/* line 115, ../../scss/partials/_structure.scss */
+/* line 116, ../../scss/partials/_structure.scss */
 #footer {
   text-align: center;
   margin-bottom: 5px;
 }
 
-/* line 123, ../../scss/partials/_structure.scss */
+/* line 124, ../../scss/partials/_structure.scss */
 .group {
   *zoom: 1;
 }
