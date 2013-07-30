@@ -70,4 +70,10 @@
     </div>
   </script>
 
+  <script type="text/html" id="dropdown-template">
+    <li role="presentation">
+      <a role="menuitem" tabindex="-1" href="#">{{.}}</a>
+    </li>
+  </script>
+
 

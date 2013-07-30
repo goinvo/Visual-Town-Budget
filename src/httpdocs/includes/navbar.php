@@ -23,11 +23,11 @@
     
         <div class="menubutton margin">
           <span> <i class="icon-th-large"></i> </span>
-          <a id="navbar-map" href="javascript:switchMode('t'); "> Map view </a>
+          <a id="navbar-map" href="javascript:avb.home.hide();switchMode('t'); "> Map view </a>
         </div>
         <div class="menubutton margin">
           <span> <i class="icon-th-list"></i> </span>
-          <a id="navbar-table" href="javascript:switchMode('l'); "> Tabular view </a>
+          <a id="navbar-table" href="javascript:avb.home.hide();switchMode('l'); "> Tabular view </a>
         </div>
 
         <ul id="yeardrop" class="nav menubutton">
