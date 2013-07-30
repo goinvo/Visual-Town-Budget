@@ -381,6 +381,8 @@ avb.home = function () {
     *   @parma {boolean} showtour - whether to show tour after homepage
     */
     hide = function (showtour) {
+        // return if home is not initialized
+        if(home.content === undefined) return;
         // slides up home page area
         home.content.slideUp(function () {
             //adds purple border to menu bar when transition is over
