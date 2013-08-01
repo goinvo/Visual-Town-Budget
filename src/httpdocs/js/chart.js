@@ -641,9 +641,11 @@ avb.chart = function () {
 
         // trick that solves IE10 bug which keeps chart
         // for expanding past its initial width
+
         setTimeout(function(){
             slideLayers(chart.layersWidth);
         }, 10);
+
         
 
     };
