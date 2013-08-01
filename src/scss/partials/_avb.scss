@@ -1,44 +1,65 @@
+/*
+  File Overview:  Section styles.
+  Authors:
+    Ivan DiLernia <ivan@goinvo.com>
+    Roger Zhu <roger@goinvo.com>
+*/
 
+/*
+* Visualization container
+*/
+#avb-wrap {
+  position: relative;
+  margin-bottom: 10px;
+  padding: 15px;
+  padding-top: 10px;
+  text-align: left;
+  background-color: $white;
 
+  @include box-shadow(0px 0px 10px $light-gray);
+}
 
-// window container
-#avb-body {
-  font-weight: 200;
-  
+/*
+* Section title and description
+*/
+.title-head{
+  font-size: $text-big;
+  white-space: nowrap;
+  font-size: $text-title;
+  div{
+    line-height: 70px;
+  }
 
-  // border window
-  #avb-wrap {
-    position: relative;
-    margin-bottom: 10px;
-    padding: 15px;
-    padding-top: 10px;
-    text-align: left;
+  .description{
+    display: inline-block;
+    font-size: $text-big;
+    width: 400px;
+    margin-left: 20px;
+    line-height: normal;
     white-space: normal;
-    background-color: #f9f9f9;
-
-    -moz-box-shadow: 0px 0px 10px #ccc;
-    -webkit-box-shadow: 0px 0px 10px #ccc;
-    box-shadow: 0px 0px 10px #ccc;
-
   }
 }
 
-/*
-* Entry title and description
-*/
-.title-head {
-    font-size: $text-big;
-    line-height: normal;
-    white-space: nowrap;
-    font-size: $text-title;
-    div{
-      line-height: 70px;
-    }
+.introjs-tooltip{
+  font-size: $text-big;
 }
 
+/*
+* Separator class
+*/
+.separator:after{
+    display:block;
+    border:none;
+    height:1px;
+    background-image: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 350, from(#ccc), to(#fff));
+    background-image: -webkit-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.2), rgba(0,0,0,0));
+    background-image: -moz-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.2), rgba(0,0,0,0));
+    background-image: -ms-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.2), rgba(0,0,0,0));
+    background-image: -o-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.2), rgba(0,0,0,0));
+};
 
 /*
-* Cards and legend
+* Links
 */
 .link {
   text-decoration: underline;
@@ -51,29 +72,17 @@
 }
 
 
-.separator:after{
-    display:block;
-    border:none;
-    color:white;
-    height:1px;
-    background: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 350, from(#ccc), to(#fff));
-};
-
+/*
+* Opendata section css
+*/
 .dataDownload{
     font-size: $text-big;
     line-height: $text-lineheight-big;
+    margin-top: 10px;
 
     .icon-download{
       vertical-align: baseline;
     }
-}
-
-.introjs-tooltip{
-  font-size: $text-big;
-}
-
-#avb-opendata{
-  padding: 10px;
 }
 
 /*
@@ -102,4 +111,9 @@
     }
 
   }
+}
+
+#footer {
+  text-align:center;
+  margin-bottom: 5px;
 }

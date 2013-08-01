@@ -6,7 +6,7 @@
 
 <!-- Non-minified js -->
 
-<!--
+
   <script type="text/javascript" src="/js/lib/mustache/mustache.js"></script>
   <script type="text/javascript" src ="/js/lib/d3/d3.v3.min.js"></script>
   <script type="text/javascript" src ="/js/lib/jquery/jquery-1.9.1.min.js"></script>
@@ -22,9 +22,11 @@
   <script type="text/javascript" src ="/js/table.js"></script>
   <script type="text/javascript" src ="/js/statistics.js"></script>
   <script type="text/javascript" src ="/js/home.js"></script>
--->
+
 
 <!-- Minified js -->
-<script type="text/javascript" src ="/js/lib/dependencies.js"></script>
+
+<!-- <script type="text/javascript" src ="/js/lib/dependencies.js"></script>
 <script type="text/javascript" src ="/js/components.js"></script>
 <script type="text/javascript" src ="/js/avb.js"></script>
+ -->

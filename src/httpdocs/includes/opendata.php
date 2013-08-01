@@ -3,7 +3,7 @@
 "https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"
 style="position: absolute; top: 0; right: 0; border: 0;"></a>
 
-<section id="avb-opendata">
+<section id="avb-opendata" style="padding:10px;">
     <div class="separator" style="margin-bottom:20px;">
         <div class="title-head">
             Data
