@@ -1,12 +1,53 @@
+/*
+  File Overview: Cards and legend styles.
+  Authors:
+    Ivan DiLernia <ivan@goinvo.com>
+    Roger Zhu <roger@goinvo.com>
+*/
 
-.card {
-	padding-top: 10px;
-	padding-bottom: 10px;
-	margin-left: 2%;
-
-	&.top {
-		padding-top: 5px;
+/*
+* Cards & legend container
+*/
+#info-wrap{
+	overflow:hidden; 
+	height:100%;
+	div{
+	  cursor: pointer;
 	}
+}
+
+/*
+*	Legend
+*/
+#legend-wrap {
+	position:absolute;
+	height: 100%;
+	width: 100%;
+	left:-100%;
+	overflow-y: auto;
+	font-size: $text-big;
+	line-height: $text-lineheight-big;
+
+	.legend-label{
+	  width: 16px;
+	  height: 16px;
+	  border-radius: 8px;
+	}
+
+	tr :first-child {
+	  margin-right: 5px;
+	}
+}
+
+/*
+*	Cards container
+*/
+#cards-wrap{
+	height: 100%;
+	width:100%; 
+	overflow-x: hidden;
+	position:relative;
+	cursor: pointer;
 }
 
 
@@ -19,103 +60,40 @@
 	margin-top:15px;
 	overflow:auto;
 
-	.card-row{
-		div:first-child .card{
-			// padding-right:6%;
-		}
+	.card{
+		padding: 10px 0px 10px 0px;
 
-		div:last-child .card{
-			// padding-left:6%;
-		}
-
-
-		.card-source{
-			padding-left:0;
-			padding-right:0;
-			
-
-
-			.card-value{
-				//text-decoration: underline;
-				font-size:$text-big;
-				cursor: pointer;
-				display: block;
-			}
-
-			.card-value:hover{
-				color:  steelblue;
-			}
-		}
-
-		.card-desc{
-			font-size: $text-big;
-			line-height: $text-lineheight-big;
-			color: gray;
-		}
-
-		.card-value {
-			font-size: $text-title;
-			line-height:$text-lineheight-big;
-			font-family: 'Georgia';
-		}
-		
-	}
-}
-
-#information-container{
-
-
-	position: relative;
-	padding-left: 5px;
-
-	#title-
-
-	#info-wrap{
-		overflow:hidden; 
-		height:100%;
-		div{
-			cursor: pointer;
+		&.top {
+			padding-top: 5px;
 		}
 	}
 
-	.title-head{
-		.description{
-			display: inline-block;
-			font-size: $text-big;
-			width: 400px;
-			margin-left: 20px;
-			line-height: normal;
-			white-space: normal;
-		}
-	}
-
-	#cards-wrap{
-		height: 100%;
-		width:100%; 
-		overflow-x: hidden;
-		position:relative;
-		cursor: pointer;
-	}
-
-	#legend-wrap {
-		position:absolute;
-		height: 100%;
-		width: 100%;
-		left:-100%;
-		overflow-y: auto;
+	.card-desc{
 		font-size: $text-big;
 		line-height: $text-lineheight-big;
+		color: gray;
+	}
 
-		.legend-label{
-			width: 16px;
-			height: 16px;
-			border-radius: 8px;
+	.card-value {
+		font-size: $text-title;
+		line-height:$text-lineheight-big;
+		font-family: 'Georgia';
+	}
+
+	.card-source{
+		padding-left:0;
+		padding-right:0;
+		
+		.card-value{
+			//text-decoration: underline;
+			font-size:$text-big;
+			cursor: pointer;
+			display: block;
 		}
 
-		tr :first-child {
-			margin-right: 5px;
+		.card-value:hover{
+			color:  steelblue;
 		}
 	}
 }
-
 

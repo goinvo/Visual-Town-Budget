@@ -75,7 +75,7 @@ avb.cards = function(){
     */
     drawCard = function ($container, card){
         // renders card template
-        return $('<div></div>').appendTo($container)
+        return $('<div class="card-wrapper"></div>').appendTo($container)
         .html(Mustache.render($('#card-template').html(),card));
     },
 

@@ -5,13 +5,19 @@
 */
 /*
 	File Overview:	Base scss definitions
-	Author:			Michael Bester
+	Authors:		Michael Bester,
+					Ivan DiLernia, Roger Zhu
 */
 /* Compass global imports */
 /* Configure for target Browser Set
    Chrome, IE8+
 ============================================*/
-/* Global variables */
+/* line 36, ../../scss/partials/_base.scss */
+body {
+  color: #333333;
+  font-family: 'Strait', sans-serif;
+}
+
 @page {
   size: landscape;
 }

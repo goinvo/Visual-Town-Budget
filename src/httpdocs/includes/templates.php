@@ -1,6 +1,6 @@
 <script type="text/html" id="treemap-template">
 
-<div id="information-container" class="span6">
+<div id="information-container" class="span6" style="position:relative; padding-left:5px;">
 
   <div id="information-cards" >
 

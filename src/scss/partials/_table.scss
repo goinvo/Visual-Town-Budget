@@ -1,8 +1,23 @@
+/*
+  File Overview:  Table styles.
+  Authors:
+    Ivan DiLernia <ivan@goinvo.com>
+    Roger Zhu <roger@goinvo.com>
+*/
 
 .group{
 	display: none;
 }
 
+// don't select table header
+#table-header:hover{
+	background-color: transparent;
+	cursor: default;
+}
+
+/*
+*	Row styles
+*/
 .tablerow{
 	height: 40px;
 	cursor: pointer;
@@ -20,13 +35,52 @@
 		display: none;
 	}
 
-	&.expanded .sum{
-
+	&:last-child{
+		border-bottom: 0;
 	}
-}
 
-.tablerow:last-child{
-	border-bottom: 0px;
+	.value{
+		text-align: center;
+		width: 150px;
+		white-space: nowrap;
+		text-overflow:ellipsis;
+		overflow: hidden;
+		display: inline-block;
+
+		&.long{
+			width: 300px;
+		}
+
+		&.textleft{
+			text-align: left;
+		}
+
+		&.numeric{
+			font-family: 'Georgia'
+		}
+
+		&.head{
+			font-weight: $text-bold;
+		}
+	}
+
+	.bullet, .sparkline{
+		vertical-align: bottom;
+	}
+
+	.bullet{
+		width: 20px;
+		vertical-align: top;
+		display: inline-block;
+	}
+
+	.sparkline{
+		.line{
+			stroke-width: 1px;
+		}
+		line-height: 0px;
+	}
+
 }
 
 .popover{
@@ -34,59 +88,6 @@
 	line-height: 1.2em;
 }
 
-#table-header:hover{
-	background-color: transparent;
-	cursor: default;
-}
-
-.value, .bullet{
-	display: inline-block;
-}
-
-.bullet, .sparkline{
-	vertical-align: bottom;
-}
-
-
-.value{
-	text-align: center;
-	width: 150px;
-	white-space: nowrap;
-	text-overflow:ellipsis;
-	overflow: hidden;
-
-
-
-
-	&.long{
-		width: 300px;
-	}
-
-	&.textleft{
-		text-align: left;
-	}
-
-	&.numeric{
-		font-family: 'Georgia'
-	}
-
-	&.head{
-		font-weight: $text-bold;
-	}
-}
-
-
-.bullet{
-	width: 20px;
-	vertical-align: top;
-}
-
-.sparkline{
-	.line{
-		stroke-width: 1px;
-	}
-	line-height: 0px;
-}
 
 @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
 	.value {

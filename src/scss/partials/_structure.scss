@@ -1,6 +1,8 @@
 /*
 	File Overview:	Basic structural styles.
-	Author:			Ivan David DiLernia
+	Authors:
+    Ivan DiLernia <ivan@goinvo.com>
+    Roger Zhu <roger@goinvo.com>
 */
 
 html{
@@ -10,17 +12,16 @@ html{
 
 body {
 	@include reset-box-model;
-	background: $page-background-color;
 	background-image: url(/img/bg_avb.png);
   height: 100%;
-
 }
+
 /*
 * Window sizes
 */
 
 /*
-* Defaults to > 1200px width (>2013)
+* Defaults to > 1200px width
 */
 .container {
   width: 1200px;
@@ -29,8 +30,6 @@ body {
 #avb-body {
 
   #information-container{
-
-
     #chart-wrap {
       height:  250px;
     }
@@ -46,18 +45,7 @@ body {
     position: relative;  
   }
 
-  #navigation {
-    height:88%;
-    width:100%;
-  }
-
 }
-
-
-#vdivider{
-  left:280px;
-}
-
 
 
 /*
@@ -113,14 +101,3 @@ body {
   }
 }
 
-#footer {
-  text-align:center;
-  margin-bottom: 5px;
-}
-
-
-
-
-.group {
-	@include pie-clearfix;
-}
