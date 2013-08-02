@@ -57,7 +57,6 @@ avb.table = function () {
             // display no results message should that be the case
             if (data.length === 0) {
                 textRow('No results found.', table);
-                return;
             }
             // render table head
             $table.append(Mustache.render($('#table-header-template').html(), tableStats));

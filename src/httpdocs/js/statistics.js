@@ -132,7 +132,7 @@ stats = {
     },
     parent : {
         title : "From",
-        cellClass: "value",
+        cellClass: "value parent",
         value: function (d){
             return (typeof(d.parent) === 'string') ? d.parent : '';
         }

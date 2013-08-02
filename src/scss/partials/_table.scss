@@ -10,9 +10,16 @@
 }
 
 // don't select table header
-#table-header:hover{
-	background-color: transparent;
-	cursor: default;
+#table-header{
+	&:hover{
+		background-color: transparent;
+		cursor: default;
+	}
+
+	div{
+		margin-left: -4px;
+	}
+
 }
 
 /*
@@ -90,11 +97,19 @@
 
 
 @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
-	.value {
-		width: 100px;
+	
+	.tablerow {
+		.value {
+			width: 120px;
+			// background: black;
 
-		&.long {
-			width: 250px;
+			&.long {
+				width: 220px;
+			}
+
+			&.parent{
+				width: 150px;
+			}
 		}
 	}
 

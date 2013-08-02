@@ -58,9 +58,6 @@ avb.chart = function () {
             .domain([avb.firstYear, avb.lastYear])
             .range([chart.xmargin, chart.width - 15]);
 
-        // limits layers from taking the whole chart width
-        chart.layersWidth = chart.xscale(avb.thisYear);
-
         // hooks up chart interactions functions
         addActions(chart);
 
@@ -640,6 +637,10 @@ avb.chart = function () {
         // trick that solves IE10 bug which keeps chart
         // for expanding past its initial width
 
+        
+        // limits layers from taking the whole chart width
+        chart.layersWidth = chart.xscale(avb.thisYear);
+        
         setTimeout(function(){
             slideLayers(chart.layersWidth);
         }, 10);

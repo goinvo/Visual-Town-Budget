@@ -590,16 +590,20 @@ p {
   display: none;
 }
 
-/* line 13, ../../scss/partials/_table.scss */
+/* line 14, ../../scss/partials/_table.scss */
 #table-header:hover {
   background-color: transparent;
   cursor: default;
+}
+/* line 19, ../../scss/partials/_table.scss */
+#table-header div {
+  margin-left: -4px;
 }
 
 /*
 *	Row styles
 */
-/* line 21, ../../scss/partials/_table.scss */
+/* line 28, ../../scss/partials/_table.scss */
 .tablerow {
   height: 40px;
   cursor: pointer;
@@ -609,19 +613,19 @@ p {
   font-size: 18px;
   line-height: 40px;
 }
-/* line 30, ../../scss/partials/_table.scss */
+/* line 37, ../../scss/partials/_table.scss */
 .tablerow:hover {
   background-color: #ebebeb;
 }
-/* line 34, ../../scss/partials/_table.scss */
+/* line 41, ../../scss/partials/_table.scss */
 .tablerow.atomic .expand-icon {
   display: none;
 }
-/* line 38, ../../scss/partials/_table.scss */
+/* line 45, ../../scss/partials/_table.scss */
 .tablerow:last-child {
   border-bottom: 0;
 }
-/* line 42, ../../scss/partials/_table.scss */
+/* line 49, ../../scss/partials/_table.scss */
 .tablerow .value {
   text-align: center;
   width: 150px;
@@ -630,55 +634,59 @@ p {
   overflow: hidden;
   display: inline-block;
 }
-/* line 50, ../../scss/partials/_table.scss */
+/* line 57, ../../scss/partials/_table.scss */
 .tablerow .value.long {
   width: 300px;
 }
-/* line 54, ../../scss/partials/_table.scss */
+/* line 61, ../../scss/partials/_table.scss */
 .tablerow .value.textleft {
   text-align: left;
 }
-/* line 58, ../../scss/partials/_table.scss */
+/* line 65, ../../scss/partials/_table.scss */
 .tablerow .value.numeric {
   font-family: "Georgia";
 }
-/* line 62, ../../scss/partials/_table.scss */
+/* line 69, ../../scss/partials/_table.scss */
 .tablerow .value.head {
   font-weight: 500;
 }
-/* line 67, ../../scss/partials/_table.scss */
+/* line 74, ../../scss/partials/_table.scss */
 .tablerow .bullet, .tablerow .sparkline {
   vertical-align: bottom;
 }
-/* line 71, ../../scss/partials/_table.scss */
+/* line 78, ../../scss/partials/_table.scss */
 .tablerow .bullet {
   width: 20px;
   vertical-align: top;
   display: inline-block;
 }
-/* line 77, ../../scss/partials/_table.scss */
+/* line 84, ../../scss/partials/_table.scss */
 .tablerow .sparkline {
   line-height: 0px;
 }
-/* line 78, ../../scss/partials/_table.scss */
+/* line 85, ../../scss/partials/_table.scss */
 .tablerow .sparkline .line {
   stroke-width: 1px;
 }
 
-/* line 86, ../../scss/partials/_table.scss */
+/* line 93, ../../scss/partials/_table.scss */
 .popover {
   max-width: 350px;
   line-height: 1.2em;
 }
 
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
-  /* line 93, ../../scss/partials/_table.scss */
-  .value {
-    width: 100px;
+  /* line 102, ../../scss/partials/_table.scss */
+  .tablerow .value {
+    width: 120px;
   }
-  /* line 96, ../../scss/partials/_table.scss */
-  .value.long {
-    width: 250px;
+  /* line 106, ../../scss/partials/_table.scss */
+  .tablerow .value.long {
+    width: 220px;
+  }
+  /* line 110, ../../scss/partials/_table.scss */
+  .tablerow .value.parent {
+    width: 150px;
   }
 }
 /*
