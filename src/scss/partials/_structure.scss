@@ -5,21 +5,6 @@
     Roger Zhu <roger@goinvo.com>
 */
 
-html{
-    min-height: 100%;
-    position: relative;
-}
-
-body {
-	@include reset-box-model;
-	background-image: url(/img/bg_avb.png);
-  height: 100%;
-}
-
-/*
-* Window sizes
-*/
-
 /*
 * Defaults to > 1200px width
 */
@@ -27,77 +12,44 @@ body {
   width: 1200px;
 }
 
-#avb-body {
+// chart
+#chart-wrap{
+  height: 250px;
+}
 
-  #information-container{
-    #chart-wrap {
-      height:  250px;
-    }
+// cards + legend
+#info-wrap {
+  height:  250px;
+}
 
-    #info-wrap {
-      height: 250px;
-    }
-  }
-
-  #navigation-container,
-  #information-container {
-    height: 600px;
-    position: relative;  
-  }
-
+// lhs, rhs
+#navigation-container,
+#information-container {
+  height: 600px;
 }
 
 
 /*
-* Ipad Portait + Landscape
+* Tablet Portait + Landscape
 */ 
 @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
-  body, html {
-    font-size: 12px;
-  }
-
-  h1{
-    font-size: 2.5em !important;
-  }
 
   .container {
     width: 980px;
   }
 
-  #avb-menubar{
-
-    padding: 15px 5px 15px 5px;
-
-    .navbar-margin{
-      margin-left: 30px;
-    }
-
-    .modename{
-      display: none;
-    }
+  #chart-wrap {
+    height: 220px;
   }
 
-  #avb-body {
-
-    #information-container{
-
-      #chart-wrap {
-        height: 220px;
-      }
-
-      #info-wrap {
-        height: 250px;
-      }
-    }
-
-    #cards{
-      margin-top: 0px;
-    }
-
-    #navigation-container,
-    #information-container {
-      height: 550px;  
-    }
+  #info-wrap {
+    height: 250px;
   }
+
+  #navigation-container,
+  #information-container {
+    height: 550px;  
+  }
+
 }
 

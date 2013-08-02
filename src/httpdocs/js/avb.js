@@ -91,10 +91,7 @@ function initialize(params) {
 
     // get user contribution if set
     avb.userContribution = avb.home.getContribution();
-    
-    log(params.year);
-    log(params.section)
-    log(params.mode);
+
     // set viewing mode
     setMode(params.mode);
 

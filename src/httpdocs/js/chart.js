@@ -45,7 +45,6 @@ avb.chart = function () {
         chart.height = $(div).height();
         chart.xmargin = 50;
         chart.ymargin = 20;
-        chart.linestack = [];
         chart.showLegend = false;
 
         $('#info-wrap').click(toggleLegend);
@@ -57,6 +56,8 @@ avb.chart = function () {
         chart.xscale = d3.scale.linear()
             .domain([avb.firstYear, avb.lastYear])
             .range([chart.xmargin, chart.width - 15]);
+
+        chart.layersWidth = 0;
 
         // hooks up chart interactions functions
         addActions(chart);
@@ -638,9 +639,13 @@ avb.chart = function () {
         // for expanding past its initial width
 
         
-        // limits layers from taking the whole chart width
-        chart.layersWidth = chart.xscale(avb.thisYear);
-        
+        // introduces feedback when user changes year
+        // chart layer boundary is moved to current year x coordinate
+        if(avb.thisYear != chart.year){
+            chart.layersWidth = chart.xscale(avb.thisYear);
+            chart.year = avb.thisYear;
+        }
+
         setTimeout(function(){
             slideLayers(chart.layersWidth);
         }, 10);

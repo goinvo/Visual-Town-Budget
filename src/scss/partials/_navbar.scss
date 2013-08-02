@@ -110,3 +110,21 @@
   }
 }
 
+/*
+* Tablet Portait + Landscape
+*/ 
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
+  #avb-menubar{
+
+    padding: 15px 5px 15px 5px;
+
+    .navbar-margin{
+      margin-left: 30px;
+    }
+
+    .modename{
+      display: none;
+    }
+
+  }
+}

@@ -1,3 +1,10 @@
+/*
+  File Overview:  Homepage styles.
+  Authors:
+    Ivan DiLernia <ivan@goinvo.com>
+    Roger Zhu <roger@goinvo.com>
+*/
+
 #avb-home, #overlay {
   position: absolute;
   width: 100%;
@@ -8,7 +15,7 @@
 #avb-home{
   background-image: url(/img/bg_avb.png);
   z-index: 1010;
-  border-bottom: 2px solid rgb(214,51,102);
+  border-bottom: 2px solid $fucsia;
   display: none;
 }
 
@@ -20,17 +27,42 @@
   display: none;
 }
 
-p{
-  vertical-align: top;
+/*
+*   Homepage hero unit
+*/
+.hero-unit{
+  padding: 0px;
+  margin-top: 90px;
+  line-height: $text-lineheight-big;
+
+  #welcome-hero{
+    width: 70%; 
+    display: inline-block;
+    vertical-align: top;
+  }
+
+  h1{
+    font-size: $text-title;
+    margin-bottom: 10px;
+  }
 }
 
 #tax-input{
   width:100px;
-  //font-family: 'Helvetica Neue LT Std', sans-serif;
+  font-family: 'Strait', sans-serif;
+}
+
+#home-col1,
+#home-col2{
+  width: 46%;
+  vertical-align: top;
 }
 
 
-#home-map{
+/*
+* Bars CSS
+*/
+#home-col3{
   display: inline-block;
   vertical-align: bottom;
   height: 200px;
@@ -70,34 +102,30 @@ p{
       opacity: 0.8;
     }
   }
-
 }
 
-.home-column{
-  vertical-align: top;
-}
 
-#welcome{
-  padding: 0px;
-  margin-top: 90px;
-  line-height: $text-lineheight-big;
-  display: inline-block;
 
-  #welcome-hero{
-    width: 70%; //----> DEFAULT
-    // width: 75%;
-    display: inline-block;
-    vertical-align: top;
-  }
 
+/*
+* Tablet Portait + Landscape
+*/ 
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
   h1{
-    font-size: $text-title;
-    margin-bottom: 10px;
+    font-size: 2.5em !important;
   }
 
-  #tour-link{
-    text-decoration: underline;
-    cursor: pointer;
-    color: black;
+  #home-col1{
+    width: 50%
   }
+
+  #home-col2{
+    width: 42%;
+  }
+
+
+  #tax-input{
+    width: 80px;
+  }
+
 }

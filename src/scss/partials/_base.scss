@@ -17,7 +17,9 @@ $experimental-support-for-opera:		false;
 $experimental-support-for-mozilla:		false;
 $experimental-support-for-khtml:		false;
 
-// font sizes
+/*
+*	Fonts
+*/
 $text-title: 28px;
 $text-big: 18px;
 $text-small: 14px;
@@ -25,15 +27,43 @@ $text-bold: 500;
 
 $text-lineheight-big: 28px;
 
-// colors
+/*
+*	Colors
+*/
 $black: #333333;
 $gray: #aaa;
 $light-gray: #ccc;
+$white: #f9f9f9;
+$fucsia: rgb(214,51,102);
 $red: rgb(167, 103, 108);
 $blue: rgb(87,118,162);
-$white: #f9f9f9;
+
+/*
+*	Page
+*/
+html{
+    min-height: 100%;
+    position: relative;
+}
 
 body {
 	color: $black;
 	font-family: 'Strait', sans-serif;
+	@include reset-box-model;
+	background-image: url(/img/bg_avb.png);
+ 	height: 100%;
+}
+
+
+p{
+  vertical-align: top;
+}
+
+/*
+* Tablet Portait + Landscape
+*/ 
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
+  body, html {
+    font-size: 12px;
+  }
 }
