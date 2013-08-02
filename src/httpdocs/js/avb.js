@@ -84,7 +84,7 @@ function initialize(params) {
 
     // highlight current selection in navigation bar
     $('.section').each(function () {
-        if ($(this).text().toLowerCase() === avb.section.toLowerCase()) {
+        if ($(this).data('section') === avb.section.toLowerCase()) {
             $(this).addClass('selected');
         }
     });
@@ -92,6 +92,9 @@ function initialize(params) {
     // get user contribution if set
     avb.userContribution = avb.home.getContribution();
     
+    log(params.year);
+    log(params.section)
+    log(params.mode);
     // set viewing mode
     setMode(params.mode);
 
