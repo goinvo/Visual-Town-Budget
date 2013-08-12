@@ -92,7 +92,7 @@ avb.home = function () {
         text: 'Here is the basic information you need to know about the department.',
         position: 'down',
         before: function () {
-            avb.navigation.open(fireDepartment);
+            avb.navigation.open(fireDepartment, false, true);
         }
     }, {
         selector: '#zoombutton',
@@ -115,7 +115,7 @@ avb.home = function () {
         text: 'Check how the snow removal costs oscillate over the years.',
         position: 'right',
         before: function () {
-            avb.navigation.open(snowRemoval);
+            avb.navigation.open(snowRemoval, false, true);
         }
     }, {
         selector: '#cards',
@@ -141,7 +141,7 @@ avb.home = function () {
         selector: '#cards',
         text: 'They constitute about 40% of the yearly expenses.',
         position: 'right',
-        before :  function() { avb.navigation.open(townSchools) }
+        before :  function() { avb.navigation.open(townSchools, false, true) }
     }, {
         selector: '#zoombutton',
         text: 'Go back and explore more.',
@@ -224,7 +224,7 @@ avb.home = function () {
         // Link 1
         $('#q1').click(function () {
             tourClick.call(this, fireTour, function () {
-                avb.navigation.open(townDepartments);
+                avb.navigation.open(townDepartments, false, true);
                 fireTour[0].before();
             })
         });
@@ -241,7 +241,7 @@ avb.home = function () {
         // Link 3
         $('#q3').click(function () {
             tourClick.call(this, snowTour, function () {
-                avb.navigation.open(townDepartments);
+                avb.navigation.open(townDepartments, false, true);
                 snowTour[0].before();
             })
         });

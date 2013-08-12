@@ -225,7 +225,9 @@ function changeYear(year) {
     // don't switch if year is already selected
     if (year === avb.thisYear) return;
     // go back to root
-    avb.currentNode = avb.root;
+   
+    //avb.currentNode = avb.root;
+
     // push change to browser history
     pushUrl(avb.section, year, avb.mode, avb.root.hash);
     // set new year values
@@ -233,7 +235,8 @@ function changeYear(year) {
     yearIndex = avb.thisYear - avb.firstYear;
     // update navigation (treemap or table)
     avb.navigation.update(avb.root);
-    avb.navigation.open(avb.root.hash);
+
+    avb.navigation.open(avb.currentNode.data.hash, false);
     // remember year over page changes
     $.cookie('year', year, {
             expires: 14

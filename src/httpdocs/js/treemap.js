@@ -73,6 +73,7 @@ avb.treemap = function () {
         // initialize chart
         avb.chart.initialize('#chart');
 
+        avb.currentNode.data = data;
 
         // start populating treemap
         update(data);
@@ -89,18 +90,23 @@ avb.treemap = function () {
             // this function recursively determines
             // treemap layout structure
             var layout = function (d) {
+                // root color
+                d.color = nav.color(0);
+
                 if (d.sub) {
                     treemap.nodes({
                         values: d.values,
                         children: d.sub
                     });
-                    d.sub.forEach(function (c) {
+                    d.sub.forEach(function (c,i) {
                         c.x = d.x + c.x * d.dx;
                         c.y = d.y + c.y * d.dy;
                         c.dx *= d.dx;
                         c.dy *= d.dy;
                         c.parent = d;
                         layout(c);
+                        // node color
+                        c.color = nav.color(i);
                     });
                 }
             }
@@ -141,7 +147,7 @@ avb.treemap = function () {
             layout(root);
 
             // display treemap
-            currentLevel = display(root);
+            currentLevel = display(avb.currentNode.data);
         }
 
         /*
@@ -203,21 +209,12 @@ avb.treemap = function () {
                     });
                 });
 
-            // assign new color only if not last node
-            if (d.sub.length !== 0 && d.color === undefined) {
-                d.color = nav.color(0);
-            }
-            // assign colors to children
-            for (var i = 0; i < d.sub.length; i++) {
-                d.sub[i].color = nav.color(i);
-            }
-
             // draw parent rectange
             g.append("rect")
                 .attr("class", "parent")
                 .call(rect)
                 .style("fill", function (d) {
-                    return zoneColor(d.color, 0.8);
+                   return zoneColor(d.color, 0.8);
                 });
 
             // recursively draw children rectangles
@@ -426,9 +423,11 @@ avb.treemap = function () {
         }
 
         // zoom button renders parent zone
-        $zoom.click(function () {
-            zoneClick.call(parent, d3.select(parent).datum(), true);
-        })
+        if(data !== avb.root) {
+            $zoom.click(function () {
+                zoneClick.call(parent, d3.select(parent).datum(), true);
+            })
+        }
 
     }
 
@@ -437,36 +436,59 @@ avb.treemap = function () {
     * @param {string} nodeId - hash that refers to zone
     * @param {bool} pushUrl - Whether to add url to browser history
     */
-    open = function (nodeId, pushUrl) {
-        // find rectangle with nodeId
-        var rect = d3.select('g[nodeid*="' + nodeId + '"]');
-        // open zone
-        zoneClick.call(rect.node(), rect.datum());
+    open = function (nodeId, pushUrl, transition) {
+        
+        function searchHash(hash, node){
+            var index = node.hash.indexOf(hash);
+            // results
+            if (index !== -1) return node;
+            // propagate recursively
+            if(node.sub !== undefined) {
+                // propagate to all children
+                for(var i=0; i<node.sub.length; i++) {
+                    // aggregate children results
+                    var subResults = searchHash(hash, node.sub[i]);
+                    if (subResults) return subResults;
+                }
+            }
+            return false;
+        };
+
+        // find node with given hash or open root node
+        zoneClick.call(null, searchHash(nodeId, avb.root) || avb.root, false, 1);
     },
 
 
-    zoneClick = function (d, click) {
+    zoneClick = function (d, click, transition) {
         // stop event propagation
         var event = window.event || event
         stopPropagation( event );
 
+        transition = transition || 750;
+
         // do not expand if another transition is happening
         // or data not defined
-        if (nav.transitioning || !d || !avb.currentNode) return;
+        if (nav.transitioning || !d) return;
 
-        // go back if click happened on the same zone
-        if (d !== avb.root && d === avb.currentNode.data) {
+        // // go back if click happened on the same zone
+        if (click && d === avb.currentNode.data) {
             $('#zoombutton').trigger('click');
             return;
         }
 
         // push url to browser history
-        if (click === true) {
+        if (click) {
             pushUrl(avb.section, avb.thisYear, avb.mode, d.hash);
         }
 
         // reset year
         yearIndex = avb.thisYear - avb.firstYear;
+
+        // 
+        if(d.values[yearIndex].val === 0) {
+            zoneClick.call(null, d.parent || avb.root.hash);
+            return;
+        }
 
         // remove old labels
         nav.selectAll('text').remove();
@@ -484,8 +506,8 @@ avb.treemap = function () {
 
         // initialize transitions
         var g2 = display(d);
-        t1 = currentLevel.transition().duration(750),
-        t2 = g2.transition().duration(750);
+        t1 = currentLevel.transition().duration(transition),
+        t2 = g2.transition().duration(transition);
 
         // Update the domain only after entering new elements.
         nav.x.domain([d.x, d.x + d.dx]);
