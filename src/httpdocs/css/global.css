@@ -527,20 +527,22 @@ p {
 }
 /* line 87, ../../scss/partials/_cards.scss */
 #cards .card-source .card-value {
+  text-decoration: underline;
   font-size: 18px;
   cursor: pointer;
   display: block;
+  color: #5776a2;
 }
-/* line 94, ../../scss/partials/_cards.scss */
+/* line 96, ../../scss/partials/_cards.scss */
 #cards .card-source .card-value:hover {
-  color: steelblue;
+  color: #98abc7;
 }
 
 /*
 * Tablet Portait + Landscape
 */
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
-  /* line 104, ../../scss/partials/_cards.scss */
+  /* line 106, ../../scss/partials/_cards.scss */
   #cards {
     margin-top: 0px;
   }
@@ -677,12 +679,12 @@ p {
   display: none;
 }
 
-/* line 14, ../../scss/partials/_table.scss */
+/* line 15, ../../scss/partials/_table.scss */
 #table-header:hover {
   background-color: transparent;
   cursor: default;
 }
-/* line 19, ../../scss/partials/_table.scss */
+/* line 20, ../../scss/partials/_table.scss */
 #table-header div {
   margin-left: -4px;
 }
@@ -690,7 +692,7 @@ p {
 /*
 *	Row styles
 */
-/* line 28, ../../scss/partials/_table.scss */
+/* line 29, ../../scss/partials/_table.scss */
 .tablerow {
   height: 40px;
   cursor: pointer;
@@ -700,19 +702,15 @@ p {
   font-size: 18px;
   line-height: 40px;
 }
-/* line 37, ../../scss/partials/_table.scss */
-.tablerow:hover {
-  background-color: #ebebeb;
-}
-/* line 41, ../../scss/partials/_table.scss */
+/* line 39, ../../scss/partials/_table.scss */
 .tablerow.atomic .expand-icon {
   display: none;
 }
-/* line 45, ../../scss/partials/_table.scss */
+/* line 43, ../../scss/partials/_table.scss */
 .tablerow:last-child {
   border-bottom: 0;
 }
-/* line 49, ../../scss/partials/_table.scss */
+/* line 47, ../../scss/partials/_table.scss */
 .tablerow .value {
   text-align: center;
   width: 150px;
@@ -721,57 +719,70 @@ p {
   overflow: hidden;
   display: inline-block;
 }
-/* line 57, ../../scss/partials/_table.scss */
+/* line 55, ../../scss/partials/_table.scss */
 .tablerow .value.long {
   width: 300px;
 }
-/* line 61, ../../scss/partials/_table.scss */
+/* line 59, ../../scss/partials/_table.scss */
 .tablerow .value.textleft {
   text-align: left;
 }
-/* line 65, ../../scss/partials/_table.scss */
+/* line 63, ../../scss/partials/_table.scss */
 .tablerow .value.numeric {
   font-family: "Georgia";
 }
-/* line 69, ../../scss/partials/_table.scss */
+/* line 67, ../../scss/partials/_table.scss */
 .tablerow .value.head {
   font-weight: 500;
 }
-/* line 74, ../../scss/partials/_table.scss */
+/* line 71, ../../scss/partials/_table.scss */
+.tablerow .value.maplink {
+  width: 40px;
+  opacity: 0.1;
+}
+/* line 77, ../../scss/partials/_table.scss */
+.tablerow:hover {
+  background-color: #ebebeb;
+}
+/* line 80, ../../scss/partials/_table.scss */
+.tablerow:hover .value.maplink {
+  opacity: 0.8;
+}
+/* line 85, ../../scss/partials/_table.scss */
 .tablerow .bullet, .tablerow .sparkline {
   vertical-align: bottom;
 }
-/* line 78, ../../scss/partials/_table.scss */
+/* line 89, ../../scss/partials/_table.scss */
 .tablerow .bullet {
   width: 20px;
   vertical-align: top;
   display: inline-block;
 }
-/* line 84, ../../scss/partials/_table.scss */
+/* line 95, ../../scss/partials/_table.scss */
 .tablerow .sparkline {
   line-height: 0px;
 }
-/* line 85, ../../scss/partials/_table.scss */
+/* line 96, ../../scss/partials/_table.scss */
 .tablerow .sparkline .line {
   stroke-width: 1px;
 }
 
-/* line 93, ../../scss/partials/_table.scss */
+/* line 104, ../../scss/partials/_table.scss */
 .popover {
   max-width: 350px;
   line-height: 1.2em;
 }
 
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
-  /* line 102, ../../scss/partials/_table.scss */
+  /* line 113, ../../scss/partials/_table.scss */
   .tablerow .value {
     width: 120px;
   }
-  /* line 106, ../../scss/partials/_table.scss */
+  /* line 117, ../../scss/partials/_table.scss */
   .tablerow .value.long {
     width: 220px;
   }
-  /* line 110, ../../scss/partials/_table.scss */
+  /* line 121, ../../scss/partials/_table.scss */
   .tablerow .value.parent {
     width: 150px;
   }

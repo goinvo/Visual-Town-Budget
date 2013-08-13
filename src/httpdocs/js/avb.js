@@ -382,6 +382,32 @@ var inArray = function(myarray, needle){
     return indexOf.call(myarray, needle) > -1;
 };
 
+function findSection(hash){
+    var section = null;
+    $.each(avb.data, function(){
+        if(findHash(hash, this) !== false) {
+            section = this;
+        }
+    })
+    return section;
+}
+
+function findHash(hash, node){
+    var index = node.hash.indexOf(hash);
+    // results
+    if (index !== -1) return node;
+    // propagate recursively
+    if(node.sub !== undefined) {
+        // propagate to all children
+        for(var i=0; i<node.sub.length; i++) {
+            // aggregate children results
+            var subResults = findHash(hash, node.sub[i]);
+            if (subResults) return subResults;
+        }
+    }
+    return false;
+};
+
 /*
 * Feedbackify function
 */

@@ -136,6 +136,13 @@ stats = {
         value: function (d){
             return (typeof(d.parent) === 'string') ? d.parent : '';
         }
+    },
+    mapLink : {
+        title : "",
+        cellClass: "value maplink",
+        cellFunction: function (d, cell) {
+            avb.table.renderMaplink(d, cell)
+        }
     }
 },
 
@@ -146,10 +153,10 @@ decks = {
 },
 
 tables = {
-    revenues: [stats.name, stats.growth, stats.sparkline, stats.impact, stats.amount],
-    expenses: [stats.name, stats.growth, stats.sparkline, stats.impact, stats.amount],
-    funds: [stats.name, stats.growth, stats.sparkline, stats.impact, stats.amount],
-    search: [stats.name, stats.growth, stats.sparkline, stats.amount, stats.parent,  stats.section]
+    revenues: [stats.name, stats.growth, stats.sparkline, stats.impact, stats.amount, stats.mapLink],
+    expenses: [stats.name, stats.growth, stats.sparkline, stats.impact, stats.amount, stats.mapLink],
+    funds: [stats.name, stats.growth, stats.sparkline, stats.impact, stats.amount, stats.mapLink],
+    search: [stats.name, stats.growth, stats.sparkline, stats.amount, stats.parent,  stats.section, stats.mapLink]
 }
 
 function formatcurrency(value) {
@@ -186,3 +193,4 @@ function growth(data) {
     var perc = Math.round(100 * 100 * (data.values[yearIndex].val - previous) / data.values[yearIndex].val) / 100;
     return formatPercentage(perc);
 };
+

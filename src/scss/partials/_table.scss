@@ -11,6 +11,7 @@
 
 // don't select table header
 #table-header{
+
 	&:hover{
 		background-color: transparent;
 		cursor: default;
@@ -34,9 +35,6 @@
 	font-size: $text-big;
 	line-height: 40px;
 
-	&:hover{
-		background-color: rgb(235,235,235);
-	}
 
 	&.atomic .expand-icon{
 		display: none;
@@ -68,6 +66,19 @@
 
 		&.head{
 			font-weight: $text-bold;
+		}
+
+		&.maplink{
+			width: 40px;
+			opacity: 0.1;
+		}
+	}
+
+	&:hover{
+		background-color: rgb(235,235,235);
+
+		.value.maplink{
+			opacity: 0.8;
 		}
 	}
 

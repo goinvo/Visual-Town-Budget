@@ -85,14 +85,16 @@
 		padding-right:0;
 		
 		.card-value{
-			//text-decoration: underline;
+			text-decoration: underline;
 			font-size:$text-big;
 			cursor: pointer;
 			display: block;
+			color:  $blue;
+
 		}
 
 		.card-value:hover{
-			color:  steelblue;
+			color:  lighten($blue, 20%);
 		}
 	}
 }

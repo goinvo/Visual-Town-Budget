@@ -438,24 +438,8 @@ avb.treemap = function () {
     */
     open = function (nodeId, pushUrl, transition) {
         
-        function searchHash(hash, node){
-            var index = node.hash.indexOf(hash);
-            // results
-            if (index !== -1) return node;
-            // propagate recursively
-            if(node.sub !== undefined) {
-                // propagate to all children
-                for(var i=0; i<node.sub.length; i++) {
-                    // aggregate children results
-                    var subResults = searchHash(hash, node.sub[i]);
-                    if (subResults) return subResults;
-                }
-            }
-            return false;
-        };
-
         // find node with given hash or open root node
-        zoneClick.call(null, searchHash(nodeId, avb.root) || avb.root, false, 1);
+        zoneClick.call(null, findHash(nodeId, avb.root) || avb.root, false, 1);
     },
 
 

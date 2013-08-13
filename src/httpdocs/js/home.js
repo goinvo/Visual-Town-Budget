@@ -60,6 +60,8 @@ avb.home = function () {
         before: function () {
             setTimeout(function () {
                 $('#yeardrop-container').addClass('open');
+                // exit the tour as soon a year is selected
+                $('#yeardrop-container').find('li').click(function() { tour.exit() })
             }, 800);
         }
     }];
