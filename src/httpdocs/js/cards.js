@@ -75,8 +75,7 @@ avb.cards = function(){
     */
     drawCard = function ($container, card){
         // renders card template
-        return $('<div class="card-wrapper"></div>').appendTo($container)
-        .html(Mustache.render($('#card-template').html(),card));
+        return $('<div class="card-wrapper"></div>').appendTo($container);
     },
 
     /*
@@ -86,27 +85,21 @@ avb.cards = function(){
     update = function (data) {
 
         // update all cards in deck
-        for(var i=0; i < deck.length; i++) {
+        $.each(deck, function(i,d){
             // render template
-            cardstack[i].html(Mustache.render($('#card-template').html(),deck[i]));
+
+            if(typeof(d.cardRenderer) === 'function') {
+                d.cardRenderer(data, cardstack[i]);
+            } else {
+                cardstack[i].html(Mustache.render($('#card-template').html(),d));
+            }
             // set value
             cardstack[i].find(".card-value").html(deck[i].value(data));
-            
-            // check whether to use provided or default link
-            // ( this is because not all zones may have a source attribute)
-            if(typeof(deck[i].link) === 'function') {
-                // attach link
-                cardstack[i].attr('onclick', "window.location='" + deck[i].link(data)  + "'");
-                // prevent sliding animation
-                cardstack[i].click(function(event){
-                    // stop propagation
-                    stopPropagation(window.event || event);
-                });
-            }
+
             // set card description if available
             cardstack[i].find(".card-desc").html(
                 (typeof(deck[i].side) === 'string') ? deck[i].side : deck[i].side(data));
-        }
+        });
     },
 
     /*

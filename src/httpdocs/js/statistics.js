@@ -51,6 +51,12 @@ stats = {
         side: function () {
             return " of total " + avb.section + "."
         },
+        cardRenderer : function(d, cell){
+            $(cell).html(Mustache.render($('#card-template').html(),this));
+            if(this.value(d) === '100%') {
+                $(cell).find('.card').css({ display : 'none'});
+            }
+        },
         cellClass: "value sum",
         cellFunction: function (d, cell) {
             avb.table.renderImpact(d, cell)
@@ -90,6 +96,17 @@ stats = {
         },
         link: function (d) {
             return (d.url === '') ? "http://www.town.arlington.ma.us/" : d.url;
+        },
+        cardRenderer : function(d, card){
+            $card = $(card);
+            $card.html(Mustache.render($('#card-template').html(), this));
+
+            $card.attr('onclick', "window.location='" + this.link(d)  + "'");
+                // prevent sliding animation
+                $card.click(function(event){
+                    // stop propagation
+                stopPropagation(window.event || event);
+            });
         },
         side: "is the data source for this entry."
     },

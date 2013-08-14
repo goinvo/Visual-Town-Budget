@@ -766,23 +766,28 @@ p {
 .tablerow .sparkline .line {
   stroke-width: 1px;
 }
+/* line 102, ../../scss/partials/_table.scss */
+.tablerow .sparkline svg rect {
+  fill: white;
+  opacity: 0.001;
+}
 
-/* line 104, ../../scss/partials/_table.scss */
+/* line 113, ../../scss/partials/_table.scss */
 .popover {
   max-width: 350px;
   line-height: 1.2em;
 }
 
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
-  /* line 113, ../../scss/partials/_table.scss */
+  /* line 122, ../../scss/partials/_table.scss */
   .tablerow .value {
     width: 120px;
   }
-  /* line 117, ../../scss/partials/_table.scss */
+  /* line 126, ../../scss/partials/_table.scss */
   .tablerow .value.long {
     width: 220px;
   }
-  /* line 121, ../../scss/partials/_table.scss */
+  /* line 130, ../../scss/partials/_table.scss */
   .tablerow .value.parent {
     width: 150px;
   }

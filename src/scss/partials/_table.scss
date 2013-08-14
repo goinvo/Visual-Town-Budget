@@ -97,6 +97,15 @@
 			stroke-width: 1px;
 		}
 		line-height: 0px;
+
+		svg{
+			rect{
+				fill: white;
+				opacity: 0.001;
+			}
+		}
+
+
 	}
 
 }

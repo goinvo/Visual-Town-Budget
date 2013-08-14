@@ -252,7 +252,7 @@ avb.table = function () {
             .attr('width', width).attr('height', height);
 
         // scale initialization
-        var xscale = d3.scale.linear().range([0, width])
+        var xscale = d3.scale.linear().range([5, width-5])
             .domain([avb.firstYear, avb.lastYear]);
         var yscale = d3.scale.linear().range([height - 2, 2])
             .domain([0, d3.max(node.values, function (d) {
@@ -273,9 +273,45 @@ avb.table = function () {
             .attr("d", line(node.values)).style("stroke", 'black');
 
         // draw point to indicate current year
-        sparkline.append('g').append("svg:circle").attr("r", 2)
+        var pointer = sparkline.append('g').append("svg:circle").attr("r", 2)
+            .datum({
+                cx : xscale(node.values[yearIndex].year),
+                cy : yscale(node.values[yearIndex].val)
+            })
             .attr("cx", xscale(node.values[yearIndex].year))
             .attr("cy", yscale(node.values[yearIndex].val));
+
+        sparkline.on('mouseenter', function(){
+            var year = Math.round(xscale.invert(d3.mouse(this)[0]));
+            $(pointer.node()).tooltip('destroy');
+            $(pointer.node()).tooltip({
+                container : 'body',
+                title : year,
+                animation : false
+            })
+            $(pointer.node()).tooltip('show');
+        });
+
+        sparkline.on('mousemove', function(){
+            var year = Math.round(xscale.invert(d3.mouse(this)[0]));
+            pointer.attr("cx",  xscale(year))
+            .attr("cy", yscale(node.values[year - avb.firstYear].val));
+
+            $(pointer.node()).tooltip('destroy');
+            $(pointer.node()).tooltip({
+                container : 'body',
+                title : year,
+                animation : false
+            })
+            $(pointer.node()).tooltip('show');
+        })
+
+        sparkline.on('mouseleave', function(){
+            var pos = pointer.datum();
+            pointer.attr("cx", pos.cx)
+            .attr("cy", pos.cy);
+            $(pointer.node()).tooltip('destroy');
+        })
 
     },
 
