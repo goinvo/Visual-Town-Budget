@@ -207,6 +207,7 @@ avb.table = function () {
                 // as it will show the popover mid-row, which
                 // what we want
                 trigger: 'manual',
+                animation : false,
                 // calculate best position for popover placement
                 placement: function (context, source) {
                     var position = $(source).position();
@@ -281,37 +282,37 @@ avb.table = function () {
             .attr("cx", xscale(node.values[yearIndex].year))
             .attr("cy", yscale(node.values[yearIndex].val));
 
-        sparkline.on('mouseenter', function(){
+        // mouse moving in sparkline
+        sparkline.on('mousemove', function(){
+            // find year from x coordinate
             var year = Math.round(xscale.invert(d3.mouse(this)[0]));
+            // move circle to another year
+            pointer.attr("cx",  xscale(year))
+            .attr("cy", yscale(node.values[year - avb.firstYear].val));
+
+            // redraw popover
             $(pointer.node()).tooltip('destroy');
             $(pointer.node()).tooltip({
-                container : 'body',
+                // popover is appended to sparkline cell
+                // this is done to avoid mouseleave events should the tooltip
+                // be attached to 'body'. Obviously we cannot attach the tooltip
+                // to the svg itself.
+                container : sparkline.node().parentNode,
                 title : year,
                 animation : false
             })
             $(pointer.node()).tooltip('show');
         });
 
-        sparkline.on('mousemove', function(){
-            var year = Math.round(xscale.invert(d3.mouse(this)[0]));
-            pointer.attr("cx",  xscale(year))
-            .attr("cy", yscale(node.values[year - avb.firstYear].val));
-
-            $(pointer.node()).tooltip('destroy');
-            $(pointer.node()).tooltip({
-                container : 'body',
-                title : year,
-                animation : false
-            })
-            $(pointer.node()).tooltip('show');
-        })
-
-        sparkline.on('mouseleave', function(){
+        // mouse leaving sparkline
+        d3.select(sparkline.node().parentNode).on('mouseleave', function(){
+            // return year pointer to its original location
             var pos = pointer.datum();
             pointer.attr("cx", pos.cx)
             .attr("cy", pos.cy);
+            // remove tooltip
             $(pointer.node()).tooltip('destroy');
-        })
+        });
 
     },
 
