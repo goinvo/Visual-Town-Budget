@@ -412,7 +412,7 @@ avb.treemap = function () {
         // main section such as revenues, expenses and funds need to have
         // descriptions
         if (inArray(avb.sections, data.key.toLowerCase())) {
-            $('<div class="description">  </div>').appendTo($title).text(data.descr);
+            $('<div class="description">  </div>').appendTo($title).html(data.descr);
         }
 
         // make zoom-out button appear disabled while at root nodes
