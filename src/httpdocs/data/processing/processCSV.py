@@ -2,7 +2,7 @@ import csv, json, hashlib, zlib, sys, os
 
 FIRST_YEAR = None
 LAST_YEAR = None
-MAX_LEVEL = 3
+MAX_LEVEL = 0
 
 class entry:
 
@@ -40,6 +40,7 @@ class entry:
 def generateList(inputFile):
 	global FIRST_YEAR
 	global LAST_YEAR
+	global MAX_LEVEL
 	csventries = []
 	
 	# attempt opening file if inputFile is not 
@@ -65,6 +66,9 @@ def generateList(inputFile):
 		#initialize year-range
 		if not yearSet:
 			for key, value  in row.iteritems() :
+				if(key.find('LEVEL') != -1 and key != 'LEVEL'):
+					MAX_LEVEL = max(int(key[5:]), MAX_LEVEL)
+				#year case
 				if(key.isdigit()):
 					FIRST_YEAR = int(key) if FIRST_YEAR == None else min(FIRST_YEAR, int(key))
 					LAST_YEAR = int(key) if LAST_YEAR == None else max(LAST_YEAR, int(key))
@@ -177,7 +181,7 @@ def generateTree(csventries, filename):
 
 
 def updateHome():
-	global FIRST_YEAR, LAST_YEAR
+	global FIRST_YEAR, LAST_YEAR, MAX_LEVEL
 
 	# the files used to generate home data
 	files = ['../revenues.csv', '../expenses.csv', '../funds.csv']
@@ -187,6 +191,7 @@ def updateHome():
 	for file in files:
 		FIRST_YEAR = None
 		LAST_YEAR = None
+		MAX_LEVEL = 0
 		try:
 			fd = open(os.path.dirname(__file__) + file, 'rU')
 			csventries = generateList(fd)

@@ -84,7 +84,7 @@ avb.home = function () {
     */
     var fireTour = [{
         selector: '#fire',
-        text: 'The fire department accounts for one of the greatest town department expenses.',
+        text: 'The Fire Department requires significant spending to ensure public safety.',
         position: 'left',
         before: function () {
             $('g[nodeid="' + fireDepartment + '"]').find('div').first().attr('id', 'fire');
@@ -134,7 +134,7 @@ avb.home = function () {
     */
     var schoolTour = [{
         selector: '#school',
-        text: 'School play an important role in the town expenses.',
+        text: 'Education is an important factor in Town expenses.',
         position: 'bottom',
         before: function () {
             $('g[nodeid="' + townSchools + '"]').find('div').first().attr('id', 'school');
