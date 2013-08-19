@@ -181,7 +181,7 @@ def generateTree(csventries, filename):
 
 
 def updateHome():
-	global FIRST_YEAR, LAST_YEAR
+	global FIRST_YEAR, LAST_YEAR, MAX_LEVEL
 
 	# the files used to generate home data
 	files = ['../revenues.csv', '../expenses.csv', '../funds.csv']
@@ -191,6 +191,7 @@ def updateHome():
 	for file in files:
 		FIRST_YEAR = None
 		LAST_YEAR = None
+		MAX_LEVEL = 0
 		try:
 			fd = open(os.path.dirname(__file__) + file, 'rU')
 			csventries = generateList(fd)
