@@ -17,7 +17,9 @@
           </table>
         </div>
       </div>
-      <div id="cards" > </div>
+      <div id="cards" >
+        
+      </div>
     </div>
   </div>
 
