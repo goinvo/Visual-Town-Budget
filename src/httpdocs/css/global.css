@@ -448,8 +448,9 @@ p {
 #info-wrap {
   overflow: hidden;
   height: 100%;
+  overflow-x: hidden;
 }
-/* line 14, ../../scss/partials/_cards.scss */
+/* line 15, ../../scss/partials/_cards.scss */
 #info-wrap div {
   cursor: pointer;
 }
@@ -457,23 +458,27 @@ p {
 /*
 *	Legend
 */
-/* line 22, ../../scss/partials/_cards.scss */
+/* line 23, ../../scss/partials/_cards.scss */
 #legend-wrap {
   position: absolute;
   height: 100%;
   width: 100%;
   left: -100%;
-  overflow-y: auto;
   font-size: 18px;
   line-height: 28px;
 }
 /* line 31, ../../scss/partials/_cards.scss */
+#legend-wrap #legend-container {
+  height: 100%;
+  overflow-y: auto;
+}
+/* line 36, ../../scss/partials/_cards.scss */
 #legend-wrap .legend-label {
   width: 16px;
   height: 16px;
   border-radius: 8px;
 }
-/* line 37, ../../scss/partials/_cards.scss */
+/* line 42, ../../scss/partials/_cards.scss */
 #legend-wrap tr :first-child {
   margin-right: 5px;
 }
@@ -481,8 +486,8 @@ p {
 /*
 *	Cards container
 */
-/* line 45, ../../scss/partials/_cards.scss */
-#cards-wrap {
+/* line 50, ../../scss/partials/_cards.scss */
+#slider-wrap {
   height: 100%;
   width: 100%;
   overflow-x: hidden;
@@ -493,39 +498,39 @@ p {
 /*
 *	Cards
 */
-/* line 57, ../../scss/partials/_cards.scss */
+/* line 62, ../../scss/partials/_cards.scss */
 #cards {
   position: relative;
   width: 100%;
   margin-top: 15px;
   overflow: auto;
 }
-/* line 63, ../../scss/partials/_cards.scss */
+/* line 68, ../../scss/partials/_cards.scss */
 #cards .card {
   padding: 10px 0px 10px 0px;
 }
-/* line 66, ../../scss/partials/_cards.scss */
+/* line 71, ../../scss/partials/_cards.scss */
 #cards .card.top {
   padding-top: 5px;
 }
-/* line 71, ../../scss/partials/_cards.scss */
+/* line 76, ../../scss/partials/_cards.scss */
 #cards .card-desc {
   font-size: 18px;
   line-height: 28px;
   color: gray;
 }
-/* line 77, ../../scss/partials/_cards.scss */
+/* line 82, ../../scss/partials/_cards.scss */
 #cards .card-value {
   font-size: 28px;
   line-height: 28px;
   font-family: 'Georgia';
 }
-/* line 83, ../../scss/partials/_cards.scss */
+/* line 88, ../../scss/partials/_cards.scss */
 #cards .card-source {
   padding-left: 0;
   padding-right: 0;
 }
-/* line 87, ../../scss/partials/_cards.scss */
+/* line 92, ../../scss/partials/_cards.scss */
 #cards .card-source .card-value {
   text-decoration: underline;
   font-size: 18px;
@@ -533,16 +538,40 @@ p {
   display: block;
   color: #5776a2;
 }
-/* line 96, ../../scss/partials/_cards.scss */
+/* line 101, ../../scss/partials/_cards.scss */
 #cards .card-source .card-value:hover {
   color: #98abc7;
+}
+
+/*
+*	Cards/legend switcher
+*/
+/* line 110, ../../scss/partials/_cards.scss */
+.arrow {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 20px;
+  opacity: 0.1;
+  background-color: #f1f1f1;
+}
+/* line 119, ../../scss/partials/_cards.scss */
+.arrow i {
+  position: absolute;
+  top: 50%;
+  left: 3px;
+}
+/* line 125, ../../scss/partials/_cards.scss */
+.arrow:hover {
+  opacity: 0.6;
 }
 
 /*
 * Tablet Portait + Landscape
 */
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
-  /* line 106, ../../scss/partials/_cards.scss */
+  /* line 134, ../../scss/partials/_cards.scss */
   #cards {
     margin-top: 0px;
   }

@@ -4,32 +4,45 @@
 
   <div id="information-cards" >
 
-  <div class="title-head" style="height:70px;">
-    <div style="display:inline-block;" class="text" > </div>
-  </div>
-  <div class="row-fluid" id="info-wrap" >
-    <div id="cards-wrap" style="position:relative;">
-      <div id="legend-wrap" >
-        <div id="legend" class="separator" >
-          <table>
-            <tbody>
-            </tbody>
-          </table>
+  <!-- entry title -->
+    <div class="title-head" style="height:70px;">
+      <div style="display:inline-block;" class="text" > </div>
+    </div>
+
+    <div id="info-wrap" >
+      <div id="slider-wrap">
+
+        <!-- layer chart legend -->
+        <div id="legend-wrap">
+          <div class="arrow" style="right:20px;"> 
+            <i class="icon-chevron-left"></i>
+          </div>
+          <div id="legend-container">
+            <div id="legend" class="separator">
+              <table><tbody></tbody></table>
+            </div>
+          </div>
         </div>
-      </div>
-      <div id="cards" >
-        
+
+        <!-- info cards -->
+        <div id="cards" >
+          <div class="arrow"> 
+            <i class="icon-chevron-right"></i>
+          </div>
+        </div>
+
       </div>
     </div>
-  </div>
 
   </div>
 
+  <!-- chart -->
   <div id="chart-wrap" class="row-fluid" > 
     <div id='chart' class="chart"> </div>
   </div>
 </div>
 
+<!-- treemap -->
 <div id="navigation-container" class="span6" >
   <div class="title-head" style="height:70px;">
     <button id="zoombutton" class="btn pull-right">
@@ -37,12 +50,11 @@
     </button>
   </div>
   <div id="navigation" >  
-  <div id="ie-popover">
-    <div class="text"></div>
-    <div class="arrow"> </div> 
+    <div id="ie-popover">
+      <div class="text"></div>
+      <div class="arrow"> </div> 
+    </div>
   </div>
-  </div>
-  
 </div>
 
   </script>
