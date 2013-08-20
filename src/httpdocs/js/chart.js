@@ -140,7 +140,7 @@ avb.chart = function () {
     /*
     * Updates chart with current data
     */
-    update = function (data, color) {
+    open = function (data, color) {
         // do a redraw in case function is called with no arguments
         var data = data || avb.currentNode.data;
         var color = color || avb.currentNode.color;
@@ -657,6 +657,6 @@ avb.chart = function () {
     return {
         chart: chart,
         initialize: initialize,
-        update : update
+        open : open
     }
 }();

@@ -47,13 +47,7 @@ avb.cards = function(){
         // about each entry
         // eg. only expenses has personal contribution card
         deck = decks[avb.section];
-        draw();
-    },
 
-    /*
-    * Draws information cards on page
-    */
-    draw = function () {
         var container,
             rowHtml = '<div class="row-fluid card-row separator"> </div>';
         // draw all cards in deck
@@ -102,6 +96,10 @@ avb.cards = function(){
         });
     },
 
+    open = function(data){
+        avb.cards.update(data);
+    },
+
     /*
     * Remove all cards
     */
@@ -110,6 +108,7 @@ avb.cards = function(){
     };
 
     return{
+        open : open,
         update : update,
         clear : clear,
         initialize : initialize

@@ -481,8 +481,8 @@ avb.treemap = function () {
         avb.currentNode.year = yearIndex;
         
         // update chart and cards
-        avb.chart.update(d, d.color);
-        avb.cards.update(d);
+        avb.chart.open(d, d.color);
+        avb.cards.open(d);
 
         // prevent further events from happening while transitioning
         nav.transitioning = true;
