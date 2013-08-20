@@ -449,16 +449,39 @@ p {
   overflow: hidden;
   height: 100%;
   overflow-x: hidden;
+  /*
+  *	Cards/legend switcher
+  */
 }
 /* line 15, ../../scss/partials/_cards.scss */
 #info-wrap div {
   cursor: pointer;
 }
+/* line 23, ../../scss/partials/_cards.scss */
+#info-wrap .arrow {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 20px;
+  opacity: 0.1;
+  background-color: #f1f1f1;
+}
+/* line 32, ../../scss/partials/_cards.scss */
+#info-wrap .arrow i {
+  position: absolute;
+  top: 50%;
+  left: 3px;
+}
+/* line 38, ../../scss/partials/_cards.scss */
+#info-wrap .arrow:hover {
+  opacity: 0.6;
+}
 
 /*
 *	Legend
 */
-/* line 23, ../../scss/partials/_cards.scss */
+/* line 48, ../../scss/partials/_cards.scss */
 #legend-wrap {
   position: absolute;
   height: 100%;
@@ -467,18 +490,18 @@ p {
   font-size: 18px;
   line-height: 28px;
 }
-/* line 31, ../../scss/partials/_cards.scss */
+/* line 56, ../../scss/partials/_cards.scss */
 #legend-wrap #legend-container {
   height: 100%;
   overflow-y: auto;
 }
-/* line 36, ../../scss/partials/_cards.scss */
+/* line 61, ../../scss/partials/_cards.scss */
 #legend-wrap .legend-label {
   width: 16px;
   height: 16px;
   border-radius: 8px;
 }
-/* line 42, ../../scss/partials/_cards.scss */
+/* line 67, ../../scss/partials/_cards.scss */
 #legend-wrap tr :first-child {
   margin-right: 5px;
 }
@@ -486,7 +509,7 @@ p {
 /*
 *	Cards container
 */
-/* line 50, ../../scss/partials/_cards.scss */
+/* line 75, ../../scss/partials/_cards.scss */
 #slider-wrap {
   height: 100%;
   width: 100%;
@@ -498,39 +521,39 @@ p {
 /*
 *	Cards
 */
-/* line 62, ../../scss/partials/_cards.scss */
+/* line 87, ../../scss/partials/_cards.scss */
 #cards {
   position: relative;
   width: 100%;
   margin-top: 15px;
   overflow: auto;
 }
-/* line 68, ../../scss/partials/_cards.scss */
+/* line 93, ../../scss/partials/_cards.scss */
 #cards .card {
   padding: 10px 0px 10px 0px;
 }
-/* line 71, ../../scss/partials/_cards.scss */
+/* line 96, ../../scss/partials/_cards.scss */
 #cards .card.top {
   padding-top: 5px;
 }
-/* line 76, ../../scss/partials/_cards.scss */
+/* line 101, ../../scss/partials/_cards.scss */
 #cards .card-desc {
   font-size: 18px;
   line-height: 28px;
   color: gray;
 }
-/* line 82, ../../scss/partials/_cards.scss */
+/* line 107, ../../scss/partials/_cards.scss */
 #cards .card-value {
   font-size: 28px;
   line-height: 28px;
   font-family: 'Georgia';
 }
-/* line 88, ../../scss/partials/_cards.scss */
+/* line 113, ../../scss/partials/_cards.scss */
 #cards .card-source {
   padding-left: 0;
   padding-right: 0;
 }
-/* line 92, ../../scss/partials/_cards.scss */
+/* line 117, ../../scss/partials/_cards.scss */
 #cards .card-source .card-value {
   text-decoration: underline;
   font-size: 18px;
@@ -538,40 +561,16 @@ p {
   display: block;
   color: #5776a2;
 }
-/* line 101, ../../scss/partials/_cards.scss */
+/* line 126, ../../scss/partials/_cards.scss */
 #cards .card-source .card-value:hover {
   color: #98abc7;
-}
-
-/*
-*	Cards/legend switcher
-*/
-/* line 110, ../../scss/partials/_cards.scss */
-.arrow {
-  position: absolute;
-  right: 0;
-  top: 0;
-  height: 100%;
-  width: 20px;
-  opacity: 0.1;
-  background-color: #f1f1f1;
-}
-/* line 119, ../../scss/partials/_cards.scss */
-.arrow i {
-  position: absolute;
-  top: 50%;
-  left: 3px;
-}
-/* line 125, ../../scss/partials/_cards.scss */
-.arrow:hover {
-  opacity: 0.6;
 }
 
 /*
 * Tablet Portait + Landscape
 */
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
-  /* line 134, ../../scss/partials/_cards.scss */
+  /* line 137, ../../scss/partials/_cards.scss */
   #cards {
     margin-top: 0px;
   }

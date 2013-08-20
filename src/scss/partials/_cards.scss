@@ -15,6 +15,31 @@
 	div{
 	  cursor: pointer;
 	}
+
+
+	/*
+	*	Cards/legend switcher
+	*/
+	.arrow{
+		position: absolute;
+		right: 0;
+		top: 0;
+		height: 100%;
+		width: 20px;
+		opacity: 0.1;
+		background-color: #f1f1f1;
+
+		i{
+			position: absolute;
+			top: 50%;
+			left: 3px;
+		}
+
+		&:hover{
+			opacity: 0.6;
+		}
+	}
+	
 }
 
 /*
@@ -104,28 +129,6 @@
 	}
 }
 
-/*
-*	Cards/legend switcher
-*/
-.arrow{
-	position: absolute;
-	right: 0;
-	top: 0;
-	height: 100%;
-	width: 20px;
-	opacity: 0.1;
-	background-color: #f1f1f1;
-
-	i{
-		position: absolute;
-		top: 50%;
-		left: 3px;
-	}
-
-	&:hover{
-		opacity: 0.6;
-	}
-}
 
 /*
 * Tablet Portait + Landscape

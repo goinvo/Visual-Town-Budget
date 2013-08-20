@@ -4,13 +4,25 @@ Budget Visualization Framework
 Open-source budget visualization framework.
 
 ##Components
-####Treemap
-![treemap-img](https://raw.github.com/goinvo/Visual-Town-Budget/develop/docs/img/treemap.png)
 ####Cards
+Basic stats about data (`src/httpdocs/js/cards.js`).
+
 ![card-img](https://raw.github.com/goinvo/Visual-Town-Budget/develop/docs/img/cards.png)
+
 ####Chart
+Shows data change over time (`src/httpdocs/js/chart.js`).
+
 ![chart-img](https://raw.github.com/goinvo/Visual-Town-Budget/develop/docs/img/chart.png)
+
+
+####Treemap
+Main navigation component (`src/httpdocs/js/treemap.js`).
+
+![treemap-img](https://raw.github.com/goinvo/Visual-Town-Budget/develop/docs/img/treemap.png)
+
 ####Table
+Alternative navigation technique to treemap (`src/httpdocs/js/tables.js`).
+
 ![table-img](https://raw.github.com/goinvo/Visual-Town-Budget/develop/docs/img/table.png)
 
 
@@ -37,4 +49,4 @@ Open-source budget visualization framework.
 		*	treemap.js: treemap routines
 
 ##Sample Datasets
-Expenses, Revenues and Funds from Arlington, MA.
+Expenses, Revenues and Funds from Arlington, MA in `src/httpdocs/data/`.
