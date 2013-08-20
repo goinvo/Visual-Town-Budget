@@ -125,6 +125,8 @@ function loadData() {
 
     // initialize cards
     avb.cards.initialize();
+
+
     // navigation (treemap or table)
     avb.navigation.initialize(avb.root);
     avb.navigation.open(avb.root.hash, true);
@@ -191,9 +193,9 @@ function setMode(mode) {
     //  table/list mode
     if (mode && mode === 'l') {
         // initialize table
+        avb.mode = 'l';
         avb.navigation = avb.table;
         container.html(Mustache.render(table.html()));
-        avb.mode = 'l';
     // treemap mode
     } else {
         avb.navigation = avb.treemap;

@@ -54,7 +54,7 @@ Sample Expenses, Revenues and Funds from Arlington, MA in `src/httpdocs/data/`.
 Two data is kept in JSON and CSV format. The JSON format is actively used for computation while the CSV is kept for reference and data download.
 
 ####Data pipeline
-Given the fact that town representatives are likely to be proficient in editing spreadsheets the Visual Budget Application currently uses a pipeline that converts CSV files (created with Microsoft Excel) to nested JSON files used for computation.
+Town representatives are likely to be proficient in editing spreadsheets. The Visual Budget application currently uses a pipeline that converts CSV files (created with Microsoft Excel) to nested JSON files used for computation.
 
 A python script `src/httpdocs/data/processing/processCSV.py` converts a flat CSV file into a nested JSON structure. A php script `src/httpdocs/data/processing/update.php` orchestrates the entire data update procedure.
 

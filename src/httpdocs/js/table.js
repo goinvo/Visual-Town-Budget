@@ -386,11 +386,15 @@ avb.table = function () {
             switchMode('t', true);
             // give enough time to load data
             setTimeout(function(){
-                avb.navigation.open(data.hash, false, false);
+                avb.treemap.open(data.hash, false, false);
             }, 50)
             
         });
     }
+
+    open = function(){
+
+    },
 
     /*
      * Updates/re-renders table rows
