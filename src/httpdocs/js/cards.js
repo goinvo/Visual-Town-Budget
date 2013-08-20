@@ -60,7 +60,7 @@ avb.cards = function(){
         for(var i=0; i < deck.length; i++) {
             // append new row every 2 cards
             if (i%2 === 0) {
-                container = $(rowHtml).appendTo('#cards');
+                container = $(rowHtml).appendTo($cards);
             }
             // draw single card
             var newcard = drawCard(container, deck[i]);

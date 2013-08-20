@@ -11,9 +11,35 @@
 #info-wrap{
 	overflow:hidden; 
 	height:100%;
+	overflow-x: hidden;
 	div{
 	  cursor: pointer;
 	}
+
+
+	/*
+	*	Cards/legend switcher
+	*/
+	.arrow{
+		position: absolute;
+		right: 0;
+		top: 0;
+		height: 100%;
+		width: 20px;
+		opacity: 0.1;
+		background-color: #f1f1f1;
+
+		i{
+			position: absolute;
+			top: 50%;
+			left: 3px;
+		}
+
+		&:hover{
+			opacity: 0.6;
+		}
+	}
+	
 }
 
 /*
@@ -24,9 +50,13 @@
 	height: 100%;
 	width: 100%;
 	left:-100%;
-	overflow-y: auto;
 	font-size: $text-big;
 	line-height: $text-lineheight-big;
+
+	#legend-container{
+		height: 100%;
+		overflow-y: auto;
+	}
 
 	.legend-label{
 	  width: 16px;
@@ -42,7 +72,7 @@
 /*
 *	Cards container
 */
-#cards-wrap{
+#slider-wrap{
 	height: 100%;
 	width:100%; 
 	overflow-x: hidden;
@@ -98,6 +128,7 @@
 		}
 	}
 }
+
 
 /*
 * Tablet Portait + Landscape
