@@ -49,6 +49,18 @@ avb.thisYear = avb.currentYear;
 avb.userContribution = null;
 // available data sections
 avb.sections = ['revenues', 'expenses', 'funds'];
+// available modes (treemap, table..)
+avb.modes = 
+{
+    "l" : {
+        js : avb.table,
+        template : '#table-template'
+    },
+    "t" : {
+        js : avb.treemap,
+        template : '#treemap-template'
+    }
+}
 
 var timer = 0;
 
@@ -61,14 +73,35 @@ Number.prototype.px = function () {
     return this.toString() + "px";
 };
 
-
+/*
+*   Reads parameters from current url path and calls related
+*   initialization routines
+*/
+function initialize(){
+    var urlComponents = window.location.pathname.substring(1).split('/');
+    var params = {
+        section : urlComponents[0],
+        year : urlComponents[1],
+        mode : urlComponents[2],
+        node : urlComponents[3]
+    }
+    avb.navbar.initialize();
+    if(params.section === undefined || params.section === "") {
+        avb.home.initialize();
+        avb.home.show();
+    } else if($.inArray(params.section, avb.sections) > -1){
+        initializeVisualizations(params);
+    } else {
+        avb.navbar.minimize();
+    }
+}
 
 /*
-*   Bootstraps visual budget application
+*  Initialized data visualization components
 *
 *   @param {obj} params - object listing year, mode, section and node
 */
-function initialize(params) {
+function initializeVisualizations(params) {
     // get previosly set year
     var yearCookie = parseInt(jQuery.cookie('year'));
     // use year listed in the params object
@@ -125,6 +158,8 @@ function loadData() {
 
     // initialize cards
     avb.cards.initialize();
+
+
     // navigation (treemap or table)
     avb.navigation.initialize(avb.root);
     avb.navigation.open(avb.root.hash, true);
@@ -149,7 +184,7 @@ function loadData() {
 function pushUrl(section, year, mode, node) {
     if (ie()) return;
     // format URL
-    var url = '/' + section + '/' + avb.thisYear + '/' + mode + '/' + node;
+    var url = '/' + section + '/' + year + '/' + mode + '/' + node;
     // create history object
     window.history.pushState({
         section: section,
@@ -184,22 +219,11 @@ function popUrl(event) {
 *   @param {string} mode - 'l' for list, 't' for treemap
 */
 function setMode(mode) {
-    var container = $('#avb-wrap'),
-        table = $('#table-template'),
-        treemap = $('#treemap-template');
-
-    //  table/list mode
-    if (mode && mode === 'l') {
-        // initialize table
-        avb.navigation = avb.table;
-        container.html(Mustache.render(table.html()));
-        avb.mode = 'l';
-    // treemap mode
-    } else {
-        avb.navigation = avb.treemap;
-        container.html(Mustache.render(treemap.html()));
-        avb.mode = 't';
-    }
+    var $container = $('#avb-wrap');
+    mode = mode || "t";
+    avb.mode = mode;
+    avb.navigation = avb.modes[mode].js;
+    $container.html(Mustache.render($(avb.modes[mode].template).html()));
 }
 
 /*
@@ -224,9 +248,6 @@ function switchMode(mode, pushurl) {
 function changeYear(year) {
     // don't switch if year is already selected
     if (year === avb.thisYear) return;
-    // go back to root
-   
-    //avb.currentNode = avb.root;
 
     // push change to browser history
     pushUrl(avb.section, year, avb.mode, avb.root.hash);

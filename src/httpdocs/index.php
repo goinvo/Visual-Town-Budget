@@ -10,8 +10,11 @@
  
   <?php
     require_once 'includes/imports.php';
-    require_once 'includes/onloadjs.php';
   ?>
+
+<script>
+$(document).ready(initialize);
+</script>
 
 </head>
 

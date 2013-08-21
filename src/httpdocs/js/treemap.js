@@ -437,7 +437,6 @@ avb.treemap = function () {
     * @param {bool} pushUrl - Whether to add url to browser history
     */
     open = function (nodeId, pushUrl, transition) {
-        
         // find node with given hash or open root node
         zoneClick.call(null, findHash(nodeId, avb.root) || avb.root, false, 1);
     },
@@ -482,8 +481,8 @@ avb.treemap = function () {
         avb.currentNode.year = yearIndex;
         
         // update chart and cards
-        avb.chart.update(d, d.color);
-        avb.cards.update(d);
+        avb.chart.open(d, d.color);
+        avb.cards.open(d);
 
         // prevent further events from happening while transitioning
         nav.transitioning = true;

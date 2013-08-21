@@ -6,7 +6,7 @@
 */
 
 /*
-* Visualization container
+* Main container
 */
 #avb-wrap {
   position: relative;
@@ -20,25 +20,65 @@
 }
 
 /*
-* Section title and description
+* Component dimensions
+* (chart, treemap, tables...)
 */
-.title-head{
-  font-size: $text-big;
-  white-space: nowrap;
-  font-size: $text-title;
-  div{
-    line-height: 70px;
+
+/*
+* Defaults to > 1200px width
+*/
+.container {
+  width: 1200px;
+}
+
+// chart
+#chart-wrap{
+  height: 250px;
+}
+
+// cards + legend
+#info-wrap {
+  height:  250px;
+}
+
+// lhs, rhs
+#navigation-container,
+#information-container {
+  height: 600px;
+}
+
+
+/*
+* Tablet Portait + Landscape
+*/ 
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
+
+  .container {
+    width: 980px;
   }
 
-  .description{
-    display: inline-block;
-    font-size: $text-big;
-    width: 400px;
-    margin-left: 20px;
-    line-height: normal;
-    white-space: normal;
+  #chart-wrap {
+    height: 220px;
   }
+
+  #info-wrap {
+    height: 250px;
+  }
+
+  #navigation-container,
+  #information-container {
+    height: 550px;  
+  }
+
 }
+
+
+
+
+
+
+
+
 
 .introjs-tooltip{
   font-size: $text-big;

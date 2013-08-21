@@ -7,22 +7,21 @@
 <!-- Non-minified js -->
 
 
-  <script type="text/javascript" src="/js/lib/mustache/mustache.js"></script>
-  <script type="text/javascript" src ="/js/lib/d3/d3.v3.min.js"></script>
-  <script type="text/javascript" src ="/js/lib/jquery/jquery-1.9.1.min.js"></script>
-  <script type="text/javascript" src ="/js/lib/bootstrap.min.js"></script>
-  <script type="text/javascript" src ="/js/lib/detectmobilebrowser.js"></script>
-  <script type="text/javascript" src ="/js/lib/intro/intro.min.js"></script>
-  <script type="text/javascript" src ="/js/lib/cookie/jquery.cookie.js"></script>
-  <script type="text/javascript" src ="/js/treemap.js"></script>
-  <script type="text/javascript" src ="/js/chart.js"></script>
-  <script type="text/javascript" src ="/js/cards.js"></script>
-  <script type="text/javascript" src ="/js/avb.js"></script>
-  <script type="text/javascript" src ="/js/navbar.js"></script>
-  <script type="text/javascript" src ="/js/table.js"></script>
-  <script type="text/javascript" src ="/js/statistics.js"></script>
-  <script type="text/javascript" src ="/js/home.js"></script>
-
+<script type="text/javascript" src="/js/lib/mustache/mustache.js"></script>
+<script type="text/javascript" src ="/js/lib/d3/d3.v3.min.js"></script>
+<script type="text/javascript" src ="/js/lib/jquery/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src ="/js/lib/bootstrap/bootstrap.min.js"></script>
+<script type="text/javascript" src ="/js/lib/detectmobilebrowser/detectmobilebrowser.js"></script>
+<script type="text/javascript" src ="/js/lib/intro/intro.min.js"></script>
+<script type="text/javascript" src ="/js/lib/cookie/jquery.cookie.js"></script>
+<script type="text/javascript" src ="/js/treemap.js"></script>
+<script type="text/javascript" src ="/js/chart.js"></script>
+<script type="text/javascript" src ="/js/cards.js"></script>
+<script type="text/javascript" src ="/js/table.js"></script>
+<script type="text/javascript" src ="/js/navbar.js"></script>
+<script type="text/javascript" src ="/js/statistics.js"></script>
+<script type="text/javascript" src ="/js/home.js"></script>
+<script type="text/javascript" src ="/js/avb.js"></script>
 
 <!-- Minified js -->
 
