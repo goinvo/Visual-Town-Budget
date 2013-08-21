@@ -89,6 +89,117 @@ Sample Expenses, Revenues and Funds from Arlington, MA in `src/httpdocs/data`.
 
 Two data is kept in JSON and CSV format. The JSON format is actively used for computation while the CSV is kept for reference and data download.
 
+####Data structure
+
+` {
+   "key":"Funds",
+   "src":"",
+   "hash":"d42b2bb7",
+   "sub":[
+      {
+         "key":"Tip Fee Stabilization Fund",
+         "src":"",
+         "hash":"68a317f0",
+         "sub":[],
+         "descr":"The Town of Arlington participated in a regional solid waste consortium, and upon leaving the consortium in September 2005, the Town was entitled to revenue derived from the regional agreement.",
+         "url":"",
+         "values":[
+            {
+               "val":1885012.0,
+               "year":2010
+            },
+            {
+               "val":1010675.0,
+               "year":2011
+            },
+            {
+               "val":562906.0,
+               "year":2012
+            },
+            {
+               "val":164000.0,
+               "year":2013
+            }
+         ]
+      },
+      {
+         "key":"Override Stabilization Fund",
+         "src":"",
+         "hash":"cc5b3ad1",
+         "sub":[
+         ],
+         "descr":"This Fund was created as a result of the 2005 Proposition 2 1/2 override. The Town makes annual appropriations to the fund until the time in which it is necessary to make withdrawals for the purposes of balancing the general fund budget.",
+         "url":"",
+         "values":[
+            {
+               "val":1584330.0,
+               "year":2010
+            },
+            {
+               "val":0.0,
+               "year":2011
+            },
+            {
+               "val":3986819.0,
+               "year":2012
+            },
+            {
+               "val":7886125.0,
+               "year":2013
+            }
+         ]
+      },
+      {
+         "key":"Stabilization Fund",
+         "src":"",
+         "hash":"22772b4f",
+         "sub":[
+         ],
+         "descr":"In accordance with M.G.L. Ch. 40 S. 5B, the Town may appropriate in any year an amount not exceeding, in the aggregate, 10% of the amount raised in the preceding fiscal year's tax levy.",
+         "url":"",
+         "values":[
+            {
+               "val":2541858.0,
+               "year":2010
+            },
+            {
+               "val":2551951.0,
+               "year":2011
+            },
+            {
+               "val":2558551.0,
+               "year":2012
+            },
+            {
+               "val":2667328.0,
+               "year":2013
+            }
+         ]
+      }
+   ],
+   "descr":"All accounts which hold money from year to year. For more information, see the Glossary.",
+   "url":"",
+   "values":[
+      {
+         "val":8538240.0,
+         "year":2010
+      },
+      {
+         "val":5089098.0,
+         "year":2011
+      },
+      {
+         "val":8423147.0,
+         "year":2012
+      },
+      {
+         "val":18398926.0,
+         "year":2013
+      }
+   ]
+}
+`
+
 ####Data pipeline
 Town representatives are likely to be proficient in editing spreadsheets. The Visual Budget application currently uses a pipeline that converts CSV files (created with Microsoft Excel) to nested JSON files used for computation.
 
