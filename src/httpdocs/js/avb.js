@@ -49,6 +49,18 @@ avb.thisYear = avb.currentYear;
 avb.userContribution = null;
 // available data sections
 avb.sections = ['revenues', 'expenses', 'funds'];
+// available modes (treemap, table..)
+avb.modes = 
+{
+    "l" : {
+        js : avb.table,
+        template : '#table-template'
+    },
+    "t" : {
+        js : avb.treemap,
+        template : '#treemap-template'
+    }
+}
 
 var timer = 0;
 
@@ -172,7 +184,7 @@ function loadData() {
 function pushUrl(section, year, mode, node) {
     if (ie()) return;
     // format URL
-    var url = '/' + section + '/' + avb.thisYear + '/' + mode + '/' + node;
+    var url = '/' + section + '/' + year + '/' + mode + '/' + node;
     // create history object
     window.history.pushState({
         section: section,
@@ -207,22 +219,11 @@ function popUrl(event) {
 *   @param {string} mode - 'l' for list, 't' for treemap
 */
 function setMode(mode) {
-    var container = $('#avb-wrap'),
-        table = $('#table-template'),
-        treemap = $('#treemap-template');
-
-    //  table/list mode
-    if (mode && mode === 'l') {
-        // initialize table
-        avb.mode = 'l';
-        avb.navigation = avb.table;
-        container.html(Mustache.render(table.html()));
-    // treemap mode
-    } else {
-        avb.navigation = avb.treemap;
-        container.html(Mustache.render(treemap.html()));
-        avb.mode = 't';
-    }
+    var $container = $('#avb-wrap');
+    mode = mode || "t";
+    avb.mode = mode;
+    avb.navigation = avb.modes[mode].js;
+    $container.html(Mustache.render($(avb.modes[mode].template).html()));
 }
 
 /*
@@ -247,9 +248,6 @@ function switchMode(mode, pushurl) {
 function changeYear(year) {
     // don't switch if year is already selected
     if (year === avb.thisYear) return;
-    // go back to root
-   
-    //avb.currentNode = avb.root;
 
     // push change to browser history
     pushUrl(avb.section, year, avb.mode, avb.root.hash);

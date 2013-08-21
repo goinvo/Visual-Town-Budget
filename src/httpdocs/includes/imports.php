@@ -17,12 +17,11 @@
 <script type="text/javascript" src ="/js/treemap.js"></script>
 <script type="text/javascript" src ="/js/chart.js"></script>
 <script type="text/javascript" src ="/js/cards.js"></script>
-<script type="text/javascript" src ="/js/avb.js"></script>
-<script type="text/javascript" src ="/js/navbar.js"></script>
 <script type="text/javascript" src ="/js/table.js"></script>
+<script type="text/javascript" src ="/js/navbar.js"></script>
 <script type="text/javascript" src ="/js/statistics.js"></script>
 <script type="text/javascript" src ="/js/home.js"></script>
-
+<script type="text/javascript" src ="/js/avb.js"></script>
 
 <!-- Minified js -->
 

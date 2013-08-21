@@ -48,6 +48,7 @@ Each component implements a common interface of 3 calls:
 		*	datafiles.php: json datafiles loaded with the page (AJAX can be used as an alternative)
 		*	home.php: homescreen php
 		*	navbar.php: navigation bar html
+		*	templates.php: contains Mustache templates (eg. cards, table row templates...)
 	*	**js**:	Javascript assets
 		*	avb.js: helper functions and initialization routines
 		*	cards.js: cards component routines
