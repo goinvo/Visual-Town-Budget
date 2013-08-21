@@ -37,10 +37,11 @@ avb.table = function () {
     /*
      * Initializes table
      *
-     * @parma {obj} data - dataset
+     * @param {obj} data - dataset
      */
-    var initialize = function (data) {
-        var $table = $('#table-container');
+    var initialize = function ($container, data) {
+        log($container)
+        var $table = $container;
 
         // remove old rows
         $('.tablerow').remove();
@@ -378,7 +379,12 @@ avb.table = function () {
         $(cell).text(impact);
     },
 
-
+    /*
+     *   Draws links that redirect to treemap representation of current entry
+     *
+     *   @param {object} data - current node
+     *   @param {jquery object} - current cell
+     */
     renderMaplink = function(data, cell){
         $(cell).html('<i class="icon-chevron-right maplink"></i>');
         $(cell).click(function(){

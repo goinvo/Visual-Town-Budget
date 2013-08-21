@@ -31,18 +31,18 @@ avb.chart = function () {
     /*
      * Initialization routines
      */
-    initialize = function (div) {
+    initialize = function (container) {
 
         // remove preexisting charts
         if (chart !== undefined) {
             chart.remove();
         }
 
-        chart = d3.select(div).append("svg");
+        chart = d3.select(container).append("svg");
 
         // chart param initialization
-        chart.width = $(div).width();
-        chart.height = $(div).height();
+        chart.width = $(container).width();
+        chart.height = $(container).height();
         chart.xmargin = 50;
         chart.ymargin = 20;
         chart.showLegend = false;

@@ -54,11 +54,13 @@ avb.modes =
 {
     "l" : {
         js : avb.table,
-        template : '#table-template'
+        template : '#table-template',
+        container : '#table-container'
     },
     "t" : {
         js : avb.treemap,
-        template : '#treemap-template'
+        template : '#treemap-template',
+        container : '#navigation'
     }
 }
 
@@ -167,7 +169,7 @@ function loadData() {
 
 
     // navigation (treemap or table)
-    avb.navigation.initialize(avb.root);
+    avb.navigation.initialize($(avb.modes[avb.mode].container), avb.root);
     avb.navigation.open(avb.root.hash);
 
     console.log("UI Loaded.");
@@ -316,7 +318,7 @@ function hexToRgb(hex) {
 *   @param {object} rgb1 - rgb color object
 *   @param {object} rgb2 - rgb color object
 *   @param {float} p - weight (0 to 1)
-*
+*   @return {rgb object} - mixed color
 */
 function mixrgb(rgb1, rgb2, p) {
     return {
@@ -331,6 +333,7 @@ function mixrgb(rgb1, rgb2, p) {
 * 
 *   @param {hex color} hex - color to which transparency has to be applied
 *   @param {float} opacity - level of opacity (0.0 - 1.0 scale)
+*   @return {rgba string} - rgba color with new transparency
 */
 function applyTransparency(hex, opacity){
     var startRgb = mixrgb(hexToRgb(hex), {r:255, g:255, b:255}, opacity);

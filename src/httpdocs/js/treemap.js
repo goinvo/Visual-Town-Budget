@@ -37,18 +37,19 @@ avb.treemap = function () {
     /*
     *   Initialize navigation treemap
     *
+    *   @param {jquery selection} $container - treemap container
     *   @param {node} data - root node that will become root level of treemap
     */
-    var initialize = function (data) {
-        var width = $('#navigation').width(),
-            height = $('#navigation').height();
+    var initialize = function ($container, data) {
+        var width = $container.width(),
+            height = $container.height();
 
         var height = height,
             formatNumber = d3.format(",d"),
             transitioning;
 
         // create svg 
-        nav = d3.select("#navigation").append("svg")
+        nav = d3.select($container.get(0)).append("svg")
             .attr("width", width)
             .attr("height", height)
             .append("g")
