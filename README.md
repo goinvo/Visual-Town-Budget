@@ -91,7 +91,8 @@ Two data is kept in JSON and CSV format. The JSON format is actively used for co
 
 ####Data structure
 
-` {
+```
+{
    "key":"Funds",
    "src":"",
    "hash":"d42b2bb7",
@@ -198,7 +199,7 @@ Two data is kept in JSON and CSV format. The JSON format is actively used for co
       }
    ]
 }
-`
+```
 
 ####Data pipeline
 Town representatives are likely to be proficient in editing spreadsheets. The Visual Budget application currently uses a pipeline that converts CSV files (created with Microsoft Excel) to nested JSON files used for computation.
