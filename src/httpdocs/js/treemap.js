@@ -35,8 +35,10 @@ avb.treemap = function () {
         };
 
     /*
-     *   Initialize navigation treemap
-     */
+    *   Initialize navigation treemap
+    *
+    *   @param {node} data - root node that will become root level of treemap
+    */
     var initialize = function (data) {
         var width = $('#navigation').width(),
             height = $('#navigation').height();
@@ -81,8 +83,11 @@ avb.treemap = function () {
     },
 
         /*
-         * Computes treemap layout for a nested dataset
-         */
+        *   Computes treemap layout for a nested dataset.
+        *   Treemap data will be stored within each node object.
+        *
+        *   @param {node} data - node where treemap should begin
+        */
         update = function (data) {
             // remove all old treemap elements
             nav.selectAll("g").remove();
@@ -151,8 +156,10 @@ avb.treemap = function () {
         }
 
         /*
-         * Draws and displays a treemap layout
-         */
+        *   Draws and displays a treemap layout from node data
+        *
+        *   @param {node} d - node where treemap begins (root)
+        */
         display = function (d) {
 
             // remove all popovers
@@ -163,7 +170,6 @@ avb.treemap = function () {
                 transitioning;
 
             // return block name
-
             function name(d) {
                 return d.parent ? name(d.parent) + "." + d.key : d.key;
             }
@@ -214,7 +220,7 @@ avb.treemap = function () {
                 .attr("class", "parent")
                 .call(rect)
                 .style("fill", function (d) {
-                   return zoneColor(d.color, 0.8);
+                   return applyTransparency(d.color, 0.8);
                 });
 
             // recursively draw children rectangles
@@ -274,8 +280,10 @@ avb.treemap = function () {
         }
 
     /*
-    * Assigns label and popover events (IE only)
-    * this is done because IE9 does not support foreign objects
+    *   Assigns label and popover events (IE only)
+    *   IE9 does not support SVG foreign objects
+    *
+    *   @param {node} d - node object to which popover has to be attached
     */
     ieLabels = function (d) {
 
@@ -319,7 +327,9 @@ avb.treemap = function () {
     }
 
     /*
-    * Assigns label and popover events (Non IE-browsers)
+    *   Assigns label and popover events (Chrome, Safari, FF)
+    *
+    *   @param {node} d - node to be labelled
     */
     textLabels = function (d) {
 
@@ -394,7 +404,9 @@ avb.treemap = function () {
     }
 
     /*
-    * Updates page title when sections
+    *   Updates page title when sections
+    *
+    *   @param {node} data - current node
     */
     updateTitle = function (data) {
         var $title = $(".title-head .text");
@@ -411,7 +423,7 @@ avb.treemap = function () {
 
         // main section such as revenues, expenses and funds need to have
         // descriptions
-        if (inArray(avb.sections, data.key.toLowerCase())) {
+        if ($.inArray(data.key.toLowerCase(), avb.sections) > -1) {
             $('<div class="description">  </div>').appendTo($title).html(data.descr);
         }
 
@@ -432,16 +444,23 @@ avb.treemap = function () {
     }
 
     /*
-    * Opens visible treemap section
-    * @param {string} nodeId - hash that refers to zone
-    * @param {bool} pushUrl - Whether to add url to browser history
+    *   Opens visible treemap section
+    *
+    *   @param {string} nodeId - hash that refers to zone
+    *   @param {integer} transition - duration of transition from current node to destination node (optional)
     */
-    open = function (nodeId, pushUrl, transition) {
+    open = function (nodeId, transition) {
         // find node with given hash or open root node
-        zoneClick.call(null, findHash(nodeId, avb.root) || avb.root, false, 1);
+        zoneClick.call(null, findHash(nodeId, avb.root) || avb.root, false, transition || 1);
     },
 
-
+    /*
+    *   Event triggered on click event in treemap areas
+    *
+    *   @param {node} d - clicked node data
+    *   @param {boolean} click - whether click was triggered
+    *   @param {integer} transition - transition duration
+    */
     zoneClick = function (d, click, transition) {
         // stop event propagation
         var event = window.event || event
@@ -453,7 +472,7 @@ avb.treemap = function () {
         // or data not defined
         if (nav.transitioning || !d) return;
 
-        // // go back if click happened on the same zone
+        // go back if click happened on the same zone
         if (click && d === avb.currentNode.data) {
             $('#zoombutton').trigger('click');
             return;
@@ -537,7 +556,11 @@ avb.treemap = function () {
         currentLevel = g2;
     }
 
-    // sets rectangle (zone) properties
+    /*
+    *   Sets SVG rectangle properties based on treemap node values
+    *
+    *   @param {d3 selection} rect - SVG rectangle
+    */
     rect = function (rect) {
         rect.attr("x", function (d) {
             return nav.x(d.x);
@@ -553,11 +576,6 @@ avb.treemap = function () {
         });
     }
 
-
-    zoneColor = function (color, opacity) {
-        var startRgb = mixrgb(hexToRgb(color), white, opacity);
-        return 'rgba(' + startRgb.r + ',' + startRgb.g + ',' + startRgb.b + ',' + 1.0 + ')';
-    };
 
     return {
         initialize: initialize,

@@ -97,9 +97,9 @@ function initialize(){
 }
 
 /*
-*  Initialized data visualization components
+*  Initializes data visualization components
 *
-*   @param {obj} params - object listing year, mode, section and node
+*  @param {obj} params - year, mode, section and node
 */
 function initializeVisualizations(params) {
     // get previosly set year
@@ -128,11 +128,17 @@ function initializeVisualizations(params) {
     // set viewing mode
     setMode(params.mode);
 
+    // connect search actions
+    $('#searchbox').keyup(avb.navbar.searchChange);
+
     loadData();
 }
 
+/*
+*   Parses JSON files and calls visualization subroutines
+*/
 function loadData() {
-        // get datasets
+    // get datasets
     // loads all jsons in data
     $.each(avb.sections, function (i, url) {
         avb.data[url] = JSON.parse($('#data-' + url).html());
@@ -162,15 +168,20 @@ function loadData() {
 
     // navigation (treemap or table)
     avb.navigation.initialize(avb.root);
-    avb.navigation.open(avb.root.hash, true);
-
-    // connect search actions
-    $('#searchbox').keyup(avb.navbar.searchChange);
+    avb.navigation.open(avb.root.hash);
 
     console.log("UI Loaded.");
 }
 
-// Browser history routines
+/*
+*   Browser history routines
+*   (Chrome, Safari, FF)
+*/
+
+/*
+*   Back button action
+*/
+window.onpopstate = popUrl;
 
 /*
 *   Pushes current status to browser history
@@ -203,15 +214,18 @@ function popUrl(event) {
     if (ie()) return;
 
     if (event.state === null) {
+        avb.navigation.open(avb.root.hash, 500);
     } else if (event.state.mode !== avb.mode) {
         switchMode(event.state.mode, false);
     } else {
-        avb.navigation.open(event.state.nodeId, false);
+        avb.navigation.open(event.state.nodeId, 500);
     }
 }
 
-/* Initialization routines */
 
+/*
+*   Mode selection subroutines
+*/
 
 /*
 *   Sets visualization mode
@@ -240,6 +254,10 @@ function switchMode(mode, pushurl) {
 }
 
 /*
+*   Year selection subroutines
+*/
+
+/*
 * Switches visualizations to selected year
 *
 * @param {int} year - selected year
@@ -257,7 +275,7 @@ function changeYear(year) {
     // update navigation (treemap or table)
     avb.navigation.update(avb.root);
 
-    avb.navigation.open(avb.currentNode.data.hash, false);
+    avb.navigation.open(avb.currentNode.data.hash);
     // remember year over page changes
     $.cookie('year', year, {
             expires: 14
@@ -268,7 +286,9 @@ function changeYear(year) {
     }
 }
 
-/* Utilities */
+/*
+*   Helper functions
+*/
 
 /* As simple as that */
 var log = function (d) {
@@ -304,6 +324,17 @@ function mixrgb(rgb1, rgb2, p) {
         g: Math.round(p * rgb1.g + (1 - p) * rgb2.g),
         b: Math.round(p * rgb1.b + (1 - p) * rgb2.b)
     };
+}
+
+/*
+*   Mixes RGB color with white to give a transparency effect
+* 
+*   @param {hex color} hex - color to which transparency has to be applied
+*   @param {float} opacity - level of opacity (0.0 - 1.0 scale)
+*/
+function applyTransparency(hex, opacity){
+    var startRgb = mixrgb(hexToRgb(hex), {r:255, g:255, b:255}, opacity);
+    return 'rgba(' + startRgb.r + ',' + startRgb.g + ',' + startRgb.b + ',' + 1.0 + ')';
 }
 
 /*
@@ -361,6 +392,8 @@ function ie(){
 
 /*
 *   Stops event propagation (on all browsers)
+*  
+*   @param {event object} event - event for which propagation has to be stopped
 */
 function stopPropagation(event){
     if(event) {
@@ -371,37 +404,13 @@ function stopPropagation(event){
 
 /*
 *   Capitalizes a string
+*
+*   @param {string} string - string to be capitalized
+*   @return {string} - capitalized string
 */
 function capitalize(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
-
-// Back button action
-window.onpopstate = popUrl;
-
-
-var indexOf = function(needle) {
-    if(typeof Array.prototype.indexOf === 'function') {
-        indexOf = Array.prototype.indexOf;
-    } else {
-        indexOf = function(needle) {
-            var i = -1, index;
-
-            for(i = 0; i < this.length; i++) {
-                if(this[i] === needle) {
-                    index = i;
-                    break;
-                }
-            }
-            return index;
-        };
-    }
-    return indexOf.call(this, needle);
-};
-
-var inArray = function(myarray, needle){
-    return indexOf.call(myarray, needle) > -1;
-};
 
 function findSection(hash){
     var section = null;
@@ -413,6 +422,13 @@ function findSection(hash){
     return section;
 }
 
+/*
+*   Finds node with given hash
+*
+*   @param {string} hash - hash to be searched
+*   @param {node} node - current node
+*   @return {node} - node with given hash
+*/
 function findHash(hash, node){
     var index = node.hash.indexOf(hash);
     // results
@@ -421,7 +437,6 @@ function findHash(hash, node){
     if(node.sub !== undefined) {
         // propagate to all children
         for(var i=0; i<node.sub.length; i++) {
-            // aggregate children results
             var subResults = findHash(hash, node.sub[i]);
             if (subResults) return subResults;
         }
