@@ -59,7 +59,7 @@ p {
     Roger Zhu <roger@goinvo.com>
 */
 /*
-* Visualization container
+* Main container
 */
 /* line 11, ../../scss/partials/_avb.scss */
 #avb-wrap {
@@ -74,29 +74,59 @@ p {
 }
 
 /*
-* Section title and description
+* Component dimensions
+* (chart, treemap, tables...)
 */
-/* line 25, ../../scss/partials/_avb.scss */
-.title-head {
-  font-size: 18px;
-  white-space: nowrap;
-  font-size: 28px;
-}
-/* line 29, ../../scss/partials/_avb.scss */
-.title-head div {
-  line-height: 70px;
-}
-/* line 33, ../../scss/partials/_avb.scss */
-.title-head .description {
-  display: inline-block;
-  font-size: 18px;
-  width: 400px;
-  margin-left: 20px;
-  line-height: normal;
-  white-space: normal;
+/*
+* Defaults to > 1200px width
+*/
+/* line 30, ../../scss/partials/_avb.scss */
+.container {
+  width: 1200px;
 }
 
-/* line 43, ../../scss/partials/_avb.scss */
+/* line 35, ../../scss/partials/_avb.scss */
+#chart-wrap {
+  height: 250px;
+}
+
+/* line 40, ../../scss/partials/_avb.scss */
+#info-wrap {
+  height: 250px;
+}
+
+/* line 46, ../../scss/partials/_avb.scss */
+#navigation-container,
+#information-container {
+  height: 600px;
+}
+
+/*
+* Tablet Portait + Landscape
+*/
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+  /* line 56, ../../scss/partials/_avb.scss */
+  .container {
+    width: 980px;
+  }
+
+  /* line 60, ../../scss/partials/_avb.scss */
+  #chart-wrap {
+    height: 220px;
+  }
+
+  /* line 64, ../../scss/partials/_avb.scss */
+  #info-wrap {
+    height: 250px;
+  }
+
+  /* line 69, ../../scss/partials/_avb.scss */
+  #navigation-container,
+  #information-container {
+    height: 550px;
+  }
+}
+/* line 83, ../../scss/partials/_avb.scss */
 .introjs-tooltip {
   font-size: 18px;
 }
@@ -104,7 +134,7 @@ p {
 /*
 * Separator class
 */
-/* line 50, ../../scss/partials/_avb.scss */
+/* line 90, ../../scss/partials/_avb.scss */
 .separator:after {
   display: block;
   border: none;
@@ -119,13 +149,13 @@ p {
 /*
 * Links
 */
-/* line 64, ../../scss/partials/_avb.scss */
+/* line 104, ../../scss/partials/_avb.scss */
 .link {
   text-decoration: underline;
   cursor: pointer;
   color: black;
 }
-/* line 69, ../../scss/partials/_avb.scss */
+/* line 109, ../../scss/partials/_avb.scss */
 .link:hover {
   color: steelblue;
 }
@@ -133,13 +163,13 @@ p {
 /*
 * Opendata section css
 */
-/* line 78, ../../scss/partials/_avb.scss */
+/* line 118, ../../scss/partials/_avb.scss */
 .dataDownload {
   font-size: 18px;
   line-height: 28px;
   margin-top: 10px;
 }
-/* line 83, ../../scss/partials/_avb.scss */
+/* line 123, ../../scss/partials/_avb.scss */
 .dataDownload .icon-download {
   vertical-align: baseline;
 }
@@ -147,30 +177,30 @@ p {
 /*
 * Glossary section css
 */
-/* line 91, ../../scss/partials/_avb.scss */
+/* line 131, ../../scss/partials/_avb.scss */
 #avb-glossary {
   padding: 10px;
 }
-/* line 95, ../../scss/partials/_avb.scss */
+/* line 135, ../../scss/partials/_avb.scss */
 #avb-glossary .definition {
   margin-bottom: 20px;
 }
-/* line 100, ../../scss/partials/_avb.scss */
+/* line 140, ../../scss/partials/_avb.scss */
 #avb-glossary .definition .title,
 #avb-glossary .definition .description {
   font-size: 18px;
 }
-/* line 104, ../../scss/partials/_avb.scss */
+/* line 144, ../../scss/partials/_avb.scss */
 #avb-glossary .definition .title {
   font-weight: bold;
   color: #d63366;
 }
-/* line 109, ../../scss/partials/_avb.scss */
+/* line 149, ../../scss/partials/_avb.scss */
 #avb-glossary .definition .description {
   margin-left: 10px;
 }
 
-/* line 116, ../../scss/partials/_avb.scss */
+/* line 156, ../../scss/partials/_avb.scss */
 #footer {
   text-align: center;
   margin-bottom: 5px;
@@ -442,9 +472,32 @@ p {
     Roger Zhu <roger@goinvo.com>
 */
 /*
-* Cards & legend container
+* Section title and description
 */
 /* line 11, ../../scss/partials/_cards.scss */
+.title-head {
+  font-size: 18px;
+  white-space: nowrap;
+  font-size: 28px;
+}
+/* line 15, ../../scss/partials/_cards.scss */
+.title-head div {
+  line-height: 70px;
+}
+/* line 19, ../../scss/partials/_cards.scss */
+.title-head .description {
+  display: inline-block;
+  font-size: 18px;
+  width: 400px;
+  margin-left: 20px;
+  line-height: normal;
+  white-space: normal;
+}
+
+/*
+* Cards & legend container
+*/
+/* line 33, ../../scss/partials/_cards.scss */
 #info-wrap {
   overflow: hidden;
   height: 100%;
@@ -453,11 +506,11 @@ p {
   *	Cards/legend switcher
   */
 }
-/* line 15, ../../scss/partials/_cards.scss */
+/* line 37, ../../scss/partials/_cards.scss */
 #info-wrap div {
   cursor: pointer;
 }
-/* line 23, ../../scss/partials/_cards.scss */
+/* line 45, ../../scss/partials/_cards.scss */
 #info-wrap .arrow {
   position: absolute;
   right: 0;
@@ -467,13 +520,13 @@ p {
   opacity: 0.1;
   background-color: #f1f1f1;
 }
-/* line 32, ../../scss/partials/_cards.scss */
+/* line 54, ../../scss/partials/_cards.scss */
 #info-wrap .arrow i {
   position: absolute;
   top: 50%;
   left: 3px;
 }
-/* line 38, ../../scss/partials/_cards.scss */
+/* line 60, ../../scss/partials/_cards.scss */
 #info-wrap .arrow:hover {
   opacity: 0.6;
 }
@@ -481,7 +534,7 @@ p {
 /*
 *	Legend
 */
-/* line 48, ../../scss/partials/_cards.scss */
+/* line 70, ../../scss/partials/_cards.scss */
 #legend-wrap {
   position: absolute;
   height: 100%;
@@ -490,18 +543,18 @@ p {
   font-size: 18px;
   line-height: 28px;
 }
-/* line 56, ../../scss/partials/_cards.scss */
+/* line 78, ../../scss/partials/_cards.scss */
 #legend-wrap #legend-container {
   height: 100%;
   overflow-y: auto;
 }
-/* line 61, ../../scss/partials/_cards.scss */
+/* line 83, ../../scss/partials/_cards.scss */
 #legend-wrap .legend-label {
   width: 16px;
   height: 16px;
   border-radius: 8px;
 }
-/* line 67, ../../scss/partials/_cards.scss */
+/* line 89, ../../scss/partials/_cards.scss */
 #legend-wrap tr :first-child {
   margin-right: 5px;
 }
@@ -509,7 +562,7 @@ p {
 /*
 *	Cards container
 */
-/* line 75, ../../scss/partials/_cards.scss */
+/* line 97, ../../scss/partials/_cards.scss */
 #slider-wrap {
   height: 100%;
   width: 100%;
@@ -521,39 +574,39 @@ p {
 /*
 *	Cards
 */
-/* line 87, ../../scss/partials/_cards.scss */
+/* line 109, ../../scss/partials/_cards.scss */
 #cards {
   position: relative;
   width: 100%;
   margin-top: 15px;
   overflow: auto;
 }
-/* line 93, ../../scss/partials/_cards.scss */
+/* line 115, ../../scss/partials/_cards.scss */
 #cards .card {
   padding: 10px 0px 10px 0px;
 }
-/* line 96, ../../scss/partials/_cards.scss */
+/* line 118, ../../scss/partials/_cards.scss */
 #cards .card.top {
   padding-top: 5px;
 }
-/* line 101, ../../scss/partials/_cards.scss */
+/* line 123, ../../scss/partials/_cards.scss */
 #cards .card-desc {
   font-size: 18px;
   line-height: 28px;
   color: gray;
 }
-/* line 107, ../../scss/partials/_cards.scss */
+/* line 129, ../../scss/partials/_cards.scss */
 #cards .card-value {
   font-size: 28px;
   line-height: 28px;
   font-family: 'Georgia';
 }
-/* line 113, ../../scss/partials/_cards.scss */
+/* line 135, ../../scss/partials/_cards.scss */
 #cards .card-source {
   padding-left: 0;
   padding-right: 0;
 }
-/* line 117, ../../scss/partials/_cards.scss */
+/* line 139, ../../scss/partials/_cards.scss */
 #cards .card-source .card-value {
   text-decoration: underline;
   font-size: 18px;
@@ -561,7 +614,7 @@ p {
   display: block;
   color: #5776a2;
 }
-/* line 126, ../../scss/partials/_cards.scss */
+/* line 148, ../../scss/partials/_cards.scss */
 #cards .card-source .card-value:hover {
   color: #98abc7;
 }
@@ -570,7 +623,7 @@ p {
 * Tablet Portait + Landscape
 */
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
-  /* line 137, ../../scss/partials/_cards.scss */
+  /* line 159, ../../scss/partials/_cards.scss */
   #cards {
     margin-top: 0px;
   }
@@ -950,60 +1003,4 @@ p {
 #ie-popover .text {
   color: white;
   padding: 5px;
-}
-
-/*
-	File Overview:	Basic structural styles.
-	Authors:
-    Ivan DiLernia <ivan@goinvo.com>
-    Roger Zhu <roger@goinvo.com>
-*/
-/*
-* Defaults to > 1200px width
-*/
-/* line 11, ../../scss/partials/_structure.scss */
-.container {
-  width: 1200px;
-}
-
-/* line 16, ../../scss/partials/_structure.scss */
-#chart-wrap {
-  height: 250px;
-}
-
-/* line 21, ../../scss/partials/_structure.scss */
-#info-wrap {
-  height: 250px;
-}
-
-/* line 27, ../../scss/partials/_structure.scss */
-#navigation-container,
-#information-container {
-  height: 600px;
-}
-
-/*
-* Tablet Portait + Landscape
-*/
-@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
-  /* line 37, ../../scss/partials/_structure.scss */
-  .container {
-    width: 980px;
-  }
-
-  /* line 41, ../../scss/partials/_structure.scss */
-  #chart-wrap {
-    height: 220px;
-  }
-
-  /* line 45, ../../scss/partials/_structure.scss */
-  #info-wrap {
-    height: 250px;
-  }
-
-  /* line 50, ../../scss/partials/_structure.scss */
-  #navigation-container,
-  #information-container {
-    height: 550px;
-  }
 }

@@ -6,6 +6,28 @@
 */
 
 /*
+* Section title and description
+*/
+.title-head{
+  font-size: $text-big;
+  white-space: nowrap;
+  font-size: $text-title;
+  div{
+    line-height: 70px;
+  }
+
+  .description{
+    display: inline-block;
+    font-size: $text-big;
+    width: 400px;
+    margin-left: 20px;
+    line-height: normal;
+    white-space: normal;
+  }
+}
+
+
+/*
 * Cards & legend container
 */
 #info-wrap{
