@@ -8,16 +8,16 @@ Open-source budget visualization framework.
 * SCSS compiler
 
 ##Setup
-Clone this repository to your local machine and set your webserver root to point to `src/httpdocs`, the application should work out of the box, this repository contains some sample data that can be used for testing.
+Clone this repository to your local machine and point your webserver root to `src/httpdocs`, the application should work out of the box, this repository contains some sample data that can be used for testing.
 
 ##Components
 ####Cards
-Report statical information about dataset (`src/httpdocs/js/cards.js`).
+Report statical information about selected entry (`src/httpdocs/js/cards.js`).
 
 ![card-img](https://raw.github.com/goinvo/Visual-Town-Budget/develop/docs/img/cards.png)
 
 ####Chart
-Shows data values change over time (`src/httpdocs/js/chart.js`).
+Shows data change over time (`src/httpdocs/js/chart.js`).
 
 ![chart-img](https://raw.github.com/goinvo/Visual-Town-Budget/develop/docs/img/chart.png)
 
@@ -48,9 +48,9 @@ Each component implements a common interface of 3 calls:
 			*	`processCSV.py`: converts CSV file to nested JSON structure
 			*	`update.php`: Interface for data update
 	*	**img**: image assets
-	*	**includes**: templates and website components
+	*	**includes**: templates and HTML assets
 		*	`imports.php`: CSS and JS assets imports
-		*	`datafiles.php`: json datafiles loaded with the page (AJAX can be used as an alternative)
+		*	`datafiles.php`: json datafiles loaded in each instance (AJAX can be used as an alternative)
 		*	`home.php`: homescreen html
 		*	`navbar.php`: navigation bar html
 		*	`templates.php`: contains Mustache templates (eg. table row templates, cards...)
@@ -58,16 +58,16 @@ Each component implements a common interface of 3 calls:
 		*	`avb.js`: helper functions and initialization routines
 		*	`cards.js`: cards component routines
 		*	`chart.js`: chart component routines
-		*	`home.js`: homescreen routines and tutorials code
+		*	`home.js`: homescreen routines and introJs based tutorials code
 		*	`statistics.js`: functions used to generate statistical info and number formatting functions
 		* 	`table.js`: table component routines
 		*	`treemap.js`: treemap component routines
 * **/src/scss**: SCSS files
 	*	`print.scss`:  SCSS applied when printing a Visual Budget page
 	*	`global.scss`: main SCSS file (imports all the partials defined below)
-	*	**partials**: contains components SCSS files
-		*	`_avb.scss`: contains section styles
-		* 	`_base.scss`: contains html, body styles, colors and font variables
+	*	**partials**: SCSS assets
+		*	`_avb.scss`:  section styles
+		* 	`_base.scss`: html, body styles, colors and font variables
 		*	`_cards.scss`: styles for card component
 		*	`_chart.scss`: styles for chart component
 		*	`_home.scss`: styles for homescreen
@@ -85,21 +85,39 @@ Each component implements a common interface of 3 calls:
 *	IntroJS (required for tutorials)
 
 ##Sample Datasets
-Sample Expenses, Revenues and Funds from Arlington, MA in `src/httpdocs/data`.
+Sample `Expenses.json`, `Revenues.json` and `Funds.json` from Arlington, MA in `src/httpdocs/data`.
 
-Two data is kept in JSON and CSV format. The JSON format is actively used for computation while the CSV is kept for reference and data download.
+Budget data is kept in JSON and CSV format. The JSON format is actively used for computation while the CSV format is kept for reference and data download.
 
 ####Data structure
 
+The base data unit is an object with the following fields:
+
+*	`key` {string}: entry name
+*	`src` {url string}: link to data source from where entry data was extracted (optional)
+*	`hash` {string}: entry id (can be arbitrary)
+*	`sub` {array of other entries}: subsections that make up current entry
+*	`descr` {string} : entry description (optional)
+*	`values` {array of value objects} : entry values over time
+
+A simple value object is defined by:
+
+*	`year` : year of value
+*	`val` : value
+
+This data structure could be changed should it be considered not ideal for future uses.
+
+####Data structure sample
+The data sample below is partial section of `src/httpdocs/data/funds.json`.
 ```
 {
    "key":"Funds",
-   "src":"",
+   "src":"http://www.arlingtonma.gov/",
    "hash":"d42b2bb7",
    "sub":[
       {
          "key":"Tip Fee Stabilization Fund",
-         "src":"",
+         "src":"www.arlin",
          "hash":"68a317f0",
          "sub":[],
          "descr":"The Town of Arlington participated in a regional solid waste consortium, and upon leaving the consortium in September 2005, the Town was entitled to revenue derived from the regional agreement.",
@@ -127,8 +145,7 @@ Two data is kept in JSON and CSV format. The JSON format is actively used for co
          "key":"Override Stabilization Fund",
          "src":"",
          "hash":"cc5b3ad1",
-         "sub":[
-         ],
+         "sub":[],
          "descr":"This Fund was created as a result of the 2005 Proposition 2 1/2 override. The Town makes annual appropriations to the fund until the time in which it is necessary to make withdrawals for the purposes of balancing the general fund budget.",
          "url":"",
          "values":[
@@ -154,8 +171,7 @@ Two data is kept in JSON and CSV format. The JSON format is actively used for co
          "key":"Stabilization Fund",
          "src":"",
          "hash":"22772b4f",
-         "sub":[
-         ],
+         "sub":[],
          "descr":"In accordance with M.G.L. Ch. 40 S. 5B, the Town may appropriate in any year an amount not exceeding, in the aggregate, 10% of the amount raised in the preceding fiscal year's tax levy.",
          "url":"",
          "values":[
@@ -204,10 +220,10 @@ Two data is kept in JSON and CSV format. The JSON format is actively used for co
 ####Data pipeline
 Town representatives are likely to be proficient in editing spreadsheets. The Visual Budget application currently uses a pipeline that converts CSV files (created with Microsoft Excel) to nested JSON files used for computation.
 
-A python script `src/httpdocs/data/processing/processCSV.py` converts a flat CSV file into a nested JSON structure. A php script `src/httpdocs/data/processing/update.php` orchestrates the entire data update procedure.
+A python script `src/httpdocs/data/processing/processCSV.py` converts a flat CSV file into the nested JSON structure listed above. A php script `src/httpdocs/data/processing/update.php` orchestrates the entire data update procedure.
 
-For more information about data formats or update procedures check `docs/data`.
+For more information about CSV data formats or update procedures check `docs/data`.
 
 ## Future upgrades
-*	Decoupling town related assets (budget sections, links, logos, data) from core visualization techniques
-*	Changing data sections now requires to manually change links (`navbar.php`), homepage data (`home.php`), initialization javascripts (`avb.js`) and update routines (`processCSV.py`, `update.php`). This process should be simplified to allow a simpler migration between different types of data (eg. Replace 'revenues' with 'Town Departments').
+*	Decoupling town related assets (budget sections, links, logos, data..) from core visualization techniques
+*	Changing data sections (eg. Replace 'revenues' with 'Town Departments') requires to manually change links (`navbar.php`), homepage data (`home.php`), initialization javascripts (`avb.js`) and update routines (`processCSV.py`, `update.php`). This process should be simplified to allow a simpler migration between different types of data.
