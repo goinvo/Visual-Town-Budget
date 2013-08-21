@@ -9,26 +9,17 @@ style="position: absolute; top: 0; right: 0; border: 0;"></a>
             Data
         </div>
 
-        <div class="dataDownload">
-            <span><i class="icon-download"></i></span> <span class=
-            "name">Revenues</span> <span>-</span> <a href=
-            "data/revenues.csv">CSV</a> <span>-</span> <a href=
-            "data/revenues.json">Json</a>
-        </div>
+        <?php
+            foreach($dataSections as $section){
+                echo '<div class="dataDownload">';
+                echo '<span><i class="icon-download"></i></span>';
+                echo '<span class="name">'.ucfirst($section).'</span> <span>-</span>';
+                echo '<a href="'.$section.'.csv">CSV</a> <span>-</span>';
+                echo '<a href="'.$section.'.json">Json</a>';
+                echo '</div>';
+            }
+        ?>
 
-        <div class="dataDownload">
-            <span><i class="icon-download"></i></span> <span class=
-            "name">Expenses</span> <span>-</span> <a href=
-            "data/expenses.csv">CSV</a> <span>-</span> <a href=
-            "data/expenses.json">Json</a>
-        </div>
-
-        <div class="dataDownload">
-            <span><i class="icon-download"></i></span> <span class=
-            "name">Funds</span> <span>-</span> <a href=
-            "data/funds.csv">CSV</a> <span>-</span> <a href=
-            "data/funds.json">Json</a>
-        </div>
     </div>
 
     <div class="separator" style="margin-bottom:20px;">

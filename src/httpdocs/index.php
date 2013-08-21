@@ -9,6 +9,7 @@
 
  
   <?php
+    $dataSections = array('revenues', 'expenses', 'funds');
     require_once 'includes/imports.php';
   ?>
 

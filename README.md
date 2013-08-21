@@ -7,6 +7,9 @@ Open-source budget visualization framework.
 * PHP-enabled webserver
 * SCSS compiler
 
+##Setup
+Clone this repository to your local machine and set your webserver root to point to `src/httpdocs`, the application should work out of the box, this repository contains some sample data that can be used for testing.
+
 ##Components
 ####Cards
 Report statical information about dataset (`src/httpdocs/js/cards.js`).
@@ -42,36 +45,47 @@ Each component implements a common interface of 3 calls:
 	*	**css**: compiled SCSS and libraries (bootstrap, introJs)
 	*	**data**: CSV and JSON data files
 		*	**processing**:	temporary directory for data conversion
+			*	`processCSV.py`: converts CSV file to nested JSON structure
+			*	`update.php`: Interface for data update
 	*	**img**: image assets
 	*	**includes**: templates and website components
-		*	imports.php: CSS and JS assets import
-		*	datafiles.php: json datafiles loaded with the page (AJAX can be used as an alternative)
-		*	home.php: homescreen php
-		*	navbar.php: navigation bar html
-		*	templates.php: contains Mustache templates (eg. cards, table row templates...)
+		*	`imports.php`: CSS and JS assets imports
+		*	`datafiles.php`: json datafiles loaded with the page (AJAX can be used as an alternative)
+		*	`home.php`: homescreen html
+		*	`navbar.php`: navigation bar html
+		*	`templates.php`: contains Mustache templates (eg. table row templates, cards...)
 	*	**js**:	Javascript assets
-		*	avb.js: helper functions and initialization routines
-		*	cards.js: cards component routines
-		*	chart.js: chart component routines
-		*	home.js: homescreen routines and tutorials code
-		*	statistics.js: functions used to generate statistical info and number formatting functions
-		* 	table.js: table component routines
-		*	treemap.js: treemap component routines
+		*	`avb.js`: helper functions and initialization routines
+		*	`cards.js`: cards component routines
+		*	`chart.js`: chart component routines
+		*	`home.js`: homescreen routines and tutorials code
+		*	`statistics.js`: functions used to generate statistical info and number formatting functions
+		* 	`table.js`: table component routines
+		*	`treemap.js`: treemap component routines
 * **/src/scss**: SCSS files
-	*	print.scss:  SCSS applied when printing a Visual Budget page
-	*	global.scss: main SCSS file (imports all the partials defined below)
+	*	`print.scss`:  SCSS applied when printing a Visual Budget page
+	*	`global.scss`: main SCSS file (imports all the partials defined below)
 	*	**partials**: contains components SCSS files
-		*	_avb.scss: contains section styles
-		* 	_base.scss: contains html, body styles, colors and font variables
-		*	_cards.scss: styles for card component
-		*	_chart.scss: styles for chart component
-		*	_home.scss: styles for homescreen
-		*	_navbar.scss: styles for top navigation bar
-		*	_table.scss: styles for tabular view
-		*	_treemap.scss: styles for treemap component
+		*	`_avb.scss`: contains section styles
+		* 	`_base.scss`: contains html, body styles, colors and font variables
+		*	`_cards.scss`: styles for card component
+		*	`_chart.scss`: styles for chart component
+		*	`_home.scss`: styles for homescreen
+		*	`_navbar.scss`: styles for top navigation bar
+		*	`_table.scss`: styles for tabular view
+		*	`_treemap.scss`: styles for treemap component
+
+####Required Libraries
+*	Bootstrap (grid layout, dropdowns..)
+*	D3 (visualizations)
+*	Jquery Cookie
+*	DetectMobileBrowser
+*	Jquery
+*	Mustache (templates)
+*	IntroJS (required for tutorials)
 
 ##Sample Datasets
-Sample Expenses, Revenues and Funds from Arlington, MA in `src/httpdocs/data/`.
+Sample Expenses, Revenues and Funds from Arlington, MA in `src/httpdocs/data`.
 
 Two data is kept in JSON and CSV format. The JSON format is actively used for computation while the CSV is kept for reference and data download.
 
@@ -81,3 +95,7 @@ Town representatives are likely to be proficient in editing spreadsheets. The Vi
 A python script `src/httpdocs/data/processing/processCSV.py` converts a flat CSV file into a nested JSON structure. A php script `src/httpdocs/data/processing/update.php` orchestrates the entire data update procedure.
 
 For more information about data formats or update procedures check `docs/data`.
+
+## Future upgrades
+*	Decoupling town related assets (budget sections, links, logos, data) from core visualization techniques
+*	Changing data sections now requires to manually change links (`navbar.php`), homepage data (`home.php`), initialization javascripts (`avb.js`) and update routines (`processCSV.py`, `update.php`). This process should be simplified to allow a simpler migration between different types of data (eg. Replace 'revenues' with 'Town Departments').
