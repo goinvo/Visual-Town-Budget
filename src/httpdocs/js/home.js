@@ -250,7 +250,7 @@ avb.home = function () {
     },
 
     sectionClick = function() {
-        initialize({
+        initializeVisualizations({
             section: $(this).attr('data-section').toLowerCase()
         });
         // home page minimizes right after treemap values are calculated
@@ -368,7 +368,7 @@ avb.home = function () {
         }, 1500);
 
         // start application
-        initialize({
+        initializeVisualizations({
             "section": "funds"
         });
         

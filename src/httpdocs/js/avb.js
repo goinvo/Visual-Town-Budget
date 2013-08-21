@@ -61,14 +61,35 @@ Number.prototype.px = function () {
     return this.toString() + "px";
 };
 
-
+/*
+*   Reads parameters from current url path and calls related
+*   initialization routines
+*/
+function initialize(){
+    var urlComponents = window.location.pathname.substring(1).split('/');
+    var params = {
+        section : urlComponents[0],
+        year : urlComponents[1],
+        mode : urlComponents[2],
+        node : urlComponents[3]
+    }
+    avb.navbar.initialize();
+    if(params.section === undefined || params.section === "") {
+        avb.home.initialize();
+        avb.home.show();
+    } else if($.inArray(params.section, avb.sections) > -1){
+        initializeVisualizations(params);
+    } else {
+        avb.navbar.minimize();
+    }
+}
 
 /*
-*   Bootstraps visual budget application
+*  Initialized data visualization components
 *
 *   @param {obj} params - object listing year, mode, section and node
 */
-function initialize(params) {
+function initializeVisualizations(params) {
     // get previosly set year
     var yearCookie = parseInt(jQuery.cookie('year'));
     // use year listed in the params object

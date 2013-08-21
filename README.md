@@ -39,11 +39,15 @@ Each component implements a common interface of 3 calls:
 ##Directory Structure
 * **/config**: Compass configuration files
 * **/src/httpdocs**: Application root directory
-	*	**css**: compiled SCSS and libraries CSS
+	*	**css**: compiled SCSS and libraries (bootstrap, introJs)
 	*	**data**: CSV and JSON data files
 		*	**processing**:	temporary directory for data conversion
 	*	**img**: image assets
 	*	**includes**: templates and website components
+		*	imports.php: CSS and JS assets import
+		*	datafiles.php: json datafiles loaded with the page (AJAX can be used as an alternative)
+		*	home.php: homescreen php
+		*	navbar.php: navigation bar html
 	*	**js**:	Javascript assets
 		*	avb.js: helper functions and initialization routines
 		*	cards.js: cards component routines
