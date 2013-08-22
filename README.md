@@ -227,6 +227,7 @@ For more information about CSV data formats or update procedures check `docs/dat
 ## Future upgrades
 *  Decoupling town related assets (budget sections, links, logos, data..) from core visualization techniques
 *  Changing data sections (eg. Replace 'revenues' with 'Town Departments') requires to manually change links (`navbar.php`), homepage data (`home.php`), initialization javascripts (`avb.js`) and update routines (`processCSV.py`, `update.php`). This process should be simplified to allow a simpler migration between different types of data.
+*  Grid space. As of now, although each viz component implements a common interface, each visualization is tied to specific div (or html section), the creation of a 'grid' space that allows any visualization to be 'attached' to any area of the screen and would greatly enhance the customization and upgradability of the application.
 
 ##Core Contributors
 

@@ -259,7 +259,7 @@ avb.home = function () {
     }
 
     /*
-    * retrieves resident annual contribution
+    *   retrieves resident annual contribution
     */
     getContribution = function () {
         // reads contribution cookie
@@ -287,9 +287,9 @@ avb.home = function () {
     },
 
     /*
-    * useful snippet on stackoverflow
-    * keeps non-numeric characters from being typed in the input box
-    * http://stackoverflow.com/questions/469357/html-text-input-allow-only-numeric-input
+    *   useful snippet on stackoverflow
+    *   keeps non-numeric characters from being typed in the input box
+    *   http://stackoverflow.com/questions/469357/html-text-input-allow-only-numeric-input
     */
     validate = function (evt) {
 
@@ -380,7 +380,7 @@ avb.home = function () {
     /*
     *   Minimizes home page
     *
-    *   @parma {boolean} showtour - whether to show tour after homepage
+    *   @param {boolean} showtour - whether to show tour after homepage
     */
     hide = function (showtour) {
         // return if home is not initialized

@@ -74,7 +74,7 @@ avb.treemap = function () {
         $('#zoombutton').center();
 
         // initialize chart
-        avb.chart.initialize('#chart');
+        avb.chart.initialize($('#chart'));
 
         avb.currentNode.data = data;
 
@@ -445,7 +445,7 @@ avb.treemap = function () {
     }
 
     /*
-    *   Opens visible treemap section
+    *   Displays node in treemap
     *
     *   @param {string} nodeId - hash that refers to zone
     *   @param {integer} transition - duration of transition from current node to destination node (optional)

@@ -29,20 +29,22 @@ avb.chart = function () {
     var chart, layers
 
     /*
-     * Initialization routines
-     */
-    initialize = function (container) {
+    *   Initialization routines
+    *   
+    *   @param {jquery obj} $container - container for visualization
+    */
+    initialize = function ($container) {
 
         // remove preexisting charts
         if (chart !== undefined) {
             chart.remove();
         }
 
-        chart = d3.select(container).append("svg");
+        chart = d3.select($container.get(0)).append("svg");
 
         // chart param initialization
-        chart.width = $(container).width();
-        chart.height = $(container).height();
+        chart.width = $container.width();
+        chart.height = $container.height();
         chart.xmargin = 50;
         chart.ymargin = 20;
         chart.showLegend = false;
@@ -69,8 +71,8 @@ avb.chart = function () {
     * Populates legend for all chart layers
     *
     * Arguments:
-    * layers - *(array of svg groups)* an array containing all layers
-    * parent - *(object)* data for upper level node (needed to calculate percentages)
+    * @param {array of svg groups} layers - all layers for which a legend has to be generated
+    * @param {node} parent - parent of current sections (used to calculate % values)
     */
     legend = function (layers, parent) {
 
@@ -112,7 +114,7 @@ avb.chart = function () {
     },
 
     /*
-    *   Initializes layers
+    *   Initializes stacked area chart
     */
     initializeLayers = function () {
 
@@ -138,7 +140,10 @@ avb.chart = function () {
     },
 
     /*
-    * Updates chart with current data
+    *   Displays node in chart
+    *
+    *   @param {node} data - node for which data has to be displayed
+    *   @param {hex} color - chart area color
     */
     open = function (data, color) {
         // do a redraw in case function is called with no arguments
@@ -355,8 +360,8 @@ avb.chart = function () {
     },
 
     /*
-    * Shows/hides datapoint markers when necessary
-    * Eg. markers shouldn't be shown in the layered region
+    *   Shows/hides datapoint markers when necessary
+    *   Eg. markers shouldn't be shown in the layered region
     */
     setDatapointsVisibility = function () {
         chart.circles.selectAll('circle').attr('opacity', function () {
@@ -370,7 +375,7 @@ avb.chart = function () {
     },
 
     /*
-    * Toggles layer legend
+    *   Toggles legend
     */
     toggleLegend = function () {
         // return if action is being repeated
@@ -397,7 +402,9 @@ avb.chart = function () {
     },
 
     /*
-    * Handles drag and drops in chart
+    *   Handles chart sliding interaction
+    *
+    *   @param {int} x - current x boundary between non-layered and layered part
     */
     slideLayers = function (x) {
         // updates information data based on the 
@@ -428,9 +435,9 @@ avb.chart = function () {
     },
 
     /*
-    * Binds all events for chart interactivity
+    *   Binds all events for chart interactivity
     */
-    addActions = function (chart) {
+    addActions = function () {
         var touchStart = {},
             delta = {},
             mousedown = false;
@@ -506,9 +513,11 @@ avb.chart = function () {
     },
 
     /*
-    * Draws layers
+    *   Draws stacked area chart
+    *   
+    *   @param {node} data - node for which data has to be displayed
     */
-    drawLayers = function (jsondata, transition) {
+    drawLayers = function (data) {
 
         // puts a shadow at boundary between layered
         // and non-layered part of the chart
@@ -547,11 +556,11 @@ avb.chart = function () {
 
         // when there visualized part has no subsections there
         // is not much to be done
-        if (jsondata.sub.length === 0) {
+        if (data.sub.length === 0) {
             // append the shadow
             appendShadow(layers);
             // update legend
-            var legendData = chart.areagroup.datum(jsondata);
+            var legendData = chart.areagroup.datum(data);
             legend(legendData, legendData.datum());
             return;
         }
@@ -598,7 +607,7 @@ avb.chart = function () {
                 return d.val;
             });
 
-        var instance = stack(jsondata.sub);
+        var instance = stack(data.sub);
 
         // calculate areas
         var regions = layers.selectAll(".browser")
@@ -627,7 +636,7 @@ avb.chart = function () {
             });
 
         // legend
-        legend(regions, jsondata);
+        legend(regions, data);
 
         // not fundamental, improves layers looks
         $('.layers g:last .multiline').remove();

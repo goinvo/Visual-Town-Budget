@@ -35,10 +35,11 @@ avb.table = function () {
     var impactScale = d3.scale.linear().clamp(true).domain([0, 100]).range(["#aaa", "#333"]);
 
     /*
-     * Initializes table
-     *
-     * @param {obj} data - dataset
-     */
+    * Initializes table
+    *
+    *   @param {jQuery obj} $container - table container
+    *   @param {node} data - nodes to be displayed
+    */
     var initialize = function ($container, data) {
         log($container)
         var $table = $container;
@@ -86,8 +87,8 @@ avb.table = function () {
 
 
     /*
-     * Aligns columns when the indentation level changes
-     */
+    *   Aligns columns when the indentation level changes
+    */
     alignRows = function () {
         // could do this using a stack
         var maxLevel = 0;
@@ -105,11 +106,14 @@ avb.table = function () {
     },
 
     /*
-    * Renders row containing text message
+    *   Renders row containing just text (used to display 'No results found' msg)
+    *
+    *   @param {string} msg - message to be displayed
+    *   @param {jQuery obj} table - container
     */
-    textRow = function (msg, table) {
+    textRow = function (msg, $table) {
         var template = $('#row-template');
-        var rendered = table.append(Mustache.render(template.html())).children().last();
+        var rendered = $table.append(Mustache.render(template.html())).children().last();
         // align text to center
         rendered.css({
             'text-align': 'center'
@@ -117,8 +121,8 @@ avb.table = function () {
     },
 
     /*
-     *   Click event for rows
-     */
+    *   Click event for rows
+    */
     rowClick = function () {
         var row = $(this);
         var node = row.data();
@@ -165,14 +169,14 @@ avb.table = function () {
     },
 
     /*
-     *   Renders row based on node data
-     *
-     *   @param {object} node - current node
-     *   @param {int} level - current depth
-     *   @param {jquery object} - container to which new row is appended
-     *
-     *   @return {jquery object} - new row
-     */
+    *   Renders row based on node data
+    *
+    *   @param {object} node - current node
+    *   @param {int} level - current depth
+    *   @param {jquery object} - container to which new row is appended
+    *
+    *   @return {jquery object} - new row
+    */
     renderNode = function (node, level, container) {
         // append row to container
         var template = $('#row-template');
@@ -237,11 +241,11 @@ avb.table = function () {
     },
 
     /*
-     * Draws D3 sparkline in cell
-     *
-     *   @param {object} data - current node
-     *   @param {jquery object} - current cell
-     */
+    * Draws D3 sparkline in cell
+    *
+    *   @param {object} data - current node
+    *   @param {jquery object} - current cell
+    */
     renderSparkline = function (node, cell) {
 
         // delete old sparklines
@@ -318,11 +322,11 @@ avb.table = function () {
     },
 
     /*
-     *   Draws growth cell for current node
-     *
-     *   @param {object} data - current node
-     *   @param {jquery object} - current cell
-     */
+    *   Draws growth cell for current node
+    *
+    *   @param {object} data - current node
+    *   @param {jquery object} - current cell
+    */
     renderGrowth = function (data, cell) {
         // when year is first year report previous year value to be 0
         // growth will result to be 100%
@@ -349,11 +353,11 @@ avb.table = function () {
     }
 
     /*
-     *   Draws amount cell for current node
-     *
-     *   @param {object} data - current node
-     *   @param {jquery object} - current cell
-     */
+    *   Draws amount cell for current node
+    *
+    *   @param {object} data - current node
+    *   @param {jquery object} - current cell
+    */
     renderAmount = function (data, cell) {
         var amount = (data.values[yearIndex].val);
         // apply color based on scale
@@ -365,11 +369,11 @@ avb.table = function () {
     },
 
     /*
-     *   Draws inpact cell for current node
-     *
-     *   @param {object} data - current node
-     *   @param {jquery object} - current cell
-     */
+    *   Draws inpact cell for current node
+    *
+    *   @param {object} data - current node
+    *   @param {jquery object} - current cell
+    */
     renderImpact = function (data, cell) {
         var impact = stats.impact.value(data);
         // apply color based on scale
@@ -380,11 +384,11 @@ avb.table = function () {
     },
 
     /*
-     *   Draws links that redirect to treemap representation of current entry
-     *
-     *   @param {object} data - current node
-     *   @param {jquery object} - current cell
-     */
+    *   Draws links that redirect to treemap representation of current entry
+    *
+    *   @param {object} data - current node
+    *   @param {jquery object} - current cell
+    */
     renderMaplink = function(data, cell){
         $(cell).html('<i class="icon-chevron-right maplink"></i>');
         $(cell).click(function(){
@@ -403,8 +407,8 @@ avb.table = function () {
     },
 
     /*
-     * Updates/re-renders table rows
-     */
+    *   Updates/re-renders table rows
+    */
     update = function () {
         // update all rows
         $('.tablerow').each(function () {

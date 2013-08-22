@@ -176,6 +176,12 @@ tables = {
     search: [stats.name, stats.growth, stats.sparkline, stats.amount, stats.parent,  stats.section, stats.mapLink]
 }
 
+/*
+*   Formats currency
+*
+*   @param {float/int} value - number to be formatted
+*   @return {string} formatted value
+*/
 function formatcurrency(value) {
     if (value === undefined) {
         return "N/A";
@@ -190,11 +196,23 @@ function formatcurrency(value) {
     }
 }
 
+/*
+*   Formats currency with no rounding
+*
+*   @param {float/int} value - number to be formatted
+*   @return {string} formatted value
+*/
 function formatCurrencyExact(value) {
     var commasFormatter = d3.format(",.0f")
     return "$ " + commasFormatter(value);
 }
 
+/*
+*   Formats percentage
+*
+*   @param {float/int} value - number to be formatted
+*   @return {string} formatted value
+*/
 function formatPercentage(value) {
     if (value > 0) {
         return "+ " + value.toString() + "%";
@@ -205,6 +223,12 @@ function formatPercentage(value) {
     }
 }
 
+/*
+*   Calculates growth (% change) compared to previous datapoint
+*
+*   @param {node} data - node for which growth has to be computed
+*   @return {string} - growth in %
+*/
 function growth(data) {
     var previous = (data.values[yearIndex - 1] !== undefined) ? data.values[yearIndex - 1].val : 0;
     var perc = Math.round(100 * 100 * (data.values[yearIndex].val - previous) / data.values[yearIndex].val) / 100;

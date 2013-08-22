@@ -38,7 +38,7 @@ avb.cards = function(){
     $cards;
 
     /*
-    * initializes page cards
+    *   Initializes cards
     */
     initialize = function(){
         cardstack = [];
@@ -56,25 +56,18 @@ avb.cards = function(){
             if (i%2 === 0) {
                 container = $(rowHtml).appendTo($cards);
             }
-            // draw single card
-            var newcard = drawCard(container, deck[i]);
+            // creates div for new card
+            var newcard = $('<div class="card-wrapper"></div>').appendTo(container);
+            // var newcard = drawCard(container, deck[i]);
             // remember card object for future updates
             cardstack.push(newcard);
         }
     },
 
     /*
-    * Draws single card
-    * @param {JQuery obj} $container - div containing card
-    */
-    drawCard = function ($container, card){
-        // renders card template
-        return $('<div class="card-wrapper"></div>').appendTo($container);
-    },
-
-    /*
-    * Updates all cards with latest data
-    * @param {object} data - data about current section
+    *   Updates all cards with latest data
+    *
+    *   @param {node} data - node for which data has to be displayed
     */
     update = function (data) {
 
@@ -96,21 +89,18 @@ avb.cards = function(){
         });
     },
 
+    /*
+    *   Displays node in cards
+    *
+    *   @param {node} data - node for which data has to be displayed
+    */
     open = function(data){
         avb.cards.update(data);
-    },
-
-    /*
-    * Remove all cards
-    */
-    clear = function(){
-        cardstack.length = 0;
     };
 
     return{
         open : open,
         update : update,
-        clear : clear,
         initialize : initialize
     }
 }();

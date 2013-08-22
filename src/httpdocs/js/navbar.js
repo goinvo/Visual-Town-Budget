@@ -29,7 +29,7 @@ var avb = avb || {};
 avb.navbar = function(){
 
 	/*
-	*	called each time search box input changes
+	*	Input change event
 	*/
 	var searchChange = function(){
 	    var  keyword = $(this).val();
