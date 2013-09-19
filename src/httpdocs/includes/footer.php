@@ -3,5 +3,5 @@
   <a class="link" href="http://www.town.arlington.ma.us/">Town of Arlington</a> - 
   <a class="link" href="http://www.goinvo.com">by Involution Studios</a> -
   <a class="link" href="/opendata"> Open Data + Code</a> -
-  <a class="link" href="javascript:;" onclick="fby.push(['showForm', '4389']);return false;">Feedback</a>
+  <a class="link" href="mailto:arlington-internal@goinvo.com?subject=Feedback">Feedback</a>
 </div>

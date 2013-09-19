@@ -8,10 +8,7 @@
 
                 <div class="home-column" id="home-col1" style=
                 "display:inline-block;">
-                    <p>It's tough to understand, let alone have access to,
-                    your town's budget. Now, Arlington, Massachusetts has
-                    released its yearly data for all citizens to view,
-                    engage with, and discuss.</p>
+                    <p>Government budgets can be tough to understand, but now the Town of Arlington, Massachusetts is providing the next generation of accessibility in financial information that allows citizens to view, engage with, and discuss.</p>
 
                     <div style="margin-top: 25px;">
                         <div>
@@ -43,20 +40,17 @@
 
                         <div>
                             <a class='link' data-section="expenses" id='q1'
-                            style='color:#db4e86'>What is the fire
-                            department annual cost?</a>
+                            style='color:#db4e86'>What is the annual cost of the Fire Department?</a>
                         </div>
 
                         <div>
                             <a class='link' data-section="expenses" id='q2'
-                            style='color:#db4e86'>How much money does the
-                            town spend on schools?</a>
+                            style='color:#db4e86'>How much money does the Town spend on schools?</a>
                         </div>
 
                         <div>
                             <a class='link' data-section="expenses" id='q3'
-                            style='color:#db4e86'>How expensive is to take
-                            care of snow over the winter?</a>
+                            style='color:#db4e86'>How expensive is Snow &#38; Ice Removal?</a>
                         </div>
                     </div>
 
