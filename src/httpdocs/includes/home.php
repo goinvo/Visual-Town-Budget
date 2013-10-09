@@ -22,7 +22,7 @@
 
                         <div style="display:inline-block;">
                             <span class="currencyinput">$</span>
-                            <input class="currencyinput" data-section=
+                            <input class="currencyinput" placeholder=2000 data-section=
                             "expenses" id="tax-input" maxlength="6" name=
                             "tax-amount" onkeypress=
                             'avb.home.validate(event)' type="text">

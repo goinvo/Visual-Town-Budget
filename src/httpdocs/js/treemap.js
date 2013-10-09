@@ -343,9 +343,11 @@ avb.treemap = function () {
                 container: 'body',
                 trigger: 'hover',
                 placement: function (context, source) {
+
                     // calculate best position for popover placement
-                    var position = $(source).position();
-                    if (position.top < 110) {
+                    // offset is used instead of position due to firefox + svg bug
+                    var position = $(source).offset();
+                    if (position.top < 200) {
                         return "left";
                     } else {
                         return "top";

@@ -70,7 +70,7 @@ stats = {
 
             return '$' + d3.round(avb.userContribution * percentage,2);
         },
-        side: 'your yearly contribution.',
+        side: 'your yearly tax contribution.',
         cellClass: "value sum",
         cellFunction: function (d, cell) {
             avb.table.renderImpact(d, cell)

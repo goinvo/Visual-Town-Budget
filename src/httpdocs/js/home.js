@@ -262,8 +262,9 @@ avb.home = function () {
     *   retrieves resident annual contribution
     */
     getContribution = function () {
+        var defaultContribution = 2000;
         // reads contribution cookie
-        var value = jQuery.cookie('contribution') || null;
+        var value = jQuery.cookie('contribution') || defaultContribution;
         // adds yearly contribution as a new card
         if (value !== null && decks.expenses[0].title !== stats.individual.title) {
             decks.expenses.unshift(stats.individual);
