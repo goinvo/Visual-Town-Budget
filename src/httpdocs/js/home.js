@@ -71,7 +71,7 @@ avb.home = function () {
     */
     var individualTour = [{
         selector: '.individual',
-        text: 'Here is your yearly contribution.',
+        text: 'Here is your yearly tax contribution.',
         position: 'right'
     }, {
         selector: '#navigation',
