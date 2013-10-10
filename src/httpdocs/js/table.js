@@ -41,7 +41,6 @@ avb.table = function () {
     *   @param {node} data - nodes to be displayed
     */
     var initialize = function ($container, data) {
-        log($container)
         var $table = $container;
 
         // remove old rows

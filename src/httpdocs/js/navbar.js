@@ -43,7 +43,7 @@ avb.navbar = function(){
 	        // allow to go back
 	        pushUrl(avb.section, avb.thisYear, 'l', avb.root.hash);
 	        // show search results
-	        avb.navigation.initialize(search(keyword));
+	        avb.navigation.initialize($('#avb-wrap'), search(keyword));
 	    }
 
 	    // have a 300ms timeout from the time the user
