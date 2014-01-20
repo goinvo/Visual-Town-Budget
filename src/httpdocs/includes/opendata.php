@@ -1,4 +1,4 @@
-<a href="https://github.com/goinvo/Visual-Town-Budget"><img alt=
+data/<a href="https://github.com/goinvo/Visual-Town-Budget"><img alt=
 "Fork me on GitHub" src=
 "https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"
 style="position: absolute; top: 0; right: 0; border: 0;"></a>
@@ -14,8 +14,8 @@ style="position: absolute; top: 0; right: 0; border: 0;"></a>
                 echo '<div class="dataDownload">';
                 echo '<span><i class="icon-download"></i></span>';
                 echo '<span class="name">'.ucfirst($section).'</span> <span>-</span>';
-                echo '<a href="'.$section.'.csv">CSV</a> <span>-</span>';
-                echo '<a href="'.$section.'.json">Json</a>';
+                echo '<a href="/data/'.$section.'.csv">CSV</a> <span>-</span>';
+                echo '<a href="/data/'.$section.'.json">Json</a>';
                 echo '</div>';
             }
         ?>
