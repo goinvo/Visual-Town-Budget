@@ -494,6 +494,9 @@ avb.treemap = function () {
     *   @param {integer} transition - transition duration
     */
     zoneClick = function (d, click, transition) {
+        //destroy popovers on transition (so they don't accidentally stay)
+        $(this).find('div').first().popover('destroy');
+
         // stop event propagation
         var event = window.event || event
         stopPropagation( event );
