@@ -50,7 +50,7 @@ avb.userContribution = null;
 // available data sections
 avb.sections = ['revenues', 'expenses', 'funds'];
 // available modes (treemap, table..)
-avb.modes = 
+avb.modes =
 {
     "l" : {
         js : avb.table,
@@ -209,7 +209,7 @@ function pushUrl(section, year, mode, node) {
 
 /*
 *   Restores previous history state
-*   
+*
 *   @param {state obj} event - object containing previous state
 */
 function popUrl(event) {
@@ -330,7 +330,7 @@ function mixrgb(rgb1, rgb2, p) {
 
 /*
 *   Mixes RGB color with white to give a transparency effect
-* 
+*
 *   @param {hex color} hex - color to which transparency has to be applied
 *   @param {float} opacity - level of opacity (0.0 - 1.0 scale)
 *   @return {rgba string} - rgba color with new transparency
@@ -349,7 +349,7 @@ function translate(obj, x, y) {
 
 /*
 *  Centers object vertically
-*/ 
+*/
 $.fn.center = function () {
     this.css("margin-top", Math.max(0, $(this).parent().height() - $(this).outerHeight()) / 2);
     return this;
@@ -379,23 +379,8 @@ $.fn.textfill = function (maxFontSize, targetWidth) {
 };
 
 /*
-*   Detects IE browsers
-*
-*   @return - true when browser is IE
-*/
-function ie(){
-    var agent = navigator.userAgent;
-    var reg = /MSIE\s?(\d+)(?:\.(\d+))?/i;
-    var matches = agent.match(reg);
-    if (matches != null) {
-        return true
-    }
-    return false;
-}
-
-/*
 *   Stops event propagation (on all browsers)
-*  
+*
 *   @param {event object} event - event for which propagation has to be stopped
 */
 function stopPropagation(event){
