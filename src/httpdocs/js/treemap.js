@@ -23,6 +23,35 @@ License:
     See the License for the specific language governing permissions and
     limitations under the License.
 */
+
+// Determine client browser and version
+navigator.sayswho = (function(){
+    var ua= navigator.userAgent, tem,
+    M= ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || [];
+    if(/trident/i.test(M[1])){
+        tem=  /\brv[ :]+(\d+)/g.exec(ua) || [];
+        return 'IE '+(tem[1] || '');
+    }
+    if(M[1]=== 'Chrome'){
+        tem= ua.match(/\bOPR\/(\d+)/)
+        if(tem!= null) return 'Opera '+tem[1];
+    }
+    M= M[2]? [M[1], M[2]]: [navigator.appName, navigator.appVersion, '-?'];
+    if((tem= ua.match(/version\/(\d+)/i))!= null) M.splice(1, 1, tem[1]);
+    return M.join(' ');
+})();
+
+// Boolean - is browser IE?
+function ie(){
+    var agent = navigator.sayswho;
+    var reg = /IE\s?(\d+)(?:\.(\d+))?/i;
+    var matches = agent.match(reg);
+    if (matches != null) {
+        return true
+    }
+    return false;
+}
+
 var avb = avb || {};
 
 avb.treemap = function () {
@@ -48,7 +77,7 @@ avb.treemap = function () {
             formatNumber = d3.format(",d"),
             transitioning;
 
-        // create svg 
+        // create svg
         nav = d3.select($container.get(0)).append("svg")
             .attr("width", width)
             .attr("height", height)
@@ -147,7 +176,7 @@ avb.treemap = function () {
             nav.grandparent = nav.append("g")
                 .attr("class", "grandparent");
 
-            // init treemap 
+            // init treemap
             init(root);
             // init layout
             layout(root);
@@ -188,7 +217,7 @@ avb.treemap = function () {
                 .data((d.sub.length === 0) ? [d] : d.sub)
                 .enter().append("g");
 
-            // create grandparent bar at top 
+            // create grandparent bar at top
             nav.grandparent
                 .datum((d.parent === undefined) ? d : d.parent)
                 .attr("nodeid", (d.parent === undefined) ? d.hash : d.parent.hash)
@@ -258,7 +287,7 @@ avb.treemap = function () {
             }
 
             // assign label through foreign object
-            // foreignobjects allows the use of divs and 
+            // foreignobjects allows the use of divs and
             // textwrapping
             g.each(function () {
                 var label = d3.select(this).append("foreignObject")
@@ -380,7 +409,7 @@ avb.treemap = function () {
 
         // Note.
         // If we are in the expenses section and the user did enter his/her
-        // tax contribution, popovers will be used to show how much each 
+        // tax contribution, popovers will be used to show how much each
         // zone amounts in terms of personal contribution.
         var description;
         if (avb.userContribution != null && avb.section == 'expenses') {
@@ -489,7 +518,7 @@ avb.treemap = function () {
         // reset year
         yearIndex = avb.thisYear - avb.firstYear;
 
-        // 
+        //
         if(d.values[yearIndex].val === 0) {
             zoneClick.call(null, d.parent || avb.root.hash);
             return;
@@ -501,7 +530,7 @@ avb.treemap = function () {
         // remember currently selected section and year
         avb.currentNode.data = d;
         avb.currentNode.year = yearIndex;
-        
+
         // update chart and cards
         avb.chart.open(d, d.color);
         avb.cards.open(d);
