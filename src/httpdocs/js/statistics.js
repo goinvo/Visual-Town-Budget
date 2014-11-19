@@ -92,10 +92,10 @@ stats = {
         title: "Source",
         class: "span6 card-source ",
         value: function (d) {
-            return (d.src === '') ? 'Town of Arlington' : d.src;
+            return (d.src === '') ? longName : d.src;
         },
         link: function (d) {
-            return (d.url === '') ? "http://www.arlingtonma.gov/" : d.url;
+            return (d.url === '') ? municipalURL : d.url;
         },
         cardRenderer : function(d, card){
             $card = $(card);

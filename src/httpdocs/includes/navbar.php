@@ -2,13 +2,13 @@
 <div class="purple-border" id="avb-menubar" >
   <div class="container">
 
-    <div class="homebutton" onclick='window.location = "/"'> 
-      
-      <div style="font-size:32px;line-height:28px; display:inline-block"> Arlington, MA  </div>
+    <div class="homebutton" onclick='window.location = "/"'>
+
+      <div style="font-size:32px;line-height:28px; display:inline-block"> <?php echo $shortName; ?>, <?php echo $stateAbbreviation; ?>  </div>
       <img src="/img/logo@High.png" alt="avb-logo" width=24 height=24 />
    </div>
 
-    <div id="navbar-links" style="line-height:30px;"> 
+    <div id="navbar-links" style="line-height:30px;">
 
      <div onclick='window.location = "/"' class="entry homebutton"> Town Budget, Visualized </div>
 
@@ -20,7 +20,7 @@
 
     <div class="entry" id="navbar-right" style="float:right;">
         <input id="searchbox" type="text" class="margin menubutton margin search" placeholder="Search">
-    
+
         <div class="menubutton margin">
           <span> <i class="icon-th-large"></i> </span>
           <a id="navbar-map" href="javascript:avb.home.hide();switchMode('t'); "> Map view </a>
