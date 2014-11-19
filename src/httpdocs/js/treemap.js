@@ -508,7 +508,6 @@ avb.treemap = function () {
         if (nav.transitioning || !d) return;
 
         // go back if click happened on the same zone
-        // debugger
         if (click && d.hash === avb.currentNode.data.hash) {
             $('#zoombutton').trigger('click');
             return;

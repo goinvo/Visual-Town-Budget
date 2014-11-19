@@ -557,8 +557,15 @@ avb.chart = function () {
         // if there is only one entry being displayed:
         // format it so the subsequent code can still draw a layer for it
         var singleAreaColor = false;
-        if (data.sub.length === 0) {
-            singleAreaColor = data.color;
+
+        // this is kind of a hack
+        // because areas with 1 sub get draw 2 layers deep
+        // to be fixed soon
+        if (data.sub.length == 0 || data.sub.length == 1) {
+          singleAreaColor = data.color;
+        }
+
+        if (data.sub.length == 0) {
             var newSub = jQuery.extend({}, data);
             data.sub.push(newSub);
             data.sub[0].sub = [];
