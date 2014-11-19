@@ -35,13 +35,13 @@ style="position: absolute; top: 0; right: 0; border: 0;"></a>
 
     <div>
         <div>
-            Arlington Visual Budget is licensed under <a class="link" href=
+            <?php echo $siteName; ?> is licensed under <a class="link" href=
             "http://www.apache.org/licenses/LICENSE-2.0.html">Apache 2</a>
             and was created using open source code and data.
         </div>
 
         <div>
-            Download, examine, and contribute to Arlington Visual Budget
+            Download, examine, and contribute to <?php echo $siteName; ?>
             using the links provided.
         </div>
     </div>

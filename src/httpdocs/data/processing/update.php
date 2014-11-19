@@ -1,6 +1,10 @@
 <!doctype html>
 <html>
 <head>
+  <?php
+    require_once 'includes/localized_variables.php';
+  ?>
+
   <link type="text/css" rel="stylesheet" href="/css/update.css">
   <link type="text/css" rel="stylesheet" href="/css/global.css">
   <script type="text/javascript" src ="/js/lib/jquery/jquery-1.9.1.min.js"></script>
@@ -61,7 +65,7 @@
         <div class="controls">
           <button id="upload-button" style="margin-left:0" class="btn">Upload</button>
         </div>
-      </div> 
+      </div>
     </form>
 
     <div id="error">
@@ -116,10 +120,6 @@
         echo '<div class="alert alert-success">'.$msg.'</div>';
       }
 
-      // example credential, will be changed on production server
-      $user = 'admin';
-      $pass = 'pass';
-
       // credentials check
       if(!isset($_POST['user']) || !isset($_POST['pass'])) {
         exit();
@@ -128,7 +128,7 @@
       } else {
 
       }
-      
+
       $file = $_FILES["file"];
       $filesize = $file["size"];
       $filename = $file["name"];

@@ -8,11 +8,11 @@
 
                 <div class="home-column" id="home-col1" style=
                 "display:inline-block;">
-                    <p>Government budgets can be tough to understand, but now the Town of Arlington, Massachusetts is providing the next generation of accessibility in financial information that allows citizens to view, engage with, and discuss.</p>
+                    <p>Government budgets can be tough to understand, but now the <?php echo $longName; ?>, <?php echo $state; ?> is providing the next generation of accessibility in financial information that allows citizens to view, engage with, and discuss.</p>
 
                     <div style="margin-top: 25px;">
                         <div>
-                            Arlington residents, see where your tax dollars
+                            <?php echo $shortName; ?> residents, see where your tax dollars
                             go:
                         </div>
 
@@ -36,7 +36,7 @@
                 <div class="home-column" id="home-col2" style=
                 "display:inline-block; margin-left:5%;">
                     <div>
-                        Start learning about Arlington:
+                        Start learning about <?php echo $shortName; ?>:
 
                         <div>
                             <a class='link' data-section="expenses" id='q1'
