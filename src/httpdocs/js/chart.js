@@ -414,11 +414,13 @@ avb.chart = function () {
             var newIndex = Math.max(year - avb.firstYear, 0);
             if (yearIndex === newIndex) return;
             yearIndex = newIndex;
-            avb.cards.update(avb.currentNode.data);
+            avb.cards.update(avb.currentNode.data, year);
             legend();
         }
 
-        updateInfo(Math.round(chart.xscale.invert(x)));
+        // subtract 25 here to make stats change on tick marks
+        // should likely be computed by length of x axes / number of ticks
+        updateInfo(Math.round(chart.xscale.invert(x - 25)));
 
         // resize svg width
         x = Math.min(x, chart.xscale.range()[1]);

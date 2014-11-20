@@ -53,9 +53,6 @@ stats = {
         },
         cardRenderer : function(d, cell){
             $(cell).html(Mustache.render($('#card-template').html(),this));
-            if(this.value(d) === '100%') {
-                $(cell).find('.card').css({ display : 'none'});
-            }
         },
         cellClass: "value sum",
         cellFunction: function (d, cell) {

@@ -69,23 +69,29 @@ avb.cards = function(){
     *
     *   @param {node} data - node for which data has to be displayed
     */
-    update = function (data) {
+    update = function (data, year) {
 
         // update all cards in deck
         $.each(deck, function(i,d){
-            // render template
 
+            // render template
             if(typeof(d.cardRenderer) === 'function') {
                 d.cardRenderer(data, cardstack[i]);
             } else {
                 cardstack[i].html(Mustache.render($('#card-template').html(),d));
             }
+
             // set value
+            $(cardstack[i]).find('.card').css('display', 'block');
             cardstack[i].find(".card-value").html(deck[i].value(data));
 
             // set card description if available
             cardstack[i].find(".card-desc").html(
                 (typeof(deck[i].side) === 'string') ? deck[i].side : deck[i].side(data));
+
+            if (year == 2008 && cardstack[i].find(".card-desc").text() == ' compared to previous year.') {
+              $(cardstack[i]).find('.card').css('display', 'none');
+            }
         });
     },
 
