@@ -30,7 +30,7 @@ avb.chart = function () {
 
     /*
     *   Initialization routines
-    *   
+    *
     *   @param {jquery obj} $container - container for visualization
     */
     initialize = function ($container) {
@@ -201,6 +201,7 @@ avb.chart = function () {
         // line drawing
 
         // line definition
+
         var line = d3.svg.line()
             .interpolate("monotone")
             .x(function (d) {
@@ -246,9 +247,10 @@ avb.chart = function () {
         //non-projection area
         chart.visuals[0].classed("area", true)
             .transition().duration(transitionDuration)
-            .attr("d", area(data.values.slice(0, data.values.length)))
+            .attr("d", area(data.values.slice(0, projected + 1)))
             .attr("fill", 'black');
 
+        //projection area
         chart.visuals[1].classed("area", true).classed("projection", true)
             .transition().duration(transitionDuration)
             .attr("d", area(data.values.slice(projected, data.values.length)))
@@ -316,7 +318,7 @@ avb.chart = function () {
          * Overflows
          */
 
-        // covers leftmost circle overflow 
+        // covers leftmost circle overflow
         var overflows = chart.axes.append("g").classed('overflows', true);
         overflows.append("rect").attr("width", chart.xmargin)
             .attr("height", chart.height);
@@ -407,9 +409,9 @@ avb.chart = function () {
     *   @param {int} x - current x boundary between non-layered and layered part
     */
     slideLayers = function (x) {
-        // updates information data based on the 
+        // updates information data based on the
         function updateInfo(year) {
-            // fixes edge case bug which gives a out of 
+            // fixes edge case bug which gives a out of
             // boundary year
             var newIndex = Math.max(year - avb.firstYear, 0);
             if (yearIndex === newIndex) return;
@@ -451,7 +453,7 @@ avb.chart = function () {
             var x, y;
             mousedown = true;
 
-            // makes event valid for both touch and mouse devices 
+            // makes event valid for both touch and mouse devices
             if (e.type === 'touchstart') {
                 x = e.touches[0].pageX;
             } else {
@@ -475,7 +477,7 @@ avb.chart = function () {
             var x, y;
             dragging = true;
 
-            // makes event valid for both touch and mouse devices 
+            // makes event valid for both touch and mouse devices
             if (e.type === 'touchmove') {
                 x = e.touches[0].pageX;
             } else {
@@ -514,7 +516,7 @@ avb.chart = function () {
 
     /*
     *   Draws stacked area chart
-    *   
+    *
     *   @param {node} data - node for which data has to be displayed
     */
     drawLayers = function (data) {
@@ -572,7 +574,7 @@ avb.chart = function () {
 
         var color = d3.scale.category20();
 
-        // line declaration
+        // area declaration
         var area = d3.svg.area()
             .interpolate("monotone")
             .x(function (d) {
@@ -585,7 +587,7 @@ avb.chart = function () {
                 return yscale(d.y0 + d.val);
             });
 
-        // area declaration
+        // line declaration
         var line = d3.svg.line()
             .interpolate("monotone")
             .x(function (d) {
@@ -647,7 +649,7 @@ avb.chart = function () {
         // trick that solves IE10 bug which keeps chart
         // for expanding past its initial width
 
-        
+
         // introduces feedback when user changes year
         // chart layer boundary is moved to current year x coordinate
         if(avb.thisYear != chart.year){
@@ -659,7 +661,7 @@ avb.chart = function () {
             slideLayers(chart.layersWidth);
         }, 10);
 
-        
+
 
     };
 
