@@ -30,7 +30,7 @@ avb.chart = function () {
 
     /*
     *   Initialization routines
-    *   
+    *
     *   @param {jquery obj} $container - container for visualization
     */
     initialize = function ($container) {
@@ -316,7 +316,7 @@ avb.chart = function () {
          * Overflows
          */
 
-        // covers leftmost circle overflow 
+        // covers leftmost circle overflow
         var overflows = chart.axes.append("g").classed('overflows', true);
         overflows.append("rect").attr("width", chart.xmargin)
             .attr("height", chart.height);
@@ -407,9 +407,9 @@ avb.chart = function () {
     *   @param {int} x - current x boundary between non-layered and layered part
     */
     slideLayers = function (x) {
-        // updates information data based on the 
+        // updates information data based on the
         function updateInfo(year) {
-            // fixes edge case bug which gives a out of 
+            // fixes edge case bug which gives a out of
             // boundary year
             var newIndex = Math.max(year - avb.firstYear, 0);
             if (yearIndex === newIndex) return;
@@ -451,7 +451,7 @@ avb.chart = function () {
             var x, y;
             mousedown = true;
 
-            // makes event valid for both touch and mouse devices 
+            // makes event valid for both touch and mouse devices
             if (e.type === 'touchstart') {
                 x = e.touches[0].pageX;
             } else {
@@ -475,7 +475,7 @@ avb.chart = function () {
             var x, y;
             dragging = true;
 
-            // makes event valid for both touch and mouse devices 
+            // makes event valid for both touch and mouse devices
             if (e.type === 'touchmove') {
                 x = e.touches[0].pageX;
             } else {
@@ -514,7 +514,7 @@ avb.chart = function () {
 
     /*
     *   Draws stacked area chart
-    *   
+    *
     *   @param {node} data - node for which data has to be displayed
     */
     drawLayers = function (data) {
@@ -554,15 +554,25 @@ avb.chart = function () {
         layers.width = chart.width;
         layers.height = chart.height;
 
-        // when there visualized part has no subsections there
-        // is not much to be done
-        if (data.sub.length === 0) {
-            // append the shadow
-            appendShadow(layers);
-            // update legend
-            var legendData = chart.areagroup.datum(data);
-            legend(legendData, legendData.datum());
-            return;
+        // if there is only one entry being displayed:
+        // format it so the subsequent code can still draw a layer for it
+        var singleAreaColor = false;
+
+        // this is kind of a hack
+        // because areas with 1 sub get draw 2 layers deep
+        // to be fixed soon
+        if (data.sub.length == 0 || data.sub.length == 1) {
+          singleAreaColor = data.color;
+        }
+
+        if (data.sub.length == 0) {
+            var newSub = jQuery.extend({}, data);
+            data.sub.push(newSub);
+            data.sub[0].sub = [];
+            delete data['area'];
+            delete data['value'];
+            delete data['z'];
+            data.depth = 0;
         }
 
         var yscale = chart.yscale
@@ -622,7 +632,7 @@ avb.chart = function () {
                 return area(d.values);
             })
             .style("fill", function (d, i) {
-                return d3.scale.category20().range()[i % 20];
+                return singleAreaColor || d3.scale.category20().range()[i % 20];
             });
 
         // draw lines
@@ -647,7 +657,7 @@ avb.chart = function () {
         // trick that solves IE10 bug which keeps chart
         // for expanding past its initial width
 
-        
+
         // introduces feedback when user changes year
         // chart layer boundary is moved to current year x coordinate
         if(avb.thisYear != chart.year){
@@ -659,7 +669,7 @@ avb.chart = function () {
             slideLayers(chart.layersWidth);
         }, 10);
 
-        
+
 
     };
 
