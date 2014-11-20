@@ -201,6 +201,7 @@ avb.chart = function () {
         // line drawing
 
         // line definition
+
         var line = d3.svg.line()
             .interpolate("monotone")
             .x(function (d) {
@@ -246,9 +247,10 @@ avb.chart = function () {
         //non-projection area
         chart.visuals[0].classed("area", true)
             .transition().duration(transitionDuration)
-            .attr("d", area(data.values.slice(0, data.values.length)))
+            .attr("d", area(data.values.slice(0, projected + 1)))
             .attr("fill", 'black');
 
+        //projection area
         chart.visuals[1].classed("area", true).classed("projection", true)
             .transition().duration(transitionDuration)
             .attr("d", area(data.values.slice(projected, data.values.length)))
@@ -518,7 +520,7 @@ avb.chart = function () {
     *   @param {node} data - node for which data has to be displayed
     */
     drawLayers = function (data) {
-
+      var projected = avb.currentYear - avb.firstYear;
         // puts a shadow at boundary between layered
         // and non-layered part of the chart
         function appendShadow(group) {
@@ -582,7 +584,7 @@ avb.chart = function () {
 
         var color = d3.scale.category20();
 
-        // line declaration
+        // area declaration
         var area = d3.svg.area()
             .interpolate("monotone")
             .x(function (d) {
@@ -595,7 +597,7 @@ avb.chart = function () {
                 return yscale(d.y0 + d.val);
             });
 
-        // area declaration
+        // line declaration
         var line = d3.svg.line()
             .interpolate("monotone")
             .x(function (d) {
@@ -617,6 +619,7 @@ avb.chart = function () {
                 return d.val;
             });
 
+
         var instance = stack(data.sub);
 
         // calculate areas
@@ -629,7 +632,16 @@ avb.chart = function () {
         layers.areas = regions.append("path")
             .attr("class", "multiarea")
             .attr("d", function (d) {
-                return area(d.values);
+                return area(d.values.slice(0, projected + 1));
+            })
+            .style("fill", function (d, i) {
+                return d3.scale.category20().range()[i % 20];
+            });
+
+        layers.areas = regions.append("path")
+            .attr("class", "multiarea")
+            .attr("d", function (d) {
+                return area(d.values.slice(projected, data.values.length));
             })
             .style("fill", function (d, i) {
                 return singleAreaColor || d3.scale.category20().range()[i % 20];
@@ -639,11 +651,21 @@ avb.chart = function () {
         layers.lines = regions.append("path")
             .attr("class", "multiline")
             .attr("d", function (d) {
-                return line(d.values);
+                return line(d.values.slice(0, projected + 1));
             })
             .style("stroke", function (d, i) {
                 return d3.scale.category20().range()[i % 20];
             });
+
+        layers.lines = regions.append("path")
+            .attr("class", "multiline")
+            .attr("d", function (d) {
+                return line(d.values.slice(projected, data.values.length));
+            })
+            .style("stroke", function (d, i) {
+                return d3.scale.category20().range()[i % 20];
+            });
+
 
         // legend
         legend(regions, data);
