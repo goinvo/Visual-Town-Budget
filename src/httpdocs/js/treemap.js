@@ -386,10 +386,8 @@ avb.treemap = function () {
         var description;
         if (avb.userContribution != null && avb.section == 'expenses') {
             // popover content is split in separate 2 divs
-            description = ' Your contribution is ' + stats.individual.value(d);
             description = d.descr + ' Your contribution is ' + stats.individual.value(d);
         } else {
-            description = null;
             description = d.descr;
         }
 
