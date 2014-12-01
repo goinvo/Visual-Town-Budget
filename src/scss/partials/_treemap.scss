@@ -6,7 +6,7 @@
 */
 
 #navigation{
-  -webkit-tap-highlight-color: rgba(0,0,0,0); 
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
   position: relative;
   height:88%;
   width:100%;
@@ -63,7 +63,7 @@
       .valueLabel{
         display: none;
       }
-    } 
+    }
   }
 
   /*
@@ -112,24 +112,24 @@
   background-color: rgba(0,0,0,0.5);
   display: none;
   position: absolute;
-  width: 150px;
-  height: 50px;
-  margin-top: -58px;
   border-radius: 5px;
 
   .arrow{
     z-index: 1050;
     position: absolute;
-    width: 0; 
-    height: 0; 
-    left: 65px;
-    top: 50px;
+    width: 0;
+    height: 0;
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
     border-top: 10px solid rgba(0,0,0,0.5);
   }
 
   .text{
+    color: white;
+    padding: 5px;
+  }
+
+  .popover-title{
     color: white;
     padding: 5px;
   }
