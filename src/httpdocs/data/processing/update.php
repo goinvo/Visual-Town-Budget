@@ -2,7 +2,7 @@
 <html>
 <head>
   <?php
-    require_once 'includes/localized_variables.php';
+    require_once '../../includes/localized_variables.php';
   ?>
 
   <link type="text/css" rel="stylesheet" href="/css/update.css">
