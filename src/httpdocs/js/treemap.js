@@ -335,17 +335,17 @@ avb.treemap = function () {
               if (descr !== null) { popoverText.text(descr) };
               popoverWidth = $('#ie-popover').width();
               popoverHeight = $('#ie-popover').outerHeight();
-              if (popoverHeight < 200) {
-                var x = coords[0] + (parseFloat(rect.attr('width')) / 2) - (popoverWidth / 2);
-                var y = coords[1] - (popoverHeight + 8);
-                var arrowX = ((popoverWidth / 2) - 5).px();
-                var arrowY = popoverHeight.px();
-              } else {
+              if (coords[0] > 500 || coords[1] < 10) {
                 var x = coords[0] - (popoverWidth + 8);
                 var y = coords[1] + (parseFloat(rect.attr('height')) / 2) - (popoverHeight / 2);
                 var arrowX = (popoverWidth - 5).px();
                 var arrowY = ((popoverHeight/2) - 5).px();
                 arrow.style('-ms-transform', 'rotate(-90deg)');
+              } else {
+                var x = coords[0] + (parseFloat(rect.attr('width')) / 2) - (popoverWidth / 2);
+                var y = coords[1] - (popoverHeight + 8);
+                var arrowX = ((popoverWidth / 2) - 5).px();
+                var arrowY = popoverHeight.px();
               }
               thisPopover
                 .style('display', 'block')
