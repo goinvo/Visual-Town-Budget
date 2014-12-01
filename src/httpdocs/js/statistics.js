@@ -68,7 +68,7 @@ stats = {
         value: function (d) {
             var percentage = d.values[yearIndex].val / avb.root.values[yearIndex].val;
 
-            return '$' + d3.round(avb.userContribution * percentage,2);
+            return '$' + (avb.userContribution * percentage).toFixed(2);
         },
         side: 'your yearly tax contribution.',
         cellClass: "value sum",

@@ -979,12 +979,12 @@ p {
 /* line 110, ../../scss/partials/_treemap.scss */
 #ie-popover {
   z-index: 2030;
-  background-color: rgba(0, 0, 0, 0.5);
+  width: 180px;
+  min-width: 150px;
+  min-height: 30px;
+  background-color: rgba(0, 0, 0, 0.6);
   display: none;
   position: absolute;
-  width: 150px;
-  height: 50px;
-  margin-top: -58px;
   border-radius: 5px;
 }
 /* line 120, ../../scss/partials/_treemap.scss */
@@ -993,14 +993,22 @@ p {
   position: absolute;
   width: 0;
   height: 0;
-  left: 65px;
-  top: 50px;
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
-  border-top: 10px solid rgba(0, 0, 0, 0.5);
+  border-top: 10px solid rgba(0, 0, 0, 0.6);
 }
 /* line 132, ../../scss/partials/_treemap.scss */
 #ie-popover .text {
   color: white;
+  position: relative;
+  display: block;
+  padding: 5px;
+}
+
+#ie-popover .popover-title {
+  background-color: rgba(0, 0, 0, 0);
+  color: white;
+  position: relative;
+  display: block;
   padding: 5px;
 }

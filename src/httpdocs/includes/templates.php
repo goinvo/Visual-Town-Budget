@@ -14,7 +14,7 @@
 
         <!-- layer chart legend -->
         <div id="legend-wrap">
-          <div class="arrow" style="right:20px;"> 
+          <div class="arrow" style="right:20px;">
             <i class="icon-chevron-left"></i>
           </div>
           <div id="legend-container">
@@ -26,7 +26,7 @@
 
         <!-- info cards -->
         <div id="cards" >
-          <div class="arrow"> 
+          <div class="arrow">
             <i class="icon-chevron-right"></i>
           </div>
         </div>
@@ -37,7 +37,7 @@
   </div>
 
   <!-- chart -->
-  <div id="chart-wrap" class="row-fluid" > 
+  <div id="chart-wrap" class="row-fluid" >
     <div id='chart' class="chart"> </div>
   </div>
 </div>
@@ -49,10 +49,11 @@
       <i class="icon-zoom-out"></i> Go back
     </button>
   </div>
-  <div id="navigation" >  
+  <div id="navigation" >
     <div id="ie-popover">
+      <div class="popover-title"></div>
       <div class="text"></div>
-      <div class="arrow"> </div> 
+      <div class="arrow"> </div>
     </div>
   </div>
 </div>
@@ -71,15 +72,15 @@
 
 <!-- table template -->
 <script type="text/html" id="table-template">
-  <div id="table-container" > 
+  <div id="table-container" >
     <div class="tablerow" id="table-header" > <div class="bullet"> </div>
   </div>
 </script>
 
 <!-- table header template -->
 <script type="text/html" id="table-header-template">
-  <div class="tablerow" id="table-header" data-level=0> 
-    <div class="bullet"> </div> 
+  <div class="tablerow" id="table-header" data-level=0>
+    <div class="bullet"> </div>
     {{#.}}
       <div class="{{cellClass}} head"> {{title}} </div>
     {{/.}}

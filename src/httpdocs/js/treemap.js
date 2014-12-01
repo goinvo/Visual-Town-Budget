@@ -321,16 +321,47 @@ avb.treemap = function () {
         * Attach popover event to zone
         */
         function attachPopoverIe(obj, title, descr) {
-            d3.select(obj).on('mouseover', function () {
-                var rect = d3.select(this).select('.parent');
-                var coords = [parseFloat(rect.attr('x')),
-                    parseFloat(rect.attr('y'))
-                ];
-                var x = coords[0] + parseFloat(rect.attr('width')) / 2 - 75;
-                d3.select('#ie-popover').select('.text').text(title);
-                d3.select('#ie-popover').style('display', 'block')
-                    .style('left', (x).px()).style('top', (coords[1]).px());
-            })
+          var thisPopover, popoverWidth, popoverHeight, arrow, popoverText, popoverTitle;
+          thisPopover = d3.select('#ie-popover');
+          arrow = thisPopover.select('.arrow');
+          popoverTitle = thisPopover.select('.popover-title');
+          popoverText = thisPopover.select('.text');
+          d3.select(obj).on('mouseover', function () {
+              var rect = d3.select(this).select('.parent');
+              var coords = [parseFloat(rect.attr('x')),
+                  parseFloat(rect.attr('y'))
+              ];
+              popoverTitle.text(title);
+              if (descr !== null) { popoverText.text(descr) };
+              popoverWidth = $('#ie-popover').width();
+              popoverHeight = $('#ie-popover').outerHeight();
+              if (popoverHeight < 200) {
+                var x = coords[0] + (parseFloat(rect.attr('width')) / 2) - (popoverWidth / 2);
+                var y = coords[1] - (popoverHeight + 8);
+                var arrowX = ((popoverWidth / 2) - 5).px();
+                var arrowY = popoverHeight.px();
+              } else {
+                var x = coords[0] - (popoverWidth + 8);
+                var y = coords[1] + (parseFloat(rect.attr('height')) / 2) - (popoverHeight / 2);
+                var arrowX = (popoverWidth - 5).px();
+                var arrowY = ((popoverHeight/2) - 5).px();
+                arrow.style('-ms-transform', 'rotate(-90deg)');
+              }
+              thisPopover
+                .style('display', 'block')
+                .style('left', (x).px())
+                .style('top', (y).px());
+              arrow
+                .style('left', arrowX)
+                .style('top', arrowY);
+          })
+          .on('mouseout', function () {
+            popoverTitle.text('');
+            popoverText.text('');
+            popoverWidth = 0;
+            popoverHeight = 0;
+            arrow.style('-ms-transform', 'none');
+          });
         }
 
         // label zone using svg:text object
@@ -352,8 +383,18 @@ avb.treemap = function () {
             popover = true;
         }
 
+        var description;
+        if (avb.userContribution != null && avb.section == 'expenses') {
+            // popover content is split in separate 2 divs
+            description = ' Your contribution is ' + stats.individual.value(d);
+            description = d.descr + ' Your contribution is ' + stats.individual.value(d);
+        } else {
+            description = null;
+            description = d.descr;
+        }
+
         // attach popover to zone
-        attachPopoverIe(this, d.key, d.descr);
+        attachPopoverIe(this, d.key, description);
     }
 
     /*
