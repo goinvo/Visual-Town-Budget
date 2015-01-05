@@ -10,6 +10,9 @@ Open-source budget visualization framework.
 ##Setup
 Clone this repository to your local machine and point your webserver root to `src/httpdocs`, the application should work out of the box, this repository contains some sample data that can be used for testing.
 
+##Localized Variables  
+Set the variables in the `localized_variables.php` file to your municipality's information. These are global variables used throughout the Visual Budget instance. The file can be found in `/src/httpdocs/includes`.  
+
 ##Components
 ####Cards
 Report statical information about selected entry (`src/httpdocs/js/cards.js`).
@@ -49,6 +52,7 @@ Each component implements a common interface of 3 calls:
          *  `update.php`: Interface for data update
    *  **img**: image assets
    *  **includes**: templates and HTML assets
+      *  `localized_variables.php`: A collection of global variables specific to a municipaltiy.
       *  `imports.php`: CSS and JS assets imports
       *  `datafiles.php`: json datafiles loaded in each instance (AJAX can be used as an alternative)
       *  `home.php`: homescreen html
