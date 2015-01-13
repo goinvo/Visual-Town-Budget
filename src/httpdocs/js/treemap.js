@@ -62,7 +62,7 @@ avb.treemap = function () {
             b: 255,
             g: 255
         };
-
+        
     /*
     *   Initialize navigation treemap
     *
@@ -154,6 +154,33 @@ avb.treemap = function () {
                 root.depth = 0;
             }
 
+            //recursively check all subs, because all the treemap is calculated at once.
+            function collectAllValues(data) {
+              var values = [];
+              for (var j = 0; j < data.sub.length; j++) {
+                if (data.sub[j].values[yearIndex].val > 0) {
+                  values.push(data.sub[j].values[yearIndex].val);
+                }
+                if (data.sub[j].sub) {
+                  values = values.concat(collectAllValues(data.sub[j]));
+                }
+              }
+              return values;
+            }
+
+            var currentValues = collectAllValues(data);
+            var min1 = d3.min(currentValues);
+            var max1 = d3.max(currentValues);
+            // min1 = 0;
+            console.log("min: ");
+            console.log(min1);
+            console.log("max: ");
+            console.log(max1);
+
+            var dataScale = d3.scale.linear()
+                .domain([min1, max1])
+                .range([1,100]);
+
             // create treemap d3 layout
             var treemap = d3.layout.treemap()
             // node children
@@ -162,7 +189,12 @@ avb.treemap = function () {
             })
             // treemap values calculated based on current year value
             .value(function (d) {
-                return d.values[yearIndex].val
+              console.log(d);
+              var t = d.values[yearIndex].val;
+              if (t > 0) {
+                return t;
+              }
+              return 0;
             })
             // block sorting function
             .sort(function (a, b) {
