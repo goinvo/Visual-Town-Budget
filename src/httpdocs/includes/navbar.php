@@ -9,8 +9,32 @@
    </div>
 
     <div id="navbar-links" style="line-height:30px;">
+      <div class="entry homebutton" <?php if (!is_null($externalLinks)) echo 'id="ext-links-button"'; ?>>
+        <?php
+          if ($enterprise) {
+            echo $enterprise;
+          } else {
+            echo "Town Budget, Visualized";
+          }
 
-     <div onclick='window.location = "/"' class="entry homebutton"> Town Budget, Visualized </div>
+          if (!is_null($externalLinks)) {
+            echo '<b class="caret ext-links"></b>';
+          }
+        ?>
+        <?php if (!is_null($externalLinks)): ?>
+          <div id="ext-nav-links-container">
+            <ul>
+            <?php
+              foreach ($externalLinks as $value) {
+                echo  '<li>
+                        <a href="'.$value->link.'">'.$value->name.'</a>
+                      </li>';
+              }
+            ?>
+            </ul>
+          </div>
+        <?php endif ?>
+      </div>
 
      <div class="entry navbar-margin">
         <span class="menubutton section margin" data-section="revenues"><a href="/revenues">Revenues</a></span>

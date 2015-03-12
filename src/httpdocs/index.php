@@ -8,6 +8,7 @@
     <script>
       var longName = "<?php echo $longName; ?>";
       var municipalURL = "<?php echo $municipalURL; ?>";
+      var tour = "<?php echo $tour; ?>";
     </script>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -43,6 +44,13 @@
 
       ga('create', "<?php echo $gaKey; ?>", "<?php echo $siteURL; ?>");
       ga('send', 'pageview');
+
+      $externalLinks = $('#ext-links-button');
+
+      $externalLinks.on('click', function() {
+        var $list = $(this).find('#ext-nav-links-container');
+        $list.toggleClass('display');
+      });
     </script>
   </body>
 </html>

@@ -115,7 +115,7 @@ avb.navbar = function(){
 		$dropdown = $('#yeardrop-container');
 		$dropdownLabel = $('#yeardrop-label');
 		$dropdownList = $('#yeardrop-list');
-
+    
 		// year selector (mobile browsers)
 		$selector = $('#yeardrop-container-mobile');
 

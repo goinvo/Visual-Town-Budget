@@ -69,8 +69,9 @@ p {
   padding-top: 10px;
   text-align: left;
   background-color: #f9f9f9;
-  -webkit-box-shadow: 0px 0px 10px #cccccc;
-  box-shadow: 0px 0px 10px #cccccc;
+  -moz-box-shadow: 0px 0px 10px #ccc;
+  -webkit-box-shadow: 0px 0px 10px #ccc;
+  box-shadow: 0px 0px 10px #ccc;
 }
 
 /*
@@ -95,7 +96,7 @@ p {
   height: 250px;
 }
 
-/* line 46, ../../scss/partials/_avb.scss */
+/* line 45, ../../scss/partials/_avb.scss */
 #navigation-container,
 #information-container {
   height: 600px;
@@ -120,7 +121,7 @@ p {
     height: 250px;
   }
 
-  /* line 69, ../../scss/partials/_avb.scss */
+  /* line 68, ../../scss/partials/_avb.scss */
   #navigation-container,
   #information-container {
     height: 550px;
@@ -139,11 +140,11 @@ p {
   display: block;
   border: none;
   height: 1px;
-  background-image: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 350, from(#cccccc), to(white));
-  background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0));
-  background-image: -moz-linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0));
-  background-image: -ms-linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0));
-  background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0));
+  background-image: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 350, from(#ccc), to(#fff));
+  background-image: -webkit-linear-gradient(left, transparent, rgba(0, 0, 0, 0.2), transparent);
+  background-image: -moz-linear-gradient(left, transparent, rgba(0, 0, 0, 0.2), transparent);
+  background-image: -ms-linear-gradient(left, transparent, rgba(0, 0, 0, 0.2), transparent);
+  background-image: -o-linear-gradient(left, transparent, rgba(0, 0, 0, 0.2), transparent);
 }
 
 /*
@@ -185,7 +186,7 @@ p {
 #avb-glossary .definition {
   margin-bottom: 20px;
 }
-/* line 140, ../../scss/partials/_avb.scss */
+/* line 139, ../../scss/partials/_avb.scss */
 #avb-glossary .definition .title,
 #avb-glossary .definition .description {
   font-size: 18px;
@@ -264,7 +265,7 @@ p {
   font-family: 'Strait', sans-serif;
 }
 
-/* line 56, ../../scss/partials/_home.scss */
+/* line 55, ../../scss/partials/_home.scss */
 #home-col1,
 #home-col2 {
   width: 46%;
@@ -352,7 +353,7 @@ p {
 */
 /* line 11, ../../scss/partials/_chart.scss */
 #chart-wrap {
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: transparent;
   cursor: pointer;
   width: 100%;
   position: absolute;
@@ -670,7 +671,7 @@ p {
   display: inline-block;
   position: relative;
 }
-/* line 43, ../../scss/partials/_navbar.scss */
+/* line 42, ../../scss/partials/_navbar.scss */
 #avb-menubar .homebutton,
 #avb-menubar .menubutton {
   cursor: pointer;
@@ -679,28 +680,65 @@ p {
   color: #333333;
   display: inline-block;
 }
-/* line 53, ../../scss/partials/_navbar.scss */
+/* line 52, ../../scss/partials/_navbar.scss */
+#avb-menubar #navbar-links .links-dropdown {
+  position: relative;
+}
+/* line 55, ../../scss/partials/_navbar.scss */
+#avb-menubar #navbar-links .caret {
+  border-top-color: #333333;
+  border-bottom-color: #333333;
+}
+/* line 58, ../../scss/partials/_navbar.scss */
+#avb-menubar #navbar-links .caret.ext-links {
+  margin-top: 13px;
+  margin-left: 3px;
+}
+/* line 63, ../../scss/partials/_navbar.scss */
+#avb-menubar #navbar-links #ext-nav-links-container {
+  display: none;
+  position: absolute;
+  background-color: white;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  top: 25px;
+  left: 0px;
+  z-index: 50000;
+}
+/* line 74, ../../scss/partials/_navbar.scss */
+#avb-menubar #navbar-links #ext-nav-links-container.display {
+  display: block;
+}
+/* line 77, ../../scss/partials/_navbar.scss */
+#avb-menubar #navbar-links #ext-nav-links-container ul {
+  min-width: 100px;
+  list-style: none;
+  margin: 5px;
+}
+/* line 87, ../../scss/partials/_navbar.scss */
 #avb-menubar .menubutton.selected a {
   color: #db4e86;
 }
-/* line 57, ../../scss/partials/_navbar.scss */
+/* line 91, ../../scss/partials/_navbar.scss */
 #avb-menubar .menubutton .caret {
   border-top-color: #333333;
   border-bottom-color: #333333;
 }
-/* line 62, ../../scss/partials/_navbar.scss */
+/* line 96, ../../scss/partials/_navbar.scss */
 #avb-menubar .menubutton a {
   color: #333333;
 }
-/* line 66, ../../scss/partials/_navbar.scss */
+/* line 100, ../../scss/partials/_navbar.scss */
 #avb-menubar .menubutton i {
   vertical-align: baseline;
 }
-/* line 70, ../../scss/partials/_navbar.scss */
+/* line 104, ../../scss/partials/_navbar.scss */
 #avb-menubar .menubutton.margin {
   margin-right: 20px;
 }
-/* line 78, ../../scss/partials/_navbar.scss */
+/* line 112, ../../scss/partials/_navbar.scss */
 #avb-menubar .search {
   border-radius: 5px;
   border: 1px solid #c2c2c2;
@@ -711,22 +749,22 @@ p {
 /*
 * Year selector
 */
-/* line 90, ../../scss/partials/_navbar.scss */
+/* line 124, ../../scss/partials/_navbar.scss */
 #yeardrop-container {
   vertical-align: top;
   min-width: 100px;
 }
-/* line 98, ../../scss/partials/_navbar.scss */
+/* line 132, ../../scss/partials/_navbar.scss */
 #yeardrop-container a {
   padding-left: 20px;
 }
-/* line 101, ../../scss/partials/_navbar.scss */
+/* line 135, ../../scss/partials/_navbar.scss */
 #yeardrop-container a b {
   float: right;
   margin-right: 5px;
   vertical-align: baseline;
 }
-/* line 107, ../../scss/partials/_navbar.scss */
+/* line 141, ../../scss/partials/_navbar.scss */
 #yeardrop-container .dropdown-menu {
   min-width: 100px;
   border-radius: 0px;
@@ -736,15 +774,15 @@ p {
 * Tablet Portait + Landscape
 */
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
-  /* line 117, ../../scss/partials/_navbar.scss */
+  /* line 151, ../../scss/partials/_navbar.scss */
   #avb-menubar {
     padding: 15px 5px 15px 5px;
   }
-  /* line 121, ../../scss/partials/_navbar.scss */
+  /* line 155, ../../scss/partials/_navbar.scss */
   #avb-menubar .navbar-margin {
     margin-left: 30px;
   }
-  /* line 125, ../../scss/partials/_navbar.scss */
+  /* line 159, ../../scss/partials/_navbar.scss */
   #avb-menubar .modename {
     display: none;
   }
@@ -779,7 +817,7 @@ p {
   cursor: pointer;
   padding-top: 5px;
   padding-bottom: 5px;
-  border-bottom: 1px solid #aaaaaa;
+  border-bottom: 1px solid #aaa;
   font-size: 18px;
   line-height: 40px;
 }
@@ -881,7 +919,7 @@ p {
 */
 /* line 8, ../../scss/partials/_treemap.scss */
 #navigation {
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: transparent;
   position: relative;
   height: 88%;
   width: 100%;
@@ -905,7 +943,7 @@ p {
 #navigation text {
   font-size: 1.2em;
 }
-/* line 32, ../../scss/partials/_treemap.scss */
+/* line 31, ../../scss/partials/_treemap.scss */
 #navigation rect.parent,
 #navigation .grandparent rect {
   stroke-width: 4px;
@@ -914,7 +952,7 @@ p {
 #navigation rect.parent {
   opacity: 0.6;
 }
-/* line 41, ../../scss/partials/_treemap.scss */
+/* line 40, ../../scss/partials/_treemap.scss */
 #navigation .children:hover rect.parent,
 #navigation .grandparent:hover rect {
   opacity: 1.0;
@@ -944,7 +982,7 @@ p {
   padding: 8px;
   font-family: 'Strait', sans-serif;
 }
-/* line 77, ../../scss/partials/_treemap.scss */
+/* line 76, ../../scss/partials/_treemap.scss */
 #navigation .textdiv .titleLabel,
 #navigation .textdiv .valueLabel {
   overflow: hidden;
@@ -979,15 +1017,12 @@ p {
 /* line 110, ../../scss/partials/_treemap.scss */
 #ie-popover {
   z-index: 2030;
-  width: 180px;
-  min-width: 150px;
-  min-height: 30px;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.5);
   display: none;
   position: absolute;
   border-radius: 5px;
 }
-/* line 120, ../../scss/partials/_treemap.scss */
+/* line 117, ../../scss/partials/_treemap.scss */
 #ie-popover .arrow {
   z-index: 1050;
   position: absolute;
@@ -995,20 +1030,15 @@ p {
   height: 0;
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
-  border-top: 10px solid rgba(0, 0, 0, 0.6);
+  border-top: 10px solid rgba(0, 0, 0, 0.5);
 }
-/* line 132, ../../scss/partials/_treemap.scss */
+/* line 127, ../../scss/partials/_treemap.scss */
 #ie-popover .text {
   color: white;
-  position: relative;
-  display: block;
   padding: 5px;
 }
-
+/* line 132, ../../scss/partials/_treemap.scss */
 #ie-popover .popover-title {
-  background-color: rgba(0, 0, 0, 0);
   color: white;
-  position: relative;
-  display: block;
   padding: 5px;
 }

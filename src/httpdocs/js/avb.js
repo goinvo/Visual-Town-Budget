@@ -171,8 +171,6 @@ function loadData() {
     // navigation (treemap or table)
     avb.navigation.initialize($(avb.modes[avb.mode].container), avb.root);
     avb.navigation.open(avb.root.hash);
-
-    console.log("UI Loaded.");
 }
 
 /*

@@ -48,6 +48,40 @@
     display: inline-block;
   }
 
+  #navbar-links {
+    .links-dropdown {
+      position: relative;
+    }
+    .caret {
+      border-top-color: $black;
+      border-bottom-color: $black;
+      &.ext-links {
+        margin-top: 13px;
+        margin-left: 3px;
+      }
+    }
+    #ext-nav-links-container {
+      display: none;
+      position: absolute;
+      background-color: white;
+      border: 1px solid rgba(0, 0, 0, 0.2);
+      -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+      -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+      top: 25px;
+      left: 0px;
+      z-index: 50000;
+      &.display {
+        display: block;
+      }
+      ul {
+        min-width: 100px;
+        list-style: none;
+        margin: 5px;
+      }
+    }
+  }
+
   .menubutton {
   
     &.selected a{

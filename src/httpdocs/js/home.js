@@ -420,35 +420,34 @@ avb.home = function () {
     *                                Check examples at beginning of this js file
     */
     starttour = function (steps) {
+      function addTour(tour) {
+          // for each step
+          for (var i = 0; i < tour.length; i++) {
+              // find its dom object and set tour data attributes
+              $(tour[i].selector).attr('data-intro', tour[i].text)
+                  .attr('data-step', i + 1).attr('data-position', tour[i].position);
+          }
+          home.selectedTour = tour;
+      }
 
-        function addTour(tour) {
-            // for each step
-            for (var i = 0; i < tour.length; i++) {
-                // find its dom object and set tour data attributes
-                $(tour[i].selector).attr('data-intro', tour[i].text)
-                    .attr('data-step', i + 1).attr('data-position', tour[i].position);
-            }
-            home.selectedTour = tour;
-        }
-
-        var steps = steps || mainTour;
-        // find the dom objects that will be part of the tour
-        // and attach tour data attributes
-        addTour(steps);
-        // initialize tour
-        tour = introJs();
-        // before each new tour slide call any functions if needed
-        tour.onchange(function (targetElement) {
-            var curStep = parseInt($(targetElement).attr('data-step')) - 1;
-            // don't show 'next' or 'back' options while at last step
-            if (curStep === steps.length - 1) $('.introjs-nextbutton, .introjs-prevbutton').hide();
-            // execute specified function if needed
-            if (typeof (steps[curStep].before) === 'function') steps[curStep].before();
-        });
-        // don't show labels or step numbers
-        tour.setOption("showStepNumbers", false);
-        tour.setOption("skipLabel", "Exit");
-        tour.start();
+      var steps = steps || mainTour;
+      // find the dom objects that will be part of the tour
+      // and attach tour data attributes
+      addTour(steps);
+      // initialize tour
+      tour = introJs();
+      // before each new tour slide call any functions if needed
+      tour.onchange(function (targetElement) {
+          var curStep = parseInt($(targetElement).attr('data-step')) - 1;
+          // don't show 'next' or 'back' options while at last step
+          if (curStep === steps.length - 1) $('.introjs-nextbutton, .introjs-prevbutton').hide();
+          // execute specified function if needed
+          if (typeof (steps[curStep].before) === 'function') steps[curStep].before();
+      });
+      // don't show labels or step numbers
+      tour.setOption("showStepNumbers", false);
+      tour.setOption("skipLabel", "Exit");
+      tour.start();
     };
 
     return {

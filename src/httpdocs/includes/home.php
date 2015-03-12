@@ -4,8 +4,13 @@
     <div class="container">
         <div class="hero-unit">
             <div id="welcome-hero">
-                <h1>See your town's budget.</h1>
-
+                <?php
+                  if (!$enterprise) {
+                    echo "<h1>See your town's budget.</h1>";
+                  } else {
+                    echo "<h1>See the ".$enterprise." budget.</h1>";
+                  }
+                ?>
                 <div class="home-column" id="home-col1" style=
                 "display:inline-block;">
                     <p>Government budgets can be tough to understand, but now the <?php echo $longName; ?>, <?php echo $state; ?> is providing the next generation of accessibility in financial information that allows citizens to view, engage with, and discuss.</p>
@@ -35,6 +40,7 @@
 
                 <div class="home-column" id="home-col2" style=
                 "display:inline-block; margin-left:5%;">
+                  <?php if (!$enterprise): ?>
                     <div>
                         Start learning about <?php echo $shortName; ?>:
 
@@ -53,7 +59,7 @@
                             style='color:#db4e86'>How expensive is Snow &#38; Ice Removal?</a>
                         </div>
                     </div>
-
+                  <?php endif ?>
                     <p style="margin-top:20px;"><a class="link" href=
                     "javascript:;" onclick="avb.home.hide(true);" style=
                     "text-decoration:underline;">Start the tour</a> or
