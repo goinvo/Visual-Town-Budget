@@ -50,7 +50,7 @@ def generateList(inputFile):
 		try:
 			csvfile = open(inputFile, 'rU')
 		except Exception, e:
-			print('Error opening ' + inputFile)
+			print('FATAL: Error opening ' + inputFile)
 			exit(1)
 	else:
 		csvfile = inputFile
@@ -96,7 +96,7 @@ def generateList(inputFile):
 			csventries.append(entry(name.replace(' Total',''),row['TOOLTIP'], row['SOURCE'], row['SOURCE URL'], rowValues, int(row['LEVEL'])))
 
 		except Exception, e:
-			print('Error parsing line ' + str(currentRow) + ': ' + str(row))
+			print('FATAL: Error parsing line ' + str(currentRow) + ': ' + str(row))
 			exit(1)
 
 		#update row number (useful for printing errors)
@@ -113,7 +113,12 @@ def generateTree(csventries, filename):
 	#reverse list for tree creation
 	csventries.reverse()
 
-	#assign name to root
+	# check to see if root is really root
+	if csventries[0].level != 0:
+		print('FATAL: Total Row (last in the CSV), must have a level of 0')
+		exit(1)
+		
+	#assign name to root		
 	csventries[0].key = filename.capitalize()
 
 	#tree-structure creation
@@ -152,7 +157,7 @@ def generateTree(csventries, filename):
 			lastNode = node
 		except Exception, e:
 			print(e)
-			print('Error reconstructing tree at node: ' + str(node))
+			print('FATAL: Error reconstructing tree at node: ' + str(node))
 			exit(1)
 
 	# delete duplicates
@@ -169,7 +174,7 @@ def generateTree(csventries, filename):
 	try:
 		outputFile = open(filename + '.json', 'w')
 	except  Exception, e:
-		print('Error opening output file.')
+		print('FATAL: Error opening output file.')
 		exit(1)
 
 	# dump in json structure
@@ -197,7 +202,7 @@ def updateHome():
 			csventries = generateList(fd)
 			sections += [csventries[-1]]
 		except Exception, e:
-			print('Error in proceesing files for homepage update.')
+			print('FATAL: Error in proceesing files for homepage update.')
 			exit(1)
 
 	# create root and add the 3 sections as children
@@ -207,8 +212,8 @@ def updateHome():
 	# dump data to json file
 	try:
 		outputFile = open('home.json', 'w')
-	except  Exception, e:
-		print('Error opening home.json for write.')
+	except Exception, e:
+		print('FATAL: Error opening home.json for write.')
 		exit(1)
 
 	jsontext = json.dumps(root.reprJSON(), indent=0).replace('\n', '').replace('\r', '')
