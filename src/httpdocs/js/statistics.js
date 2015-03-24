@@ -70,7 +70,7 @@ stats = {
 
             return '$' + (avb.userContribution * percentage).toFixed(2);
         },
-        side: 'your yearly tax contribution.',
+        side: contributionText,
         cellClass: "value sum",
         cellFunction: function (d, cell) {
             avb.table.renderImpact(d, cell)

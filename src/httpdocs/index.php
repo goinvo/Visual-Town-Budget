@@ -9,6 +9,7 @@
       var longName = "<?php echo $longName; ?>";
       var municipalURL = "<?php echo $municipalURL; ?>";
       var tour = "<?php echo $tour; ?>";
+      var contributionText = "<?php echo $valueLabel; ?>";
     </script>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -28,7 +29,9 @@
   </head>
   <body>
     <?php
-      require_once 'includes/home.php';
+      if ($homeShow) {
+        require_once 'includes/home.php';
+      }
       require_once 'includes/navbar.php';
       require_once 'includes/container.php';
       require_once "includes/footer.php";

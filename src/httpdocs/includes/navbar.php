@@ -4,30 +4,30 @@
 
     <div class="homebutton" onclick='window.location = "/"'>
 
-      <div style="font-size:32px;line-height:28px; display:inline-block"> <?php echo $shortName; ?>, <?php echo $stateAbbreviation; ?>  </div>
+      <div style="font-size:32px;line-height:28px; display:inline-block"> <?php echo $siteName; ?>  </div>
       <img src="/img/logo@High.png" alt="avb-logo" width=24 height=24 />
    </div>
 
     <div id="navbar-links" style="line-height:30px;">
-      <div class="entry homebutton" <?php if (!is_null($externalLinks)) echo 'id="ext-links-button"'; ?>>
+      <div class="entry homebutton" <?php if (!is_null($menuExternal)) echo 'id="ext-links-button"'; ?>>
         <?php
-          if ($enterprise) {
-            echo $enterprise;
+          if (!is_null($menuExternal)) {
+            echo $menuExternal->title;
           } else {
-            echo "Town Budget, Visualized";
+            echo "Budget, Visualized";
           }
 
-          if (!is_null($externalLinks)) {
+          if (!is_null($menuExternal)) {
             echo '<b class="caret ext-links"></b>';
           }
         ?>
-        <?php if (!is_null($externalLinks)): ?>
+        <?php if (!is_null($menuExternal)): ?>
           <div id="ext-nav-links-container">
             <ul>
             <?php
-              foreach ($externalLinks as $value) {
+              foreach ($menuExternal->links as $link) {
                 echo  '<li>
-                        <a href="'.$value->link.'">'.$value->name.'</a>
+                        <a href="'.$link->url.'" target="_blank">'.$link->label.'</a>
                       </li>';
               }
             ?>
