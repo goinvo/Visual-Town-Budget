@@ -17,7 +17,7 @@
                         </div>
 
                         <div style="display:inline-block;">
-                            <?php echo $valuePr; ?>
+                            <?php echo $valuePrompt; ?>
                         </div>
 
                         <div style="display:inline-block;">
