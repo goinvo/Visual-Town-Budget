@@ -713,7 +713,7 @@ p {
 }
 /* line 77, ../../scss/partials/_navbar.scss */
 #avb-menubar #navbar-links #ext-nav-links-container ul {
-  min-width: 100px;
+  min-width: 225px;
   list-style: none;
   margin: 5px;
 }
