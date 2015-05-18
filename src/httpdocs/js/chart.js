@@ -416,6 +416,8 @@ avb.chart = function () {
             yearIndex = newIndex;
             avb.cards.update(avb.currentNode.data);
             legend();
+            changeYear(year);
+            $('#yeardrop-label').html(year + "<b class='caret'></b>");
         }
 
         updateInfo(Math.round(chart.xscale.invert(x)));
