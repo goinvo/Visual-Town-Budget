@@ -1,13 +1,13 @@
 <?php
   # Variables used through the site
-  $siteName = "Arlington Visual Budget";
-  $siteURL = "arlingtonvisualbudget.org";
-  $municipalURL = "http://town.arlington.ma.us";
-  $feedbackEmail = "arlington-internal@goinvo.com";
-  $shortName = "Arlington";
-  $longName = "Town of Arlington";
-  $state = "Massachusetts";
-  $stateAbbreviation = "MA";
+  $siteName = "Venice Visual Budget";
+  $siteURL = "veniceprojectcenter.org";
+  $municipalURL = "http://dati.venezia.it/";
+  $feedbackEmail = "venice.wpi@gmail.com";
+  $shortName = "Venice";
+  $longName = "City of Venice";
+  $state = "Veneto";
+  $stateAbbreviation = "VE";
   $gaKey = "UA-10273473-12";
 
   # Variables for update.php
