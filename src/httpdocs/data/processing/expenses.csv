@@ -1,138 +1,138 @@
-LEVEL1,LEVEL2,LEVEL3,TOOLTIP,SOURCE,SOURCE URL,2013,2014,2015,LEVEL
-One,One,One,,,,19499390.68,15555582.5,13177133.63,3
-One,,Two,,,,3497875.56,3504427.12,3262182.55,3
-One,,Three,,,,21403493.28,22560642.68,21870773.51,3
-One,,Four,,,,88177517.02,84521484.23,84276577.38,3
-One,,Five,,,,4752059.64,4955169.41,6065305.66,3
-One,,Six,,,,9437132.41,9852881.62,8626670.24,3
-One,,Seven,,,,6725899.29,6101839.52,6883396.47,3
-One,,Eight,,,,10410006.65,10570245.89,12169016.77,3
-One,,Ten,,,,5825350.09,5984539.18,5210120.27,3
-One,,Eleven,,,,10126434.98,10202092.75,16588120.3,3
-One,,One Total,,,,179855159.6,173808904.9,178129296.8,2
-One,Two,One,,,,5891642,4935538.96,3383860.91,3
-One,,Two Total,,,,5891642,4935538.96,3383860.91,2
-One,Three,One,,,,26698815.97,24758889.66,22878894.01,3
-One,,Three Total,,,,26698815.97,24758889.66,22878894.01,2
-One,Four,One,,,,13674584.8,13660725.17,13062753.56,3
-One,,Two,,,,4457856.15,4527698.48,4797385.79,3
-One,,Six,,,,8210817.69,8152641.73,7443272.67,3
-One,,Seven,,,,1110377.02,1136086.85,1030904.55,3
-One,,Four Total,,,,27453635.66,27477152.23,26334316.57,2
-One,Five,Two,,,,18812262.2,16397831.9,14553408.32,3
-One,,Five Total,,,,18812262.2,16397831.9,14553408.32,2
-One,Six,One,,,,4592409.64,3831219.51,3818420.81,3
-One,,Two,,,,724401.27,460244.6,286032.62,3
-One,,Six Total,,,,5316810.91,4291464.11,4104453.43,2
-One,Seven,One,,,,1698516.66,1414622.05,1434731.34,3
-One,,Seven Total,,,,1698516.66,1414622.05,1434731.34,2
-One,Eight,One,,,,4491349.87,4372101.51,3908819.51,3
-One,,Two,,,,10823523.3,11345047.81,10815231.97,3
-One,,Eight Total,,,,15314873.17,15717149.32,14724051.48,2
-One,Nine,One,,,,2805965.08,6485510.04,8513021.03,3
-One,,Two,,,,13973350.3,12148203.07,13793982.16,3
-One,,Three,,,,95859423.98,91909150.81,93300589.27,3
-One,,Four,,,,38943,40390.97,30511.39,3
-One,,Five,,,,181836.45,181856.59,133553.3,3
-One,,Eight,,,,1037936.3,845916.59,726300.85,3
-One,,Nine Total,,,,113897455.1,111611028.1,116497958,2
-One,Ten,Two,,,,73864200.26,70755075.12,71833949.84,3
-One,,Three,,,,171268,168847.17,154183.41,3
-One,,Five,,,,21534730.76,22295736.13,28932045.25,3
-One,,Ten Total,,,,95570199.02,93219658.42,100920178.5,2
-One,Eleven,One,,,,1912781.86,1829868.95,1747293.84,3
-One,,Eleven Total,,,,1912781.86,1829868.95,1747293.84,2
-One,Twelve,One,,,,28512764.32,27303228.27,26750825.68,3
-One,,Two,,,,17882638.27,16835553.04,16727385.36,3
-One,,Three,,,,16858956.41,15775365.35,14004394.49,3
-One,,Four,,,,11690036.81,11306399.26,10777588.2,3
-One,,Six,,,,2000000,1133966.56,1807351.06,3
-One,,Seven,,,,4412337.86,4659134.94,4535817.47,3
-One,,Eight,,,,173461.07,321652.63,240215.4,3
-One,,Nine,,,,3441784.6,4566381.75,5005934.66,3
-One,,Twelve Total,,,,84971979.34,81901681.8,79849512.32,2
-One,Fourteen,One,,,,0,0,0,3
-One,,Two,,,,3268302.19,3273076.6,3132762.36,3
-One,,Four,,,,713434.45,548851.92,505531.12,3
-One,,Fourteen Total,,,,3981736.64,3821928.52,3638293.48,2
-One,Nineteen,One,,,,2855675.84,1317097.57,811608.11,3
-One,,Nineteen Total,,,,2855675.84,1317097.57,811608.11,2
-One,Twenty,One,,,,0,0,0,3
-One,,Two,,,,0,0,0,3
-One,,Twenty Total,,,,0,0,0,2
-One Total,,,,,,584231544,562502816.5,569007857.1,1
-Two,One,One,,,,0,0,1972.56,3
-Two,,Two,,,,0,0,20008,3
-Two,,Three,,,,256123.86,842288.44,862745.32,3
-Two,,Five,,,,58454498.88,7995154.53,23922941.96,3
-Two,,Six,,,,10691685.27,8066265.42,5724112.67,3
-Two,,Seven,,,,0,0,0,3
-Two,,Eight,,,,3696067.78,1080995.96,1724573.27,3
-Two,,Eleven,,,,253455.01,18343.02,0,3
-Two,,One Total,,,,73351830.8,18003047.37,32256353.78,2
-Two,Two,One,,,,4673939.17,2584275.07,841920.85,3
-Two,,Two Total,,,,4673939.17,2584275.07,841920.85,2
-Two,Three,One,,,,507310.56,277061.48,517368.28,3
-Two,,Three Total,,,,507310.56,277061.48,517368.28,2
-Two,Four,One,,,,3300,629.97,0,3
-Two,,Two,,,,2733161.72,1336879.12,171438.81,3
-Two,,Six,,,,0,1615870.06,837241.89,3
-Two,,Four Total,,,,2736461.72,2953379.15,1008680.7,2
-Two,Five,Two,,,,1078995.68,892729.59,867434.82,3
-Two,,Five Total,,,,1078995.68,892729.59,867434.82,2
-Two,Six,One,,,,1537788.84,1634859.66,454328.62,3
-Two,,Two,,,,0,40044.05,0,3
-Two,,Six Total,,,,1537788.84,1674903.71,454328.62,2
-Two,Seven,One,,,,0,0,0,3
-Two,,Seven Total,,,,0,0,0,2
-Two,Eight,One,,,,4152087.93,2833978.43,2199689.46,3
-Two,,Two,,,,1229216.41,780036.38,3118620.71,3
-Two,,Eight Total,,,,5381304.34,3614014.81,5318310.17,2
-Two,Nine,One,,,,26577503.28,17881186.84,24510492.75,3
-Two,,Two,,,,3391463.46,2638486.43,1090087.03,3
-Two,,Four,,,,555672.06,218962.06,513658.86,3
-Two,,Eight,,,,0,0,0,3
-Two,,Nine Total,,,,30524638.8,20738635.33,26114238.64,2
-Two,Ten,Two,,,,3456184.48,5538533.24,1976529.99,3
-Two,,Three,,,,0,0,0,3
-Two,,Five,,,,30983866.06,9760780.57,14946811.16,3
-Two,,Ten Total,,,,34440050.54,15299313.81,16923341.15,2
-Two,Eleven,One,,,,80139.22,5721.8,88941,3
-Two,,Eleven Total,,,,80139.22,5721.8,88941,2
-Two,Twelve,One,,,,26273.3,0,0,3
-Two,,Two,,,,500000,500000,500000,3
-Two,,Three,,,,0,0,9997.33,3
-Two,,Seven,,,,0,27059.46,11600.64,3
-Two,,Nine,,,,692546.66,503350.48,578941.85,3
-Two,,Twelve Total,,,,1218819.96,1030409.94,1100539.82,2
-Two,Fourteen,One,,,,403829.09,0,0,3
-Two,,Two,,,,0,0,0,3
-Two,,Four,,,,983791.44,234988.99,84812.03,3
-Two,,Fourteen Total,,,,1387620.53,234988.99,84812.03,2
-Two,Nineteen,One,,,,574824.25,1333091.59,2634315.92,3
-Two,,Nineteen Total,,,,574824.25,1333091.59,2634315.92,2
-Two Total,,,,,,157493724.4,68641572.64,88210585.78,1
-Three,One,Three,,,,0,1424093.08,7327937.01,3
-Three,,Five,,,,0,0,8249911.34,3
-Three,,Eleven,,,,0,0,20000000,3
-Three,,One Total,,,,0,1424093.08,35577848.35,2
-Three,Ten,Two,,,,0,0,0,3
-Three,,Ten Total,,,,0,0,0,2
-Three,Twelve,Seven,,,,0,0,38000,3
-Three,,Twelve Total,,,,0,0,38000,2
-Three,Nineteen,One,,,,0,0,50000,3
-Three,,Nineteen Total,,,,0,0,50000,2
-Three Total,,,,,,0,1424093.08,35665848.35,1
-Four,Fifty,Two,,,,16939995.91,17709132.33,11658340.71,3
-Four,,Fifty Total,,,,16939995.91,17709132.33,11658340.71,2
-Four Total,,,,,,16939995.91,17709132.33,11658340.71,1
-Five,Sixty,One,,,,133953378.5,142964424.1,299736526.1,3
-Five,,Sixty Total,,,,133953378.5,142964424.1,299736526.1,2
-Five Total,,,,,,133953378.5,142964424.1,299736526.1,1
-Seven,NinetyNine,One,,,,43463367.41,58832202.56,236735029.6,3
-Seven,,NinetyNine Total,,,,43463367.41,58832202.56,236735029.6,2
-Seven Total,,,,,,43463367.41,58832202.56,236735029.6,1
-Zero,Zero,Zero,,,,0,0,0,3
-Zero,,Zero Total,,,,0,0,0,2
-Zero Total,,,,,,0,0,0,1
-APPROPRIATIONS TOTAL,,,,,,936082010.2,852074241.2,1241014188,0
+LEVEL1,LEVEL2,LEVEL3,TOOLTIP,SOURCE,SOURCE URL,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,LEVEL
+Current Expenditures,One,One,,,,0,0,0,0,0,19499390.68,15555582.5,13177133.63,0,0,0,3
+Current Expenditures,,Two,,,,0,0,0,0,0,3497875.56,3504427.12,3262182.55,0,0,0,3
+Current Expenditures,,Three,,,,0,0,0,0,0,21403493.28,22560642.68,21870773.51,0,0,0,3
+Current Expenditures,,Four,,,,0,0,0,0,0,88177517.02,84521484.23,84276577.38,0,0,0,3
+Current Expenditures,,Five,,,,0,0,0,0,0,4752059.64,4955169.41,6065305.66,0,0,0,3
+Current Expenditures,,Six,,,,0,0,0,0,0,9437132.41,9852881.62,8626670.24,0,0,0,3
+Current Expenditures,,Seven,,,,0,0,0,0,0,6725899.29,6101839.52,6883396.47,0,0,0,3
+Current Expenditures,,Eight,,,,0,0,0,0,0,10410006.65,10570245.89,12169016.77,0,0,0,3
+Current Expenditures,,Ten,,,,0,0,0,0,0,5825350.09,5984539.18,5210120.27,0,0,0,3
+Current Expenditures,,Eleven,,,,0,0,0,0,0,10126434.98,10202092.75,16588120.3,0,0,0,3
+Current Expenditures,,One Total,,,,0,0,0,0,0,179855159.6,173808904.9,178129296.8,0,0,0,2
+Current Expenditures,Two,One,,,,0,0,0,0,0,5891642,4935538.96,3383860.91,0,0,0,3
+Current Expenditures,,Two Total,,,,0,0,0,0,0,5891642,4935538.96,3383860.91,0,0,0,2
+Current Expenditures,Three,One,,,,0,0,0,0,0,26698815.97,24758889.66,22878894.01,0,0,0,3
+Current Expenditures,,Three Total,,,,0,0,0,0,0,26698815.97,24758889.66,22878894.01,0,0,0,2
+Current Expenditures,Four,One,,,,0,0,0,0,0,13674584.8,13660725.17,13062753.56,0,0,0,3
+Current Expenditures,,Two,,,,0,0,0,0,0,4457856.15,4527698.48,4797385.79,0,0,0,3
+Current Expenditures,,Six,,,,0,0,0,0,0,8210817.69,8152641.73,7443272.67,0,0,0,3
+Current Expenditures,,Seven,,,,0,0,0,0,0,1110377.02,1136086.85,1030904.55,0,0,0,3
+Current Expenditures,,Four Total,,,,0,0,0,0,0,27453635.66,27477152.23,26334316.57,0,0,0,2
+Current Expenditures,Five,Two,,,,0,0,0,0,0,18812262.2,16397831.9,14553408.32,0,0,0,3
+Current Expenditures,,Five Total,,,,0,0,0,0,0,18812262.2,16397831.9,14553408.32,0,0,0,2
+Current Expenditures,Six,One,,,,0,0,0,0,0,4592409.64,3831219.51,3818420.81,0,0,0,3
+Current Expenditures,,Two,,,,0,0,0,0,0,724401.27,460244.6,286032.62,0,0,0,3
+Current Expenditures,,Six Total,,,,0,0,0,0,0,5316810.91,4291464.11,4104453.43,0,0,0,2
+Current Expenditures,Seven,One,,,,0,0,0,0,0,1698516.66,1414622.05,1434731.34,0,0,0,3
+Current Expenditures,,Seven Total,,,,0,0,0,0,0,1698516.66,1414622.05,1434731.34,0,0,0,2
+Current Expenditures,Eight,One,,,,0,0,0,0,0,4491349.87,4372101.51,3908819.51,0,0,0,3
+Current Expenditures,,Two,,,,0,0,0,0,0,10823523.3,11345047.81,10815231.97,0,0,0,3
+Current Expenditures,,Eight Total,,,,0,0,0,0,0,15314873.17,15717149.32,14724051.48,0,0,0,2
+Current Expenditures,Nine,One,,,,0,0,0,0,0,2805965.08,6485510.04,8513021.03,0,0,0,3
+Current Expenditures,,Two,,,,0,0,0,0,0,13973350.3,12148203.07,13793982.16,0,0,0,3
+Current Expenditures,,Three,,,,0,0,0,0,0,95859423.98,91909150.81,93300589.27,0,0,0,3
+Current Expenditures,,Four,,,,0,0,0,0,0,38943,40390.97,30511.39,0,0,0,3
+Current Expenditures,,Five,,,,0,0,0,0,0,181836.45,181856.59,133553.3,0,0,0,3
+Current Expenditures,,Eight,,,,0,0,0,0,0,1037936.3,845916.59,726300.85,0,0,0,3
+Current Expenditures,,Nine Total,,,,0,0,0,0,0,113897455.1,111611028.1,116497958,0,0,0,2
+Current Expenditures,Ten,Two,,,,0,0,0,0,0,73864200.26,70755075.12,71833949.84,0,0,0,3
+Current Expenditures,,Three,,,,0,0,0,0,0,171268,168847.17,154183.41,0,0,0,3
+Current Expenditures,,Five,,,,0,0,0,0,0,21534730.76,22295736.13,28932045.25,0,0,0,3
+Current Expenditures,,Ten Total,,,,0,0,0,0,0,95570199.02,93219658.42,100920178.5,0,0,0,2
+Current Expenditures,Eleven,One,,,,0,0,0,0,0,1912781.86,1829868.95,1747293.84,0,0,0,3
+Current Expenditures,,Eleven Total,,,,0,0,0,0,0,1912781.86,1829868.95,1747293.84,0,0,0,2
+Current Expenditures,Twelve,One,,,,0,0,0,0,0,28512764.32,27303228.27,26750825.68,0,0,0,3
+Current Expenditures,,Two,,,,0,0,0,0,0,17882638.27,16835553.04,16727385.36,0,0,0,3
+Current Expenditures,,Three,,,,0,0,0,0,0,16858956.41,15775365.35,14004394.49,0,0,0,3
+Current Expenditures,,Four,,,,0,0,0,0,0,11690036.81,11306399.26,10777588.2,0,0,0,3
+Current Expenditures,,Six,,,,0,0,0,0,0,2000000,1133966.56,1807351.06,0,0,0,3
+Current Expenditures,,Seven,,,,0,0,0,0,0,4412337.86,4659134.94,4535817.47,0,0,0,3
+Current Expenditures,,Eight,,,,0,0,0,0,0,173461.07,321652.63,240215.4,0,0,0,3
+Current Expenditures,,Nine,,,,0,0,0,0,0,3441784.6,4566381.75,5005934.66,0,0,0,3
+Current Expenditures,,Twelve Total,,,,0,0,0,0,0,84971979.34,81901681.8,79849512.32,0,0,0,2
+Current Expenditures,Fourteen,One,,,,0,0,0,0,0,0,0,0,0,0,0,3
+Current Expenditures,,Two,,,,0,0,0,0,0,3268302.19,3273076.6,3132762.36,0,0,0,3
+Current Expenditures,,Four,,,,0,0,0,0,0,713434.45,548851.92,505531.12,0,0,0,3
+Current Expenditures,,Fourteen Total,,,,0,0,0,0,0,3981736.64,3821928.52,3638293.48,0,0,0,2
+Current Expenditures,Nineteen,One,,,,0,0,0,0,0,2855675.84,1317097.57,811608.11,0,0,0,3
+Current Expenditures,,Nineteen Total,,,,0,0,0,0,0,2855675.84,1317097.57,811608.11,0,0,0,2
+Current Expenditures,Twenty,One,,,,0,0,0,0,0,0,0,0,0,0,0,3
+Current Expenditures,,Two,,,,0,0,0,0,0,0,0,0,0,0,0,3
+Current Expenditures,,Twenty Total,,,,0,0,0,0,0,0,0,0,0,0,0,2
+Current Expenditures Total,,,,,,0,0,0,0,0,584231544,562502816.5,569007857.1,0,0,0,1
+Capital Expenditure of Investment,One,One,,,,0,0,0,0,0,0,0,1972.56,0,0,0,3
+Capital Expenditure of Investment,,Two,,,,0,0,0,0,0,0,0,20008,0,0,0,3
+Capital Expenditure of Investment,,Three,,,,0,0,0,0,0,256123.86,842288.44,862745.32,0,0,0,3
+Capital Expenditure of Investment,,Five,,,,0,0,0,0,0,58454498.88,7995154.53,23922941.96,0,0,0,3
+Capital Expenditure of Investment,,Six,,,,0,0,0,0,0,10691685.27,8066265.42,5724112.67,0,0,0,3
+Capital Expenditure of Investment,,Seven,,,,0,0,0,0,0,0,0,0,0,0,0,3
+Capital Expenditure of Investment,,Eight,,,,0,0,0,0,0,3696067.78,1080995.96,1724573.27,0,0,0,3
+Capital Expenditure of Investment,,Eleven,,,,0,0,0,0,0,253455.01,18343.02,0,0,0,0,3
+Capital Expenditure of Investment,,One Total,,,,0,0,0,0,0,73351830.8,18003047.37,32256353.78,0,0,0,2
+Capital Expenditure of Investment,Two,One,,,,0,0,0,0,0,4673939.17,2584275.07,841920.85,0,0,0,3
+Capital Expenditure of Investment,,Two Total,,,,0,0,0,0,0,4673939.17,2584275.07,841920.85,0,0,0,2
+Capital Expenditure of Investment,Three,One,,,,0,0,0,0,0,507310.56,277061.48,517368.28,0,0,0,3
+Capital Expenditure of Investment,,Three Total,,,,0,0,0,0,0,507310.56,277061.48,517368.28,0,0,0,2
+Capital Expenditure of Investment,Four,One,,,,0,0,0,0,0,3300,629.97,0,0,0,0,3
+Capital Expenditure of Investment,,Two,,,,0,0,0,0,0,2733161.72,1336879.12,171438.81,0,0,0,3
+Capital Expenditure of Investment,,Six,,,,0,0,0,0,0,0,1615870.06,837241.89,0,0,0,3
+Capital Expenditure of Investment,,Four Total,,,,0,0,0,0,0,2736461.72,2953379.15,1008680.7,0,0,0,2
+Capital Expenditure of Investment,Five,Two,,,,0,0,0,0,0,1078995.68,892729.59,867434.82,0,0,0,3
+Capital Expenditure of Investment,,Five Total,,,,0,0,0,0,0,1078995.68,892729.59,867434.82,0,0,0,2
+Capital Expenditure of Investment,Six,One,,,,0,0,0,0,0,1537788.84,1634859.66,454328.62,0,0,0,3
+Capital Expenditure of Investment,,Two,,,,0,0,0,0,0,0,40044.05,0,0,0,0,3
+Capital Expenditure of Investment,,Six Total,,,,0,0,0,0,0,1537788.84,1674903.71,454328.62,0,0,0,2
+Capital Expenditure of Investment,Seven,One,,,,0,0,0,0,0,0,0,0,0,0,0,3
+Capital Expenditure of Investment,,Seven Total,,,,0,0,0,0,0,0,0,0,0,0,0,2
+Capital Expenditure of Investment,Eight,One,,,,0,0,0,0,0,4152087.93,2833978.43,2199689.46,0,0,0,3
+Capital Expenditure of Investment,,Two,,,,0,0,0,0,0,1229216.41,780036.38,3118620.71,0,0,0,3
+Capital Expenditure of Investment,,Eight Total,,,,0,0,0,0,0,5381304.34,3614014.81,5318310.17,0,0,0,2
+Capital Expenditure of Investment,Nine,One,,,,0,0,0,0,0,26577503.28,17881186.84,24510492.75,0,0,0,3
+Capital Expenditure of Investment,,Two,,,,0,0,0,0,0,3391463.46,2638486.43,1090087.03,0,0,0,3
+Capital Expenditure of Investment,,Four,,,,0,0,0,0,0,555672.06,218962.06,513658.86,0,0,0,3
+Capital Expenditure of Investment,,Eight,,,,0,0,0,0,0,0,0,0,0,0,0,3
+Capital Expenditure of Investment,,Nine Total,,,,0,0,0,0,0,30524638.8,20738635.33,26114238.64,0,0,0,2
+Capital Expenditure of Investment,Ten,Two,,,,0,0,0,0,0,3456184.48,5538533.24,1976529.99,0,0,0,3
+Capital Expenditure of Investment,,Three,,,,0,0,0,0,0,0,0,0,0,0,0,3
+Capital Expenditure of Investment,,Five,,,,0,0,0,0,0,30983866.06,9760780.57,14946811.16,0,0,0,3
+Capital Expenditure of Investment,,Ten Total,,,,0,0,0,0,0,34440050.54,15299313.81,16923341.15,0,0,0,2
+Capital Expenditure of Investment,Eleven,One,,,,0,0,0,0,0,80139.22,5721.8,88941,0,0,0,3
+Capital Expenditure of Investment,,Eleven Total,,,,0,0,0,0,0,80139.22,5721.8,88941,0,0,0,2
+Capital Expenditure of Investment,Twelve,One,,,,0,0,0,0,0,26273.3,0,0,0,0,0,3
+Capital Expenditure of Investment,,Two,,,,0,0,0,0,0,500000,500000,500000,0,0,0,3
+Capital Expenditure of Investment,,Three,,,,0,0,0,0,0,0,0,9997.33,0,0,0,3
+Capital Expenditure of Investment,,Seven,,,,0,0,0,0,0,0,27059.46,11600.64,0,0,0,3
+Capital Expenditure of Investment,,Nine,,,,0,0,0,0,0,692546.66,503350.48,578941.85,0,0,0,3
+Capital Expenditure of Investment,,Twelve Total,,,,0,0,0,0,0,1218819.96,1030409.94,1100539.82,0,0,0,2
+Capital Expenditure of Investment,Fourteen,One,,,,0,0,0,0,0,403829.09,0,0,0,0,0,3
+Capital Expenditure of Investment,,Two,,,,0,0,0,0,0,0,0,0,0,0,0,3
+Capital Expenditure of Investment,,Four,,,,0,0,0,0,0,983791.44,234988.99,84812.03,0,0,0,3
+Capital Expenditure of Investment,,Fourteen Total,,,,0,0,0,0,0,1387620.53,234988.99,84812.03,0,0,0,2
+Capital Expenditure of Investment,Nineteen,One,,,,0,0,0,0,0,574824.25,1333091.59,2634315.92,0,0,0,3
+Capital Expenditure of Investment,,Nineteen Total,,,,0,0,0,0,0,574824.25,1333091.59,2634315.92,0,0,0,2
+Capital Expenditure of Investment Total,,,,,,0,0,0,0,0,157493724.4,68641572.64,88210585.78,0,0,0,1
+Purchase of Shares & Credit Concessions,One,Three,,,,0,0,0,0,0,0,1424093.08,7327937.01,0,0,0,3
+Purchase of Shares & Credit Concessions,,Five,,,,0,0,0,0,0,0,0,8249911.34,0,0,0,3
+Purchase of Shares & Credit Concessions,,Eleven,,,,0,0,0,0,0,0,0,20000000,0,0,0,3
+Purchase of Shares & Credit Concessions,,One Total,,,,0,0,0,0,0,0,1424093.08,35577848.35,0,0,0,2
+Purchase of Shares & Credit Concessions,Ten,Two,,,,0,0,0,0,0,0,0,0,0,0,0,3
+Purchase of Shares & Credit Concessions,,Ten Total,,,,0,0,0,0,0,0,0,0,0,0,0,2
+Purchase of Shares & Credit Concessions,Twelve,Seven,,,,0,0,0,0,0,0,0,38000,0,0,0,3
+Purchase of Shares & Credit Concessions,,Twelve Total,,,,0,0,0,0,0,0,0,38000,0,0,0,2
+Purchase of Shares & Credit Concessions,Nineteen,One,,,,0,0,0,0,0,0,0,50000,0,0,0,3
+Purchase of Shares & Credit Concessions,,Nineteen Total,,,,0,0,0,0,0,0,0,50000,0,0,0,2
+Purchase of Shares & Credit Concessions Total,,,,,,0,0,0,0,0,0,1424093.08,35665848.35,0,0,0,1
+Loan Replacements,Fifty,Two,,,,0,0,0,0,0,16939995.91,17709132.33,11658340.71,0,0,0,3
+Loan Replacements,,Fifty Total,,,,0,0,0,0,0,16939995.91,17709132.33,11658340.71,0,0,0,2
+Loan Replacements Total,,,,,,0,0,0,0,0,16939995.91,17709132.33,11658340.71,0,0,0,1
+Spending on Closing of Advances Treasurer/Cashier,Sixty,One,,,,0,0,0,0,0,133953378.5,142964424.1,299736526.1,0,0,0,3
+Spending on Closing of Advances Treasurer/Cashier,,Sixty Total,,,,0,0,0,0,0,133953378.5,142964424.1,299736526.1,0,0,0,2
+Spending on Closing of Advances Treasurer/Cashier Total,,,,,,0,0,0,0,0,133953378.5,142964424.1,299736526.1,0,0,0,1
+Spending on Third Party Services,NinetyNine,One,,,,0,0,0,0,0,43463367.41,58832202.56,236735029.6,0,0,0,3
+Spending on Third Party Services,,NinetyNine Total,,,,0,0,0,0,0,43463367.41,58832202.56,236735029.6,0,0,0,2
+Spending on Third Party Services Total,,,,,,0,0,0,0,0,43463367.41,58832202.56,236735029.6,0,0,0,1
+Zero,Zero,Zero,,,,0,0,0,0,0,0,0,0,0,0,0,3
+Zero,,Zero Total,,,,0,0,0,0,0,0,0,0,0,0,0,2
+Zero Total,,,,,,0,0,0,0,0,0,0,0,0,0,0,1
+APPROPRIATIONS TOTAL,,,,,,0,0,0,0,0,936082010.2,852074241.2,1241014188,0,0,0,0

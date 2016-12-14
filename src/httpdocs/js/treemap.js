@@ -162,7 +162,8 @@ avb.treemap = function () {
             })
             // treemap values calculated based on current year value
             .value(function (d) {
-                return d.values[yearIndex].val
+                console.log("yearIndex = " + yearIndex);
+                return d.values[yearIndex].val;
             })
             // block sorting function
             .sort(function (a, b) {
