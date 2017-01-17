@@ -80,14 +80,12 @@ Number.prototype.px = function () {
 *   initialization routines
 */
 function initialize(){
-    var urlComponents = window.location.pathname.substring(1).split('/');
-    var params = {
-        section : urlComponents[0],
-        year : urlComponents[1],
-        mode : urlComponents[2],
-        node : urlComponents[3]
-    }
+    
+    params = pageParams;
+    params.section = ('page' in pageParams) ? pageParams.page : '';
+
     avb.navbar.initialize();
+
     if(params.section === undefined || params.section === "") {
         avb.home.initialize();
         avb.home.show();

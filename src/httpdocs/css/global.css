@@ -34,7 +34,7 @@ body {
   margin: 0;
   padding: 0;
   border: 0;
-  background-image: url(/img/bg_avb.png);
+  background-image: url(../img/bg_avb.png);
   height: 100%;
 }
 
@@ -222,7 +222,7 @@ p {
 
 /* line 15, ../../scss/partials/_home.scss */
 #avb-home {
-  background-image: url(/img/bg_avb.png);
+  background-image: url(../img/bg_avb.png);
   z-index: 1010;
   border-bottom: 2px solid #d63366;
   display: none;

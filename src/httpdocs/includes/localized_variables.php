@@ -13,4 +13,8 @@
   # Variables for update.php
   $user = 'admin';
   $pass = 'pass';
+
+  # App Path
+  $app_dir = dirname($_SERVER['PHP_SELF']) . '/';
+
 ?>

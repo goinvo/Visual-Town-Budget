@@ -22,7 +22,8 @@
     ?>
 
     <script>
-    $(document).ready(initialize);
+      $(document).ready(initialize);
+      var pageParams = <?php echo json_encode($_GET); ?>
     </script>
   </head>
   <body>

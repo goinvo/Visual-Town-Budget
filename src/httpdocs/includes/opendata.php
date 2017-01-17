@@ -14,8 +14,8 @@ style="position: absolute; top: 0; right: 0; border: 0;"></a>
                 echo '<div class="dataDownload">';
                 echo '<span><i class="icon-download"></i></span>';
                 echo '<span class="name">'.ucfirst($section).'</span> <span>-</span>';
-                echo '<a href="/data/'.$section.'.csv">CSV</a> <span>-</span>';
-                echo '<a href="/data/'.$section.'.json">Json</a>';
+                echo '<a href="' . $app_dir . 'data/'.$section.'.csv" target="_blank">CSV</a> <span>-</span>';
+                echo '<a href="' . $app_dir . 'data/'.$section.'.json" target="_blank">Json</a>';
                 echo '</div>';
             }
         ?>
@@ -28,7 +28,7 @@ style="position: absolute; top: 0; right: 0; border: 0;"></a>
         </div>
 
         <div class="dataDownload">
-            <a href="https://github.com/goinvo/Visual-Town-Budget">GitHub
+            <a href="https://github.com/goinvo/Visual-Town-Budget" target="_blank">GitHub
             Repo</a>
         </div>
     </div>

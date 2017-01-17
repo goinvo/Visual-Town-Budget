@@ -5,7 +5,7 @@
     <div class="homebutton" onclick='window.location = "/"'>
 
       <div style="font-size:32px;line-height:28px; display:inline-block"> <?php echo $shortName; ?>, <?php echo $stateAbbreviation; ?>  </div>
-      <img src="/img/logo@High.png" alt="avb-logo" width=24 height=24 />
+      <img src="<?php echo $app_dir; ?>img/logo@High.png" alt="avb-logo" width=24 height=24 />
    </div>
 
     <div id="navbar-links" style="line-height:30px;">
@@ -13,9 +13,9 @@
      <div onclick='window.location = "/"' class="entry homebutton"> Town Budget, Visualized </div>
 
      <div class="entry navbar-margin">
-        <span class="menubutton section margin" data-section="revenues"><a href="/revenues">Revenues</a></span>
-        <span class="menubutton section margin" data-section="expenses"><a href="/expenses">Expenses</a></span>
-        <span class="menubutton section margin" data-section="funds"><a id="navbar-funds" href="/funds">Funds &#38; Reserves</a></span>
+        <span class="menubutton section margin" data-section="revenues"><a href="<?php echo $app_dir; ?>revenues">Revenues</a></span>
+        <span class="menubutton section margin" data-section="expenses"><a href="<?php echo $app_dir; ?>expenses">Expenses</a></span>
+        <span class="menubutton section margin" data-section="funds"><a id="navbar-funds" href="<?php echo $app_dir; ?>funds">Funds &#38; Reserves</a></span>
     </div>
 
     <div class="entry" id="navbar-right" style="float:right;">
