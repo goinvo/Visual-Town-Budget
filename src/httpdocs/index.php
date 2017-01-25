@@ -23,7 +23,8 @@
 
     <script>
       $(document).ready(initialize);
-      var pageParams = <?php echo json_encode($_GET); ?>
+      var pageParams = <?php echo json_encode($_GET); ?>;
+      var app_path = '<?php echo $app_dir; ?>';
     </script>
   </head>
   <body>
