@@ -16,5 +16,6 @@
 
   # App Path
   $app_dir = dirname($_SERVER['PHP_SELF']) . '/';
+  if($app_dir == '//') $app_dir = '/';
 
 ?>
