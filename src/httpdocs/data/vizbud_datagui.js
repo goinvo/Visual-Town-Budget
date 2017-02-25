@@ -86,8 +86,10 @@ app.controller('vbGuiCtrl', ['$scope', '$http', '$sce', '$rootScope', '$window',
 
 			$scope.subTotals = false;
 
-			$scope.treePosition = getTreePointer(item.hash);
-			$scope.currentParentHash = $scope.treePosition.parent.hash;
+			if(item.hash != $scope.dataSet.hash){
+				$scope.treePosition = getTreePointer(item.hash);
+				$scope.currentParentHash = $scope.treePosition.parent.hash;
+			}
 
 
 			if(item.sub.length != 0){
@@ -183,7 +185,7 @@ function buildCatHash(parent, indent){
 			pIndex 	: i,
 			pointer : pointer
 		});
-		
+
 		if(pointer.sub.length != 0){
 			buildCatHash(pointer, indent);
 		}

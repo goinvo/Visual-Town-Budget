@@ -22,7 +22,7 @@
 			input		{ border: 1px solid #d3d6db; height: 25px; padding: 5px; width: 100% }
 			textarea	{ width: 100%; height: 200px; border: 1px solid #d3d6db; font-family: arial; font-size: 11px; padding: 5px; line-height: 17px }
 
-			table 		{width:100%;margin-bottom:10px;}
+			table 		{width:100%;margin-bottom:10px;;}
 			table td 	{width:40%;}
 			table tr td:first-child {width:20%;}
 			table tr td:last-child {text-align:left;}
@@ -99,9 +99,7 @@
 							<td><textarea id="descr" ng-model="currentItem.descr"></textarea></td>
 							<td></td>
 						</tr>
-					</table>
-
-					<table>
+					
 						<tr ng-repeat="v in currentItem.values">
 							<td><label for="val_{{v.year}}">{{v.year}}</label></td>
 							<td><input id="src" ng-model="v.val" id="val_{{v.year}}" /></td>
