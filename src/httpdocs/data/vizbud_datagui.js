@@ -69,7 +69,7 @@ app.controller('vbGuiCtrl', ['$scope', '$http', '$sce', '$rootScope', '$window',
 
 			}, function errorCallback(response) {
 				console.log("can't find data set")
-			});	
+			});
 		}
 
 		$scope.reset = function(){
@@ -79,7 +79,7 @@ app.controller('vbGuiCtrl', ['$scope', '$http', '$sce', '$rootScope', '$window',
 			$scope.currentParentHash = false;
 		}
 
-	
+
 		// UI
 		$scope.openItem = function(item){
 			$scope.currentItem = item;
@@ -107,7 +107,7 @@ app.controller('vbGuiCtrl', ['$scope', '$http', '$sce', '$rootScope', '$window',
 			}
 
 		}
-		
+
 		$scope.deleteItem = function(item){
 			$scope.treePosition.parent.sub.splice($scope.treePosition.pIndex, 1);
 			$scope.currentItem = false;
@@ -155,11 +155,11 @@ app.controller('vbGuiCtrl', ['$scope', '$http', '$sce', '$rootScope', '$window',
 		}
 
 	
+
 		// AND AWAY WE GO!!!
 		$scope.init();
 	}
 ]);
-
 
 
 
@@ -183,7 +183,7 @@ function buildCatHash(parent, indent){
 			pIndex 	: i,
 			pointer : pointer
 		});
-
+		
 		if(pointer.sub.length != 0){
 			buildCatHash(pointer, indent);
 		}

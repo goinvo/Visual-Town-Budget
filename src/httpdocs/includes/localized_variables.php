@@ -1,14 +1,14 @@
 <?php
   # Variables used through the site
-  $siteName = "Arlington Visual Budget";
-  $siteURL = "arlingtonvisualbudget.org";
-  $municipalURL = "http://town.arlington.ma.us";
-  $feedbackEmail = "arlington-internal@goinvo.com";
-  $shortName = "Arlington";
-  $longName = "Town of Arlington";
-  $state = "Massachusetts";
-  $stateAbbreviation = "MA";
-  $gaKey = "UA-10273473-12";
+  $siteName = "Portland Maine Visual budget";
+  $siteURL = "http://www.portlandmaine.gov/201/Budget-Financial-Documents";
+  $municipalURL = "http://www.portlandmaine.gov/201/Budget-Financial-Documents";
+  $feedbackEmail = "theportlandbudget@gmail.com";
+  $shortName = "Portland";
+  $longName = "Portland";
+  $state = "Maine";
+  $stateAbbreviation = "ME";
+  $gaKey = "";
 
   # Variables for update.php
   $user = 'admin';
