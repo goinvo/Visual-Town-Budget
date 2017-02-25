@@ -7,7 +7,217 @@
       "descr": "",
       "key": "City Council",
       "src": "",
-      "sub": [],
+      "sub": [
+        {
+          "descr": "",
+          "key": "Payroll",
+          "src": "",
+          "sub": [
+            {
+              "descr": "",
+              "key": "Mayor",
+              "src": "",
+              "sub": [],
+              "url": "",
+              "values": [
+                {
+                  "year": "2015",
+                  "val": "68386"
+                },
+                {
+                  "year": "2016",
+                  "val": "70434"
+                },
+                {
+                  "year": "2017",
+                  "val": "71838"
+                },
+                {
+                  "year": "2018",
+                  "val": 0
+                }
+              ],
+              "hash": "pBFiX6ZA"
+            },
+            {
+              "descr": "",
+              "key": "Special Assistant to the Mayor",
+              "src": "",
+              "sub": [],
+              "url": "",
+              "values": [
+                {
+                  "year": "2015",
+                  "val": 0
+                },
+                {
+                  "year": "2016",
+                  "val": 0
+                },
+                {
+                  "year": "2017",
+                  "val": "65770"
+                },
+                {
+                  "year": "2018",
+                  "val": 0
+                }
+              ],
+              "hash": "9CaOgj2q"
+            },
+            {
+              "descr": "",
+              "key": "City Councilors (8)",
+              "src": "",
+              "sub": [],
+              "url": "",
+              "values": [
+                {
+                  "year": "2015",
+                  "val": "48614"
+                },
+                {
+                  "year": "2016",
+                  "val": "50074"
+                },
+                {
+                  "year": "2017",
+                  "val": "51072"
+                },
+                {
+                  "year": "2018",
+                  "val": 0
+                }
+              ],
+              "hash": "RWdtSMRX"
+            }
+          ],
+          "url": "",
+          "values": [
+            {
+              "year": "2015",
+              "val": "117000"
+            },
+            {
+              "year": "2016",
+              "val": "120508"
+            },
+            {
+              "year": "2017",
+              "val": "188680"
+            },
+            {
+              "year": "2018",
+              "val": 0
+            }
+          ],
+          "hash": "OgMksHIt"
+        },
+        {
+          "descr": "",
+          "key": "Administrative Services",
+          "src": "",
+          "sub": [],
+          "url": "",
+          "values": [
+            {
+              "year": "2015",
+              "val": "49880"
+            },
+            {
+              "year": "2016",
+              "val": "38680"
+            },
+            {
+              "year": "2017",
+              "val": "37190"
+            },
+            {
+              "year": "2018",
+              "val": 0
+            }
+          ],
+          "hash": "5tNTGkef"
+        },
+        {
+          "descr": "",
+          "key": "Contractual Services",
+          "src": "",
+          "sub": [],
+          "url": "",
+          "values": [
+            {
+              "year": "2015",
+              "val": "159000"
+            },
+            {
+              "year": "2016",
+              "val": "169000"
+            },
+            {
+              "year": "2017",
+              "val": "146000"
+            },
+            {
+              "year": "2018",
+              "val": 0
+            }
+          ],
+          "hash": "ryRAbsbl"
+        },
+        {
+          "descr": "",
+          "key": "Supplies",
+          "src": "",
+          "sub": [],
+          "url": "",
+          "values": [
+            {
+              "year": "2015",
+              "val": "3750"
+            },
+            {
+              "year": "2016",
+              "val": "3750"
+            },
+            {
+              "year": "2017",
+              "val": "3750"
+            },
+            {
+              "year": "2018",
+              "val": 0
+            }
+          ],
+          "hash": "Y0erJZ0o"
+        },
+        {
+          "descr": "",
+          "key": "Utilities",
+          "src": "",
+          "sub": [],
+          "url": "",
+          "values": [
+            {
+              "year": "2015",
+              "val": "1565"
+            },
+            {
+              "year": "2016",
+              "val": "1565"
+            },
+            {
+              "year": "2017",
+              "val": "1200"
+            },
+            {
+              "year": "2018",
+              "val": 0
+            }
+          ],
+          "hash": "XSclaIH3"
+        }
+      ],
       "url": "",
       "values": [
         {
@@ -33,7 +243,425 @@
       "descr": "",
       "key": "City Clerk",
       "src": "",
-      "sub": [],
+      "sub": [
+        {
+          "descr": "",
+          "key": "Payroll",
+          "src": "",
+          "sub": [
+            {
+              "descr": "",
+              "key": "City Clerk",
+              "src": "",
+              "sub": [],
+              "url": "",
+              "values": [
+                {
+                  "year": "2015",
+                  "val": "75231"
+                },
+                {
+                  "year": "2016",
+                  "val": "79794"
+                },
+                {
+                  "year": "2017",
+                  "val": "80574"
+                },
+                {
+                  "year": "2018",
+                  "val": 0
+                }
+              ],
+              "hash": "1tSoQDQX"
+            },
+            {
+              "descr": "",
+              "key": "Principal Admin Officer",
+              "src": "",
+              "sub": [],
+              "url": "",
+              "values": [
+                {
+                  "year": "2015",
+                  "val": "58793"
+                },
+                {
+                  "year": "2016",
+                  "val": "52826"
+                },
+                {
+                  "year": "2017",
+                  "val": "55501"
+                },
+                {
+                  "year": "2018",
+                  "val": 0
+                }
+              ],
+              "hash": "CYV7rdKl"
+            },
+            {
+              "descr": "NOTE: This position was moved to the Permitting & Inspections Department in FY17.",
+              "key": "Business License Admin",
+              "src": "",
+              "sub": [],
+              "url": "",
+              "values": [
+                {
+                  "year": "2015",
+                  "val": "44483"
+                },
+                {
+                  "year": "2016",
+                  "val": "47134"
+                },
+                {
+                  "year": "2017",
+                  "val": 0
+                },
+                {
+                  "year": "2018",
+                  "val": 0
+                }
+              ],
+              "hash": "jWxmbXZH"
+            },
+            {
+              "descr": "",
+              "key": "Election Administrator",
+              "src": "",
+              "sub": [],
+              "url": "",
+              "values": [
+                {
+                  "year": "2015",
+                  "val": "46010"
+                },
+                {
+                  "year": "2016",
+                  "val": "43518"
+                },
+                {
+                  "year": "2017",
+                  "val": "44704"
+                },
+                {
+                  "year": "2018",
+                  "val": 0
+                }
+              ],
+              "hash": "EiyhbFL2"
+            },
+            {
+              "descr": "",
+              "key": "Election Assistant",
+              "src": "",
+              "sub": [],
+              "url": "",
+              "values": [
+                {
+                  "year": "2015",
+                  "val": "43566"
+                },
+                {
+                  "year": "2016",
+                  "val": "3390"
+                },
+                {
+                  "year": "2017",
+                  "val": "32702"
+                },
+                {
+                  "year": "2018",
+                  "val": 0
+                }
+              ],
+              "hash": "4Zy0eHzg"
+            },
+            {
+              "descr": "",
+              "key": "Vital Records Clerk",
+              "src": "",
+              "sub": [],
+              "url": "",
+              "values": [
+                {
+                  "year": "2015",
+                  "val": "132794"
+                },
+                {
+                  "year": "2016",
+                  "val": "137070"
+                },
+                {
+                  "year": "2017",
+                  "val": "131503"
+                },
+                {
+                  "year": "2018",
+                  "val": 0
+                }
+              ],
+              "hash": "rL9yhKWX"
+            },
+            {
+              "descr": "",
+              "key": "Temporary Help",
+              "src": "",
+              "sub": [],
+              "url": "",
+              "values": [
+                {
+                  "year": "2015",
+                  "val": "55140"
+                },
+                {
+                  "year": "2016",
+                  "val": "74668"
+                },
+                {
+                  "year": "2017",
+                  "val": "71823"
+                },
+                {
+                  "year": "2018",
+                  "val": 0
+                }
+              ],
+              "hash": "6iJuycU0"
+            },
+            {
+              "descr": "",
+              "key": "Overtime",
+              "src": "",
+              "sub": [],
+              "url": "",
+              "values": [
+                {
+                  "year": "2015",
+                  "val": "15370"
+                },
+                {
+                  "year": "2016",
+                  "val": "16820"
+                },
+                {
+                  "year": "2017",
+                  "val": "16820"
+                },
+                {
+                  "year": "2018",
+                  "val": 0
+                }
+              ],
+              "hash": "P2VD6hdT"
+            },
+            {
+              "descr": "",
+              "key": "Business License Admin / Election Assistant",
+              "src": "",
+              "sub": [],
+              "url": "",
+              "values": [
+                {
+                  "year": "2015",
+                  "val": 0
+                },
+                {
+                  "year": "2016",
+                  "val": "33624"
+                },
+                {
+                  "year": "2017",
+                  "val": 0
+                },
+                {
+                  "year": "2018",
+                  "val": 0
+                }
+              ],
+              "hash": "ucKQO8nH"
+            }
+          ],
+          "url": "",
+          "values": [
+            {
+              "year": "2015",
+              "val": "471387"
+            },
+            {
+              "year": "2016",
+              "val": "488844"
+            },
+            {
+              "year": "2017",
+              "val": "433627"
+            },
+            {
+              "year": "2018",
+              "val": 0
+            }
+          ],
+          "hash": "yffHX5Bt"
+        },
+        {
+          "descr": "",
+          "key": "Administrative Services",
+          "src": "",
+          "sub": [],
+          "url": "",
+          "values": [
+            {
+              "year": "2015",
+              "val": "5269"
+            },
+            {
+              "year": "2016",
+              "val": "1580"
+            },
+            {
+              "year": "2017",
+              "val": "5324"
+            },
+            {
+              "year": "2018",
+              "val": 0
+            }
+          ],
+          "hash": "jgSK15mP"
+        },
+        {
+          "descr": "",
+          "key": "Contractual Services",
+          "src": "",
+          "sub": [],
+          "url": "",
+          "values": [
+            {
+              "year": "2015",
+              "val": "36671"
+            },
+            {
+              "year": "2016",
+              "val": "67816"
+            },
+            {
+              "year": "2017",
+              "val": "34700"
+            },
+            {
+              "year": "2018",
+              "val": 0
+            }
+          ],
+          "hash": "U07qCn8i"
+        },
+        {
+          "descr": "",
+          "key": "Maintenance & Repairs",
+          "src": "",
+          "sub": [],
+          "url": "",
+          "values": [
+            {
+              "year": "2015",
+              "val": "1650"
+            },
+            {
+              "year": "2016",
+              "val": "2750"
+            },
+            {
+              "year": "2017",
+              "val": "3000"
+            },
+            {
+              "year": "2018",
+              "val": 0
+            }
+          ],
+          "hash": "3AwB1lIS"
+        },
+        {
+          "descr": "",
+          "key": "Rentals",
+          "src": "",
+          "sub": [],
+          "url": "",
+          "values": [
+            {
+              "year": "2015",
+              "val": "10328"
+            },
+            {
+              "year": "2016",
+              "val": "8968"
+            },
+            {
+              "year": "2017",
+              "val": "8974"
+            },
+            {
+              "year": "2018",
+              "val": 0
+            }
+          ],
+          "hash": "2ysV5Hm6"
+        },
+        {
+          "descr": "",
+          "key": "Supplies",
+          "src": "",
+          "sub": [],
+          "url": "",
+          "values": [
+            {
+              "year": "2015",
+              "val": "6500"
+            },
+            {
+              "year": "2016",
+              "val": "5600"
+            },
+            {
+              "year": "2017",
+              "val": "5900"
+            },
+            {
+              "year": "2018",
+              "val": 0
+            }
+          ],
+          "hash": "iBKiAsJX"
+        },
+        {
+          "descr": "",
+          "key": "Utilities",
+          "src": "",
+          "sub": [],
+          "url": "",
+          "values": [
+            {
+              "year": "2015",
+              "val": "780"
+            },
+            {
+              "year": "2016",
+              "val": "780"
+            },
+            {
+              "year": "2017",
+              "val": "624"
+            },
+            {
+              "year": "2018",
+              "val": 0
+            }
+          ],
+          "hash": "B7LdjfVI"
+        }
+      ],
       "url": "",
       "values": [
         {
@@ -59,7 +687,765 @@
       "descr": "",
       "key": "City Manager",
       "src": "",
-      "sub": [],
+      "sub": [
+        {
+          "descr": "",
+          "key": "Payroll",
+          "src": "",
+          "sub": [
+            {
+              "descr": "",
+              "key": "City Manager",
+              "src": "",
+              "sub": [],
+              "url": "",
+              "values": [
+                {
+                  "year": "2015",
+                  "val": "149531"
+                },
+                {
+                  "year": "2016",
+                  "val": "152506"
+                },
+                {
+                  "year": "2017",
+                  "val": "148064"
+                },
+                {
+                  "year": "2018",
+                  "val": 0
+                }
+              ],
+              "hash": "w1NQkNsW"
+            },
+            {
+              "descr": "",
+              "key": "Deputy City Manager",
+              "src": "",
+              "sub": [],
+              "url": "",
+              "values": [
+                {
+                  "year": "2015",
+                  "val": "128798"
+                },
+                {
+                  "year": "2016",
+                  "val": "142448"
+                },
+                {
+                  "year": "2017",
+                  "val": "143421"
+                },
+                {
+                  "year": "2018",
+                  "val": 0
+                }
+              ],
+              "hash": "rGhrhGcP"
+            },
+            {
+              "descr": "",
+              "key": "Assistant to the City Manager/Constituent Services",
+              "src": "",
+              "sub": [],
+              "url": "",
+              "values": [
+                {
+                  "year": "2015",
+                  "val": "59236"
+                },
+                {
+                  "year": "2016",
+                  "val": 0
+                },
+                {
+                  "year": "2017",
+                  "val": "75972"
+                },
+                {
+                  "year": "2018",
+                  "val": 0
+                }
+              ],
+              "hash": "bIKd5LFc"
+            },
+            {
+              "descr": "",
+              "key": "Communications Director",
+              "src": "",
+              "sub": [],
+              "url": "",
+              "values": [
+                {
+                  "year": "2015",
+                  "val": "69184"
+                },
+                {
+                  "year": "2016",
+                  "val": "75731"
+                },
+                {
+                  "year": "2017",
+                  "val": "79558"
+                },
+                {
+                  "year": "2018",
+                  "val": 0
+                }
+              ],
+              "hash": "nzbasTpM"
+            },
+            {
+              "descr": "",
+              "key": "Island/Neighborhood Admin",
+              "src": "",
+              "sub": [],
+              "url": "",
+              "values": [
+                {
+                  "year": "2015",
+                  "val": "69314"
+                },
+                {
+                  "year": "2016",
+                  "val": "73528"
+                },
+                {
+                  "year": "2017",
+                  "val": 0
+                },
+                {
+                  "year": "2018",
+                  "val": 0
+                }
+              ],
+              "hash": "EWTfnbC4"
+            },
+            {
+              "descr": "NOTE: This position was transferred to the Human Resources Department in FY17",
+              "key": "Director of Economic Opportunity & Multicultural Affairs",
+              "src": "",
+              "sub": [],
+              "url": "",
+              "values": [
+                {
+                  "year": "2015",
+                  "val": "67883"
+                },
+                {
+                  "year": "2016",
+                  "val": "72041"
+                },
+                {
+                  "year": "2017",
+                  "val": 0
+                },
+                {
+                  "year": "2018",
+                  "val": 0
+                }
+              ],
+              "hash": "Fu5VvjHm"
+            },
+            {
+              "descr": "(What happened to this position in FY17?)",
+              "key": "Waterfront Coordinator",
+              "src": "",
+              "sub": [],
+              "url": "",
+              "values": [
+                {
+                  "year": "2015",
+                  "val": "74352"
+                },
+                {
+                  "year": "2016",
+                  "val": "78879"
+                },
+                {
+                  "year": "2017",
+                  "val": 0
+                },
+                {
+                  "year": "2018",
+                  "val": 0
+                }
+              ],
+              "hash": "kO7GjV1t"
+            },
+            {
+              "descr": "NOTE: This position was eliminated in FY15 due to the end of its grant funding.",
+              "key": "Arts and Equity Director",
+              "src": "",
+              "sub": [],
+              "url": "",
+              "values": [
+                {
+                  "year": "2015",
+                  "val": "51597"
+                },
+                {
+                  "year": "2016",
+                  "val": 0
+                },
+                {
+                  "year": "2017",
+                  "val": 0
+                },
+                {
+                  "year": "2018",
+                  "val": 0
+                }
+              ],
+              "hash": "sBMscsZN"
+            },
+            {
+              "descr": "Proposed in FY15 but eliminated in the final FY15 budget.",
+              "key": "Grants Coordinator",
+              "src": "",
+              "sub": [],
+              "url": "",
+              "values": [
+                {
+                  "year": "2015",
+                  "val": "0"
+                },
+                {
+                  "year": "2016",
+                  "val": 0
+                },
+                {
+                  "year": "2017",
+                  "val": 0
+                },
+                {
+                  "year": "2018",
+                  "val": 0
+                }
+              ],
+              "hash": "Z5QPJ3d6"
+            },
+            {
+              "descr": "",
+              "key": "Senior Executive Assistant",
+              "src": "",
+              "sub": [],
+              "url": "",
+              "values": [
+                {
+                  "year": "2015",
+                  "val": "93603"
+                },
+                {
+                  "year": "2016",
+                  "val": "99299"
+                },
+                {
+                  "year": "2017",
+                  "val": "103067"
+                },
+                {
+                  "year": "2018",
+                  "val": 0
+                }
+              ],
+              "hash": "6K6AH58o"
+            },
+            {
+              "descr": "NOTE: This is a 0.5 time position approved in FY15, and was transferred to the Information Technology department later in FY15.",
+              "key": "311 Customer Service Representative",
+              "src": "",
+              "sub": [],
+              "url": "",
+              "values": [
+                {
+                  "year": "2015",
+                  "val": "19250"
+                },
+                {
+                  "year": "2016",
+                  "val": 0
+                },
+                {
+                  "year": "2017",
+                  "val": 0
+                },
+                {
+                  "year": "2018",
+                  "val": 0
+                }
+              ],
+              "hash": "vTT9sJFO"
+            },
+            {
+              "descr": "\"Intern Leadership Program\"",
+              "key": "Temporary Help",
+              "src": "",
+              "sub": [],
+              "url": "",
+              "values": [
+                {
+                  "year": "2015",
+                  "val": "20000"
+                },
+                {
+                  "year": "2016",
+                  "val": "7200"
+                },
+                {
+                  "year": "2017",
+                  "val": "5150"
+                },
+                {
+                  "year": "2018",
+                  "val": 0
+                }
+              ],
+              "hash": "OJwAbAsD"
+            },
+            {
+              "descr": "",
+              "key": "Overtime",
+              "src": "",
+              "sub": [],
+              "url": "",
+              "values": [
+                {
+                  "year": "2015",
+                  "val": "2000"
+                },
+                {
+                  "year": "2016",
+                  "val": 0
+                },
+                {
+                  "year": "2017",
+                  "val": 0
+                },
+                {
+                  "year": "2018",
+                  "val": 0
+                }
+              ],
+              "hash": "pHANjdP7"
+            },
+            {
+              "descr": "NOTE: This position was added in FY16, and eliminated in FY17.",
+              "key": "Chief of Staff",
+              "src": "",
+              "sub": [],
+              "url": "",
+              "values": [
+                {
+                  "year": "2015",
+                  "val": 0
+                },
+                {
+                  "year": "2016",
+                  "val": "99485"
+                },
+                {
+                  "year": "2017",
+                  "val": 0
+                },
+                {
+                  "year": "2018",
+                  "val": 0
+                }
+              ],
+              "hash": "hSOi2tw9"
+            }
+          ],
+          "url": "",
+          "values": [
+            {
+              "year": "2015",
+              "val": "804748"
+            },
+            {
+              "year": "2016",
+              "val": "1128970"
+            },
+            {
+              "year": "2017",
+              "val": "723224"
+            },
+            {
+              "year": "2018",
+              "val": 0
+            }
+          ],
+          "hash": "fk1B86B2"
+        },
+        {
+          "descr": "",
+          "key": "Benefits",
+          "src": "",
+          "sub": [],
+          "url": "",
+          "values": [
+            {
+              "year": "2015",
+              "val": "5400"
+            },
+            {
+              "year": "2016",
+              "val": 0
+            },
+            {
+              "year": "2017",
+              "val": "6000"
+            },
+            {
+              "year": "2018",
+              "val": 0
+            }
+          ],
+          "hash": "E2kqEQ5A"
+        },
+        {
+          "descr": "",
+          "key": "Administrative Services",
+          "src": "",
+          "sub": [],
+          "url": "",
+          "values": [
+            {
+              "year": "2015",
+              "val": "23350"
+            },
+            {
+              "year": "2016",
+              "val": "17200"
+            },
+            {
+              "year": "2017",
+              "val": "22000"
+            },
+            {
+              "year": "2018",
+              "val": 0
+            }
+          ],
+          "hash": "npg5btqm"
+        },
+        {
+          "descr": "",
+          "key": "Contractual Services",
+          "src": "",
+          "sub": [],
+          "url": "",
+          "values": [
+            {
+              "year": "2015",
+              "val": "44200"
+            },
+            {
+              "year": "2016",
+              "val": "44200"
+            },
+            {
+              "year": "2017",
+              "val": "15500"
+            },
+            {
+              "year": "2018",
+              "val": 0
+            }
+          ],
+          "hash": "ntMe1IFh"
+        },
+        {
+          "descr": "",
+          "key": "Rentals",
+          "src": "",
+          "sub": [],
+          "url": "",
+          "values": [
+            {
+              "year": "2015",
+              "val": "1800"
+            },
+            {
+              "year": "2016",
+              "val": "1800"
+            },
+            {
+              "year": "2017",
+              "val": "3000"
+            },
+            {
+              "year": "2018",
+              "val": 0
+            }
+          ],
+          "hash": "8sfBMsrG"
+        },
+        {
+          "descr": "",
+          "key": "Supplies",
+          "src": "",
+          "sub": [],
+          "url": "",
+          "values": [
+            {
+              "year": "2015",
+              "val": "11400"
+            },
+            {
+              "year": "2016",
+              "val": "17650"
+            },
+            {
+              "year": "2017",
+              "val": "11900"
+            },
+            {
+              "year": "2018",
+              "val": 0
+            }
+          ],
+          "hash": "NUghRK5y"
+        },
+        {
+          "descr": "",
+          "key": "Utilities",
+          "src": "",
+          "sub": [],
+          "url": "",
+          "values": [
+            {
+              "year": "2015",
+              "val": "5840"
+            },
+            {
+              "year": "2016",
+              "val": "7520"
+            },
+            {
+              "year": "2017",
+              "val": "3675"
+            },
+            {
+              "year": "2018",
+              "val": 0
+            }
+          ],
+          "hash": "arRg5HQF"
+        },
+        {
+          "descr": "",
+          "key": "Housing Safety",
+          "src": "",
+          "sub": [
+            {
+              "descr": "",
+              "key": "Payroll",
+              "src": "",
+              "sub": [
+                {
+                  "descr": "",
+                  "key": "Housing Safety Officer",
+                  "src": "",
+                  "sub": [],
+                  "url": "",
+                  "values": [
+                    {
+                      "year": "2015",
+                      "val": 0
+                    },
+                    {
+                      "year": "2016",
+                      "val": "75000"
+                    },
+                    {
+                      "year": "2017",
+                      "val": 0
+                    },
+                    {
+                      "year": "2018",
+                      "val": 0
+                    }
+                  ],
+                  "hash": "zu6VlatF"
+                },
+                {
+                  "descr": "",
+                  "key": "Education Officer (Fire)",
+                  "src": "",
+                  "sub": [],
+                  "url": "",
+                  "values": [
+                    {
+                      "year": "2015",
+                      "val": 0
+                    },
+                    {
+                      "year": "2016",
+                      "val": "55000"
+                    },
+                    {
+                      "year": "2017",
+                      "val": 0
+                    },
+                    {
+                      "year": "2018",
+                      "val": 0
+                    }
+                  ],
+                  "hash": "4Bw4jOTH"
+                },
+                {
+                  "descr": "",
+                  "key": "Project Manager",
+                  "src": "",
+                  "sub": [],
+                  "url": "",
+                  "values": [
+                    {
+                      "year": "2015",
+                      "val": 0
+                    },
+                    {
+                      "year": "2016",
+                      "val": "62853"
+                    },
+                    {
+                      "year": "2017",
+                      "val": 0
+                    },
+                    {
+                      "year": "2018",
+                      "val": 0
+                    }
+                  ],
+                  "hash": "vK2MqHNa"
+                },
+                {
+                  "descr": "",
+                  "key": "Inspector",
+                  "src": "",
+                  "sub": [],
+                  "url": "",
+                  "values": [
+                    {
+                      "year": "2015",
+                      "val": 0
+                    },
+                    {
+                      "year": "2016",
+                      "val": "13500"
+                    },
+                    {
+                      "year": "2017",
+                      "val": 0
+                    },
+                    {
+                      "year": "2018",
+                      "val": 0
+                    }
+                  ],
+                  "hash": "bJ8So2t8"
+                }
+              ],
+              "url": "",
+              "values": [
+                {
+                  "year": "2015",
+                  "val": 0
+                },
+                {
+                  "year": "2016",
+                  "val": "327853"
+                },
+                {
+                  "year": "2017",
+                  "val": 0
+                },
+                {
+                  "year": "2018",
+                  "val": 0
+                }
+              ],
+              "hash": "Yd1eAT26"
+            },
+            {
+              "descr": "",
+              "key": "Suppplies",
+              "src": "",
+              "sub": [],
+              "url": "",
+              "values": [
+                {
+                  "year": "2015",
+                  "val": 0
+                },
+                {
+                  "year": "2016",
+                  "val": "6250"
+                },
+                {
+                  "year": "2017",
+                  "val": 0
+                },
+                {
+                  "year": "2018",
+                  "val": 0
+                }
+              ],
+              "hash": "X26StVT0"
+            },
+            {
+              "descr": "",
+              "key": "Utilities",
+              "src": "",
+              "sub": [],
+              "url": "",
+              "values": [
+                {
+                  "year": "2015",
+                  "val": 0
+                },
+                {
+                  "year": "2016",
+                  "val": "1680"
+                },
+                {
+                  "year": "2017",
+                  "val": 0
+                },
+                {
+                  "year": "2018",
+                  "val": 0
+                }
+              ],
+              "hash": "QpYDTGqo"
+            }
+          ],
+          "url": "",
+          "values": [
+            {
+              "year": "2015",
+              "val": 0
+            },
+            {
+              "year": "2016",
+              "val": "335783"
+            },
+            {
+              "year": "2017",
+              "val": 0
+            },
+            {
+              "year": "2018",
+              "val": 0
+            }
+          ],
+          "hash": "Hu4tCjeX"
+        }
+      ],
       "url": "",
       "values": [
         {
@@ -85,7 +1471,295 @@
       "descr": "",
       "key": "Assessor",
       "src": "",
-      "sub": [],
+      "sub": [
+        {
+          "descr": "",
+          "key": "Payroll",
+          "src": "",
+          "sub": [
+            {
+              "descr": "",
+              "key": "Tax Assessor",
+              "src": "",
+              "sub": [],
+              "url": "",
+              "values": [
+                {
+                  "year": "2015",
+                  "val": "100671"
+                },
+                {
+                  "year": "2016",
+                  "val": "105854"
+                },
+                {
+                  "year": "2017",
+                  "val": "107981"
+                },
+                {
+                  "year": "2018",
+                  "val": 0
+                }
+              ],
+              "hash": "talyY9vX"
+            },
+            {
+              "descr": "",
+              "key": "Tax Assessment Analyst",
+              "src": "",
+              "sub": [],
+              "url": "",
+              "values": [
+                {
+                  "year": "2015",
+                  "val": "69401"
+                },
+                {
+                  "year": "2016",
+                  "val": "71467"
+                },
+                {
+                  "year": "2017",
+                  "val": "72911"
+                },
+                {
+                  "year": "2018",
+                  "val": 0
+                }
+              ],
+              "hash": "9gCwl13f"
+            },
+            {
+              "descr": "",
+              "key": "Senior Appraiser",
+              "src": "",
+              "sub": [],
+              "url": "",
+              "values": [
+                {
+                  "year": "2015",
+                  "val": "54015"
+                },
+                {
+                  "year": "2016",
+                  "val": "55634"
+                },
+                {
+                  "year": "2017",
+                  "val": "56745"
+                },
+                {
+                  "year": "2018",
+                  "val": 0
+                }
+              ],
+              "hash": "5qcqnsY1"
+            },
+            {
+              "descr": "",
+              "key": "Office Assistant",
+              "src": "",
+              "sub": [],
+              "url": "",
+              "values": [
+                {
+                  "year": "2015",
+                  "val": "74690"
+                },
+                {
+                  "year": "2016",
+                  "val": "77789"
+                },
+                {
+                  "year": "2017",
+                  "val": "79316"
+                },
+                {
+                  "year": "2018",
+                  "val": 0
+                }
+              ],
+              "hash": "lWs7NPhl"
+            },
+            {
+              "descr": "NOTE: This position was added in FY17.",
+              "key": "Appraiser",
+              "src": "",
+              "sub": [],
+              "url": "",
+              "values": [
+                {
+                  "year": "2015",
+                  "val": 0
+                },
+                {
+                  "year": "2016",
+                  "val": 0
+                },
+                {
+                  "year": "2017",
+                  "val": "41516"
+                },
+                {
+                  "year": "2018",
+                  "val": 0
+                }
+              ],
+              "hash": "rXDe5NtT"
+            },
+            {
+              "descr": "",
+              "key": "Temporary Help",
+              "src": "",
+              "sub": [],
+              "url": "",
+              "values": [
+                {
+                  "year": "2015",
+                  "val": 0
+                },
+                {
+                  "year": "2016",
+                  "val": 0
+                },
+                {
+                  "year": "2017",
+                  "val": "22950"
+                },
+                {
+                  "year": "2018",
+                  "val": 0
+                }
+              ],
+              "hash": "QxOlxZAE"
+            }
+          ],
+          "url": "",
+          "values": [
+            {
+              "year": "2015",
+              "val": "298777"
+            },
+            {
+              "year": "2016",
+              "val": "310744"
+            },
+            {
+              "year": "2017",
+              "val": "381419"
+            },
+            {
+              "year": "2018",
+              "val": 0
+            }
+          ],
+          "hash": "8oYoyVjg"
+        },
+        {
+          "descr": "",
+          "key": "Administrative Services",
+          "src": "",
+          "sub": [],
+          "url": "",
+          "values": [
+            {
+              "year": "2015",
+              "val": "8845"
+            },
+            {
+              "year": "2016",
+              "val": "4895"
+            },
+            {
+              "year": "2017",
+              "val": "17690"
+            },
+            {
+              "year": "2018",
+              "val": 0
+            }
+          ],
+          "hash": "fZrKJRby"
+        },
+        {
+          "descr": "",
+          "key": "Contractual Services",
+          "src": "",
+          "sub": [],
+          "url": "",
+          "values": [
+            {
+              "year": "2015",
+              "val": "12210"
+            },
+            {
+              "year": "2016",
+              "val": "11980"
+            },
+            {
+              "year": "2017",
+              "val": "44180"
+            },
+            {
+              "year": "2018",
+              "val": 0
+            }
+          ],
+          "hash": "hmABfsm7"
+        },
+        {
+          "descr": "",
+          "key": "Rentals",
+          "src": "",
+          "sub": [],
+          "url": "",
+          "values": [
+            {
+              "year": "2015",
+              "val": "1620"
+            },
+            {
+              "year": "2016",
+              "val": "1620"
+            },
+            {
+              "year": "2017",
+              "val": "1620"
+            },
+            {
+              "year": "2018",
+              "val": 0
+            }
+          ],
+          "hash": "7GB0h5nS"
+        },
+        {
+          "descr": "",
+          "key": "Supplies",
+          "src": "",
+          "sub": [],
+          "url": "",
+          "values": [
+            {
+              "year": "2015",
+              "val": "3900"
+            },
+            {
+              "year": "2016",
+              "val": "3900"
+            },
+            {
+              "year": "2017",
+              "val": "8180"
+            },
+            {
+              "year": "2018",
+              "val": 0
+            }
+          ],
+          "hash": "D9g7Ln9Q"
+        }
+      ],
       "url": "",
       "values": [
         {
