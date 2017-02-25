@@ -1,6 +1,6 @@
 <html>
 	<head>
-	 	<meta http-equiv="Content-Type" content="text/html;charset=ISO-8859-1"> 
+	 	<meta http-equiv="Content-Type" content="text/html;charset=ISO-8859-1">
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
 		<script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.10.0.js"></script>
 		<script type="text/javascript" src="vizbud_datagui.js"></script>
@@ -21,11 +21,27 @@
 			label 		{ font-size: 14px; line-height: 18px; color: #90949c; cursor: pointer;  }
 			input		{ border: 1px solid #d3d6db; height: 25px; padding: 5px; width: 100% }
 			textarea	{ width: 100%; height: 200px; border: 1px solid #d3d6db; font-family: arial; font-size: 11px; padding: 5px; line-height: 17px }
+
+			table {width:100%;margin-bottom:10px;}
+			table td {width:40%;}
+			table tr td:first-child {width:20%;}
+			table tr td:last-child {text-align:left;}
+			.data-actions {margin-bottom:10px;border-bottom:1px solid #eee;padding-bottom:10px;}
+
+			@media screen and (max-width:767px) {
+
+				#appControls {padding-bottom:15px;}
+				.appFrame {height:300px;}
+				.sidebar {width:100%;}
+				.main {padding:0px;clear:both;width:100%;margin-top:10px;}
+
+			}
+
 		</style>
 	</head>
 	<body ng-app="vbGuiApp" ng-controller="vbGuiCtrl">
 
-		
+
 		<div class="appFrame">
 			<div class="sidebar">
 				<div id="appControls">
@@ -49,44 +65,45 @@
 
 
 				<div ng-if="currentItem">
-					<h2>{{currentItem.key}} </h2>
-					<button ng-click="deleteItem(currentItem)">DELETE</button>
-					<button ng-click="addChild(currentItem)">ADD SUBCATEGORY</button>
-					
-					<table style="margin-top: 20px; border-top: dashed 1px #ccc">
+
+					<div class="data-actions">
+						<h2>{{currentItem.key}} </h2>
+						<button ng-click="deleteItem(currentItem)">DELETE</button>
+						<button ng-click="addChild(currentItem)">ADD SUBCATEGORY</button>
+					</div>
+
+					<table style="width: 100%">
 						<tr>
-							<td style="width: 450px; vertical-align: top;">
-								<table style="width: 100%">
-									<tr>
-										<td><label for="key">Key</label></td>
-										<td><input id="key" ng-model="currentItem.key" /></td>
-									</tr>
-									<tr>
-										<td><label for="url">URL</label></td>
-										<td><input id="url" ng-model="currentItem.url" /></td>
-									</tr>
-									<tr>
-										<td><label for="src">SRC</label></td>
-										<td><input id="src" ng-model="currentItem.src" /></td>
-									</tr>
-									<tr>
-										<td style="vertical-align: top"><label for="descr" >Description</label></td>
-										<td><textarea id="descr" ng-model="currentItem.descr"></textarea></td>
-									</tr>
-								</table>
-							</td>
-							<td>
-								<table>
-									<tr ng-repeat="v in currentItem.values">
-										<td><label for="val_{{v.year}}">{{v.year}}</label></td>
-										<td><input id="src" ng-model="v.val" id="val_{{v.year}}" /></td>
-										<td style="font-size: 11px;">{{v.val | currency}}</td>
-										<td ng-if="subTotals" style="font-size: 11px; color: red">{{ subTotals[v.year] | currency}}</td>
-									</tr>
-								</table>
-							</td>
+							<td><label for="key">Key</label></td>
+							<td><input id="key" ng-model="currentItem.key" /></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td><label for="url">URL</label></td>
+							<td><input id="url" ng-model="currentItem.url" /></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td><label for="src">SRC</label></td>
+							<td><input id="src" ng-model="currentItem.src" /></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td style="vertical-align: top"><label for="descr" >Description</label></td>
+							<td><textarea id="descr" ng-model="currentItem.descr"></textarea></td>
+							<td></td>
 						</tr>
 					</table>
+
+					<table>
+						<tr ng-repeat="v in currentItem.values">
+							<td><label for="val_{{v.year}}">{{v.year}}</label></td>
+							<td><input id="src" ng-model="v.val" id="val_{{v.year}}" /></td>
+							<td style="font-size: 11px;">{{v.val | currency}}</td>
+							<td ng-if="subTotals" style="font-size: 11px; color: red">{{ subTotals[v.year] | currency}}</td>
+						</tr>
+					</table>
+
 				</div>
 
 			</div>
