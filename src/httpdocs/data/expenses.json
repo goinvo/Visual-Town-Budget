@@ -1,21 +1,750 @@
 {
-	"key": "Expenses", 
-	"src": "", 
-	"hash": "35808d3b", 
-	"sub": [], 
-	"descr": "All uses of money to provide town & school services. For more information, see the Glossary.", 
-	"url": "", 
-	"values": [
-	{
-      "val": 0,
+  "key": "Expenses",
+  "src": "",
+  "hash": "35808d3b",
+  "sub": [
+    {
+      "descr": "",
+      "key": "City Council",
+      "src": "",
+      "sub": [],
+      "url": "",
+      "values": [
+        {
+          "year": "2015",
+          "val": "331195"
+        },
+        {
+          "year": "2016",
+          "val": "333503"
+        },
+        {
+          "year": "2017",
+          "val": "376820"
+        },
+        {
+          "year": "2018",
+          "val": 0
+        }
+      ],
+      "hash": "s2Emk0Vd"
+    },
+    {
+      "descr": "",
+      "key": "City Clerk",
+      "src": "",
+      "sub": [],
+      "url": "",
+      "values": [
+        {
+          "year": "2015",
+          "val": "532585"
+        },
+        {
+          "year": "2016",
+          "val": "576338"
+        },
+        {
+          "year": "2017",
+          "val": "492149"
+        },
+        {
+          "year": "2018",
+          "val": 0
+        }
+      ],
+      "hash": "sYcq85NO"
+    },
+    {
+      "descr": "",
+      "key": "City Manager",
+      "src": "",
+      "sub": [],
+      "url": "",
+      "values": [
+        {
+          "year": "2015",
+          "val": "896738"
+        },
+        {
+          "year": "2016",
+          "val": "1217340"
+        },
+        {
+          "year": "2017",
+          "val": "785299"
+        },
+        {
+          "year": "2018",
+          "val": 0
+        }
+      ],
+      "hash": "ZW1zEmVY"
+    },
+    {
+      "descr": "",
+      "key": "Assessor",
+      "src": "",
+      "sub": [],
+      "url": "",
+      "values": [
+        {
+          "year": "2015",
+          "val": "325352"
+        },
+        {
+          "year": "2016",
+          "val": "333139"
+        },
+        {
+          "year": "2017",
+          "val": "453089"
+        },
+        {
+          "year": "2018",
+          "val": 0
+        }
+      ],
+      "hash": "WWzxqJSd"
+    },
+    {
+      "descr": "",
+      "key": "Finance",
+      "src": "",
+      "sub": [],
+      "url": "",
+      "values": [
+        {
+          "year": "2015",
+          "val": "1711565"
+        },
+        {
+          "year": "2016",
+          "val": "1676971"
+        },
+        {
+          "year": "2017",
+          "val": "1736637"
+        },
+        {
+          "year": "2018",
+          "val": 0
+        }
+      ],
+      "hash": "Bqv19J3D"
+    },
+    {
+      "descr": "",
+      "key": "Legal",
+      "src": "",
+      "sub": [],
+      "url": "",
+      "values": [
+        {
+          "year": "2015",
+          "val": "498493"
+        },
+        {
+          "year": "2016",
+          "val": "511850"
+        },
+        {
+          "year": "2017",
+          "val": "567152"
+        },
+        {
+          "year": "2018",
+          "val": 0
+        }
+      ],
+      "hash": "gjrBjR43"
+    },
+    {
+      "descr": "",
+      "key": "Human Resources",
+      "src": "",
+      "sub": [],
+      "url": "",
+      "values": [
+        {
+          "year": "2015",
+          "val": "264926"
+        },
+        {
+          "year": "2016",
+          "val": "1041392"
+        },
+        {
+          "year": "2017",
+          "val": "989173"
+        },
+        {
+          "year": "2018",
+          "val": 0
+        }
+      ],
+      "hash": "4p4rMHHN"
+    },
+    {
+      "descr": "",
+      "key": "Parking",
+      "src": "",
+      "sub": [],
+      "url": "",
+      "values": [
+        {
+          "year": "2015",
+          "val": "2043717"
+        },
+        {
+          "year": "2016",
+          "val": "2173971"
+        },
+        {
+          "year": "2017",
+          "val": "2346390"
+        },
+        {
+          "year": "2018",
+          "val": 0
+        }
+      ],
+      "hash": "nyuCyvwM"
+    },
+    {
+      "descr": "",
+      "key": "Economic Development",
+      "src": "",
+      "sub": [],
+      "url": "",
+      "values": [
+        {
+          "year": "2015",
+          "val": "264926"
+        },
+        {
+          "year": "2016",
+          "val": "273906"
+        },
+        {
+          "year": "2017",
+          "val": "457910"
+        },
+        {
+          "year": "2018",
+          "val": 0
+        }
+      ],
+      "hash": "pIf3AJOs"
+    },
+    {
+      "descr": "",
+      "key": "Police",
+      "src": "",
+      "sub": [],
+      "url": "",
+      "values": [
+        {
+          "year": "2015",
+          "val": "14365678"
+        },
+        {
+          "year": "2016",
+          "val": "14581063"
+        },
+        {
+          "year": "2017",
+          "val": "15697557"
+        },
+        {
+          "year": "2018",
+          "val": 0
+        }
+      ],
+      "hash": "yFhQDpiV"
+    },
+    {
+      "descr": "",
+      "key": "Fire",
+      "src": "",
+      "sub": [],
+      "url": "",
+      "values": [
+        {
+          "year": "2015",
+          "val": 0
+        },
+        {
+          "year": "2016",
+          "val": 0
+        },
+        {
+          "year": "2017",
+          "val": 0
+        },
+        {
+          "year": "2018",
+          "val": 0
+        }
+      ],
+      "hash": "uyCBc5Is"
+    },
+    {
+      "descr": "",
+      "key": "Planning & Development",
+      "src": "",
+      "sub": [],
+      "url": "",
+      "values": [
+        {
+          "year": "2015",
+          "val": 0
+        },
+        {
+          "year": "2016",
+          "val": 0
+        },
+        {
+          "year": "2017",
+          "val": 0
+        },
+        {
+          "year": "2018",
+          "val": 0
+        }
+      ],
+      "hash": "PJDHUkFJ"
+    },
+    {
+      "descr": "",
+      "key": "Information Technology",
+      "src": "",
+      "sub": [],
+      "url": "",
+      "values": [
+        {
+          "year": "2015",
+          "val": 0
+        },
+        {
+          "year": "2016",
+          "val": 0
+        },
+        {
+          "year": "2017",
+          "val": 0
+        },
+        {
+          "year": "2018",
+          "val": 0
+        }
+      ],
+      "hash": "wLrteYjc"
+    },
+    {
+      "descr": "",
+      "key": "Public Services",
+      "src": "",
+      "sub": [],
+      "url": "",
+      "values": [
+        {
+          "year": "2015",
+          "val": 0
+        },
+        {
+          "year": "2016",
+          "val": 0
+        },
+        {
+          "year": "2017",
+          "val": 0
+        },
+        {
+          "year": "2018",
+          "val": 0
+        }
+      ],
+      "hash": "Wd6bHTCF"
+    },
+    {
+      "descr": "",
+      "key": "Recreation & Facilities Management",
+      "src": "",
+      "sub": [],
+      "url": "",
+      "values": [
+        {
+          "year": "2015",
+          "val": 0
+        },
+        {
+          "year": "2016",
+          "val": 0
+        },
+        {
+          "year": "2017",
+          "val": 0
+        },
+        {
+          "year": "2018",
+          "val": 0
+        }
+      ],
+      "hash": "HKOFj81O"
+    },
+    {
+      "descr": "",
+      "key": "Public Health",
+      "src": "",
+      "sub": [],
+      "url": "",
+      "values": [
+        {
+          "year": "2015",
+          "val": 0
+        },
+        {
+          "year": "2016",
+          "val": 0
+        },
+        {
+          "year": "2017",
+          "val": 0
+        },
+        {
+          "year": "2018",
+          "val": 0
+        }
+      ],
+      "hash": "CFQhkfOI"
+    },
+    {
+      "descr": "",
+      "key": "Social Services",
+      "src": "",
+      "sub": [],
+      "url": "",
+      "values": [
+        {
+          "year": "2015",
+          "val": 0
+        },
+        {
+          "year": "2016",
+          "val": 0
+        },
+        {
+          "year": "2017",
+          "val": 0
+        },
+        {
+          "year": "2018",
+          "val": 0
+        }
+      ],
+      "hash": "anKB8xMz"
+    },
+    {
+      "descr": "",
+      "key": "Barron Center",
+      "src": "",
+      "sub": [],
+      "url": "",
+      "values": [
+        {
+          "year": "2015",
+          "val": 0
+        },
+        {
+          "year": "2016",
+          "val": 0
+        },
+        {
+          "year": "2017",
+          "val": 0
+        },
+        {
+          "year": "2018",
+          "val": 0
+        }
+      ],
+      "hash": "vcOx5jEk"
+    },
+    {
+      "descr": "",
+      "key": "Debt Service",
+      "src": "",
+      "sub": [],
+      "url": "",
+      "values": [
+        {
+          "year": "2015",
+          "val": 0
+        },
+        {
+          "year": "2016",
+          "val": 0
+        },
+        {
+          "year": "2017",
+          "val": 0
+        },
+        {
+          "year": "2018",
+          "val": 0
+        }
+      ],
+      "hash": "G3ZUtr6C"
+    },
+    {
+      "descr": "",
+      "key": "Library",
+      "src": "",
+      "sub": [],
+      "url": "",
+      "values": [
+        {
+          "year": "2015",
+          "val": 0
+        },
+        {
+          "year": "2016",
+          "val": 0
+        },
+        {
+          "year": "2017",
+          "val": 0
+        },
+        {
+          "year": "2018",
+          "val": 0
+        }
+      ],
+      "hash": "NPbkN9D9"
+    },
+    {
+      "descr": "",
+      "key": "Pension",
+      "src": "",
+      "sub": [],
+      "url": "",
+      "values": [
+        {
+          "year": "2015",
+          "val": 0
+        },
+        {
+          "year": "2016",
+          "val": 0
+        },
+        {
+          "year": "2017",
+          "val": 0
+        },
+        {
+          "year": "2018",
+          "val": 0
+        }
+      ],
+      "hash": "r1okNJey"
+    },
+    {
+      "descr": "",
+      "key": "Employee Benefits",
+      "src": "",
+      "sub": [],
+      "url": "",
+      "values": [
+        {
+          "year": "2015",
+          "val": 0
+        },
+        {
+          "year": "2016",
+          "val": 0
+        },
+        {
+          "year": "2017",
+          "val": 0
+        },
+        {
+          "year": "2018",
+          "val": 0
+        }
+      ],
+      "hash": "ViaYZ6hc"
+    },
+    {
+      "descr": "",
+      "key": "Contingent",
+      "src": "",
+      "sub": [],
+      "url": "",
+      "values": [
+        {
+          "year": "2015",
+          "val": 0
+        },
+        {
+          "year": "2016",
+          "val": 0
+        },
+        {
+          "year": "2017",
+          "val": 0
+        },
+        {
+          "year": "2018",
+          "val": 0
+        }
+      ],
+      "hash": "wwECBtt3"
+    },
+    {
+      "descr": "",
+      "key": "Liability Insurance",
+      "src": "",
+      "sub": [],
+      "url": "",
+      "values": [
+        {
+          "year": "2015",
+          "val": 0
+        },
+        {
+          "year": "2016",
+          "val": 0
+        },
+        {
+          "year": "2017",
+          "val": 0
+        },
+        {
+          "year": "2018",
+          "val": 0
+        }
+      ],
+      "hash": "cGPUNROe"
+    },
+    {
+      "descr": "",
+      "key": "County Tax",
+      "src": "",
+      "sub": [],
+      "url": "",
+      "values": [
+        {
+          "year": "2015",
+          "val": 0
+        },
+        {
+          "year": "2016",
+          "val": 0
+        },
+        {
+          "year": "2017",
+          "val": 0
+        },
+        {
+          "year": "2018",
+          "val": 0
+        }
+      ],
+      "hash": "Bo4sm8lH"
+    },
+    {
+      "descr": "",
+      "key": "Memberships & Contributions",
+      "src": "",
+      "sub": [],
+      "url": "",
+      "values": [
+        {
+          "year": "2015",
+          "val": 0
+        },
+        {
+          "year": "2016",
+          "val": 0
+        },
+        {
+          "year": "2017",
+          "val": 0
+        },
+        {
+          "year": "2018",
+          "val": 0
+        }
+      ],
+      "hash": "brfo7bUV"
+    },
+    {
+      "descr": "",
+      "key": "Wage Adjustment",
+      "src": "",
+      "sub": [],
+      "url": "",
+      "values": [
+        {
+          "year": "2015",
+          "val": 0
+        },
+        {
+          "year": "2016",
+          "val": 0
+        },
+        {
+          "year": "2017",
+          "val": 0
+        },
+        {
+          "year": "2018",
+          "val": 0
+        }
+      ],
+      "hash": "XAJAlIZC"
+    },
+    {
+      "descr": "",
+      "key": "Capital",
+      "src": "",
+      "sub": [],
+      "url": "",
+      "values": [
+        {
+          "year": "2015",
+          "val": 0
+        },
+        {
+          "year": "2016",
+          "val": 0
+        },
+        {
+          "year": "2017",
+          "val": 0
+        },
+        {
+          "year": "2018",
+          "val": 0
+        }
+      ],
+      "hash": "vohqlIgV"
+    }
+  ],
+  "descr": "All uses of money to provide town & school services. For more information, see the Glossary.",
+  "url": "",
+  "values": [
+    {
+      "val": "322578505",
       "year": 2015
     },
     {
-      "val": 0,
+      "val": "327813183",
       "year": 2016
     },
     {
-      "val": 0,
+      "val": "339784476",
       "year": 2017
     },
     {
