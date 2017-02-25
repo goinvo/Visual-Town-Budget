@@ -47,7 +47,7 @@ app.controller('vbGuiCtrl', ['$scope', '$http', '$sce', '$rootScope', '$window',
 				method : 'POST',
 				data: {
 					fileName : $scope.selectedSet.path
-				} 
+				}
 			}
 
 			if(payLoad) req.data.newContents = angular.toJson(payLoad, true)
@@ -56,11 +56,11 @@ app.controller('vbGuiCtrl', ['$scope', '$http', '$sce', '$rootScope', '$window',
 				$scope.dataSet = response.data;
 			}, function errorCallback(response) {
 				console.log("can't find data set")
-			});	
+			});
 		}
 
 
-	
+
 		// UI
 		$scope.openItem = function(item){
 			$scope.currentItem = item;
@@ -84,7 +84,7 @@ app.controller('vbGuiCtrl', ['$scope', '$http', '$sce', '$rootScope', '$window',
 			}
 
 		}
-		
+
 		$scope.deleteItem = function(item){
 			searchAndDestroy($scope.dataSet, item.hash);
 			$scope.currentItem = false;
@@ -111,7 +111,7 @@ app.controller('vbGuiCtrl', ['$scope', '$http', '$sce', '$rootScope', '$window',
 			$scope.currentItem = item.sub[item.sub.length - 1];
 		}
 
-	
+
 		// AND AWAY WE GO!!!
 		$scope.init();
 	}
@@ -123,7 +123,7 @@ function searchAndDestroy(parent, targetHash){
 		if(pointer.hash == targetHash) {
 			parent.sub.splice(i, 1);
 			return true;
-		}	
+		}
 		if(pointer.sub.length != 0){
 			if(searchAndDestroy(pointer, targetHash)) return true;
 		}
@@ -144,7 +144,7 @@ function searchAndPush(parent, targetHash, emptyCat){
 		if(pointer.hash == targetHash) {
 			parent.sub[i].sub.push(emptyCat);
 			return true;
-		}	
+		}
 		if(pointer.sub.length != 0){
 			if(searchAndPush(pointer, targetHash, emptyCat)) return true;
 		}
