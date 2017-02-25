@@ -2,7 +2,7 @@
 
 config = {
 
-	activeYears : ["2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018"],
+	activeYears : ["2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018"],
 
 	dataSetList : [
 		{ name : "Home", 	path : "home.json"},
@@ -54,7 +54,6 @@ app.controller('vbGuiCtrl', ['$scope', '$http', '$sce', '$rootScope', '$window',
 
 			$http(req).then(function successCallback(response) {
 				$scope.dataSet = response.data;
-				console.log($scope.dataSet)
 			}, function errorCallback(response) {
 				console.log("can't find data set")
 			});	
@@ -108,6 +107,7 @@ app.controller('vbGuiCtrl', ['$scope', '$http', '$sce', '$rootScope', '$window',
 				})
 			}
 			searchAndPush($scope.dataSet, item.hash, emptyCat);
+
 			$scope.currentItem = item.sub[item.sub.length - 1];
 		}
 
@@ -131,6 +131,14 @@ function searchAndDestroy(parent, targetHash){
 }
 
 function searchAndPush(parent, targetHash, emptyCat){
+
+	// check if we're at the top level
+	if(parent.hash == targetHash) {
+		parent.sub.push(emptyCat);
+		return true;
+	}
+
+	// else start recursively iterating
 	for(var i = 0; i < parent.sub.length; i++){
 		var pointer = parent.sub[i];
 		if(pointer.hash == targetHash) {
