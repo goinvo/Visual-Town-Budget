@@ -52,7 +52,11 @@
 					<h2>{{currentItem.key}} </h2>
 					<button ng-click="deleteItem(currentItem)">DELETE</button>
 					<button ng-click="addChild(currentItem)">ADD SUBCATEGORY</button>
-					
+					<br />Parent: 
+						<select ng-model="currentParentHash" id="parentSelector">
+							 <option ng-repeat="cat in catHash" value="{{cat.hash}}" >{{cat.key}}</option>
+						</select>
+						<button ng-click="changeParent()">Update!</button>
 					<table style="margin-top: 20px; border-top: dashed 1px #ccc">
 						<tr>
 							<td style="width: 450px; vertical-align: top;">

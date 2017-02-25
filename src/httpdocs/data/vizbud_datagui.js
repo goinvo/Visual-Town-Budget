@@ -19,6 +19,7 @@ var app = angular.module('vbGuiApp', ['ui.bootstrap']);
 app.controller('vbGuiCtrl', ['$scope', '$http', '$sce', '$rootScope', '$window', '$modal',
 	function($scope, $http, $sce, $rootScope, $window, $modal){
 
+		window.$scope = $scope;
 
 		$scope.init = function(){
 			$scope.config = config;
@@ -53,12 +54,30 @@ app.controller('vbGuiCtrl', ['$scope', '$http', '$sce', '$rootScope', '$window',
 			if(payLoad) req.data.newContents = angular.toJson(payLoad, true)
 
 			$http(req).then(function successCallback(response) {
+				$scope.reset();
 				$scope.dataSet = response.data;
+
+				$scope.catHash = [];
+				$scope.catHash.push({
+					hash : $scope.dataSet.hash,
+					key : $scope.dataSet.key
+				});
+				if($scope.dataSet.sub.length != 0){
+					buildCatHash($scope.dataSet, '');
+					// if($scope.currentItem) $scope.openItem($scope.currentItem);
+				}
+
 			}, function errorCallback(response) {
 				console.log("can't find data set")
 			});	
 		}
 
+		$scope.reset = function(){
+			$scope.catHash = [];
+			$scope.currentItem = false;
+			$scope.treePosition = false;
+			$scope.currentParentHash = false;
+		}
 
 	
 		// UI
@@ -66,6 +85,10 @@ app.controller('vbGuiCtrl', ['$scope', '$http', '$sce', '$rootScope', '$window',
 			$scope.currentItem = item;
 
 			$scope.subTotals = false;
+
+			$scope.treePosition = getTreePointer(item.hash);
+			$scope.currentParentHash = $scope.treePosition.parent.hash;
+
 
 			if(item.sub.length != 0){
 				$scope.subTotals = {};
@@ -86,7 +109,7 @@ app.controller('vbGuiCtrl', ['$scope', '$http', '$sce', '$rootScope', '$window',
 		}
 		
 		$scope.deleteItem = function(item){
-			searchAndDestroy($scope.dataSet, item.hash);
+			$scope.treePosition.parent.sub.splice($scope.treePosition.pIndex, 1);
 			$scope.currentItem = false;
 		}
 
@@ -106,9 +129,29 @@ app.controller('vbGuiCtrl', ['$scope', '$http', '$sce', '$rootScope', '$window',
 					val : 0
 				})
 			}
-			searchAndPush($scope.dataSet, item.hash, emptyCat);
+
+			$scope.treePosition.pointer.sub.push(emptyCat);
 
 			$scope.currentItem = item.sub[item.sub.length - 1];
+		}
+
+		$scope.changeParent = function(){
+			var newParentHash = document.getElementById('parentSelector').value;
+
+			var newParent = getTreePointer(newParentHash);
+			var newCat = angular.copy($scope.currentItem);
+
+			$scope.deleteItem($scope.currentItem);
+			
+			newCat.hash = createGUID(8);
+
+			var t= newParent.pointer.sub;
+			t.push(newCat);
+			buildCatHash($scope.dataSet, '');
+
+			var newCat = t[t.length - 1];
+
+			$scope.openItem(newCat);
 		}
 
 	
@@ -117,39 +160,37 @@ app.controller('vbGuiCtrl', ['$scope', '$http', '$sce', '$rootScope', '$window',
 	}
 ]);
 
-function searchAndDestroy(parent, targetHash){
+
+
+
+function getTreePointer(hash){
+	for(var i = 0; i < $scope.catHash.length; i++){
+		var p = $scope.catHash[i];
+		if(p.hash == hash) return p;
+	}
+}
+
+function buildCatHash(parent, indent){
+	indent += '--';
+
 	for(var i = 0; i < parent.sub.length; i++){
 		var pointer = parent.sub[i];
-		if(pointer.hash == targetHash) {
-			parent.sub.splice(i, 1);
-			return true;
-		}	
+
+		$scope.catHash.push({
+			key 	: indent + ' ' + pointer.key,
+			hash 	: pointer.hash,
+			parent  : parent,
+			pIndex 	: i,
+			pointer : pointer
+		});
+
 		if(pointer.sub.length != 0){
-			if(searchAndDestroy(pointer, targetHash)) return true;
+			buildCatHash(pointer, indent);
 		}
 	}
 }
 
-function searchAndPush(parent, targetHash, emptyCat){
 
-	// check if we're at the top level
-	if(parent.hash == targetHash) {
-		parent.sub.push(emptyCat);
-		return true;
-	}
-
-	// else start recursively iterating
-	for(var i = 0; i < parent.sub.length; i++){
-		var pointer = parent.sub[i];
-		if(pointer.hash == targetHash) {
-			parent.sub[i].sub.push(emptyCat);
-			return true;
-		}	
-		if(pointer.sub.length != 0){
-			if(searchAndPush(pointer, targetHash, emptyCat)) return true;
-		}
-	}
-}
 
 function createGUID(l){
     var text = "";
