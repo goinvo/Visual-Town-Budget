@@ -2,7 +2,7 @@
 
 config = {
 
-	activeYears : ["2015", "2016", "2017", "2018"],
+	activeYears : ["2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018"],
 
 	dataSetList : [
 		{ name : "Home", 	path : "home.json"},
@@ -47,44 +47,26 @@ app.controller('vbGuiCtrl', ['$scope', '$http', '$sce', '$rootScope', '$window',
 				method : 'POST',
 				data: {
 					fileName : $scope.selectedSet.path
-				} 
+				}
 			}
 
 			if(payLoad) req.data.newContents = angular.toJson(payLoad, true)
 
 			$http(req).then(function successCallback(response) {
 				$scope.dataSet = response.data;
+				console.log($scope.dataSet)
 			}, function errorCallback(response) {
 				console.log("can't find data set")
-			});	
+			});
 		}
 
 
-	
+
 		// UI
 		$scope.openItem = function(item){
 			$scope.currentItem = item;
-
-			$scope.subTotals = false;
-
-			if(item.sub.length != 0){
-				$scope.subTotals = {};
-				for(var i = 0; i < item.sub.length; i++){
-					var s = item.sub[i];
-					for(var v = 0; v < s.values.length; v++){
-						val = s.values[v];
-						var year = val.year;
-						var value = val.val;
-
-						if(!(year in $scope.subTotals)) $scope.subTotals[year] = 0;
-						$scope.subTotals[year] += parseFloat(value);
-					}
-				}
-
-			}
-
 		}
-		
+
 		$scope.deleteItem = function(item){
 			searchAndDestroy($scope.dataSet, item.hash);
 			$scope.currentItem = false;
@@ -107,11 +89,10 @@ app.controller('vbGuiCtrl', ['$scope', '$http', '$sce', '$rootScope', '$window',
 				})
 			}
 			searchAndPush($scope.dataSet, item.hash, emptyCat);
-
 			$scope.currentItem = item.sub[item.sub.length - 1];
 		}
 
-	
+
 		// AND AWAY WE GO!!!
 		$scope.init();
 	}
@@ -123,7 +104,7 @@ function searchAndDestroy(parent, targetHash){
 		if(pointer.hash == targetHash) {
 			parent.sub.splice(i, 1);
 			return true;
-		}	
+		}
 		if(pointer.sub.length != 0){
 			if(searchAndDestroy(pointer, targetHash)) return true;
 		}
@@ -131,20 +112,12 @@ function searchAndDestroy(parent, targetHash){
 }
 
 function searchAndPush(parent, targetHash, emptyCat){
-
-	// check if we're at the top level
-	if(parent.hash == targetHash) {
-		parent.sub.push(emptyCat);
-		return true;
-	}
-
-	// else start recursively iterating
 	for(var i = 0; i < parent.sub.length; i++){
 		var pointer = parent.sub[i];
 		if(pointer.hash == targetHash) {
 			parent.sub[i].sub.push(emptyCat);
 			return true;
-		}	
+		}
 		if(pointer.sub.length != 0){
 			if(searchAndPush(pointer, targetHash, emptyCat)) return true;
 		}
