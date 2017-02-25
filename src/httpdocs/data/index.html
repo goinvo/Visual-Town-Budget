@@ -81,6 +81,7 @@
 										<td><label for="val_{{v.year}}">{{v.year}}</label></td>
 										<td><input id="src" ng-model="v.val" id="val_{{v.year}}" /></td>
 										<td style="font-size: 11px;">{{v.val | currency}}</td>
+										<td ng-if="subTotals" style="font-size: 11px; color: red">{{ subTotals[v.year] | currency}}</td>
 									</tr>
 								</table>
 							</td>

@@ -65,6 +65,25 @@ app.controller('vbGuiCtrl', ['$scope', '$http', '$sce', '$rootScope', '$window',
 		// UI
 		$scope.openItem = function(item){
 			$scope.currentItem = item;
+
+			$scope.subTotals = false;
+
+			if(item.sub.length != 0){
+				$scope.subTotals = {};
+				for(var i = 0; i < item.sub.length; i++){
+					var s = item.sub[i];
+					for(var v = 0; v < s.values.length; v++){
+						val = s.values[v];
+						var year = val.year;
+						var value = val.val;
+
+						if(!(year in $scope.subTotals)) $scope.subTotals[year] = 0;
+						$scope.subTotals[year] += parseFloat(value);
+					}
+				}
+
+			}
+
 		}
 		
 		$scope.deleteItem = function(item){
