@@ -25,6 +25,7 @@ app.controller('vbGuiCtrl', ['$scope', '$http', '$sce', '$rootScope', '$window',
 			$scope.config = config;
 			$scope.selectedSet = config.dataSetList[0];
 			$scope.loadDataSet();
+			$scope.view = 'multi';
 		}
 
 
@@ -51,7 +52,11 @@ app.controller('vbGuiCtrl', ['$scope', '$http', '$sce', '$rootScope', '$window',
 				} 
 			}
 
-			if(payLoad) req.data.newContents = angular.toJson(payLoad, true)
+			$scope.openHash = false;
+			if(payLoad) {
+				if($scope.currentItem) $scope.openHash = $scope.currentItem.hash;
+				req.data.newContents = angular.toJson(payLoad, true)
+			}
 
 			$http(req).then(function successCallback(response) {
 				$scope.reset();
@@ -64,7 +69,10 @@ app.controller('vbGuiCtrl', ['$scope', '$http', '$sce', '$rootScope', '$window',
 				});
 				if($scope.dataSet.sub.length != 0){
 					buildCatHash($scope.dataSet, '');
-					// if($scope.currentItem) $scope.openItem($scope.currentItem);
+					if($scope.openHash){
+						var p = getTreePointer($scope.openHash);
+						$scope.openItem(p.pointer);
+					} 
 				}
 
 			}, function errorCallback(response) {
@@ -91,7 +99,19 @@ app.controller('vbGuiCtrl', ['$scope', '$http', '$sce', '$rootScope', '$window',
 				$scope.currentParentHash = $scope.treePosition.parent.hash;
 			}
 
+			$scope.calculateSubs();
 
+		}
+
+
+		$scope.changeView = function(){
+			if($scope.view == 'single') $scope.view = 'multi';
+			else $scope.view = 'single';
+		}
+
+		$scope.calculateSubs = function(){
+
+			var item = $scope.currentItem;
 			if(item.sub.length != 0){
 				$scope.subTotals = {};
 				for(var i = 0; i < item.sub.length; i++){
@@ -105,9 +125,7 @@ app.controller('vbGuiCtrl', ['$scope', '$http', '$sce', '$rootScope', '$window',
 						$scope.subTotals[year] += parseFloat(value);
 					}
 				}
-
 			}
-
 		}
 
 		$scope.deleteItem = function(item){

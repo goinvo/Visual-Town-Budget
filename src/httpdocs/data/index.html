@@ -21,12 +21,17 @@
 			label 		{ font-size: 14px; line-height: 18px; color: #90949c; cursor: pointer;  }
 			input		{ border: 1px solid #d3d6db; height: 25px; padding: 5px; width: 100% }
 			textarea	{ width: 100%; height: 200px; border: 1px solid #d3d6db; font-family: arial; font-size: 11px; padding: 5px; line-height: 17px }
+			select 		{ width: 200px; }
 
 			table 		{width:100%;margin-bottom:10px;;}
 			table td 	{width:40%;}
 			table tr td:first-child {width:20%;}
 			table tr td:last-child {text-align:left;}
 			.data-actions {margin-bottom:10px;border-bottom:1px solid #eee;padding-bottom:10px;}
+
+			.multiTable 	{ width: auto;}
+			.multiTable td 	{ width: auto; text-align: left;}
+			.multiTable .totalLine td { padding-top: 30px; }
 
 			@media screen and (max-width:767px) {
 
@@ -46,7 +51,7 @@
 			<div class="sidebar">
 				<div id="appControls">
 					<div class="buffer">
-						<select ng-change="loadDataSet()" ng-options="set.name for set in config.dataSetList" ng-model="selectedSet"></select>
+						<select ng-change="loadDataSet()" ng-options="set.name for set in config.dataSetList" ng-model="selectedSet" style="width: auto"></select>
 						<button ng-click="saveDataSet()">SAVE</button>
 					</div>
 				</div>
@@ -69,16 +74,20 @@
 						<h2>{{currentItem.key}} </h2>
 						<button ng-click="deleteItem(currentItem)">DELETE</button>
 						<button ng-click="addChild(currentItem)">ADD SUBCATEGORY</button>
-						Parent: &nbsp; &nbsp;
-						<select ng-model="currentParentHash" id="parentSelector">
-							 <option ng-repeat="cat in catHash" value="{{cat.hash}}" >{{cat.key}}</option>
-						</select>
+						<button ng-click="changeView()">CHANGE VIEW</button>
+						<div style="padding: 15px 5px; width: 500px">
+							Parent: &nbsp; &nbsp;
+							<select ng-model="currentParentHash" id="parentSelector">
+								 <option ng-repeat="cat in catHash" value="{{cat.hash}}" >{{cat.key}}</option>
+							</select>
+							<button ng-click="changeParent()">Update!</button>
+						</div>
 
-						<button ng-click="changeParent()">Update!</button>
+						
 					</div>
 
 					
-					<table style="width: 100%">
+					<table style="width: 100%" ng-if="view == 'single'">
 						<tr>
 							<td><label for="key">Key</label></td>
 							<td><input id="key" ng-model="currentItem.key" /></td>
@@ -107,6 +116,34 @@
 							<td ng-if="subTotals" style="font-size: 11px; color: red">{{ subTotals[v.year] | currency}}</td>
 						</tr>
 					</table>
+
+					<div ng-if="view == 'multi'">
+						<table class="multiTable" >
+							<tr>
+								<td style="width: 300px"></td>
+								<td style="width: 60px !important" ng-repeat="year in config.activeYears">{{year}}</td>
+							</tr>
+							<tr ng-repeat="sub in currentItem.sub">
+								<td style="font-size: 11px;">{{sub.key}}</td>
+								<td ng-repeat="v in sub.values">
+									<input ng-model="v.val" ng-keyup="calculateSubs()" />
+								</td>
+							</tr>
+							<tr>
+								<td></td>
+								<td ng-repeat="s in subTotals" style="font-size: 11px; color: red">{{ s | currency}}</td>
+							</tr>
+							<tr class="totalLine">
+								<td style="font-weight: bold; font-size: 11px">TOTALS</td>
+								<td ng-repeat="v in currentItem.values"><input id="src" ng-model="v.val" /></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td style="font-size: 11px; color: #444" ng-repeat="v in currentItem.values">{{ v.val | currency}}</td>
+							</tr>
+
+						</table>
+					</div>
 
 				</div>
 
