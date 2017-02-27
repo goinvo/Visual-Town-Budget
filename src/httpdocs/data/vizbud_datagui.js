@@ -30,11 +30,6 @@ app.controller('vbGuiCtrl', ['$scope', '$http', '$sce', '$rootScope', '$window',
 
 
 		// NETWORKING
-		$scope.changeDataSet = function(set){
-			$scope.selectedSet = set;
-			$scope.loadDataSet();
-		}
-
 		$scope.loadDataSet = function(){
 			$scope.callAPI();
 		}
@@ -100,9 +95,7 @@ app.controller('vbGuiCtrl', ['$scope', '$http', '$sce', '$rootScope', '$window',
 			}
 
 			$scope.calculateSubs();
-
 		}
-
 
 		$scope.changeView = function(){
 			if($scope.view == 'single') $scope.view = 'multi';
