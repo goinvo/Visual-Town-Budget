@@ -64,10 +64,10 @@ app.controller('vbGuiCtrl', ['$scope', '$http', '$sce', '$rootScope', '$window',
 				});
 				if($scope.dataSet.sub.length != 0){
 					buildCatHash($scope.dataSet, '');
-					if($scope.openHash){
-						var p = getTreePointer($scope.openHash);
-						$scope.openItem(p.pointer);
-					} 
+					// if($scope.openHash){
+					// 	var p = getTreePointer($scope.openHash);
+					// 	$scope.openItem(p.pointer);
+					// } 
 				}
 
 			}, function errorCallback(response) {
@@ -162,9 +162,11 @@ app.controller('vbGuiCtrl', ['$scope', '$http', '$sce', '$rootScope', '$window',
 			t.push(newCat);
 			buildCatHash($scope.dataSet, '');
 
-			var newCat = t[t.length - 1];
+			// var newCat = t[t.length - 1];
+			// $scope.openItem(newCat);
 
-			$scope.openItem(newCat);
+			$scope.saveDataSet();
+
 		}
 
 	
