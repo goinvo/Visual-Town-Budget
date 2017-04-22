@@ -16,7 +16,7 @@
 			#treeNav 	{ height: 90%; overflow: scroll; }
 			ul 			{ margin-left: 0px; padding-left: 25px}
 			li 			{ padding: 8px 0 5px; margin-left: 0px }
-			.main 		{ width: 70%; float: left; padding: 30px; }
+			.main 		{ width: 70%; float: left; padding: 30px; max-height: 100%; overflow: auto; box-sizing: border-box;}
 			td 			{ padding-right: 18px; padding-top: 5px; text-align: right;}
 			label 		{ font-size: 14px; line-height: 18px; color: #90949c; cursor: pointer;  }
 			input		{ border: 1px solid #d3d6db; height: 25px; padding: 5px; width: 100% }
@@ -108,7 +108,7 @@
 					
 						<tr ng-repeat="v in currentItem.values">
 							<td><label for="val_{{v.year}}">{{v.year}}</label></td>
-							<td><input id="src" ng-model="v.val" id="val_{{v.year}}" /></td>
+							<td><input id="src" ng-model="v.val" id="val_{{v.year}}"  ng-change="fixNumber(v)" /></td>
 							<td style="font-size: 11px;">{{v.val | currency}}</td>
 							<td ng-if="subTotals" style="font-size: 11px; color: red">{{ subTotals[v.year] | currency}}</td>
 						</tr>
@@ -121,9 +121,11 @@
 								<td style="width: 60px !important" ng-repeat="year in config.activeYears">{{year}}</td>
 							</tr>
 							<tr ng-repeat="sub in currentItem.sub">
-								<td style="font-size: 11px;">{{sub.key}}</td>
+								<td style="font-size: 11px;"><!-- {{sub.key}} -->
+									<input ng-model="sub.key" />
+								</td>
 								<td ng-repeat="v in sub.values">
-									<input ng-model="v.val" ng-keyup="calculateSubs()" />
+									<input ng-model="v.val" ng-keyup="calculateSubs()"  ng-change="fixNumber(v)" />
 								</td>
 							</tr>
 							<tr>
@@ -132,7 +134,9 @@
 							</tr>
 							<tr class="totalLine">
 								<td style="font-weight: bold; font-size: 11px">TOTALS</td>
-								<td ng-repeat="v in currentItem.values"><input id="src" ng-model="v.val" /></td>
+								<td ng-repeat="v in currentItem.values">
+									<input ng-model="v.val" ng-change="fixNumber(v)"/>
+								</td>
 							</tr>
 							<tr>
 								<td></td>

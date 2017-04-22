@@ -63,11 +63,7 @@ app.controller('vbGuiCtrl', ['$scope', '$http', '$sce', '$rootScope', '$window',
 					key : $scope.dataSet.key
 				});
 				if($scope.dataSet.sub.length != 0){
-					buildCatHash($scope.dataSet, '');
-					// if($scope.openHash){
-					// 	var p = getTreePointer($scope.openHash);
-					// 	$scope.openItem(p.pointer);
-					// } 
+					buildCatHash($scope.dataSet, '');					
 				}
 
 			}, function errorCallback(response) {
@@ -143,9 +139,10 @@ app.controller('vbGuiCtrl', ['$scope', '$http', '$sce', '$rootScope', '$window',
 				})
 			}
 
-			$scope.treePosition.pointer.sub.push(emptyCat);
-
-			$scope.currentItem = item.sub[item.sub.length - 1];
+			item.sub.push(emptyCat);
+			$scope.calculateSubs();
+			
+			//$scope.openItem(item.sub[item.sub.length - 1]);
 		}
 
 		$scope.changeParent = function(){
@@ -166,7 +163,13 @@ app.controller('vbGuiCtrl', ['$scope', '$http', '$sce', '$rootScope', '$window',
 			// $scope.openItem(newCat);
 
 			$scope.saveDataSet();
+		}
 
+		$scope.fixNumber = function(node){
+
+			var negative = (node.val[0] == '-');
+			node.val = Number(node.val.replace(/[^0-9\.]+/g,""));
+			if(negative) node.val *= -1;
 		}
 
 	
