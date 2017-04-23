@@ -195,7 +195,7 @@ window.onpopstate = popUrl;
 function pushUrl(section, year, mode, node) {
     if (ie()) return;
     // format URL
-    var url = app_path +  section + '/' + year + '/' + mode + '/' + node;
+    var url = '#' +  section + '/' + year + '/' + mode + '/' + node;
     // create history object
     window.history.pushState({
         section: section,

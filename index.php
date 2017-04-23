@@ -5,11 +5,27 @@
       require_once $d . 'includes/imports.php';
     ?>
     <script>
+
+      function readLocationHash(path){
+        if(path[0] == '#'){
+          path = path.substr(1);
+        }
+        var fields = ['page', 'year', 'mode', 'node'];
+        var tmp = path.split('/');
+        var p = {};
+        for(var i = 0; i < tmp.length; i++){
+          p[fields[i]] = tmp[i];
+        }
+        return p;
+      }
+
+
+
       var longName = "<?php echo $longName; ?>";
       var municipalURL = "<?php echo $municipalURL; ?>";
       $(document).ready(initialize);
-      var pageParams = <?php echo json_encode($_GET); ?>;
       var app_path = '<?php echo $app_dir; ?>';
+      var pageParams = readLocationHash(window.location.hash);
     </script>
  
 
