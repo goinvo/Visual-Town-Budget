@@ -7,7 +7,7 @@
     <script>
 
       function readLocationHash(path){
-        if(path == '') return {};
+        if(path == '') return {page : "expenses"};
         if(path[0] == '#'){
           path = path.substr(1);
         }

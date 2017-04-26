@@ -47,8 +47,10 @@ avb.thisYear = avb.currentYear;
 
 // amount of yearly taxes spent by user
 avb.userContribution = null;
+
 // available data sections
 avb.sections = ['revenues', 'expenses', 'funds'];
+
 // available modes (treemap, table..)
 avb.modes =
 {
@@ -253,6 +255,17 @@ function switchMode(mode, pushurl) {
     loadData();
 }
 
+
+
+function switchSection(section){
+    avb.section = section;
+    params.section = section;
+    $('.navbar-margin span').removeClass('selected');
+    window.location.hash = section;
+    initializeVisualizations(params);
+    
+    
+}
 /*
 *   Year selection subroutines
 */
@@ -264,18 +277,22 @@ function switchMode(mode, pushurl) {
 *
 */
 function changeYear(year) {
+
     // don't switch if year is already selected
     if (year === avb.thisYear) return;
 
     // push change to browser history
     pushUrl(avb.section, year, avb.mode, avb.root.hash);
+
     // set new year values
     avb.thisYear = year;
     yearIndex = avb.thisYear - avb.firstYear;
+    
     // update navigation (treemap or table)
     avb.navigation.update(avb.root);
 
     avb.navigation.open(avb.currentNode.data.hash);
+
     // remember year over page changes
     $.cookie('year', year, {
             expires: 14
