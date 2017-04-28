@@ -2,15 +2,13 @@
 <div class="purple-border" id="avb-menubar" >
   <div class="container">
 
-    <div class="homebutton" onclick='window.location = "/"'>
-
+    <a class="homebutton" href= "<?php echo get_site_url(); ?>">
       <div style="font-size:32px;line-height:28px; display:inline-block"> <?php echo $shortName; ?>, <?php echo $stateAbbreviation; ?>  </div>
-      <img src="<?php echo $app_dir; ?>img/logo@High.png" alt="avb-logo" width=24 height=24 />
-   </div>
+   </a>
 
     <div id="navbar-links" style="line-height:30px;">
 
-     <div onclick='window.location = "/"' class="entry homebutton"> Town Budget, Visualized </div>
+     <a href= "<?php echo get_site_url(); ?>" class="entry homebutton"> Town Budget, Visualized </a>
 
      <div class="entry navbar-margin">
         <span class="menubutton section margin" data-section="revenues"><a onclick="switchSection('revenues')">Revenues</a></span>

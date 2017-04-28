@@ -26,6 +26,7 @@ License:
     See the License for the specific language governing permissions and
     limitations under the License.
 */
+$ = jQuery;
 var avb = avb || {};
 
 // navigation variables
@@ -82,9 +83,8 @@ Number.prototype.px = function () {
 *   initialization routines
 */
 function initialize(){
-    
-    params = pageParams;
-    params.section = ('page' in pageParams) ? pageParams.page : '';
+    params = readLocationHash(window.location.hash);
+    params.section = ('page' in params) ? params.page : '';
 
     avb.navbar.initialize();
 
@@ -446,3 +446,24 @@ function findHash(hash, node){
     }
     return false;
 };
+
+
+function readLocationHash(path){
+    if(path == '') return {page : "expenses"};
+    if(path[0] == '#'){
+      path = path.substr(1);
+    }
+    var fields = ['page', 'year', 'mode', 'node'];
+    var tmp = path.split('/');
+    var p = {};
+    for(var i = 0; i < tmp.length; i++){
+      p[fields[i]] = tmp[i];
+    }
+    return p;
+}
+
+
+// AND GO!
+$(document).ready(initialize);
+
+

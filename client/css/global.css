@@ -99,6 +99,7 @@ p {
 #navigation-container,
 #information-container {
   height: 600px;
+  overflow: hidden;
 }
 
 /*
@@ -150,13 +151,20 @@ p {
 * Links
 */
 /* line 104, ../../scss/partials/_avb.scss */
-.link {
+#footer.menu li {
+  display: inline;
+  list-style: none;
+  font-size: 17px;
+  padding: 0 8px;
+}
+
+#footer.menu a {
   text-decoration: underline;
   cursor: pointer;
   color: black;
 }
 /* line 109, ../../scss/partials/_avb.scss */
-.link:hover {
+#footer.menu a:hover {
   color: steelblue;
 }
 
@@ -537,7 +545,6 @@ p {
 /* line 70, ../../scss/partials/_cards.scss */
 #legend-wrap {
   position: absolute;
-  height: 100%;
   width: 100%;
   left: -100%;
   font-size: 18px;
@@ -659,7 +666,7 @@ p {
 }
 /* line 25, ../../scss/partials/_navbar.scss */
 #avb-menubar .navbar-margin {
-  margin-left: 90px;
+  margin-left: 40px;
 }
 /* line 29, ../../scss/partials/_navbar.scss */
 #avb-menubar .nav {

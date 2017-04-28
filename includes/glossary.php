@@ -4,7 +4,7 @@
 <?php
 $curpath = getcwd().'/';
 // attempt opening glossary file
-$glossary_file = "data/glossary.csv";
+$glossary_file = plugin_dir_path(__FILE__) . "glossary.csv";
 if (($handle = fopen( $glossary_file, "r")) !== FALSE) {
 	$counter = 0;
 	while (!feof($handle) ) {
