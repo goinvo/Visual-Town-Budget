@@ -67,8 +67,10 @@ stats = {
         class: "span6 individual",
         value: function (d) {
             var percentage = d.values[yearIndex].val / avb.root.values[yearIndex].val;
+            var number = (avb.userContribution * percentage).toFixed(2);
+            var displayNumber = formatMoney(number);
 
-            return '$' + (avb.userContribution * percentage).toFixed(2);
+            return '<a onmousedown="toggleHome()">$' + displayNumber + '</a>';
         },
         side: 'your yearly tax contribution.',
         cellClass: "value sum",

@@ -370,7 +370,7 @@ avb.home = function () {
 
         // start application
         initializeVisualizations({
-            "section": "funds"
+            "section": "expenses"
         });
         
         // do not highlight any sections while homepage is open
