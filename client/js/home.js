@@ -149,6 +149,7 @@ avb.home = function () {
         */
 
         fireDrill = function(){
+            isFirstVisit();
             avb.home.hide();
             setTimeout('avb.navigation.open("uYIA1YH5", 2000)', 500)
             setTimeout('avb.navigation.open("OOjhINuS", 2000)', 3000);
@@ -157,6 +158,7 @@ avb.home = function () {
 
 
         jetportDrill = function(){
+            isFirstVisit();
             avb.home.hide();
             setTimeout('switchSection("funds")', 500)
             setTimeout('avb.navigation.open("ecY3MSl9", 2000)', 1500)
@@ -166,6 +168,7 @@ avb.home = function () {
         
 
          schoolLunchDrill = function(){
+            isFirstVisit();
             avb.home.hide();
             setTimeout('switchSection("revenues")', 500);
             setTimeout('avb.navigation.open("cJ0p78lv", 2000)', 1500); // school dept.
