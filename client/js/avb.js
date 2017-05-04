@@ -91,6 +91,7 @@ function initialize(){
     if(params.section === undefined || params.section === "") {
         avb.home.initialize();
         avb.home.show();
+        switchSection('expenses')
     } else if($.inArray(params.section, avb.sections) > -1){
         initializeVisualizations(params);
     } else {
@@ -263,8 +264,6 @@ function switchSection(section){
     $('.navbar-margin span').removeClass('selected');
     window.location.hash = section;
     initializeVisualizations(params);
-    
-    
 }
 /*
 *   Year selection subroutines

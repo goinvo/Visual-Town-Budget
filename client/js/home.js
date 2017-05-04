@@ -33,11 +33,7 @@ avb.home = function () {
      * Tutorial node IDs.
      * They are used to identify which zone to highlight on the treemap
      */
-    var townDepartments = 'dc313bc5',
-        fireDepartment = 'bd2b7e5f',
-        snowRemoval = 'c61196eb',
-        townSchools = 'b5fe5259';
-
+  
     /*
     * Main tour, for new users.
     */
@@ -79,76 +75,7 @@ avb.home = function () {
         position: 'top'
     }];
 
-    /*
-    *   Topic tour, begins when user clicks on FAQ
-    */
-    var fireTour = [{
-        selector: '#fire',
-        text: 'The Fire Department requires significant spending to ensure public safety.',
-        position: 'left',
-        before: function () {
-            $('g[nodeid="' + fireDepartment + '"]').find('div').first().attr('id', 'fire');
-        }
-    }, {
-        selector: '#cards',
-        text: 'Here is the basic information you need to know about the department.',
-        position: 'down',
-        before: function () {
-            avb.navigation.open(fireDepartment, 500);
-        }
-    }, {
-        selector: '#zoombutton',
-        text: 'Go back and explore more.',
-        position: 'left'
-    }];
-
-    /*
-    *   Topic tour, begins when user clicks on FAQ
-    */
-    var snowTour = [{
-        selector: '#snow',
-        text: 'Snow removal has a relatively small cost compared to other departments',
-        position: 'top',
-        before: function () {
-            $('g[nodeid="' + snowRemoval + '"]').find('div').first().attr('id', 'snow');
-        }
-    }, {
-        selector: '#chart',
-        text: 'Check how the snow removal costs oscillate over the years.',
-        position: 'right',
-        before: function () {
-            avb.navigation.open(snowRemoval, 500);
-        }
-    }, {
-        selector: '#cards',
-        text: 'Here is the basic information about snow removal over the current year.',
-        position: 'right'
-    }, {
-        selector: '#zoombutton',
-        text: 'Go back and explore more.',
-        position: 'left'
-    }];
-
-    /*
-    *   Topic tour, begins when user clicks on FAQ
-    */
-    var schoolTour = [{
-        selector: '#school',
-        text: 'Education is an important factor in Town expenses.',
-        position: 'bottom',
-        before: function () {
-            $('g[nodeid="' + townSchools + '"]').find('div').first().attr('id', 'school');
-        }
-    }, {
-        selector: '#cards',
-        text: 'They constitute about 40% of the yearly expenses.',
-        position: 'right',
-        before :  function() { avb.navigation.open(townSchools, 500) }
-    }, {
-        selector: '#zoombutton',
-        text: 'Go back and explore more.',
-        position: 'left'
-    }];
+   
 
     /*
     *   Initiialize function
@@ -161,8 +88,6 @@ avb.home = function () {
         */
         function overlayClick(event) {
             event.stopPropagation();
-            // highlight 'funds' link
-            $($('.section').get(2)).addClass('selected');
             hide();
         }
 
@@ -223,30 +148,32 @@ avb.home = function () {
         *   Tutorial links initialization
         */
 
-        // Link 1
-        $('#q1').click(function () {
-            tourClick.call(this, fireTour, function () {
-                avb.navigation.open(townDepartments, 500);
-                fireTour[0].before();
-            })
-        });
+        fireDrill = function(){
+            avb.home.hide();
+            setTimeout('avb.navigation.open("uYIA1YH5", 2000)', 500)
+            setTimeout('avb.navigation.open("OOjhINuS", 2000)', 3000);
+        }
+         $('#q1').click(fireDrill);
 
-        // Link 2
-        $('#q2').click(function () {
-            sectionClick.call(this);
-            setTimeout(function() {
-                schoolTour[0].before();
-                starttour(schoolTour);
-            },1200)
-        });
+
+        jetportDrill = function(){
+            avb.home.hide();
+            setTimeout('switchSection("funds")', 500)
+            setTimeout('avb.navigation.open("ecY3MSl9", 2000)', 1500)
+            setTimeout('avb.navigation.open("am3HTP1C", 2000)', 4000);   
+        }
+         $('#q2').click(jetportDrill);
+        
+
+         schoolLunchDrill = function(){
+            avb.home.hide();
+            setTimeout('switchSection("revenues")', 500);
+            setTimeout('avb.navigation.open("cJ0p78lv", 2000)', 1500); // school dept.
+            setTimeout('avb.navigation.open("qLGsTT5M", 2000)', 4000); // food service
+         }
 
         // Link 3
-        $('#q3').click(function () {
-            tourClick.call(this, snowTour, function () {
-                avb.navigation.open(townDepartments, 500);
-                snowTour[0].before();
-            })
-        });
+        $('#q3').click(schoolLunchDrill);
     },
 
     sectionClick = function() {
@@ -296,11 +223,14 @@ avb.home = function () {
 
         // enter key
         var theEvent = evt || window.event;
-        var key = theEvent.keyCode || theEvent.which;
-        key = String.fromCharCode(key);
+        var keyCode = theEvent.keyCode || theEvent.which;
+        var goodKeys = [37, 39, 38, 40, 8]
+
+        key = String.fromCharCode(keyCode);
         // regex all values are compared against
         var regex = /[0-9]|\./;
-        if (!regex.test(key)) {
+
+        if (!regex.test(key) && $.inArray(keyCode, goodKeys) == -1 ) {
             theEvent.returnValue = false;
             if (theEvent.preventDefault) theEvent.preventDefault();
         }
@@ -373,9 +303,7 @@ avb.home = function () {
             "section": "expenses"
         });
         
-        // do not highlight any sections while homepage is open
-        $('.section').removeClass('selected');
-
+      
     },
 
     /*

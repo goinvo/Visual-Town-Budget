@@ -4,11 +4,11 @@
     <div class="container">
         <div class="hero-unit">
             <div id="welcome-hero">
-                <h1>See your town's budget.</h1>
+                <h1>See Portland's budget.</h1>
 
                 <div class="home-column" id="home-col1" style=
                 "display:inline-block;">
-                    <p>Government budgets can be tough to understand, but now <?php echo $longName; ?>, <?php echo $state; ?> is providing the next generation of accessibility in financial information that allows citizens to view, engage with, and discuss.</p>
+                    <p>Government budgets can be tough to understand, but now OpenMaine.org is providing the next generation of accessibility in financial information that allows citizens to view, engage with, and discuss.</p>
 
                     <div style="margin-top: 25px;">
                         <div>
@@ -44,12 +44,12 @@
 
                         <div>
                             <a class='link' data-section="expenses" id='q2'
-                            style='color:#db4e86'>How much money does the Town spend on schools?</a>
+                            style='color:#db4e86'>How much is the Portland Jetport worth?</a>
                         </div>
 
                         <div>
                             <a class='link' data-section="expenses" id='q3'
-                            style='color:#db4e86'>How expensive is Snow &#38; Ice Removal?</a>
+                            style='color:#db4e86'>How much does the school lunch program take in?</a>
                         </div>
                     </div>
 
@@ -98,7 +98,7 @@
                             <div class="node" data-section="funds" style=
                             "left: 200px; width: 100px;">
                                 <div>
-                                    Funds
+                                    Assets
                                 </div>
 
                                 <div class="node-bar" id="funds-node"
