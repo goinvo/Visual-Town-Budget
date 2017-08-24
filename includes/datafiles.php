@@ -1,12 +1,14 @@
 <?php
-	foreach($dataSections as $section){
+	global $selected_budget;
+	$budget_slug = $selected_budget -> meta['slug'];
+
+	foreach($selected_budget -> meta['sections'] as $section){
 		echo '<script id="data-'.$section.'" type="application/json">';
-		require_once ABSPATH . 'data/'.$section.'.json';
+		require_once ABSPATH . "data/budgets/$budget_slug/$section.json";
 		echo '</script>';
 	}
 ?>
 
-<script id="data-home" type="application/json"> 
-  <?php require_once ABSPATH . "data/home.json";?>
+<script id="data-home" type="application/json">
+  <?php require_once ABSPATH . "data/budgets/$budget_slug/home.json";?>
 </script>
-

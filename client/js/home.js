@@ -196,7 +196,7 @@ avb.home = function () {
         // reads contribution cookie
         var value = jQuery.cookie('contribution') || defaultContribution;
         // adds yearly contribution as a new card
-        if (value !== null && decks.expenses[0].title !== stats.individual.title) {
+        if (value !== null && decks.expenses[0].title !== stats.individual.title && parseInt(budget_settings.include_taxes)) {
             decks.expenses.unshift(stats.individual);
         }
         return value;

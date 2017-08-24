@@ -71,6 +71,7 @@ p {
   background-color: #f9f9f9;
   -webkit-box-shadow: 0px 0px 10px #cccccc;
   box-shadow: 0px 0px 10px #cccccc;
+  z-index: 3;
 }
 
 /*
@@ -490,7 +491,7 @@ p {
 }
 /* line 15, ../../scss/partials/_cards.scss */
 .title-head div {
-  line-height: 70px;
+  line-height: 50px;
 }
 /* line 19, ../../scss/partials/_cards.scss */
 .title-head .description {
@@ -501,6 +502,13 @@ p {
   line-height: normal;
   white-space: normal;
 }
+
+.title-head .text {
+  font-size: 29px;
+  border-bottom: 1px dashed rgb(119, 119, 119);
+  padding-top: 10px;
+}
+
 
 /*
 * Cards & legend container
@@ -647,7 +655,6 @@ p {
   padding: 15px 5px 15px 5px;
   z-index: 1050;
   padding-top: 2px;
-  border-top: 2px solid #d63366;
   max-height: 60px;
   /*
   * Links
@@ -658,7 +665,7 @@ p {
 }
 /* line 17, ../../scss/partials/_navbar.scss */
 #avb-menubar.purple-border {
-  border-top: 2px solid #d63366;
+
 }
 /* line 21, ../../scss/partials/_navbar.scss */
 #avb-menubar .container {
@@ -666,7 +673,7 @@ p {
 }
 /* line 25, ../../scss/partials/_navbar.scss */
 #avb-menubar .navbar-margin {
-  margin-left: 40px;
+
 }
 /* line 29, ../../scss/partials/_navbar.scss */
 #avb-menubar .nav {

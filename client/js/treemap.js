@@ -490,13 +490,13 @@ avb.treemap = function () {
         $title.text(data.key);
         // make sure to shrink text if it does not fit
         // 48px is max text size
-        $title.textfill(48, $('.title-head').width() - 120);
+        $title.textfill(30, $('.title-head').width() - 120);
 
         // main section such as revenues, expenses and funds need to have
         // descriptions
-        if ($.inArray(data.key.toLowerCase(), avb.sections) > -1) {
-            $('<div class="description">  </div>').appendTo($title).html(data.descr);
-        }
+        // if ($.inArray(data.key.toLowerCase(), avb.sections) > -1) {
+        //     $('<div class="description">  </div>').appendTo($title).html(data.descr);
+        // }
 
         // make zoom-out button appear disabled while at root nodes
         if (avb.currentNode.data === avb.root) {

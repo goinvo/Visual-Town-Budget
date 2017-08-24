@@ -1,19 +1,34 @@
-    <?php
-      $d = dirname(__FILE__) . '/';
-      require_once $d . 'includes/localized_variables.php';
-      $dataSections = array('revenues', 'expenses', 'funds');
-    ?>
-    <script>
-      var longName = "<?php echo $longName; ?>";
-      var municipalURL = "<?php echo $municipalURL; ?>";
-      var app_path = '<?php echo $app_dir; ?>';
-    </script>
- 
+<?php
+  global $selected_budget;
 
-    <?php
-      require_once $d . 'includes/home.php';
-      require_once $d . 'includes/navbar.php';
-      require_once $d . 'includes/container.php';
-      require_once $d . 'includes/templates.php';
-      require_once $d . "includes/datafiles.php";
-    ?>
+  $d = dirname(__FILE__) . '/';
+
+  # Variables used through the site
+  // $siteName = "Portland Maine Visual budget";
+  // $siteURL = "http://www.portlandmaine.gov/201/Budget-Financial-Documents";
+  // $municipalURL = "http://www.portlandmaine.gov/201/Budget-Financial-Documents";
+  // $feedbackEmail = "theportlandbudget@gmail.com";
+  // $shortName = "Portland";
+  // $longName = "Portland";
+  // $state = "Maine";
+  // $stateAbbreviation = "ME";
+  // $gaKey = "";
+
+
+  # App Path
+  $app_dir = plugins_url('visgov_wp') .  '/';
+
+?>
+<script>
+  var app_path = '<?php echo $app_dir; ?>';
+  var budget_settings = <?php echo json_encode($selected_budget -> meta); ?>;
+</script>
+
+
+
+<?php
+  require_once $d . 'includes/home.php';
+  require_once $d . 'includes/container.php';
+  require_once $d . 'includes/templates.php';
+  require_once $d . "includes/datafiles.php";
+?>

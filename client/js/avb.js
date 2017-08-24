@@ -50,7 +50,7 @@ avb.thisYear = avb.currentYear;
 avb.userContribution = null;
 
 // available data sections
-avb.sections = ['revenues', 'expenses', 'funds'];
+avb.sections = budget_settings.sections;
 
 // available modes (treemap, table..)
 avb.modes =
@@ -173,7 +173,6 @@ function loadData() {
     avb.navigation.initialize($(avb.modes[avb.mode].container), avb.root);
     avb.navigation.open(avb.root.hash);
 
-    console.log("UI Loaded.");
 }
 
 /*
@@ -236,7 +235,7 @@ function popUrl(event) {
 *   @param {string} mode - 'l' for list, 't' for treemap
 */
 function setMode(mode) {
-    var $container = $('#avb-wrap');
+    var $container = $('#avb-app');
     mode = mode || "t";
     avb.mode = mode;
     avb.navigation = avb.modes[mode].js;

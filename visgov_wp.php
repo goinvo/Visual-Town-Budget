@@ -69,13 +69,13 @@ function registerVisGovClient(){
 
 
 	// REGISTER MASTER APP FILE
-	wp_register_script( 'vg-avb-js', $app_dir . 'client/js/avb.js', 
+	wp_register_script( 'vg-avb-js', $app_dir . 'client/js/avb.js',
 						array(	'bootstrap-js', 'mustache-js', 'd3-js', 'detectmobilebrowser-js', 'jquerycookie-js', 'intro-js',
-								'vg-treemap-js', 'vg-chart-js', 'vg-cards-js', 'vg-table-js', 'vg-navbar-js', 'vg-statistic-js', 'vg-home-js'), 
+								'vg-treemap-js', 'vg-chart-js', 'vg-cards-js', 'vg-table-js', 'vg-navbar-js', 'vg-statistic-js', 'vg-home-js'),
 						NULL, true );
 
-	
-	
+
+
 
 }
 add_action( 'wp_enqueue_scripts', 'registerVisGovClient' );
@@ -86,8 +86,38 @@ add_action( 'wp_enqueue_scripts', 'registerVisGovClient' );
 
 
 
-function visgov_wp_template_main(){
+function visgov_wp_template_main($atts){
+  global $selected_budget, $wpdb;
+
+
+  // FETCH SELECTED BUDGET
+  if(!isset($atts['budget'])) {
+    echo "No budget specified.";
+    return;
+  }
+  $budget_id = $wpdb->get_var( $wpdb->prepare(
+    "SELECT post_id FROM wp_postmeta where meta_key='slug' && meta_value=%s",
+    $atts['budget']
+  ));
+  if($budget_id === NULL) {
+    echo "Budget not found: " . $atts['budget'];
+    return;
+  }
+  $selected_budget = get_post($budget_id);
+  $meta = get_post_custom($budget_id);
+  $selected_budget -> meta = array();
+  foreach($meta as $k => $v){
+    if($k[0] == '_') continue;
+    if($k == "sections") $selected_budget -> meta[$k] = unserialize($v[0]);
+    else $selected_budget -> meta[$k] = $v[0];
+  }
+
+
+  // LOAD APP JS
 	wp_enqueue_script('vg-avb-js');
+
+
+  // RENDER TEMPLATE
 	include(dirname(__FILE__) . '/index.php');
 }
 add_shortcode( 'visgov', 'visgov_wp_template_main' );
@@ -98,5 +128,3 @@ function visgov_wp_template_glossary(){
 	include(dirname(__FILE__) . '/includes/glossary.php');
 }
 add_shortcode( 'visgov_glossary', 'visgov_wp_template_glossary' );
-
-

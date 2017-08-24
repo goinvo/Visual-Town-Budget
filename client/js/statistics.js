@@ -94,21 +94,13 @@ stats = {
         title: "Source",
         class: "span6 card-source ",
         value: function (d) {
-            return (d.src === '') ? longName : d.src;
-        },
-        link: function (d) {
-            return (d.url === '') ? municipalURL : d.url;
+            var src_name  = (d.src === '') ? budget_settings['info_source_name'] : d.src;
+            var src_url   = (d.url === '') ? budget_settings['info_source_url'] : d.url;
+            return '<a href="' + src_url + '" target="_blank">' + src_name + '</a>';
         },
         cardRenderer : function(d, card){
             $card = $(card);
             $card.html(Mustache.render($('#card-template').html(), this));
-
-            $card.attr('onclick', "window.location='" + this.link(d)  + "'");
-                // prevent sliding animation
-                $card.click(function(event){
-                    // stop propagation
-                stopPropagation(window.event || event);
-            });
         },
         side: "is the data source for this entry."
     },
@@ -236,4 +228,3 @@ function growth(data) {
     var perc = Math.round(100 * 100 * (data.values[yearIndex].val - previous) / data.values[yearIndex].val) / 100;
     return formatPercentage(perc);
 };
-
