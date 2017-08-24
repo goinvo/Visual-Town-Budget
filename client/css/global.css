@@ -64,7 +64,7 @@ p {
 /* line 11, ../../scss/partials/_avb.scss */
 #avb-wrap {
   position: relative;
-  margin-bottom: 10px;
+  margin-bottom: 50px;
   padding: 15px;
   padding-top: 10px;
   text-align: left;
@@ -231,7 +231,7 @@ p {
 
 /* line 15, ../../scss/partials/_home.scss */
 #avb-home {
-  background-image: url(../img/bg_avb.png);
+  background: white;
   z-index: 1010;
   border-bottom: 2px solid #d63366;
   display: none;
@@ -251,9 +251,9 @@ p {
 */
 /* line 33, ../../scss/partials/_home.scss */
 .hero-unit {
-  padding: 0px;
-  margin-top: 90px;
+  padding: 30px;
   line-height: 28px;
+  background: white;
 }
 /* line 38, ../../scss/partials/_home.scss */
 .hero-unit #welcome-hero {
@@ -653,9 +653,10 @@ p {
 #avb-menubar {
   font-size: 18px;
   padding: 15px 5px 15px 5px;
-  z-index: 1050;
+  z-index: 400;
   padding-top: 2px;
   max-height: 60px;
+  position: relative;
   /*
   * Links
   */
