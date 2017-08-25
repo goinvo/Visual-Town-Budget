@@ -1,6 +1,16 @@
 <?php
   global $selected_budget;
-  $active_sections = $selected_budget -> meta['sections'];
+  extract($selected_budget -> meta);
+
+
+  $launch_btns =
+    '<p style="margin-top:20px;">
+      <a  class="link" href="javascript:;" onclick="avb.home.hide(true);"
+          style="text-decoration:underline;">Start the tour</a> or
+
+      <a class="link" href="javascript:;" onclick="avb.home.hide();"
+        style="text-decoration:underline;">Dive in</a>
+    </p>';
 ?>
 
 <div id="overlay"></div>
@@ -9,18 +19,19 @@
       <div id="welcome-hero">
 
         <!-- BUDGET TITLE -->
-        <h1><?php echo $selected_budget -> meta['title']; ?></h1>
+        <h1><?php echo $title; ?></h1>
 
 
         <!-- FIRST COLUMN -->
-        <div class="home-column" id="home-col1" style="display:inline-block;">
-            <p><?php echo $selected_budget -> meta['header_html']; ?></p>
+        <div class="home-column" id="home-col1" style="display:inline-block;
+            <?php if($budget_questions == '') echo "width: 94%;" ?> ">
+            <p><?php echo $header_html; ?></p>
 
             <!-- TAX BLOCK -->
-            <?php if($selected_budget -> meta['include_taxes']): ?>
+            <?php if($include_taxes): ?>
               <div style="margin-top: 25px;">
                   <div>
-                      <?php echo $shortName; ?> residents, see where your tax dollars
+                      <?php echo $shortName; ?> See where your tax dollars
                       go:
                   </div>
 
@@ -35,32 +46,31 @@
                       "tax-amount" onkeypress=
                       'avb.home.validate(event)' type="text">
                       <a class="link" data-section="expenses" id=
-                      "tax-input-start" style="text-decoration:underline; cursor: pointer">Start</a>
+                      "tax-input-start" style="text-decoration:underline; cursor: pointer">Follow your taxes!</a>
                   </div>
               </div>
-            <?php endif; ?>
+            <?php
+
+              endif;
+
+              if($budget_questions == "") echo $launch_btns;
+
+
+            ?>
         </div>
 
 
 
         <!-- SECOND COLUMN -->
-        <div class="home-column" id="home-col2" style="display:inline-block; margin-left:5%;">
+        <?php
+          if($budget_questions != ''){
+            echo '<div class="home-column" id="home-col2" style="display:inline-block; margin-left:5%;">' .
+                    $budget_questions . $launch_btns .
+                  '</div>';
+          }
+        ?>
 
-            <!-- BUDGET QUESTIONS -->
-            <div>
-                <?php echo $selected_budget -> meta['budget_questions']; ?>
-            </div>
-
-            <!-- JUMP IN QUESTIONS -->
-            <p style="margin-top:20px;">
-              <a  class="link" href="javascript:;" onclick="avb.home.hide(true);"
-                  style="text-decoration:underline;">Start the tour</a> or
-
-              <a class="link" href="javascript:;" onclick="avb.home.hide();"
-                style="text-decoration:underline;">Dive in</a>
-            </p>
-        </div>
-
+        
       </div>
 
       <!-- THIRD COLUMN -->
@@ -83,7 +93,7 @@
           <div style="position: relative;height: 200px;">
 
             <!-- REVENUES -->
-            <?php if(in_array("revenues", $active_sections)):?>
+            <?php if(in_array("revenues", $sections)):?>
               <div class="node" data-section="revenues" style="left: 0px; width: 100px;">
                   <div>Revenues</div>
                   <div class="node-bar" id="revenues-node" style="background-color: rgb(31, 119, 180);">
@@ -94,7 +104,7 @@
 
 
             <!-- EXPENSES -->
-            <?php if(in_array("expenses", $active_sections)):?>
+            <?php if(in_array("expenses", $sections)):?>
               <div class="node" data-section="expenses" style="left: 100px; width: 100px;">
                   <div>Expenses</div>
                   <div class="node-bar" id="expenses-node" style=" background-color: #56b356;">
@@ -105,7 +115,7 @@
 
 
             <!-- FUNDS -->
-            <?php if(in_array("funds", $active_sections)):?>
+            <?php if(in_array("funds", $sections)):?>
               <div class="node" data-section="funds" style="left: 200px; width: 100px;">
                   <div>Assets</div>
                   <div class="node-bar" id="funds-node" style=" background-color: #ff993e;">
