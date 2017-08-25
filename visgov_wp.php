@@ -312,10 +312,13 @@ function visgov_wp_template_main($atts){
     echo "No budget specified.";
     return;
   }
-  $budget_id = $wpdb->get_var( $wpdb->prepare(
-    "SELECT post_id FROM wp_postmeta where meta_key='slug' && meta_value=%s",
+
+  $sql = $wpdb->prepare(
+    "SELECT post_id FROM " . $wpdb -> postmeta . " where meta_key='slug' && meta_value=%s",
     $atts['budget']
-  ));
+  );
+
+  $budget_id = $wpdb->get_var($sql);
   if($budget_id === NULL) {
     echo "Budget not found: " . $atts['budget'];
     return;
