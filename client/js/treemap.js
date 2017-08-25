@@ -451,11 +451,13 @@ avb.treemap = function () {
         // tax contribution, popovers will be used to show how much each
         // zone amounts in terms of personal contribution.
         var description;
-        if (avb.userContribution != null && avb.section == 'expenses') {
+
+        if (avb.userContribution != null && avb.section == 'expenses'  && budget_settings.include_taxes == "1") {
             // popover content is split in separate 2 divs
             description = '<div>' + d.descr + '</div> <div class="contribution"> Your contribution is ' + stats.individual.value(d) + '</div>';
         } else {
-            description = d.descr;
+
+            description = '<div>' + d.descr + '</div> <div class="contribution">' + formatCurrencyExact(d.value) + '</div>';
         }
 
         // calculate whether zone has enough space for any labels
