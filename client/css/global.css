@@ -255,6 +255,10 @@ p {
   line-height: 28px;
   background: white;
 }
+
+.hero-unit p{
+  font-size: 18px;
+}
 /* line 38, ../../scss/partials/_home.scss */
 .hero-unit #welcome-hero {
   width: 70%;
