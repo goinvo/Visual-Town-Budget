@@ -82,9 +82,226 @@ add_action( 'wp_enqueue_scripts', 'registerVisGovClient' );
 
 
 
+/*******************************************************
+* BUDGETS - CUSTOM POST TYPES AND FIELDS
+*
+*******************************************************/
+
+// include ACF without plugin
+define( 'ACF_LITE', true );
+include_once('advanced-custom-fields/acf.php');
+
+function cptui_register_my_cpts_budget() {
+	$labels = array(
+		"name" => __( "Budgets", "openmaine" ),
+		"singular_name" => __( "Budget", "openmaine" ),
+	);
+	$args = array(
+		"label" => __( "Budgets", "openmaine" ),
+		"labels" => $labels,
+		"description" => "",
+		"public" => true,
+		"publicly_queryable" => true,
+		"show_ui" => true,
+		"show_in_rest" => false,
+		"rest_base" => "",
+		"has_archive" => false,
+		"show_in_menu" => true,
+		"exclude_from_search" => false,
+		"capability_type" => "post",
+		"map_meta_cap" => true,
+		"hierarchical" => false,
+		"rewrite" => array( "slug" => "budget", "with_front" => true ),
+		"query_var" => true,
+		"supports" => array( "title", "thumbnail" ),
+	);
+	register_post_type( "budget", $args );
+}
+add_action( 'init', 'cptui_register_my_cpts_budget' );
+
+if(function_exists("register_field_group"))
+{
+	register_field_group(array (
+		'id' => 'acf_budget-fields',
+		'title' => 'Budget Fields',
+		'fields' => array (
+			array (
+				'key' => 'field_599baba6391b3',
+				'label' => 'Basic',
+				'name' => '',
+				'type' => 'tab',
+			),
+			array (
+				'key' => 'field_599bd1af40f31',
+				'label' => 'Page Title',
+				'name' => 'page_title',
+				'type' => 'text',
+				'default_value' => '',
+				'placeholder' => '',
+				'prepend' => '',
+				'append' => '',
+				'formatting' => 'html',
+				'maxlength' => '',
+			),
+			array (
+				'key' => 'field_599ba1af50d17',
+				'label' => 'Slug',
+				'name' => 'slug',
+				'type' => 'text',
+				'default_value' => '',
+				'placeholder' => '',
+				'prepend' => '',
+				'append' => '',
+				'formatting' => 'html',
+				'maxlength' => '',
+			),
+			array (
+				'key' => 'field_599ba04ab1d73',
+				'label' => 'Budget Sections',
+				'name' => 'sections',
+				'type' => 'checkbox',
+				'choices' => array (
+					'revenues' => 'Revenues',
+					'expenses' => 'Expenses',
+					'assets' => 'Assets',
+				),
+				'default_value' => '',
+				'layout' => 'vertical',
+			),
+			array (
+				'key' => 'field_599baa7d0e0c3',
+				'label' => 'Include Taxes',
+				'name' => 'include_taxes',
+				'type' => 'true_false',
+				'message' => '',
+				'default_value' => 0,
+			),
+			array (
+				'key' => 'field_599bca1796814',
+				'label' => 'Info Source - Name',
+				'name' => 'info_source_name',
+				'type' => 'text',
+				'default_value' => '',
+				'placeholder' => '',
+				'prepend' => '',
+				'append' => '',
+				'formatting' => 'html',
+				'maxlength' => '',
+			),
+			array (
+				'key' => 'field_599bc8c68678e',
+				'label' => 'Info Source - URL',
+				'name' => 'info_source_url',
+				'type' => 'text',
+				'default_value' => '',
+				'placeholder' => '',
+				'prepend' => '',
+				'append' => '',
+				'formatting' => 'html',
+				'maxlength' => '',
+			),
+			array (
+				'key' => 'field_599baa3603230',
+				'label' => 'Home Overlay',
+				'name' => '',
+				'type' => 'tab',
+			),
+			array (
+				'key' => 'field_599bab1cb9349',
+				'label' => 'Title',
+				'name' => 'title',
+				'type' => 'text',
+				'default_value' => '',
+				'placeholder' => '',
+				'prepend' => '',
+				'append' => '',
+				'formatting' => 'html',
+				'maxlength' => '',
+			),
+			array (
+				'key' => 'field_599b586155f17',
+				'label' => 'Intro Paragraph',
+				'name' => 'header_html',
+				'type' => 'wysiwyg',
+				'default_value' => '',
+				'toolbar' => 'full',
+				'media_upload' => 'yes',
+			),
+			array (
+				'key' => 'field_599bab4a10f27',
+				'label' => 'Tax Description',
+				'name' => 'tax_description',
+				'type' => 'text',
+				'conditional_logic' => array (
+					'status' => 1,
+					'rules' => array (
+						array (
+							'field' => 'field_599baa7d0e0c3',
+							'operator' => '==',
+							'value' => '1',
+						),
+					),
+					'allorany' => 'all',
+				),
+				'default_value' => '',
+				'placeholder' => '',
+				'prepend' => '',
+				'append' => '',
+				'formatting' => 'html',
+				'maxlength' => '',
+			),
+			array (
+				'key' => 'field_599bab7854811',
+				'label' => 'Budget Questions',
+				'name' => 'budget_questions',
+				'type' => 'textarea',
+				'default_value' => '',
+				'placeholder' => '',
+				'maxlength' => '',
+				'rows' => '',
+				'formatting' => 'br',
+			),
+			array (
+				'key' => 'field_599b587255f18',
+				'label' => 'Custom JS',
+				'name' => 'custom_js',
+				'type' => 'textarea',
+				'default_value' => '',
+				'placeholder' => '',
+				'maxlength' => '',
+				'rows' => 20,
+				'formatting' => 'none',
+			),
+		),
+		'location' => array (
+			array (
+				array (
+					'param' => 'post_type',
+					'operator' => '==',
+					'value' => 'budget',
+					'order_no' => 0,
+					'group_no' => 0,
+				),
+			),
+		),
+		'options' => array (
+			'position' => 'normal',
+			'layout' => 'no_box',
+			'hide_on_screen' => array (
+			),
+		),
+		'menu_order' => 0,
+	));
+}
 
 
 
+
+
+/*******************************************************
+* SHORT CODES
+*
+*******************************************************/
 
 function visgov_wp_template_main($atts){
   global $selected_budget, $wpdb;
