@@ -111,13 +111,16 @@ avb.navbar = function(){
 	*	Initialize navigation bar
 	*/
 	initialize = function(){
+
+		console.log('initializing');
+
 		// year dropdown (non-mobile browsers)
-		$dropdown = $('#yeardrop-container');
-		$dropdownLabel = $('#yeardrop-label');
-		$dropdownList = $('#yeardrop-list');
+		$dropdown = $('.yeardrop-container');
+		$dropdownLabel = $('.yeardrop-label');
+		$dropdownList = $('.yeardrop-list');
 
 		// year selector (mobile browsers)
-		$selector = $('#yeardrop-container-mobile');
+		$selector = $('.yeardrop-container-mobile');
 
 		if(!jQuery.browser.mobile) {
 
@@ -126,19 +129,29 @@ avb.navbar = function(){
 			*/
 
 			$dropdownList.html('');
+
 			// add dropdown element for each year
 			for(var i=avb.firstYear; i<=avb.lastYear; i++) {
-				// render button
+
+				// render button - puts years on both menus
 				$dropdownList.append(Mustache.render($('#dropdown-template').html(), [i]));
+
+
 				// attach click action
-				$dropdownList.find('li').last().click(function(event) {
+				$('li a', $dropdownList).click(function(event) {
+
 					event.preventDefault();
+
 					// get year
 					var year = parseInt($(this).text());
+
+
 					// change dropdown active entry to selected
 					$dropdownLabel.html(year + ' <b class="caret"></b>');
+
 					// change year
 					changeYear(year);
+
 					// close dropdown
 					$dropdown.removeClass('open');
 				});
@@ -168,7 +181,7 @@ avb.navbar = function(){
 
 			//show selector
 			$selector.show();
-			$('#yeardrop').css({'vertical-align' : 'top'});
+			$('.yeardrop').css({'vertical-align' : 'top'});
 		}
 
 		// Mobile browser don't have enough h space for long titles

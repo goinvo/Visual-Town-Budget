@@ -286,7 +286,7 @@ p {
 /* line 65, ../../scss/partials/_home.scss */
 #home-col3 {
   display: inline-block;
-  vertical-align: bottom;
+  vertical-align: top;
   height: 200px;
 }
 /* line 70, ../../scss/partials/_home.scss */
@@ -727,24 +727,32 @@ p {
 * Year selector
 */
 /* line 90, ../../scss/partials/_navbar.scss */
-#yeardrop-container {
+.yeardrop-container {
   vertical-align: top;
   min-width: 100px;
 }
 /* line 98, ../../scss/partials/_navbar.scss */
-#yeardrop-container a {
+.yeardrop-container a {
   padding-left: 20px;
 }
 /* line 101, ../../scss/partials/_navbar.scss */
-#yeardrop-container a b {
+.yeardrop-container a b {
   float: right;
   margin-right: 5px;
   vertical-align: baseline;
 }
 /* line 107, ../../scss/partials/_navbar.scss */
-#yeardrop-container .dropdown-menu {
+.yeardrop-container .dropdown-menu {
   min-width: 100px;
   border-radius: 0px;
+}
+
+.yeardrop-label {
+  padding: 5px 5px 5px 20px
+}
+
+.yeardrop-label .caret {
+  margin-top: 12px !important;
 }
 
 /*

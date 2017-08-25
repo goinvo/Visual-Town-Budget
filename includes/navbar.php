@@ -43,16 +43,18 @@
           <a id="navbar-table" href="javascript:avb.home.hide();switchMode('l'); "> Tabular view </a>
         </div>
 
-        <ul id="yeardrop" class="nav menubutton">
-          <li  id="yeardrop-container" class="dropdown" style="display:none;">
-            <a id="yeardrop-label" class="dropdown-toggle" role="button" data-toggle="dropdown" href="#">Dropdown <b class="caret"></b></a>
-            <ul id="yeardrop-list" class="dropdown-menu vhscrollable" role="menu"></ul>
+        <!-- YEAR DROP -->
+        <ul class="yeardrop nav menubutton">
+          <li  class="yeardrop-container dropdown" style="display:none;">
+            <a class="yeardrop-label dropdown-toggle" role="button" data-toggle="dropdown" href="#">Dropdown <b class="caret"></b></a>
+            <ul class="yeardrop-list dropdown-menu vhscrollable" role="menu"></ul>
           </li>
           <li>
-            <select id="yeardrop-container-mobile" style="display:none; width:100px; height:28px">
+            <select class="yeardrop-container-mobile" style="display:none; width:100px; height:28px">
             </select>
           </li>
         </ul>
+
       </div>
     </div>
   </div>

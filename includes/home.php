@@ -61,49 +61,61 @@
             </p>
         </div>
 
+      </div>
 
-        <!-- THIRD COLUMN -->
-        <div id="home-col3">
+      <!-- THIRD COLUMN -->
+      <div id="home-col3">
 
-          <!-- HOME BAR GRAPH -->
-          <div id="home-map-svg">
-              <div style="position: relative;height: 200px;">
+        <!-- YEAR DROP -->
+        <ul class="yeardrop nav menubutton">
+          <li  class="yeardrop-container dropdown" style="display:none;">
+            <a class="yeardrop-label dropdown-toggle" role="button" data-toggle="dropdown" href="#">Dropdown <b class="caret"></b></a>
+            <ul class="yeardrop-list dropdown-menu vhscrollable" role="menu"></ul>
+          </li>
+          <li>
+            <select class="yeardrop-container-mobile" style="display:none; width:100px; height:28px">
+            </select>
+          </li>
+        </ul>
 
-                  <!-- REVENUES -->
-                  <?php if(in_array("revenues", $active_sections)):?>
-                    <div class="node" data-section="revenues" style="left: 0px; width: 100px;">
-                        <div>Revenues</div>
-                        <div class="node-bar" id="revenues-node" style="background-color: rgb(31, 119, 180);">
-                            <div class="node-value">11</div>
-                        </div>
-                    </div>
-                  <?php endif; ?>
+        <!-- HOME BAR GRAPH -->
+        <div id="home-map-svg">
+          <div style="position: relative;height: 200px;">
 
-
-                  <!-- EXPENSES -->
-                  <?php if(in_array("expenses", $active_sections)):?>
-                    <div class="node" data-section="expenses" style="left: 100px; width: 100px;">
-                        <div>Expenses</div>
-                        <div class="node-bar" id="expenses-node" style=" background-color: #56b356;">
-                            <div class="node-value">11</div>
-                        </div>
-                    </div>
-                  <?php endif; ?>
-
-
-                  <!-- FUNDS -->
-                  <?php if(in_array("funds", $active_sections)):?>
-                    <div class="node" data-section="funds" style="left: 200px; width: 100px;">
-                        <div>Assets</div>
-                        <div class="node-bar" id="funds-node" style=" background-color: #ff993e;">
-                            <div class="node-value">11</div>
-                        </div>
-                    </div>
-                  <?php endif; ?>
-
+            <!-- REVENUES -->
+            <?php if(in_array("revenues", $active_sections)):?>
+              <div class="node" data-section="revenues" style="left: 0px; width: 100px;">
+                  <div>Revenues</div>
+                  <div class="node-bar" id="revenues-node" style="background-color: rgb(31, 119, 180);">
+                      <div class="node-value">11</div>
+                  </div>
               </div>
+            <?php endif; ?>
+
+
+            <!-- EXPENSES -->
+            <?php if(in_array("expenses", $active_sections)):?>
+              <div class="node" data-section="expenses" style="left: 100px; width: 100px;">
+                  <div>Expenses</div>
+                  <div class="node-bar" id="expenses-node" style=" background-color: #56b356;">
+                      <div class="node-value">11</div>
+                  </div>
+              </div>
+            <?php endif; ?>
+
+
+            <!-- FUNDS -->
+            <?php if(in_array("funds", $active_sections)):?>
+              <div class="node" data-section="funds" style="left: 200px; width: 100px;">
+                  <div>Assets</div>
+                  <div class="node-bar" id="funds-node" style=" background-color: #ff993e;">
+                      <div class="node-value">11</div>
+                  </div>
+              </div>
+            <?php endif; ?>
           </div>
         </div>
+
       </div>
     </div>
 </div>

@@ -33,7 +33,7 @@ avb.home = function () {
      * Tutorial node IDs.
      * They are used to identify which zone to highlight on the treemap
      */
-  
+
     /*
     * Main tour, for new users.
     */
@@ -75,7 +75,7 @@ avb.home = function () {
         position: 'top'
     }];
 
-   
+
 
     /*
     *   Initiialize function
@@ -91,7 +91,7 @@ avb.home = function () {
             hide();
         }
 
-        /* 
+        /*
         *   starts a tour with a slight delay
         *   this gives the homepage enough time to minimize
         *
@@ -126,7 +126,7 @@ avb.home = function () {
         // visualization init
         home.map = $('#home-map-svg');
         home.menubar = $('#avb-menubar');
-        
+
         $('.section').removeAttr('onclick');
 
         // taxes input box initialization
@@ -162,10 +162,10 @@ avb.home = function () {
             avb.home.hide();
             setTimeout('switchSection("funds")', 500)
             setTimeout('avb.navigation.open("ecY3MSl9", 2000)', 1500)
-            setTimeout('avb.navigation.open("am3HTP1C", 2000)', 4000);   
+            setTimeout('avb.navigation.open("am3HTP1C", 2000)', 4000);
         }
          $('#q2').click(jetportDrill);
-        
+
 
          schoolLunchDrill = function(){
             isFirstVisit();
@@ -241,8 +241,8 @@ avb.home = function () {
 
     /*
     *   Executes home bars transition
-    *  
-    *   @param {int} duration - transition duration   
+    *
+    *   @param {int} duration - transition duration
     */
     showGraph = function (duration) {
         // get data
@@ -258,17 +258,26 @@ avb.home = function () {
             height: scale(data[0].values[yearIndex].val)
         }, duration)
             .find('.node-value').text(formatcurrency(data[0].values[yearIndex].val));
+
+
         // expenses animation
         $('#expenses-node').animate({
             height: scale(data[1].values[yearIndex].val)
         }, duration)
             .find('.node-value').text(formatcurrency(data[1].values[yearIndex].val));
+
+
         // funds animation
-        $('#funds-node').animate({
-            height: scale(data[2].values[yearIndex].val)
-        }, duration)
-            .find('.node-value').text(formatcurrency(data[2].values[yearIndex].val));
+        if($('#funds-node').length == 1){
+          $('#funds-node').animate({
+              height: scale(data[2].values[yearIndex].val)
+          }, duration)
+              .find('.node-value').text(formatcurrency(data[2].values[yearIndex].val));
+        }
+
         $('.node-value').fadeIn(duration);
+
+
 
         // hook up click actions
         $('.node').click(sectionClick);
@@ -305,8 +314,8 @@ avb.home = function () {
         initializeVisualizations({
             "section": "expenses"
         });
-        
-      
+
+
     },
 
     /*
