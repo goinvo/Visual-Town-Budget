@@ -3,6 +3,7 @@
 	$budget_slug = $selected_budget -> meta['slug'];
 
 	foreach($selected_budget -> meta['sections'] as $section){
+		if($section == "assets") $section = "funds";
 		echo '<script id="data-'.$section.'" type="application/json">';
 		require_once ABSPATH . "data/budgets/$budget_slug/$section.json";
 		echo '</script>';

@@ -143,9 +143,16 @@ function initializeVisualizations(params) {
 function loadData() {
     // get datasets
     // loads all jsons in data
+
+
+
     $.each(avb.sections, function (i, url) {
+        console.log('trying to load - ' + url);
         avb.data[url] = JSON.parse($('#data-' + url).html());
+        console.log('loaded!');
     });
+
+
 
     // initialize root level
     avb.root = avb.data[avb.section];
@@ -285,7 +292,7 @@ function changeYear(year) {
     // set new year values
     avb.thisYear = year;
     yearIndex = avb.thisYear - avb.firstYear;
-    
+
     // update navigation (treemap or table)
     avb.navigation.update(avb.root);
 
@@ -467,16 +474,14 @@ function toggleHome(){
 }
 
 formatMoney = function(n, c, d, t){
-    c = isNaN(c = Math.abs(c)) ? 2 : c, 
-    d = d == undefined ? "." : d, 
-    t = t == undefined ? "," : t, 
-    s = n < 0 ? "-" : "", 
-    i = String(parseInt(n = Math.abs(Number(n) || 0).toFixed(c))), 
+    c = isNaN(c = Math.abs(c)) ? 2 : c,
+    d = d == undefined ? "." : d,
+    t = t == undefined ? "," : t,
+    s = n < 0 ? "-" : "",
+    i = String(parseInt(n = Math.abs(Number(n) || 0).toFixed(c))),
     j = (j = i.length) > 3 ? j % 3 : 0;
    return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
  };
 
 // AND GO!
 $(document).ready(initialize);
-
-

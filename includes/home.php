@@ -91,8 +91,8 @@
                   <?php endif; ?>
 
 
-                  <!-- ASSETS -->
-                  <?php if(in_array("assets", $active_sections)):?>
+                  <!-- FUNDS -->
+                  <?php if(in_array("funds", $active_sections)):?>
                     <div class="node" data-section="funds" style="left: 200px; width: 100px;">
                         <div>Assets</div>
                         <div class="node-bar" id="funds-node" style=" background-color: #ff993e;">

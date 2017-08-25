@@ -23,9 +23,9 @@
           </span>
         <?php endif; ?>
 
-        <?php if(in_array("assets", $active_sections)):?>
+        <?php if(in_array("funds", $active_sections)):?>
           <span class="menubutton section margin" data-section="funds">
-            <a id="navbar-funds" onclick="switchSection('funds')">Assets</a>
+            <a id="navbar-funds" onclick="switchSection('funds')">Funds & Reserves</a>
           </span>
         <?php endif; ?>
 

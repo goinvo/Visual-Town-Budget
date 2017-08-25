@@ -164,6 +164,7 @@ if(function_exists("register_field_group"))
 					'revenues' => 'Revenues',
 					'expenses' => 'Expenses',
 					'assets' => 'Assets',
+          'funds' => 'Funds & Reserves'
 				),
 				'default_value' => '',
 				'layout' => 'vertical',
