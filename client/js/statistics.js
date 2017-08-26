@@ -35,7 +35,7 @@ stats = {
             return formatcurrency(d.values[yearIndex].val);
         },
         side: function () {
-            return " in " + (avb.firstYear + yearIndex).toString() + "."
+            return " in " + (parseInt(avb.firstYear) + yearIndex).toString() + "."
         },
         cellClass: "value sum ",
         cellFunction: function (d, cell) {
