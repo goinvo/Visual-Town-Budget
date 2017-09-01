@@ -88,7 +88,7 @@ add_action( 'wp_enqueue_scripts', 'registerVisGovClient' );
 *******************************************************/
 
 // include ACF without plugin
-define( 'ACF_LITE', true );
+// define( 'ACF_LITE', true ); // this would disable ACF
 include_once('advanced-custom-fields/acf.php');
 
 function cptui_register_my_cpts_budget() {
@@ -168,6 +168,20 @@ if(function_exists("register_field_group"))
 				),
 				'default_value' => '',
 				'layout' => 'vertical',
+			),
+      array (
+				'key' => 'field_59a8751c46daf',
+				'label' => 'Loaded Section',
+				'name' => 'loaded_section',
+				'type' => 'select',
+				'choices' => array (
+					'expenses' => 'Expenses',
+					'revenues' => 'Revenues',
+					'funds' => 'Funds & Reserves',
+				),
+				'default_value' => 'expenses',
+				'allow_null' => 0,
+				'multiple' => 0,
 			),
 			array (
 				'key' => 'field_599baa7d0e0c3',

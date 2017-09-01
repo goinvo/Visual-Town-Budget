@@ -112,8 +112,6 @@ avb.navbar = function(){
 	*/
 	initialize = function(){
 
-		console.log('initializing');
-
 		// year dropdown (non-mobile browsers)
 		$dropdown = $('.yeardrop-container');
 		$dropdownLabel = $('.yeardrop-label');
