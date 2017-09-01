@@ -84,6 +84,18 @@ Number.prototype.px = function () {
 */
 function initialize(){
 
+    $('#adjustForInflation')
+      .prop('checked', budget_settings.adjustForInflation)
+      .change(function(){
+        var p = ($(this).attr('checked')) ? 'afi' : '';
+        var url = '?' + p + '#' + avb.section;
+        window.location = url;
+      });
+
+
+
+
+
     params = readLocationHash(window.location.hash);
     params.section = ('page' in params) ? params.page : '';
     avb.navbar.initialize();
@@ -158,7 +170,9 @@ function loadData() {
     // get datasets
     // loads all jsons in data
     $.each(avb.sections, function (i, url) {
-        avb.data[url] = adjustForInflation(JSON.parse($('#data-' + url).html()));
+        var data = JSON.parse($('#data-' + url).html());
+        if(budget_settings.adjustForInflation) data = adjustForInflation(data);
+        avb.data[url] = data;
     });
 
 
@@ -191,15 +205,18 @@ function loadData() {
 }
 
 function adjustForInflation(dataSet){
-  dataSet.adjustedValues = [];
+  var adjustedValues = [];
   $.each(dataSet.values, function(index, valueSet){
-    dataSet.adjustedValues.push(
+    adjustedValues.push(
       {
         val : Math.round(avb.inflationRates[valueSet.year] * valueSet.val),
         year : valueSet.year
       }
     );
   });
+
+  dataSet.values = adjustedValues;
+
 
   $.each(dataSet.sub, function(i, subSet){
     dataSet.sub[i] = adjustForInflation(subSet);

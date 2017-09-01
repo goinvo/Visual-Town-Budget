@@ -44,6 +44,7 @@
 <script>
   var app_path = '<?php echo $app_dir; ?>';
   var budget_settings = <?php echo json_encode($selected_budget -> meta); ?>;
+  budget_settings.adjustForInflation = <?php echo isset($_GET['afi']) ? 1 : 0; ?> ;
 
   var inflation = [
     [ 2018, 1 ],
@@ -54,7 +55,6 @@
     [ 2013, 2 ],
     [ 2012, 1.4 ]
   ];
-
 
 </script>
 

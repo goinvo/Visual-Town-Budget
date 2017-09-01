@@ -59,3 +59,16 @@
     </div>
   </div>
 </div>
+
+
+<div style="float: right">
+
+  <label  for="adjustForInflation"
+          style="display: inline-block;line-height: 20px;padding-left: 5px;padding-top: 3px;font-size: 14px;"
+          >Adjust For Inflation</label>
+
+  <input type="checkbox"
+        style="display: block;float: right;margin: 6px 4px;"
+        id="adjustForInflation"/>
+</div>
+<div style="clear: both"></div>
