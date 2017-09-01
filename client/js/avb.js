@@ -145,11 +145,22 @@ function initializeVisualizations(params) {
 *   Parses JSON files and calls visualization subroutines
 */
 function loadData() {
+
+    // load inflation rates
+    avb.inflationRates = {};
+    var multiplier = 1;
+    for(var i = 0; i < inflation.length; i++){
+      var row = inflation[i];
+      multiplier = multiplier * (1 + (row[1] / 100));
+      avb.inflationRates[row[0]] = Math.round(multiplier * 10000) / 10000;
+    }
+
     // get datasets
     // loads all jsons in data
     $.each(avb.sections, function (i, url) {
-        avb.data[url] = JSON.parse($('#data-' + url).html());
+        avb.data[url] = adjustForInflation(JSON.parse($('#data-' + url).html()));
     });
+
 
     // initialize root level
     avb.root = avb.data[avb.section];
@@ -178,6 +189,26 @@ function loadData() {
     avb.navigation.open(avb.root.hash);
 
 }
+
+function adjustForInflation(dataSet){
+  dataSet.adjustedValues = [];
+  $.each(dataSet.values, function(index, valueSet){
+    dataSet.adjustedValues.push(
+      {
+        val : Math.round(avb.inflationRates[valueSet.year] * valueSet.val),
+        year : valueSet.year
+      }
+    );
+  });
+
+  $.each(dataSet.sub, function(i, subSet){
+    dataSet.sub[i] = adjustForInflation(subSet);
+  });
+
+  return dataSet;
+}
+
+
 
 /*
 *   Browser history routines

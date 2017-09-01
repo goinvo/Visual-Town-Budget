@@ -44,6 +44,18 @@
 <script>
   var app_path = '<?php echo $app_dir; ?>';
   var budget_settings = <?php echo json_encode($selected_budget -> meta); ?>;
+
+  var inflation = [
+    [ 2018, 1 ],
+    [ 2017, 1.7 ],
+    [ 2016, 0.8 ],
+    [ 2015, 0.2 ],
+    [ 2014, 2 ],
+    [ 2013, 2 ],
+    [ 2012, 1.4 ]
+  ];
+
+
 </script>
 
 
