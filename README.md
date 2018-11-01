@@ -8,46 +8,46 @@ https://github.com/goinvo/visualbudget
 ![screenshot](https://raw.github.com/goinvo/Visual-Town-Budget/develop/docs/img/example_screenshot.png)
 Open-source budget visualization framework.
 
-##Requirements
+## Requirements
 * PHP-enabled webserver
 * SCSS compiler
 
-##Setup
+## Setup
 Clone this repository to your local machine and point your webserver root to `src/httpdocs`, the application should work out of the box, this repository contains some sample data that can be used for testing.
 
-##Localized Variables  
+## Localized Variables  
 Set the variables in the `localized_variables.php` file to your municipality's information. These are global variables used throughout the Visual Budget instance. The file can be found in `/src/httpdocs/includes`.  
 
-##Components
-####Cards
+## Components
+#### Cards
 Report statical information about selected entry (`src/httpdocs/js/cards.js`).
 
 ![card-img](https://raw.github.com/goinvo/Visual-Town-Budget/develop/docs/img/cards.png)
 
-####Chart
+#### Chart
 Shows data change over time (`src/httpdocs/js/chart.js`).
 
 ![chart-img](https://raw.github.com/goinvo/Visual-Town-Budget/develop/docs/img/chart.png)
 
 
-####Treemap
+#### Treemap
 Used as the main navigation component (`src/httpdocs/js/treemap.js`).
 
 ![treemap-img](https://raw.github.com/goinvo/Visual-Town-Budget/develop/docs/img/treemap.png)
 
-####Table
+#### Table
 Alternative navigation technique to a treemap (`src/httpdocs/js/tables.js`).
 
 ![table-img](https://raw.github.com/goinvo/Visual-Town-Budget/develop/docs/img/table.png)
 
-####Component Interface
+#### Component Interface
 Each component implements a common interface of 3 calls:
 
 * `Initialize`: called only once, prepares the component to show data
 * `Open`: opens a data object and displays its contents using the specified component
 * `Update`: refreshes component data (useful when year changes and new values need to be plotted)
 
-##Directory Structure
+## Directory Structure
 * **/config**: Compass configuration files
 * **/src/httpdocs**: Application root directory
    *  **css**: compiled SCSS and libraries (bootstrap, introJs)
@@ -84,7 +84,7 @@ Each component implements a common interface of 3 calls:
       *  `_table.scss`: styles for tabular view
       *  `_treemap.scss`: styles for treemap component
 
-####Required Libraries
+#### Required Libraries
 *  Bootstrap (grid layout, dropdowns..)
 *  D3 (visualizations)
 *  Jquery Cookie
@@ -93,12 +93,12 @@ Each component implements a common interface of 3 calls:
 *  Mustache (templates)
 *  IntroJS (required for tutorials)
 
-##Sample Datasets
+## Sample Datasets
 Sample `Expenses.json`, `Revenues.json` and `Funds.json` from Arlington, MA in `src/httpdocs/data`.
 
 Budget data is kept in JSON and CSV format. The JSON format is actively used for computation while the CSV format is kept for reference and data download.
 
-####Data structure
+#### Data structure
 
 The base data unit is an object with the following fields:
 
@@ -116,7 +116,7 @@ A simple value object is defined by:
 
 This data structure could be changed should it be considered not ideal for future uses.
 
-####Data structure sample
+#### Data structure sample
 The data sample below is partial section of `src/httpdocs/data/funds.json`.
 ```
 {
@@ -226,7 +226,7 @@ The data sample below is partial section of `src/httpdocs/data/funds.json`.
 }
 ```
 
-####Data pipeline
+#### Data pipeline
 Town representatives are likely to be proficient in editing spreadsheets. The Visual Budget application currently uses a pipeline that converts CSV files (created with Microsoft Excel) to nested JSON files used for computation.
 
 A python script `src/httpdocs/data/processing/processCSV.py` converts a flat CSV file into the nested JSON structure listed above. A php script `src/httpdocs/data/processing/update.php` orchestrates the entire data update procedure.
@@ -238,15 +238,15 @@ For more information about CSV data formats or update procedures check `docs/dat
 *  Changing data sections (eg. Replace 'revenues' with 'Town Departments') requires to manually change links (`navbar.php`), homepage data (`home.php`), initialization javascripts (`avb.js`) and update routines (`processCSV.py`, `update.php`). This process should be simplified to allow a simpler migration between different types of data.
 *  Grid space. As of now, although each viz component implements a common interface, each visualization is tied to specific div (or html section), the creation of a 'grid' space that allows any visualization to be 'attached' to any area of the screen and would greatly enhance the customization and upgradability of the application.
 
-##Core Contributors
+## Core Contributors
 
-####[Involution Studios](http://goinvo.com) (Design and Coding)
+#### [GoInvo](http://goinvo.com) (Design and Coding)
 
 *  Lead Developer: [Ivan David DiLernia](http://idilernia.com)
 *  Creative Director: [Juhan Sonin](http://twitter.com/jsonin)
 *  Lead Designer: [Roger Zhu](http://cargocollective.com/xingjie)
 
-####[Town of Arlington](http://arlingtonma.gov) (Data Collection and Testing)
+#### [Town of Arlington](http://arlingtonma.gov) (Data Collection and Testing)
 
 *  Mike Bouton
 *  Andrew Flanagan
@@ -254,6 +254,8 @@ For more information about CSV data formats or update procedures check `docs/dat
 *  [Annie LaCourt](https://twitter.com/annielacourt)
 
 
-##License
+## License
 
 Visual Town Budget is licensed under the Apache-2.0 open source license. You can find more information on the Apache-2.0 license at http://www.apache.org/licenses/LICENSE-2.0
+
+### For guidance integrating Visual Town Budget for your town, contact us at arlington-internal@goinvo.com. ###
